@@ -2,46 +2,37 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface CategoryTile {
+  index: string;
   slug: string;
   name: string;
-  image: string;
   count: string;
+  image: string;
 }
 
 interface VenuePreview {
   slug: string;
   name: string;
-  type: string;
+  specialty: string;
+  badge: string;
   city: string;
   district: string;
   rating: string;
   reviewCount: number;
+  startingPrice: string;
   image: string;
 }
 
 const CATEGORIES: CategoryTile[] = [
   {
+    index: "01",
     slug: "hair",
     name: "Coiffure & Coloration",
-    count: "420 adresses",
+    count: "420 salons",
     image:
-      "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80",
   },
   {
-    slug: "barber",
-    name: "Barbiers & Soins Homme",
-    count: "180 adresses",
-    image:
-      "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    slug: "nails",
-    name: "Manucure & Ongles",
-    count: "260 adresses",
-    image:
-      "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=800&q=80",
-  },
-  {
+    index: "02",
     slug: "facial",
     name: "Soins Visage & Institut",
     count: "310 adresses",
@@ -49,65 +40,91 @@ const CATEGORIES: CategoryTile[] = [
       "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80",
   },
   {
+    index: "03",
     slug: "massage",
     name: "Massages & Spas",
-    count: "195 adresses",
+    count: "195 havres",
     image:
       "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80",
   },
   {
+    index: "04",
+    slug: "barber",
+    name: "Barbiers & Homme",
+    count: "180 ateliers",
+    image:
+      "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    index: "05",
+    slug: "nails",
+    name: "Manucure & Ongles",
+    count: "260 studios",
+    image:
+      "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    index: "06",
     slug: "wellness",
     name: "Rituels & Bien-être",
-    count: "140 adresses",
+    count: "140 praticiens",
     image:
-      "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80",
   },
 ];
 
 const CURATED_VENUES: VenuePreview[] = [
   {
     slug: "atelier-botanique-paris",
-    name: "L'Atelier Botanique",
-    type: "Coiffure naturelle & végétale",
+    name: "L’Atelier Botanique",
+    specialty: "Coiffure végétale & coupe sur-mesure",
+    badge: "Maison d’artisan",
     city: "Paris",
     district: "Le Marais",
     rating: "4,9",
     reviewCount: 142,
+    startingPrice: "dès 55 €",
     image:
-      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=85",
   },
   {
     slug: "maison-albar-soins",
     name: "Maison Albar Institut",
-    type: "Soin visage sur-mesure & spa",
+    specialty: "Soin visage holistique & diagnostic peau",
+    badge: "Signature",
     city: "Lyon",
-    district: "Presqu'île",
+    district: "Presqu’île",
     rating: "5,0",
     reviewCount: 96,
+    startingPrice: "dès 80 €",
     image:
-      "https://images.unsplash.com/photo-1512290900672-1f55b9a89c8a?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=900&q=85",
   },
   {
     slug: "barbier-saint-germain",
     name: "Le Salon Saint-Germain",
-    type: "Taille de barbe & coupe classique",
+    specialty: "Taille de barbe traditionnelle & serviette chaude",
+    badge: "Atelier Barbier",
     city: "Bordeaux",
-    district: "Triangle d'Or",
+    district: "Triangle d’Or",
     rating: "4,9",
     reviewCount: 218,
+    startingPrice: "dès 38 €",
     image:
-      "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=900&q=85",
   },
   {
     slug: "bain-de-vapeur-sequoia",
     name: "Studio Séquoia",
-    type: "Massage relaxant & rituel corporel",
+    specialty: "Massage relaxant & rituel corporel",
+    badge: "Espace Spa",
     city: "Marseille",
     district: "Vieux-Port",
     rating: "4,8",
     reviewCount: 88,
+    startingPrice: "dès 75 €",
     image:
-      "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=85",
   },
 ];
 
@@ -136,33 +153,37 @@ const SEARCH_SUGGESTIONS = [
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen selection:bg-primary-100 selection:text-primary-900">
       {/* -------------------------------------------------------------------- */}
-      {/* 1. Header / Navigation                                                */}
+      {/* 1. Header & Navigation Sticky                                        */}
       {/* -------------------------------------------------------------------- */}
-      <header className="nav">
-        <div className="flex items-center gap-8">
+      <header className="nav border-b border-line/80 backdrop-blur-md bg-bg/90">
+        <div className="flex items-center gap-10">
           <Link
             href="/"
-            className="nav-logo hover:opacity-85 transition-opacity"
+            className="nav-logo group flex items-baseline gap-1"
             aria-label="Belora - Accueil"
           >
-            Belora
+            <span className="font-display text-2xl tracking-tight text-sand-900 transition-colors group-hover:text-primary-600">
+              Belora
+            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-primary-600" aria-hidden="true" />
           </Link>
-          <nav className="hidden lg:flex items-center gap-6" aria-label="Univers">
-            <Link href="/search?category=hair" className="nav-link">
+
+          <nav className="hidden lg:flex items-center gap-7" aria-label="Univers de soins">
+            <Link href="/search?category=hair" className="nav-link text-xs tracking-wider uppercase font-medium">
               Coiffure
             </Link>
-            <Link href="/search?category=facial" className="nav-link">
+            <Link href="/search?category=facial" className="nav-link text-xs tracking-wider uppercase font-medium">
               Soins visage
             </Link>
-            <Link href="/search?category=massage" className="nav-link">
+            <Link href="/search?category=massage" className="nav-link text-xs tracking-wider uppercase font-medium">
               Massages & Spas
             </Link>
-            <Link href="/search?category=barber" className="nav-link">
+            <Link href="/search?category=barber" className="nav-link text-xs tracking-wider uppercase font-medium">
               Barbiers
             </Link>
-            <Link href="/search?category=nails" className="nav-link">
+            <Link href="/search?category=nails" className="nav-link text-xs tracking-wider uppercase font-medium">
               Onglerie
             </Link>
           </nav>
@@ -171,16 +192,29 @@ export default function HomePage() {
         <div className="flex items-center gap-4">
           <Link
             href="/pro"
-            className="hidden sm:inline-flex text-xs font-medium tracking-wide uppercase text-fg-muted hover:text-fg transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-sand-700 hover:text-primary-600 transition-colors"
           >
-            Espace Professionnel
+            <span>Espace Pro</span>
+            <svg
+              className="w-3.5 h-3.5 opacity-60"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M7 17 17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </Link>
 
-          <span className="hidden sm:inline-block w-px h-4 bg-line" aria-hidden="true" />
+          <span className="hidden sm:inline-block w-px h-4 bg-line-strong" aria-hidden="true" />
 
-          <Link href="/account" className="btn btn-outline btn-sm">
+          <Link href="/account" className="btn btn-editorial btn-sm">
             <svg
-              className="w-4 h-4 text-fg-muted"
+              className="w-3.5 h-3.5 text-sand-700"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -198,52 +232,55 @@ export default function HomePage() {
       </header>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 2. Hero Photographique & Recherche intégrée                           */}
+      {/* 2. Hero Photographique & Barre de Recherche Créative                 */}
       {/* -------------------------------------------------------------------- */}
       <section className="hero">
         <Image
-          src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=2000&q=85"
-          alt="Atmosphère d'un salon de soin haut de gamme"
+          src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=2000&q=85"
+          alt="Atmosphère baignée de lumière d’un salon de coiffure architectural"
           fill
           priority
           sizes="100vw"
           className="hero-media"
         />
 
-        <div className="container-belora w-full pb-16 pt-24 sm:pb-20 relative z-10">
-          <div className="max-w-3xl mb-8 sm:mb-10">
-            <h1 className="display-xl text-sand-50 mb-4 text-balance">
-              L’art du soin, <span className="display-italic">à votre rythme.</span>
+        <div className="container-belora w-full pb-16 pt-28 sm:pb-20 relative z-10">
+          <div className="max-w-3xl mb-10">
+            <p className="inline-block text-xs uppercase tracking-widest text-sand-300 font-semibold mb-3">
+              Maison de réservation beauté & bien-être
+            </p>
+            <h1 className="display-xl text-sand-50 mb-5 text-balance">
+              L’art du soin, <span className="display-italic font-normal">à votre rythme.</span>
             </h1>
-            <p className="text-base sm:text-lg text-sand-200 max-w-xl text-pretty leading-relaxed">
+            <p className="text-base sm:text-lg text-sand-200/90 max-w-xl text-pretty leading-relaxed">
               Découvrez et réservez les salons de coiffure, instituts et spas
-              indépendants sélectionnés pour leur exigence.
+              indépendants sélectionnés pour l’exigence de leurs artisans.
             </p>
           </div>
 
-          {/* Formulaire de recherche 3 champs */}
+          {/* Formulaire de recherche flottant & architecturé */}
           <form
             action="/search"
             method="GET"
-            className="searchbar shadow-sm max-w-4xl"
+            className="searchbar max-w-4xl shadow-xl shadow-black/15 bg-sand-50/95 backdrop-blur-sm border border-sand-200"
             role="search"
           >
             <div className="searchbar-field">
-              <label htmlFor="search-service" className="searchbar-label">
+              <label htmlFor="search-service" className="searchbar-label text-[10px] font-semibold text-sand-500">
                 Prestation ou établissement
               </label>
               <input
                 id="search-service"
                 name="q"
                 type="text"
-                placeholder="Coupe, soin éclat, balayage…"
-                className="searchbar-input"
+                placeholder="Balayage, coupe signature, massage…"
+                className="searchbar-input text-sand-900 font-medium"
                 autoComplete="off"
               />
             </div>
 
             <div className="searchbar-field">
-              <label htmlFor="search-location" className="searchbar-label">
+              <label htmlFor="search-location" className="searchbar-label text-[10px] font-semibold text-sand-500">
                 Adresse, ville ou quartier
               </label>
               <input
@@ -251,26 +288,29 @@ export default function HomePage() {
                 name="location"
                 type="text"
                 placeholder="Paris, Lyon, Bordeaux…"
-                className="searchbar-input"
+                className="searchbar-input text-sand-900 font-medium"
                 autoComplete="address-level2"
               />
             </div>
 
             <div className="searchbar-field">
-              <label htmlFor="search-date" className="searchbar-label">
+              <label htmlFor="search-date" className="searchbar-label text-[10px] font-semibold text-sand-500">
                 Date souhaitée
               </label>
               <input
                 id="search-date"
                 name="date"
                 type="date"
-                className="searchbar-input cursor-pointer"
+                className="searchbar-input text-sand-900 cursor-pointer font-medium"
               />
             </div>
 
-            <button type="submit" className="searchbar-submit">
+            <button
+              type="submit"
+              className="searchbar-submit group/btn px-8 text-xs font-semibold tracking-wider uppercase"
+            >
               <svg
-                className="w-4 h-4"
+                className="w-4 h-4 transition-transform group-hover/btn:scale-110"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -286,16 +326,16 @@ export default function HomePage() {
             </button>
           </form>
 
-          {/* Suggestions rapides sobres */}
+          {/* Suggestions de recherche sous la barre */}
           <div className="mt-5 flex items-center gap-2 flex-wrap">
-            <span className="text-xs text-sand-300 font-medium mr-1">
+            <span className="text-xs text-sand-300/80 font-medium mr-1 tracking-wide">
               Recherches fréquentes :
             </span>
             {SEARCH_SUGGESTIONS.map((item) => (
               <Link
                 key={item.query}
                 href={`/search?q=${item.query}`}
-                className="chip chip-photo text-xs"
+                className="chip chip-photo text-xs tracking-wide"
               >
                 {item.label}
               </Link>
@@ -305,28 +345,28 @@ export default function HomePage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 3. Univers & Catégories de Métiers                                    */}
+      {/* 3. Univers & Collections de Soins (Tuiles Éditoriales)                */}
       {/* -------------------------------------------------------------------- */}
       <section className="section bg-bg" aria-labelledby="categories-heading">
         <div className="container-belora">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 hairline-b">
             <div>
-              <p className="eyebrow mb-2">Savoir-faire d’exception</p>
+              <p className="eyebrow mb-2">Collections de soins</p>
               <h2 id="categories-heading" className="display-md text-sand-900">
-                Explorer par univers
+                Explorer par savoir-faire
               </h2>
             </div>
             <Link
               href="/search"
-              className="text-sm font-medium text-sand-900 hover:text-accent transition-colors inline-flex items-center gap-1.5 self-start sm:self-auto"
+              className="btn btn-editorial self-start sm:self-auto group"
             >
-              <span>Tous les métiers</span>
+              <span>Tous les univers</span>
               <svg
-                className="w-4 h-4"
+                className="w-3.5 h-3.5 btn-icon-slide"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="1.75"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
@@ -351,28 +391,36 @@ export default function HomePage() {
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
                   className="tile-media"
                 />
+
+                {/* Index de collection en filigrane */}
+                <span className="absolute top-3 right-3 text-xs font-display tracking-widest text-sand-100/70 select-none">
+                  {category.index}
+                </span>
+
                 <div className="tile-body">
-                  <div>
-                    <span className="block text-xs uppercase tracking-wider text-sand-300 font-medium mb-1">
+                  <div className="min-w-0 pr-1">
+                    <span className="block text-[11px] uppercase tracking-wider text-sand-300 font-medium mb-1">
                       {category.count}
                     </span>
-                    <h3 className="tile-title text-lg sm:text-xl text-sand-50">
+                    <h3 className="tile-title text-sand-50 truncate">
                       {category.name}
                     </h3>
                   </div>
-                  <svg
-                    className="tile-arrow text-sand-50"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.75"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M7 17 17 7" />
-                    <path d="M7 7h10v10" />
-                  </svg>
+
+                  <span className="tile-arrow-circle" aria-hidden="true">
+                    <svg
+                      className="w-3.5 h-3.5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M7 17 17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </span>
                 </div>
               </Link>
             ))}
@@ -381,28 +429,28 @@ export default function HomePage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 4. Sélection d'Établissements Recommandés                             */}
+      {/* 4. Sélection d’Établissements Recommandés                             */}
       {/* -------------------------------------------------------------------- */}
       <section className="section bg-surface hairline-t hairline-b" aria-labelledby="venues-heading">
         <div className="container-belora">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 hairline-b">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 pb-4 hairline-b">
             <div>
-              <p className="eyebrow mb-2">Sélection rigoureuse</p>
+              <p className="eyebrow mb-2">Sélection indépendante</p>
               <h2 id="venues-heading" className="display-md text-sand-900">
-                Adresses recommandées
+                Maisons & ateliers recommandés
               </h2>
             </div>
             <Link
               href="/search?filter=curated"
-              className="text-sm font-medium text-sand-900 hover:text-accent transition-colors inline-flex items-center gap-1.5 self-start sm:self-auto"
+              className="btn btn-editorial self-start sm:self-auto group"
             >
-              <span>Explorer la sélection</span>
+              <span>Voir la sélection complète</span>
               <svg
-                className="w-4 h-4"
+                className="w-3.5 h-3.5 btn-icon-slide"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="1.75"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
@@ -428,17 +476,24 @@ export default function HomePage() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="object-cover"
                   />
+
+                  {/* Étiquette d'artisan */}
+                  <span className="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-[var(--radius-xs)] bg-sand-950/70 text-sand-50 text-[10px] tracking-wider uppercase font-semibold backdrop-blur-sm z-[1]">
+                    {venue.badge}
+                  </span>
+
+                  {/* Bouton favori tactile */}
                   <button
                     type="button"
                     className="fav-btn"
                     aria-label={`Ajouter ${venue.name} aux favoris`}
                   >
                     <svg
-                      className="w-4 h-4 text-sand-900"
+                      className="w-4 h-4 text-sand-900 transition-colors hover:text-primary-600"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="1.5"
+                      strokeWidth="1.75"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       aria-hidden="true"
@@ -449,12 +504,12 @@ export default function HomePage() {
                 </div>
 
                 <div className="venue-meta">
-                  <h3 className="venue-name group-hover:text-accent transition-colors">
+                  <h3 className="venue-name group-hover:text-primary-600 transition-colors">
                     {venue.name}
                   </h3>
                   <div className="venue-rating font-medium flex items-center gap-1 text-xs">
                     <svg
-                      className="w-3.5 h-3.5 text-accent fill-current"
+                      className="w-3.5 h-3.5 text-primary-600 fill-current"
                       viewBox="0 0 20 20"
                       aria-hidden="true"
                     >
@@ -466,8 +521,17 @@ export default function HomePage() {
                 </div>
 
                 <p className="venue-sub">
-                  {venue.type} · {venue.district}, {venue.city}
+                  {venue.specialty}
                 </p>
+
+                <div className="mt-2.5 pt-2.5 border-t border-line/60 flex items-center justify-between text-xs">
+                  <span className="text-fg-muted">
+                    {venue.district}, {venue.city}
+                  </span>
+                  <span className="font-semibold text-sand-900 tracking-wide">
+                    {venue.startingPrice}
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
@@ -481,58 +545,58 @@ export default function HomePage() {
         <div className="container-belora">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-7">
-              <p className="eyebrow mb-3">L’expérience Belora</p>
+              <p className="eyebrow mb-3">L’engagement Belora</p>
               <h2 id="editorial-heading" className="display-lg text-sand-900 mb-6 text-balance">
-                Une réservation fluide, pensée pour votre sérénité.
+                La sérénité d’un rendez-vous, <span className="display-italic">sans attente ni incertitude.</span>
               </h2>
               <p className="lead mb-10 text-pretty">
-                Fini les appels pendant vos heures de travail ou l’attente d’une
-                confirmation par message. Belora connecte directement votre
-                créneau à l’agenda officiel du salon.
+                Parce que votre temps est précieux, Belora réunit l’exigence
+                artisanale et la fluidité technologique. Choisissez votre créneau,
+                recevez vos confirmations et profitez de votre instant.
               </p>
 
               <div className="space-y-6">
-                <div className="flex items-start gap-4 pb-6 border-b border-line">
-                  <span className="num font-display text-2xl text-accent font-normal">
+                <div className="flex items-start gap-5 pb-6 border-b border-line">
+                  <span className="num font-display text-3xl text-primary-600 font-normal leading-none pt-0.5">
                     01
                   </span>
                   <div>
-                    <h3 className="font-semibold text-sand-900 text-sm mb-1">
-                      Créneaux certifiés en temps réel
+                    <h3 className="font-semibold text-sand-900 text-sm mb-1.5 tracking-wide">
+                      Disponibilités certifiées en direct
                     </h3>
                     <p className="text-xs sm:text-sm text-fg-muted leading-relaxed">
-                      Chaque horaire affiché correspond aux disponibilités réelles de
-                      l’équipe. Aucune double réservation, jamais de mauvaise surprise.
+                      Chaque horaire affiché correspond exactement à l’agenda officiel
+                      de l’équipe. Aucune double réservation, jamais de déconvenue.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 pb-6 border-b border-line">
-                  <span className="num font-display text-2xl text-accent font-normal">
+                <div className="flex items-start gap-5 pb-6 border-b border-line">
+                  <span className="num font-display text-3xl text-primary-600 font-normal leading-none pt-0.5">
                     02
                   </span>
                   <div>
-                    <h3 className="font-semibold text-sand-900 text-sm mb-1">
-                      Rappels discrets et gestion sans friction
+                    <h3 className="font-semibold text-sand-900 text-sm mb-1.5 tracking-wide">
+                      Rappels discrets & flexibilité
                     </h3>
                     <p className="text-xs sm:text-sm text-fg-muted leading-relaxed">
-                      Recevez les coordonnées précises et vos rappels par e-mail et
-                      SMS. Modifiez ou annulez en un clic selon les conditions du lieu.
+                      Recevez les détails précis de votre soin par e-mail et SMS. Modifiez ou
+                      annulez sans devoir appeler pendant vos heures de travail.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <span className="num font-display text-2xl text-accent font-normal">
+                <div className="flex items-start gap-5">
+                  <span className="num font-display text-3xl text-primary-600 font-normal leading-none pt-0.5">
                     03
                   </span>
                   <div>
-                    <h3 className="font-semibold text-sand-900 text-sm mb-1">
-                      Règlement transparent
+                    <h3 className="font-semibold text-sand-900 text-sm mb-1.5 tracking-wide">
+                      Règlement clair & sans surcoût
                     </h3>
                     <p className="text-xs sm:text-sm text-fg-muted leading-relaxed">
-                      Acompte ou paiement sur place selon les règles de
-                      l’établissement. Aucun surcoût ni frais cachés pour le client.
+                      Acompte ou paiement sur place selon les règles propres au salon.
+                      Tarifs identiques à ceux affichés sur place, sans commission client.
                     </p>
                   </div>
                 </div>
@@ -540,14 +604,43 @@ export default function HomePage() {
             </div>
 
             <div className="lg:col-span-5 relative">
-              <div className="relative aspect-[4/5] rounded-[var(--radius-photo)] overflow-hidden bg-sand-200">
+              <div className="relative aspect-[4/5] rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-line shadow-lg">
                 <Image
                   src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80"
-                  alt="Détail d'un rituel de soin et de détente"
+                  alt="Détail d'un rituel de soin apaisant et soigné"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
                 />
+
+                {/* Cartouche d'assurance qualité discrète */}
+                <div className="absolute bottom-5 inset-x-5 p-4 rounded-[var(--radius-sm)] bg-sand-50/95 backdrop-blur-sm border border-sand-200 shadow-md">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-xs uppercase tracking-wider text-sand-500 font-semibold mb-0.5">
+                        Indice de ponctualité
+                      </p>
+                      <p className="font-display text-xl text-sand-900">
+                        99,4% des créneaux honorés
+                      </p>
+                    </div>
+                    <span className="w-10 h-10 rounded-full bg-primary-50 text-primary-600 flex items-center justify-center shrink-0">
+                      <svg
+                        className="w-5 h-5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                        <path d="m9 12 2 2 4-4" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -555,66 +648,62 @@ export default function HomePage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 6. Section Professionnels                                             */}
+      {/* 6. Section Professionnels (Charbon chaud & Typographie d’atelier)     */}
       {/* -------------------------------------------------------------------- */}
-      <section className="section bg-sand-900 text-sand-50" aria-labelledby="pro-heading">
+      <section className="section bg-sand-950 text-sand-50 border-y border-sand-800" aria-labelledby="pro-heading">
         <div className="container-belora">
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-xs font-medium tracking-widest uppercase text-sand-400 mb-3">
-              Pour les salons & praticiens indépendants
+            <p className="text-xs font-semibold tracking-widest uppercase text-sand-400 mb-3">
+              Belora Pro · Pour les artisans & créateurs
             </p>
             <h2 id="pro-heading" className="display-lg text-sand-50 mb-6 text-balance">
-              Le logiciel d’agenda pensé pour votre maison de beauté.
+              L’outil d’agenda qui sublime votre maison de beauté.
             </h2>
-            <p className="text-base sm:text-lg text-sand-300 max-w-2xl mx-auto mb-10 leading-relaxed text-pretty">
-              Rejoignez Belora pour gérer vos plannings d’équipe, encaisser vos
-              acomptes en ligne et attirer une nouvelle clientèle sans dépendre du téléphone.
+            <p className="text-base sm:text-lg text-sand-300 max-w-2xl mx-auto mb-12 leading-relaxed text-pretty">
+              Fédérez votre équipe, sécurisez vos revenus grâce aux acomptes en ligne et offrez à votre clientèle une expérience de réservation digne de votre exigence.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-start mb-12">
-              <div className="p-6 rounded-[var(--radius-sm)] border border-sand-800 bg-sand-950/60">
-                <span className="block font-display text-3xl text-primary-300 mb-2">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-start mb-14">
+              <div className="p-7 rounded-[var(--radius-sm)] border border-sand-800 bg-sand-900/60 hover:border-sand-700 transition-colors">
+                <span className="block font-display text-3xl text-primary-300 mb-3 font-normal">
                   01
                 </span>
-                <h3 className="font-medium text-sm text-sand-100 mb-2">
+                <h3 className="font-semibold text-sm text-sand-100 mb-2 tracking-wide">
                   Agenda multi-collaborateurs
                 </h3>
                 <p className="text-xs text-sand-400 leading-relaxed">
-                  Vue jour et semaine fluide, horaires personnalisés, pauses et
-                  congés gérés en toute simplicité.
+                  Vue jour et semaine ultra-fluide, gestion intuitive des pauses, congés et temps de pose par praticien.
                 </p>
               </div>
 
-              <div className="p-6 rounded-[var(--radius-sm)] border border-sand-800 bg-sand-950/60">
-                <span className="block font-display text-3xl text-primary-300 mb-2">
+              <div className="p-7 rounded-[var(--radius-sm)] border border-sand-800 bg-sand-900/60 hover:border-sand-700 transition-colors">
+                <span className="block font-display text-3xl text-primary-300 mb-3 font-normal">
                   02
                 </span>
-                <h3 className="font-medium text-sm text-sand-100 mb-2">
-                  Réduction des rendez-vous manqués
+                <h3 className="font-semibold text-sm text-sand-100 mb-2 tracking-wide">
+                  Protection contre les no-shows
                 </h3>
                 <p className="text-xs text-sand-400 leading-relaxed">
-                  Rappels automatiques par SMS et prise d’acompte Stripe Connect
-                  pour sécuriser vos créneaux.
+                  Acomptes en ligne sécurisés Stripe Connect et rappels automatiques par SMS pour garantir vos créneaux.
                 </p>
               </div>
 
-              <div className="p-6 rounded-[var(--radius-sm)] border border-sand-800 bg-sand-950/60">
-                <span className="block font-display text-3xl text-primary-300 mb-2">
+              <div className="p-7 rounded-[var(--radius-sm)] border border-sand-800 bg-sand-900/60 hover:border-sand-700 transition-colors">
+                <span className="block font-display text-3xl text-primary-300 mb-3 font-normal">
                   03
                 </span>
-                <h3 className="font-medium text-sm text-sand-100 mb-2">
+                <h3 className="font-semibold text-sm text-sand-100 mb-2 tracking-wide">
                   Visibilité sur la marketplace
                 </h3>
                 <p className="text-xs text-sand-400 leading-relaxed">
-                  Une vitrine élégante, fidèle à votre identité et ouverte aux
-                  réservations 24h sur 24.
+                  Une vitrine haut de gamme sans publicité intrusive, réservable 24h/24 pour conquérir une clientèle qualifiée.
                 </p>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/pro" className="btn btn-primary btn-lg w-full sm:w-auto">
-                <span>Découvrir l’espace professionnel</span>
+                <span>Rejoindre Belora Pro</span>
                 <svg
                   className="w-4 h-4"
                   viewBox="0 0 24 24"
@@ -631,9 +720,22 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/pro#contact"
-                className="btn btn-outline border-sand-700 text-sand-200 hover:text-sand-50 hover:border-sand-400 btn-lg w-full sm:w-auto"
+                className="btn btn-editorial-light btn-lg w-full sm:w-auto"
               >
-                Parler à un conseiller
+                <span>Demander une démonstration</span>
+                <svg
+                  className="w-3.5 h-3.5 btn-icon-slide"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
               </Link>
             </div>
           </div>
@@ -645,21 +747,33 @@ export default function HomePage() {
       {/* -------------------------------------------------------------------- */}
       <section className="section bg-bg" aria-labelledby="cities-heading">
         <div className="container-belora">
-          <div className="mb-6">
+          <div className="mb-8">
             <p className="eyebrow mb-2">Présence nationale</p>
             <h2 id="cities-heading" className="display-md text-sand-900">
-              Trouver un rendez-vous près de chez vous
+              Trouver un salon ou institut près de chez vous
             </h2>
           </div>
 
-          <div className="flex flex-wrap gap-x-6 gap-y-3 pt-4 border-t border-line">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 pt-6 border-t border-line">
             {POPULAR_CITIES.map((city) => (
               <Link
                 key={city}
                 href={`/search?location=${encodeURIComponent(city)}`}
-                className="text-sm text-fg-muted hover:text-sand-900 transition-colors"
+                className="p-3.5 rounded-[var(--radius-sm)] border border-line bg-surface hover:border-sand-400 hover:bg-sand-100 transition-all text-xs text-sand-900 font-medium flex items-center justify-between group"
               >
-                Coiffeur & soins à <span className="font-medium text-sand-900">{city}</span>
+                <span>{city}</span>
+                <svg
+                  className="w-3 h-3 text-fg-subtle group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
               </Link>
             ))}
           </div>
