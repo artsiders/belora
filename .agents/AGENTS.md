@@ -12,8 +12,8 @@
 
 ## 3. Direction Artistique (DA) & Palette de Couleurs
 - **Conserver la palette primaire et secondaire officielle** définie dans `globals.css` :
-  - Primaire : Bleu Marine (`var(--primary-500)` `#02275d`, `bg-primary-500`, `text-primary-600`, etc.).
-  - Secondaire : Or / Ambre (`var(--secondary-500)` `#e5a00a`, `bg-secondary-500`, `text-secondary-600`, etc.).
+  - Primaire : Bleu Marine (`var(--primary-500)` `#82385a`, `bg-primary-500`, `text-primary-600`, etc.).
+  - Secondaire : Or / Ambre (`var(--secondary-500)` `#6b6256`, `bg-secondary-500`, `text-secondary-600`, etc.).
 - **Interdiction Formelle des Dégradés (NO GRADIENT)** :
   - Ne jamais utiliser de dégradés (`linear-gradient`, `bg-gradient-to-*`, etc.) sur l'application. Utiliser uniquement des aplats de couleurs solides ou des masques opaques unis.
 - **Ne jamais réintroduire de vert `#0E7C66` en dur** ni de couleurs hors charte graphique.
