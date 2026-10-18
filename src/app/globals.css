@@ -157,19 +157,18 @@
   --radius-md: var(--radius-md);
   --radius-photo: var(--radius-photo);
 
-  --font-sans: var(--font-hanken, "Hanken Grotesk"), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-montserrat, "Montserrat"), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display, "Instrument Serif"), "Times New Roman", serif;
 }
 
 /* --------------------------------------------------------------------------
    3. BASE
    -------------------------------------------------------------------------- */
-@layer base {
-  html {
-    color-scheme: light;
-    scroll-padding-top: var(--nav-h);
-    -webkit-text-size-adjust: 100%;
-  }
+html {
+  color-scheme: light;
+  scroll-padding-top: var(--nav-h);
+  -webkit-text-size-adjust: 100%;
+}
 
   body {
     background: var(--bg);
@@ -200,12 +199,10 @@
   }
 
   [dir="rtl"] { text-align: start; }
-}
 
 /* --------------------------------------------------------------------------
    4. COMPOSANTS
    -------------------------------------------------------------------------- */
-@layer components {
 
   /* ----- Mise en page ----- */
   .container-belora {
@@ -585,12 +582,10 @@
   .hero { position: relative; display: grid; align-items: end; min-height: min(86dvh, 820px); overflow: hidden; isolation: isolate; color: var(--sand-50); }
   .hero-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
   .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(18, 16, 13, 0.55) 0%, rgba(18, 16, 13, 0.05) 60%); }
-}
 
 /* --------------------------------------------------------------------------
    5. UTILITAIRES
    -------------------------------------------------------------------------- */
-@layer utilities {
   .no-scrollbar { scrollbar-width: none; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .custom-scrollbar { scrollbar-width: thin; scrollbar-color: var(--sand-300) transparent; }
@@ -599,7 +594,6 @@
   .safe-bottom { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
-}
 
 /* --------------------------------------------------------------------------
    6. ACCESSIBILITÉ : mouvement réduit
