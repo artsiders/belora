@@ -1,13 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-
-interface CategoryTile {
-  index: string;
-  slug: string;
-  name: string;
-  count: string;
-  image: string;
-}
+import { HeroAsymmetric } from "@/components/home/hero-asymmetric";
+import { EditorialMarquee } from "@/components/home/editorial-marquee";
+import { UniverseShowcase } from "@/components/home/universe-showcase";
+import { FeaturedSanctuary } from "@/components/home/featured-sanctuary";
 
 interface VenuePreview {
   slug: string;
@@ -21,57 +17,6 @@ interface VenuePreview {
   startingPrice: string;
   image: string;
 }
-
-const CATEGORIES: CategoryTile[] = [
-  {
-    index: "01",
-    slug: "hair",
-    name: "Coiffure & Coloration",
-    count: "420 salons",
-    image:
-      "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    index: "02",
-    slug: "facial",
-    name: "Soins Visage & Institut",
-    count: "310 adresses",
-    image:
-      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    index: "03",
-    slug: "massage",
-    name: "Massages & Spas",
-    count: "195 havres",
-    image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    index: "04",
-    slug: "barber",
-    name: "Barbiers & Homme",
-    count: "180 ateliers",
-    image:
-      "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    index: "05",
-    slug: "nails",
-    name: "Manucure & Ongles",
-    count: "260 studios",
-    image:
-      "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    index: "06",
-    slug: "wellness",
-    name: "Rituels & Bien-être",
-    count: "140 praticiens",
-    image:
-      "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80",
-  },
-];
 
 const CURATED_VENUES: VenuePreview[] = [
   {
@@ -141,14 +86,6 @@ const POPULAR_CITIES = [
   "Montpellier",
   "Rennes",
   "Aix-en-Provence",
-];
-
-const SEARCH_SUGGESTIONS = [
-  { label: "Balayage signature", query: "balayage" },
-  { label: "Massage californien", query: "massage-californien" },
-  { label: "Soin hydrafacial", query: "hydrafacial" },
-  { label: "Manucure japonaise", query: "manucure-japonaise" },
-  { label: "Taille de barbe", query: "barbe" },
 ];
 
 export default function HomePage() {
@@ -232,204 +169,27 @@ export default function HomePage() {
       </header>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 2. Hero Photographique & Barre de Recherche Créative                 */}
+      {/* 2. Hero Asymétrique Haute Couture (100% lisibilité & grande photo)    */}
       {/* -------------------------------------------------------------------- */}
-      <section className="hero">
-        <Image
-          src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=2000&q=85"
-          alt="Atmosphère baignée de lumière d’un salon de coiffure architectural"
-          fill
-          priority
-          sizes="100vw"
-          className="hero-media"
-        />
-
-        <div className="container-belora w-full pb-16 pt-28 sm:pb-20 relative z-10">
-          <div className="max-w-3xl mb-10">
-            <p className="inline-block text-xs uppercase tracking-widest text-sand-300 font-semibold mb-3">
-              Maison de réservation beauté & bien-être
-            </p>
-            <h1 className="display-xl text-sand-50 mb-5 text-balance">
-              L’art du soin, <span className="display-italic font-normal">à votre rythme.</span>
-            </h1>
-            <p className="text-base sm:text-lg text-sand-200/90 max-w-xl text-pretty leading-relaxed">
-              Découvrez et réservez les salons de coiffure, instituts et spas
-              indépendants sélectionnés pour l’exigence de leurs artisans.
-            </p>
-          </div>
-
-          {/* Formulaire de recherche flottant & architecturé */}
-          <form
-            action="/search"
-            method="GET"
-            className="searchbar max-w-4xl shadow-xl shadow-black/15 bg-sand-50/95 backdrop-blur-sm border border-sand-200"
-            role="search"
-          >
-            <div className="searchbar-field">
-              <label htmlFor="search-service" className="searchbar-label text-[10px] font-semibold text-sand-500">
-                Prestation ou établissement
-              </label>
-              <input
-                id="search-service"
-                name="q"
-                type="text"
-                placeholder="Balayage, coupe signature, massage…"
-                className="searchbar-input text-sand-900 font-medium"
-                autoComplete="off"
-              />
-            </div>
-
-            <div className="searchbar-field">
-              <label htmlFor="search-location" className="searchbar-label text-[10px] font-semibold text-sand-500">
-                Adresse, ville ou quartier
-              </label>
-              <input
-                id="search-location"
-                name="location"
-                type="text"
-                placeholder="Paris, Lyon, Bordeaux…"
-                className="searchbar-input text-sand-900 font-medium"
-                autoComplete="address-level2"
-              />
-            </div>
-
-            <div className="searchbar-field">
-              <label htmlFor="search-date" className="searchbar-label text-[10px] font-semibold text-sand-500">
-                Date souhaitée
-              </label>
-              <input
-                id="search-date"
-                name="date"
-                type="date"
-                className="searchbar-input text-sand-900 cursor-pointer font-medium"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="searchbar-submit group/btn px-8 text-xs font-semibold tracking-wider uppercase"
-            >
-              <svg
-                className="w-4 h-4 transition-transform group-hover/btn:scale-110"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.3-4.3" />
-              </svg>
-              <span>Rechercher</span>
-            </button>
-          </form>
-
-          {/* Suggestions de recherche sous la barre */}
-          <div className="mt-5 flex items-center gap-2 flex-wrap">
-            <span className="text-xs text-sand-300/80 font-medium mr-1 tracking-wide">
-              Recherches fréquentes :
-            </span>
-            {SEARCH_SUGGESTIONS.map((item) => (
-              <Link
-                key={item.query}
-                href={`/search?q=${item.query}`}
-                className="chip chip-photo text-xs tracking-wide"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HeroAsymmetric />
 
       {/* -------------------------------------------------------------------- */}
-      {/* 3. Univers & Collections de Soins (Tuiles Éditoriales)                */}
+      {/* 3. Bandeau Défilant Typographique (Marquee éditorial)                */}
       {/* -------------------------------------------------------------------- */}
-      <section className="section bg-bg" aria-labelledby="categories-heading">
-        <div className="container-belora">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 hairline-b">
-            <div>
-              <p className="eyebrow mb-2">Collections de soins</p>
-              <h2 id="categories-heading" className="display-md text-sand-900">
-                Explorer par savoir-faire
-              </h2>
-            </div>
-            <Link
-              href="/search"
-              className="btn btn-editorial self-start sm:self-auto group"
-            >
-              <span>Tous les univers</span>
-              <svg
-                className="w-3.5 h-3.5 btn-icon-slide"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-            {CATEGORIES.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/search?category=${category.slug}`}
-                className="tile group"
-              >
-                <Image
-                  src={category.image}
-                  alt={category.name}
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                  className="tile-media"
-                />
-
-                {/* Index de collection en filigrane */}
-                <span className="absolute top-3 right-3 text-xs font-display tracking-widest text-sand-100/70 select-none">
-                  {category.index}
-                </span>
-
-                <div className="tile-body">
-                  <div className="min-w-0 pr-1">
-                    <span className="block text-[11px] uppercase tracking-wider text-sand-300 font-medium mb-1">
-                      {category.count}
-                    </span>
-                    <h3 className="tile-title text-sand-50 truncate">
-                      {category.name}
-                    </h3>
-                  </div>
-
-                  <span className="tile-arrow-circle" aria-hidden="true">
-                    <svg
-                      className="w-3.5 h-3.5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M7 17 17 7" />
-                      <path d="M7 7h10v10" />
-                    </svg>
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <EditorialMarquee />
 
       {/* -------------------------------------------------------------------- */}
-      {/* 4. Sélection d’Établissements Recommandés                             */}
+      {/* 4. Atelier des Savoir-Faire (Interactif avec très grandes photos)     */}
+      {/* -------------------------------------------------------------------- */}
+      <UniverseShowcase />
+
+      {/* -------------------------------------------------------------------- */}
+      {/* 5. Immersion Salon Partenaire (Pleine Largeur Showcase)              */}
+      {/* -------------------------------------------------------------------- */}
+      <FeaturedSanctuary />
+
+      {/* -------------------------------------------------------------------- */}
+      {/* 6. Sélection d’Établissements Recommandés                             */}
       {/* -------------------------------------------------------------------- */}
       <section className="section bg-surface hairline-t hairline-b" aria-labelledby="venues-heading">
         <div className="container-belora">
@@ -539,7 +299,7 @@ export default function HomePage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 5. Le Rituel Belora (Section Éditoriale Asymétrique)                   */}
+      {/* 7. Le Rituel Belora (Manifeste Geste & Matière)                       */}
       {/* -------------------------------------------------------------------- */}
       <section className="section bg-bg" aria-labelledby="editorial-heading">
         <div className="container-belora">
@@ -648,7 +408,7 @@ export default function HomePage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 6. Section Professionnels (Charbon chaud & Typographie d’atelier)     */}
+      {/* 8. Section Professionnels (Charbon chaud & Typographie d’atelier)     */}
       {/* -------------------------------------------------------------------- */}
       <section className="section bg-sand-950 text-sand-50 border-y border-sand-800" aria-labelledby="pro-heading">
         <div className="container-belora">
@@ -743,7 +503,7 @@ export default function HomePage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 7. Maillage SEO par Villes & Footer                                   */}
+      {/* 9. Maillage SEO par Villes & Footer                                   */}
       {/* -------------------------------------------------------------------- */}
       <section className="section bg-bg" aria-labelledby="cities-heading">
         <div className="container-belora">
