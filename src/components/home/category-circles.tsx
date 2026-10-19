@@ -177,7 +177,7 @@ export function CategoryCircles() {
                 <h3 className="text-base sm:text-lg font-semibold text-sand-950 group-hover:text-primary-600 transition-colors">
                   {item.name}
                 </h3>
-                <p className="text-xs text-sand-500 font-normal mt-0.5 mb-2 leading-tight">
+                <p className="text-sm text-sand-500 font-normal mt-0.5 mb-2 leading-tight">
                   {item.subservices}
                 </p>
                 <div className="text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all">

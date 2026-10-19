@@ -75,17 +75,17 @@ export function ArtisanSpotlight() {
           {ARTISANS.map((artisan) => (
             <div
               key={artisan.id}
-              className="group flex flex-col justify-between bg-white rounded-2xl border border-sand-200/80 p-4 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300"
+              className="group flex flex-col justify-between bg-white arch-t border border-sand-200/80 p-4 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300"
             >
               <div>
                 {/* Photographie portrait avec arche douce élégante */}
-                <div className="relative aspect-[4/5] w-full rounded-t-[80px] rounded-b-xl overflow-hidden bg-sand-100 mb-4">
+                <div className="relative aspect-[4/5] w-full arch-t rounded-b-xl overflow-hidden bg-sand-100 mb-4">
                   <Image
                     src={artisan.image}
                     alt={`Portrait de ${artisan.name}, ${artisan.role}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover"
                   />
 
                   {/* Pastille expérience sécurisée en bas à droite (aucun risque de rognage par l'arche) */}
