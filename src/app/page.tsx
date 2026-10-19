@@ -6,7 +6,6 @@ import { SanctuaryExperience } from "@/components/home/sanctuary-experience";
 import { CuratedVenues } from "@/components/home/curated-venues";
 import { ArtisanSpotlight } from "@/components/home/artisan-spotlight";
 import { ResultsGallery } from "@/components/home/results-gallery";
-import { ProBanner } from "@/components/home/pro-banner";
 import { CityDirectory } from "@/components/home/city-directory";
 import { Footer } from "@/components/layout/footer";
 
@@ -24,7 +23,7 @@ export default function HomePage() {
 
       {/* 4. Explorer par Univers de Soins (Vignettes Circulaires) */}
       <CategoryCircles />
-      
+
       {/* 5. L'Expérience Sanctuaire (Charte d'Excellence & Intérieur Architectural) */}
       <SanctuaryExperience />
 
@@ -36,9 +35,6 @@ export default function HomePage() {
 
       {/* 8. Le Geste en Image (Mosaïque de Réalisations & Résultats Réels) */}
       <ResultsGallery />
-
-      {/* 9. Belora Pro (Pour les Artisans & Gérants d'Établissements) */}
-      <ProBanner />
 
       {/* 10. Répertoire par Villes */}
       <CityDirectory />
