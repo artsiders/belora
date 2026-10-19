@@ -376,7 +376,7 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={isLoading || !acceptTerms}
-              className="w-full mt-3 flex items-center justify-center gap-2 py-3.5 px-6 rounded-[var(--radius-sm)] bg-primary-600 hover:bg-primary-700 text-sand-50 text-xs font-semibold uppercase tracking-wider transition-colors disabled:opacity-50 cursor-pointer shadow-sm"
+              className="btn btn-primary btn-block mt-3"
             >
               {isLoading ? (
                 <span className="inline-block w-4 h-4 border-2 border-sand-50 border-t-transparent rounded-full animate-spin" />
