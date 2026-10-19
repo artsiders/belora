@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function HeroCentered() {
   return (
-    <section className="relative w-full min-h-180 sm:min-h-195 lg:min-h-215 overflow-hidden flex flex-col justify-between pt-14 sm:pt-20 pb-8 sm:pb-12 border-b border-line">
+    <section className="relative w-full min-h-[calc(100vh-132px)] overflow-hidden flex flex-col justify-between pt-14 sm:pt-20 pb-8 sm:pb-12 border-b border-line">
       {/* 1. Photographie haute définition en arrière-plan complet (Full Width) */}
       <Image
         src="/images/heroes/hero-image.jpeg"
