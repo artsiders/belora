@@ -2,8 +2,6 @@ import { MainNav } from "@/components/layout/main-nav";
 import { HeroCentered } from "@/components/home/hero-centered";
 import { EditorialMarquee } from "@/components/home/editorial-marquee";
 import { CategoryCircles } from "@/components/home/category-circles";
-import { SignatureRituals } from "@/components/home/signature-rituals";
-import { UniverseShowcase } from "@/components/home/universe-showcase";
 import { SanctuaryExperience } from "@/components/home/sanctuary-experience";
 import { CuratedVenues } from "@/components/home/curated-venues";
 import { ArtisanSpotlight } from "@/components/home/artisan-spotlight";
@@ -26,32 +24,26 @@ export default function HomePage() {
 
       {/* 4. Explorer par Univers de Soins (Vignettes Circulaires) */}
       <CategoryCircles />
-
-      {/* 5. Prestations Signatures & Protocoles d'Artisans (01, 02, 03) */}
-      <SignatureRituals />
-
-      {/* 6. Atelier des Savoir-Faire (Interactif avec très grandes photos) */}
-      <UniverseShowcase />
-
-      {/* 7. L'Expérience Sanctuaire (Charte d'Excellence & Intérieur Architectural) */}
+      
+      {/* 5. L'Expérience Sanctuaire (Charte d'Excellence & Intérieur Architectural) */}
       <SanctuaryExperience />
 
-      {/* 8. Maisons & Ateliers Recommandés (Sélection Audités) */}
+      {/* 6. Maisons & Ateliers Recommandés (Sélection Audités) */}
       <CuratedVenues />
 
-      {/* 9. Rencontre avec les Maîtres Artisans (Portraits & Citations) */}
+      {/* 7. Rencontre avec les Maîtres Artisans (Portraits & Citations) */}
       <ArtisanSpotlight />
 
-      {/* 10. Le Geste en Image (Mosaïque de Réalisations & Résultats Réels) */}
+      {/* 8. Le Geste en Image (Mosaïque de Réalisations & Résultats Réels) */}
       <ResultsGallery />
 
-      {/* 11. Belora Pro (Pour les Artisans & Gérants d'Établissements) */}
+      {/* 9. Belora Pro (Pour les Artisans & Gérants d'Établissements) */}
       <ProBanner />
 
-      {/* 12. Répertoire par Villes */}
+      {/* 10. Répertoire par Villes */}
       <CityDirectory />
 
-      {/* 13. Pied de Page Institutionnel */}
+      {/* 11. Pied de Page Institutionnel */}
       <Footer />
     </div>
   );
