@@ -1,0 +1,40 @@
+model ServiceCategory {
+  id          String    @id @default(cuid())
+  venueId     String
+  name        String
+  description String?   @db.Text
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  venue       Venue     @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  services    Service[]
+
+  @@index([venueId, order])
+  @@map("service_categories")
+}
+
+model Service {
+  id                String           @id @default(cuid())
+  venueId           String
+  categoryId        String?
+  name              String
+  description       String?          @db.Text
+  durationMinutes   Int
+  bufferTimeMinutes Int              @default(0)
+  priceMinorUnits   Int              // montant en centimes (ex: 3500 = 35.00 EUR)
+  currency          String           @default("EUR")
+  isActive          Boolean          @default(true)
+  order             Int              @default(0)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  venue             Venue            @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  category          ServiceCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  staffServices     StaffService[]
+  bookingItems      BookingItem[]
+
+  @@index([venueId, isActive])
+  @@index([categoryId])
+  @@map("services")
+}

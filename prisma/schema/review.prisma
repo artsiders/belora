@@ -1,0 +1,43 @@
+enum ReviewStatus {
+  PUBLISHED
+  HIDDEN
+  REPORTED
+}
+
+model Review {
+  id        String       @id @default(cuid())
+  venueId   String
+  bookingId String       @unique
+  userId    String?
+  rating    Int          // Note entre 1 et 5
+  comment   String?      @db.Text
+  reply     String?      @db.Text
+  repliedAt DateTime?
+  status    ReviewStatus @default(PUBLISHED)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  venue     Venue        @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  booking   Booking      @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  user      User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  reports   ReviewReport[]
+
+  @@index([venueId, rating])
+  @@index([venueId, status])
+  @@index([userId])
+  @@map("reviews")
+}
+
+model ReviewReport {
+  id         String   @id @default(cuid())
+  reviewId   String
+  reporterId String?
+  reason     String   @db.Text
+  isResolved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  review     Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@index([reviewId])
+  @@map("review_reports")
+}

@@ -1,0 +1,115 @@
+enum VenueStatus {
+  DRAFT
+  PENDING_VALIDATION
+  PUBLISHED
+  SUSPENDED
+}
+
+model Venue {
+  id                  String      @id @default(cuid())
+  name                String
+  slug                String      @unique
+  description         String?     @db.Text
+  address             String
+  city                String
+  postalCode          String
+  countryCode         String      @default("FR")
+  latitude            Float?
+  longitude           Float?
+  timezone            String      @default("Europe/Paris")
+  currency            String      @default("EUR")
+  phone               String?
+  email               String?
+  website             String?
+  coverImageUrl       String?
+  status              VenueStatus @default(DRAFT)
+  stripeAccountId     String?
+  stripeAccountStatus String?
+  commissionRate      Int         @default(1500) // 15.00% en centièmes de pourcent
+  ownerId             String
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  owner               User        @relation(fields: [ownerId], references: [id], onDelete: Restrict)
+  categories          VenueCategory[]
+  photos              VenuePhoto[]
+  openingHours        VenueHours[]
+  serviceCategories   ServiceCategory[]
+  services            Service[]
+  staffMembers        StaffMember[]
+  customerProfiles    CustomerProfile[]
+  bookings            Booking[]
+  subscriptions       Subscription[]
+  reviews             Review[]
+  favorites           Favorite[]
+  notifications       Notification[]
+
+  @@index([slug])
+  @@index([city])
+  @@index([status])
+  @@index([latitude, longitude])
+  @@index([ownerId])
+  @@map("venues")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?  @db.Text
+  icon        String?
+  order       Int      @default(0)
+  parentId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  parent      Category?       @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children    Category[]      @relation("CategoryHierarchy")
+  venues      VenueCategory[]
+
+  @@index([slug])
+  @@map("categories")
+}
+
+model VenueCategory {
+  venueId    String
+  categoryId String
+
+  venue      Venue    @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([venueId, categoryId])
+  @@map("venue_categories")
+}
+
+model VenueHours {
+  id        String   @id @default(cuid())
+  venueId   String
+  dayOfWeek Int      // 0 (dimanche) à 6 (samedi)
+  openTime  String   // format "09:00"
+  closeTime String   // format "19:00"
+  isClosed  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  venue     Venue    @relation(fields: [venueId], references: [id], onDelete: Cascade)
+
+  @@unique([venueId, dayOfWeek, openTime])
+  @@index([venueId, dayOfWeek])
+  @@map("venue_hours")
+}
+
+model VenuePhoto {
+  id        String   @id @default(cuid())
+  venueId   String
+  url       String
+  order     Int      @default(0)
+  caption   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  venue     Venue    @relation(fields: [venueId], references: [id], onDelete: Cascade)
+
+  @@index([venueId, order])
+  @@map("venue_photos")
+}

@@ -1,0 +1,22 @@
+model CustomerProfile {
+  id        String    @id @default(cuid())
+  venueId   String
+  userId    String?
+  firstName String
+  lastName  String
+  email     String
+  phone     String?
+  notes     String?   @db.Text
+  isBlocked Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  venue     Venue     @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  user      User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  bookings  Booking[]
+
+  @@unique([venueId, email])
+  @@index([venueId, phone])
+  @@index([userId])
+  @@map("customer_profiles")
+}

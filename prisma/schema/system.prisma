@@ -1,0 +1,68 @@
+enum NotificationChannel {
+  EMAIL
+  SMS
+  IN_APP
+}
+
+enum NotificationType {
+  BOOKING_CONFIRMATION
+  BOOKING_REMINDER
+  BOOKING_CANCELLATION
+  NEW_BOOKING_ALERT
+  REVIEW_REQUEST
+  PAYMENT_RECEIPT
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String   // ex: "VENUE_SUSPENDED", "REFUND_ISSUED", "STAFF_CREATED"
+  targetType String   // "VENUE", "BOOKING", "USER", "PAYMENT"
+  targetId   String?
+  ipAddress  String?
+  userAgent  String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([targetType, targetId])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+model Notification {
+  id        String              @id @default(cuid())
+  userId    String?
+  venueId   String?
+  channel   NotificationChannel
+  type      NotificationType
+  recipient String              // adresse e-mail ou numéro E.164
+  title     String
+  body      String              @db.Text
+  isRead    Boolean             @default(false)
+  sentAt    DateTime?
+  createdAt DateTime            @default(now())
+
+  user      User?               @relation(fields: [userId], references: [id], onDelete: SetNull)
+  venue     Venue?              @relation(fields: [venueId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@index([venueId])
+  @@map("notifications")
+}
+
+model Favorite {
+  userId    String
+  venueId   String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  venue     Venue    @relation(fields: [venueId], references: [id], onDelete: Cascade)
+
+  @@id([userId, venueId])
+  @@index([userId])
+  @@index([venueId])
+  @@map("favorites")
+}

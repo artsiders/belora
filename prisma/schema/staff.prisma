@@ -1,0 +1,77 @@
+enum StaffRole {
+  OWNER
+  MANAGER
+  STAFF
+}
+
+model StaffMember {
+  id           String          @id @default(cuid())
+  venueId      String
+  userId       String?         @unique
+  firstName    String
+  lastName     String
+  email        String?
+  phone        String?
+  avatarUrl    String?
+  colorHex     String          @default("#82385a")
+  role         StaffRole       @default(STAFF)
+  isActive     Boolean         @default(true)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  venue        Venue           @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  user         User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  services     StaffService[]
+  schedules    StaffSchedule[]
+  timeOffs     TimeOff[]
+  bookings     Booking[]
+  bookingItems BookingItem[]
+
+  @@index([venueId, isActive])
+  @@index([userId])
+  @@map("staff_members")
+}
+
+model StaffService {
+  staffMemberId String
+  serviceId     String
+
+  staffMember   StaffMember @relation(fields: [staffMemberId], references: [id], onDelete: Cascade)
+  service       Service     @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@id([staffMemberId, serviceId])
+  @@map("staff_services")
+}
+
+model StaffSchedule {
+  id            String      @id @default(cuid())
+  staffMemberId String
+  dayOfWeek     Int         // 0 (dimanche) à 6 (samedi)
+  startTime     String      // format "09:00"
+  endTime       String      // format "18:00"
+  isWorking     Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  staffMember   StaffMember @relation(fields: [staffMemberId], references: [id], onDelete: Cascade)
+
+  @@unique([staffMemberId, dayOfWeek, startTime])
+  @@index([staffMemberId, dayOfWeek])
+  @@map("staff_schedules")
+}
+
+model TimeOff {
+  id            String      @id @default(cuid())
+  staffMemberId String
+  startsAt      DateTime
+  endsAt        DateTime
+  reason        String?
+  isApproved    Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  staffMember   StaffMember @relation(fields: [staffMemberId], references: [id], onDelete: Cascade)
+
+  @@index([staffMemberId, startsAt, endsAt])
+  @@map("time_offs")
+}

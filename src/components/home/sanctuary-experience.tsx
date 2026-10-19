@@ -25,7 +25,7 @@ const SANCTUARY_PILLARS = [
 
 export function SanctuaryExperience() {
   return (
-    <section className="section bg-sand-50/60 border-b border-sand-200/80" aria-labelledby="experience-heading">
+    <section className="section bg-white border-b border-sand-200/80" aria-labelledby="experience-heading">
       <div className="container-belora">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Colonne Gauche : Manifeste & 3 engagements purs */}

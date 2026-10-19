@@ -1,0 +1,107 @@
+enum PaymentRecordStatus {
+  REQUIRES_PAYMENT_METHOD
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+}
+
+enum RefundRecordStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+}
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  UNPAID
+}
+
+enum BillingInterval {
+  MONTHLY
+  YEARLY
+}
+
+model Payment {
+  id                    String              @id @default(cuid())
+  bookingId             String
+  stripePaymentIntentId String              @unique
+  stripeChargeId        String?
+  amountMinor           Int                 // Montant brut débité en centimes
+  applicationFeeMinor   Int                 @default(0) // Commission prélevée par Belora
+  stripeFeeMinor        Int                 @default(0) // Frais Stripe estimés
+  netPayoutMinor        Int                 @default(0) // Montant net reversé au pro
+  currency              String              @default("EUR")
+  status                PaymentRecordStatus @default(PROCESSING)
+  isDeposit             Boolean             @default(false)
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+
+  booking               Booking             @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  refunds               Refund[]
+
+  @@index([bookingId])
+  @@index([stripePaymentIntentId])
+  @@map("payments")
+}
+
+model Refund {
+  id             String             @id @default(cuid())
+  paymentId      String
+  stripeRefundId String             @unique
+  amountMinor    Int                // Montant remboursé en centimes
+  reason         String?
+  status         RefundRecordStatus @default(PENDING)
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  payment        Payment            @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+
+  @@index([paymentId])
+  @@map("refunds")
+}
+
+model SubscriptionPlan {
+  id              String          @id @default(cuid())
+  name            String
+  slug            String          @unique
+  description     String?         @db.Text
+  priceMinorUnits Int             // Prix mensuel ou annuel en centimes
+  currency        String          @default("EUR")
+  interval        BillingInterval @default(MONTHLY)
+  stripePriceId   String?         @unique
+  stripeProductId String?
+  isActive        Boolean         @default(true)
+  features        Json?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  subscriptions   Subscription[]
+
+  @@map("subscription_plans")
+}
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  venueId              String
+  planId               String
+  stripeSubscriptionId String             @unique
+  stripeCustomerId     String?
+  status               SubscriptionStatus @default(ACTIVE)
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean            @default(false)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  venue                Venue              @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  plan                 SubscriptionPlan   @relation(fields: [planId], references: [id], onDelete: Restrict)
+
+  @@index([venueId])
+  @@index([status])
+  @@map("subscriptions")
+}
