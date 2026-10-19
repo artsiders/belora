@@ -32,7 +32,7 @@ const CURATED_VENUES: Venue[] = [
   },
   {
     slug: "maison-albar-soins",
-    name: "Pure & Sens — Maison Albar",
+    name: "Pure & Sens - Maison Albar",
     category: "Soin Visage & Spa",
     tags: ["Massage", "Soins visage", "Corps"],
     city: "Lyon",

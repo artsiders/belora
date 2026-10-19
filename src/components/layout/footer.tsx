@@ -79,10 +79,10 @@ export function Footer() {
 
           {/* Colonne Univers */}
           <div className="col-span-1 md:col-span-3 lg:col-span-3 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-wider text-sand-200">
+            <p className="text-sm font-semibold uppercase tracking-wider text-sand-200">
               Univers
             </p>
-            <ul className="space-y-2.5 text-xs">
+            <ul className="space-y-2.5 text-sm">
               <li>
                 <Link href="/search?category=hair" className="hover:text-white transition-colors">
                   Coiffure d’auteur
@@ -113,10 +113,10 @@ export function Footer() {
 
           {/* Colonne Professionnels */}
           <div className="col-span-1 md:col-span-2 lg:col-span-3 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-wider text-sand-200">
+            <p className="text-sm font-semibold uppercase tracking-wider text-sand-200">
               Professionnels
             </p>
-            <ul className="space-y-2.5 text-xs">
+            <ul className="space-y-2.5 text-sm">
               <li>
                 <Link href="/pro" className="hover:text-white transition-colors">
                   Belora Pro pour les salons
@@ -137,10 +137,10 @@ export function Footer() {
 
           {/* Colonne Maison & Suivi */}
           <div className="col-span-2 md:col-span-2 lg:col-span-2 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-wider text-sand-200">
+            <p className="text-sm font-semibold uppercase tracking-wider text-sand-200">
               Maison
             </p>
-            <ul className="space-y-2.5 text-xs">
+            <ul className="space-y-2.5 text-sm">
               <li>
                 <Link href="/about" className="hover:text-white transition-colors">
                   Notre charte
@@ -154,7 +154,7 @@ export function Footer() {
             </ul>
 
             <div className="pt-4 space-y-2">
-              <p className="text-[11px] uppercase tracking-wider text-sand-400">
+              <p className="text-sm uppercase tracking-wider text-sand-400">
                 Suivez-nous
               </p>
               <div className="flex items-center gap-3 text-sand-300">
@@ -183,8 +183,8 @@ export function Footer() {
         </div>
 
         {/* Ligne inférieure */}
-        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-sand-400">
-          <p>© 2026 Belora — L’artisanat du soin d’exception.</p>
+        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-sand-400">
+          <p>© 2026 Belora - L’artisanat du soin d’exception.</p>
 
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="hover:text-white transition-colors">

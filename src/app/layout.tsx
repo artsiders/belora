@@ -10,7 +10,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Belora — Réservation de soins beauté & bien-être",
+  title: "Belora - Réservation de soins beauté & bien-être",
   description:
     "Découvrez et réservez les meilleurs salons de coiffure, instituts, barbiers et spas indépendants.",
 };

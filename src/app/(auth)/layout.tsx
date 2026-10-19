@@ -106,7 +106,7 @@ export default function AuthLayout({
 
         {/* Pied de page sobre */}
         <div className="pt-8 mt-8 border-t border-sand-200 text-center sm:flex sm:items-center sm:justify-between text-[11px] text-sand-500">
-          <p>© 2026 Belora — L’artisanat du soin d’exception.</p>
+          <p>© 2026 Belora - L’artisanat du soin d’exception.</p>
           <div className="flex items-center justify-center gap-4 mt-2 sm:mt-0">
             <Link href="/privacy" className="hover:text-sand-900 transition-colors">
               Confidentialité

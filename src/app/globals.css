@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   BELORA — Design tokens + composants (Tailwind CSS v4)
+   BELORA - Design tokens + composants (Tailwind CSS v4)
    Direction : éditoriale, chaude, précise. Photo + typo + espace.
    Primaire : « Figue » (rose-prune profond, #82385A).
    Neutres : « Sable » chauds (jamais de gris bleuté ni de blanc pur).
@@ -14,7 +14,7 @@
    1. TOKENS
    -------------------------------------------------------------------------- */
 :root {
-  /* Primaire — Terracotta / Cognac chaleureux (inspiré de la nouvelle DA) */
+  /* Primaire - Terracotta / Cognac chaleureux (inspiré de la nouvelle DA) */
   --primary-50:  #faf4f0;
   --primary-100: #f4e6de;
   --primary-200: #e8cebf;
@@ -27,7 +27,7 @@
   --primary-900: #54291a;
   --primary-950: #2d140b;
 
-  /* Secondaire — Olive / Sauge terreux / Kaki doré */
+  /* Secondaire - Olive / Sauge terreux / Kaki doré */
   --secondary-50:  #f8f8f2;
   --secondary-100: #efefe2;
   --secondary-200: #dedfc5;
@@ -48,7 +48,7 @@
   --earth-cognac:     #9E5236;
   --earth-espresso:   #281E17;
 
-  /* Neutres — Sable et Fond majoritairement Blanc */
+  /* Neutres - Sable et Fond majoritairement Blanc */
   --sand-50:  #faf8f5; /* surface cartes douces */
   --sand-100: #f5f2eb; /* légers contrastes */
   --sand-200: #e9e4db; /* filets fins */

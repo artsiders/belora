@@ -1,8 +1,8 @@
-# Belora — Feuille de route MVP
+# Belora - Feuille de route MVP
 
 *Document destiné à l'agent IA de développement. Il décrit les références (Planity, Fresha), le périmètre MVP, l'architecture Next.js, le déploiement sur VPS et la direction artistique. Il fait foi : en cas d'ambiguïté, choisir l'option la plus simple et la noter dans `DECISIONS.md`.*
 
-**Produit** : Belora — **Domaine** : belora.com — **Hébergement** : VPS Hostinger
+**Produit** : Belora - **Domaine** : belora.com - **Hébergement** : VPS Hostinger
 
 ---
 
