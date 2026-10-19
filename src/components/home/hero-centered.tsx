@@ -7,7 +7,7 @@ export function HeroCentered() {
       <div className="container-belora">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Colonne Gauche : Titre éditorial, sous-titre et barre de recherche */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
+          <div className="lg:col-span-6 flex flex-col justify-center">
             {/* Eyebrow épuré sans badges artificiels */}
             <div className="flex items-center gap-2 mb-3">
               <span className="text-xs uppercase font-semibold tracking-wider text-sand-500">
@@ -115,7 +115,7 @@ export function HeroCentered() {
           </div>
 
           {/* Colonne Droite : Composition en arches (Arch Formes) de la DA */}
-          <div className="lg:col-span-5 relative">
+          <div className="lg:col-span-6 relative">
             <div className="grid grid-cols-12 gap-3 sm:gap-4 items-end">
               {/* Arche Principale Photographique (Gauche du bloc) */}
               <div className="col-span-8 relative h-[360px] sm:h-[460px] lg:h-[500px] arch-t rounded-b-2xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-sm">
