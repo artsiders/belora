@@ -2,17 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MainNav } from "@/components/layout/main-nav";
 import { Footer } from "@/components/layout/footer";
-import {
-  Calendar,
-  ShieldCheck,
-  CreditCard,
-  Users,
-  ArrowRight,
-  Check,
-  Sparkles,
-  Smartphone,
-  TrendingUp,
-} from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 export default function ProPage() {
   const PRO_FEATURES = [
@@ -176,7 +166,7 @@ export default function ProPage() {
                 Un agenda clair, silencieux et pensé pour le rythme du salon.
               </h2>
               <p className="text-xs sm:text-sm text-sand-600 leading-relaxed font-normal">
-                Conçu avec des artisans pour supprimer les clics superflus. Vos membres d'équipe visualisent leurs rituels d'un seul coup d'œil.
+                Conçu avec des artisans pour supprimer les clics superflus. Vos membres d’équipe visualisent leurs rituels d’un seul coup d’œil.
               </p>
             </div>
 

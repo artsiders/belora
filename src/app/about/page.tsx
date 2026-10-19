@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MainNav } from "@/components/layout/main-nav";
 import { Footer } from "@/components/layout/footer";
-import { Check, ShieldCheck, ArrowRight, HeartHandshake } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function AboutPage() {
   const AUDIT_CRITERIA = [
@@ -50,7 +50,7 @@ export default function AboutPage() {
               </h1>
 
               <p className="text-base sm:text-lg text-sand-700 leading-relaxed font-normal text-pretty">
-                Dans un monde saturé d'usines à rendez-vous où les clients sont traités comme des numéros sur une chaîne d'assemblage, Belora est né d'une conviction simple : le cheveu, la peau et le corps méritent du temps, du silence et des mains expertes.
+                Dans un monde saturé d’usines à rendez-vous où les clients sont traités comme des numéros sur une chaîne d’assemblage, Belora est né d’une conviction simple : le cheveu, la peau et le corps méritent du temps, du silence et des mains expertes.
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ export default function AboutPage() {
                     Les plateformes généralistes ont standardisé la réservation en compressant les temps de pose, en banalisant les salons indépendants et en encourageant une course au volume délétère pour la qualité du geste.
                   </p>
                   <p>
-                    Belora prend le contre-pied absolu. Nous construisons une maison d’édition vivante qui sélectionne exclusivement les artisans d'exception : ceux qui prennent le temps d'un diagnostic approfondi, qui privilégient les pigments végétaux et qui soignent l’acoustique de leur lieu pour vous offrir un véritable sas de décompression.
+                    Belora prend le contre-pied absolu. Nous construisons une maison d’édition vivante qui sélectionne exclusivement les artisans d’exception : ceux qui prennent le temps d’un diagnostic approfondi, qui privilégient les pigments végétaux et qui soignent l’acoustique de leur lieu pour vous offrir un véritable sas de décompression.
                   </p>
                 </div>
 

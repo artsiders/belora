@@ -11,8 +11,6 @@ import {
   ShieldCheck,
   Check,
   ArrowRight,
-  Sparkle,
-  Phone,
 } from "lucide-react";
 
 interface VenuePageProps {
@@ -311,7 +309,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   <div className="flex items-center justify-between">
                     <span className="text-sand-500">Politique d’annulation</span>
                     <span className="font-medium text-sand-800">
-                      Gratuite jusqu'à 24h
+                      Gratuite jusqu’à 24h
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
@@ -345,7 +343,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                 {/* Horaires hebdomadaires */}
                 <div className="pt-4 border-t border-sand-200/80">
                   <span className="text-xs font-semibold text-sand-900 block mb-2.5">
-                    Horaires d'ouverture
+                    Horaires d’ouverture
                   </span>
                   <div className="space-y-1.5 text-xs text-sand-600">
                     {venue.openingHours.map((slot) => (

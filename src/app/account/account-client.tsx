@@ -3,19 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Calendar,
-  Clock,
-  MapPin,
-  Star,
-  User,
-  Heart,
-  ShieldCheck,
-  ChevronRight,
-  RotateCcw,
-  X,
-  Check,
-} from "lucide-react";
+import { Calendar, Clock, RotateCcw } from "lucide-react";
 
 interface Appointment {
   id: string;

@@ -4,14 +4,13 @@ import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { VENUES, Venue } from "@/lib/data/venues";
+import { VENUES } from "@/lib/data/venues";
 import {
   Search,
   MapPin,
   Star,
   SlidersHorizontal,
   ArrowRight,
-  Clock,
   Compass,
   Check,
 } from "lucide-react";
@@ -110,7 +109,9 @@ export function SearchClient() {
             <SlidersHorizontal className="w-4 h-4 text-sand-400 shrink-0" />
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
+              onChange={(e) =>
+                setSortBy(e.target.value as "recommended" | "rating" | "price")
+              }
               className="w-full bg-transparent text-xs sm:text-sm text-sand-900 focus:outline-none cursor-pointer"
             >
               <option value="recommended">Recommandés</option>
@@ -168,7 +169,7 @@ export function SearchClient() {
                 Aucun établissement ne correspond à cette recherche
               </h3>
               <p className="text-xs text-sand-600 max-w-md mx-auto">
-                Essayez d'élargir vos filtres ou de sélectionner une autre métropole.
+                Essayez d’élargir vos filtres ou de sélectionner une autre métropole.
               </p>
               <button
                 type="button"
@@ -318,7 +319,7 @@ export function SearchClient() {
             <div className="p-4 bg-sand-50 text-xs text-sand-600 border-t border-sand-200/80 space-y-2">
               <div className="flex items-center gap-1.5 font-semibold text-sand-800">
                 <Check className="w-3.5 h-3.5 text-primary-600" />
-                <span>Accueil garanti sans file d'attente</span>
+                <span>Accueil garanti sans file d’attente</span>
               </div>
               <p className="text-[11px] leading-relaxed text-sand-500">
                 Chaque salon certifié Belora respecte scrupuleusement les horaires de

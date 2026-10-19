@@ -9,9 +9,6 @@ interface BookPageProps {
   params: Promise<{
     venueSlug: string;
   }>;
-  searchParams: Promise<{
-    service?: string;
-  }>;
 }
 
 export async function generateStaticParams() {
@@ -20,10 +17,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BookPage({ params, searchParams }: BookPageProps) {
+export default async function BookPage({ params }: BookPageProps) {
   const { venueSlug } = await params;
-  const { service } = await searchParams;
-
   const venue = getVenueBySlug(venueSlug);
 
   if (!venue) {
@@ -42,7 +37,7 @@ export default async function BookPage({ params, searchParams }: BookPageProps) 
             </div>
           }
         >
-          <BookClient venue={venue} initialServiceId={service} />
+          <BookClient venue={venue} />
         </Suspense>
       </main>
 

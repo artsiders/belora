@@ -1,7 +1,6 @@
-import Link from "next/link";
 import { MainNav } from "@/components/layout/main-nav";
 import { Footer } from "@/components/layout/footer";
-import { Search, HelpCircle, Mail, MessageSquare, ArrowRight } from "lucide-react";
+import { Search, Mail } from "lucide-react";
 
 export default function HelpPage() {
   const FAQ_SECTIONS = [
@@ -59,13 +58,13 @@ export default function HelpPage() {
         <section className="py-16 sm:py-20 border-b border-sand-200/80 bg-sand-50/70 text-center">
           <div className="container-belora max-w-2xl mx-auto">
             <span className="eyebrow text-primary-700 font-semibold tracking-widest block mb-2">
-              Centre d'Assistance
+              Centre d’Assistance
             </span>
             <h1 className="font-display text-4xl sm:text-5xl text-sand-950 mb-4">
               Comment pouvons-nous vous aider ?
             </h1>
             <p className="text-xs sm:text-sm text-sand-600 mb-8 max-w-md mx-auto">
-              Retrouvez toutes les réponses concernant vos réservations, vos paiements et nos critères d'audit.
+              Retrouvez toutes les réponses concernant vos réservations, vos paiements et nos critères d’audit.
             </p>
 
             {/* Champ de recherche d'aide */}
@@ -73,7 +72,7 @@ export default function HelpPage() {
               <Search className="w-4 h-4 text-sand-400 absolute left-4 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Rechercher une question, une règle d'annulation..."
+                placeholder="Rechercher une question, une règle d’annulation..."
                 className="input pl-11 py-2.5 text-xs sm:text-sm bg-sand-50"
               />
             </div>

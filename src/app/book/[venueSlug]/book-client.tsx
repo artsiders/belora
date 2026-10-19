@@ -3,13 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Venue, Service, TeamMember } from "@/lib/data/venues";
+import { useSearchParams } from "next/navigation";
+import { Venue, Service } from "@/lib/data/venues";
 import {
-  Clock,
   Check,
   ChevronRight,
   ArrowLeft,
-  Calendar as CalendarIcon,
   User,
   ShieldCheck,
   CheckCircle2,
@@ -17,7 +16,6 @@ import {
 
 interface BookClientProps {
   venue: Venue;
-  initialServiceId?: string;
 }
 
 const AVAILABLE_DAYS = [
@@ -37,12 +35,15 @@ const TIME_SLOTS = [
   "18h00",
 ];
 
-export function BookClient({ venue, initialServiceId }: BookClientProps) {
+export function BookClient({ venue }: BookClientProps) {
+  const searchParams = useSearchParams();
+  const initialServiceId = searchParams.get("service");
+
   // Sélection des services
   const [selectedServices, setSelectedServices] = useState<Service[]>(() => {
     if (initialServiceId) {
       const s = venue.services.find((item) => item.id === initialServiceId);
-      return s ? [s] : [venue.services[0]];
+      if (s) return [s];
     }
     return [venue.services[0]];
   });
@@ -134,7 +135,7 @@ export function BookClient({ venue, initialServiceId }: BookClientProps) {
             Voir mes rendez-vous
           </Link>
           <Link href="/" className="btn btn-outline btn-sm w-full sm:w-auto">
-            Retour à l'accueil
+            Retour à l’accueil
           </Link>
         </div>
       </div>
@@ -296,7 +297,7 @@ export function BookClient({ venue, initialServiceId }: BookClientProps) {
                       Sans préférence
                     </h3>
                     <p className="text-xs text-sand-500">
-                      Premier artisan d'excellence disponible
+                      Premier artisan d’excellence disponible
                     </p>
                   </div>
                 </div>
@@ -338,7 +339,7 @@ export function BookClient({ venue, initialServiceId }: BookClientProps) {
                     onClick={() => setStep(3)}
                     className="btn btn-primary btn-sm inline-flex items-center gap-1.5"
                   >
-                    <span>Choisir la date & l'heure</span>
+                    <span>Choisir la date & l’heure</span>
                     <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -505,7 +506,7 @@ export function BookClient({ venue, initialServiceId }: BookClientProps) {
                 <div className="p-3.5 rounded bg-sand-100/70 border border-sand-200/80 text-xs text-sand-600 flex items-start gap-2.5">
                   <ShieldCheck className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
                   <p className="leading-snug">
-                    Aucun prépaiement requis aujourd'hui. Vous règlerez directement auprès de l'artisan lors de votre venue. Annulation sans frais jusqu'à 24h avant le créneau.
+                    Aucun prépaiement requis aujourd’hui. Vous règlerez directement auprès de l’artisan lors de votre venue. Annulation sans frais jusqu’à 24h avant le créneau.
                   </p>
                 </div>
 
