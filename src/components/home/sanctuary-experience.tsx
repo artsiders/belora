@@ -50,14 +50,14 @@ export function SanctuaryExperience() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Colonne Gauche : Engagements & Liste en 6 piliers */}
           <div className="lg:col-span-7">
-            <p className="eyebrow mb-2">Charte d’Excellence</p>
-            <h2 id="experience-heading" className="display-lg text-sand-950 mb-4 text-balance">
+            <p className="eyebrow mb-2.5">Charte d’Excellence</p>
+            <h2 id="experience-heading" className="section-title mb-3 text-balance">
               Plus qu’un rendez-vous,{" "}
               <span className="font-display italic text-primary-600 block sm:inline">
                 l’expérience sanctuaire.
               </span>
             </h2>
-            <p className="lead mb-10 text-pretty">
+            <p className="section-subtitle max-w-xl mb-8 text-pretty">
               Belora ne référence pas des chaînes anonymes, mais des ateliers
               indépendants où l’artisanat du soin retrouve toute sa noblesse et
               son intimité.
@@ -104,7 +104,7 @@ export function SanctuaryExperience() {
 
               {/* Voile d'ombrage léger pour le bas */}
               <div
-                className="absolute inset-0 bg-gradient-to-t from-sand-950/70 via-sand-950/10 to-transparent"
+                className="absolute inset-0 bg-sand-950/20"
                 aria-hidden="true"
               />
 

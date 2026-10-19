@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SectionHeader } from "@/components/ui/section-header";
 import { ArrowUpRight } from "lucide-react";
 
 const POPULAR_CITIES = [
@@ -20,18 +21,23 @@ export function CityDirectory() {
   return (
     <section className="section bg-sand-100" aria-labelledby="cities-heading">
       <div className="container-belora">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-4 border-b border-sand-200/80">
-          <div>
-            <p className="eyebrow mb-2">Présence Nationale</p>
-            <h2 id="cities-heading" className="display-md text-sand-950">
+        {/* En-tête de section unifié */}
+        <SectionHeader
+          eyebrow="Présence Nationale"
+          title={
+            <>
               Trouver un artisan{" "}
               <span className="font-display italic text-primary-600">dans votre ville</span>
-            </h2>
-          </div>
-          <span className="text-xs text-sand-500 font-medium">
-            450+ maisons de soin auditées
-          </span>
-        </div>
+            </>
+          }
+          subtitle="Nos havres et ateliers partenaires vous accueillent au cœur des douze plus grandes métropoles françaises."
+          action={
+            <span className="px-3 py-1.5 rounded-[var(--radius-xs)] bg-sand-200/80 text-sand-800 text-xs font-semibold num shadow-2xs">
+              450+ adresses certifiées
+            </span>
+          }
+          id="cities-heading"
+        />
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
           {POPULAR_CITIES.map((city) => (

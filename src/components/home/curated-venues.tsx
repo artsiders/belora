@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SectionHeader } from "@/components/ui/section-header";
 import { Star, MapPin, ArrowRight } from "lucide-react";
 
 interface Venue {
@@ -70,23 +71,27 @@ export function CuratedVenues() {
   return (
     <section className="section bg-sand-100" aria-labelledby="venues-heading">
       <div className="container-belora">
-        {/* En-tête typographique */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 pb-5 border-b border-sand-200/80">
-          <div>
-            <p className="eyebrow mb-2">Sélection Rigoureuse</p>
-            <h2 id="venues-heading" className="display-md text-sand-950">
+        {/* En-tête de section unifié */}
+        <SectionHeader
+          eyebrow="Sélection Rigoureuse"
+          title={
+            <>
               Maisons & ateliers{" "}
               <span className="font-display italic text-primary-600">recommandés</span>
-            </h2>
-          </div>
-          <Link
-            href="/search?filter=curated"
-            className="btn btn-outline btn-sm self-start sm:self-auto"
-          >
-            <span>Voir toute la sélection</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
+            </>
+          }
+          subtitle="Une collection d'adresses indépendantes auditées sur place pour l’excellence et la régularité de leurs soins."
+          action={
+            <Link
+              href="/search?filter=curated"
+              className="btn btn-outline btn-sm self-start sm:self-auto"
+            >
+              <span>Voir toute la sélection</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          }
+          id="venues-heading"
+        />
 
         {/* Grille des 4 établissements audités */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">

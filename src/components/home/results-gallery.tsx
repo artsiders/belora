@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SectionHeader } from "@/components/ui/section-header";
 import { ArrowUpRight } from "lucide-react";
 
 interface GalleryItem {
@@ -60,22 +61,20 @@ export function ResultsGallery() {
   return (
     <section className="section bg-sand-50 border-b border-sand-200/80" aria-labelledby="gallery-heading">
       <div className="container-belora">
-        {/* En-tête typographique */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 pb-5 border-b border-sand-200/80">
-          <div className="max-w-xl">
-            <p className="eyebrow mb-2">Portfolio & Précision</p>
-            <h2 id="gallery-heading" className="display-lg text-sand-950 text-balance">
+        {/* En-tête de section unifié */}
+        <SectionHeader
+          eyebrow="Portfolio & Précision"
+          title={
+            <>
               Le geste en image,{" "}
               <span className="font-display italic text-primary-600 block sm:inline">
                 résultats d’ateliers.
               </span>
-            </h2>
-          </div>
-          <p className="text-xs sm:text-sm text-sand-600 max-w-sm leading-relaxed">
-            Parce que la beauté du geste se mesure à la finesse du détail : coupes
-            vivantes, teints repulpés et finitions d’une précision sans compromis.
-          </p>
-        </div>
+            </>
+          }
+          subtitle="Parce que la beauté du geste se mesure à la finesse du détail : coupes vivantes, teints repulpés et finitions d’une précision sans compromis."
+          id="gallery-heading"
+        />
 
         {/* Mosaïque asymétrique moderne (1 grand visuel + 4 visuels secondaires) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -91,11 +90,11 @@ export function ResultsGallery() {
               />
 
               <div
-                className="absolute inset-0 bg-gradient-to-t from-sand-950/80 via-sand-950/20 to-transparent"
+                className="absolute inset-0 bg-sand-950/20 group-hover:bg-sand-950/10 transition-colors"
                 aria-hidden="true"
               />
 
-              <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4 text-sand-50">
+              <div className="absolute inset-x-0 bottom-0 p-6 bg-sand-950/85 backdrop-blur-xs flex items-end justify-between gap-4 text-sand-50 border-t border-sand-50/10">
                 <div>
                   <span className="text-[10px] uppercase font-bold tracking-widest text-primary-300 block mb-1">
                     {featured.category}
@@ -135,11 +134,11 @@ export function ResultsGallery() {
                 />
 
                 <div
-                  className="absolute inset-0 bg-gradient-to-t from-sand-950/85 via-sand-950/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"
+                  className="absolute inset-0 bg-sand-950/20 group-hover:bg-sand-950/10 transition-colors"
                   aria-hidden="true"
                 />
 
-                <div className="absolute bottom-3 left-3 right-3 text-sand-50">
+                <div className="absolute inset-x-0 bottom-0 p-3 bg-sand-950/85 backdrop-blur-xs text-sand-50 border-t border-sand-50/10">
                   <span className="text-[9px] uppercase font-bold tracking-wider text-primary-300 block">
                     {item.category}
                   </span>

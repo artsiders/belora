@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SectionHeader } from "@/components/ui/section-header";
 import { ArrowUpRight, MapPin, Quote } from "lucide-react";
 
 interface Artisan {
@@ -57,22 +58,20 @@ export function ArtisanSpotlight() {
   return (
     <section className="section bg-sand-100" aria-labelledby="artisans-heading">
       <div className="container-belora">
-        {/* En-tête typographique */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 pb-5 border-b border-sand-200/80">
-          <div className="max-w-xl">
-            <p className="eyebrow mb-2">Les Hommes & Femmes du Métier</p>
-            <h2 id="artisans-heading" className="display-lg text-sand-950 text-balance">
+        {/* En-tête de section unifié */}
+        <SectionHeader
+          eyebrow="Les Hommes & Femmes du Métier"
+          title={
+            <>
               Rencontrez les artisans,{" "}
               <span className="font-display italic text-primary-600 block sm:inline">
                 passionnés du geste.
               </span>
-            </h2>
-          </div>
-          <p className="text-xs sm:text-sm text-sand-600 max-w-sm leading-relaxed">
-            Derrière chaque salon sélectionné, il y a une histoire humaine, des
-            années de perfectionnement et un amour sincère du soin bien fait.
-          </p>
-        </div>
+            </>
+          }
+          subtitle="Derrière chaque adresse sélectionnée, découvrez des praticiens investis et reconnus pour leur savoir-faire."
+          id="artisans-heading"
+        />
 
         {/* 3 Cartes Artisans détaillées */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

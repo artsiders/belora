@@ -211,7 +211,7 @@ html {
     margin-inline: auto;
     padding-inline: var(--gutter);
   }
-  .section { padding-block: clamp(4rem, 9vw, 8rem); }
+  .section { padding-block: clamp(3.5rem, 6.5vw, 5.5rem); }
   .rule { border: 0; border-top: 1px solid var(--line); }
   .hairline-b { border-bottom: 1px solid var(--line); }
   .hairline-t { border-top: 1px solid var(--line); }
@@ -221,13 +221,51 @@ html {
   .display-lg { font-family: var(--font-display); font-size: clamp(2.25rem, 5vw, 3.75rem); line-height: 1.04; letter-spacing: -0.025em; }
   .display-md { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.1; letter-spacing: -0.02em; }
   .display-italic { font-style: italic; }
+
+  /* Titre & Sous-titre unifiés pour toutes les sections de l'application */
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.875rem, 3.2vw, 2.375rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--sand-950);
+  }
+  .section-subtitle {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--sand-600);
+    font-weight: 400;
+  }
+  @media (min-width: 640px) {
+    .section-subtitle {
+      font-size: 0.9375rem;
+    }
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(234, 227, 216, 0.85);
+  }
+  @media (min-width: 768px) {
+    .section-header {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+  }
+
   .lead { font-size: 1.125rem; line-height: 1.6; color: var(--fg-muted); max-width: 38rem; }
   .eyebrow {
     font-size: 0.6875rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--fg-muted);
+    color: var(--sand-600);
   }
   .small-caps-meta {
     font-size: 0.75rem;

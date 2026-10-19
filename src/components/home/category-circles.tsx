@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SectionHeader } from "@/components/ui/section-header";
 import { ArrowUpRight } from "lucide-react";
 
 interface CategoryCircle {
@@ -59,23 +60,27 @@ export function CategoryCircles() {
   return (
     <section className="section bg-sand-50/70 border-b border-sand-200/80" aria-labelledby="categories-heading">
       <div className="container-belora">
-        {/* En-tête typographique éditorial à double nuance */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-5 border-b border-sand-200/80">
-          <div>
-            <p className="eyebrow mb-2">Univers & Spécialités</p>
-            <h2 id="categories-heading" className="display-md text-sand-950">
+        {/* En-tête de section unifié */}
+        <SectionHeader
+          eyebrow="Univers & Spécialités"
+          title={
+            <>
               Explorer par univers{" "}
               <span className="font-display italic text-primary-600">de soin</span>
-            </h2>
-          </div>
-          <Link
-            href="/search"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-sand-700 hover:text-primary-600 transition-colors"
-          >
-            <span>Toutes les catégories</span>
-            <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />
-          </Link>
-        </div>
+            </>
+          }
+          subtitle="Du rituel capillaire sur-mesure aux massages holistiques, explorez l’excellence de nos six disciplines."
+          action={
+            <Link
+              href="/search"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-sand-700 hover:text-primary-600 transition-colors"
+            >
+              <span>Toutes les catégories</span>
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />
+            </Link>
+          }
+          id="categories-heading"
+        />
 
         {/* Grille de vignettes circulaires & arches photographiques */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8">

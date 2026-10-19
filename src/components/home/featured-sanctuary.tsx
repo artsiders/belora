@@ -28,7 +28,7 @@ export function FeaturedSanctuary() {
           />
 
           <div
-            className="absolute inset-0 bg-gradient-to-t from-sand-950/80 via-sand-950/20 to-transparent"
+            className="absolute inset-0 bg-sand-950/35"
             aria-hidden="true"
           />
 
