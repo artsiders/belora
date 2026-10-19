@@ -37,7 +37,7 @@ export function FeaturedSanctuary() {
             <span className="inline-block px-3 py-1 rounded-[var(--radius-xs)] bg-primary-600/90 text-sand-50 text-[10px] tracking-widest uppercase font-semibold mb-3 backdrop-blur-sm">
               Maison Coup de Cœur
             </span>
-            <h3 className="font-display text-3xl sm:text-4xl text-sand-50 mb-3">
+            <h3 className="text-3xl sm:text-4xl text-sand-50 mb-3">
               Maison Albar Institut & Spa
             </h3>
             <p className="text-xs sm:text-sm text-sand-200 leading-relaxed mb-6 max-w-md">

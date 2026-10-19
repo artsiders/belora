@@ -31,7 +31,7 @@ export default function AuthLayout({
         <div className="relative z-10 flex items-center justify-between">
           <Link
             href="/"
-            className="font-display text-3xl tracking-tight text-sand-50 hover:text-primary-300 transition-colors"
+            className="text-3xl tracking-tight text-sand-50 hover:text-primary-300 transition-colors"
             aria-label="Belora - Retour à l'accueil"
           >
             Belora
@@ -52,7 +52,7 @@ export default function AuthLayout({
             <span>Maison d’artisans du soin</span>
           </div>
 
-          <h2 className="font-display text-3xl xl:text-4xl leading-[1.1] text-sand-50 text-balance">
+          <h2 className="text-3xl xl:text-4xl leading-[1.1] text-sand-50 text-balance">
             L’exigence du geste, la beauté du moment suspendu.
           </h2>
 
@@ -82,7 +82,7 @@ export default function AuthLayout({
           {/* Logo visible sur mobile uniquement */}
           <Link
             href="/"
-            className="lg:hidden font-display text-2xl tracking-tight text-sand-950"
+            className="lg:hidden text-2xl tracking-tight text-sand-950"
             aria-label="Belora - Accueil"
           >
             Belora

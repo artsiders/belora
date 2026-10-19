@@ -18,24 +18,22 @@ export function SectionHeader({
   className = "",
 }: SectionHeaderProps) {
   return (
-    <div className={`section-header ${className}`}>
+    <div
+      className={`flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-5 border-b border-sand-200/80 ${className}`}
+    >
       <div className="max-w-xl">
-        {eyebrow && <p className="eyebrow mb-2.5">{eyebrow}</p>}
-        <h2 id={id} className="section-title text-balance">
+        {eyebrow && <p className="eyebrow mb-1.5">{eyebrow}</p>}
+        <h2 id={id} className="section-title text-sand-950">
           {title}
         </h2>
+        {subtitle && (
+          <p className="text-xs sm:text-sm text-sand-600 mt-1.5 leading-relaxed font-normal">
+            {subtitle}
+          </p>
+        )}
       </div>
 
-      {(subtitle || action) && (
-        <div className="flex flex-col sm:flex-row sm:items-center md:items-end justify-between md:justify-end gap-4 max-w-lg md:text-right">
-          {subtitle && (
-            <p className="section-subtitle md:text-right">
-              {subtitle}
-            </p>
-          )}
-          {action && <div className="shrink-0">{action}</div>}
-        </div>
-      )}
+      {action && <div className="shrink-0 self-start sm:self-end">{action}</div>}
     </div>
   );
 }

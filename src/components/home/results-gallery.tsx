@@ -63,11 +63,11 @@ export function ResultsGallery() {
       <div className="container-belora">
         {/* En-tête de section unifié */}
         <SectionHeader
-          eyebrow="Portfolio & Précision"
+          eyebrow="Portfolio"
           title={
             <>
               Le geste en image,{" "}
-              <span className="font-display italic text-primary-600 block sm:inline">
+              <span className="font-display italic block sm:inline">
                 résultats d’ateliers.
               </span>
             </>
@@ -99,7 +99,7 @@ export function ResultsGallery() {
                   <span className="text-[10px] uppercase font-bold tracking-widest text-primary-300 block mb-1">
                     {featured.category}
                   </span>
-                  <h3 className="font-display text-2xl sm:text-3xl text-sand-50 mb-1">
+                  <h3 className="text-2xl sm:text-3xl text-sand-50 mb-1">
                     {featured.title}
                   </h3>
                   <p className="text-xs text-sand-200">

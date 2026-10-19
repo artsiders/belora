@@ -1,131 +1,107 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Leaf,
-  Award,
-  VolumeX,
-  ShieldCheck,
-  HeartHandshake,
-  Coffee,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const SANCTUARY_PILLARS = [
   {
-    icon: Leaf,
-    title: "Matières Botaniques & Éthiques",
-    description: "Cosmétiques biologiques, argiles pures et pigments végétaux respectueux de votre santé.",
+    num: "01",
+    title: "Des havres calmes & intimes",
+    description:
+      "Acoustique feutrée, lumière douce et zéro musique intrusive. Chaque lieu est audité pour vous offrir un moment de déconnexion totale.",
   },
   {
-    icon: Award,
-    title: "Artisans Diplômés & Éprouvés",
-    description: "Professionnels formés auprès des maîtres du métier, sélectionnés après visite en salon.",
+    num: "02",
+    title: "L’artisanat du geste & matières pures",
+    description:
+      "Praticiens indépendants diplômés, diagnostic personnalisé préalable et soins prodigués avec des cosmétiques botaniques d’exception.",
   },
   {
-    icon: VolumeX,
-    title: "Atmosphère Feutrée & Apaisante",
-    description: "Une acoustique pensée pour le calme. Zéro musique agressive, votre temps est sanctuarisé.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Hygiène & Stérilisation Hospitalière",
-    description: "Désinfection méticuleuse de chaque instrument et linge propre à usage strictement unique.",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Diagnostic Personnalisé Systématique",
-    description: "Un temps d'échange dédié avant tout geste pour adapter la prestation à votre morphologie.",
-  },
-  {
-    icon: Coffee,
-    title: "Hospitalité & Attentions Rares",
-    description: "Thé d’infusion botanique, café de terroir et accueil personnalisé dès le pas de la porte.",
+    num: "03",
+    title: "Votre temps sanctuarisé",
+    description:
+      "Réservation instantanée sans intermédiaire, créneaux garantis et accueil attentif dès le pas de la porte, sans aucune attente.",
   },
 ];
 
 export function SanctuaryExperience() {
   return (
-    <section className="section bg-sand-50 border-b border-sand-200/80" aria-labelledby="experience-heading">
+    <section className="section bg-sand-50/60 border-b border-sand-200/80" aria-labelledby="experience-heading">
       <div className="container-belora">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Colonne Gauche : Engagements & Liste en 6 piliers */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          {/* Colonne Gauche : Manifeste & 3 engagements purs */}
           <div className="lg:col-span-7">
-            <p className="eyebrow mb-2.5">Charte d’Excellence</p>
+            <p className="eyebrow mb-2">Charte d’Excellence</p>
             <h2 id="experience-heading" className="section-title mb-3 text-balance">
               Plus qu’un rendez-vous,{" "}
-              <span className="font-display italic text-primary-600 block sm:inline">
+              <span className="font-display italic block sm:inline">
                 l’expérience sanctuaire.
               </span>
             </h2>
-            <p className="section-subtitle max-w-xl mb-8 text-pretty">
-              Belora ne référence pas des chaînes anonymes, mais des ateliers
-              indépendants où l’artisanat du soin retrouve toute sa noblesse et
-              son intimité.
+            <p className="text-xs sm:text-sm text-sand-600 leading-relaxed font-normal mb-8 max-w-xl">
+              Belora ne référence pas de chaînes impersonnelles. Nous sélectionnons
+              uniquement des ateliers indépendants où le soin est un art et votre tranquillité une priorité.
             </p>
 
-            {/* Grille des 6 engagements épurés */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-7 mb-10">
-              {SANCTUARY_PILLARS.map((pillar, idx) => {
-                const Icon = pillar.icon;
-                return (
-                  <div key={idx} className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-[var(--radius-xs)] bg-sand-200/70 text-primary-600 flex items-center justify-center shrink-0 border border-sand-300/60 shadow-2xs">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h3 className="text-xs font-bold uppercase tracking-wider text-sand-950 mb-1">
-                        {pillar.title}
-                      </h3>
-                      <p className="text-xs text-sand-600 leading-relaxed font-normal">
-                        {pillar.description}
-                      </p>
-                    </div>
+            {/* 3 Engagements épurés avec fine numérotation (sans boîtes d'icônes SaaS) */}
+            <div className="space-y-5 mb-8">
+              {SANCTUARY_PILLARS.map((pillar) => (
+                <div
+                  key={pillar.num}
+                  className="flex items-start gap-4 pb-5 border-b border-sand-200/70 last:border-b-0 last:pb-0"
+                >
+                  <span className="font-display text-base text-sand-400 font-normal shrink-0 pt-0.5">
+                    {pillar.num}
+                  </span>
+                  <div>
+                    <h3 className="text-xs sm:text-sm font-semibold text-sand-950 mb-1">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-xs text-sand-600 leading-relaxed font-normal">
+                      {pillar.description}
+                    </p>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
 
-            <Link href="/about" className="btn btn-outline btn-sm">
-              <span>Lire notre charte de sélection</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 text-xs font-medium text-sand-800 hover:text-primary-600 transition-colors"
+            >
+              <span>Découvrir notre protocole d’audit</span>
+              <ArrowRight className="w-3.5 h-3.5 opacity-60" />
             </Link>
           </div>
 
-          {/* Colonne Droite : Grande photographie d'architecture d'intérieur */}
+          {/* Colonne Droite : Photographie architecturale apaisante */}
           <div className="lg:col-span-5 relative">
-            <div className="relative aspect-[3/4] sm:aspect-[4/5] rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-sand-300 shadow-xl">
+            <div className="relative aspect-[4/5] rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-sand-300/80 shadow-md">
               <Image
                 src="/images/sanctuaries/sanctuary-architecture.jpg"
-                alt="Ambiance minérale et feutrée d'un institut partenaire Belora"
+                alt="Intérieur minéral et épuré d'un sanctuaire partenaire Belora"
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover"
               />
 
-              {/* Voile d'ombrage léger pour le bas */}
+              {/* Voile d'ombrage discret et cartouche sobre */}
               <div
-                className="absolute inset-0 bg-sand-950/20"
+                className="absolute inset-0 bg-sand-950/15"
                 aria-hidden="true"
               />
 
-              {/* Cartouche d'accréditation en bas */}
-              <div className="absolute bottom-5 inset-x-5 p-4 rounded-[var(--radius-sm)] bg-sand-50/95 backdrop-blur-xs border border-sand-200 shadow-md text-sand-900">
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-primary-600 block mb-0.5">
-                      Audit qualité terrain
-                    </span>
-                    <h4 className="font-display text-base text-sand-950">
-                      Maison Albar Institut & Spa
-                    </h4>
-                    <p className="text-[11px] text-sand-500">
-                      Lyon Presqu’île · Noté 5,0 / 5
-                    </p>
-                  </div>
-                  <div className="px-2.5 py-1 rounded bg-sand-200/80 text-[11px] font-semibold text-sand-800 num">
-                    Certifié 2026
-                  </div>
+              <div className="absolute bottom-4 inset-x-4 p-3.5 rounded-[var(--radius-sm)] bg-sand-50/95 backdrop-blur-xs border border-sand-200/80 text-sand-900 shadow-sm flex items-center justify-between gap-3">
+                <div>
+                  <h4 className="font-display text-base text-sand-950">
+                    Maison Albar Institut & Spa
+                  </h4>
+                  <p className="text-[11px] text-sand-500">
+                    Lyon Presqu’île · Audit 2026
+                  </p>
                 </div>
+                <span className="text-[11px] font-semibold text-sand-700 bg-sand-200/60 px-2 py-0.5 rounded-[var(--radius-xs)] num">
+                  Noté 5,0 / 5
+                </span>
               </div>
             </div>
           </div>

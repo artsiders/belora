@@ -48,7 +48,7 @@ export default function RegisterPage() {
         <span className="text-[11px] uppercase tracking-wider font-semibold text-primary-600 block mb-1.5">
           Inscription
         </span>
-        <h1 className="font-display text-3xl sm:text-4xl text-sand-950 tracking-tight">
+        <h1 className="text-3xl sm:text-4xl text-sand-950 tracking-tight">
           Rejoindre Belora
         </h1>
         <p className="text-xs sm:text-sm text-sand-600 mt-2 font-normal leading-relaxed">
@@ -141,7 +141,7 @@ export default function RegisterPage() {
             <CheckCircle2 className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="font-display text-xl text-sand-950 mb-1">
+            <h3 className="text-xl text-sand-950 mb-1">
               Bienvenue dans la Maison Belora
             </h3>
             <p className="text-xs text-sand-600">

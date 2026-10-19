@@ -60,11 +60,11 @@ export function ArtisanSpotlight() {
       <div className="container-belora">
         {/* En-tête de section unifié */}
         <SectionHeader
-          eyebrow="Les Hommes & Femmes du Métier"
+          eyebrow="Artisans"
           title={
             <>
               Rencontrez les artisans,{" "}
-              <span className="font-display italic text-primary-600 block sm:inline">
+              <span className="font-display italic block sm:inline">
                 passionnés du geste.
               </span>
             </>
@@ -104,7 +104,7 @@ export function ArtisanSpotlight() {
               {/* Contenu éditorial & Citation */}
               <div className="p-6 flex flex-col flex-1 justify-between">
                 <div>
-                  <h3 className="font-display text-2xl text-sand-950 mb-1">
+                  <h3 className="text-2xl text-sand-950 mb-1">
                     {artisan.name}
                   </h3>
                   <p className="text-xs text-sand-600 flex items-center gap-1.5 mb-4">
@@ -118,7 +118,7 @@ export function ArtisanSpotlight() {
 
                   <div className="relative pt-3 border-t border-sand-200/80">
                     <Quote className="w-4 h-4 text-primary-300 mb-1 opacity-70" />
-                    <p className="text-xs text-sand-700 italic font-normal leading-relaxed">
+                    <p className="text-xs text-sand-700 font-normal leading-relaxed">
                       « {artisan.quote} »
                     </p>
                   </div>

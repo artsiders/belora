@@ -26,7 +26,7 @@ export function MainNav() {
         <Link
           href="/"
           onClick={closeMenu}
-          className="font-display text-2xl tracking-tight text-sand-950 hover:text-primary-600 transition-colors focus:outline-none"
+          className="text-2xl tracking-tight text-sand-950 hover:text-primary-600 transition-colors focus:outline-none"
           aria-label="Belora - Accueil"
         >
           Belora

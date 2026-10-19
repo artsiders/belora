@@ -73,14 +73,13 @@ export function CuratedVenues() {
       <div className="container-belora">
         {/* En-tête de section unifié */}
         <SectionHeader
-          eyebrow="Sélection Rigoureuse"
+          eyebrow="Sélection"
           title={
             <>
-              Maisons & ateliers{" "}
-              <span className="font-display italic text-primary-600">recommandés</span>
+              Maisons & ateliers <span className="font-display italic">recommandés</span>
             </>
           }
-          subtitle="Une collection d'adresses indépendantes auditées sur place pour l’excellence et la régularité de leurs soins."
+          subtitle="Une collection d'adresses indépendantes auditées pour l’excellence de leurs praticiens."
           action={
             <Link
               href="/search?filter=curated"
@@ -132,7 +131,7 @@ export function CuratedVenues() {
                       {venue.district}, {venue.city}
                     </span>
                   </div>
-                  <h3 className="font-display text-xl text-sand-950 group-hover:text-primary-600 transition-colors mb-2 leading-snug">
+                  <h3 className="text-xl text-sand-950 group-hover:text-primary-600 transition-colors mb-2 leading-snug">
                     {venue.name}
                   </h3>
                   <p className="text-xs text-sand-600 line-clamp-2 leading-relaxed mb-4">

@@ -63,7 +63,7 @@ export default function LoginPage() {
         <span className="text-[11px] uppercase tracking-wider font-semibold text-primary-600 block mb-1.5">
           {userType === "client" ? "Réservations de soins" : "Gestion d’établissement"}
         </span>
-        <h1 className="font-display text-3xl sm:text-4xl text-sand-950 tracking-tight">
+        <h1 className="text-3xl sm:text-4xl text-sand-950 tracking-tight">
           {userType === "client" ? "Bienvenue à nouveau" : "Espace Artisan & Salon"}
         </h1>
         <p className="text-xs sm:text-sm text-sand-600 mt-2 font-normal leading-relaxed">
@@ -80,7 +80,7 @@ export default function LoginPage() {
             <CheckCircle2 className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="font-display text-xl text-sand-950 mb-1">Connexion validée</h3>
+            <h3 className="text-xl text-sand-950 mb-1">Connexion validée</h3>
             <p className="text-xs text-sand-600">
               Bienvenue sur votre espace Belora. Redirection en cours…
             </p>

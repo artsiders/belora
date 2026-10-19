@@ -23,11 +23,10 @@ export function CityDirectory() {
       <div className="container-belora">
         {/* En-tête de section unifié */}
         <SectionHeader
-          eyebrow="Présence Nationale"
+          eyebrow="Villes"
           title={
             <>
-              Trouver un artisan{" "}
-              <span className="font-display italic text-primary-600">dans votre ville</span>
+              Trouver un artisan <span className="font-display italic">dans votre ville</span>
             </>
           }
           subtitle="Nos havres et ateliers partenaires vous accueillent au cœur des douze plus grandes métropoles françaises."

@@ -60,23 +60,22 @@ export function CategoryCircles() {
   return (
     <section className="section bg-sand-50/70 border-b border-sand-200/80" aria-labelledby="categories-heading">
       <div className="container-belora">
-        {/* En-tête de section unifié */}
+        {/* En-tête de section unifié et épuré */}
         <SectionHeader
-          eyebrow="Univers & Spécialités"
+          eyebrow="Disciplines"
           title={
             <>
-              Explorer par univers{" "}
-              <span className="font-display italic text-primary-600">de soin</span>
+              Explorer par univers <span className="font-display italic">de soin</span>
             </>
           }
-          subtitle="Du rituel capillaire sur-mesure aux massages holistiques, explorez l’excellence de nos six disciplines."
+          subtitle="Six univers dédiés à la santé du cheveu, de la peau et à l’apaisement du corps."
           action={
             <Link
               href="/search"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-sand-700 hover:text-primary-600 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-sand-700 hover:text-primary-600 transition-colors"
             >
               <span>Toutes les catégories</span>
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
             </Link>
           }
           id="categories-heading"
