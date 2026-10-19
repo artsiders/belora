@@ -86,10 +86,10 @@ export function ResultsGallery() {
             <Link
               key={item.id}
               href={`/venue/${item.slug}`}
-              className="group flex flex-col bg-white rounded-2xl border border-sand-200/80 p-3.5 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300 focus:outline-none"
+              className="group flex flex-col bg-white arch-t border border-sand-200/80 p-3.5 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300 focus:outline-none"
             >
               {/* Photographie avec arche douce supérieure (écho à la nouvelle DA) */}
-              <div className="relative aspect-[4/5] w-full rounded-t-[72px] rounded-b-xl overflow-hidden bg-sand-100 mb-3.5">
+              <div className="relative aspect-[4/5] w-full arch-t rounded-b-xl overflow-hidden bg-sand-100 mb-3.5">
                 <Image
                   src={item.image}
                   alt={item.title}
