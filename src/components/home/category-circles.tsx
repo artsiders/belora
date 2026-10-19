@@ -16,48 +16,42 @@ const CATEGORIES: CategoryCircle[] = [
     label: "Coiffure d’auteur",
     count: "420+ salons",
     href: "/search?category=hair",
-    image:
-      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=400&q=80",
+    image: "/images/categories/category-hair.jpg",
   },
   {
     id: "facial",
     label: "Soins Visage",
     count: "310+ instituts",
     href: "/search?category=facial",
-    image:
-      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=400&q=80",
+    image: "/images/categories/category-facial.jpg",
   },
   {
     id: "massage",
     label: "Massages & Spas",
     count: "195+ havres",
     href: "/search?category=massage",
-    image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=400&q=80",
+    image: "/images/categories/category-massage.jpg",
   },
   {
     id: "barber",
     label: "Barbiers & Homme",
     count: "180+ ateliers",
     href: "/search?category=barber",
-    image:
-      "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=400&q=80",
+    image: "/images/categories/category-barber.jpg",
   },
   {
     id: "nails",
     label: "Onglerie de soin",
     count: "140+ studios",
     href: "/search?category=nails",
-    image:
-      "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=400&q=80",
+    image: "/images/categories/category-nails.jpg",
   },
   {
     id: "wellness",
     label: "Rituels & Bains",
     count: "85+ sanctuaires",
     href: "/search?category=massage",
-    image:
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80",
+    image: "/images/categories/category-wellness.jpg",
   },
 ];
 

@@ -18,8 +18,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     category: "Coiffure végétale",
     salon: "L’Atelier Botanique",
     city: "Paris Marais",
-    image:
-      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=85",
+    image: "/images/gallery/gallery-hair.jpg",
   },
   {
     id: "g2",
@@ -27,8 +26,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     category: "Facialisme holistique",
     salon: "Maison Albar Institut",
     city: "Lyon",
-    image:
-      "https://images.unsplash.com/photo-1512290900672-1f4861c8f49d?auto=format&fit=crop&w=600&q=80",
+    image: "/images/gallery/gallery-facial.jpg",
   },
   {
     id: "g3",
@@ -36,8 +34,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     category: "Soin des mains",
     salon: "L’Écrin Onglerie",
     city: "Paris 6e",
-    image:
-      "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=80",
+    image: "/images/gallery/gallery-nails.jpg",
   },
   {
     id: "g4",
@@ -45,8 +42,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     category: "Barbier d'époque",
     salon: "Le Salon Saint-Germain",
     city: "Bordeaux",
-    image:
-      "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=600&q=80",
+    image: "/images/gallery/gallery-barber.jpg",
   },
   {
     id: "g5",
@@ -54,8 +50,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     category: "Massages & Spas",
     salon: "Studio Séquoia",
     city: "Marseille",
-    image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=80",
+    image: "/images/gallery/gallery-massage.jpg",
   },
 ];
 

@@ -20,7 +20,7 @@ export function FeaturedSanctuary() {
         {/* Immense photographie panoramique architecturale */}
         <div className="relative aspect-[16/9] min-h-[440px] sm:min-h-[580px] w-full rounded-[var(--radius-photo)] overflow-hidden border border-line bg-sand-200 shadow-xl">
           <Image
-            src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=2000&q=85"
+            src="/images/sanctuaries/sanctuary-architecture.jpg"
             alt="Maison Albar Institut - Un espace de soin d’une grande pureté architecturale"
             fill
             sizes="100vw"

@@ -26,8 +26,7 @@ const CURATED_VENUES: Venue[] = [
     rating: "4,9",
     reviewCount: 142,
     startingPrice: "dès 55 €",
-    image:
-      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=85",
+    image: "/images/venues/atelier-botanique.jpg",
   },
   {
     slug: "maison-albar-soins",
@@ -39,8 +38,7 @@ const CURATED_VENUES: Venue[] = [
     rating: "5,0",
     reviewCount: 96,
     startingPrice: "dès 80 €",
-    image:
-      "https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=900&q=85",
+    image: "/images/venues/maison-albar.jpg",
   },
   {
     slug: "barbier-saint-germain",
@@ -52,8 +50,7 @@ const CURATED_VENUES: Venue[] = [
     rating: "4,9",
     reviewCount: 218,
     startingPrice: "dès 38 €",
-    image:
-      "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=900&q=85",
+    image: "/images/venues/salon-saint-germain.jpg",
   },
   {
     slug: "bain-de-vapeur-sequoia",
@@ -65,8 +62,7 @@ const CURATED_VENUES: Venue[] = [
     rating: "4,8",
     reviewCount: 88,
     startingPrice: "dès 75 €",
-    image:
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=85",
+    image: "/images/venues/studio-sequoia.jpg",
   },
 ];
 

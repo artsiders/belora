@@ -24,8 +24,7 @@ const ARTISANS: Artisan[] = [
     quote:
       "La coloration végétale n’est pas un compromis, c’est l’alchimie suprême qui sublime le cheveu en respectant sa matière vivante.",
     experience: "14 ans de métier",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
+    image: "/images/artisans/artisan-helene.jpg",
     venueSlug: "atelier-botanique-paris",
   },
   {
@@ -37,8 +36,7 @@ const ARTISANS: Artisan[] = [
     quote:
       "Un rasage d’époque exige le geste calme du coupe-choux, la chaleur enveloppante de la serviette et une écoute totale de l’homme.",
     experience: "18 ans de métier",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    image: "/images/artisans/artisan-marc.jpg",
     venueSlug: "barbier-saint-germain",
   },
   {
@@ -50,8 +48,7 @@ const ARTISANS: Artisan[] = [
     quote:
       "Le visage conserve la mémoire de nos rythmes. Un massage Kobido bien conduit délie chaque tension et réveille la lumière du teint.",
     experience: "11 ans de métier",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+    image: "/images/artisans/artisan-nour.jpg",
     venueSlug: "maison-albar-soins",
   },
 ];

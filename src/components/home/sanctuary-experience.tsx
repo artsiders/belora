@@ -95,7 +95,7 @@ export function SanctuaryExperience() {
           <div className="lg:col-span-5 relative">
             <div className="relative aspect-[3/4] sm:aspect-[4/5] rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-sand-300 shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=1200&q=85"
+                src="/images/sanctuaries/sanctuary-architecture.jpg"
                 alt="Ambiance minérale et feutrée d'un institut partenaire Belora"
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"

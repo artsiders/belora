@@ -13,7 +13,7 @@ export default function AuthLayout({
       <div className="relative hidden lg:flex lg:col-span-5 flex-col justify-between p-10 xl:p-14 text-sand-50 overflow-hidden bg-sand-950">
         {/* Photographie d’ambiance haute définition */}
         <Image
-          src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+          src="/images/auth/auth-editorial.jpg"
           alt="Ambiance feutrée d'un sanctuaire de soin Belora"
           fill
           priority
