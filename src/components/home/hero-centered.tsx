@@ -12,24 +12,24 @@ const SEARCH_SUGGESTIONS = [
 export function HeroCentered() {
   return (
     <section className="relative w-full min-h-[720px] sm:min-h-[780px] lg:min-h-[860px] overflow-hidden flex flex-col justify-between pt-14 sm:pt-20 pb-8 sm:pb-12 border-b border-line">
-      {/* 1. Photographie haute définition en arrière-plan complet pleine largeur (Full Width sans cadre) */}
+      {/* 1. Photographie haute définition en arrière-plan complet (Full Width) */}
       <Image
         src="/images/heroes/hero-image.jpeg"
-        alt="Intérieur architectural lumineux et apaisant d’un salon partenaire Belora"
+        alt="Atmosphère d’un salon de soin haut de gamme partenaire Belora"
         fill
         priority
         sizes="100vw"
         className="object-cover object-bottom"
       />
 
-      {/* 2. L'overlay en demi-arc de cercle (dôme/ellipse) :
-             Opaque au sommet derrière le texte pour une lisibilité absolue,
-             qui s'arrondit et s'estompe vers le bas pour révéler la photo */}
+      {/* 2. L'overlay en demi-arc de cercle arrondi :
+             SEUL le top-center est opaque pour abriter le texte et la recherche,
+             les bords gauche et droit restent totalement transparents pour dévoiler la photo */}
       <div
         className="absolute inset-0 pointer-events-none z-[1]"
         style={{
           background:
-            "radial-gradient(ellipse 130% 68% at 50% 0%, var(--bg) 0%, var(--bg) 42%, rgba(246, 241, 234, 0.92) 58%, rgba(246, 241, 234, 0.4) 78%, transparent 100%)",
+            "radial-gradient(ellipse 65% 58% at 50% 0%, var(--bg) 0%, var(--bg) 40%, rgba(246, 241, 234, 0.94) 55%, rgba(246, 241, 234, 0.2) 75%, transparent 100%)",
         }}
         aria-hidden="true"
       />
@@ -44,7 +44,7 @@ export function HeroCentered() {
         aria-hidden="true"
       />
 
-      {/* 3. Contenu textuel et recherche positionnés par-dessus le dôme opaque */}
+      {/* 3. Contenu textuel et recherche positionnés au centre sur l'arc opaque */}
       <div className="container-belora relative z-10 w-full text-center">
         <div className="max-w-4xl mx-auto">
           {/* Grand titre centré à fort contraste */}
@@ -55,7 +55,7 @@ export function HeroCentered() {
             </span>
           </h1>
 
-          {/* Sous-titre sobre et précis */}
+          {/* Sous-titre marketplace sobre et précis */}
           <p className="text-base sm:text-lg text-sand-700 max-w-2xl mx-auto text-pretty leading-relaxed mb-8 sm:mb-10 font-normal">
             Découvrez et réservez les salons de coiffure, instituts et spas
             indépendants sélectionnés pour l’exigence de leurs artisans.
@@ -65,7 +65,7 @@ export function HeroCentered() {
           <form
             action="/search"
             method="GET"
-            className="searchbar shadow-2xl shadow-sand-950/10 bg-sand-50/98 backdrop-blur-md border border-sand-300 max-w-3xl mx-auto"
+            className="searchbar shadow-2xl shadow-sand-950/10 bg-sand-50 border border-sand-300 max-w-3xl mx-auto"
             role="search"
           >
             <div className="searchbar-field">
@@ -138,16 +138,16 @@ export function HeroCentered() {
             </button>
           </form>
 
-          {/* Suggestions de recherche */}
-          <div className="mt-4 sm:mt-5 flex items-center justify-center gap-2 flex-wrap">
-            <span className="text-xs text-sand-600 font-medium mr-1">
+          {/* Suggestions de recherche avec fond OPAQUE solide */}
+          <div className="mt-5 flex items-center justify-center gap-2 flex-wrap">
+            <span className="text-xs text-sand-700 font-semibold mr-1">
               Recherches fréquentes :
             </span>
             {SEARCH_SUGGESTIONS.map((item) => (
               <Link
                 key={item.query}
                 href={`/search?q=${item.query}`}
-                className="chip text-xs bg-sand-500 hover:bg-sand-200 border-sand-300 text-sand-800 backdrop-blur-sm"
+                className="chip text-xs bg-sand-50 hover:bg-sand-200 border border-sand-300 text-sand-900 font-medium shadow-sm transition-colors"
               >
                 {item.label}
               </Link>
@@ -156,32 +156,49 @@ export function HeroCentered() {
         </div>
       </div>
 
-      {/* 4. Cartouche d'artisan / témoignage flottante dans le bas de la photo (Style Voiceflow) */}
+      {/* 4. Cartouche réassurance Marketplace Belora (centrée sur le rôle de la plateforme) */}
       <div className="container-belora relative z-10 mt-12 sm:mt-16 flex justify-end w-full">
-        <div className="max-w-sm sm:max-w-md p-5 sm:p-6 rounded-[var(--radius-sm)] bg-sand-50/95 backdrop-blur-md border border-sand-200/90 shadow-xl text-sand-900">
-          <p className="font-display text-base sm:text-lg italic text-sand-900 mb-3 leading-snug">
-            « Un accueil feutré, une écoute rare et un balayage minéral d’une
-            précision absolue. C’est exactement le niveau d’artisanat que je recherchais. »
+        <div className="max-w-sm sm:max-w-md p-5 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300/80 shadow-xl text-sand-900">
+          <div className="flex items-center justify-between gap-3 mb-2.5">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary-600" aria-hidden="true" />
+              <span className="text-[10px] uppercase tracking-widest text-sand-600 font-semibold">
+                Marketplace Belora
+              </span>
+            </div>
+            <span className="text-[11px] text-primary-600 font-semibold flex items-center gap-1">
+              <svg className="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              Réservation garantie
+            </span>
+          </div>
+
+          <p className="font-display text-lg text-sand-950 mb-1.5 leading-snug">
+            Prenez rendez-vous en moins de 90 secondes.
           </p>
-          <div className="flex items-center justify-between pt-3 border-t border-line/80">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-primary-100 border border-primary-200 flex items-center justify-center font-display text-primary-700 font-semibold text-xs">
-                CB
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-sand-900 leading-tight">
-                  Camille B.
-                </p>
-                <p className="text-xs text-fg-subtle">
-                  Cliente vérifiée · L’Atelier Botanique
-                </p>
-              </div>
+          <p className="text-xs text-sand-600 leading-relaxed mb-4">
+            Coiffure, barbiers, soins du visage et spas indépendants partout en France. Disponibilités en direct, zéro appel téléphonique, confirmation immédiate.
+          </p>
+
+          <div className="pt-3 border-t border-line/80 flex items-center justify-between text-xs text-sand-700">
+            <div className="flex items-center gap-4">
+              <span className="flex items-center gap-1 font-medium">
+                <span className="text-primary-600 font-bold">✓</span> 24h/24 & 7j/7
+              </span>
+              <span className="flex items-center gap-1 font-medium">
+                <span className="text-primary-600 font-bold">✓</span> Rappels SMS
+              </span>
             </div>
             <Link
-              href="/venue/atelier-botanique-paris"
+              href="/search"
               className="text-xs font-semibold text-primary-600 hover:text-primary-700 inline-flex items-center gap-1 group/link"
             >
-              <span>Découvrir</span>
+              <span>Explorer</span>
               <svg
                 className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5"
                 viewBox="0 0 24 24"
