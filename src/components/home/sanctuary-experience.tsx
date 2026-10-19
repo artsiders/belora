@@ -7,19 +7,19 @@ const SANCTUARY_PILLARS = [
     num: "01",
     title: "Des havres calmes & intimes",
     description:
-      "Acoustique feutrée, lumière douce et zéro musique intrusive. Chaque lieu est audité pour vous offrir un moment de déconnexion totale.",
+      "Acoustique douce, lumière apaisante, sans musique intrusive. Chaque lieu est contrôlé pour garantir la tranquillité.",
   },
   {
     num: "02",
     title: "L’artisanat du geste & matières pures",
     description:
-      "Praticiens indépendants diplômés, diagnostic personnalisé préalable et soins prodigués avec des cosmétiques botaniques d’exception.",
+      "Praticiens diplômés, soin personnalisé, cosmétiques botaniques de qualité.",
   },
   {
     num: "03",
     title: "Votre temps sanctuarisé",
     description:
-      "Réservation instantanée sans intermédiaire, créneaux garantis et accueil attentif dès le pas de la porte, sans aucune attente.",
+      "Réservation simple, créneaux fiables et accueil attentionné sans attente.",
   },
 ];
 
@@ -37,7 +37,7 @@ export function SanctuaryExperience() {
                 l’expérience sanctuaire.
               </span>
             </h2>
-            <p className="text-xs sm:text-sm text-sand-600 leading-relaxed font-normal mb-8 max-w-xl">
+            <p className="text-sm text-sand-600 leading-relaxed font-normal mb-8 max-w-xl">
               Belora ne référence pas de chaînes impersonnelles. Nous sélectionnons
               uniquement des ateliers indépendants où le soin est un art et votre tranquillité une priorité.
             </p>
@@ -53,7 +53,7 @@ export function SanctuaryExperience() {
                     {pillar.num}
                   </span>
                   <div>
-                    <h3 className="text-xs sm:text-sm font-semibold text-sand-950 mb-1">
+                    <h3 className="text-sm font-semibold text-sand-950 mb-1">
                       {pillar.title}
                     </h3>
                     <p className="text-xs text-sand-600 leading-relaxed font-normal">
@@ -68,9 +68,11 @@ export function SanctuaryExperience() {
               href="/about"
               className="btn btn-primary btn-lg"
             >
-              <span>Découvrir notre protocole d’audit</span>
+              <span>Notre audit</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
+
+       
           </div>
 
           {/* Colonne Droite : Composition architecturale en arches (Variante Sanctuaire) */}
@@ -108,7 +110,7 @@ export function SanctuaryExperience() {
               {/* Formes décoratives Arches en variante (Droite) */}
               <div className="col-span-4 flex flex-col gap-3 sm:gap-4 justify-end">
                 {/* Arche supérieure Terracotta douce avec promesse */}
-                <div className="h-40 sm:h-48 arch-t rounded-b-2xl bg-earth-terracotta p-3.5 sm:p-4 flex flex-col justify-center text-center text-white shadow-2xs">
+                <div className="h-44 sm:h-80 arch-t rounded-b-2xl bg-earth-terracotta p-3.5 sm:p-4 flex flex-col justify-center text-center text-white shadow-2xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-white/80 mx-auto mb-2" />
                   <p className="text-xs font-semibold leading-snug">
                     Acoustique feutrée & calme absolu
