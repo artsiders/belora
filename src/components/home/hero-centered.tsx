@@ -56,13 +56,13 @@ export function HeroCentered() {
           <form
             action="/search"
             method="GET"
-            className="searchbar shadow-2xl shadow-sand-950/10 bg-sand-50 border border-sand-300 max-w-3xl mx-auto"
+            className="searchbar shadow-2xl shadow-sand-950/10 bg-sand-50 border border-sand-300 max-w-4xl mx-auto"
             role="search"
           >
             <div className="searchbar-field">
               <label
                 htmlFor="search-service"
-                className="searchbar-label text-xs font-semibold text-sand-900"
+                className="searchbar-label text-xs font-semibold text-sand-900 text-left"
               >
                 Prestation ou salon
               </label>
@@ -71,7 +71,7 @@ export function HeroCentered() {
                 name="q"
                 type="text"
                 placeholder="Coupe, soin éclat, balayage…"
-                className="searchbar-input text-sand-900 font-medium"
+                className="searchbar-input text-sand-900 font-medium py-2 px-1"
                 autoComplete="off"
               />
             </div>
@@ -79,7 +79,7 @@ export function HeroCentered() {
             <div className="searchbar-field">
               <label
                 htmlFor="search-location"
-                className="searchbar-label text-xs font-semibold text-sand-900"
+                className="searchbar-label text-xs font-semibold text-sand-900 text-left"
               >
                 Où (ville, quartier)
               </label>
@@ -88,7 +88,7 @@ export function HeroCentered() {
                 name="location"
                 type="text"
                 placeholder="Paris, Lyon, Bordeaux…"
-                className="searchbar-input text-sand-900 font-medium"
+                className="searchbar-input text-sand-900 font-medium py-2 px-1"
                 autoComplete="address-level2"
               />
             </div>
@@ -96,7 +96,7 @@ export function HeroCentered() {
             <div className="searchbar-field">
               <label
                 htmlFor="search-date"
-                className="searchbar-label text-xs font-semibold text-sand-900"
+                className="searchbar-label text-xs font-semibold text-sand-900 text-left"
               >
                 Date souhaitée
               </label>
