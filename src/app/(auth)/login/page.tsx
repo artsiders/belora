@@ -113,7 +113,7 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="nom@exemple.com"
                   autoComplete="email"
-                  className="w-full px-3.5 py-3 text-sm bg-sand-50 border border-sand-300 rounded-[var(--radius-sm)] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 transition-colors"
+                  className="input pr-10"
                 />
                 <Mail className="w-4 h-4 text-sand-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
@@ -143,7 +143,7 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
                   autoComplete="current-password"
-                  className="w-full px-3.5 py-3 text-sm bg-sand-50 border border-sand-300 rounded-[var(--radius-sm)] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 transition-colors"
+                  className="input pr-10"
                 />
                 <button
                   type="button"
@@ -171,7 +171,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full mt-4 flex items-center justify-center gap-2 py-3.5 px-6 rounded-[var(--radius-sm)] bg-primary-600 hover:bg-primary-700 text-sand-50 text-xs font-semibold uppercase tracking-wider transition-colors disabled:opacity-60 cursor-pointer shadow-sm"
+              className="btn btn-primary btn-block mt-4"
             >
               {isLoading ? (
                 <span className="inline-block w-4 h-4 border-2 border-sand-50 border-t-transparent rounded-full animate-spin" />
@@ -197,7 +197,7 @@ export default function LoginPage() {
           {/* 5. Connexion SSO Google */}
           <button
             type="button"
-            className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-[var(--radius-sm)] border border-sand-300 bg-sand-50 hover:bg-sand-200 text-sand-900 text-xs font-semibold tracking-wide transition-colors cursor-pointer"
+            className="btn btn-outline btn-block"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true">
               <path

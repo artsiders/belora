@@ -243,30 +243,61 @@ html {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-height: 44px;
-    padding: 0 1.375rem;
+    min-height: 42px;
+    padding: 0 1.25rem;
     border: 1px solid transparent;
     border-radius: var(--radius-sm);
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     white-space: nowrap;
     cursor: pointer;
-    transition: all var(--dur-fast) var(--ease);
+    user-select: none;
+    box-shadow: 0 1px 2px rgba(18, 16, 13, 0.05);
+    transition: background-color var(--dur-fast) var(--ease),
+                border-color var(--dur-fast) var(--ease),
+                color var(--dur-fast) var(--ease),
+                transform var(--dur-fast) var(--ease),
+                box-shadow var(--dur-fast) var(--ease);
   }
-  .btn:active { transform: translateY(1px); }
-  .btn:disabled, .btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .btn:active { transform: translateY(1px); box-shadow: none; }
+  .btn:disabled, .btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
 
   .btn-primary {
     background: var(--primary-600);
-    border-color: var(--primary-700);
+    border-color: var(--primary-600);
     color: var(--sand-50);
-    font-weight: 600;
-    letter-spacing: 0.03em;
   }
   .btn-primary:hover:not(:disabled) {
     background: var(--primary-700);
-    border-color: var(--primary-800);
+    border-color: var(--primary-700);
+    color: var(--sand-50);
+    box-shadow: 0 2px 6px rgba(130, 56, 90, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: var(--sand-200);
+    border-color: var(--sand-300);
+    color: var(--sand-900);
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background: var(--sand-300);
+    border-color: var(--sand-400);
+    color: var(--sand-950);
+    transform: translateY(-1px);
+  }
+
+  .btn-dark {
+    background: var(--sand-900);
+    border-color: var(--sand-900);
+    color: var(--sand-50);
+  }
+  .btn-dark:hover:not(:disabled) {
+    background: var(--sand-950);
+    border-color: var(--sand-950);
+    color: var(--sand-50);
     transform: translateY(-1px);
   }
 
@@ -274,11 +305,10 @@ html {
     background: var(--sand-900);
     border-color: var(--sand-900);
     color: var(--sand-50);
-    font-weight: 500;
   }
   .btn-ink:hover:not(:disabled) {
-    background: var(--sand-800);
-    border-color: var(--sand-800);
+    background: var(--sand-950);
+    border-color: var(--sand-950);
     transform: translateY(-1px);
   }
 
@@ -361,34 +391,40 @@ html {
   .btn-outline {
     background: transparent;
     border-color: var(--line-strong);
-    color: var(--fg);
+    color: var(--sand-900);
+    box-shadow: none;
   }
   .btn-outline:hover:not(:disabled) {
-    border-color: var(--fg);
-    background: var(--sand-50);
+    border-color: var(--sand-900);
+    background: var(--sand-200);
+    color: var(--sand-950);
   }
 
   .btn-ghost {
     background: transparent;
-    color: var(--fg);
+    border-color: transparent;
+    color: var(--sand-700);
+    box-shadow: none;
   }
   .btn-ghost:hover:not(:disabled) {
-    background: var(--accent-soft);
-    color: var(--accent);
+    background: var(--sand-200);
+    color: var(--sand-950);
   }
 
   .btn-link {
     min-height: 0; padding: 0; border: 0; border-radius: 0;
-    background: none; color: var(--fg);
+    background: none; color: var(--sand-900);
     text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;
+    box-shadow: none;
   }
-  .btn-link:hover { color: var(--accent); }
+  .btn-link:hover { color: var(--primary-600); }
 
   .btn-on-photo { background: var(--sand-50); border-color: var(--sand-50); color: var(--sand-900); }
   .btn-on-photo:hover { background: var(--sand-100); }
 
-  .btn-sm { min-height: 36px; padding: 0 1rem; font-size: 0.8125rem; }
-  .btn-lg { min-height: 52px; padding: 0 1.75rem; font-size: 0.9375rem; }
+  .btn-xs { min-height: 30px; padding: 0 0.75rem; font-size: 0.6875rem; letter-spacing: 0.05em; }
+  .btn-sm { min-height: 36px; padding: 0 1rem; font-size: 0.75rem; letter-spacing: 0.05em; }
+  .btn-lg { min-height: 48px; padding: 0 1.625rem; font-size: 0.875rem; }
   .btn-block { width: 100%; }
 
   /* ----- Champs de formulaire ----- */
