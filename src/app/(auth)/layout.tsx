@@ -31,13 +31,10 @@ export default function AuthLayout({
         <div className="relative z-10 flex items-center justify-between">
           <Link
             href="/"
-            className="group flex items-baseline gap-1"
+            className="font-display text-3xl tracking-tight text-sand-50 hover:text-primary-300 transition-colors"
             aria-label="Belora - Retour à l'accueil"
           >
-            <span className="font-display text-3xl tracking-tight text-sand-50 transition-colors group-hover:text-primary-300">
-              Belora
-            </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-400" aria-hidden="true" />
+            Belora
           </Link>
 
           <Link
@@ -52,7 +49,6 @@ export default function AuthLayout({
         {/* Pied de page visuel : Manifeste & Réassurance */}
         <div className="relative z-10 max-w-md space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[var(--radius-sm)] bg-sand-950/60 backdrop-blur-xs border border-sand-50/15 text-[11px] uppercase tracking-widest text-primary-200 font-semibold">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
             <span>Maison d’artisans du soin</span>
           </div>
 
@@ -86,13 +82,10 @@ export default function AuthLayout({
           {/* Logo visible sur mobile uniquement */}
           <Link
             href="/"
-            className="lg:hidden flex items-baseline gap-1"
+            className="lg:hidden font-display text-2xl tracking-tight text-sand-950"
             aria-label="Belora - Accueil"
           >
-            <span className="font-display text-2xl tracking-tight text-sand-950">
-              Belora
-            </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-600" aria-hidden="true" />
+            Belora
           </Link>
 
           <div className="ml-auto flex items-center gap-4 text-xs">
