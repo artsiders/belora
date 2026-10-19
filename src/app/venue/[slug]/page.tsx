@@ -275,7 +275,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                         </div>
                         <span className="text-[11px] text-sand-400">{rev.date}</span>
                       </div>
-                      <p className="text-xs text-sand-700 leading-relaxed italic">
+                      <p className="text-xs text-sand-700 leading-relaxed ">
                         « {rev.comment} »
                       </p>
                     </div>

@@ -196,7 +196,7 @@ export function SearchClient() {
                     alt={venue.name}
                     fill
                     sizes="(max-width: 640px) 100vw, 192px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover"
                   />
                   <span className="absolute top-2 left-2 px-2 py-0.5 rounded-[var(--radius-xs)] bg-sand-950/75 text-sand-50 text-[9px] uppercase font-semibold tracking-wider backdrop-blur-xs">
                     {venue.badge}

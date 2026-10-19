@@ -25,7 +25,7 @@ const SANCTUARY_PILLARS = [
 
 export function SanctuaryExperience() {
   return (
-    <section className="section bg-sand-50/60 border-b border-sand-200/80" aria-labelledby="experience-heading">
+    <section className="section bg-white border-b border-sand-200/80" aria-labelledby="experience-heading">
       <div className="container-belora">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Colonne Gauche : Manifeste & 3 engagements purs */}
@@ -33,7 +33,7 @@ export function SanctuaryExperience() {
             <p className="eyebrow mb-2">Charte d’Excellence</p>
             <h2 id="experience-heading" className="section-title mb-3 text-balance">
               Plus qu’un rendez-vous,{" "}
-              <span className="font-display italic block sm:inline">
+              <span className="font-display  block sm:inline text-primary-600">
                 l’expérience sanctuaire.
               </span>
             </h2>
@@ -49,7 +49,7 @@ export function SanctuaryExperience() {
                   key={pillar.num}
                   className="flex items-start gap-4 pb-5 border-b border-sand-200/70 last:border-b-0 last:pb-0"
                 >
-                  <span className="font-display text-base text-sand-400 font-normal shrink-0 pt-0.5">
+                  <span className="font-display text-base text-primary-600 font-normal shrink-0 pt-0.5">
                     {pillar.num}
                   </span>
                   <div>
@@ -73,9 +73,9 @@ export function SanctuaryExperience() {
             </Link>
           </div>
 
-          {/* Colonne Droite : Photographie architecturale apaisante */}
+          {/* Colonne Droite : Photographie architecturale apaisante en arche */}
           <div className="lg:col-span-5 relative">
-            <div className="relative aspect-[4/5] rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-sand-300/80 shadow-md">
+            <div className="relative aspect-[4/5] arch-t rounded-b-2xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-sm">
               <Image
                 src="/images/sanctuaries/sanctuary-architecture.jpg"
                 alt="Intérieur minéral et épuré d'un sanctuaire partenaire Belora"

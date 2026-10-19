@@ -56,7 +56,7 @@ const ARTISANS: Artisan[] = [
 
 export function ArtisanSpotlight() {
   return (
-    <section className="section bg-sand-100" aria-labelledby="artisans-heading">
+    <section className="section bg-white border-b border-sand-200/80" aria-labelledby="artisans-heading">
       <div className="container-belora">
         {/* En-tête de section unifié */}
         <SectionHeader
@@ -64,7 +64,7 @@ export function ArtisanSpotlight() {
           title={
             <>
               Rencontrez les artisans,{" "}
-              <span className="font-display italic block sm:inline">
+              <span className="font-display  block sm:inline text-primary-600">
                 passionnés du geste.
               </span>
             </>
@@ -73,38 +73,38 @@ export function ArtisanSpotlight() {
           id="artisans-heading"
         />
 
-        {/* 3 Cartes Artisans détaillées */}
+        {/* 3 Cartes Artisans détaillées avec arche portrait */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {ARTISANS.map((artisan) => (
             <div
               key={artisan.id}
-              className="group flex flex-col bg-sand-50 rounded-[var(--radius-sm)] border border-sand-300/80 overflow-hidden shadow-2xs hover:shadow-md hover:border-sand-400 transition-all duration-300"
+              className="group flex flex-col bg-white rounded-t-full border border-sand-200/80 p-4 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300"
             >
-              {/* Photographie portrait avec badge de spécialité */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-sand-200">
+              {/* Photographie portrait en arche */}
+              <div className="relative aspect-4/5 w-full arch-t rounded-b-xl overflow-hidden bg-sand-200 mb-4">
                 <Image
                   src={artisan.image}
                   alt={`Portrait de ${artisan.name}, ${artisan.role}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover"
                 />
 
                 {/* Badge rôle flottant */}
-                <div className="absolute top-3 left-3 px-3 py-1 rounded-[var(--radius-xs)] bg-sand-950/80 backdrop-blur-xs text-sand-50 text-[10px] font-semibold tracking-wider uppercase">
+                {/* <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-sand-950/80 backdrop-blur-xs text-sand-50 text-[10px] font-semibold tracking-wider uppercase">
                   {artisan.role}
-                </div>
+                </div> */}
 
                 {/* Badge expérience */}
-                <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-[var(--radius-xs)] bg-sand-50/90 backdrop-blur-xs text-sand-900 text-[11px] font-semibold num shadow-2xs">
+                <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-sand-900 text-[11px] font-semibold num shadow-xs">
                   {artisan.experience}
                 </div>
               </div>
 
               {/* Contenu éditorial & Citation */}
-              <div className="p-6 flex flex-col flex-1 justify-between">
+              <div className="flex flex-col flex-1 justify-between">
                 <div>
-                  <h3 className="text-2xl text-sand-950 mb-1">
+                  <h3 className="font-display text-2xl text-sand-950 mb-1">
                     {artisan.name}
                   </h3>
                   <p className="text-xs text-sand-600 flex items-center gap-1.5 mb-4">
@@ -116,18 +116,18 @@ export function ArtisanSpotlight() {
                     </span>
                   </p>
 
-                  <div className="relative pt-3 border-t border-sand-200/80">
-                    <Quote className="w-4 h-4 text-primary-300 mb-1 opacity-70" />
-                    <p className="text-xs text-sand-700 font-normal leading-relaxed">
+                  <div className="relative pt-3 border-t border-sand-100">
+                    <Quote className="w-4 h-4 text-primary-500 mb-1 opacity-70" />
+                    <p className="text-xs text-sand-700 font-normal leading-relaxed ">
                       « {artisan.quote} »
                     </p>
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-sand-200/80">
+                <div className="pt-5 mt-5 border-t border-sand-100">
                   <Link
                     href={`/venue/${artisan.venueSlug}`}
-                    className="w-full btn btn-outline btn-sm flex items-center justify-between"
+                    className="w-full btn btn-outline btn-sm flex items-center justify-between rounded-xl"
                   >
                     <span>Voir les créneaux chez {artisan.salon}</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />

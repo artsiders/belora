@@ -1,118 +1,189 @@
-import Image from "next/image";
 import Link from "next/link";
-import { SectionHeader } from "@/components/ui/section-header";
-import { ArrowUpRight } from "lucide-react";
 
-interface CategoryCircle {
+interface UniverseArch {
   id: string;
-  label: string;
-  count: string;
+  name: string;
+  subservices: string;
+  bgColor: string;
+  textColor: string;
   href: string;
-  image: string;
+  icon: (color: string) => React.ReactNode;
 }
 
-const CATEGORIES: CategoryCircle[] = [
+const UNIVERSES: UniverseArch[] = [
   {
     id: "hair",
-    label: "Coiffure d’auteur",
-    count: "420+ salons",
+    name: "Cheveux",
+    subservices: "Coupe · Coloration · Brushing",
+    bgColor: "#C77C63", // Terracotta douce
+    textColor: "text-white",
     href: "/search?category=hair",
-    image: "/images/categories/category-hair.jpg",
+    icon: (color) => (
+      <svg
+        className={`w-9 h-9 ${color}`}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="6" cy="6" r="3" />
+        <circle cx="6" cy="18" r="3" />
+        <line x1="20" y1="4" x2="8.12" y2="15.88" />
+        <line x1="14.47" y1="14.48" x2="20" y2="20" />
+        <line x1="8.12" y1="8.12" x2="12" y2="12" />
+      </svg>
+    ),
   },
   {
     id: "facial",
-    label: "Soins Visage",
-    count: "310+ instituts",
+    name: "Visage",
+    subservices: "Soins · Éclat · Anti-âge",
+    bgColor: "#96915E", // Olive / Sauge douce
+    textColor: "text-white",
     href: "/search?category=facial",
-    image: "/images/categories/category-facial.jpg",
-  },
-  {
-    id: "massage",
-    label: "Massages & Spas",
-    count: "195+ havres",
-    href: "/search?category=massage",
-    image: "/images/categories/category-massage.jpg",
-  },
-  {
-    id: "barber",
-    label: "Barbiers & Homme",
-    count: "180+ ateliers",
-    href: "/search?category=barber",
-    image: "/images/categories/category-barber.jpg",
+    icon: (color) => (
+      <svg
+        className={`w-9 h-9 ${color}`}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 2C7.5 2 4 5.5 4 10c0 4 2.5 7.5 6 9.5V22h4v-2.5c3.5-2 6-5.5 6-9.5 0-4.5-3.5-8-8-8z" />
+        <path d="M9 11h.01" />
+        <path d="M15 11h.01" />
+        <path d="M10 15c.8.6 1.8.8 2 .8s1.2-.2 2-.8" />
+      </svg>
+    ),
   },
   {
     id: "nails",
-    label: "Onglerie de soin",
-    count: "140+ studios",
+    name: "Mains & pieds",
+    subservices: "Manucure · Pédicure · Pose",
+    bgColor: "#DEBFA9", // Blush sable poudré
+    textColor: "text-sand-900",
     href: "/search?category=nails",
-    image: "/images/categories/category-nails.jpg",
+    icon: (color) => (
+      <svg
+        className={`w-9 h-9 ${color}`}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 2C9.5 2 8 4 8 7v6a4 4 0 0 0 8 0V7c0-3-1.5-5-4-5z" />
+        <path d="M9 7h6" />
+        <path d="M12 17v5" />
+      </svg>
+    ),
   },
   {
-    id: "wellness",
-    label: "Rituels & Bains",
-    count: "85+ sanctuaires",
+    id: "massage",
+    name: "Corps & massage",
+    subservices: "Modelage · Soin du corps",
+    bgColor: "#757045", // Sauge profonde / Olive terreuse
+    textColor: "text-white",
     href: "/search?category=massage",
-    image: "/images/categories/category-wellness.jpg",
+    icon: (color) => (
+      <svg
+        className={`w-9 h-9 ${color}`}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 4c1.5 2.5 3 6 3 9 0 2.5-1.5 4-3 5-1.5-1-3-2.5-3-5 0-3 1.5-6.5 3-9z" />
+        <path d="M12 18c-3 0-6.5-1-8.5-3.5 1-3.5 4.5-6 7.5-6.5" />
+        <path d="M12 18c3 0 6.5-1 8.5-3.5-1-3.5-4.5-6-7.5-6.5" />
+        <path d="M6 19.5c3.5 1.5 8.5 1.5 12 0" />
+      </svg>
+    ),
+  },
+  {
+    id: "regard",
+    name: "Regard",
+    subservices: "Cils · Sourcils · Maquillage",
+    bgColor: "#9E5236", // Cognac / Brique chaude
+    textColor: "text-white",
+    href: "/search?category=facial",
+    icon: (color) => (
+      <svg
+        className={`w-9 h-9 ${color}`}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    ),
   },
 ];
 
 export function CategoryCircles() {
   return (
-    <section className="section bg-sand-50/70 border-b border-sand-200/80" aria-labelledby="categories-heading">
+    <section
+      className="py-14 sm:py-20 bg-white border-b border-sand-200/80"
+      aria-labelledby="univers-heading"
+    >
       <div className="container-belora">
-        {/* En-tête de section unifié et épuré */}
-        <SectionHeader
-          eyebrow="Disciplines"
-          title={
-            <>
-              Explorer par univers <span className="font-display italic">de soin</span>
-            </>
-          }
-          subtitle="Six univers dédiés à la santé du cheveu, de la peau et à l’apaisement du corps."
-          action={
-            <Link
-              href="/search"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-sand-700 hover:text-primary-600 transition-colors"
-            >
-              <span>Toutes les catégories</span>
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
-            </Link>
-          }
-          id="categories-heading"
-        />
+        {/* En-tête centré épuré comme dans la maquette */}
+        <div className="text-center max-w-xl mx-auto mb-10 sm:mb-14">
+          <h2
+            id="univers-heading"
+            className="font-display text-3xl sm:text-4xl text-sand-950 mb-2"
+          >
+            Nos univers
+          </h2>
+          <p className="text-[11px] uppercase font-semibold tracking-[0.18em] text-sand-500">
+            Choisissez votre moment bien-être
+          </p>
+        </div>
 
-        {/* Grille de vignettes circulaires & arches photographiques */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8">
-          {CATEGORIES.map((item) => (
+        {/* Grille des 5 arches de couleur côte-à-côte */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+          {UNIVERSES.map((item) => (
             <Link
               key={item.id}
               href={item.href}
               className="group flex flex-col items-center text-center focus:outline-none"
             >
-              {/* Cercle photographique avec fine bordure et zoom fluide au hover */}
-              <div className="relative w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-2 border-sand-300 group-hover:border-primary-600 transition-all duration-300 p-1 mb-3.5 shadow-2xs group-hover:shadow-md">
-                <div className="relative w-full h-full rounded-full overflow-hidden bg-sand-200">
-                  <Image
-                    src={item.image}
-                    alt={item.label}
-                    fill
-                    sizes="(max-width: 640px) 112px, (max-width: 1024px) 128px, 144px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div
-                    className="absolute inset-0 bg-sand-950/15 group-hover:bg-sand-950/0 transition-colors duration-300"
-                    aria-hidden="true"
-                  />
-                </div>
+              {/* Arche supérieure colorée */}
+              <div
+                className="w-full h-44 sm:h-52 arch-t rounded-b-2xl flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 shadow-2xs group-hover:shadow-md"
+                style={{ backgroundColor: item.bgColor }}
+              >
+                {item.icon(item.textColor)}
               </div>
 
-              {/* Titre & Compteur d'adresses */}
-              <h3 className="text-xs sm:text-sm font-semibold text-sand-900 group-hover:text-primary-600 transition-colors tracking-tight">
-                {item.label}
-              </h3>
-              <span className="text-[11px] text-sand-500 font-normal mt-0.5 num">
-                {item.count}
-              </span>
+              {/* Titre, sous-services et flèche discrète sous l'arche */}
+              <div className="pt-3.5 flex flex-col items-center">
+                <h3 className="font-display text-lg sm:text-xl text-sand-950 group-hover:text-primary-600 transition-colors">
+                  {item.name}
+                </h3>
+                <p className="text-[11px] sm:text-xs text-sand-500 font-normal mt-0.5 mb-2 leading-tight">
+                  {item.subservices}
+                </p>
+                <span className="text-xs text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all">
+                  →
+                </span>
+              </div>
             </Link>
           ))}
         </div>

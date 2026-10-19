@@ -19,19 +19,19 @@ const POPULAR_CITIES = [
 
 export function CityDirectory() {
   return (
-    <section className="section bg-sand-100" aria-labelledby="cities-heading">
+    <section className="section bg-white border-b border-sand-200/80" aria-labelledby="cities-heading">
       <div className="container-belora">
         {/* En-tête de section unifié */}
         <SectionHeader
           eyebrow="Villes"
           title={
             <>
-              Trouver un artisan <span className="font-display italic">dans votre ville</span>
+              Trouver un artisan <span className="font-display  text-primary-600">dans votre ville</span>
             </>
           }
           subtitle="Nos havres et ateliers partenaires vous accueillent au cœur des douze plus grandes métropoles françaises."
           action={
-            <span className="px-3 py-1.5 rounded-[var(--radius-xs)] bg-sand-200/80 text-sand-800 text-xs font-semibold num shadow-2xs">
+            <span className="px-3 py-1.5 rounded-full bg-sand-100 text-sand-800 text-xs font-semibold num shadow-2xs">
               450+ adresses certifiées
             </span>
           }
@@ -43,7 +43,7 @@ export function CityDirectory() {
             <Link
               key={city.name}
               href={`/search?location=${encodeURIComponent(city.name)}`}
-              className="p-3.5 rounded-[var(--radius-sm)] border border-sand-300/80 bg-sand-50 hover:border-sand-400 hover:bg-sand-100 transition-all text-xs text-sand-900 font-medium flex items-center justify-between group shadow-2xs"
+              className="p-3.5 rounded-xl border border-sand-200/80 bg-white hover:border-sand-300 hover:shadow-xs transition-all text-xs text-sand-900 font-medium flex items-center justify-between group"
             >
               <div className="flex flex-col">
                 <span className="font-semibold text-sand-950 group-hover:text-primary-600 transition-colors">

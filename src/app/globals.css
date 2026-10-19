@@ -14,31 +14,52 @@
    1. TOKENS
    -------------------------------------------------------------------------- */
 :root {
-  /* Primaire — Figue */
-  --primary-50:  #faf3f5;
-  --primary-100: #f4e4e9;
-  --primary-200: #e8c9d3;
-  --primary-300: #d6a3b4;
-  --primary-400: #be7690;
-  --primary-500: #a04f6d;
-  --primary-600: #82385a; /* couleur principale */
-  --primary-700: #6a2d4a;
-  --primary-800: #55253c;
-  --primary-900: #3f1b2d;
-  --primary-950: #26101b;
+  /* Primaire — Terracotta / Cognac chaleureux (inspiré de la nouvelle DA) */
+  --primary-50:  #faf4f0;
+  --primary-100: #f4e6de;
+  --primary-200: #e8cebf;
+  --primary-300: #d7ae9b;
+  --primary-400: #c4846c;
+  --primary-500: #b36447;
+  --primary-600: #9e5236; /* couleur d'accent principale */
+  --primary-700: #84412a;
+  --primary-800: #6b3522;
+  --primary-900: #54291a;
+  --primary-950: #2d140b;
 
-  /* Neutres — Sable (fond, texte, filets) */
-  --sand-50:  #fbf8f3; /* surface */
-  --sand-100: #f6f1ea; /* fond principal « papier » */
-  --sand-200: #eae3d8; /* filets */
-  --sand-300: #d9cfc0; /* filets forts */
-  --sand-400: #b3a794;
-  --sand-500: #8a7f70;
-  --sand-600: #6b6256; /* texte secondaire */
-  --sand-700: #4f483f;
-  --sand-800: #342f29;
-  --sand-900: #1e1a16; /* encre */
-  --sand-950: #12100d; /* charbon */
+  /* Secondaire — Olive / Sauge terreux / Kaki doré */
+  --secondary-50:  #f8f8f2;
+  --secondary-100: #efefe2;
+  --secondary-200: #dedfc5;
+  --secondary-300: #c6c9a2;
+  --secondary-400: #acb17e;
+  --secondary-500: #969b5e;
+  --secondary-600: #7c814b; /* couleur secondaire */
+  --secondary-700: #63683a;
+  --secondary-800: #4d512d;
+  --secondary-900: #383b20;
+  --secondary-950: #1f2111;
+
+  /* Teintes de la palette Arches / Univers */
+  --earth-terracotta: #C77C63;
+  --earth-olive:      #96915E;
+  --earth-sand:       #DEBFA9;
+  --earth-moss:       #757045;
+  --earth-cognac:     #9E5236;
+  --earth-espresso:   #281E17;
+
+  /* Neutres — Sable et Fond majoritairement Blanc */
+  --sand-50:  #faf8f5; /* surface cartes douces */
+  --sand-100: #f5f2eb; /* légers contrastes */
+  --sand-200: #e9e4db; /* filets fins */
+  --sand-300: #d8d1c4; /* filets forts */
+  --sand-400: #b4aa9b;
+  --sand-500: #8b8070;
+  --sand-600: #6b6255; /* texte secondaire */
+  --sand-700: #4d463b;
+  --sand-800: #332d25;
+  --sand-900: #1c1813; /* encre principale */
+  --sand-950: #100d0a; /* charbon profond */
 
   /* États */
   --success: #4f6b4a;
@@ -48,9 +69,9 @@
   --danger: #9a2b2b;
   --danger-soft: #f1dcdc;
 
-  /* Sémantique (thème clair) */
-  --bg: var(--sand-100);
-  --surface: var(--sand-50);
+  /* Sémantique (thème clair : fond blanc majoritaire) */
+  --bg: #ffffff;
+  --surface: #ffffff;
   --fg: var(--sand-900);
   --fg-muted: var(--sand-600);
   --fg-subtle: var(--sand-500);
@@ -60,14 +81,15 @@
   --accent-hover: var(--primary-700);
   --accent-soft: var(--primary-50);
   --accent-line: var(--primary-200);
-  --on-accent: var(--sand-50);
+  --on-accent: #ffffff;
   --focus: var(--primary-500);
 
-  /* Rayons : faibles pour l'interface, doux pour la photographie */
+  /* Rayons : formes arch pour la nouvelle DA */
   --radius-xs: 2px;
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-photo: 14px;
+  --radius-photo: 16px;
+  --radius-arch: 9999px;
   --radius-pill: 999px;
 
   /* Mouvement */
@@ -125,6 +147,25 @@
   --color-primary-900: var(--primary-900);
   --color-primary-950: var(--primary-950);
 
+  --color-secondary-50: var(--secondary-50);
+  --color-secondary-100: var(--secondary-100);
+  --color-secondary-200: var(--secondary-200);
+  --color-secondary-300: var(--secondary-300);
+  --color-secondary-400: var(--secondary-400);
+  --color-secondary-500: var(--secondary-500);
+  --color-secondary-600: var(--secondary-600);
+  --color-secondary-700: var(--secondary-700);
+  --color-secondary-800: var(--secondary-800);
+  --color-secondary-900: var(--secondary-900);
+  --color-secondary-950: var(--secondary-950);
+
+  --color-earth-terracotta: var(--earth-terracotta);
+  --color-earth-olive: var(--earth-olive);
+  --color-earth-sand: var(--earth-sand);
+  --color-earth-moss: var(--earth-moss);
+  --color-earth-cognac: var(--earth-cognac);
+  --color-earth-espresso: var(--earth-espresso);
+
   --color-sand-50: var(--sand-50);
   --color-sand-100: var(--sand-100);
   --color-sand-200: var(--sand-200);
@@ -155,6 +196,7 @@
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-photo: var(--radius-photo);
+  --radius-arch: var(--radius-arch);
 
   --font-sans: var(--font-montserrat, "Montserrat"), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display, "Instrument Serif"), "Times New Roman", serif;
@@ -303,14 +345,28 @@ html {
   .btn-primary {
     background: var(--primary-600);
     border-color: var(--primary-600);
-    color: var(--sand-50);
+    color: #ffffff;
   }
   .btn-primary:hover:not(:disabled) {
     background: var(--primary-700);
     border-color: var(--primary-700);
-    color: var(--sand-50);
-    box-shadow: 0 2px 6px rgba(130, 56, 90, 0.25);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(158, 82, 54, 0.28);
     transform: translateY(-1px);
+  }
+
+  /* Formes Arches (DA Rituel / Sanctuaire) */
+  .arch-t {
+    border-top-left-radius: 9999px;
+    border-top-right-radius: 9999px;
+  }
+  .arch-b {
+    border-bottom-left-radius: 9999px;
+    border-bottom-right-radius: 9999px;
+  }
+  .arch-r {
+    border-top-right-radius: 9999px;
+    border-bottom-right-radius: 9999px;
   }
 
   .btn-secondary {

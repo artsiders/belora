@@ -20,21 +20,21 @@ export function MainNav() {
   const closeMenu = () => setMobileOpen(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-sand-200/80 bg-sand-100/90 backdrop-blur-md">
-      <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-[68px] flex items-center justify-between">
+    <header className="sticky top-0 z-40 w-full border-b border-sand-200/80 bg-white/95 backdrop-blur-md">
+      <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-[70px] flex items-center justify-between">
         {/* 1. Logo Belora pur et intemporel */}
         <Link
           href="/"
           onClick={closeMenu}
-          className="text-2xl tracking-tight text-sand-950 hover:text-primary-600 transition-colors focus:outline-none"
+          className="font-display text-2xl sm:text-3xl tracking-tight text-sand-950 hover:text-primary-600 transition-colors focus:outline-none"
           aria-label="Belora - Accueil"
         >
           Belora
         </Link>
 
-        {/* 2. Navigation centrale avec micro-interaction fluide (pillule dynamique sans encombrement) */}
+        {/* 2. Navigation centrale avec micro-interaction fluide */}
         <nav
-          className="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-sand-200/35 border border-sand-200/50"
+          className="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-sand-100/70 border border-sand-200/60"
           onMouseLeave={() => setHoveredCategory(null)}
           aria-label="Univers de soins"
         >
@@ -50,7 +50,7 @@ export function MainNav() {
                 {isHovered && (
                   <motion.span
                     layoutId="navHoverPill"
-                    className="absolute inset-0 rounded-full bg-sand-50 shadow-2xs"
+                    className="absolute inset-0 rounded-full bg-white shadow-xs border border-sand-200/50"
                     transition={{ type: "spring", stiffness: 450, damping: 30 }}
                   />
                 )}

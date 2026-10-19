@@ -59,7 +59,7 @@ export function ResultsGallery() {
   const [featured, ...rest] = GALLERY_ITEMS;
 
   return (
-    <section className="section bg-sand-50 border-b border-sand-200/80" aria-labelledby="gallery-heading">
+    <section className="section bg-white border-b border-sand-200/80" aria-labelledby="gallery-heading">
       <div className="container-belora">
         {/* En-tête de section unifié */}
         <SectionHeader
@@ -67,7 +67,7 @@ export function ResultsGallery() {
           title={
             <>
               Le geste en image,{" "}
-              <span className="font-display italic block sm:inline">
+              <span className="font-display  block sm:inline text-primary-600">
                 résultats d’ateliers.
               </span>
             </>
@@ -80,7 +80,7 @@ export function ResultsGallery() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* 1. Grand visuel vedette à gauche (7 colonnes) */}
           <div className="lg:col-span-7">
-            <div className="group relative aspect-[4/3] sm:aspect-[16/11] lg:h-full w-full rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-sand-300 shadow-sm">
+            <div className="group relative aspect-[4/3] sm:aspect-[16/11] lg:h-full w-full rounded-2xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-sm">
               <Image
                 src={featured.image}
                 alt={featured.title}
