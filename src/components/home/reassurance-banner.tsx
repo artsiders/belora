@@ -83,12 +83,12 @@ export function ReassuranceBanner() {
             </div>
           </div>
 
-          {/* Colonne Droite : Arches graphiques décoratives avec tokens thèmes */}
-          <div className="hidden lg:flex lg:col-span-3 justify-end items-end relative h-72">
+          {/* Colonne Droite : Arches graphiques agrandies et collées en bas */}
+          <div className="hidden lg:flex lg:col-span-3 justify-end items-end self-end lg:-mb-20 relative">
             {/* Arche 1 : Olive */}
-            <div className="w-28 h-60 arch-t rounded-b-2xl bg-earth-moss opacity-90 shadow-lg mr-2" />
+            <div className="w-36 xl:w-44 h-80 xl:h-96 arch-t rounded-b-none bg-earth-moss opacity-90 shadow-lg" />
             {/* Arche 2 : Terracotta */}
-            <div className="w-32 h-44 arch-t rounded-b-2xl bg-earth-terracotta shadow-lg" />
+            <div className="w-44 xl:w-52 h-60 xl:h-72 arch-t rounded-b-none bg-earth-terracotta shadow-lg" />
           </div>
         </div>
       </div>
