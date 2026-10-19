@@ -3,18 +3,18 @@ import { Smartphone, ShieldCheck, Lock, ArrowRight } from "lucide-react";
 
 export function ReassuranceBanner() {
   return (
-    <section className="relative overflow-hidden bg-[#281E17] text-white py-14 sm:py-20">
+    <section className="relative overflow-hidden bg-earth-espresso text-white py-14 sm:py-20">
       <div className="container-belora relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Colonne Gauche : Titre et bouton d'action */}
           <div className="lg:col-span-5 space-y-4">
-            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-semibold text-sand-400">
+            <p className="text-xs uppercase tracking-wider font-semibold text-sand-400">
               Pour les amateurs de belle peau et de moments authentiques
             </p>
 
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-sand-50 leading-[1.12]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-50 leading-tight">
               Votre rendez-vous beauté{" "}
-              <span className="font-display  block text-sand-200">
+              <span className="block text-sand-200 font-bold">
                 en toute simplicité.
               </span>
             </h2>
@@ -83,12 +83,12 @@ export function ReassuranceBanner() {
             </div>
           </div>
 
-          {/* Colonne Droite : Arches graphiques décoratives comme dans la référence */}
+          {/* Colonne Droite : Arches graphiques décoratives avec tokens thèmes */}
           <div className="hidden lg:flex lg:col-span-3 justify-end items-end relative h-72">
             {/* Arche 1 : Olive */}
-            <div className="w-28 h-60 arch-t rounded-b-2xl bg-[#757045] opacity-90 shadow-lg mr-2" />
+            <div className="w-28 h-60 arch-t rounded-b-2xl bg-earth-moss opacity-90 shadow-lg mr-2" />
             {/* Arche 2 : Terracotta */}
-            <div className="w-32 h-44 arch-t rounded-b-2xl bg-[#C77C63] shadow-lg" />
+            <div className="w-32 h-44 arch-t rounded-b-2xl bg-earth-terracotta shadow-lg" />
           </div>
         </div>
       </div>

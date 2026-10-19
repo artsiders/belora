@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 interface UniverseArch {
   id: string;
   name: string;
   subservices: string;
-  bgColor: string;
+  bgClass: string;
   textColor: string;
   href: string;
   icon: (color: string) => React.ReactNode;
@@ -15,7 +16,7 @@ const UNIVERSES: UniverseArch[] = [
     id: "hair",
     name: "Cheveux",
     subservices: "Coupe · Coloration · Brushing",
-    bgColor: "#C77C63", // Terracotta douce
+    bgClass: "bg-earth-terracotta",
     textColor: "text-white",
     href: "/search?category=hair",
     icon: (color) => (
@@ -41,7 +42,7 @@ const UNIVERSES: UniverseArch[] = [
     id: "facial",
     name: "Visage",
     subservices: "Soins · Éclat · Anti-âge",
-    bgColor: "#96915E", // Olive / Sauge douce
+    bgClass: "bg-earth-olive",
     textColor: "text-white",
     href: "/search?category=facial",
     icon: (color) => (
@@ -66,7 +67,7 @@ const UNIVERSES: UniverseArch[] = [
     id: "nails",
     name: "Mains & pieds",
     subservices: "Manucure · Pédicure · Pose",
-    bgColor: "#DEBFA9", // Blush sable poudré
+    bgClass: "bg-earth-sand",
     textColor: "text-sand-900",
     href: "/search?category=nails",
     icon: (color) => (
@@ -90,7 +91,7 @@ const UNIVERSES: UniverseArch[] = [
     id: "massage",
     name: "Corps & massage",
     subservices: "Modelage · Soin du corps",
-    bgColor: "#757045", // Sauge profonde / Olive terreuse
+    bgClass: "bg-earth-moss",
     textColor: "text-white",
     href: "/search?category=massage",
     icon: (color) => (
@@ -115,7 +116,7 @@ const UNIVERSES: UniverseArch[] = [
     id: "regard",
     name: "Regard",
     subservices: "Cils · Sourcils · Maquillage",
-    bgColor: "#9E5236", // Cognac / Brique chaude
+    bgClass: "bg-earth-cognac",
     textColor: "text-white",
     href: "/search?category=facial",
     icon: (color) => (
@@ -143,20 +144,20 @@ export function CategoryCircles() {
       aria-labelledby="univers-heading"
     >
       <div className="container-belora">
-        {/* En-tête centré épuré comme dans la maquette */}
+        {/* En-tête centré épuré sans badges artificiels */}
         <div className="text-center max-w-xl mx-auto mb-10 sm:mb-14">
           <h2
             id="univers-heading"
-            className="font-display text-3xl sm:text-4xl text-sand-950 mb-2"
+            className="text-2xl sm:text-3xl font-bold text-sand-950 mb-2"
           >
             Nos univers
           </h2>
-          <p className="text-[11px] uppercase font-semibold tracking-[0.18em] text-sand-500">
+          <p className="text-xs uppercase font-semibold tracking-wider text-sand-500">
             Choisissez votre moment bien-être
           </p>
         </div>
 
-        {/* Grille des 5 arches de couleur côte-à-côte */}
+        {/* Grille des 5 arches de couleur avec vraies icônes Lucide */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
           {UNIVERSES.map((item) => (
             <Link
@@ -166,23 +167,22 @@ export function CategoryCircles() {
             >
               {/* Arche supérieure colorée */}
               <div
-                className="w-full h-44 sm:h-52 arch-t rounded-b-2xl flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 shadow-2xs group-hover:shadow-md"
-                style={{ backgroundColor: item.bgColor }}
+                className={`w-full h-44 sm:h-52 arch-t rounded-b-2xl flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 shadow-2xs group-hover:shadow-md ${item.bgClass}`}
               >
                 {item.icon(item.textColor)}
               </div>
 
-              {/* Titre, sous-services et flèche discrète sous l'arche */}
+              {/* Titre, sous-services et vraie icône Lucide ArrowRight */}
               <div className="pt-3.5 flex flex-col items-center">
-                <h3 className="font-display text-lg sm:text-xl text-sand-950 group-hover:text-primary-600 transition-colors">
+                <h3 className="text-base sm:text-lg font-semibold text-sand-950 group-hover:text-primary-600 transition-colors">
                   {item.name}
                 </h3>
-                <p className="text-[11px] sm:text-xs text-sand-500 font-normal mt-0.5 mb-2 leading-tight">
+                <p className="text-xs text-sand-500 font-normal mt-0.5 mb-2 leading-tight">
                   {item.subservices}
                 </p>
-                <span className="text-xs text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all">
-                  →
-                </span>
+                <div className="text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all">
+                  <ArrowRight className="w-4 h-4" />
+                </div>
               </div>
             </Link>
           ))}

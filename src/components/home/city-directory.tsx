@@ -26,7 +26,8 @@ export function CityDirectory() {
           eyebrow="Villes"
           title={
             <>
-              Trouver un artisan <span className="font-display  text-primary-600">dans votre ville</span>
+              Trouver un artisan{" "}
+              <span className="text-primary-600 font-bold">dans votre ville</span>
             </>
           }
           subtitle="Nos havres et ateliers partenaires vous accueillent au cœur des douze plus grandes métropoles françaises."
@@ -49,7 +50,7 @@ export function CityDirectory() {
                 <span className="font-semibold text-sand-950 group-hover:text-primary-600 transition-colors">
                   {city.name}
                 </span>
-                <span className="text-[10px] text-sand-500 num mt-0.5">
+                <span className="text-xs text-sand-500 num mt-0.5">
                   {city.count}
                 </span>
               </div>

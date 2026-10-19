@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Search, MapPin, Sparkles, Calendar } from "lucide-react";
+import { Search, MapPin, Layers, Calendar } from "lucide-react";
 
 export function HeroCentered() {
   return (
@@ -8,17 +8,17 @@ export function HeroCentered() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Colonne Gauche : Titre éditorial, sous-titre et barre de recherche */}
           <div className="lg:col-span-7 flex flex-col justify-center">
-            {/* Eyebrow épuré */}
+            {/* Eyebrow épuré sans badges artificiels */}
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-[11px] uppercase font-semibold tracking-[0.2em] text-sand-500">
+              <span className="text-xs uppercase font-semibold tracking-wider text-sand-500">
                 Beauté · Bien-être · Soin de soi
               </span>
             </div>
 
-            {/* Titre demandé par l'utilisateur */}
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-sand-950 leading-[1.08] mb-4 text-balance">
+            {/* Titre demandé par l'utilisateur (Montserrat pur, sans italique) */}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-sand-950 leading-tight mb-4 text-balance">
               Prendre soin de soi,{" "}
-              <span className="font-display  block sm:inline text-primary-600">
+              <span className="block sm:inline text-primary-600 font-bold">
                 c’est déjà être beau.
               </span>
             </h1>
@@ -33,15 +33,15 @@ export function HeroCentered() {
             <form
               action="/search"
               method="GET"
-              className="bg-white rounded-2xl border border-sand-200/90 shadow-sm p-3.5 sm:p-5 space-y-3 sm:space-y-4 max-w-xl"
+              className="bg-white rounded-2xl border border-sand-200/90 shadow-sm p-4 sm:p-5 space-y-4 max-w-xl"
               role="search"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {/* Champ 1 : Où ? */}
-                <div className="p-2.5 rounded-xl bg-sand-50/70 border border-sand-200/60 focus-within:border-primary-500 transition-colors">
+                <div className="p-3 rounded-xl bg-sand-50/70 border border-sand-200/60 focus-within:border-primary-500 transition-colors">
                   <label
                     htmlFor="search-location"
-                    className="block text-[11px] font-semibold text-sand-900 mb-1"
+                    className="block text-xs font-semibold text-sand-900 mb-1"
                   >
                     Où ?
                   </label>
@@ -52,25 +52,25 @@ export function HeroCentered() {
                       name="location"
                       type="text"
                       placeholder="Paris, Lyon, quartier..."
-                      className="w-full bg-transparent text-xs text-sand-900 placeholder:text-sand-400 focus:outline-none"
+                      className="w-full bg-transparent text-xs text-sand-900 placeholder:text-sand-400 focus:outline-none font-medium"
                     />
                   </div>
                 </div>
 
                 {/* Champ 2 : Quoi ? */}
-                <div className="p-2.5 rounded-xl bg-sand-50/70 border border-sand-200/60 focus-within:border-primary-500 transition-colors">
+                <div className="p-3 rounded-xl bg-sand-50/70 border border-sand-200/60 focus-within:border-primary-500 transition-colors">
                   <label
                     htmlFor="search-category"
-                    className="block text-[11px] font-semibold text-sand-900 mb-1"
+                    className="block text-xs font-semibold text-sand-900 mb-1"
                   >
                     Quoi ?
                   </label>
                   <div className="flex items-center gap-1.5 text-xs text-sand-600">
-                    <Sparkles className="w-3.5 h-3.5 text-sand-400 shrink-0" />
+                    <Layers className="w-3.5 h-3.5 text-sand-400 shrink-0" />
                     <select
                       id="search-category"
                       name="category"
-                      className="w-full bg-transparent text-xs text-sand-900 focus:outline-none cursor-pointer"
+                      className="w-full bg-transparent text-xs text-sand-900 focus:outline-none cursor-pointer font-medium"
                       defaultValue=""
                     >
                       <option value="">Toutes les prestations</option>
@@ -84,10 +84,10 @@ export function HeroCentered() {
                 </div>
 
                 {/* Champ 3 : Quand ? */}
-                <div className="p-2.5 rounded-xl bg-sand-50/70 border border-sand-200/60 focus-within:border-primary-500 transition-colors">
+                <div className="p-3 rounded-xl bg-sand-50/70 border border-sand-200/60 focus-within:border-primary-500 transition-colors">
                   <label
                     htmlFor="search-date"
-                    className="block text-[11px] font-semibold text-sand-900 mb-1"
+                    className="block text-xs font-semibold text-sand-900 mb-1"
                   >
                     Quand ?
                   </label>
@@ -97,7 +97,7 @@ export function HeroCentered() {
                       id="search-date"
                       name="date"
                       type="date"
-                      className="w-full bg-transparent text-xs text-sand-900 focus:outline-none cursor-pointer"
+                      className="w-full bg-transparent text-xs text-sand-900 focus:outline-none cursor-pointer font-medium"
                     />
                   </div>
                 </div>
@@ -118,7 +118,7 @@ export function HeroCentered() {
           <div className="lg:col-span-5 relative">
             <div className="grid grid-cols-12 gap-3 sm:gap-4 items-end">
               {/* Arche Principale Photographique (Gauche du bloc) */}
-              <div className="col-span-8 relative h-90 sm:h-115 lg:h-125 arch-t rounded-b-2xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-sm">
+              <div className="col-span-8 relative h-[360px] sm:h-[460px] lg:h-[500px] arch-t rounded-b-2xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-sm">
                 <Image
                   src="/images/heroes/hero-facial.jpg"
                   alt="Rituel de soin du visage et bien-être"
@@ -130,16 +130,16 @@ export function HeroCentered() {
               </div>
 
               {/* Colonne Droite : Formes graphiques Arches de couleur */}
-              <div className="col-span-4 flex flex-col gap-3 sm:gap-4 h-90 sm:h-115 lg:h-125">
+              <div className="col-span-4 flex flex-col gap-3 sm:gap-4 h-[360px] sm:h-[460px] lg:h-[500px]">
                 {/* Arche supérieure Olive / Kaki avec mantra */}
-                <div className="flex-1 arch-t rounded-b-2xl bg-[#96915E] p-4 sm:p-5 flex flex-col justify-center text-center text-white shadow-2xs">
-                  <p className="font-display  text-xs sm:text-sm leading-snug">
+                <div className="flex-1 arch-t rounded-b-2xl bg-earth-olive p-4 sm:p-5 flex flex-col justify-center text-center text-white shadow-2xs">
+                  <p className="text-xs sm:text-sm font-medium leading-snug">
                     Prendre soin de soi, c’est se reconnecter.
                   </p>
                 </div>
 
                 {/* Arche inférieure Blush / Sable doux */}
-                <div className="h-32 sm:h-44 arch-r rounded-l-2xl bg-[#DEBFA9] shadow-2xs flex items-center justify-center">
+                <div className="h-32 sm:h-44 arch-r rounded-l-2xl bg-earth-sand shadow-2xs flex items-center justify-center">
                   <span className="w-2.5 h-2.5 rounded-full bg-white/70" />
                 </div>
               </div>

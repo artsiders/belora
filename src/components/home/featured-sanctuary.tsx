@@ -34,7 +34,7 @@ export function FeaturedSanctuary() {
 
           {/* Cartouche d'artisan en bas à gauche */}
           <div className="absolute bottom-6 sm:bottom-10 left-6 sm:left-10 max-w-xl text-sand-50">
-            <span className="inline-block px-3 py-1 rounded-[var(--radius-xs)] bg-primary-600/90 text-sand-50 text-[10px] tracking-widest uppercase font-semibold mb-3 backdrop-blur-sm">
+            <span className="inline-block px-3 py-1 rounded-[var(--radius-xs)] bg-primary-600/90 text-sand-50 text-xs tracking-widest uppercase font-semibold mb-3 backdrop-blur-sm">
               Maison Coup de Cœur
             </span>
             <h3 className="text-3xl sm:text-4xl text-sand-50 mb-3">

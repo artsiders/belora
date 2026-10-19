@@ -75,12 +75,12 @@ export function CuratedVenues() {
   return (
     <section className="py-14 sm:py-20 bg-white border-b border-sand-200/80" aria-labelledby="venues-heading">
       <div className="container-belora">
-        {/* En-tête avec titre et lien "Voir tous les salons" */}
+        {/* En-tête avec titre et vraie icône Lucide */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12">
           <div>
             <h2
               id="venues-heading"
-              className="font-display text-2xl sm:text-3xl lg:text-4xl text-sand-950 mb-1"
+              className="text-2xl sm:text-3xl font-bold text-sand-950 mb-1"
             >
               Nos salons populaires près de chez vous
             </h2>
@@ -94,7 +94,7 @@ export function CuratedVenues() {
             className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-sand-700 hover:text-primary-600 transition-colors shrink-0"
           >
             <span>Voir tous les salons</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
@@ -103,7 +103,7 @@ export function CuratedVenues() {
           {CURATED_VENUES.map((venue) => (
             <div
               key={venue.slug}
-              className="group flex flex-col bg-white rounded-2xl border border-sand-200/80 p-3.5 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300"
+              className="group flex flex-col bg-white rounded-2xl border border-sand-200/80 p-4 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300"
             >
               {/* Photo avec coins arrondis, pastille de note et favori */}
               <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-sand-200 mb-3.5">
@@ -112,7 +112,7 @@ export function CuratedVenues() {
                   alt={venue.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 
                 {/* Bouton favori cœur discret */}
@@ -125,8 +125,8 @@ export function CuratedVenues() {
                 </button>
 
                 {/* Pastille de note en bas à gauche de la photo */}
-                <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-[11px] font-semibold text-sand-900 num flex items-center gap-1 shadow-xs">
-                  <Star className="w-3 h-3 fill-primary-600 text-primary-600" />
+                <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-xs font-semibold text-sand-900 num flex items-center gap-1 shadow-xs">
+                  <Star className="w-3.5 h-3.5 fill-primary-600 text-primary-600" />
                   <span>
                     {venue.rating} ({venue.reviewCount})
                   </span>
@@ -136,23 +136,23 @@ export function CuratedVenues() {
               {/* Titre et détails de l'établissement */}
               <div className="flex flex-col flex-1 justify-between">
                 <div>
-                  <h3 className="font-display text-lg sm:text-xl text-sand-950 group-hover:text-primary-600 transition-colors mb-1">
+                  <h3 className="text-base sm:text-lg font-bold text-sand-950 group-hover:text-primary-600 transition-colors mb-1">
                     {venue.name}
                   </h3>
 
-                  <div className="flex items-center gap-1 text-[11px] text-sand-500 mb-3">
-                    <MapPin className="w-3 h-3 text-sand-400 shrink-0" />
+                  <div className="flex items-center gap-1 text-xs text-sand-500 mb-3">
+                    <MapPin className="w-3.5 h-3.5 text-sand-400 shrink-0" />
                     <span>
                       {venue.district} · {venue.distance}
                     </span>
                   </div>
 
-                  {/* Badges / Chips de prestations */}
+                  {/* Prestations */}
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {venue.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2.5 py-0.5 rounded-full bg-sand-100 text-[10px] text-sand-700 font-medium"
+                        className="px-2.5 py-0.5 rounded-full bg-sand-100 text-xs text-sand-700 font-medium"
                       >
                         {tag}
                       </span>
@@ -160,17 +160,17 @@ export function CuratedVenues() {
                   </div>
                 </div>
 
-                {/* Lien d'action "Voir les prestations →" */}
+                {/* Lien d'action "Voir les prestations" avec vraie icône Lucide ArrowRight */}
                 <div className="pt-3 border-t border-sand-100 flex items-center justify-between">
                   <Link
                     href={`/venue/${venue.slug}`}
-                    className="text-xs font-semibold text-primary-700 group-hover:text-primary-800 transition-colors inline-flex items-center gap-1"
+                    className="text-xs font-semibold text-primary-700 group-hover:text-primary-800 transition-colors inline-flex items-center gap-1.5"
                   >
                     <span>Voir les prestations</span>
-                    <span>→</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
 
-                  <span className="text-[11px] font-semibold text-sand-600 num">
+                  <span className="text-xs font-semibold text-sand-600 num">
                     {venue.startingPrice}
                   </span>
                 </div>

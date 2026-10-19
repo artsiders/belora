@@ -209,21 +209,21 @@ export default function ProPage() {
                   </div>
 
                   {/* Rendez-vous 1 */}
-                  <div className="p-3 rounded-[var(--radius-xs)] bg-[#ebd3cf] border-l-4 border-[#b0584a] text-sand-950 text-xs">
+                  <div className="p-3 rounded-[var(--radius-xs)] bg-primary-100/70 border-l-4 border-primary-600 text-sand-950 text-xs">
                     <div className="flex justify-between font-semibold">
                       <span>Balayage Minéral</span>
                       <span className="num">10h00 - 12h00</span>
                     </div>
-                    <p className="text-[11px] text-sand-700 mt-0.5">Sophie M. · Acompte versé</p>
+                    <p className="text-xs text-sand-700 mt-0.5">Sophie M. · Acompte versé</p>
                   </div>
 
                   {/* Rendez-vous 2 */}
-                  <div className="p-3 rounded-[var(--radius-xs)] bg-[#f0e1bf] border-l-4 border-[#b98a2a] text-sand-950 text-xs">
+                  <div className="p-3 rounded-[var(--radius-xs)] bg-secondary-100/70 border-l-4 border-secondary-600 text-sand-950 text-xs">
                     <div className="flex justify-between font-semibold">
                       <span>Coupe Signature à Sec</span>
                       <span className="num">14h00 - 15h00</span>
                     </div>
-                    <p className="text-[11px] text-sand-700 mt-0.5">Camille D. · Nouveau client Belora</p>
+                    <p className="text-xs text-sand-700 mt-0.5">Camille D. · Nouveau client Belora</p>
                   </div>
                 </div>
 
@@ -241,26 +241,26 @@ export default function ProPage() {
                     </div>
                     <div>
                       <h4 className="text-xs font-semibold text-sand-950">Clément (Coupe)</h4>
-                      <span className="text-[10px] text-sand-500">6 créneaux</span>
+                      <span className="text-xs text-sand-500">6 créneaux</span>
                     </div>
                   </div>
 
                   {/* Rendez-vous 1 */}
-                  <div className="p-3 rounded-[var(--radius-xs)] bg-[#d8e0d0] border-l-4 border-[#5f7a58] text-sand-950 text-xs">
+                  <div className="p-3 rounded-[var(--radius-xs)] bg-sand-200/80 border-l-4 border-sand-600 text-sand-950 text-xs">
                     <div className="flex justify-between font-semibold">
                       <span>Rituel Coupe & Soin Végétal</span>
                       <span className="num">11h00 - 12h00</span>
                     </div>
-                    <p className="text-[11px] text-sand-700 mt-0.5">Alexandre G. · Client fidèle</p>
+                    <p className="text-xs text-sand-700 mt-0.5">Alexandre G. · Client fidèle</p>
                   </div>
 
                   {/* Rendez-vous 2 */}
-                  <div className="p-3 rounded-[var(--radius-xs)] bg-[#d5dee3] border-l-4 border-[#4f6f82] text-sand-950 text-xs">
+                  <div className="p-3 rounded-[var(--radius-xs)] bg-primary-100/60 border-l-4 border-primary-500 text-sand-950 text-xs">
                     <div className="flex justify-between font-semibold">
                       <span>Coupe sur Cheveux Secs</span>
                       <span className="num">15h30 - 16h30</span>
                     </div>
-                    <p className="text-[11px] text-sand-700 mt-0.5">Jeanne R. · Réservation en ligne</p>
+                    <p className="text-xs text-sand-700 mt-0.5">Jeanne R. · Réservation en ligne</p>
                   </div>
                 </div>
 
@@ -278,17 +278,17 @@ export default function ProPage() {
                     </div>
                     <div>
                       <h4 className="text-xs font-semibold text-sand-950">Nour (Facialiste)</h4>
-                      <span className="text-[10px] text-sand-500">4 créneaux</span>
+                      <span className="text-xs text-sand-500">4 créneaux</span>
                     </div>
                   </div>
 
                   {/* Rendez-vous 1 */}
-                  <div className="p-3 rounded-[var(--radius-xs)] bg-[#e6d2dc] border-l-4 border-[#8e4a68] text-sand-950 text-xs">
+                  <div className="p-3 rounded-[var(--radius-xs)] bg-secondary-100/80 border-l-4 border-secondary-600 text-sand-950 text-xs">
                     <div className="flex justify-between font-semibold">
                       <span>Grand Rituel Kobido</span>
                       <span className="num">14h00 - 15h15</span>
                     </div>
-                    <p className="text-[11px] text-sand-700 mt-0.5">Élodie B. · Cabine 1</p>
+                    <p className="text-xs text-sand-700 mt-0.5">Élodie B. · Cabine 1</p>
                   </div>
                 </div>
               </div>

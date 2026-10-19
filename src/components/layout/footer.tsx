@@ -2,28 +2,28 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-sand-50 border-t border-sand-200/80 pt-14 pb-10 text-sand-600">
+    <footer className="bg-white border-t border-sand-200/80 pt-14 pb-10 text-sand-600">
       <div className="container-belora">
         {/* Grille principale 4 colonnes aérées et équilibrées */}
         <div className="grid grid-cols-2 md:grid-cols-12 gap-8 lg:gap-12 mb-12">
-          {/* Colonne Marque (4 cols sur desktop) */}
+          {/* Colonne Marque */}
           <div className="col-span-2 md:col-span-4 lg:col-span-5 pr-0 md:pr-8">
             <Link
               href="/"
-              className="font-display text-3xl tracking-tight text-sand-950 hover:text-primary-600 transition-colors inline-block mb-3"
+              className="text-2xl font-bold tracking-tight text-sand-950 hover:text-primary-600 transition-colors inline-block mb-3"
             >
               Belora
             </Link>
-            <p className="text-xs sm:text-[13px] leading-relaxed max-w-sm text-sand-600 mb-4 font-normal">
+            <p className="text-xs sm:text-sm leading-relaxed max-w-sm text-sand-600 mb-4 font-normal">
               La maison de réservation des artisans indépendants de la coiffure,
               du soin et du bien-être d’exception.
             </p>
-            <p className="text-[11px] text-sand-500 font-normal">
+            <p className="text-xs text-sand-500 font-normal">
               Chaque établissement partenaire est audité et certifié sur place.
             </p>
           </div>
 
-          {/* Colonne Univers (2 cols) */}
+          {/* Colonne Univers */}
           <div className="md:col-span-3 lg:col-span-2">
             <p className="eyebrow mb-3.5 text-sand-900 font-semibold">
               Univers
@@ -57,7 +57,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Colonne Professionnels (3 cols) */}
+          {/* Colonne Professionnels */}
           <div className="md:col-span-3 lg:col-span-3">
             <p className="eyebrow mb-3.5 text-sand-900 font-semibold">
               Professionnels
@@ -81,7 +81,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Colonne Maison & Légal (2 cols) */}
+          {/* Colonne Maison & Légal */}
           <div className="md:col-span-2 lg:col-span-2">
             <p className="eyebrow mb-3.5 text-sand-900 font-semibold">
               Maison
@@ -90,16 +90,6 @@ export function Footer() {
               <li>
                 <Link href="/about" className="hover:text-sand-950 transition-colors">
                   Notre charte
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-sand-950 transition-colors">
-                  Conditions
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="hover:text-sand-950 transition-colors">
-                  Confidentialité
                 </Link>
               </li>
               <li>
@@ -112,7 +102,7 @@ export function Footer() {
         </div>
 
         {/* Ligne inférieure sobre et alignée */}
-        <div className="pt-6 border-t border-sand-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-sand-500">
+        <div className="pt-6 border-t border-sand-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-sand-500">
           <p>© 2026 Belora — L’artisanat du soin d’exception.</p>
           <div className="flex items-center gap-4">
             <span>France</span>

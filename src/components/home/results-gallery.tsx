@@ -67,7 +67,7 @@ export function ResultsGallery() {
           title={
             <>
               Le geste en image,{" "}
-              <span className="font-display  block sm:inline text-primary-600">
+              <span className="block sm:inline text-primary-600 font-bold">
                 résultats d’ateliers.
               </span>
             </>
@@ -96,23 +96,23 @@ export function ResultsGallery() {
 
               <div className="absolute inset-x-0 bottom-0 p-6 bg-sand-950/85 backdrop-blur-xs flex items-end justify-between gap-4 text-sand-50 border-t border-sand-50/10">
                 <div>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-primary-300 block mb-1">
+                  <span className="text-xs uppercase font-bold tracking-widest text-primary-300 block mb-1">
                     {featured.category}
                   </span>
-                  <h3 className="text-2xl sm:text-3xl text-sand-50 mb-1">
+                  <h3 className="text-xl sm:text-2xl font-bold text-sand-50 mb-1">
                     {featured.title}
                   </h3>
-                  <p className="text-xs text-sand-200">
+                  <p className="text-xs text-sand-200 font-normal">
                     Réalisé par {featured.salon} · {featured.city}
                   </p>
                 </div>
 
                 <Link
-                  href="/search?category=hair"
-                  className="w-10 h-10 rounded-full bg-sand-50/90 text-sand-900 group-hover:bg-primary-600 group-hover:text-sand-50 flex items-center justify-center shrink-0 transition-colors shadow-md"
-                  aria-label="Voir les soins de coiffure"
+                  href="/search"
+                  className="shrink-0 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                  aria-label={`En savoir plus sur ${featured.title}`}
                 >
-                  <ArrowUpRight className="w-5 h-5" />
+                  <ArrowUpRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
@@ -123,14 +123,14 @@ export function ResultsGallery() {
             {rest.map((item) => (
               <div
                 key={item.id}
-                className="group relative aspect-square rounded-[var(--radius-sm)] overflow-hidden bg-sand-200 border border-sand-300 shadow-2xs"
+                className="group relative aspect-square rounded-2xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-2xs hover:shadow-md transition-all duration-300"
               >
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  sizes="(max-width: 640px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 
                 <div
@@ -138,14 +138,14 @@ export function ResultsGallery() {
                   aria-hidden="true"
                 />
 
-                <div className="absolute inset-x-0 bottom-0 p-3 bg-sand-950/85 backdrop-blur-xs text-sand-50 border-t border-sand-50/10">
-                  <span className="text-[9px] uppercase font-bold tracking-wider text-primary-300 block">
+                <div className="absolute inset-x-0 bottom-0 p-3.5 bg-sand-950/80 backdrop-blur-xs text-sand-50 border-t border-sand-50/10">
+                  <span className="text-xs uppercase font-bold tracking-wider text-primary-300 block mb-0.5">
                     {item.category}
                   </span>
-                  <h4 className="text-xs font-semibold text-sand-50 line-clamp-1 leading-snug">
+                  <h4 className="text-xs sm:text-sm font-bold text-sand-50 line-clamp-1">
                     {item.title}
                   </h4>
-                  <p className="text-[10px] text-sand-300 mt-0.5 truncate">
+                  <p className="text-xs text-sand-300 font-normal mt-0.5 line-clamp-1">
                     {item.salon}
                   </p>
                 </div>
