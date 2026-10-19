@@ -1,0 +1,123 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { Mail, ArrowLeft, ArrowRight, CheckCircle2, KeyRound } from "lucide-react";
+
+export default function ForgotPasswordPage() {
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setSubmitted(true);
+    }, 700);
+  };
+
+  return (
+    <div className="w-full">
+      <div className="mb-8">
+        <Link
+          href="/login"
+          className="inline-flex items-center gap-1.5 text-xs text-sand-600 hover:text-sand-950 transition-colors mb-6 group"
+        >
+          <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
+          <span>Retour à la connexion</span>
+        </Link>
+
+        <div className="w-10 h-10 rounded-[var(--radius-sm)] bg-sand-200/80 border border-sand-300 text-sand-800 flex items-center justify-center mb-4">
+          <KeyRound className="w-5 h-5 text-primary-600" />
+        </div>
+
+        <span className="text-[11px] uppercase tracking-wider font-semibold text-primary-600 block mb-1">
+          Sécurité du compte
+        </span>
+        <h1 className="font-display text-3xl sm:text-4xl text-sand-950 tracking-tight">
+          Mot de passe oublié
+        </h1>
+        <p className="text-xs sm:text-sm text-sand-600 mt-2 font-normal leading-relaxed">
+          Saisissez l’adresse e-mail associée à votre compte Belora. Nous vous
+          enverrons un lien sécurisé à usage unique pour en définir un nouveau.
+        </p>
+      </div>
+
+      {submitted ? (
+        <div className="p-6 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300 text-center space-y-4">
+          <div className="w-12 h-12 rounded-full bg-primary-50 text-primary-600 mx-auto flex items-center justify-center">
+            <CheckCircle2 className="w-6 h-6" />
+          </div>
+          <div>
+            <h3 className="font-display text-xl text-sand-950 mb-1">
+              Vérifiez votre boîte de réception
+            </h3>
+            <p className="text-xs text-sand-600 leading-relaxed">
+              Un e-mail contenant les instructions de réinitialisation vient d’être
+              adressé à <span className="font-semibold text-sand-900">{email}</span>. Ce
+              lien expirera dans 60 minutes.
+            </p>
+          </div>
+          <div className="pt-2">
+            <Link
+              href="/login"
+              className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-[var(--radius-sm)] bg-primary-600 hover:bg-primary-700 text-sand-50 text-xs font-semibold uppercase tracking-wider transition-colors"
+            >
+              <span>Retour à la connexion</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label
+              htmlFor="forgot-email"
+              className="block text-xs uppercase tracking-wider font-semibold text-sand-700 mb-1.5"
+            >
+              Adresse e-mail du compte
+            </label>
+            <div className="relative">
+              <input
+                id="forgot-email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="nom@exemple.com"
+                autoComplete="email"
+                className="w-full px-3.5 py-3 text-sm bg-sand-50 border border-sand-300 rounded-[var(--radius-sm)] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 transition-colors"
+              />
+              <Mail className="w-4 h-4 text-sand-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full mt-2 flex items-center justify-center gap-2 py-3.5 px-6 rounded-[var(--radius-sm)] bg-primary-600 hover:bg-primary-700 text-sand-50 text-xs font-semibold uppercase tracking-wider transition-colors disabled:opacity-60 cursor-pointer shadow-sm"
+          >
+            {isLoading ? (
+              <span className="inline-block w-4 h-4 border-2 border-sand-50 border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <>
+                <span>Transmettre le lien</span>
+                <ArrowRight className="w-4 h-4" />
+              </>
+            )}
+          </button>
+
+          <p className="text-[11px] text-sand-500 text-center pt-2">
+            Vous n’avez plus accès à cet e-mail ?{" "}
+            <Link href="/help" className="text-sand-800 underline underline-offset-2">
+              Contacter l’assistance Belora
+            </Link>
+          </p>
+        </form>
+      )}
+    </div>
+  );
+}

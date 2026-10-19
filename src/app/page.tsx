@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { MainNav } from "@/components/layout/main-nav";
 import { HeroCentered } from "@/components/home/hero-centered";
 import { EditorialMarquee } from "@/components/home/editorial-marquee";
 import { UniverseShowcase } from "@/components/home/universe-showcase";
@@ -92,81 +93,9 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen selection:bg-primary-100 selection:text-primary-900">
       {/* -------------------------------------------------------------------- */}
-      {/* 1. Header & Navigation Sticky                                        */}
+      {/* 1. Header & Navigation Éditoriale                                    */}
       {/* -------------------------------------------------------------------- */}
-      <header className="nav border-b border-line/80 backdrop-blur-md bg-bg/90">
-        <div className="flex items-center gap-10">
-          <Link
-            href="/"
-            className="nav-logo group flex items-baseline gap-1"
-            aria-label="Belora - Accueil"
-          >
-            <span className="font-display text-2xl tracking-tight text-sand-900 transition-colors group-hover:text-primary-600">
-              Belora
-            </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-600" aria-hidden="true" />
-          </Link>
-
-          <nav className="hidden lg:flex items-center gap-7" aria-label="Univers de soins">
-            <Link href="/search?category=hair" className="nav-link text-xs tracking-wider uppercase font-medium">
-              Coiffure
-            </Link>
-            <Link href="/search?category=facial" className="nav-link text-xs tracking-wider uppercase font-medium">
-              Soins visage
-            </Link>
-            <Link href="/search?category=massage" className="nav-link text-xs tracking-wider uppercase font-medium">
-              Massages & Spas
-            </Link>
-            <Link href="/search?category=barber" className="nav-link text-xs tracking-wider uppercase font-medium">
-              Barbiers
-            </Link>
-            <Link href="/search?category=nails" className="nav-link text-xs tracking-wider uppercase font-medium">
-              Onglerie
-            </Link>
-          </nav>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <Link
-            href="/pro"
-            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-sand-700 hover:text-primary-600 transition-colors"
-          >
-            <span>Espace Pro</span>
-            <svg
-              className="w-3.5 h-3.5 opacity-60"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M7 17 17 7" />
-              <path d="M7 7h10v10" />
-            </svg>
-          </Link>
-
-          <span className="hidden sm:inline-block w-px h-4 bg-line-strong" aria-hidden="true" />
-
-          <Link href="/account" className="btn btn-editorial btn-sm">
-            <svg
-              className="w-3.5 h-3.5 text-sand-700"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.75"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-            <span>Connexion</span>
-          </Link>
-        </div>
-      </header>
+      <MainNav />
 
       {/* -------------------------------------------------------------------- */}
       {/* 2. Hero Centré avec Dégradé Supérieur & Grande Photographie           */}
