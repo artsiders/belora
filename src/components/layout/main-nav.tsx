@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -21,15 +22,22 @@ export function MainNav() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-sand-200/80 bg-white/95 backdrop-blur-md">
-      <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-[70px] flex items-center justify-between">
+      <div className="max-w-340 mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-18 flex items-center justify-between">
         {/* 1. Logo Belora pur et intemporel */}
         <Link
           href="/"
           onClick={closeMenu}
-          className="font-display text-2xl sm:text-3xl tracking-tight text-sand-950 hover:text-primary-600 transition-colors focus:outline-none"
+          className="flex items-center"
           aria-label="Belora - Accueil"
         >
-          Belora
+          <Image
+            src="/images/logos/belora.png"
+            alt="Belora"
+            width={182}
+            height={80}
+            priority
+            className="object-contain h-7 w-auto"
+          />
         </Link>
 
         {/* 2. Navigation centrale avec micro-interaction fluide */}
