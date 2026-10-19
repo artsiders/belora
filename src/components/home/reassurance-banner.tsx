@@ -27,7 +27,7 @@ export function ReassuranceBanner() {
             <div className="pt-2">
               <Link
                 href="/search"
-                className="btn btn-primary rounded-xl px-6 py-3.5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider shadow-md cursor-pointer"
+                className="btn btn-primary btn-lg"
               >
                 <span>Découvrir tous les salons</span>
                 <ArrowRight className="w-4 h-4" />

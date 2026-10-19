@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const SANCTUARY_PILLARS = [
   {
@@ -27,9 +27,9 @@ export function SanctuaryExperience() {
   return (
     <section className="section bg-white border-b border-sand-200/80" aria-labelledby="experience-heading">
       <div className="container-belora">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Colonne Gauche : Manifeste & 3 engagements purs */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-6">
             <p className="eyebrow mb-2">Charte d’Excellence</p>
             <h2 id="experience-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3 text-balance">
               Plus qu’un rendez-vous,{" "}
@@ -66,42 +66,59 @@ export function SanctuaryExperience() {
 
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-sand-800 hover:text-primary-600 transition-colors"
+              className="btn btn-primary btn-lg"
             >
               <span>Découvrir notre protocole d’audit</span>
-              <ArrowRight className="w-3.5 h-3.5 opacity-60" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          {/* Colonne Droite : Photographie architecturale apaisante en arche */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative aspect-[4/5] arch-t rounded-b-2xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-sm">
-              <Image
-                src="/images/sanctuaries/sanctuary-architecture.jpg"
-                alt="Intérieur minéral et épuré d'un sanctuaire partenaire Belora"
-                fill
-                sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover"
-              />
+          {/* Colonne Droite : Composition architecturale en arches (Variante Sanctuaire) */}
+          <div className="lg:col-span-6 relative">
+            <div className="grid grid-cols-12 gap-3 sm:gap-4 items-end">
+              {/* Arche Principale Photographique (Gauche) */}
+              <div className="col-span-8 relative aspect-[4/5] arch-t rounded-b-2xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-sm">
+                <Image
+                  src="/images/sanctuaries/sanctuary-architecture.jpg"
+                  alt="Intérieur minéral et épuré d'un sanctuaire partenaire Belora"
+                  fill
+                  sizes="(max-width: 1024px) 70vw, 30vw"
+                  className="object-cover"
+                />
 
-              {/* Voile d'ombrage discret et cartouche sobre */}
-              <div
-                className="absolute inset-0 bg-sand-950/15"
-                aria-hidden="true"
-              />
+                {/* Voile d'ombrage discret et cartouche sobre */}
+                <div
+                  className="absolute inset-0 bg-sand-950/15"
+                  aria-hidden="true"
+                />
 
-              <div className="absolute bottom-4 inset-x-4 p-3.5 rounded-xl bg-sand-50/95 backdrop-blur-xs border border-sand-200/80 text-sand-900 shadow-sm flex items-center justify-between gap-3">
-                <div>
-                  <h4 className="text-sm font-bold text-sand-950">
-                    Maison Albar Institut & Spa
-                  </h4>
-                  <p className="text-xs text-sand-500">
-                    Lyon Presqu’île · Audit 2026
+                <div className="absolute bottom-3 inset-x-3 p-3 rounded-xl bg-white/95 backdrop-blur-xs border border-sand-200/80 text-sand-900 shadow-xs flex items-center justify-between gap-2">
+                  <div>
+                    <h4 className="text-xs font-bold text-sand-950">
+                      Maison Albar Institut
+                    </h4>
+                    <p className="text-xs text-sand-500">
+                      Lyon Presqu’île · Audit 2026
+                    </p>
+                  </div>
+                  <CheckCircle2 className="w-4 h-4 text-primary-600 shrink-0" />
+                </div>
+              </div>
+
+              {/* Formes décoratives Arches en variante (Droite) */}
+              <div className="col-span-4 flex flex-col gap-3 sm:gap-4 justify-end">
+                {/* Arche supérieure Terracotta douce avec promesse */}
+                <div className="h-40 sm:h-48 arch-t rounded-b-2xl bg-earth-terracotta p-3.5 sm:p-4 flex flex-col justify-center text-center text-white shadow-2xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/80 mx-auto mb-2" />
+                  <p className="text-xs font-semibold leading-snug">
+                    Acoustique feutrée & calme absolu
                   </p>
                 </div>
-                <span className="text-xs font-semibold text-sand-700 bg-sand-200/60 px-2 py-0.5 rounded num">
-                  Noté 5,0 / 5
-                </span>
+
+                {/* Arche inférieure Olive avec forme arrondie horizontale */}
+                <div className="h-28 sm:h-36 arch-r rounded-l-2xl bg-earth-olive shadow-2xs flex items-center justify-center text-white text-center p-2">
+                  <span className="text-xs font-bold tracking-wider uppercase">Audit Certifié</span>
+                </div>
               </div>
             </div>
           </div>
