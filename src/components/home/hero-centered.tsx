@@ -14,7 +14,7 @@ export function HeroCentered() {
     <section className="relative w-full min-h-[720px] sm:min-h-[780px] lg:min-h-[860px] overflow-hidden flex flex-col justify-between pt-14 sm:pt-20 pb-8 sm:pb-12 border-b border-line">
       {/* 1. Photographie haute définition en arrière-plan complet pleine largeur (Full Width sans cadre) */}
       <Image
-        src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=2400&q=85"
+        src="/images/heroes/hero-image.jpeg"
         alt="Intérieur architectural lumineux et apaisant d’un salon partenaire Belora"
         fill
         priority
@@ -47,14 +47,6 @@ export function HeroCentered() {
       {/* 3. Contenu textuel et recherche positionnés par-dessus le dôme opaque */}
       <div className="container-belora relative z-10 w-full text-center">
         <div className="max-w-4xl mx-auto">
-          {/* Pastille éditoriale sobre */}
-          <div className="inline-flex items-center gap-2 mb-4 px-3.5 py-1 rounded-full bg-sand-200/70 border border-sand-300">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-600" aria-hidden="true" />
-            <span className="text-[10px] sm:text-xs uppercase tracking-widest text-sand-800 font-semibold">
-              Maison de réservation · Beauté & Bien-être
-            </span>
-          </div>
-
           {/* Grand titre centré à fort contraste */}
           <h1 className="display-xl text-sand-950 mb-4 sm:mb-5 text-balance">
             L’art du soin,{" "}
@@ -79,7 +71,7 @@ export function HeroCentered() {
             <div className="searchbar-field">
               <label
                 htmlFor="search-service"
-                className="searchbar-label text-[10px] font-semibold text-sand-500"
+                className="searchbar-label text-xs font-semibold text-sand-500"
               >
                 Prestation ou salon
               </label>
@@ -96,7 +88,7 @@ export function HeroCentered() {
             <div className="searchbar-field">
               <label
                 htmlFor="search-location"
-                className="searchbar-label text-[10px] font-semibold text-sand-500"
+                className="searchbar-label text-xs font-semibold text-sand-500"
               >
                 Où (ville, quartier)
               </label>
@@ -113,7 +105,7 @@ export function HeroCentered() {
             <div className="searchbar-field">
               <label
                 htmlFor="search-date"
-                className="searchbar-label text-[10px] font-semibold text-sand-500"
+                className="searchbar-label text-xs font-semibold text-sand-500"
               >
                 Date souhaitée
               </label>
@@ -155,7 +147,7 @@ export function HeroCentered() {
               <Link
                 key={item.query}
                 href={`/search?q=${item.query}`}
-                className="chip text-xs bg-sand-50/90 hover:bg-sand-200 border-sand-300 text-sand-800 backdrop-blur-sm"
+                className="chip text-xs bg-sand-500 hover:bg-sand-200 border-sand-300 text-sand-800 backdrop-blur-sm"
               >
                 {item.label}
               </Link>
@@ -180,7 +172,7 @@ export function HeroCentered() {
                 <p className="text-xs font-semibold text-sand-900 leading-tight">
                   Camille B.
                 </p>
-                <p className="text-[10px] text-fg-subtle">
+                <p className="text-xs text-fg-subtle">
                   Cliente vérifiée · L’Atelier Botanique
                 </p>
               </div>
