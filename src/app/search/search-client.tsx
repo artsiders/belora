@@ -13,6 +13,7 @@ import {
   ArrowRight,
   Compass,
   Check,
+  ShieldCheck,
 } from "lucide-react";
 
 const CATEGORIES = [
@@ -72,29 +73,29 @@ export function SearchClient() {
   }, [selectedCategory, selectedCity, searchQuery, sortBy]);
 
   return (
-    <div className="container-belora py-8">
-      {/* 1. Barre de recherche contextuelle */}
-      <div className="mb-8 p-4 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300 shadow-2xs">
+    <div className="container-belora py-8 sm:py-12">
+      {/* 1. Barre de recherche & filtres Apple Pro */}
+      <div className="mb-8 p-4 sm:p-5 rounded-3xl bg-white border border-sand-200/90 shadow-sm space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-          {/* Champ Soin / Salon */}
-          <div className="md:col-span-5 flex items-center gap-2 px-3 py-2 rounded bg-sand-100/70 border border-sand-200">
+          {/* Champ 1 : Recherche Soin / Salon */}
+          <div className="md:col-span-5 flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-sand-50/80 border border-sand-200/70 focus-within:border-primary-500 focus-within:bg-white transition-all">
             <Search className="w-4 h-4 text-sand-400 shrink-0" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Soin, salon ou artisan..."
-              className="w-full bg-transparent text-xs sm:text-sm text-sand-900 placeholder:text-sand-400 focus:outline-none"
+              className="w-full bg-transparent text-xs sm:text-sm text-sand-900 placeholder:text-sand-400 focus:outline-none font-medium"
             />
           </div>
 
-          {/* Champ Ville */}
-          <div className="md:col-span-4 flex items-center gap-2 px-3 py-2 rounded bg-sand-100/70 border border-sand-200">
+          {/* Champ 2 : Ville */}
+          <div className="md:col-span-4 flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-sand-50/80 border border-sand-200/70 focus-within:border-primary-500 focus-within:bg-white transition-all">
             <MapPin className="w-4 h-4 text-sand-400 shrink-0" />
             <select
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
-              className="w-full bg-transparent text-xs sm:text-sm text-sand-900 focus:outline-none cursor-pointer"
+              className="w-full bg-transparent text-xs sm:text-sm text-sand-900 focus:outline-none cursor-pointer font-medium"
             >
               {CITIES.map((city) => (
                 <option key={city} value={city}>
@@ -104,15 +105,15 @@ export function SearchClient() {
             </select>
           </div>
 
-          {/* Tri */}
-          <div className="md:col-span-3 flex items-center gap-2 px-3 py-2 rounded bg-sand-100/70 border border-sand-200">
+          {/* Champ 3 : Tri */}
+          <div className="md:col-span-3 flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-sand-50/80 border border-sand-200/70 focus-within:border-primary-500 focus-within:bg-white transition-all">
             <SlidersHorizontal className="w-4 h-4 text-sand-400 shrink-0" />
             <select
               value={sortBy}
               onChange={(e) =>
                 setSortBy(e.target.value as "recommended" | "rating" | "price")
               }
-              className="w-full bg-transparent text-xs sm:text-sm text-sand-900 focus:outline-none cursor-pointer"
+              className="w-full bg-transparent text-xs sm:text-sm text-sand-900 focus:outline-none cursor-pointer font-medium"
             >
               <option value="recommended">Recommandés</option>
               <option value="rating">Mieux notés</option>
@@ -121,8 +122,8 @@ export function SearchClient() {
           </div>
         </div>
 
-        {/* Chips de filtres par disciplines */}
-        <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-sand-200/80">
+        {/* Chips de disciplines épurées */}
+        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-sand-100">
           {CATEGORIES.map((cat) => {
             const isSelected = selectedCategory === cat.id;
             return (
@@ -130,10 +131,10 @@ export function SearchClient() {
                 key={cat.id}
                 type="button"
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-colors cursor-pointer border ${
+                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                   isSelected
-                    ? "bg-sand-950 text-sand-50 border-sand-950"
-                    : "bg-sand-50 text-sand-700 border-sand-300 hover:bg-sand-200/60"
+                    ? "bg-sand-950 text-white shadow-2xs"
+                    : "bg-white text-sand-700 border border-sand-200 hover:border-sand-300 hover:bg-sand-50"
                 }`}
               >
                 {cat.label}
@@ -146,30 +147,30 @@ export function SearchClient() {
       {/* 2. Résumé des résultats et comptage */}
       <div className="flex items-center justify-between mb-6 pb-3 border-b border-sand-200/80 text-xs text-sand-500">
         <div>
-          <span className="font-semibold text-sand-900 num">
+          <span className="font-bold text-sand-900 num">
             {filteredVenues.length}
           </span>{" "}
           {filteredVenues.length > 1 ? "maisons trouvées" : "maison trouvée"}
           {selectedCity !== "Toutes les villes" && ` à ${selectedCity}`}
         </div>
-        <div className="flex items-center gap-2 text-sand-600">
-          <Compass className="w-3.5 h-3.5 text-primary-600" />
+        <div className="flex items-center gap-1.5 text-sand-600 font-medium">
+          <ShieldCheck className="w-4 h-4 text-primary-600" />
           <span>Établissements audités sur place</span>
         </div>
       </div>
 
-      {/* 3. Disposition Split : Liste de fiches + Aperçu géographique */}
+      {/* 3. Disposition Split : Cartes Apple Pro + Carte Géographique Stylisée */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Colonne gauche : Liste des salons (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
           {filteredVenues.length === 0 ? (
-            <div className="p-12 text-center rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300/80 space-y-4">
+            <div className="p-12 text-center rounded-3xl bg-white border border-sand-200/80 shadow-2xs space-y-4">
               <Compass className="w-8 h-8 text-sand-400 mx-auto" />
-              <h3 className="font-display text-2xl text-sand-950">
+              <h3 className="text-xl sm:text-2xl font-bold text-sand-950">
                 Aucun établissement ne correspond à cette recherche
               </h3>
-              <p className="text-xs text-sand-600 max-w-md mx-auto">
-                Essayez d’élargir vos filtres ou de sélectionner une autre métropole.
+              <p className="text-xs sm:text-sm text-sand-600 max-w-md mx-auto font-normal">
+                Essayez d’élargir vos filtres ou de sélectionner une autre ville.
               </p>
               <button
                 type="button"
@@ -178,7 +179,7 @@ export function SearchClient() {
                   setSelectedCity("Toutes les villes");
                   setSearchQuery("");
                 }}
-                className="btn btn-outline btn-sm"
+                className="btn btn-outline btn-sm rounded-xl cursor-pointer"
               >
                 Réinitialiser les filtres
               </button>
@@ -187,33 +188,32 @@ export function SearchClient() {
             filteredVenues.map((venue) => (
               <div
                 key={venue.id}
-                className="group p-5 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300/80 hover:border-sand-400 hover:shadow-md transition-all flex flex-col sm:flex-row gap-5"
+                id={`venue-${venue.id}`}
+                className="group p-4 sm:p-5 rounded-3xl bg-white border border-sand-200/80 hover:border-sand-300 shadow-2xs hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row gap-5"
               >
-                {/* Photo de l'atelier */}
-                <div className="relative aspect-[4/3] sm:aspect-square sm:w-48 rounded-[var(--radius-sm)] overflow-hidden bg-sand-200 shrink-0">
+                {/* Photographie de l'atelier avec arrondis harmonieux (Apple standard) */}
+                <Link
+                  href={`/venue/${venue.slug}`}
+                  className="relative aspect-[4/3] sm:aspect-square sm:w-52 rounded-2xl overflow-hidden bg-sand-100 shrink-0 block"
+                >
                   <Image
                     src={venue.image}
                     alt={venue.name}
                     fill
-                    sizes="(max-width: 640px) 100vw, 192px"
-                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 208px"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <span className="absolute top-2 left-2 px-2 py-0.5 rounded-[var(--radius-xs)] bg-sand-950/75 text-sand-50 text-[9px] uppercase font-semibold tracking-wider backdrop-blur-xs">
-                    {venue.badge}
-                  </span>
-                </div>
+                </Link>
 
                 {/* Métadonnées & prestations phares */}
                 <div className="flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center justify-between gap-2 mb-1">
-                      <div className="flex items-center gap-1 text-[11px] text-sand-500">
-                        <MapPin className="w-3 h-3 text-sand-400" />
-                        <span>
-                          {venue.district}, {venue.city}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1 text-xs font-semibold text-sand-900 num">
+                    {/* Eyebrow & Note */}
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-primary-600">
+                        {venue.badge}
+                      </span>
+                      <div className="flex items-center gap-1 text-xs font-bold text-sand-900 num">
                         <Star className="w-3.5 h-3.5 fill-primary-600 text-primary-600" />
                         <span>{venue.rating}</span>
                         <span className="text-sand-400 font-normal">
@@ -222,22 +222,32 @@ export function SearchClient() {
                       </div>
                     </div>
 
-                    <h2 className="font-display text-xl text-sand-950 group-hover:text-primary-600 transition-colors mb-1">
+                    {/* Nom du sanctuaire */}
+                    <h2 className="text-lg sm:text-xl font-bold text-sand-950 group-hover:text-primary-600 transition-colors mb-1">
                       <Link href={`/venue/${venue.slug}`}>{venue.name}</Link>
                     </h2>
-                    <p className="text-xs text-sand-600 line-clamp-2 leading-relaxed mb-3 font-normal">
+
+                    {/* Localisation & Description */}
+                    <p className="text-xs text-sand-500 flex items-center gap-1 mb-2">
+                      <MapPin className="w-3.5 h-3.5 text-sand-400 shrink-0" />
+                      <span>
+                        {venue.district}, {venue.city}
+                      </span>
+                    </p>
+
+                    <p className="text-xs text-sand-600 line-clamp-2 leading-relaxed mb-3.5 font-normal">
                       {venue.tagline}
                     </p>
 
-                    {/* Extrait de 2 prestations */}
-                    <div className="space-y-1.5 pt-2 border-t border-sand-200/60 mb-3">
+                    {/* Extrait de 2 rituels signatures */}
+                    <div className="space-y-2 pt-3 border-t border-sand-100 mb-4">
                       {venue.services.slice(0, 2).map((srv) => (
                         <div
                           key={srv.id}
-                          className="flex items-center justify-between text-[11px] text-sand-700"
+                          className="flex items-center justify-between text-xs text-sand-700 font-medium"
                         >
-                          <span className="truncate pr-2">{srv.name}</span>
-                          <span className="font-semibold text-sand-900 num shrink-0">
+                          <span className="truncate pr-3">{srv.name}</span>
+                          <span className="font-bold text-sand-950 num shrink-0">
                             {srv.priceEuros} €
                           </span>
                         </div>
@@ -245,24 +255,28 @@ export function SearchClient() {
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-sand-200/80 flex items-center justify-between gap-3">
+                  {/* Pied de carte avec tarif de départ et actions claires */}
+                  <div className="pt-3 border-t border-sand-100 flex items-center justify-between gap-3">
                     <span className="text-xs text-sand-500 font-normal">
-                      dès <strong className="text-sand-950 num">{venue.startingPrice}</strong>
+                      dès{" "}
+                      <strong className="text-sm font-bold text-sand-950 num">
+                        {venue.startingPrice}
+                      </strong>
                     </span>
 
                     <div className="flex items-center gap-2">
                       <Link
                         href={`/venue/${venue.slug}`}
-                        className="btn btn-outline btn-xs"
+                        className="btn btn-outline btn-sm rounded-xl py-2 px-3 text-xs font-semibold"
                       >
-                        Voir la fiche
+                        Découvrir
                       </Link>
                       <Link
                         href={`/book/${venue.slug}`}
-                        className="btn btn-primary btn-xs inline-flex items-center gap-1"
+                        className="btn btn-primary btn-sm rounded-xl py-2 px-3.5 text-xs font-semibold inline-flex items-center gap-1.5"
                       >
                         <span>Réserver</span>
-                        <ArrowRight className="w-3 h-3" />
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   </div>
@@ -272,58 +286,59 @@ export function SearchClient() {
           )}
         </div>
 
-        {/* Colonne droite : Carte & Adresses certifiées (5 cols - sticky) */}
+        {/* Colonne droite : Repères géographiques & Adresses certifiées (5 cols - sticky) */}
         <div className="hidden lg:block lg:col-span-5 sticky top-24">
-          <div className="rounded-[var(--radius-sm)] border border-sand-300 overflow-hidden bg-sand-50 shadow-sm">
-            {/* Simulation de carte stylisée monochrome */}
-            <div className="relative h-72 w-full bg-sand-200/90 p-6 flex flex-col justify-between overflow-hidden">
-              <div
-                className="absolute inset-0 opacity-15"
-                style={{
-                  backgroundImage: `radial-gradient(var(--sand-500) 1px, transparent 1px)`,
-                  backgroundSize: "20px 20px",
-                }}
-                aria-hidden="true"
-              />
-
-              <div className="relative z-10 flex items-center justify-between">
-                <span className="px-2.5 py-1 rounded bg-sand-50/90 backdrop-blur-xs text-[10px] uppercase font-semibold text-sand-800 tracking-wider shadow-2xs">
+          <div className="rounded-3xl border border-sand-200/80 overflow-hidden bg-white shadow-sm space-y-4 p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-sand-500">
                   Repères géographiques
-                </span>
-                <span className="text-xs text-sand-600 bg-sand-50/80 px-2 py-0.5 rounded num">
-                  {filteredVenues.length} adresses
-                </span>
+                </p>
+                <h3 className="text-base font-bold text-sand-950">
+                  Adresses certifiées
+                </h3>
               </div>
-
-              {/* Pins décoratifs interactifs */}
-              <div className="relative z-10 space-y-2">
-                {filteredVenues.slice(0, 3).map((v) => (
-                  <div
-                    key={v.id}
-                    className="p-2.5 rounded bg-sand-50/95 backdrop-blur-xs border border-sand-200/80 flex items-center justify-between text-xs shadow-2xs hover:bg-sand-50 transition-colors"
-                  >
-                    <div className="flex items-center gap-2 truncate pr-2">
-                      <MapPin className="w-3.5 h-3.5 text-primary-600 shrink-0" />
-                      <span className="font-medium text-sand-900 truncate">
-                        {v.name}
-                      </span>
-                    </div>
-                    <span className="text-[11px] text-sand-500 shrink-0">
-                      {v.district}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <span className="text-xs font-bold text-sand-700 bg-sand-100 px-2.5 py-1 rounded-full num">
+                {filteredVenues.length} adresses
+              </span>
             </div>
 
-            <div className="p-4 bg-sand-50 text-xs text-sand-600 border-t border-sand-200/80 space-y-2">
-              <div className="flex items-center gap-1.5 font-semibold text-sand-800">
+            {/* Liste interactive des adresses */}
+            <div className="space-y-2.5">
+              {filteredVenues.map((v) => (
+                <a
+                  key={v.id}
+                  href={`#venue-${v.id}`}
+                  className="p-3 rounded-2xl bg-sand-50/80 border border-sand-200/60 flex items-center justify-between text-xs hover:bg-sand-100/80 hover:border-sand-300 transition-all cursor-pointer group"
+                >
+                  <div className="flex items-center gap-2.5 truncate pr-2">
+                    <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-primary-600 shrink-0 shadow-2xs">
+                      <MapPin className="w-3.5 h-3.5" />
+                    </div>
+                    <div className="truncate">
+                      <p className="font-bold text-sand-950 group-hover:text-primary-600 transition-colors truncate">
+                        {v.name}
+                      </p>
+                      <p className="text-sand-500 text-xs truncate">
+                        {v.district}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-xs font-bold text-sand-900 num shrink-0">
+                    dès {v.startingPrice}
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            {/* Engagement de quiétude Belora */}
+            <div className="p-4 rounded-2xl bg-sand-50 border border-sand-200/60 space-y-1.5 text-xs">
+              <div className="flex items-center gap-1.5 font-bold text-sand-950">
                 <Check className="w-3.5 h-3.5 text-primary-600" />
                 <span>Accueil garanti sans file d’attente</span>
               </div>
-              <p className="text-[11px] leading-relaxed text-sand-500">
-                Chaque salon certifié Belora respecte scrupuleusement les horaires de
-                ses créneaux pour sanctuariser votre pause de soin.
+              <p className="text-xs text-sand-600 leading-relaxed font-normal">
+                Chaque salon certifié Belora respecte scrupuleusement les horaires de ses créneaux pour sanctuariser votre pause de soin.
               </p>
             </div>
           </div>
