@@ -21,7 +21,7 @@ const UNIVERSES: UniverseArch[] = [
     href: "/search?category=hair",
     icon: (color) => (
       <svg
-        className={`w-9 h-9 ${color}`}
+        className={`w-12 h-12 ${color}`}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -47,7 +47,7 @@ const UNIVERSES: UniverseArch[] = [
     href: "/search?category=facial",
     icon: (color) => (
       <svg
-        className={`w-9 h-9 ${color}`}
+        className={`w-12 h-12 ${color}`}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -72,7 +72,7 @@ const UNIVERSES: UniverseArch[] = [
     href: "/search?category=nails",
     icon: (color) => (
       <svg
-        className={`w-9 h-9 ${color}`}
+        className={`w-12 h-12 ${color}`}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -96,7 +96,7 @@ const UNIVERSES: UniverseArch[] = [
     href: "/search?category=massage",
     icon: (color) => (
       <svg
-        className={`w-9 h-9 ${color}`}
+        className={`w-12 h-12 ${color}`}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -121,7 +121,7 @@ const UNIVERSES: UniverseArch[] = [
     href: "/search?category=facial",
     icon: (color) => (
       <svg
-        className={`w-9 h-9 ${color}`}
+        className={`w-12 h-12 ${color}`}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
