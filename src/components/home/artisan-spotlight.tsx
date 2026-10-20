@@ -117,7 +117,7 @@ export function ArtisanSpotlight() {
             <p className="eyebrow mb-2">Artisans</p>
             <h2
               id="artisans-heading"
-              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-1"
+              className="section-title text-sand-950 max-w-xl"
             >
               Rencontrez les artisans,{" "}
               <span className="block sm:inline text-primary-600 font-bold">
