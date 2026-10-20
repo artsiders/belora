@@ -34,7 +34,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-sand-100 text-sand-900 selection:bg-primary-100 selection:text-primary-900">
+    <div className="flex flex-col min-h-screen bg-white text-sand-900 selection:bg-primary-100 selection:text-primary-900">
       <MainNav />
 
       {/* 1. Fil d'Ariane épuré */}
