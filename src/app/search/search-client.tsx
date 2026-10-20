@@ -75,7 +75,7 @@ export function SearchClient() {
   return (
     <div className="container-belora py-8 sm:py-12">
       {/* 1. Barre de recherche & filtres Apple Pro */}
-      <div className="mb-8 p-4 sm:p-5 rounded-3xl bg-white border border-sand-200/90 shadow-sm space-y-4">
+      <div className="mb-8 p-4 sm:p-5 rounded-3xl bg-white border border-sand-200/90 space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
           {/* Champ 1 : Recherche Soin / Salon */}
           <div className="md:col-span-5 flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-sand-50/80 border border-sand-200/70 focus-within:border-primary-500 focus-within:bg-white transition-all">
@@ -288,7 +288,7 @@ export function SearchClient() {
 
         {/* Colonne droite : Repères géographiques & Adresses certifiées (5 cols - sticky) */}
         <div className="hidden lg:block lg:col-span-5 sticky top-24">
-          <div className="rounded-3xl border border-sand-200/80 overflow-hidden bg-white shadow-sm space-y-4 p-6">
+          <div className="rounded-3xl border border-sand-200/80 overflow-hidden bg-white space-y-4 p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-sand-500">

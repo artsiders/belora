@@ -33,7 +33,7 @@ export function HeroCentered() {
             <form
               action="/search"
               method="GET"
-              className="bg-white rounded-2xl border border-sand-200/90 shadow-sm p-4 sm:p-5 space-y-4 max-w-xl"
+              className="bg-white rounded-2xl border border-sand-200/90 p-4 sm:p-5 space-y-4 max-w-xl"
               role="search"
             >
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
