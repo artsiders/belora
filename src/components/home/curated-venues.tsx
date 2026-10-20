@@ -103,10 +103,10 @@ export function CuratedVenues() {
           {CURATED_VENUES.map((venue) => (
             <div
               key={venue.slug}
-              className="group flex flex-col bg-white rounded-2xl border border-sand-200/80 p-4 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300"
+              className="group flex flex-col bg-white rounded-2xl border border-sand-200/80 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300"
             >
               {/* Photo avec coins arrondis, pastille de note et favori */}
-              <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-sand-200 mb-3.5">
+              <div className="relative aspect-[4/3] w-full rounded-t-xl overflow-hidden bg-sand-200 mb-3.5">
                 <Image
                   src={venue.image}
                   alt={venue.name}
@@ -134,7 +134,7 @@ export function CuratedVenues() {
               </div>
 
               {/* Titre et détails de l'établissement */}
-              <div className="flex flex-col flex-1 justify-between">
+              <div className="flex flex-col flex-1 justify-between p-4 pt-0">
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-sand-950 group-hover:text-primary-600 transition-colors mb-1">
                     {venue.name}
