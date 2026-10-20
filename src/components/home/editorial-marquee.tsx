@@ -14,7 +14,7 @@ const MARQUEE_ITEMS = [
 
 export function EditorialMarquee() {
   return (
-    <div className="w-full overflow-hidden border-b border-sand-200/80 bg-white py-4 select-none" aria-hidden="true">
+    <div className="w-full overflow-hidden border-b border-sand-200/80 bg-earth-espresso py-4 select-none" aria-hidden="true">
       <motion.div
         className="flex gap-10 whitespace-nowrap"
         animate={{ x: ["0%", "-50%"] }}
@@ -26,10 +26,10 @@ export function EditorialMarquee() {
       >
         {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, index) => (
           <div key={index} className="flex items-center gap-10">
-            <span className="text-lg sm:text-xl tracking-wide text-sand-900/80">
+            <span className="text-lg sm:text-xl tracking-wide text-sand-50/95">
               {item}
             </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-600/70" />
+            <span className="w-1.5 h-1.5 rounded-full bg-primary-400/80" />
           </div>
         ))}
       </motion.div>
