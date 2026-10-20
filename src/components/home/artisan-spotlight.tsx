@@ -170,7 +170,7 @@ export function ArtisanSpotlight() {
                   alt={`Portrait de ${artisan.name}, ${artisan.role}`}
                   fill
                   sizes="(max-width: 640px) 260px, 280px"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="object-cover"
                 />
               </div>
 

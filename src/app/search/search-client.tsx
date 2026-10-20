@@ -201,7 +201,7 @@ export function SearchClient() {
                     alt={venue.name}
                     fill
                     sizes="(max-width: 640px) 100vw, 208px"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="object-cover"
                   />
                 </Link>
 
