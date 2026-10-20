@@ -6,13 +6,6 @@ import Image from "next/image";
 import { Menu, X, ArrowRight, ArrowUpRight, ShieldCheck, HelpCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const DESKTOP_CATEGORIES = [
-  { label: "Coiffure", href: "/search?category=hair" },
-  { label: "Soins visage", href: "/search?category=facial" },
-  { label: "Massages & Spas", href: "/search?category=massage" },
-  { label: "Barbiers", href: "/search?category=barber" },
-  { label: "Onglerie", href: "/search?category=nails" },
-];
 
 const MOBILE_UNIVERSES = [
   {
@@ -85,41 +78,14 @@ export function MainNav() {
           />
         </Link>
 
-        {/* 2. Navigation centrale Desktop avec micro-interaction fluide */}
-        <nav
-          className="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-sand-100/70 border border-sand-200/60"
-          onMouseLeave={() => setHoveredCategory(null)}
-          aria-label="Univers de soins"
-        >
-          {DESKTOP_CATEGORIES.map((cat) => {
-            const isHovered = hoveredCategory === cat.href;
-            return (
-              <Link
-                key={cat.href}
-                href={cat.href}
-                onMouseEnter={() => setHoveredCategory(cat.href)}
-                className="relative px-4 py-1.5 text-xs font-semibold tracking-wide text-sand-700 hover:text-sand-950 transition-colors"
-              >
-                {isHovered && (
-                  <motion.span
-                    layoutId="navHoverPill"
-                    className="absolute inset-0 rounded-full bg-white shadow-xs border border-sand-200/50"
-                    transition={{ type: "spring", stiffness: 450, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{cat.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
-
         {/* 3. Actions Desktop à droite */}
         <div className="hidden sm:flex items-center gap-4">
           <Link
             href="/pro"
             className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-sand-600 hover:text-primary-600 transition-colors"
           >
-            <span>Espace Pro</span>
+            <span>Je suis un professionnel</span>
+       
             <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
           </Link>
 
