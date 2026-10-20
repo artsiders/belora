@@ -181,22 +181,6 @@ export default function ProPage() {
                     <span>Découvrir l’agenda en direct</span>
                   </a>
                 </div>
-
-                {/* Réassurance sobre */}
-                <div className="pt-3 flex flex-wrap items-center gap-6 text-xs text-sand-600 font-medium">
-                  <span className="flex items-center gap-1.5">
-                    <Check className="w-4 h-4 text-primary-600 shrink-0" />
-                    14 jours d’essai sans carte bancaire
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Check className="w-4 h-4 text-primary-600 shrink-0" />
-                    Sans engagement
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Check className="w-4 h-4 text-primary-600 shrink-0" />
-                    Migration gratuite en 24h
-                  </span>
-                </div>
               </div>
 
               {/* Colonne droite : Composition photographique en arches de la DA */}
@@ -217,7 +201,7 @@ export default function ProPage() {
                   {/* Arches graphiques d'impact */}
                   <div className="col-span-4 flex flex-col gap-3 sm:gap-4 h-[360px] sm:h-[440px]">
                     {/* Arche supérieure Espresso avec indicateur fort */}
-                    <div className="flex-1 arch-t rounded-b-2xl bg-earth-espresso p-4 sm:p-5 flex flex-col justify-between text-white shadow-2xs">
+                    <div className="flex-1 arch-t rounded-b-2xl bg-earth-espresso p-4 sm:p-5 flex flex-col justify-end gap-2 text-white shadow-2xs">
                       <span className="text-xs uppercase font-semibold text-sand-400">
                         Performance
                       </span>
@@ -275,17 +259,6 @@ export default function ProPage() {
                     Vue Journalière
                   </span>
                 </div>
-
-                <div className="flex items-center gap-3 text-xs text-sand-600">
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-600" />
-                    3 praticiens en poste
-                  </span>
-                  <span className="hidden sm:inline text-sand-300">·</span>
-                  <span className="hidden sm:inline font-medium text-sand-900">
-                    14 rituels confirmés
-                  </span>
-                </div>
               </div>
 
               {/* Colonnes des collaborateurs */}
@@ -318,7 +291,7 @@ export default function ProPage() {
                   </div>
 
                   {/* Rendez-vous 1 */}
-                  <div className="p-3.5 rounded-2xl bg-primary-50 border-l-4 border-primary-600 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-primary-50 border-l-4 border-primary-600 text-sand-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Balayage Minéral & Soin</span>
                       <span className="num font-semibold text-sand-700">10h00 - 12h00</span>
@@ -329,7 +302,7 @@ export default function ProPage() {
                   </div>
 
                   {/* Rendez-vous 2 */}
-                  <div className="p-3.5 rounded-2xl bg-sand-100 border-l-4 border-sand-500 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-sand-100 border-l-4 border-sand-500 text-sand-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Coupe Signature à Sec</span>
                       <span className="num font-semibold text-sand-700">14h00 - 15h00</span>
@@ -368,7 +341,7 @@ export default function ProPage() {
                   </div>
 
                   {/* Rendez-vous 1 */}
-                  <div className="p-3.5 rounded-2xl bg-secondary-50 border-l-4 border-secondary-600 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-secondary-50 border-l-4 border-secondary-600 text-sand-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Rituel Rasage & Serviette Chaude</span>
                       <span className="num font-semibold text-sand-700">11h00 - 12h00</span>
@@ -379,7 +352,7 @@ export default function ProPage() {
                   </div>
 
                   {/* Rendez-vous 2 */}
-                  <div className="p-3.5 rounded-2xl bg-sand-100 border-l-4 border-sand-500 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-sand-100 border-l-4 border-sand-500 text-sand-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Taille de Barbe & Soin Huile</span>
                       <span className="num font-semibold text-sand-700">15h30 - 16h15</span>
@@ -418,7 +391,7 @@ export default function ProPage() {
                   </div>
 
                   {/* Rendez-vous 1 */}
-                  <div className="p-3.5 rounded-2xl bg-primary-50 border-l-4 border-primary-600 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-primary-50 border-l-4 border-primary-600 text-sand-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Grand Rituel Kobido Impérial</span>
                       <span className="num font-semibold text-sand-700">14h00 - 15h15</span>
@@ -429,7 +402,7 @@ export default function ProPage() {
                   </div>
 
                   {/* Rendez-vous 2 */}
-                  <div className="p-3.5 rounded-2xl bg-sand-100 border-l-4 border-sand-500 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-sand-100 border-l-4 border-sand-500 text-sand-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Consultation & Diagnostic Visage</span>
                       <span className="num font-semibold text-sand-700">16h30 - 17h15</span>
