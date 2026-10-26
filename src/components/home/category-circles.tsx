@@ -1,189 +1,135 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { LayoutGrid, Scissors, Leaf, Home } from "lucide-react";
 
-interface UniverseArch {
+interface CategoryItem {
   id: string;
   name: string;
-  subservices: string;
-  bgClass: string;
-  textColor: string;
   href: string;
-  icon: (color: string) => React.ReactNode;
+  isAll?: boolean;
+  icon: React.ReactNode;
 }
 
-const UNIVERSES: UniverseArch[] = [
+const CATEGORIES: CategoryItem[] = [
+  {
+    id: "all",
+    name: "Tout",
+    href: "/search",
+    isAll: true,
+    icon: <LayoutGrid className="w-6 h-6 sm:w-7 sm:h-7 text-white stroke-[1.8]" />,
+  },
   {
     id: "hair",
-    name: "Cheveux",
-    subservices: "Coupe · Coloration · Brushing",
-    bgClass: "bg-earth-terracotta",
-    textColor: "text-white",
+    name: "Coiffure",
     href: "/search?category=hair",
-    icon: (color) => (
-      <svg
-        className={`w-12 h-12 ${color}`}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="6" cy="6" r="3" />
-        <circle cx="6" cy="18" r="3" />
-        <line x1="20" y1="4" x2="8.12" y2="15.88" />
-        <line x1="14.47" y1="14.48" x2="20" y2="20" />
-        <line x1="8.12" y1="8.12" x2="12" y2="12" />
-      </svg>
-    ),
+    icon: <Scissors className="w-6 h-6 sm:w-7 sm:h-7 text-primary-600 stroke-[1.6]" />,
   },
   {
     id: "facial",
-    name: "Visage",
-    subservices: "Soins · Éclat · Anti-âge",
-    bgClass: "bg-earth-olive",
-    textColor: "text-white",
+    name: "Exthétique",
     href: "/search?category=facial",
-    icon: (color) => (
+    icon: (
       <svg
-        className={`w-12 h-12 ${color}`}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="1.2"
+        strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
+        className="w-6 h-6 sm:w-7 sm:h-7 text-primary-600"
         aria-hidden="true"
       >
-        <path d="M12 2C7.5 2 4 5.5 4 10c0 4 2.5 7.5 6 9.5V22h4v-2.5c3.5-2 6-5.5 6-9.5 0-4.5-3.5-8-8-8z" />
-        <path d="M9 11h.01" />
-        <path d="M15 11h.01" />
-        <path d="M10 15c.8.6 1.8.8 2 .8s1.2-.2 2-.8" />
+        <path d="M12 4.5c-1.6 2.8-1.6 6.8 0 9.5 1.6-2.7 1.6-6.7 0-9.5z" />
+        <path d="M10.5 14C7 12.8 4.5 14.5 3.5 17c2.5 1 6.5.5 8.5-3z" />
+        <path d="M13.5 14c3.5-1.2 6 .5 7 3-2.5 1-6.5.5-8.5-3z" />
+        <path d="M7 11.5c-1.5-3.5 1-6 2.5-7.5.5 3 2.5 5.5 2.5 5.5" />
+        <path d="M17 11.5c1.5-3.5-1-6-2.5-7.5-.5 3-2.5 5.5-2.5 5.5" />
       </svg>
     ),
   },
   {
     id: "nails",
-    name: "Mains & pieds",
-    subservices: "Manucure · Pédicure · Pose",
-    bgClass: "bg-earth-sand",
-    textColor: "text-sand-900",
+    name: "Onglerie",
     href: "/search?category=nails",
-    icon: (color) => (
+    icon: (
       <svg
-        className={`w-12 h-12 ${color}`}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="1.2"
+        strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
+        className="w-6 h-6 sm:w-7 sm:h-7 text-primary-600"
         aria-hidden="true"
       >
-        <path d="M12 2C9.5 2 8 4 8 7v6a4 4 0 0 0 8 0V7c0-3-1.5-5-4-5z" />
-        <path d="M9 7h6" />
-        <path d="M12 17v5" />
+        <rect x="10" y="3" width="4" height="6" rx="1" />
+        <path d="M8 9h8a2 2 0 0 1 2 2v7a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-7a2 2 0 0 1 2-2z" />
+        <line x1="9" y1="14" x2="15" y2="14" strokeWidth="1.2" strokeDasharray="1.5 1.5" />
+      </svg>
+    ),
+  },
+  {
+    id: "barber",
+    name: "Barbier",
+    href: "/search?category=barber",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="w-6 h-6 sm:w-7 sm:h-7 text-primary-600"
+        aria-hidden="true"
+      >
+        <path d="M4 14c2-4 5.5-3.5 8-1 2.5-2.5 6-3 8 1-2 2.5-5 2-8 0-3 2-6 2.5-8 0z" />
       </svg>
     ),
   },
   {
     id: "massage",
-    name: "Corps & massage",
-    subservices: "Modelage · Soin du corps",
-    bgClass: "bg-earth-moss",
-    textColor: "text-white",
+    name: "Corps et esprit",
     href: "/search?category=massage",
-    icon: (color) => (
-      <svg
-        className={`w-12 h-12 ${color}`}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M12 4c1.5 2.5 3 6 3 9 0 2.5-1.5 4-3 5-1.5-1-3-2.5-3-5 0-3 1.5-6.5 3-9z" />
-        <path d="M12 18c-3 0-6.5-1-8.5-3.5 1-3.5 4.5-6 7.5-6.5" />
-        <path d="M12 18c3 0 6.5-1 8.5-3.5-1-3.5-4.5-6-7.5-6.5" />
-        <path d="M6 19.5c3.5 1.5 8.5 1.5 12 0" />
-      </svg>
-    ),
+    icon: <Leaf className="w-6 h-6 sm:w-7 sm:h-7 text-primary-600 stroke-[1.6]" />,
   },
   {
-    id: "regard",
-    name: "Regard",
-    subservices: "Cils · Sourcils · Maquillage",
-    bgClass: "bg-earth-cognac",
-    textColor: "text-white",
-    href: "/search?category=facial",
-    icon: (color) => (
-      <svg
-        className={`w-12 h-12 ${color}`}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    ),
+    id: "home",
+    name: "À domicile",
+    href: "/search?type=home",
+    icon: <Home className="w-6 h-6 sm:w-7 sm:h-7 text-primary-600 stroke-[1.6]" />,
   },
 ];
 
 export function CategoryCircles() {
   return (
     <section
-      className="py-14 sm:py-20 bg-white border-b border-sand-200/80"
-      aria-labelledby="univers-heading"
+      className="w-full bg-white py-8 sm:py-10 border-b border-sand-200/60"
+      aria-label="Catégories de prestations"
     >
       <div className="container-belora">
-        {/* En-tête centré épuré sans badges artificiels */}
-        <div className="text-center max-w-xl mx-auto mb-10 sm:mb-14">
-          <h2
-            id="univers-heading"
-            className="text-2xl sm:text-3xl font-bold text-sand-950 mb-2"
-          >
-            Nos univers
-          </h2>
-          <p className="text-xs uppercase font-semibold tracking-wider text-sand-500">
-            Choisissez votre moment bien-être
-          </p>
-        </div>
-
-        {/* Grille des 5 arches de couleur avec vraies icônes Lucide */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
-          {UNIVERSES.map((item) => (
+        {/* Navigation des 7 univers circulaires */}
+        <div className="flex items-center justify-between gap-3 sm:gap-6 lg:gap-10 overflow-x-auto no-scrollbar py-2 px-1">
+          {CATEGORIES.map((cat) => (
             <Link
-              key={item.id}
-              href={item.href}
-              className="group flex flex-col items-center text-center focus:outline-none"
+              key={cat.id}
+              href={cat.href}
+              className="group flex flex-col items-center shrink-0 min-w-[70px] sm:min-w-[84px] focus:outline-none"
             >
-              {/* Arche supérieure colorée */}
+              {/* Cercle d'icône */}
               <div
-                className={`w-full h-44 sm:h-52 arch-t rounded-b-2xl flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 shadow-2xs group-hover:shadow-md ${item.bgClass}`}
+                className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-200 ease-belora group-hover:-translate-y-1 shadow-2xs group-hover:shadow-sm ${
+                  cat.isAll
+                    ? "bg-primary-600 text-white group-hover:bg-primary-700"
+                    : "bg-primary-50/80 text-primary-600 border border-primary-100/70 group-hover:bg-primary-100 group-hover:border-primary-200"
+                }`}
               >
-                {item.icon(item.textColor)}
+                {cat.icon}
               </div>
 
-              {/* Titre, sous-services et vraie icône Lucide ArrowRight */}
-              <div className="pt-3.5 flex flex-col items-center">
-                <h3 className="text-base sm:text-lg font-semibold text-sand-950 group-hover:text-primary-600 transition-colors">
-                  {item.name}
-                </h3>
-                <p className="text-sm text-sand-500 font-normal mt-0.5 mb-2 leading-tight">
-                  {item.subservices}
-                </p>
-                <div className="text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all">
-                  <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
+              {/* Libellé de la catégorie */}
+              <span className="mt-2.5 text-xs sm:text-sm font-semibold text-sand-800 text-center transition-colors group-hover:text-primary-700">
+                {cat.name}
+              </span>
             </Link>
           ))}
         </div>

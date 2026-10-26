@@ -1,7 +1,8 @@
 import { MainNav } from "@/components/layout/main-nav";
 import { HeroCentered } from "@/components/home/hero-centered";
-import { EditorialMarquee } from "@/components/home/editorial-marquee";
 import { CategoryCircles } from "@/components/home/category-circles";
+import { PhilosophySection } from "@/components/home/philosophy-section";
+import { EditorialMarquee } from "@/components/home/editorial-marquee";
 import { CuratedVenues } from "@/components/home/curated-venues";
 import { ReassuranceBanner } from "@/components/home/reassurance-banner";
 import { SanctuaryExperience } from "@/components/home/sanctuary-experience";
@@ -16,16 +17,19 @@ export default function HomePage() {
       {/* 1. Header & Navigation Moderne & Épurée */}
       <MainNav />
 
-      {/* 2. Hero Éditorial avec Formes en Arches (Arch) & Recherche */}
+      {/* 2. Hero Éditorial : Portrait Communauté & Recherche en Capsule */}
       <HeroCentered />
 
-      {/* 3. Ruban de Réassurance Défilant */}
-      <EditorialMarquee />
-
-      {/* 4. Nos Univers : 5 Arches aux Teintes de Couleur de la Nouvelle DA */}
+      {/* 3. Bandeau Catégories / Prestations (7 Univers Circulaires) */}
       <CategoryCircles />
 
-      {/* 5. Nos Salons Populaires Près de Chez Vous (Cartes avec Favoris, Notes & Tags) */}
+      {/* 4. Section Notre Philosophie : Prendre soin de soi, c’est déjà être beau */}
+      <PhilosophySection />
+
+      {/* 5. Ruban de Réassurance Défilant */}
+      <EditorialMarquee />
+
+      {/* 6. Nos Salons Populaires Près de Chez Vous (Cartes avec Favoris, Notes & Tags) */}
       <CuratedVenues />
 
       {/* 6. Bannière de Réassurance & Simplicité avec Arches Décoratives */}

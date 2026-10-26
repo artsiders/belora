@@ -1,150 +1,119 @@
+"use client";
+
 import Image from "next/image";
-import { Search, MapPin, Layers, Calendar } from "lucide-react";
+import { Search, MapPin, CalendarDays, User } from "lucide-react";
 
 export function HeroCentered() {
   return (
-    <section className="relative w-full bg-white pt-10 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 lg:pb-20 border-b border-sand-200/80">
-      <div className="container-belora">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          {/* Colonne Gauche : Titre éditorial, sous-titre et barre de recherche */}
-          <div className="lg:col-span-6 flex flex-col justify-center">
-            {/* Eyebrow épuré sans badges artificiels */}
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-xs uppercase font-semibold tracking-wider text-sand-500">
-                Beauté · Bien-être · Soin de soi
-              </span>
-            </div>
+    <section className="relative w-full overflow-hidden bg-sand-100">
+      {/* 1. Visuel Communauté Beauté & Bien-être plein écran / ratio éditorial */}
+      <div className="relative w-full h-[380px] sm:h-[440px] md:h-[480px] lg:h-[520px]">
+        <Image
+          src="/images/heroes/hero-banner-clean.jpg"
+          alt="Belora - Beauté, bien-être et communauté"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-top"
+        />
 
-            {/* Titre demandé par l'utilisateur (Montserrat pur, sans italique) */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-sand-950 leading-tight mb-4 text-balance">
-              Prendre soin de soi,{" "}
-              <span className="block sm:inline text-primary-600 font-bold">
-                c’est déjà être beau.
-              </span>
-            </h1>
-
-            {/* Sous-titre sobre et accueillant */}
-            <p className="text-sm sm:text-base text-sand-600 leading-relaxed max-w-xl mb-8 font-normal">
-              Réservez en quelques clics votre moment de bien-être parmi les meilleurs
-              salons et instituts indépendants près de chez vous.
-            </p>
-
-            {/* Carte de recherche inspirée de la référence */}
-            <form
-              action="/search"
-              method="GET"
-              className="bg-white rounded-2xl border border-sand-200/90 p-4 sm:p-5 space-y-4 max-w-xl"
-              role="search"
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {/* Champ 1 : Où ? */}
-                <div className="p-3 rounded-xl bg-sand-50/70 border border-sand-200/60 focus-within:border-primary-500 transition-colors">
+        {/* 2. Barre de Recherche Flottante en Capsule intégrée en bas du visuel */}
+        <div className="absolute bottom-4 sm:bottom-6 md:bottom-7 inset-x-0 z-20 flex justify-center px-3 sm:px-6">
+          <form
+            action="/search"
+            method="GET"
+            role="search"
+            className="w-full max-w-4xl bg-white/95 backdrop-blur-xs rounded-2xl border border-sand-200/90 shadow-xl p-2 sm:p-2.5"
+          >
+            <div className="flex flex-col md:flex-row md:items-center gap-1.5 md:gap-0">
+              {/* Champ 1 : Où souhaitez-vous ? */}
+              <div className="flex-1 flex items-center gap-3 px-4 py-2 focus-within:bg-sand-50 rounded-xl md:rounded-full transition-colors">
+                <MapPin className="w-4 h-4 text-primary-600 shrink-0" />
+                <div className="flex-1 min-w-0">
                   <label
-                    htmlFor="search-location"
-                    className="block text-xs font-semibold text-sand-900 mb-1"
+                    htmlFor="hero-location"
+                    className="block text-xs font-semibold text-sand-950 cursor-pointer"
                   >
-                    Où ?
+                    Où souhaitez-vous ?
                   </label>
-                  <div className="flex items-center gap-1.5 text-xs text-sand-600">
-                    <MapPin className="w-3.5 h-3.5 text-sand-400 shrink-0" />
-                    <input
-                      id="search-location"
-                      name="location"
-                      type="text"
-                      placeholder="Paris, Lyon, quartier..."
-                      className="w-full bg-transparent text-xs text-sand-900 placeholder:text-sand-400 focus:outline-none font-medium"
-                    />
-                  </div>
+                  <input
+                    id="hero-location"
+                    name="location"
+                    type="text"
+                    placeholder="Ville, code postal..."
+                    className="w-full bg-transparent text-xs text-sand-700 placeholder:text-sand-400 focus:outline-none font-medium truncate"
+                  />
                 </div>
+              </div>
 
-                {/* Champ 2 : Quoi ? */}
-                <div className="p-3 rounded-xl bg-sand-50/70 border border-sand-200/60 focus-within:border-primary-500 transition-colors">
+              {/* Séparateur vertical */}
+              <div
+                className="hidden md:block w-px h-8 bg-sand-200/90 shrink-0 mx-1"
+                aria-hidden="true"
+              />
+
+              {/* Champ 2 : Quelle prestation ? */}
+              <div className="flex-1 flex items-center gap-3 px-4 py-2 focus-within:bg-sand-50 rounded-xl md:rounded-full transition-colors">
+                <CalendarDays className="w-4 h-4 text-primary-600 shrink-0" />
+                <div className="flex-1 min-w-0">
                   <label
-                    htmlFor="search-category"
-                    className="block text-xs font-semibold text-sand-900 mb-1"
+                    htmlFor="hero-service"
+                    className="block text-xs font-semibold text-sand-950 cursor-pointer"
                   >
-                    Quoi ?
+                    Quelle prestation ?
                   </label>
-                  <div className="flex items-center gap-1.5 text-xs text-sand-600">
-                    <Layers className="w-3.5 h-3.5 text-sand-400 shrink-0" />
-                    <select
-                      id="search-category"
-                      name="category"
-                      className="w-full bg-transparent text-xs text-sand-900 focus:outline-none cursor-pointer font-medium"
-                      defaultValue=""
-                    >
-                      <option value="">Toutes les prestations</option>
-                      <option value="hair">Coiffure d’auteur</option>
-                      <option value="facial">Soins visage & éclat</option>
-                      <option value="massage">Massages & Spas</option>
-                      <option value="nails">Mains & pieds</option>
-                      <option value="barber">Barbiers & Homme</option>
-                    </select>
-                  </div>
+                  <input
+                    id="hero-service"
+                    name="category"
+                    type="text"
+                    placeholder="Coiffure, esthétique, onglerie..."
+                    className="w-full bg-transparent text-xs text-sand-700 placeholder:text-sand-400 focus:outline-none font-medium truncate"
+                  />
                 </div>
+              </div>
 
-                {/* Champ 3 : Quand ? */}
-                <div className="p-3 rounded-xl bg-sand-50/70 border border-sand-200/60 focus-within:border-primary-500 transition-colors">
+              {/* Séparateur vertical */}
+              <div
+                className="hidden md:block w-px h-8 bg-sand-200/90 shrink-0 mx-1"
+                aria-hidden="true"
+              />
+
+              {/* Champ 3 : Quand ? */}
+              <div className="flex-1 flex items-center gap-3 px-4 py-2 focus-within:bg-sand-50 rounded-xl md:rounded-full transition-colors">
+                <User className="w-4 h-4 text-primary-600 shrink-0" />
+                <div className="flex-1 min-w-0">
                   <label
-                    htmlFor="search-date"
-                    className="block text-xs font-semibold text-sand-900 mb-1"
+                    htmlFor="hero-date"
+                    className="block text-xs font-semibold text-sand-950 cursor-pointer"
                   >
                     Quand ?
                   </label>
-                  <div className="flex items-center gap-1.5 text-xs text-sand-600">
-                    <Calendar className="w-3.5 h-3.5 text-sand-400 shrink-0" />
-                    <input
-                      id="search-date"
-                      name="date"
-                      type="date"
-                      className="w-full bg-transparent text-xs text-sand-900 focus:outline-none cursor-pointer font-medium"
-                    />
-                  </div>
+                  <input
+                    id="hero-date"
+                    name="date"
+                    type="text"
+                    placeholder="Date souhaitée"
+                    onFocus={(e) => (e.target.type = "date")}
+                    onBlur={(e) => {
+                      if (!e.target.value) e.target.type = "text";
+                    }}
+                    className="w-full bg-transparent text-xs text-sand-700 placeholder:text-sand-400 focus:outline-none font-medium truncate cursor-pointer"
+                  />
                 </div>
               </div>
 
-              {/* Bouton de recherche Terracotta pleine largeur */}
-              <button
-                type="submit"
-                className="w-full btn btn-primary py-3.5 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider rounded-xl cursor-pointer"
-              >
-                <Search className="w-4 h-4" />
-                <span>Rechercher un salon</span>
-              </button>
-            </form>
-          </div>
-
-          {/* Colonne Droite : Composition en arches (Arch Formes) de la DA */}
-          <div className="lg:col-span-6 relative">
-            <div className="grid grid-cols-12 gap-3 sm:gap-4 items-end">
-              {/* Arche Principale Photographique (Gauche du bloc) */}
-              <div className="col-span-8 relative h-[360px] sm:h-[460px] lg:h-[500px] arch-t rounded-b-2xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-sm">
-                <Image
-                  src="/images/heroes/hero-facial.jpg"
-                  alt="Rituel de soin du visage et bien-être"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 70vw, 32vw"
-                  className="object-cover"
-                />
-              </div>
-
-              {/* Colonne Droite : Formes graphiques Arches de couleur */}
-              <div className="col-span-4 flex flex-col gap-3 sm:gap-4 h-[360px] sm:h-[460px] lg:h-[500px]">
-                {/* Arche supérieure Olive / Kaki avec mantra */}
-                <div className="flex-1 arch-t rounded-b-2xl bg-earth-olive p-4 sm:p-5 flex flex-col justify-center text-center text-white shadow-2xs">
-                  <p className="text-xs sm:text-sm font-medium leading-snug">
-                    Prendre soin de soi, c’est se reconnecter.
-                  </p>
-                </div>
-
-                {/* Arche inférieure Blush / Sable doux */}
-                <div className="h-32 sm:h-44 arch-r rounded-l-2xl bg-earth-sand shadow-2xs flex items-center justify-center">
-                  <span className="w-2.5 h-2.5 rounded-full bg-white/70" />
-                </div>
+              {/* Bouton de recherche bordeaux / figue */}
+              <div className="pt-1 md:pt-0 shrink-0 px-2 md:px-0">
+                <button
+                  type="submit"
+                  className="w-full md:w-auto btn btn-primary rounded-xl h-full py-4"
+                >
+                  <Search className="w-4 h-4 text-white shrink-0" />
+                  <span>Rechercher</span>
+                </button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </section>
