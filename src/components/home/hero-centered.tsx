@@ -81,7 +81,7 @@ export function HeroCentered() {
       {/* 1. Visuel d'arrière-plan */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/heroes/hero-banner.webp"
+          src="/images/heroes/people-collage-design.webp"
           alt="Belora - Beauté, bien-être et communauté"
           fill
           priority
