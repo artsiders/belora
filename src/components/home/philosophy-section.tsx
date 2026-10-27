@@ -36,7 +36,7 @@ export function PhilosophySection() {
           {/* Titre Serif éditorial haut de gamme */}
           <h2
             id="philosophy-title"
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-sand-950 leading-tight mb-5 sm:mb-6"
+            className="text-3xl sm:text-4xl font-semibold text-sand-950 leading-tight mb-4"
           >
             Prendre soin de soi,{" "}
             <span className="block text-primary-600">
@@ -45,7 +45,7 @@ export function PhilosophySection() {
           </h2>
 
           {/* Texte de présentation éditorial */}
-          <p className="text-sm sm:text-base text-sand-700 leading-relaxed max-w-lg mb-8 sm:mb-10 font-normal">
+          <p className="text-sm sm:text-base text-sand-700 leading-relaxed max-w-lg mb-8 font-normal">
             Chez Belora, nous croyons que la beauté commence par le bien-être.
             Découvrez et réservez les meilleurs salons, instituts et professionnels
             indépendants, sélectionnés pour la qualité de leurs services et le

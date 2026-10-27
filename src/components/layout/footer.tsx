@@ -40,7 +40,7 @@ function FacebookIcon({ className = "w-4 h-4" }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-earth-espresso text-sand-300 border-t border-white/10 pt-16 pb-12">
+    <footer className="relative overflow-hidden bg-secondary-900 text-sand-300 border-t border-white/10 pt-16 pb-12">
       {/* Arches graphiques décoratives collées au bas du footer */}
       <div
         aria-hidden="true"

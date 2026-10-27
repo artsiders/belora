@@ -14,7 +14,7 @@ const MARQUEE_ITEMS = [
 
 export function EditorialMarquee() {
   return (
-    <div className="w-full overflow-hidden border-b border-sand-200/80 bg-earth-espresso py-4 select-none" aria-hidden="true">
+    <div className="w-full overflow-hidden border-b border-sand-200/80 bg-secondary-900 py-4 select-none" aria-hidden="true">
       <motion.div
         className="flex gap-10 whitespace-nowrap"
         animate={{ x: ["0%", "-50%"] }}

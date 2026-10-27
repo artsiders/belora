@@ -189,7 +189,7 @@ export function MainNav() {
               <Link
                 href="/pro"
                 onClick={closeMenu}
-                className="block p-3.5 rounded-2xl bg-earth-espresso text-white hover:bg-sand-900 transition-colors shadow-xs"
+                className="block p-3.5 rounded-2xl bg-secondary-900 text-white hover:bg-sand-900 transition-colors shadow-xs"
               >
                 <div className="flex items-center justify-between">
                   <div>

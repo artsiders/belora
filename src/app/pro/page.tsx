@@ -201,7 +201,7 @@ export default function ProPage() {
                   {/* Arches graphiques d'impact */}
                   <div className="col-span-4 flex flex-col gap-3 sm:gap-4 h-[360px] sm:h-[440px]">
                     {/* Arche supérieure Espresso avec indicateur fort */}
-                    <div className="flex-1 arch-t rounded-b-2xl bg-earth-espresso p-4 sm:p-5 flex flex-col justify-end gap-2 text-white shadow-2xs">
+                    <div className="flex-1 arch-t rounded-b-2xl bg-secondary-900 p-4 sm:p-5 flex flex-col justify-end gap-2 text-white shadow-2xs">
                       <span className="text-xs uppercase font-semibold text-sand-400">
                         Performance
                       </span>
