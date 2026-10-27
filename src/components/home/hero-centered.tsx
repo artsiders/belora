@@ -7,8 +7,13 @@ import { Search, MapPin, CalendarDays, Scissors, ChevronLeft, ChevronRight } fro
 export function HeroCentered() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [currentMonth, setCurrentMonth] = useState<Date | null>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
+
+  // Initialisation différée de la date courante (évite l'erreur blocking-prerender au build)
+  useEffect(() => {
+    setCurrentMonth(new Date());
+  }, []);
 
   // Fermer le calendrier au clic extérieur
   useEffect(() => {
@@ -33,20 +38,31 @@ export function HeroCentered() {
     return { daysInMonth, startOffset };
   };
 
-  const { daysInMonth, startOffset } = getDaysInMonth(currentMonth);
+  const activeMonth = currentMonth || new Date(2026, 0, 1);
+  const { daysInMonth, startOffset } = getDaysInMonth(activeMonth);
+
+  const handleToggleCalendar = () => {
+    if (!currentMonth) {
+      setCurrentMonth(new Date());
+    }
+    setIsCalendarOpen((prev) => !prev);
+  };
 
   const handlePrevMonth = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1));
+    const base = currentMonth || new Date();
+    setCurrentMonth(new Date(base.getFullYear(), base.getMonth() - 1, 1));
   };
 
   const handleNextMonth = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
+    const base = currentMonth || new Date();
+    setCurrentMonth(new Date(base.getFullYear(), base.getMonth() + 1, 1));
   };
 
   const handleSelectDay = (day: number) => {
-    const chosen = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    const base = currentMonth || new Date();
+    const chosen = new Date(base.getFullYear(), base.getMonth(), day);
     setSelectedDate(chosen);
     setIsCalendarOpen(false);
   };
@@ -90,7 +106,7 @@ export function HeroCentered() {
               <div className="flex-1 min-w-0">
                 <label
                   htmlFor="hero-location"
-                  className="block text-[11px] font-semibold text-sand-950 uppercase tracking-wide cursor-pointer"
+                  className="block text-xs font-semibold text-sand-950 uppercase tracking-wide cursor-pointer"
                 >
                   Où ?
                 </label>
@@ -113,7 +129,7 @@ export function HeroCentered() {
               <div className="flex-1 min-w-0">
                 <label
                   htmlFor="hero-service"
-                  className="block text-[11px] font-semibold text-sand-950 uppercase tracking-wide cursor-pointer"
+                  className="block text-xs font-semibold text-sand-950 uppercase tracking-wide cursor-pointer"
                 >
                   Prestation
                 </label>
@@ -133,12 +149,12 @@ export function HeroCentered() {
             {/* Champ 3 : Date Moderne avec Dropdown Calendar */}
             <div ref={calendarRef} className="relative flex-1">
               <div
-                onClick={() => setIsCalendarOpen(!isCalendarOpen)}
+                onClick={handleToggleCalendar}
                 className="flex items-center gap-3 px-3.5 py-2 hover:bg-sand-50/80 rounded-2xl cursor-pointer transition-colors"
               >
                 <CalendarDays className="w-4 h-4 text-primary-600 shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <span className="block text-[11px] font-semibold text-sand-950 uppercase tracking-wide">
+                  <span className="block text-xs font-semibold text-sand-950 uppercase tracking-wide">
                     Quand ?
                   </span>
                   <input
@@ -158,20 +174,20 @@ export function HeroCentered() {
                   {/* Entête du mois */}
                   <div className="flex items-center justify-between mb-3 px-1">
                     <span className="text-xs font-bold text-sand-950 capitalize">
-                      {new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric" }).format(currentMonth)}
+                      {new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric" }).format(activeMonth)}
                     </span>
                     <div className="flex items-center gap-1">
                       <button
                         type="button"
                         onClick={handlePrevMonth}
-                        className="p-1 hover:bg-sand-100 rounded-lg text-sand-700 transition"
+                        className="p-1 hover:bg-sand-100 rounded-lg text-sand-700 transition cursor-pointer"
                       >
                         <ChevronLeft className="w-4 h-4" />
                       </button>
                       <button
                         type="button"
                         onClick={handleNextMonth}
-                        className="p-1 hover:bg-sand-100 rounded-lg text-sand-700 transition"
+                        className="p-1 hover:bg-sand-100 rounded-lg text-sand-700 transition cursor-pointer"
                       >
                         <ChevronRight className="w-4 h-4" />
                       </button>
@@ -179,7 +195,7 @@ export function HeroCentered() {
                   </div>
 
                   {/* Noms des jours */}
-                  <div className="grid grid-cols-7 gap-1 text-center mb-1 text-[10px] font-semibold text-sand-400">
+                  <div className="grid grid-cols-7 gap-1 text-center mb-1 text-xs font-semibold text-sand-400">
                     <span>Lu</span><span>Ma</span><span>Me</span><span>Je</span><span>Ve</span><span>Sa</span><span>Di</span>
                   </div>
 
@@ -192,15 +208,15 @@ export function HeroCentered() {
                       const day = index + 1;
                       const isSelected =
                         selectedDate?.getDate() === day &&
-                        selectedDate?.getMonth() === currentMonth.getMonth() &&
-                        selectedDate?.getFullYear() === currentMonth.getFullYear();
+                        selectedDate?.getMonth() === activeMonth.getMonth() &&
+                        selectedDate?.getFullYear() === activeMonth.getFullYear();
 
                       return (
                         <button
                           key={day}
                           type="button"
                           onClick={() => handleSelectDay(day)}
-                          className={`h-8 w-8 mx-auto flex items-center justify-center rounded-xl text-xs font-medium transition-colors ${
+                          className={`h-8 w-8 mx-auto flex items-center justify-center rounded-xl text-xs font-medium transition-colors cursor-pointer ${
                             isSelected
                               ? "bg-primary-600 text-white font-bold"
                               : "text-sand-800 hover:bg-sand-100"
@@ -219,7 +235,7 @@ export function HeroCentered() {
             <div className="pt-1.5 md:pt-0 shrink-0">
               <button
                 type="submit"
-                className="btn btn-primary bg py-4.5 rounded-md w-full"
+                className="btn btn-primary py-3.5 rounded-xl w-full cursor-pointer"
               >
                 <Search className="w-4 h-4 text-white shrink-0" />
                 <span>Rechercher</span>
