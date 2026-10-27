@@ -12,7 +12,7 @@ export function ReassuranceBanner() {
               Pour les amateurs de belle peau et de moments authentiques
             </p>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-50 leading-tight">
+            <h2 className="text-2xl sm:text-4xl font-semibold text-sand-50 leading-tight">
               Votre rendez-vous beauté{" "}
               <span className="block text-sand-200 font-bold">
                 en toute simplicité.
