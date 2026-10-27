@@ -86,7 +86,7 @@ export function ResultsGallery() {
             <Link
               key={item.id}
               href={`/venue/${item.slug}`}
-              className="group flex flex-col bg-white border border-sand-200/80 p-3 rounded-md pt-0 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300 focus:outline-none"
+              className="group flex flex-col bg-white border border-sand-200/80 p-3 rounded-2xl pt-0 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300 focus:outline-none"
             >
               {/* Photographie avec arche douce supérieure (écho à la nouvelle DA) */}
               <div className="relative aspect-[4/5] w-full rounded-b-xl overflow-hidden bg-sand-100 mb-3.5">

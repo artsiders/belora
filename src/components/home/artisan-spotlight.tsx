@@ -109,7 +109,7 @@ export function ArtisanSpotlight() {
   };
 
   return (
-    <section className="section bg-white border-b border-sand-200/80" aria-labelledby="artisans-heading">
+    <section className="section bg-secondary-100 border-b border-sand-200/80" aria-labelledby="artisans-heading">
       <div className="container-belora">
         {/* En-tête épuré Apple-style */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">

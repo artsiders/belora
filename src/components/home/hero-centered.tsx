@@ -162,7 +162,7 @@ export function HeroCentered() {
                     name="date"
                     value={selectedDate ? selectedDate.toISOString().split("T")[0] : ""}
                   />
-                  <span className="block text-xs sm:text-sm text-sand-800 font-medium truncate">
+                  <span className="block text-xs sm:text-sm text-sand-400 font-medium truncate">
                     {selectedDate ? formatDisplayDate(selectedDate) : "Ajouter une date"}
                   </span>
                 </div>
