@@ -4,7 +4,7 @@ import { Smartphone, ShieldCheck, Lock, ArrowRight } from "lucide-react";
 
 export function ReassuranceBanner() {
   return (
-    <section className="relative overflow-hidden bg-secondary-900 text-white py-14 sm:py-20 border-b border-primary-800">
+    <section className="relative overflow-hidden bg-secondary-950 text-white py-14 sm:py-20 border-b border-primary-800">
       <div className="container-belora relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Colonne Gauche : Titre et bouton d'action */}
