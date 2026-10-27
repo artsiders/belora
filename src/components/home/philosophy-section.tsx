@@ -10,7 +10,7 @@ export function PhilosophySection() {
       {/* 1. Image d'ambiance complète en arrière-plan (Rituel spa, serviettes, bougie, flacon ambré & eucalyptus à droite) */}
       <div className="absolute inset-0 pointer-events-none select-none">
         <Image
-          src="/images/heroes/philosophy-banner.jpg"
+          src="/images/heroes/philosophy-banner.webp"
           alt=""
           fill
           priority
