@@ -219,7 +219,7 @@ export function HeroCentered() {
             <div className="pt-1.5 md:pt-0 shrink-0">
               <button
                 type="submit"
-                className="btn btn-primary bg py-4.5 rounded-md"
+                className="btn btn-primary bg py-4.5 rounded-md w-full"
               >
                 <Search className="w-4 h-4 text-white shrink-0" />
                 <span>Rechercher</span>
