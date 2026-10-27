@@ -7,7 +7,6 @@ export function FeaturedSanctuary() {
       <div className="container-belora">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 hairline-b">
           <div>
-            <p className="eyebrow mb-2">Immersion dans nos maisons partenaires</p>
             <h2 id="sanctuary-heading" className="display-md text-sand-900">
               L’intimité d’un lieu d’exception
             </h2>

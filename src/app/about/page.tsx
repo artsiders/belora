@@ -100,7 +100,6 @@ export default function AboutPage() {
         <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-primary-50/10/60">
           <div className="container-belora">
             <div className="max-w-2xl mb-14">
-              <p className="eyebrow mb-2">Exigence Terrain</p>
               <h2 className="font-display text-3xl sm:text-4xl text-sand-950 mb-3">
                 Notre protocole d’audit en 4 critères.
               </h2>

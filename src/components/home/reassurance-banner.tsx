@@ -9,10 +9,6 @@ export function ReassuranceBanner() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Colonne Gauche : Titre et bouton d'action */}
           <div className="lg:col-span-5 space-y-4">
-            <p className="text-xs uppercase tracking-wider font-semibold text-sand-400">
-              Pour les amateurs de belle peau et de moments authentiques
-            </p>
-
             <h2 className="text-2xl sm:text-4xl font-semibold text-sand-50 leading-tight">
               Votre rendez-vous beauté{" "}
               <span className="block text-sand-200 font-bold">
@@ -20,7 +16,7 @@ export function ReassuranceBanner() {
               </span>
             </h2>
 
-            <p className="text-xs sm:text-sm text-sand-300 leading-relaxed font-normal max-w-md pt-1">
+            <p className="text-sm sm:text-base text-white/80 leading-relaxed font-normal max-w-md pt-1">
               Un large choix de salons et professionnels de confiance, près de chez vous.
               Réservez, payez en ligne, et profitez de votre soin l’esprit libre.
             </p>
@@ -40,14 +36,14 @@ export function ReassuranceBanner() {
           <div className="lg:col-span-4 space-y-6">
             {/* 1. Réservation en ligne */}
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full border border-primary-600/70 flex items-center justify-center shrink-0 text-sand-200">
+              <div className="w-12 h-12 rounded-full border border-gray-600/70 flex items-center justify-center shrink-0 text-white">
                 <Smartphone className="w-5 h-5" strokeWidth={1.4} />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-sand-100">
+                <h3 className="text-base font-semibold text-white">
                   Réservation en ligne
                 </h3>
-                <p className="text-xs text-sand-400 font-normal">
+                <p className="text-sm text-white/80 font-normal">
                   24h/24 et 7j/7 sans attente
                 </p>
               </div>
@@ -55,14 +51,14 @@ export function ReassuranceBanner() {
 
             {/* 2. Professionnels vérifiés */}
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full border border-primary-600/70 flex items-center justify-center shrink-0 text-sand-200">
+              <div className="w-12 h-12 rounded-full border border-gray-600/70 flex items-center justify-center shrink-0 text-white">
                 <ShieldCheck className="w-5 h-5" strokeWidth={1.4} />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-sand-100">
+                <h3 className="text-base font-semibold text-white">
                   Professionnels vérifiés
                 </h3>
-                <p className="text-xs text-sand-400 font-normal">
+                <p className="text-sm text-white/80 font-normal">
                   Qualité et avis 100% réels
                 </p>
               </div>
@@ -70,14 +66,14 @@ export function ReassuranceBanner() {
 
             {/* 3. Paiement sécurisé */}
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full border border-primary-600/70 flex items-center justify-center shrink-0 text-sand-200">
+              <div className="w-12 h-12 rounded-full border border-gray-600/70 flex items-center justify-center shrink-0 text-white">
                 <Lock className="w-5 h-5" strokeWidth={1.4} />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-sand-100">
+                <h3 className="text-base font-semibold text-white">
                   Paiement sécurisé
                 </h3>
-                <p className="text-xs text-sand-400 font-normal">
+                <p className="text-sm text-white/80 font-normal">
                   100% confiance & tranquillité
                 </p>
               </div>

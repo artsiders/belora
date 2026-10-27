@@ -30,7 +30,6 @@ export function SanctuaryExperience() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Colonne Gauche : Manifeste & 3 engagements purs */}
           <div className="lg:col-span-6">
-            <p className="eyebrow mb-2">Charte d’Excellence</p>
             <h2 id="experience-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3 text-balance">
               Plus qu’un rendez-vous,{" "}
               <span className="block sm:inline text-primary-600 font-bold">

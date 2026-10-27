@@ -7,23 +7,23 @@ export function PhilosophySection() {
       className="relative w-full overflow-hidden bg-sand-warm border-b border-primary-200/80"
       aria-labelledby="philosophy-title"
     >
-      {/* 1. Image d'ambiance complète en arrière-plan (Rituel spa, serviettes, bougie, flacon ambré & eucalyptus à droite) */}
-      <div className="absolute inset-0 pointer-events-none select-none">
+      {/* 1. Sur desktop (lg+) : Arrière-plan panoramique à droite (version validée et parfaite sur grand écran) */}
+      <div className="hidden lg:block absolute inset-0 pointer-events-none select-none">
         <Image
           src="/images/heroes/philosophy-banner.webp"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-right md:object-center"
+          className="object-cover object-right"
         />
       </div>
 
-      {/* 2. Contenu éditorial textuel posé directement sur le fond (sans boîte carrée) */}
-      <div className="container-belora relative z-10 py-16 sm:py-20 lg:py-28">
+      {/* 2. Contenu éditorial textuel */}
+      <div className="container-belora relative z-10 pt-12 pb-0 sm:pt-16 lg:py-28">
         <div className="max-w-xl lg:max-w-2xl">
           {/* Eyebrow éditorial avec filet linéaire bordeaux/figue */}
-          <div className="flex items-center gap-3.5 mb-5 sm:mb-6">
+          <div className="flex items-center gap-3.5 mb-4 sm:mb-6">
             <span className="text-xs uppercase font-semibold tracking-widest text-primary-700">
               Notre philosophie
             </span>
@@ -33,10 +33,10 @@ export function PhilosophySection() {
             />
           </div>
 
-          {/* Titre Serif éditorial haut de gamme */}
+          {/* Titre éditorial haut de gamme */}
           <h2
             id="philosophy-title"
-            className="text-3xl sm:text-4xl font-semibold text-sand-950 leading-tight mb-4"
+            className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-sand-950 leading-tight mb-4"
           >
             Prendre soin de soi,{" "}
             <span className="block text-primary-600">
@@ -44,8 +44,8 @@ export function PhilosophySection() {
             </span>
           </h2>
 
-          {/* Texte de présentation éditorial */}
-          <p className="text-sm sm:text-base text-sand-700 leading-relaxed max-w-lg mb-8 font-normal">
+          {/* Texte de présentation éditorial avec contraste et lisibilité parfaits */}
+          <p className="text-xs sm:text-sm lg:text-base text-sand-700 leading-relaxed max-w-lg mb-6 sm:mb-8 font-normal">
             Chez Belora, nous croyons que la beauté commence par le bien-être.
             Découvrez et réservez les meilleurs salons, instituts et professionnels
             indépendants, sélectionnés pour la qualité de leurs services et le
@@ -56,11 +56,22 @@ export function PhilosophySection() {
           <div>
             <Link
               href="/about"
-              className="btn btn-primary"
+              className="btn btn-primary cursor-pointer"
             >
               Découvrir notre univers
             </Link>
           </div>
+        </div>
+
+        {/* 3. Sur mobile et tablette (< lg) : L'image se place en pleine largeur sous le texte (aucun chevauchement, lisibilité 100% garantie, sans boîte carrée) */}
+        <div className="block lg:hidden relative w-[calc(100%+2.5rem)] -mx-5 sm:w-[calc(100%+4rem)] sm:-mx-8 h-64 sm:h-80 mt-8 overflow-hidden">
+          <Image
+            src="/images/heroes/philosophy-banner.webp"
+            alt="Rituel bien-être Belora"
+            fill
+            sizes="100vw"
+            className="object-cover object-right sm:object-center"
+          />
         </div>
       </div>
     </section>

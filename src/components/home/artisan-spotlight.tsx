@@ -114,7 +114,6 @@ export function ArtisanSpotlight() {
         {/* En-tête épuré Apple-style */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
           <div>
-            <p className="eyebrow mb-2">Artisans</p>
             <h2
               id="artisans-heading"
               className="section-title text-sand-950 max-w-xl"

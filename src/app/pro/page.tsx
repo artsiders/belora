@@ -234,7 +234,6 @@ export default function ProPage() {
         >
           <div className="container-belora">
             <div className="max-w-2xl mb-10 sm:mb-12">
-              <p className="eyebrow mb-2">Simplicité Quotidienne</p>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3">
                 Un agenda silencieux, conçu pour le rythme de votre salon.
               </h2>
@@ -431,7 +430,6 @@ export default function ProPage() {
         <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-white">
           <div className="container-belora">
             <div className="max-w-2xl mb-12 sm:mb-16">
-              <p className="eyebrow mb-2">Avantages Concrets</p>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3">
                 Pourquoi les meilleurs ateliers choisissent Belora Pro.
               </h2>
@@ -476,7 +474,6 @@ export default function ProPage() {
         <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-primary-50/10/50">
           <div className="container-belora">
             <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
-              <p className="eyebrow mb-2">La Différence</p>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3">
                 Un modèle respectueux de votre indépendance.
               </h2>
@@ -545,7 +542,6 @@ export default function ProPage() {
         <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-white" id="pricing">
           <div className="container-belora">
             <div className="max-w-xl mx-auto text-center mb-10 sm:mb-12">
-              <p className="eyebrow mb-2">Tarification Simple</p>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3">
                 Des forfaits fixes, sans commission abusive.
               </h2>
@@ -650,7 +646,6 @@ export default function ProPage() {
         <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-primary-50/10/50">
           <div className="container-belora">
             <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
-              <p className="eyebrow mb-2">Vos Questions</p>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3">
                 Tout ce que vous devez savoir.
               </h2>
