@@ -89,7 +89,6 @@
   --radius-md: 8px;
   --radius-lg: 10px;
   --radius-photo: 16px;
-  --radius-arch: 9999px;
   --radius-pill: 999px;
 
   /* Mouvement */
@@ -180,7 +179,6 @@
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
   --radius-photo: var(--radius-photo);
-  --radius-arch: var(--radius-arch);
   --radius-pill: var(--radius-pill);
 
   --ease-belora: var(--ease);
@@ -276,17 +274,6 @@
   }
   .num {
     @apply tabular-nums;
-  }
-
-  /* ----- Formes Arches ----- */
-  .arch-t {
-    @apply rounded-t-full;
-  }
-  .arch-b {
-    @apply rounded-b-full;
-  }
-  .arch-r {
-    @apply rounded-r-full;
   }
 
   /* ----- Boutons ----- */

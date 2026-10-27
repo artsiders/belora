@@ -137,7 +137,7 @@ export default function ProPage() {
       <main className="flex-1">
         {/* 1. HERO SECTION PRO APPLE-STYLE */}
         <section className="relative py-14 sm:py-20 lg:py-24 border-b border-primary-200/80 bg-white overflow-hidden">
-          {/* Filigrane discret d'arche */}
+          {/* Filigrane */}
           <div
             className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 rounded-full border border-primary-200/50 pointer-events-none"
             aria-hidden="true"
@@ -183,11 +183,11 @@ export default function ProPage() {
                 </div>
               </div>
 
-              {/* Colonne droite : Composition photographique en arches de la DA */}
+              {/* Colonne droite*/}
               <div className="lg:col-span-6 relative">
                 <div className="grid grid-cols-12 gap-3 sm:gap-4 items-end">
-                  {/* Arche principale photo pro */}
-                  <div className="col-span-8 relative h-[360px] sm:h-[440px] arch-t rounded-b-2xl overflow-hidden bg-sand-100 border border-primary-200/80 shadow-sm">
+                  {/* principale photo pro */}
+                  <div className="col-span-8 relative h-[360px] sm:h-[440px] rounded-b-2xl overflow-hidden bg-sand-100 border border-primary-200/80 shadow-sm">
                     <Image
                       src="/images/pro/pro-hero.jpg"
                       alt="Artisan coiffeur en plein geste dans son atelier partenaire Belora"
@@ -198,10 +198,9 @@ export default function ProPage() {
                     />
                   </div>
 
-                  {/* Arches graphiques d'impact */}
+                  {/* graphiques d'impact */}
                   <div className="col-span-4 flex flex-col gap-3 sm:gap-4 h-[360px] sm:h-[440px]">
-                    {/* Arche supérieure Espresso avec indicateur fort */}
-                    <div className="flex-1 arch-t rounded-b-2xl bg-secondary-900 p-4 sm:p-5 flex flex-col justify-end gap-2 text-white shadow-2xs">
+                    <div className="flex-1 rounded-b-2xl bg-secondary-900 p-4 sm:p-5 flex flex-col justify-end gap-2 text-white shadow-2xs">
                       <span className="text-xs uppercase font-semibold text-sand-400">
                         Performance
                       </span>
@@ -215,8 +214,8 @@ export default function ProPage() {
                       </div>
                     </div>
 
-                    {/* Arche inférieure Terracotta avec engagement */}
-                    <div className="h-32 sm:h-36 arch-r rounded-l-2xl bg-earth-terracotta p-3.5 flex flex-col justify-center text-white shadow-2xs">
+                    {/* inférieure Terracotta avec engagement */}
+                    <div className="h-32 sm:h-36 rounded-l-2xl bg-earth-terracotta p-3.5 flex flex-col justify-center text-white shadow-2xs">
                       <p className="text-xs font-semibold leading-tight text-center">
                         Zéro no-show garanti
                       </p>
@@ -699,7 +698,7 @@ export default function ProPage() {
         <section className="py-16 sm:py-24 bg-white">
           <div className="container-belora">
             <div className="rounded-3xl bg-sand-950 text-white p-8 sm:p-12 lg:p-16 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-8">
-              {/* Arches en filigrane décoratif dans le fond sombre */}
+              {/* filigrane décoratif dans le fond sombre */}
               <div
                 className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full border border-primary-800/60 pointer-events-none"
                 aria-hidden="true"

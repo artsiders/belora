@@ -139,9 +139,9 @@ export function MainNav() {
                       className="group flex items-center justify-between p-3 rounded-2xl border border-primary-200/80 bg-white hover:border-primary-300 hover:bg-primary-50/10 transition-all duration-200"
                     >
                       <div className="flex items-center gap-3">
-                        {/* Puce / miniature en arche avec couleur de l'univers */}
+                        {/* Puce / miniature  */}
                         <div
-                          className={`w-3.5 h-6 arch-t rounded-b-sm shrink-0 ${universe.bgClass}`}
+                          className={`w-3.5 h-6 rounded-b-sm shrink-0 ${universe.bgClass}`}
                         />
                         <div>
                           <h3 className="text-sm font-bold text-sand-950 group-hover:text-primary-600 transition-colors">
@@ -231,8 +231,8 @@ export function MainNav() {
                 aria-hidden="true"
                 className="pointer-events-none absolute -bottom-5 right-2 flex items-end opacity-15 select-none z-0"
               >
-                <div className="w-16 h-24 arch-t rounded-b-none bg-earth-olive -mr-2" />
-                <div className="w-20 h-16 arch-t rounded-b-none bg-earth-terracotta" />
+                <div className="w-16 h-24 rounded-b-none bg-earth-olive -mr-2" />
+                <div className="w-20 h-16 rounded-b-none bg-earth-terracotta" />
               </div>
             </div>
           </motion.div>

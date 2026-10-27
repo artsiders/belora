@@ -91,8 +91,8 @@ export function ReassuranceBanner() {
               <div className="relative w-[155px] xl:w-[187px] h-80 xl:h-96 rounded-t-3xl rounded-b-none overflow-hidden border border-white/15 shadow-2xl shrink-0 bg-sand-900">
                 <div className="absolute bottom-0 left-0 w-80 xl:w-96 h-80 xl:h-96">
                   <Image
-                    src="/images/sanctuaries/sanctuary-architecture.jpg"
-                    alt="Ambiance sanctuaire et salons Belora"
+                    src="/images/heroes/reassurance-salon.jpg"
+                    alt="Salons et professionnels de confiance Belora"
                     fill
                     sizes="(max-width: 1280px) 320px, 384px"
                     className="object-cover object-center"
@@ -105,7 +105,7 @@ export function ReassuranceBanner() {
               <div className="relative w-[155px] xl:w-[187px] h-60 xl:h-72 rounded-t-3xl rounded-b-none overflow-hidden border border-white/15 shadow-2xl shrink-0 bg-sand-900">
                 <div className="absolute bottom-0 -left-[165px] xl:-left-[197px] w-80 xl:w-96 h-80 xl:h-96">
                   <Image
-                    src="/images/sanctuaries/sanctuary-architecture.jpg"
+                    src="/images/heroes/reassurance-salon.jpg"
                     alt=""
                     fill
                     sizes="(max-width: 1280px) 320px, 384px"
