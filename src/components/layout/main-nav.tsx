@@ -1,14 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Menu,
-  X,
-  ArrowRight,
-  ArrowUpRight,
-} from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
@@ -49,6 +45,11 @@ const CATEGORY_CHIPS = [
 
 export function MainNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const closeMenu = () => setMobileOpen(false);
 
@@ -65,196 +66,200 @@ export function MainNav() {
   }, [mobileOpen]);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-sand-200/80 bg-white/95 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-18 flex items-center justify-between">
-        {/* 1. Logo Belora officiel */}
-        <Link
-          href="/"
-          onClick={closeMenu}
-          className="flex items-center"
-          aria-label="Belora - Accueil"
-        >
-          <Image
-            src="/images/logos/belora.svg"
-            alt="Belora"
-            width={182}
-            height={80}
-            priority
-            className="object-contain h-7 w-auto"
-          />
-        </Link>
-
-        {/* 2. Actions Desktop à droite */}
-        <div className="hidden sm:flex items-center gap-4">
+    <>
+      <header className="sticky top-0 z-40 w-full border-b border-sand-200/80 bg-white/95 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-18 flex items-center justify-between">
+          {/* 1. Logo Belora officiel */}
           <Link
-            href="/pro"
-            className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-sand-600 hover:text-primary-600 transition-colors"
+            href="/"
+            onClick={closeMenu}
+            className="flex items-center"
+            aria-label="Belora - Accueil"
           >
-            <span>Je suis un professionnel</span>
-            <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+            <Image
+              src="/images/logos/belora.svg"
+              alt="Belora"
+              width={182}
+              height={80}
+              priority
+              className="object-contain h-7 w-auto"
+            />
           </Link>
 
-          <span className="w-px h-3.5 bg-sand-300" aria-hidden="true" />
+          {/* 2. Actions Desktop à droite */}
+          <div className="hidden sm:flex items-center gap-4">
+            <Link
+              href="/pro"
+              className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-sand-600 hover:text-primary-600 transition-colors"
+            >
+              <span>Je suis un professionnel</span>
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+            </Link>
 
-          <Link href="/login" className="btn btn-ghost btn-sm">
-            Connexion
-          </Link>
+            <span className="w-px h-3.5 bg-sand-300" aria-hidden="true" />
 
-          <Link href="/register" className="btn btn-dark btn-sm">
-            Rejoindre
-          </Link>
+            <Link href="/login" className="btn btn-ghost btn-sm">
+              Connexion
+            </Link>
+
+            <Link href="/register" className="btn btn-dark btn-sm">
+              Rejoindre
+            </Link>
+          </div>
+
+          {/* 3. Bouton Burger Mobile Design Épuré */}
+          <button
+            type="button"
+            onClick={() => setMobileOpen(true)}
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full border border-sand-200 bg-sand-50/80 text-sand-900 hover:bg-sand-100 transition-colors cursor-pointer"
+            aria-label="Ouvrir le menu"
+            aria-expanded={mobileOpen}
+          >
+            <Menu className="w-5 h-5 stroke-[1.8]" />
+          </button>
         </div>
+      </header>
 
-        {/* 3. Bouton Burger Mobile Design Épuré */}
-        <button
-          type="button"
-          onClick={() => setMobileOpen(true)}
-          className="md:hidden flex items-center justify-center w-10 h-10 rounded-full border border-sand-200 bg-sand-50/80 text-sand-900 hover:bg-sand-100 transition-colors cursor-pointer"
-          aria-label="Ouvrir le menu"
-          aria-expanded={mobileOpen}
-        >
-          <Menu className="w-5 h-5 stroke-[1.8]" />
-        </button>
-      </div>
-
-      {/* 4. Menu Mobile Plein Écran Moderne, Créatif & Épuré */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden fixed inset-0 z-50 bg-white flex flex-col overflow-hidden"
-          >
-            {/* Barre supérieure avec Logo et bouton de fermeture rond élégant */}
-            <div className="h-16 px-5 sm:px-8 border-b border-sand-200/80 flex items-center justify-between shrink-0 bg-white">
-              <Link href="/" onClick={closeMenu} aria-label="Belora - Accueil">
-                <Image
-                  src="/images/logos/belora.svg"
-                  alt="Belora"
-                  width={182}
-                  height={80}
-                  priority
-                  className="object-contain h-7 w-auto"
-                />
-              </Link>
-
-              <button
-                type="button"
-                onClick={closeMenu}
-                className="w-10 h-10 rounded-full border border-sand-200 bg-sand-50 flex items-center justify-center text-sand-900 hover:bg-sand-100 transition-colors cursor-pointer shadow-2xs"
-                aria-label="Fermer le menu"
+      {/* 4. Menu Mobile Plein Écran via Portail sur document.body (insensible aux contextes d'empilement du header) */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {mobileOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+                className="md:hidden fixed inset-0 z-[9999] bg-white flex flex-col h-dvh w-screen overflow-hidden"
               >
-                <X className="w-5 h-5 stroke-[1.8]" />
-              </button>
-            </div>
+                {/* Barre supérieure avec Logo et bouton de fermeture rond élégant */}
+                <div className="h-16 px-5 sm:px-8 border-b border-sand-200/80 flex items-center justify-between shrink-0 bg-white">
+                  <Link href="/" onClick={closeMenu} aria-label="Belora - Accueil">
+                    <Image
+                      src="/images/logos/belora.svg"
+                      alt="Belora"
+                      width={182}
+                      height={80}
+                      priority
+                      className="object-contain h-7 w-auto"
+                    />
+                  </Link>
 
-            {/* Corps du menu avec défilement fluide et typographie éditoriale */}
-            <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col justify-between space-y-8">
-              {/* Navigation Principale Éditoriale */}
-              <div className="space-y-6">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs uppercase font-semibold tracking-widest text-primary-700">
-                    Navigation
-                  </span>
-                  <span className="h-px w-10 bg-primary-300" aria-hidden="true" />
+                  <button
+                    type="button"
+                    onClick={closeMenu}
+                    className="w-10 h-10 rounded-full border border-sand-200 bg-sand-50 flex items-center justify-center text-sand-900 hover:bg-sand-100 transition-colors cursor-pointer shadow-2xs"
+                    aria-label="Fermer le menu"
+                  >
+                    <X className="w-5 h-5 stroke-[1.8]" />
+                  </button>
                 </div>
 
-                <nav className="flex flex-col space-y-4">
-                  {NAV_LINKS.map((link, idx) => (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, x: -16 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.25, delay: idx * 0.05 }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={closeMenu}
-                        className="group flex items-baseline justify-between py-2 border-b border-sand-100"
-                      >
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-serif text-2xl font-normal text-sand-950 group-hover:text-primary-600 transition-colors">
-                              {link.title}
+                {/* Corps du menu avec défilement fluide et typographie éditoriale */}
+                <div className="flex-1 overflow-y-auto px-6 py-6 sm:py-8 flex flex-col justify-between space-y-8 bg-white">
+                  {/* Navigation Principale Éditoriale */}
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs uppercase font-semibold tracking-widest text-primary-700">
+                        Navigation
+                      </span>
+                      <span className="h-px w-10 bg-primary-300" aria-hidden="true" />
+                    </div>
+
+                    <nav className="flex flex-col space-y-4">
+                      {NAV_LINKS.map((link, idx) => (
+                        <motion.div
+                          key={link.href}
+                          initial={{ opacity: 0, x: -16 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.22, delay: idx * 0.04 }}
+                        >
+                          <Link
+                            href={link.href}
+                            onClick={closeMenu}
+                            className="group flex items-baseline justify-between py-2 border-b border-sand-100"
+                          >
+                            <div>
+                              <span className="text-2xl sm:text-3xl font-normal text-sand-950 group-hover:text-primary-600 transition-colors">
+                                {link.title}
+                              </span>
+                              <p className="text-xs text-sand-500 font-normal mt-0.5">
+                                {link.subtitle}
+                              </p>
+                            </div>
+                            <span className="text-xs font-mono font-medium text-sand-400 group-hover:text-primary-600 transition-colors">
+                              {link.number}
                             </span>
-                          </div>
-                          <p className="text-xs text-sand-500 font-normal mt-0.5">
-                            {link.subtitle}
-                          </p>
-                        </div>
-                        <span className="text-xs font-mono font-medium text-sand-400 group-hover:text-primary-600 transition-colors">
-                          {link.number}
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </nav>
+
+                    {/* Accès direct aux univers avec badges légers */}
+                    <div className="pt-2">
+                      <span className="block text-xs uppercase font-semibold tracking-wider text-sand-400 mb-3">
+                        Recherche par catégorie
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {CATEGORY_CHIPS.map((chip) => (
+                          <Link
+                            key={chip.name}
+                            href={chip.href}
+                            onClick={closeMenu}
+                            className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-sand-100 text-sand-800 hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 border border-sand-200/80 transition-colors"
+                          >
+                            {chip.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Section inférieure : Belora Pro & Authentification */}
+                  <div className="space-y-4 pt-6 border-t border-sand-200/80">
+                    {/* Carte raffinée Belora Pro */}
+                    <Link
+                      href="/pro"
+                      onClick={closeMenu}
+                      className="flex items-center justify-between p-4 rounded-2xl bg-secondary-900 text-white hover:bg-sand-950 transition-colors shadow-sm"
+                    >
+                      <div>
+                        <span className="text-xs uppercase font-semibold tracking-wider text-sand-400 block mb-0.5">
+                          Espace Professionnel
                         </span>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </nav>
+                        <span className="text-sm font-semibold text-sand-50">
+                          Développer votre salon avec Belora Pro
+                        </span>
+                      </div>
+                      <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                        <ArrowUpRight className="w-4 h-4 text-sand-200" />
+                      </div>
+                    </Link>
 
-                {/* Accès direct aux univers avec badges légers */}
-                <div className="pt-2">
-                  <span className="block text-xs uppercase font-semibold tracking-wider text-sand-400 mb-3">
-                    Recherche par catégorie
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {CATEGORY_CHIPS.map((chip) => (
+                    {/* Boutons Connexion / Rejoindre */}
+                    <div className="grid grid-cols-2 gap-3 pt-1">
                       <Link
-                        key={chip.name}
-                        href={chip.href}
+                        href="/login"
                         onClick={closeMenu}
-                        className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-sand-100 text-sand-800 hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 border border-sand-200/80 transition-colors"
+                        className="btn btn-outline py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-center"
                       >
-                        {chip.name}
+                        Connexion
                       </Link>
-                    ))}
+                      <Link
+                        href="/register"
+                        onClick={closeMenu}
+                        className="btn btn-primary py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-center"
+                      >
+                        Rejoindre
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Section inférieure : Belora Pro & Authentification */}
-              <div className="space-y-4 pt-6 border-t border-sand-200/80">
-                {/* Carte raffinée Belora Pro */}
-                <Link
-                  href="/pro"
-                  onClick={closeMenu}
-                  className="flex items-center justify-between p-4 rounded-2xl bg-secondary-900 text-white hover:bg-sand-950 transition-colors shadow-sm"
-                >
-                  <div>
-                    <span className="text-xs uppercase font-semibold tracking-wider text-sand-400 block mb-0.5">
-                      Espace Professionnel
-                    </span>
-                    <span className="text-sm font-semibold text-sand-50">
-                      Développer votre salon avec Belora Pro
-                    </span>
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                    <ArrowUpRight className="w-4 h-4 text-sand-200" />
-                  </div>
-                </Link>
-
-                {/* Boutons Connexion / Rejoindre */}
-                <div className="grid grid-cols-2 gap-3 pt-1">
-                  <Link
-                    href="/login"
-                    onClick={closeMenu}
-                    className="btn btn-outline py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-center"
-                  >
-                    Connexion
-                  </Link>
-                  <Link
-                    href="/register"
-                    onClick={closeMenu}
-                    className="btn btn-primary py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-center"
-                  >
-                    Rejoindre
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
-    </header>
+    </>
   );
 }
