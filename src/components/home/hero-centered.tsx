@@ -7,14 +7,14 @@ export function HeroCentered() {
   return (
     <section className="relative w-full overflow-hidden bg-sand-100">
       {/* 1. Visuel Communauté Beauté & Bien-être plein écran / ratio éditorial */}
-      <div className="relative w-full h-[380px] sm:h-[440px] md:h-[480px] lg:h-[520px]">
+      <div className="relative w-full h-[380px] sm:h-[440px] md:h-[480px] lg:h-[720px]">
         <Image
-          src="/images/heroes/hero-banner-clean.jpg"
+          src="/images/heroes/hero-banner.webp"
           alt="Belora - Beauté, bien-être et communauté"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-top"
+          className="object-cover"
         />
 
         {/* 2. Barre de Recherche Flottante en Capsule intégrée en bas du visuel */}
