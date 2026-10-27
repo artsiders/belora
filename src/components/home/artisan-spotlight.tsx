@@ -109,7 +109,7 @@ export function ArtisanSpotlight() {
   };
 
   return (
-    <section className="section bg-secondary-100 border-b border-sand-200/80" aria-labelledby="artisans-heading">
+    <section className="section bg-secondary-100 border-b border-primary-200/80" aria-labelledby="artisans-heading">
       <div className="container-belora">
         {/* En-tête épuré Apple-style */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
@@ -135,7 +135,7 @@ export function ArtisanSpotlight() {
               type="button"
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
-              className="w-10 h-10 rounded-full border border-sand-300 bg-white hover:border-sand-400 hover:bg-sand-50 flex items-center justify-center text-sand-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
+              className="w-10 h-10 rounded-full border border-primary-300 bg-white hover:border-primary-400 hover:bg-primary-50/10 flex items-center justify-center text-sand-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
               aria-label="Artisans précédents"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -144,7 +144,7 @@ export function ArtisanSpotlight() {
               type="button"
               onClick={() => scroll("right")}
               disabled={!canScrollRight}
-              className="w-10 h-10 rounded-full border border-sand-300 bg-white hover:border-sand-400 hover:bg-sand-50 flex items-center justify-center text-sand-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
+              className="w-10 h-10 rounded-full border border-primary-300 bg-white hover:border-primary-400 hover:bg-primary-50/10 flex items-center justify-center text-sand-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
               aria-label="Artisans suivants"
             >
               <ChevronRight className="w-4 h-4" />
@@ -161,7 +161,7 @@ export function ArtisanSpotlight() {
             <Link
               key={artisan.id}
               href={`/venue/${artisan.venueSlug}`}
-              className="group w-[260px] sm:w-[280px] shrink-0 snap-start flex flex-col justify-between bg-white rounded-3xl border border-sand-200/80 overflow-hidden shadow-2xs hover:shadow-lg hover:border-sand-300 transition-all duration-300 cursor-pointer"
+              className="group w-[260px] sm:w-[280px] shrink-0 snap-start flex flex-col justify-between bg-white rounded-3xl border border-primary-200/80 overflow-hidden shadow-2xs hover:shadow-lg hover:border-primary-300 transition-all duration-300 cursor-pointer"
             >
               {/* Photographie pleine largeur en haut : arrondis parfaitement harmonisés */}
               <div className="relative aspect-[4/5] w-full overflow-hidden bg-sand-100">
@@ -190,7 +190,7 @@ export function ArtisanSpotlight() {
                 </div>
 
                 {/* Lien subtil en bas de carte */}
-                <div className="pt-3 mt-3 border-t border-sand-100 flex items-center justify-between text-xs font-semibold text-sand-800 group-hover:text-primary-600 transition-colors">
+                <div className="pt-3 mt-3 border-t border-primary-100 flex items-center justify-between text-xs font-semibold text-sand-800 group-hover:text-primary-600 transition-colors">
                   <span>Voir le sanctuaire</span>
                   <ArrowUpRight className="w-4 h-4 text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </div>

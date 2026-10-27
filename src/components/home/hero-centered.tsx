@@ -97,11 +97,11 @@ export function HeroCentered() {
           action="/search"
           method="GET"
           role="search"
-          className="w-full max-w-4xl bg-white/95 backdrop-blur-md rounded-2xl border border-sand-200/90 shadow-2xl p-2 sm:p-2.5"
+          className="w-full max-w-4xl bg-white/95 backdrop-blur-md rounded-2xl border border-primary-200/90 shadow-2xl p-2 sm:p-2.5"
         >
           <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-0">
             {/* Champ 1 : Où souhaitez-vous ? */}
-            <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-sand-50/80 focus-within:bg-sand-50 rounded-2xl transition-colors">
+            <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-primary-50/10/80 focus-within:bg-primary-50/10 rounded-2xl transition-colors">
               <MapPin className="w-4 h-4 text-primary-600 shrink-0" />
               <div className="flex-1 min-w-0">
                 <label
@@ -124,7 +124,7 @@ export function HeroCentered() {
             <div className="hidden md:block w-px h-8 bg-sand-200 shrink-0 mx-1" aria-hidden="true" />
 
             {/* Champ 2 : Prestation */}
-            <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-sand-50/80 focus-within:bg-sand-50 rounded-2xl transition-colors">
+            <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-primary-50/10/80 focus-within:bg-primary-50/10 rounded-2xl transition-colors">
               <Scissors className="w-4 h-4 text-primary-600 shrink-0" />
               <div className="flex-1 min-w-0">
                 <label
@@ -150,7 +150,7 @@ export function HeroCentered() {
             <div ref={calendarRef} className="relative flex-1">
               <div
                 onClick={handleToggleCalendar}
-                className="flex items-center gap-3 px-3.5 py-2 hover:bg-sand-50/80 rounded-2xl cursor-pointer transition-colors"
+                className="flex items-center gap-3 px-3.5 py-2 hover:bg-primary-50/10/80 rounded-2xl cursor-pointer transition-colors"
               >
                 <CalendarDays className="w-4 h-4 text-primary-600 shrink-0" />
                 <div className="flex-1 min-w-0">
@@ -170,7 +170,7 @@ export function HeroCentered() {
 
               {/* Popup Calendrier Moderne (s'ouvre vers le haut pour éviter le hors-champ) */}
               {isCalendarOpen && (
-                <div className="absolute bottom-full mb-3 left-0 sm:left-auto sm:right-0 w-[280px] sm:w-[310px] bg-white rounded-2xl shadow-2xl border border-sand-200 p-4 z-50 animate-in fade-in zoom-in-95 duration-150">
+                <div className="absolute bottom-full mb-3 left-0 sm:left-auto sm:right-0 w-[280px] sm:w-[310px] bg-white rounded-2xl shadow-2xl border border-primary-200 p-4 z-50 animate-in fade-in zoom-in-95 duration-150">
                   {/* Entête du mois */}
                   <div className="flex items-center justify-between mb-3 px-1">
                     <span className="text-xs font-bold text-sand-950 capitalize">

@@ -55,7 +55,7 @@ export default function HelpPage() {
 
       <main className="flex-1 pb-20">
         {/* En-tête */}
-        <section className="py-16 sm:py-20 border-b border-sand-200/80 bg-sand-50/70 text-center">
+        <section className="py-16 sm:py-20 border-b border-primary-200/80 bg-primary-50/10/70 text-center">
           <div className="container-belora max-w-2xl mx-auto">
             <span className="eyebrow text-primary-700 font-semibold tracking-widest block mb-2">
               Centre d’Assistance
@@ -73,7 +73,7 @@ export default function HelpPage() {
               <input
                 type="text"
                 placeholder="Rechercher une question, une règle d’annulation..."
-                className="input pl-11 py-2.5 text-xs sm:text-sm bg-sand-50"
+                className="input pl-11 py-2.5 text-xs sm:text-sm bg-primary-50/10"
               />
             </div>
           </div>
@@ -84,7 +84,7 @@ export default function HelpPage() {
           <div className="space-y-12">
             {FAQ_SECTIONS.map((section, idx) => (
               <div key={idx} className="space-y-4">
-                <h2 className="font-display text-2xl text-sand-950 border-b border-sand-200/80 pb-2">
+                <h2 className="font-display text-2xl text-sand-950 border-b border-primary-200/80 pb-2">
                   {section.category}
                 </h2>
 
@@ -108,7 +108,7 @@ export default function HelpPage() {
           </div>
 
           {/* Contact Direct */}
-          <div className="mt-16 p-8 rounded-xl bg-sand-50 border border-sand-300 text-center space-y-4">
+          <div className="mt-16 p-8 rounded-xl bg-primary-50/10 border border-primary-300 text-center space-y-4">
             <h3 className="font-display text-2xl text-sand-950">
               Vous n’avez pas trouvé votre réponse ?
             </h3>

@@ -136,10 +136,10 @@ export default function ProPage() {
 
       <main className="flex-1">
         {/* 1. HERO SECTION PRO APPLE-STYLE */}
-        <section className="relative py-14 sm:py-20 lg:py-24 border-b border-sand-200/80 bg-white overflow-hidden">
+        <section className="relative py-14 sm:py-20 lg:py-24 border-b border-primary-200/80 bg-white overflow-hidden">
           {/* Filigrane discret d'arche */}
           <div
-            className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 rounded-full border border-sand-200/50 pointer-events-none"
+            className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 rounded-full border border-primary-200/50 pointer-events-none"
             aria-hidden="true"
           />
 
@@ -187,7 +187,7 @@ export default function ProPage() {
               <div className="lg:col-span-6 relative">
                 <div className="grid grid-cols-12 gap-3 sm:gap-4 items-end">
                   {/* Arche principale photo pro */}
-                  <div className="col-span-8 relative h-[360px] sm:h-[440px] arch-t rounded-b-2xl overflow-hidden bg-sand-100 border border-sand-200/80 shadow-sm">
+                  <div className="col-span-8 relative h-[360px] sm:h-[440px] arch-t rounded-b-2xl overflow-hidden bg-sand-100 border border-primary-200/80 shadow-sm">
                     <Image
                       src="/images/pro/pro-hero.jpg"
                       alt="Artisan coiffeur en plein geste dans son atelier partenaire Belora"
@@ -231,7 +231,7 @@ export default function ProPage() {
         {/* 2. SIMULATION DE L'AGENDA PRO EN DIRECT (APPLE PIXEL-PERFECT) */}
         <section
           id="agenda-demo"
-          className="py-16 sm:py-24 border-b border-sand-200/80 bg-sand-50/60"
+          className="py-16 sm:py-24 border-b border-primary-200/80 bg-primary-50/10/60"
         >
           <div className="container-belora">
             <div className="max-w-2xl mb-10 sm:mb-12">
@@ -245,9 +245,9 @@ export default function ProPage() {
             </div>
 
             {/* Mockup Tablette Apple Pro pour l'agenda */}
-            <div className="rounded-3xl border border-sand-200/80 bg-white shadow-lg overflow-hidden">
+            <div className="rounded-3xl border border-primary-200/80 bg-white shadow-lg overflow-hidden">
               {/* Barre supérieure de l'agenda */}
-              <div className="p-4 sm:p-5 border-b border-sand-200/80 flex flex-wrap items-center justify-between gap-4 bg-white">
+              <div className="p-4 sm:p-5 border-b border-primary-200/80 flex flex-wrap items-center justify-between gap-4 bg-white">
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-2">
                     <CalendarDays className="w-4 h-4 text-primary-600" />
@@ -265,7 +265,7 @@ export default function ProPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-sand-200/80 p-4 sm:p-6 gap-6 md:gap-0">
                 {/* Colonne 1 : Hélène */}
                 <div className="md:px-4 space-y-3.5">
-                  <div className="flex items-center justify-between pb-3 border-b border-sand-100">
+                  <div className="flex items-center justify-between pb-3 border-b border-primary-100">
                     <div className="flex items-center gap-2.5">
                       <div className="relative w-8 h-8 rounded-full overflow-hidden bg-sand-100">
                         <Image
@@ -302,7 +302,7 @@ export default function ProPage() {
                   </div>
 
                   {/* Rendez-vous 2 */}
-                  <div className="p-3.5 bg-sand-100 border-l-4 border-sand-500 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-sand-100 border-l-4 border-primary-500 text-sand-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Coupe Signature à Sec</span>
                       <span className="num font-semibold text-sand-700">14h00 - 15h00</span>
@@ -315,7 +315,7 @@ export default function ProPage() {
 
                 {/* Colonne 2 : Marc */}
                 <div className="md:px-4 space-y-3.5">
-                  <div className="flex items-center justify-between pb-3 border-b border-sand-100">
+                  <div className="flex items-center justify-between pb-3 border-b border-primary-100">
                     <div className="flex items-center gap-2.5">
                       <div className="relative w-8 h-8 rounded-full overflow-hidden bg-sand-100">
                         <Image
@@ -352,7 +352,7 @@ export default function ProPage() {
                   </div>
 
                   {/* Rendez-vous 2 */}
-                  <div className="p-3.5 bg-sand-100 border-l-4 border-sand-500 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-sand-100 border-l-4 border-primary-500 text-sand-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Taille de Barbe & Soin Huile</span>
                       <span className="num font-semibold text-sand-700">15h30 - 16h15</span>
@@ -365,7 +365,7 @@ export default function ProPage() {
 
                 {/* Colonne 3 : Nour */}
                 <div className="md:px-4 space-y-3.5">
-                  <div className="flex items-center justify-between pb-3 border-b border-sand-100">
+                  <div className="flex items-center justify-between pb-3 border-b border-primary-100">
                     <div className="flex items-center gap-2.5">
                       <div className="relative w-8 h-8 rounded-full overflow-hidden bg-sand-100">
                         <Image
@@ -402,7 +402,7 @@ export default function ProPage() {
                   </div>
 
                   {/* Rendez-vous 2 */}
-                  <div className="p-3.5 bg-sand-100 border-l-4 border-sand-500 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-sand-100 border-l-4 border-primary-500 text-sand-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Consultation & Diagnostic Visage</span>
                       <span className="num font-semibold text-sand-700">16h30 - 17h15</span>
@@ -415,7 +415,7 @@ export default function ProPage() {
               </div>
 
               {/* Pied du simulateur */}
-              <div className="p-4 bg-sand-50 border-t border-sand-200/80 flex flex-wrap items-center justify-between gap-4 text-xs">
+              <div className="p-4 bg-primary-50/10 border-t border-primary-200/80 flex flex-wrap items-center justify-between gap-4 text-xs">
                 <span className="text-sand-600 font-normal">
                   Chiffre d’affaires de la journée :{" "}
                   <strong className="text-sand-950 font-bold num">1 420 €</strong>
@@ -429,7 +429,7 @@ export default function ProPage() {
         </section>
 
         {/* 3. LES 4 PILIERS BELORA PRO */}
-        <section className="py-16 sm:py-24 border-b border-sand-200/80 bg-white">
+        <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-white">
           <div className="container-belora">
             <div className="max-w-2xl mb-12 sm:mb-16">
               <p className="eyebrow mb-2">Avantages Concrets</p>
@@ -447,7 +447,7 @@ export default function ProPage() {
                 return (
                   <div
                     key={pillar.number}
-                    className="p-6 sm:p-7 rounded-3xl bg-white border border-sand-200/80 shadow-2xs hover:shadow-lg hover:border-sand-300 transition-all duration-300 flex flex-col justify-between"
+                    className="p-6 sm:p-7 rounded-3xl bg-white border border-primary-200/80 shadow-2xs hover:shadow-lg hover:border-primary-300 transition-all duration-300 flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-5">
@@ -474,7 +474,7 @@ export default function ProPage() {
         </section>
 
         {/* 4. COMPARATIF SOBRE : BELORA PRO VS LOGICIELS TRADITIONNELS */}
-        <section className="py-16 sm:py-24 border-b border-sand-200/80 bg-sand-50/50">
+        <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-primary-50/10/50">
           <div className="container-belora">
             <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
               <p className="eyebrow mb-2">La Différence</p>
@@ -488,7 +488,7 @@ export default function ProPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {/* Carte Logiciels Traditionnels */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-white border border-sand-200/80 space-y-4">
+              <div className="p-6 sm:p-8 rounded-3xl bg-white border border-primary-200/80 space-y-4">
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sand-500">
                   <X className="w-4 h-4 text-sand-400" />
                   <span>Logiciels traditionnels & annuaires</span>
@@ -543,7 +543,7 @@ export default function ProPage() {
         </section>
 
         {/* 5. TARIFS TRANSPARENTS SANS ENGAGEMENT */}
-        <section className="py-16 sm:py-24 border-b border-sand-200/80 bg-white" id="pricing">
+        <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-white" id="pricing">
           <div className="container-belora">
             <div className="max-w-xl mx-auto text-center mb-10 sm:mb-12">
               <p className="eyebrow mb-2">Tarification Simple</p>
@@ -555,7 +555,7 @@ export default function ProPage() {
               </p>
 
               {/* Sélecteur de cycle de facturation */}
-              <div className="inline-flex items-center p-1 rounded-full bg-sand-100 border border-sand-200 mt-6">
+              <div className="inline-flex items-center p-1 rounded-full bg-sand-100 border border-primary-200 mt-6">
                 <button
                   type="button"
                   onClick={() => setBillingCycle("monthly")}
@@ -596,7 +596,7 @@ export default function ProPage() {
                     className={`p-7 sm:p-8 rounded-3xl flex flex-col justify-between border transition-all duration-300 ${
                       plan.highlighted
                         ? "bg-white border-primary-600 ring-2 ring-primary-600/20 shadow-xl"
-                        : "bg-white border-sand-200/80 shadow-2xs hover:shadow-lg hover:border-sand-300"
+                        : "bg-white border-primary-200/80 shadow-2xs hover:shadow-lg hover:border-primary-300"
                     }`}
                   >
                     <div>
@@ -613,7 +613,7 @@ export default function ProPage() {
                         {plan.description}
                       </p>
 
-                      <div className="flex items-baseline gap-1 mb-6 pb-6 border-b border-sand-100">
+                      <div className="flex items-baseline gap-1 mb-6 pb-6 border-b border-primary-100">
                         <span className="text-4xl font-bold text-sand-950 num">
                           {price} €
                         </span>
@@ -648,7 +648,7 @@ export default function ProPage() {
         </section>
 
         {/* 6. FAQ ARTISANS */}
-        <section className="py-16 sm:py-24 border-b border-sand-200/80 bg-sand-50/50">
+        <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-primary-50/10/50">
           <div className="container-belora">
             <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
               <p className="eyebrow mb-2">Vos Questions</p>
@@ -666,7 +666,7 @@ export default function ProPage() {
                 return (
                   <div
                     key={index}
-                    className="rounded-2xl border border-sand-200/80 bg-white overflow-hidden transition-colors"
+                    className="rounded-2xl border border-primary-200/80 bg-white overflow-hidden transition-colors"
                   >
                     <button
                       type="button"
@@ -684,7 +684,7 @@ export default function ProPage() {
                       />
                     </button>
                     {isOpen && (
-                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-sand-600 leading-relaxed font-normal border-t border-sand-100">
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-sand-600 leading-relaxed font-normal border-t border-primary-100">
                         {faq.answer}
                       </div>
                     )}
@@ -701,11 +701,11 @@ export default function ProPage() {
             <div className="rounded-3xl bg-sand-950 text-white p-8 sm:p-12 lg:p-16 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-8">
               {/* Arches en filigrane décoratif dans le fond sombre */}
               <div
-                className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full border border-sand-800/60 pointer-events-none"
+                className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full border border-primary-800/60 pointer-events-none"
                 aria-hidden="true"
               />
               <div
-                className="absolute -right-4 -bottom-4 w-48 h-48 rounded-full border border-sand-700/40 pointer-events-none"
+                className="absolute -right-4 -bottom-4 w-48 h-48 rounded-full border border-primary-700/40 pointer-events-none"
                 aria-hidden="true"
               />
 
@@ -730,7 +730,7 @@ export default function ProPage() {
                 </Link>
                 <Link
                   href="/login"
-                  className="btn btn-outline py-3.5 px-6 text-xs sm:text-sm rounded-xl text-center text-white border-sand-700 hover:bg-sand-900"
+                  className="btn btn-outline py-3.5 px-6 text-xs sm:text-sm rounded-xl text-center text-white border-primary-700 hover:bg-sand-900"
                 >
                   Connexion praticien
                 </Link>

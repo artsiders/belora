@@ -19,7 +19,7 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div
-      className={`flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-5 border-b border-sand-200/80 ${className}`}
+      className={`flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-5 border-b border-primary-200/80 ${className}`}
     >
       <div className="max-w-xl">
         {eyebrow && <p className="eyebrow mb-1.5">{eyebrow}</p>}

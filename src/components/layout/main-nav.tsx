@@ -59,7 +59,7 @@ export function MainNav() {
   }, [mobileOpen]);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-sand-200/80 bg-white/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b border-primary-200/80 bg-white/95 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-18 flex items-center justify-between">
         {/* 1. Logo Belora officiel */}
         <Link
@@ -136,7 +136,7 @@ export function MainNav() {
                       key={universe.href}
                       href={universe.href}
                       onClick={closeMenu}
-                      className="group flex items-center justify-between p-3 rounded-2xl border border-sand-200/80 bg-white hover:border-sand-300 hover:bg-sand-50 transition-all duration-200"
+                      className="group flex items-center justify-between p-3 rounded-2xl border border-primary-200/80 bg-white hover:border-primary-300 hover:bg-primary-50/10 transition-all duration-200"
                     >
                       <div className="flex items-center gap-3">
                         {/* Puce / miniature en arche avec couleur de l'univers */}
@@ -160,7 +160,7 @@ export function MainNav() {
               </div>
 
               {/* Raccourcis rapides éditoriaux */}
-              <div className="pt-2 border-t border-sand-100">
+              <div className="pt-2 border-t border-primary-100">
                 <p className="text-xs uppercase font-semibold tracking-wider text-sand-400 mb-2.5">
                   La Maison Belora
                 </p>
@@ -168,7 +168,7 @@ export function MainNav() {
                   <Link
                     href="/about"
                     onClick={closeMenu}
-                    className="flex items-center gap-2 p-2.5 rounded-xl bg-sand-50 border border-sand-200/60 text-xs font-semibold text-sand-800 hover:text-primary-600 transition-colors"
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-primary-50/10 border border-primary-200/60 text-xs font-semibold text-sand-800 hover:text-primary-600 transition-colors"
                   >
                     <ShieldCheck className="w-4 h-4 text-primary-600 shrink-0" />
                     <span>Charte d’audit</span>
@@ -177,7 +177,7 @@ export function MainNav() {
                   <Link
                     href="/help"
                     onClick={closeMenu}
-                    className="flex items-center gap-2 p-2.5 rounded-xl bg-sand-50 border border-sand-200/60 text-xs font-semibold text-sand-800 hover:text-primary-600 transition-colors"
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-primary-50/10 border border-primary-200/60 text-xs font-semibold text-sand-800 hover:text-primary-600 transition-colors"
                   >
                     <HelpCircle className="w-4 h-4 text-primary-600 shrink-0" />
                     <span>Aide & FAQ</span>
@@ -208,7 +208,7 @@ export function MainNav() {
             </div>
 
             {/* Pied du menu : Boutons d'authentification & signature en arches */}
-            <div className="pt-6 mt-6 border-t border-sand-200/80 relative">
+            <div className="pt-6 mt-6 border-t border-primary-200/80 relative">
               <div className="grid grid-cols-2 gap-3 relative z-10">
                 <Link
                   href="/login"

@@ -39,7 +39,7 @@ export default function AuthLayout({
 
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs text-sand-200/80 hover:text-sand-50 transition-colors py-1.5 px-3 rounded-xl border border-sand-50/20 bg-sand-950/30 backdrop-blur-xs"
+            className="inline-flex items-center gap-1.5 text-xs text-sand-200/80 hover:text-sand-50 transition-colors py-1.5 px-3 rounded-xl border border-primary-50/20 bg-sand-950/30 backdrop-blur-xs"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Explorer le site</span>
@@ -48,7 +48,7 @@ export default function AuthLayout({
 
         {/* Pied de page visuel : Manifeste & Réassurance */}
         <div className="relative z-10 max-w-md space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-sand-950/60 backdrop-blur-xs border border-sand-50/15 text-[11px] uppercase tracking-widest text-primary-200 font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-sand-950/60 backdrop-blur-xs border border-primary-50/15 text-[11px] uppercase tracking-widest text-primary-200 font-semibold">
             <span>Maison d’artisans du soin</span>
           </div>
 
@@ -62,7 +62,7 @@ export default function AuthLayout({
             exigeants de France.
           </p>
 
-          <div className="pt-4 border-t border-sand-50/15 flex items-center justify-between text-xs text-sand-300">
+          <div className="pt-4 border-t border-primary-50/15 flex items-center justify-between text-xs text-sand-300">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-primary-300" />
               <span>Artisans rigoureusement sélectionnés</span>
@@ -105,7 +105,7 @@ export default function AuthLayout({
         </div>
 
         {/* Pied de page sobre */}
-        <div className="pt-8 mt-8 border-t border-sand-200 text-center sm:flex sm:items-center sm:justify-between text-[11px] text-sand-500">
+        <div className="pt-8 mt-8 border-t border-primary-200 text-center sm:flex sm:items-center sm:justify-between text-[11px] text-sand-500">
           <p>© 2026 Belora - L’artisanat du soin d’exception.</p>
           <div className="flex items-center justify-center gap-4 mt-2 sm:mt-0">
             <Link href="/privacy" className="hover:text-sand-900 transition-colors">

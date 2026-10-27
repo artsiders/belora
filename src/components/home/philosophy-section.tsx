@@ -4,7 +4,7 @@ import Link from "next/link";
 export function PhilosophySection() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-sand-warm border-b border-sand-200/80"
+      className="relative w-full overflow-hidden bg-sand-warm border-b border-primary-200/80"
       aria-labelledby="philosophy-title"
     >
       {/* 1. Image d'ambiance complète en arrière-plan (Rituel spa, serviettes, bougie, flacon ambré & eucalyptus à droite) */}

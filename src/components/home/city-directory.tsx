@@ -19,7 +19,7 @@ const POPULAR_CITIES = [
 
 export function CityDirectory() {
   return (
-    <section className="section relative overflow-hidden bg-white border-b border-sand-200/80" aria-labelledby="cities-heading">
+    <section className="section relative overflow-hidden bg-white border-b border-primary-200/80" aria-labelledby="cities-heading">
       <div className="container-belora relative z-10">
         {/* En-tête de section unifié */}
         <SectionHeader
@@ -44,7 +44,7 @@ export function CityDirectory() {
             <Link
               key={city.name}
               href={`/search?location=${encodeURIComponent(city.name)}`}
-              className="p-3.5 rounded-xl border border-sand-200/80 bg-white hover:border-sand-300 hover:shadow-xs transition-all text-xs text-sand-900 font-medium flex items-center justify-between group"
+              className="p-3.5 rounded-xl border border-primary-200/80 bg-white hover:border-primary-300 hover:shadow-xs transition-all text-xs text-sand-900 font-medium flex items-center justify-between group"
             >
               <div className="flex flex-col">
                 <span className="font-semibold text-sand-950 group-hover:text-primary-600 transition-colors">

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function FeaturedSanctuary() {
   return (
-    <section className="section bg-sand-50 border-b border-line overflow-hidden" aria-labelledby="sanctuary-heading">
+    <section className="section bg-primary-50/10 border-b border-line overflow-hidden" aria-labelledby="sanctuary-heading">
       <div className="container-belora">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 hairline-b">
           <div>

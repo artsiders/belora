@@ -27,7 +27,7 @@ export default function LoginPage() {
   return (
     <div className="w-full">
       {/* 1. Bascule de type de compte : Client vs Professionnel */}
-      <div className="p-1 rounded-xl bg-sand-200/60 border border-sand-300 flex items-center mb-8">
+      <div className="p-1 rounded-xl bg-sand-200/60 border border-primary-300 flex items-center mb-8">
         <button
           type="button"
           onClick={() => {
@@ -36,7 +36,7 @@ export default function LoginPage() {
           }}
           className={`flex-1 py-2 text-xs font-semibold tracking-wide uppercase rounded-[calc(var(--radius-sm)-2px)] transition-all ${
             userType === "client"
-              ? "bg-sand-50 text-sand-950 shadow-2xs"
+              ? "bg-primary-50/10 text-sand-950 shadow-2xs"
               : "text-sand-600 hover:text-sand-900"
           }`}
         >
@@ -50,7 +50,7 @@ export default function LoginPage() {
           }}
           className={`flex-1 py-2 text-xs font-semibold tracking-wide uppercase rounded-[calc(var(--radius-sm)-2px)] transition-all ${
             userType === "pro"
-              ? "bg-sand-50 text-sand-950 shadow-2xs"
+              ? "bg-primary-50/10 text-sand-950 shadow-2xs"
               : "text-sand-600 hover:text-sand-900"
           }`}
         >
@@ -75,7 +75,7 @@ export default function LoginPage() {
 
       {/* Message de confirmation simulé */}
       {submitted ? (
-        <div className="p-6 rounded-xl bg-sand-50 border border-sand-300 text-center space-y-4">
+        <div className="p-6 rounded-xl bg-primary-50/10 border border-primary-300 text-center space-y-4">
           <div className="w-12 h-12 rounded-full bg-primary-50 text-primary-600 mx-auto flex items-center justify-center">
             <CheckCircle2 className="w-6 h-6" />
           </div>
@@ -162,7 +162,7 @@ export default function LoginPage() {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="rounded-[2px] border-sand-300 text-primary-600 focus:ring-primary-500 w-4 h-4"
+                  className="rounded-[2px] border-primary-300 text-primary-600 focus:ring-primary-500 w-4 h-4"
                 />
                 <span>Mémoriser mes identifiants</span>
               </label>
@@ -174,7 +174,7 @@ export default function LoginPage() {
               className="btn btn-primary btn-block mt-4"
             >
               {isLoading ? (
-                <span className="inline-block w-4 h-4 border-2 border-sand-50 border-t-transparent rounded-full animate-spin" />
+                <span className="inline-block w-4 h-4 border-2 border-primary-50 border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
                   <span>Se connecter</span>
@@ -187,7 +187,7 @@ export default function LoginPage() {
           {/* 4. Séparateur sobre */}
           <div className="relative my-6 text-center">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-sand-200" />
+              <div className="w-full border-t border-primary-200" />
             </div>
             <span className="relative px-3 bg-sand-100 text-xs text-sand-500 uppercase tracking-wider font-medium">
               ou
@@ -221,7 +221,7 @@ export default function LoginPage() {
           </button>
 
           {/* 6. Lien d'inscription */}
-          <div className="mt-8 pt-6 border-t border-sand-200 text-center">
+          <div className="mt-8 pt-6 border-t border-primary-200 text-center">
             <p className="text-xs text-sand-600">
               Vous n’avez pas encore de compte ?{" "}
               <Link

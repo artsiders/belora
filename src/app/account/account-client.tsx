@@ -71,9 +71,9 @@ export function AccountClient() {
   return (
     <div className="container-belora py-10 sm:py-12">
       {/* En-tête profil */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-sand-200/80">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-primary-200/80">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-full bg-sand-200 border border-sand-300 text-sand-800 flex items-center justify-center font-display text-xl font-normal">
+          <div className="w-14 h-14 rounded-full bg-sand-200 border border-primary-300 text-sand-800 flex items-center justify-center font-display text-xl font-normal">
             SM
           </div>
           <div>
@@ -92,7 +92,7 @@ export function AccountClient() {
       </div>
 
       {/* Navigation par onglets sobres */}
-      <div className="flex items-center gap-6 border-b border-sand-200/80 mb-8 overflow-x-auto text-xs">
+      <div className="flex items-center gap-6 border-b border-primary-200/80 mb-8 overflow-x-auto text-xs">
         <button
           type="button"
           onClick={() => setActiveTab("upcoming")}
@@ -134,7 +134,7 @@ export function AccountClient() {
       {activeTab === "upcoming" && (
         <div className="space-y-4 max-w-3xl">
           {UPCOMING_APPOINTMENTS.filter((a) => a.id !== cancelledId).length === 0 ? (
-            <div className="p-10 text-center rounded-xl bg-sand-50 border border-sand-300 space-y-3">
+            <div className="p-10 text-center rounded-xl bg-primary-50/10 border border-primary-300 space-y-3">
               <Calendar className="w-8 h-8 text-sand-400 mx-auto" />
               <h3 className="font-display text-xl text-sand-950">
                 Aucun rendez-vous à venir
@@ -150,7 +150,7 @@ export function AccountClient() {
             UPCOMING_APPOINTMENTS.filter((a) => a.id !== cancelledId).map((app) => (
               <div
                 key={app.id}
-                className="p-5 rounded-xl bg-sand-50 border border-sand-300 shadow-2xs flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between"
+                className="p-5 rounded-xl bg-primary-50/10 border border-primary-300 shadow-2xs flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between"
               >
                 <div className="flex items-start gap-4">
                   <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-sand-200 shrink-0">
@@ -180,7 +180,7 @@ export function AccountClient() {
                   </div>
                 </div>
 
-                <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2.5 w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-sand-200">
+                <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2.5 w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-primary-200">
                   <span className="font-display text-xl text-sand-950 num">
                     {app.price} €
                   </span>
@@ -255,7 +255,7 @@ export function AccountClient() {
       )}
 
       {activeTab === "profile" && (
-        <div className="max-w-xl p-6 rounded-xl bg-sand-50 border border-sand-300 space-y-5">
+        <div className="max-w-xl p-6 rounded-xl bg-primary-50/10 border border-primary-300 space-y-5">
           <h2 className="font-display text-xl text-sand-950 mb-4">
             Coordonnées personnelles
           </h2>
@@ -287,7 +287,7 @@ export function AccountClient() {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-sand-200/80 flex items-center justify-between">
+          <div className="pt-4 border-t border-primary-200/80 flex items-center justify-between">
             <span className="text-xs text-sand-500">
               Modifications enregistrées automatiquement
             </span>

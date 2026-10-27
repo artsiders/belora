@@ -108,8 +108,8 @@ export function BookClient({ venue }: BookClientProps) {
         </p>
 
         {/* Récapitulatif du rendez-vous */}
-        <div className="p-6 rounded-xl bg-sand-50 border border-sand-300 text-left mb-8 space-y-4">
-          <div className="border-b border-sand-200/80 pb-3">
+        <div className="p-6 rounded-xl bg-primary-50/10 border border-primary-300 text-left mb-8 space-y-4">
+          <div className="border-b border-primary-200/80 pb-3">
             <h3 className="font-display text-lg text-sand-950">{venue.name}</h3>
             <p className="text-xs text-sand-500">{venue.address}</p>
           </div>
@@ -124,7 +124,7 @@ export function BookClient({ venue }: BookClientProps) {
             ))}
           </div>
 
-          <div className="pt-3 border-t border-sand-200/80 flex justify-between text-xs font-semibold text-sand-950">
+          <div className="pt-3 border-t border-primary-200/80 flex justify-between text-xs font-semibold text-sand-950">
             <span>Total à régler sur place</span>
             <span className="text-sm num">{totalPrice} €</span>
           </div>
@@ -145,7 +145,7 @@ export function BookClient({ venue }: BookClientProps) {
   return (
     <div className="container-belora py-10">
       {/* En-tête du tunnel */}
-      <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-sand-200/80">
+      <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-primary-200/80">
         <div>
           <Link
             href={`/venue/${venue.slug}`}
@@ -169,7 +169,7 @@ export function BookClient({ venue }: BookClientProps) {
         {/* Colonne Gauche : Formulaire par étapes (8 cols) */}
         <div className="lg:col-span-8 space-y-8">
           {/* Étape 1 : Choix des prestations */}
-          <div className={`p-6 rounded-xl bg-sand-50 border transition-all ${step === 1 ? "border-sand-400 shadow-sm" : "border-sand-200/80"}`}>
+          <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 1 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <span className="w-6 h-6 rounded-full bg-sand-900 text-sand-50 text-xs flex items-center justify-center font-medium">
@@ -200,16 +200,16 @@ export function BookClient({ venue }: BookClientProps) {
                       onClick={() => toggleService(service)}
                       className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center justify-between gap-4 ${
                         isChecked
-                          ? "bg-sand-100/70 border-sand-900"
-                          : "bg-sand-50 border-sand-200 hover:border-sand-300"
+                          ? "bg-sand-100/70 border-primary-900"
+                          : "bg-primary-50/10 border-primary-200 hover:border-primary-300"
                       }`}
                     >
                       <div className="flex items-start gap-3">
                         <div
                           className={`w-5 h-5 rounded-[var(--radius-xs)] border mt-0.5 flex items-center justify-center shrink-0 transition-colors ${
                             isChecked
-                              ? "bg-sand-950 border-sand-950 text-sand-50"
-                              : "border-sand-300 bg-sand-50"
+                              ? "bg-sand-950 border-primary-950 text-sand-50"
+                              : "border-primary-300 bg-primary-50/10"
                           }`}
                         >
                           {isChecked && <Check className="w-3.5 h-3.5" />}
@@ -257,7 +257,7 @@ export function BookClient({ venue }: BookClientProps) {
           </div>
 
           {/* Étape 2 : Choix du praticien */}
-          <div className={`p-6 rounded-xl bg-sand-50 border transition-all ${step === 2 ? "border-sand-400 shadow-sm" : "border-sand-200/80"}`}>
+          <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 2 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <span className="w-6 h-6 rounded-full bg-sand-900 text-sand-50 text-xs flex items-center justify-center font-medium">
@@ -285,8 +285,8 @@ export function BookClient({ venue }: BookClientProps) {
                   onClick={() => setSelectedArtisan("any")}
                   className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center gap-4 ${
                     selectedArtisan === "any"
-                      ? "bg-sand-100/70 border-sand-900"
-                      : "bg-sand-50 border-sand-200 hover:border-sand-300"
+                      ? "bg-sand-100/70 border-primary-900"
+                      : "bg-primary-50/10 border-primary-200 hover:border-primary-300"
                   }`}
                 >
                   <div className="w-10 h-10 rounded-full bg-sand-200 text-sand-700 flex items-center justify-center shrink-0">
@@ -309,8 +309,8 @@ export function BookClient({ venue }: BookClientProps) {
                     onClick={() => setSelectedArtisan(member.id)}
                     className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center gap-4 ${
                       selectedArtisan === member.id
-                        ? "bg-sand-100/70 border-sand-900"
-                        : "bg-sand-50 border-sand-200 hover:border-sand-300"
+                        ? "bg-sand-100/70 border-primary-900"
+                        : "bg-primary-50/10 border-primary-200 hover:border-primary-300"
                     }`}
                   >
                     <div className="relative w-10 h-10 rounded-full overflow-hidden bg-sand-200 shrink-0">
@@ -359,7 +359,7 @@ export function BookClient({ venue }: BookClientProps) {
           </div>
 
           {/* Étape 3 : Date & Créneau horaire */}
-          <div className={`p-6 rounded-xl bg-sand-50 border transition-all ${step === 3 ? "border-sand-400 shadow-sm" : "border-sand-200/80"}`}>
+          <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 3 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <span className="w-6 h-6 rounded-full bg-sand-900 text-sand-50 text-xs flex items-center justify-center font-medium">
@@ -395,8 +395,8 @@ export function BookClient({ venue }: BookClientProps) {
                         onClick={() => setSelectedDay(d.date)}
                         className={`p-3 rounded-xl border text-center transition-all cursor-pointer ${
                           selectedDay === d.date
-                            ? "bg-sand-950 text-sand-50 border-sand-950"
-                            : "bg-sand-50 border-sand-200 text-sand-800 hover:border-sand-400"
+                            ? "bg-sand-950 text-sand-50 border-primary-950"
+                            : "bg-primary-50/10 border-primary-200 text-sand-800 hover:border-primary-400"
                         }`}
                       >
                         <span className="text-[10px] uppercase font-bold tracking-wider block opacity-75">
@@ -424,7 +424,7 @@ export function BookClient({ venue }: BookClientProps) {
                         className={`py-2 px-3 rounded-xl border text-xs font-semibold transition-all num cursor-pointer ${
                           selectedSlot === slot
                             ? "bg-primary-600 text-sand-50 border-primary-600 shadow-2xs"
-                            : "bg-sand-50 border-sand-200 text-sand-900 hover:border-sand-400"
+                            : "bg-primary-50/10 border-primary-200 text-sand-900 hover:border-primary-400"
                         }`}
                       >
                         {slot}
@@ -454,7 +454,7 @@ export function BookClient({ venue }: BookClientProps) {
           </div>
 
           {/* Étape 4 : Coordonnées & Validation */}
-          <div className={`p-6 rounded-xl bg-sand-50 border transition-all ${step === 4 ? "border-sand-400 shadow-sm" : "border-sand-200/80"}`}>
+          <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 4 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center gap-2 mb-4">
               <span className="w-6 h-6 rounded-full bg-sand-900 text-sand-50 text-xs flex items-center justify-center font-medium">
                 4
@@ -503,7 +503,7 @@ export function BookClient({ venue }: BookClientProps) {
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded bg-sand-100/70 border border-sand-200/80 text-xs text-sand-600 flex items-start gap-2.5">
+                <div className="p-3.5 rounded bg-sand-100/70 border border-primary-200/80 text-xs text-sand-600 flex items-start gap-2.5">
                   <ShieldCheck className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
                   <p className="leading-snug">
                     Aucun prépaiement requis aujourd’hui. Vous règlerez directement auprès de l’artisan lors de votre venue. Annulation sans frais jusqu’à 24h avant le créneau.
@@ -524,7 +524,7 @@ export function BookClient({ venue }: BookClientProps) {
 
         {/* Colonne Droite : Récapitulatif collant (4 cols) */}
         <div className="lg:col-span-4 sticky top-24">
-          <div className="p-6 rounded-xl bg-sand-50 border border-sand-300 shadow-sm space-y-5">
+          <div className="p-6 rounded-xl bg-primary-50/10 border border-primary-300 shadow-sm space-y-5">
             <div>
               <span className="text-[10px] uppercase font-bold tracking-wider text-primary-700 block mb-1">
                 Récapitulatif de réservation
@@ -533,7 +533,7 @@ export function BookClient({ venue }: BookClientProps) {
               <p className="text-xs text-sand-500">{venue.address}</p>
             </div>
 
-            <div className="pt-4 border-t border-sand-200/80 space-y-3">
+            <div className="pt-4 border-t border-primary-200/80 space-y-3">
               <div className="text-xs font-semibold text-sand-900">
                 Prestations choisies ({selectedServices.length}) :
               </div>
@@ -549,7 +549,7 @@ export function BookClient({ venue }: BookClientProps) {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-sand-200/80 space-y-2 text-xs text-sand-600">
+            <div className="pt-4 border-t border-primary-200/80 space-y-2 text-xs text-sand-600">
               <div className="flex items-center justify-between">
                 <span>Durée estimée</span>
                 <span className="font-semibold text-sand-900 num">{totalDuration} min</span>
@@ -566,7 +566,7 @@ export function BookClient({ venue }: BookClientProps) {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-sand-200/80 flex items-center justify-between text-sand-950">
+            <div className="pt-4 border-t border-primary-200/80 flex items-center justify-between text-sand-950">
               <span className="text-xs font-semibold">Total à régler</span>
               <span className="font-display text-2xl num">{totalPrice} €</span>
             </div>

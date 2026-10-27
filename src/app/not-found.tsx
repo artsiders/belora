@@ -35,7 +35,7 @@ export default function NotFound() {
           <form
             action="/search"
             method="GET"
-            className="flex items-center gap-2 max-w-md mx-auto mb-10 p-1.5 rounded-xl bg-sand-50 border border-sand-300 shadow-2xs"
+            className="flex items-center gap-2 max-w-md mx-auto mb-10 p-1.5 rounded-xl bg-primary-50/10 border border-primary-300 shadow-2xs"
           >
             <div className="pl-3 text-sand-400">
               <Search className="w-4 h-4" />
@@ -65,7 +65,7 @@ export default function NotFound() {
           </div>
 
           {/* Raccourcis univers */}
-          <div className="pt-8 border-t border-sand-200/80">
+          <div className="pt-8 border-t border-primary-200/80">
             <p className="text-xs text-sand-500 uppercase tracking-wider font-semibold mb-3">
               Univers recommandés
             </p>
@@ -74,7 +74,7 @@ export default function NotFound() {
                 <Link
                   key={cat.label}
                   href={cat.href}
-                  className="px-3 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium text-sand-700 bg-sand-50 hover:bg-sand-200/70 border border-sand-300/80 transition-colors"
+                  className="px-3 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium text-sand-700 bg-primary-50/10 hover:bg-sand-200/70 border border-primary-300/80 transition-colors"
                 >
                   {cat.label}
                 </Link>

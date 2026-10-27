@@ -54,7 +54,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
 
 export function ResultsGallery() {
   return (
-    <section className="section bg-white border-b border-sand-200/80" aria-labelledby="gallery-heading">
+    <section className="section bg-white border-b border-primary-200/80" aria-labelledby="gallery-heading">
       <div className="container-belora">
         {/* En-tête de section unifié et épuré */}
         <SectionHeader
@@ -86,7 +86,7 @@ export function ResultsGallery() {
             <Link
               key={item.id}
               href={`/venue/${item.slug}`}
-              className="group flex flex-col bg-white border border-sand-200/80 p-3 rounded-2xl pt-0 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300 focus:outline-none"
+              className="group flex flex-col bg-white border border-primary-200/80 p-3 rounded-2xl pt-0 shadow-2xs hover:shadow-md hover:border-primary-300 transition-all duration-300 focus:outline-none"
             >
               {/* Photographie avec arche douce supérieure (écho à la nouvelle DA) */}
               <div className="relative aspect-[4/5] w-full rounded-b-xl overflow-hidden bg-sand-100 mb-3.5">
@@ -115,7 +115,7 @@ export function ResultsGallery() {
                   </p>
                 </div>
 
-                <div className="pt-3 mt-3 border-t border-sand-100 flex items-center justify-between text-xs text-primary-700 font-semibold group-hover:text-primary-800 transition-colors">
+                <div className="pt-3 mt-3 border-t border-primary-100 flex items-center justify-between text-xs text-primary-700 font-semibold group-hover:text-primary-800 transition-colors">
                   <span>Découvrir la maison</span>
                   <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>

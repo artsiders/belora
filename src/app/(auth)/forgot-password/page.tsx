@@ -30,7 +30,7 @@ export default function ForgotPasswordPage() {
           <span>Retour à la connexion</span>
         </Link>
 
-        <div className="w-10 h-10 rounded-xl bg-sand-200/80 border border-sand-300 text-sand-800 flex items-center justify-center mb-4">
+        <div className="w-10 h-10 rounded-xl bg-sand-200/80 border border-primary-300 text-sand-800 flex items-center justify-center mb-4">
           <KeyRound className="w-5 h-5 text-primary-600" />
         </div>
 
@@ -47,7 +47,7 @@ export default function ForgotPasswordPage() {
       </div>
 
       {submitted ? (
-        <div className="p-6 rounded-xl bg-sand-50 border border-sand-300 text-center space-y-4">
+        <div className="p-6 rounded-xl bg-primary-50/10 border border-primary-300 text-center space-y-4">
           <div className="w-12 h-12 rounded-full bg-primary-50 text-primary-600 mx-auto flex items-center justify-center">
             <CheckCircle2 className="w-6 h-6" />
           </div>
@@ -101,7 +101,7 @@ export default function ForgotPasswordPage() {
             className="btn btn-primary btn-block mt-2"
           >
             {isLoading ? (
-              <span className="inline-block w-4 h-4 border-2 border-sand-50 border-t-transparent rounded-full animate-spin" />
+              <span className="inline-block w-4 h-4 border-2 border-primary-50 border-t-transparent rounded-full animate-spin" />
             ) : (
               <>
                 <span>Transmettre le lien</span>

@@ -75,10 +75,10 @@ export function SearchClient() {
   return (
     <div className="container-belora py-8 sm:py-12">
       {/* 1. Barre de recherche & filtres Apple Pro */}
-      <div className="mb-8 p-4 sm:p-5 rounded-3xl bg-white border border-sand-200/90 space-y-4">
+      <div className="mb-8 p-4 sm:p-5 rounded-3xl bg-white border border-primary-200/90 space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
           {/* Champ 1 : Recherche Soin / Salon */}
-          <div className="md:col-span-5 flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-sand-50/80 border border-sand-200/70 focus-within:border-primary-500 focus-within:bg-white transition-all">
+          <div className="md:col-span-5 flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-primary-50/10/80 border border-primary-200/70 focus-within:border-primary-500 focus-within:bg-white transition-all">
             <Search className="w-4 h-4 text-sand-400 shrink-0" />
             <input
               type="text"
@@ -90,7 +90,7 @@ export function SearchClient() {
           </div>
 
           {/* Champ 2 : Ville */}
-          <div className="md:col-span-4 flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-sand-50/80 border border-sand-200/70 focus-within:border-primary-500 focus-within:bg-white transition-all">
+          <div className="md:col-span-4 flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-primary-50/10/80 border border-primary-200/70 focus-within:border-primary-500 focus-within:bg-white transition-all">
             <MapPin className="w-4 h-4 text-sand-400 shrink-0" />
             <select
               value={selectedCity}
@@ -106,7 +106,7 @@ export function SearchClient() {
           </div>
 
           {/* Champ 3 : Tri */}
-          <div className="md:col-span-3 flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-sand-50/80 border border-sand-200/70 focus-within:border-primary-500 focus-within:bg-white transition-all">
+          <div className="md:col-span-3 flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-primary-50/10/80 border border-primary-200/70 focus-within:border-primary-500 focus-within:bg-white transition-all">
             <SlidersHorizontal className="w-4 h-4 text-sand-400 shrink-0" />
             <select
               value={sortBy}
@@ -123,7 +123,7 @@ export function SearchClient() {
         </div>
 
         {/* Chips de disciplines épurées */}
-        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-sand-100">
+        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-primary-100">
           {CATEGORIES.map((cat) => {
             const isSelected = selectedCategory === cat.id;
             return (
@@ -134,7 +134,7 @@ export function SearchClient() {
                 className={`px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                   isSelected
                     ? "bg-sand-950 text-white shadow-2xs"
-                    : "bg-white text-sand-700 border border-sand-200 hover:border-sand-300 hover:bg-sand-50"
+                    : "bg-white text-sand-700 border border-primary-200 hover:border-primary-300 hover:bg-primary-50/10"
                 }`}
               >
                 {cat.label}
@@ -145,7 +145,7 @@ export function SearchClient() {
       </div>
 
       {/* 2. Résumé des résultats et comptage */}
-      <div className="flex items-center justify-between mb-6 pb-3 border-b border-sand-200/80 text-xs text-sand-500">
+      <div className="flex items-center justify-between mb-6 pb-3 border-b border-primary-200/80 text-xs text-sand-500">
         <div>
           <span className="font-bold text-sand-900 num">
             {filteredVenues.length}
@@ -164,7 +164,7 @@ export function SearchClient() {
         {/* Colonne gauche : Liste des salons (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
           {filteredVenues.length === 0 ? (
-            <div className="p-12 text-center rounded-3xl bg-white border border-sand-200/80 shadow-2xs space-y-4">
+            <div className="p-12 text-center rounded-3xl bg-white border border-primary-200/80 shadow-2xs space-y-4">
               <Compass className="w-8 h-8 text-sand-400 mx-auto" />
               <h3 className="text-xl sm:text-2xl font-bold text-sand-950">
                 Aucun établissement ne correspond à cette recherche
@@ -189,7 +189,7 @@ export function SearchClient() {
               <div
                 key={venue.id}
                 id={`venue-${venue.id}`}
-                className="group p-4 sm:p-5 rounded-3xl bg-white border border-sand-200/80 hover:border-sand-300 shadow-2xs hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row gap-5"
+                className="group p-4 sm:p-5 rounded-3xl bg-white border border-primary-200/80 hover:border-primary-300 shadow-2xs hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row gap-5"
               >
                 {/* Photographie de l'atelier avec arrondis harmonieux (Apple standard) */}
                 <Link
@@ -240,7 +240,7 @@ export function SearchClient() {
                     </p>
 
                     {/* Extrait de 2 rituels signatures */}
-                    <div className="space-y-2 pt-3 border-t border-sand-100 mb-4">
+                    <div className="space-y-2 pt-3 border-t border-primary-100 mb-4">
                       {venue.services.slice(0, 2).map((srv) => (
                         <div
                           key={srv.id}
@@ -256,7 +256,7 @@ export function SearchClient() {
                   </div>
 
                   {/* Pied de carte avec tarif de départ et actions claires */}
-                  <div className="pt-3 border-t border-sand-100 flex items-center justify-between gap-3">
+                  <div className="pt-3 border-t border-primary-100 flex items-center justify-between gap-3">
                     <span className="text-xs text-sand-500 font-normal">
                       dès{" "}
                       <strong className="text-sm font-bold text-sand-950 num">
@@ -288,7 +288,7 @@ export function SearchClient() {
 
         {/* Colonne droite : Repères géographiques & Adresses certifiées (5 cols - sticky) */}
         <div className="hidden lg:block lg:col-span-5 sticky top-24">
-          <div className="rounded-3xl border border-sand-200/80 overflow-hidden bg-white space-y-4 p-6">
+          <div className="rounded-3xl border border-primary-200/80 overflow-hidden bg-white space-y-4 p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-sand-500">
@@ -309,7 +309,7 @@ export function SearchClient() {
                 <a
                   key={v.id}
                   href={`#venue-${v.id}`}
-                  className="p-3 rounded-2xl bg-sand-50/80 border border-sand-200/60 flex items-center justify-between text-xs hover:bg-sand-100/80 hover:border-sand-300 transition-all cursor-pointer group"
+                  className="p-3 rounded-2xl bg-primary-50/10/80 border border-primary-200/60 flex items-center justify-between text-xs hover:bg-sand-100/80 hover:border-primary-300 transition-all cursor-pointer group"
                 >
                   <div className="flex items-center gap-2.5 truncate pr-2">
                     <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-primary-600 shrink-0 shadow-2xs">
@@ -332,7 +332,7 @@ export function SearchClient() {
             </div>
 
             {/* Engagement de quiétude Belora */}
-            <div className="p-4 rounded-2xl bg-sand-50 border border-sand-200/60 space-y-1.5 text-xs">
+            <div className="p-4 rounded-2xl bg-primary-50/10 border border-primary-200/60 space-y-1.5 text-xs">
               <div className="flex items-center gap-1.5 font-bold text-sand-950">
                 <Check className="w-3.5 h-3.5 text-primary-600" />
                 <span>Accueil garanti sans file d’attente</span>

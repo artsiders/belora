@@ -25,7 +25,7 @@ const SANCTUARY_PILLARS = [
 
 export function SanctuaryExperience() {
   return (
-    <section className="section bg-white border-b border-sand-200/80" aria-labelledby="experience-heading">
+    <section className="section bg-white border-b border-primary-200/80" aria-labelledby="experience-heading">
       <div className="container-belora">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Colonne Gauche : Manifeste & 3 engagements purs */}
@@ -47,7 +47,7 @@ export function SanctuaryExperience() {
               {SANCTUARY_PILLARS.map((pillar) => (
                 <div
                   key={pillar.num}
-                  className="flex items-start gap-4 pb-5 border-b border-sand-200/70 last:border-b-0 last:pb-0"
+                  className="flex items-start gap-4 pb-5 border-b border-primary-200/70 last:border-b-0 last:pb-0"
                 >
                   <span className="text-base font-bold text-primary-600 shrink-0 pt-0.5">
                     {pillar.num}
@@ -79,7 +79,7 @@ export function SanctuaryExperience() {
           <div className="lg:col-span-6 relative">
             <div className="grid grid-cols-12 gap-3 sm:gap-4 items-end">
               {/* Arche Principale Photographique (Gauche) */}
-              <div className="col-span-8 relative aspect-[4/5] rounded-b-xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-sm">
+              <div className="col-span-8 relative aspect-[4/5] rounded-b-xl overflow-hidden bg-sand-200 border border-primary-200/80 shadow-sm">
                 <Image
                   src="/images/sanctuaries/sanctuary-architecture.jpg"
                   alt="Intérieur minéral et épuré d'un sanctuaire partenaire Belora"
@@ -94,7 +94,7 @@ export function SanctuaryExperience() {
                   aria-hidden="true"
                 />
 
-                <div className="absolute bottom-3 inset-x-3 p-3 rounded-md bg-white/95 backdrop-blur-xs border border-sand-200/80 text-sand-900 shadow-xs flex items-center justify-between gap-2">
+                <div className="absolute bottom-3 inset-x-3 p-3 rounded-md bg-white/95 backdrop-blur-xs border border-primary-200/80 text-sand-900 shadow-xs flex items-center justify-between gap-2">
                   <div>
                     <h4 className="text-xs font-bold text-sand-950">
                       Maison Albar Institut

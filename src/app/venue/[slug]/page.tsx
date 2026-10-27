@@ -38,7 +38,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
       <MainNav />
 
       {/* 1. Fil d'Ariane épuré */}
-      <div className="border-b border-sand-200/80 bg-primary-600 py-3 text-xs text-white/80">
+      <div className="border-b border-primary-200/80 bg-primary-600 py-3 text-xs text-white/80">
         <div className="container-belora flex items-center gap-2">
           <Link href="/" className="hover:text-white transition-colors">
             Accueil
@@ -60,7 +60,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
         <section className="container-belora pt-6 sm:pt-8 mb-8 sm:mb-12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 h-[340px] sm:h-[460px]">
             {/* Grande photo principale gauche */}
-            <div className="relative md:col-span-8 h-full rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-sand-300/80">
+            <div className="relative md:col-span-8 h-full rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-primary-300/80">
               <Image
                 src={venue.image}
                 alt={venue.name}
@@ -76,7 +76,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
 
             {/* Mosaïque secondaire droite */}
             <div className="hidden md:grid md:col-span-4 grid-rows-2 gap-3 sm:gap-4 h-full">
-              <div className="relative rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-sand-300/80">
+              <div className="relative rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-primary-300/80">
                 <Image
                   src={venue.gallery[1] || venue.image}
                   alt={`${venue.name} intérieur`}
@@ -85,7 +85,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   className="object-cover"
                 />
               </div>
-              <div className="relative rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-sand-300/80">
+              <div className="relative rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-primary-300/80">
                 <Image
                   src={venue.gallery[2] || venue.image}
                   alt={`${venue.name} geste`}
@@ -128,7 +128,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
               </div>
 
               {/* À propos & Philosophie */}
-              <div className="pt-8 border-t border-sand-200/80">
+              <div className="pt-8 border-t border-primary-200/80">
                 <h2 className="font-display text-2xl text-sand-950 mb-3">
                   L’esprit du lieu
                 </h2>
@@ -151,7 +151,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
               </div>
 
               {/* Carte des prestations */}
-              <div className="pt-8 border-t border-sand-200/80">
+              <div className="pt-8 border-t border-primary-200/80">
                 <div className="flex items-end justify-between mb-6">
                   <div>
                     <p className="eyebrow mb-1">Catalogue de soins</p>
@@ -189,7 +189,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                         </p>
                       </div>
 
-                      <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-3 shrink-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-sand-200/60">
+                      <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-3 shrink-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-primary-200/60">
                         <span className="font-semibold text-base text-sand-950 num">
                           {service.priceEuros} €
                         </span>
@@ -206,7 +206,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
               </div>
 
               {/* L'équipe d'artisans */}
-              <div className="pt-8 border-t border-sand-200/80">
+              <div className="pt-8 border-t border-primary-200/80">
                 <p className="eyebrow mb-1">Savoir-faire</p>
                 <h2 className="font-display text-2xl sm:text-3xl text-sand-950 mb-6">
                   L’équipe d’artisans
@@ -218,7 +218,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                       key={member.id}
                       className="p-4 rounded-xl bg-primary-50/10 border border-primary-200/80 flex items-start gap-4"
                     >
-                      <div className="relative w-14 h-14 rounded-full overflow-hidden bg-sand-200 shrink-0 border border-sand-300">
+                      <div className="relative w-14 h-14 rounded-full overflow-hidden bg-sand-200 shrink-0 border border-primary-300">
                         <Image
                           src={member.avatar}
                           alt={member.name}
@@ -244,7 +244,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
               </div>
 
               {/* Avis clients certifiés */}
-              <div className="pt-8 border-t border-sand-200/80">
+              <div className="pt-8 border-t border-primary-200/80">
                 <div className="flex items-end justify-between mb-6">
                   <div>
                     <p className="eyebrow mb-1">Retours d’expérience</p>
@@ -299,7 +299,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-sand-200/80 space-y-3 text-xs text-sand-700">
+                <div className="pt-4 border-t border-primary-200/80 space-y-3 text-xs text-sand-700">
                   <div className="flex items-center justify-between">
                     <span className="text-sand-500">Disponibilité</span>
                     <span className="font-medium text-emerald-800">
@@ -329,7 +329,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                 </Link>
 
                 {/* Réassurance de marque */}
-                <div className="p-3.5 rounded bg-sand-100/70 text-[11px] text-sand-600 space-y-1.5 border border-sand-200/60">
+                <div className="p-3.5 rounded bg-sand-100/70 text-[11px] text-sand-600 space-y-1.5 border border-primary-200/60">
                   <div className="flex items-center gap-1.5 font-semibold text-sand-800">
                     <ShieldCheck className="w-3.5 h-3.5 text-primary-600" />
                     <span>Garantie Sanctuaire Belora</span>
@@ -341,7 +341,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                 </div>
 
                 {/* Horaires hebdomadaires */}
-                <div className="pt-4 border-t border-sand-200/80">
+                <div className="pt-4 border-t border-primary-200/80">
                   <span className="text-xs font-semibold text-sand-900 block mb-2.5">
                     Horaires d’ouverture
                   </span>

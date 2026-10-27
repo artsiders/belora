@@ -73,7 +73,7 @@ const CURATED_VENUES: Venue[] = [
 
 export function CuratedVenues() {
   return (
-    <section className="py-14 sm:py-20 bg-white border-b border-sand-200/80" aria-labelledby="venues-heading">
+    <section className="py-14 sm:py-20 bg-white border-b border-primary-200/80" aria-labelledby="venues-heading">
       <div className="container-belora">
         {/* En-tête avec titre et vraie icône Lucide */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12">
@@ -103,7 +103,7 @@ export function CuratedVenues() {
           {CURATED_VENUES.map((venue) => (
             <div
               key={venue.slug}
-              className="group flex flex-col bg-white rounded-2xl border border-sand-200/80 shadow-2xs hover:shadow-md hover:border-sand-300 transition-all duration-300"
+              className="group flex flex-col bg-white rounded-2xl border border-primary-200/80 shadow-2xs hover:shadow-md hover:border-primary-300 transition-all duration-300"
             >
               {/* Photo avec coins arrondis, pastille de note et favori */}
               <div className="relative aspect-[4/3] w-full rounded-t-xl overflow-hidden bg-sand-200 mb-3.5">
@@ -161,7 +161,7 @@ export function CuratedVenues() {
                 </div>
 
                 {/* Lien d'action "Voir les prestations" avec vraie icône Lucide ArrowRight */}
-                <div className="pt-3 border-t border-sand-100 flex items-center justify-between">
+                <div className="pt-3 border-t border-primary-100 flex items-center justify-between">
                   <Link
                     href={`/venue/${venue.slug}`}
                     className="text-xs font-semibold text-primary-700 group-hover:text-primary-800 transition-colors inline-flex items-center gap-1.5"

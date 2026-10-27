@@ -262,7 +262,7 @@
     @apply text-sm sm:text-base text-sand-600 font-normal;
   }
   .section-header {
-    @apply flex flex-col md:flex-row md:items-end md:justify-between gap-5 md:gap-8 mb-12 pb-6 border-b border-sand-200/85;
+    @apply flex flex-col md:flex-row md:items-end md:justify-between gap-5 md:gap-8 mb-12 pb-6 border-b border-primary-200/85;
   }
 
   .lead {
@@ -299,19 +299,19 @@
   }
 
   .btn-secondary {
-    @apply bg-sand-100 border-sand-300 text-sand-950 hover:not-disabled:bg-sand-200 hover:not-disabled:border-sand-400 hover:not-disabled:text-sand-950 hover:not-disabled:-translate-y-px;
+    @apply bg-sand-100 border-primary-300 text-sand-950 hover:not-disabled:bg-sand-200 hover:not-disabled:border-primary-400 hover:not-disabled:text-sand-950 hover:not-disabled:-translate-y-px;
   }
 
   .btn-dark {
-    @apply bg-sand-950 border-sand-950 text-white hover:not-disabled:bg-sand-800 hover:not-disabled:border-sand-800 hover:not-disabled:text-white hover:not-disabled:-translate-y-px;
+    @apply bg-sand-950 border-primary-950 text-white hover:not-disabled:bg-sand-800 hover:not-disabled:border-primary-800 hover:not-disabled:text-white hover:not-disabled:-translate-y-px;
   }
 
   .btn-ink {
-    @apply bg-sand-900 border-sand-900 text-sand-50 hover:not-disabled:bg-sand-950 hover:not-disabled:border-sand-950 hover:not-disabled:-translate-y-px;
+    @apply bg-sand-900 border-primary-900 text-sand-50 hover:not-disabled:bg-sand-950 hover:not-disabled:border-primary-950 hover:not-disabled:-translate-y-px;
   }
 
   .btn-editorial {
-    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-line-strong rounded-sm text-sand-950 text-xs font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-sand-950 hover:not-disabled:border-sand-950 hover:not-disabled:text-white;
+    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-line-strong rounded-sm text-sand-950 text-xs font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-sand-950 hover:not-disabled:border-primary-950 hover:not-disabled:text-white;
   }
   .btn-editorial .btn-icon-slide {
     @apply transition-transform duration-200 ease-belora;
@@ -321,7 +321,7 @@
   }
 
   .btn-editorial-light {
-    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-sand-50/35 rounded-sm text-sand-50 text-xs font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-white hover:not-disabled:border-white hover:not-disabled:text-sand-950;
+    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-primary-50/35 rounded-sm text-sand-50 text-xs font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-white hover:not-disabled:border-white hover:not-disabled:text-sand-950;
   }
   .btn-editorial-light .btn-icon-slide {
     @apply transition-transform duration-200 ease-belora;
@@ -331,11 +331,11 @@
   }
 
   .btn-circle {
-    @apply inline-flex items-center justify-center w-10 h-10 rounded-pill bg-white border border-line text-sand-950 cursor-pointer transition-all duration-150 ease-belora hover:not-disabled:bg-sand-950 hover:not-disabled:border-sand-950 hover:not-disabled:text-white;
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-pill bg-white border border-line text-sand-950 cursor-pointer transition-all duration-150 ease-belora hover:not-disabled:bg-sand-950 hover:not-disabled:border-primary-950 hover:not-disabled:text-white;
   }
 
   .btn-outline {
-    @apply bg-transparent border-line-strong text-sand-950 shadow-none hover:not-disabled:border-sand-950 hover:not-disabled:bg-sand-100 hover:not-disabled:text-sand-950;
+    @apply bg-transparent border-line-strong text-sand-950 shadow-none hover:not-disabled:border-primary-950 hover:not-disabled:bg-sand-100 hover:not-disabled:text-sand-950;
   }
 
   .btn-ghost {
@@ -347,7 +347,7 @@
   }
 
   .btn-on-photo {
-    @apply bg-white border-white text-sand-950 hover:bg-sand-100 hover:border-sand-100;
+    @apply bg-white border-white text-sand-950 hover:bg-sand-100 hover:border-primary-100;
   }
 
   .btn-xs {
@@ -378,7 +378,7 @@
   }
 
   .input, .select, .textarea {
-    @apply w-full min-h-11.5 py-2.5 px-3.5 bg-white border border-line-strong rounded-sm text-fg text-sm transition-colors duration-150 ease-belora placeholder:text-fg-subtle hover:border-sand-500 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent aria-[invalid=true]:border-danger aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger;
+    @apply w-full min-h-11.5 py-2.5 px-3.5 bg-white border border-line-strong rounded-sm text-fg text-sm transition-colors duration-150 ease-belora placeholder:text-fg-subtle hover:border-primary-500 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent aria-[invalid=true]:border-danger aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger;
   }
   .textarea {
     @apply min-h-30 resize-y;
@@ -411,10 +411,10 @@
 
   /* ----- Chips ----- */
   .chip {
-    @apply inline-flex items-center gap-1.5 min-h-9 px-4 bg-white border border-line-strong rounded-pill text-sand-900 text-xs font-medium whitespace-nowrap cursor-pointer shadow-2xs transition-colors duration-150 ease-belora hover:bg-sand-100 hover:border-sand-950 aria-[pressed=true]:bg-sand-950 aria-[pressed=true]:border-sand-950 aria-[pressed=true]:text-white;
+    @apply inline-flex items-center gap-1.5 min-h-9 px-4 bg-white border border-line-strong rounded-pill text-sand-900 text-xs font-medium whitespace-nowrap cursor-pointer shadow-2xs transition-colors duration-150 ease-belora hover:bg-sand-100 hover:border-primary-950 aria-[pressed=true]:bg-sand-950 aria-[pressed=true]:border-primary-950 aria-[pressed=true]:text-white;
   }
   .chip-active {
-    @apply bg-sand-950 border-sand-950 text-white;
+    @apply bg-sand-950 border-primary-950 text-white;
   }
   .chip-photo {
     @apply bg-sand-950/55 border-white/35 text-white hover:bg-sand-950/80 hover:border-white;
@@ -432,7 +432,7 @@
 
   /* ----- Tuile catégorie ----- */
   .tile {
-    @apply relative block overflow-hidden aspect-3/4 rounded-photo bg-sand-900 text-white isolate border border-sand-950/10;
+    @apply relative block overflow-hidden aspect-3/4 rounded-photo bg-sand-900 text-white isolate border border-primary-950/10;
   }
   .tile-media {
     @apply absolute inset-0 w-full h-full object-cover -z-20 transition-transform duration-700 ease-belora;
@@ -498,7 +498,7 @@
     @apply mt-1 text-xs uppercase text-fg-subtle;
   }
   .fav-btn {
-    @apply absolute top-3.5 end-3.5 grid place-items-center w-9 h-9 bg-white/90 text-sand-950 border border-sand-300/60 rounded-pill cursor-pointer transition-all duration-150 ease-belora z-10 hover:bg-white hover:scale-105 hover:border-sand-950 aria-[pressed=true]:bg-primary-600 aria-[pressed=true]:border-primary-600 aria-[pressed=true]:text-white;
+    @apply absolute top-3.5 end-3.5 grid place-items-center w-9 h-9 bg-white/90 text-sand-950 border border-primary-300/60 rounded-pill cursor-pointer transition-all duration-150 ease-belora z-10 hover:bg-white hover:scale-105 hover:border-primary-950 aria-[pressed=true]:bg-primary-600 aria-[pressed=true]:border-primary-600 aria-[pressed=true]:text-white;
   }
 
   /* ----- Ligne de service ----- */
@@ -523,7 +523,7 @@
     @apply grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2;
   }
   .slot {
-    @apply min-h-11 grid place-items-center bg-white border border-line-strong rounded-sm text-sm tabular-nums cursor-pointer transition-colors duration-150 ease-belora hover:border-sand-950 aria-[pressed=true]:bg-accent aria-[pressed=true]:border-accent aria-[pressed=true]:text-on-accent disabled:text-fg-subtle disabled:border-line disabled:line-through disabled:cursor-not-allowed disabled:bg-transparent;
+    @apply min-h-11 grid place-items-center bg-white border border-line-strong rounded-sm text-sm tabular-nums cursor-pointer transition-colors duration-150 ease-belora hover:border-primary-950 aria-[pressed=true]:bg-accent aria-[pressed=true]:border-accent aria-[pressed=true]:text-on-accent disabled:text-fg-subtle disabled:border-line disabled:line-through disabled:cursor-not-allowed disabled:bg-transparent;
   }
   .slot-selected {
     @apply bg-accent border-accent text-on-accent;

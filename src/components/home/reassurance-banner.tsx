@@ -4,7 +4,7 @@ import { Smartphone, ShieldCheck, Lock, ArrowRight } from "lucide-react";
 
 export function ReassuranceBanner() {
   return (
-    <section className="relative overflow-hidden bg-secondary-900 text-white py-14 sm:py-20 border-b border-sand-800">
+    <section className="relative overflow-hidden bg-secondary-900 text-white py-14 sm:py-20 border-b border-primary-800">
       <div className="container-belora relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Colonne Gauche : Titre et bouton d'action */}
@@ -40,7 +40,7 @@ export function ReassuranceBanner() {
           <div className="lg:col-span-4 space-y-6">
             {/* 1. Réservation en ligne */}
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full border border-sand-600/70 flex items-center justify-center shrink-0 text-sand-200">
+              <div className="w-12 h-12 rounded-full border border-primary-600/70 flex items-center justify-center shrink-0 text-sand-200">
                 <Smartphone className="w-5 h-5" strokeWidth={1.4} />
               </div>
               <div>
@@ -55,7 +55,7 @@ export function ReassuranceBanner() {
 
             {/* 2. Professionnels vérifiés */}
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full border border-sand-600/70 flex items-center justify-center shrink-0 text-sand-200">
+              <div className="w-12 h-12 rounded-full border border-primary-600/70 flex items-center justify-center shrink-0 text-sand-200">
                 <ShieldCheck className="w-5 h-5" strokeWidth={1.4} />
               </div>
               <div>
@@ -70,7 +70,7 @@ export function ReassuranceBanner() {
 
             {/* 3. Paiement sécurisé */}
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full border border-sand-600/70 flex items-center justify-center shrink-0 text-sand-200">
+              <div className="w-12 h-12 rounded-full border border-primary-600/70 flex items-center justify-center shrink-0 text-sand-200">
                 <Lock className="w-5 h-5" strokeWidth={1.4} />
               </div>
               <div>

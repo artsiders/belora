@@ -38,7 +38,7 @@ export default function AboutPage() {
 
       <main className="flex-1">
         {/* 1. Hero Manifeste */}
-        <section className="py-16 sm:py-24 border-b border-sand-200/80 bg-sand-50/70">
+        <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-primary-50/10/70">
           <div className="container-belora">
             <div className="max-w-3xl space-y-6">
               <span className="eyebrow text-primary-700 font-semibold tracking-widest block">
@@ -57,11 +57,11 @@ export default function AboutPage() {
         </section>
 
         {/* 2. Image d'ambiance et histoire */}
-        <section className="py-16 sm:py-20 border-b border-sand-200/80 bg-sand-100">
+        <section className="py-16 sm:py-20 border-b border-primary-200/80 bg-sand-100">
           <div className="container-belora">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-6 relative">
-                <div className="relative aspect-[4/3] rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-sand-300 shadow-lg">
+                <div className="relative aspect-[4/3] rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-primary-300 shadow-lg">
                   <Image
                     src="/images/about/about-craft.jpg"
                     alt="Le geste délicat d'une artisane du soin"
@@ -97,7 +97,7 @@ export default function AboutPage() {
         </section>
 
         {/* 3. La Charte d'Audit en 4 Piliers */}
-        <section className="py-16 sm:py-24 border-b border-sand-200/80 bg-sand-50/60">
+        <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-primary-50/10/60">
           <div className="container-belora">
             <div className="max-w-2xl mb-14">
               <p className="eyebrow mb-2">Exigence Terrain</p>
@@ -113,7 +113,7 @@ export default function AboutPage() {
               {AUDIT_CRITERIA.map((crit) => (
                 <div
                   key={crit.num}
-                  className="p-8 rounded-xl bg-sand-50 border border-sand-200/90 space-y-3"
+                  className="p-8 rounded-xl bg-primary-50/10 border border-primary-200/90 space-y-3"
                 >
                   <span className="font-display text-2xl text-primary-700 block font-normal">
                     {crit.num}.
