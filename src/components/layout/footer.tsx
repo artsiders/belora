@@ -60,7 +60,7 @@ export function Footer() {
               className="text-2xl font-bold tracking-tight text-sand-50 inline-block hover:text-white transition-colors"
             >
               <Image
-                src="/images/logos/belora.png"
+                src="/images/logos/belora.svg"
                 alt="Belora"
                 width={120}
                 height={40}

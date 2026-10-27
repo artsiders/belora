@@ -69,7 +69,7 @@ export function MainNav() {
           aria-label="Belora - Accueil"
         >
           <Image
-            src="/images/logos/belora.png"
+            src="/images/logos/belora.svg"
             alt="Belora"
             width={182}
             height={80}
