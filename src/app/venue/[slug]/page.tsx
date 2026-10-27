@@ -34,24 +34,24 @@ export default async function VenuePage({ params }: VenuePageProps) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-sand-900 selection:bg-primary-100 selection:text-primary-900">
+    <div className="flex flex-col min-h-screen bg-white text-white selection:bg-primary-100 selection:text-primary-900">
       <MainNav />
 
       {/* 1. Fil d'Ariane épuré */}
-      <div className="border-b border-sand-200/80 bg-sand-50/60 py-3 text-xs text-sand-500">
+      <div className="border-b border-sand-200/80 bg-primary-600 py-3 text-xs text-white/80">
         <div className="container-belora flex items-center gap-2">
-          <Link href="/" className="hover:text-sand-900 transition-colors">
+          <Link href="/" className="hover:text-white transition-colors">
             Accueil
           </Link>
           <span>/</span>
           <Link
             href={`/search?category=${venue.category}`}
-            className="hover:text-sand-900 transition-colors"
+            className="hover:text-white transition-colors"
           >
             {venue.categoryLabel}
           </Link>
           <span>/</span>
-          <span className="text-sand-900 font-medium truncate">{venue.name}</span>
+          <span className="text-white font-medium truncate">{venue.name}</span>
         </div>
       </div>
 
@@ -69,7 +69,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                 sizes="(max-width: 768px) 100vw, 66vw"
                 className="object-cover"
               />
-              <span className="absolute top-4 left-4 px-3 py-1 rounded-[var(--radius-xs)] bg-sand-950/80 backdrop-blur-xs text-sand-50 text-[10px] uppercase font-semibold tracking-wider">
+              <span className="absolute top-4 left-4 px-3 py-1 rounded-[var(--radius-xs)] bg-sand-950/80 backdrop-blur-xs text-sand-50 text-xs uppercase font-semibold tracking-wider">
                 {venue.badge}
               </span>
             </div>
