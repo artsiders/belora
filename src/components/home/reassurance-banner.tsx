@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Smartphone, ShieldCheck, Lock, ArrowRight } from "lucide-react";
 
 export function ReassuranceBanner() {
   return (
-    <section className="relative overflow-hidden bg-secondary-900 text-white py-14 sm:py-20">
+    <section className="relative overflow-hidden bg-secondary-900 text-white py-14 sm:py-20 border-b border-sand-800">
       <div className="container-belora relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Colonne Gauche : Titre et bouton d'action */}
@@ -27,7 +28,7 @@ export function ReassuranceBanner() {
             <div className="pt-2">
               <Link
                 href="/search"
-                className="btn btn-primary btn-lg"
+                className="btn btn-primary btn-lg rounded-xl"
               >
                 <span>Découvrir tous les salons</span>
                 <ArrowRight className="w-4 h-4" />
@@ -83,12 +84,37 @@ export function ReassuranceBanner() {
             </div>
           </div>
 
-          {/* Colonne Droite : Arches graphiques agrandies et collées en bas */}
+          {/* Colonne Droite : Formes décoratives en arches parcourues par une seule image continue */}
           <div className="hidden lg:flex lg:col-span-3 justify-end items-end self-end lg:-mb-20 relative">
-            {/* Arche 1 : Olive */}
-            <div className="w-36 xl:w-44 h-80 xl:h-96 rounded-t-3xl rounded-b-none bg-white opacity-90 shadow-lg" />
-            {/* Arche 2 : Terracotta */}
-            <div className="w-44 xl:w-52 h-60 xl:h-72 rounded-t-3xl rounded-b-none bg-primary-700 shadow-lg" />
+            <div className="relative w-80 xl:w-96 h-80 xl:h-96 flex items-end gap-2.5">
+              {/* Arche 1 : Gauche (Haute) */}
+              <div className="relative w-[155px] xl:w-[187px] h-80 xl:h-96 rounded-t-3xl rounded-b-none overflow-hidden border border-white/15 shadow-2xl shrink-0 bg-sand-900">
+                <div className="absolute bottom-0 left-0 w-80 xl:w-96 h-80 xl:h-96">
+                  <Image
+                    src="/images/sanctuaries/sanctuary-architecture.jpg"
+                    alt="Ambiance sanctuaire et salons Belora"
+                    fill
+                    sizes="(max-width: 1280px) 320px, 384px"
+                    className="object-cover object-center"
+                    priority
+                  />
+                </div>
+              </div>
+
+              {/* Arche 2 : Droite (Basse) - Le décalage négatif garantit la parfaite continuité de l'image */}
+              <div className="relative w-[155px] xl:w-[187px] h-60 xl:h-72 rounded-t-3xl rounded-b-none overflow-hidden border border-white/15 shadow-2xl shrink-0 bg-sand-900">
+                <div className="absolute bottom-0 -left-[165px] xl:-left-[197px] w-80 xl:w-96 h-80 xl:h-96">
+                  <Image
+                    src="/images/sanctuaries/sanctuary-architecture.jpg"
+                    alt=""
+                    fill
+                    sizes="(max-width: 1280px) 320px, 384px"
+                    className="object-cover object-center"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -211,7 +211,7 @@ export function AccountClient() {
           {PAST_APPOINTMENTS.map((app) => (
             <div
               key={app.id}
-              className="p-5 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-200/80 flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between"
+              className="p-5 rounded-xl bg-primary-50/10 border border-primary-200/80 flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between"
             >
               <div className="flex items-start gap-4">
                 <div className="relative w-14 h-14 rounded-[var(--radius-sm)] overflow-hidden bg-sand-200 shrink-0">

@@ -141,7 +141,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   {venue.features.map((feature, i) => (
                     <div
                       key={i}
-                      className="flex items-center gap-2.5 text-xs text-sand-800 bg-sand-50 p-3 rounded-[var(--radius-sm)] border border-sand-200/80"
+                      className="flex items-center gap-2.5 text-xs text-sand-800 bg-primary-50 p-3 rounded-sm border border-primary-200/80"
                     >
                       <Check className="w-4 h-4 text-primary-600 shrink-0" />
                       <span>{feature}</span>
@@ -168,7 +168,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   {venue.services.map((service) => (
                     <div
                       key={service.id}
-                      className="p-5 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-200/80 hover:border-sand-300 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                      className="p-5 rounded-2xl bg-primary-50/10 border border-primary-200/80 hover:border-primary-300 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                     >
                       <div className="max-w-lg">
                         <div className="flex items-center gap-2 mb-1">
@@ -216,7 +216,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   {venue.team.map((member) => (
                     <div
                       key={member.id}
-                      className="p-4 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-200/80 flex items-start gap-4"
+                      className="p-4 rounded-xl bg-primary-50/10 border border-primary-200/80 flex items-start gap-4"
                     >
                       <div className="relative w-14 h-14 rounded-full overflow-hidden bg-sand-200 shrink-0 border border-sand-300">
                         <Image
@@ -262,7 +262,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   {venue.reviews.map((rev) => (
                     <div
                       key={rev.id}
-                      className="p-5 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-200/80"
+                      className="p-5 rounded-xl bg-primary-50/10 border border-primary-200/80"
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
@@ -286,7 +286,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
 
             {/* Colonne droite collante : Module de réservation (4 colonnes) */}
             <div className="lg:col-span-4 sticky top-24">
-              <div className="p-6 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300 shadow-sm space-y-6">
+              <div className="p-6 rounded-2xl bg-primary-50/10 border border-primary-300 shadow-sm space-y-6">
                 <div>
                   <span className="text-[11px] uppercase font-semibold tracking-wider text-sand-500 block mb-1">
                     Tarif indicatif

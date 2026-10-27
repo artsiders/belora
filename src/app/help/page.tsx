@@ -92,7 +92,7 @@ export default function HelpPage() {
                   {section.questions.map((faq, i) => (
                     <div
                       key={i}
-                      className="p-5 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-200/80 space-y-2"
+                      className="p-5 rounded-xl bg-primary-50/10 border border-primary-200/80 space-y-2"
                     >
                       <h3 className="text-sm font-semibold text-sand-950">
                         {faq.q}

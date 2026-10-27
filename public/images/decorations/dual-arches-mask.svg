@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 380" fill="none">
+  <!-- Arch 1 : Left (Taller, rounded-t-3xl) -->
+  <path d="M0,380 L0,36 A36,36 0 0 1 36,0 L114,0 A36,36 0 0 1 150,36 L150,380 Z" fill="white"/>
+  <!-- Arch 2 : Right (Shorter, rounded-t-3xl) -->
+  <path d="M162,380 L162,136 A36,36 0 0 1 198,100 L284,100 A36,36 0 0 1 320,136 L320,380 Z" fill="white"/>
+</svg>
