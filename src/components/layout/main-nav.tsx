@@ -3,50 +3,56 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ArrowRight, ArrowUpRight, ShieldCheck, HelpCircle } from "lucide-react";
+import {
+  Menu,
+  X,
+  ArrowRight,
+  ArrowUpRight,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-
-const MOBILE_UNIVERSES = [
+const NAV_LINKS = [
   {
-    name: "Coiffure d’auteur",
-    subtitle: "Coupe, coloration végétale & balayage",
+    title: "Réserver un salon",
+    subtitle: "Coiffure, esthétique, massages & soins",
+    href: "/search",
+    number: "01",
+  },
+  {
+    title: "Nos Prestations",
+    subtitle: "Explorer les rituels et univers de soin",
     href: "/search?category=hair",
-    bgClass: "bg-earth-terracotta",
+    number: "02",
   },
   {
-    name: "Soins visage & éclat",
-    subtitle: "Facialisme holistique, Kobido & diagnostic",
-    href: "/search?category=facial",
-    bgClass: "bg-earth-olive",
+    title: "Notre Philosophie",
+    subtitle: "L'art du bien-être et de l'exigence artisanale",
+    href: "/about",
+    number: "03",
   },
   {
-    name: "Massages & Spas",
-    subtitle: "Rituels relaxants & détente profonde",
-    href: "/search?category=massage",
-    bgClass: "bg-earth-moss",
+    title: "Assistance & FAQ",
+    subtitle: "Toutes les réponses à vos questions",
+    href: "/help",
+    number: "04",
   },
-  {
-    name: "Mains & pieds",
-    subtitle: "Manucure japonaise & pose naturelle",
-    href: "/search?category=nails",
-    bgClass: "bg-earth-sand",
-  },
-  {
-    name: "Barbiers traditionnels",
-    subtitle: "Taille au coupe-choux & serviette chaude",
-    href: "/search?category=barber",
-    bgClass: "bg-earth-cognac",
-  },
+];
+
+const CATEGORY_CHIPS = [
+  { name: "Coiffure", href: "/search?category=hair" },
+  { name: "Esthétique", href: "/search?category=facial" },
+  { name: "Onglerie", href: "/search?category=nails" },
+  { name: "Barbier", href: "/search?category=barber" },
+  { name: "Massages", href: "/search?category=massage" },
+  { name: "À domicile", href: "/search?type=home" },
 ];
 
 export function MainNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
   const closeMenu = () => setMobileOpen(false);
 
-  // Verrouillage du scroll en arrière-plan lorsque le menu mobile est ouvert
+  // Verrouillage du scroll arrière-plan quand le menu mobile est ouvert
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
@@ -59,7 +65,7 @@ export function MainNav() {
   }, [mobileOpen]);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-primary-200/80 bg-white/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b border-sand-200/80 bg-white/95 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-18 flex items-center justify-between">
         {/* 1. Logo Belora officiel */}
         <Link
@@ -78,14 +84,13 @@ export function MainNav() {
           />
         </Link>
 
-        {/* 3. Actions Desktop à droite */}
+        {/* 2. Actions Desktop à droite */}
         <div className="hidden sm:flex items-center gap-4">
           <Link
             href="/pro"
             className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-sand-600 hover:text-primary-600 transition-colors"
           >
             <span>Je suis un professionnel</span>
-       
             <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
           </Link>
 
@@ -100,139 +105,151 @@ export function MainNav() {
           </Link>
         </div>
 
-        {/* 4. Bouton Burger Mobile */}
+        {/* 3. Bouton Burger Mobile Design Épuré */}
         <button
           type="button"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 text-sand-800 hover:text-sand-950 focus:outline-none cursor-pointer"
-          aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          onClick={() => setMobileOpen(true)}
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-full border border-sand-200 bg-sand-50/80 text-sand-900 hover:bg-sand-100 transition-colors cursor-pointer"
+          aria-label="Ouvrir le menu"
           aria-expanded={mobileOpen}
         >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <Menu className="w-5 h-5 stroke-[1.8]" />
         </button>
       </div>
 
-      {/* 5. Menu Mobile Créatif, Pro & Épuré (Plein écran coulissant) */}
+      {/* 4. Menu Mobile Plein Écran Moderne, Créatif & Épuré */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.22, ease: "easeOut" }}
-            className="md:hidden fixed inset-x-0 top-16 bottom-0 z-50 bg-white/98 backdrop-blur-xl overflow-y-auto flex flex-col justify-between p-5 sm:p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="md:hidden fixed inset-0 z-50 bg-white flex flex-col overflow-hidden"
           >
-            <div className="space-y-6">
-              {/* En-tête du tiroir avec eyebrow */}
-              <div>
-                <p className="text-xs uppercase font-semibold tracking-wider text-sand-400 mb-3">
-                  Explorer les univers de soins
-                </p>
+            {/* Barre supérieure avec Logo et bouton de fermeture rond élégant */}
+            <div className="h-16 px-5 sm:px-8 border-b border-sand-200/80 flex items-center justify-between shrink-0 bg-white">
+              <Link href="/" onClick={closeMenu} aria-label="Belora - Accueil">
+                <Image
+                  src="/images/logos/belora.svg"
+                  alt="Belora"
+                  width={182}
+                  height={80}
+                  priority
+                  className="object-contain h-7 w-auto"
+                />
+              </Link>
 
-                {/* Liste des 5 univers au design soigné */}
-                <div className="space-y-2">
-                  {MOBILE_UNIVERSES.map((universe) => (
-                    <Link
-                      key={universe.href}
-                      href={universe.href}
-                      onClick={closeMenu}
-                      className="group flex items-center justify-between p-3 rounded-2xl border border-primary-200/80 bg-white hover:border-primary-300 hover:bg-primary-50/10 transition-all duration-200"
+              <button
+                type="button"
+                onClick={closeMenu}
+                className="w-10 h-10 rounded-full border border-sand-200 bg-sand-50 flex items-center justify-center text-sand-900 hover:bg-sand-100 transition-colors cursor-pointer shadow-2xs"
+                aria-label="Fermer le menu"
+              >
+                <X className="w-5 h-5 stroke-[1.8]" />
+              </button>
+            </div>
+
+            {/* Corps du menu avec défilement fluide et typographie éditoriale */}
+            <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col justify-between space-y-8">
+              {/* Navigation Principale Éditoriale */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs uppercase font-semibold tracking-widest text-primary-700">
+                    Navigation
+                  </span>
+                  <span className="h-px w-10 bg-primary-300" aria-hidden="true" />
+                </div>
+
+                <nav className="flex flex-col space-y-4">
+                  {NAV_LINKS.map((link, idx) => (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.25, delay: idx * 0.05 }}
                     >
-                      <div className="flex items-center gap-3">
-                        {/* Puce / miniature  */}
-                        <div
-                          className={`w-3.5 h-6 rounded-b-sm shrink-0 ${universe.bgClass}`}
-                        />
+                      <Link
+                        href={link.href}
+                        onClick={closeMenu}
+                        className="group flex items-baseline justify-between py-2 border-b border-sand-100"
+                      >
                         <div>
-                          <h3 className="text-sm font-bold text-sand-950 group-hover:text-primary-600 transition-colors">
-                            {universe.name}
-                          </h3>
-                          <p className="text-xs text-sand-500 font-normal">
-                            {universe.subtitle}
+                          <div className="flex items-center gap-2">
+                            <span className="font-serif text-2xl font-normal text-sand-950 group-hover:text-primary-600 transition-colors">
+                              {link.title}
+                            </span>
+                          </div>
+                          <p className="text-xs text-sand-500 font-normal mt-0.5">
+                            {link.subtitle}
                           </p>
                         </div>
-                      </div>
-
-                      <ArrowRight className="w-4 h-4 text-sand-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-transform shrink-0" />
-                    </Link>
+                        <span className="text-xs font-mono font-medium text-sand-400 group-hover:text-primary-600 transition-colors">
+                          {link.number}
+                        </span>
+                      </Link>
+                    </motion.div>
                   ))}
+                </nav>
+
+                {/* Accès direct aux univers avec badges légers */}
+                <div className="pt-2">
+                  <span className="block text-xs uppercase font-semibold tracking-wider text-sand-400 mb-3">
+                    Recherche par catégorie
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {CATEGORY_CHIPS.map((chip) => (
+                      <Link
+                        key={chip.name}
+                        href={chip.href}
+                        onClick={closeMenu}
+                        className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-sand-100 text-sand-800 hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 border border-sand-200/80 transition-colors"
+                      >
+                        {chip.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Raccourcis rapides éditoriaux */}
-              <div className="pt-2 border-t border-primary-100">
-                <p className="text-xs uppercase font-semibold tracking-wider text-sand-400 mb-2.5">
-                  La Maison Belora
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  <Link
-                    href="/about"
-                    onClick={closeMenu}
-                    className="flex items-center gap-2 p-2.5 rounded-xl bg-primary-50/10 border border-primary-200/60 text-xs font-semibold text-sand-800 hover:text-primary-600 transition-colors"
-                  >
-                    <ShieldCheck className="w-4 h-4 text-primary-600 shrink-0" />
-                    <span>Charte d’audit</span>
-                  </Link>
-
-                  <Link
-                    href="/help"
-                    onClick={closeMenu}
-                    className="flex items-center gap-2 p-2.5 rounded-xl bg-primary-50/10 border border-primary-200/60 text-xs font-semibold text-sand-800 hover:text-primary-600 transition-colors"
-                  >
-                    <HelpCircle className="w-4 h-4 text-primary-600 shrink-0" />
-                    <span>Aide & FAQ</span>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Carte d'accès Belora Pro */}
-              <Link
-                href="/pro"
-                onClick={closeMenu}
-                className="block p-3.5 rounded-2xl bg-secondary-900 text-white hover:bg-sand-900 transition-colors shadow-xs"
-              >
-                <div className="flex items-center justify-between">
+              {/* Section inférieure : Belora Pro & Authentification */}
+              <div className="space-y-4 pt-6 border-t border-sand-200/80">
+                {/* Carte raffinée Belora Pro */}
+                <Link
+                  href="/pro"
+                  onClick={closeMenu}
+                  className="flex items-center justify-between p-4 rounded-2xl bg-secondary-900 text-white hover:bg-sand-950 transition-colors shadow-sm"
+                >
                   <div>
-                    <span className="text-xs uppercase font-semibold tracking-wider text-sand-300 block mb-0.5">
-                      Praticiens & Salons
+                    <span className="text-xs uppercase font-semibold tracking-wider text-sand-400 block mb-0.5">
+                      Espace Professionnel
                     </span>
-                    <h4 className="text-sm font-bold text-sand-50">
-                      Rejoindre Belora Pro
-                    </h4>
+                    <span className="text-sm font-semibold text-sand-50">
+                      Développer votre salon avec Belora Pro
+                    </span>
                   </div>
                   <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center shrink-0">
                     <ArrowUpRight className="w-4 h-4 text-sand-200" />
                   </div>
+                </Link>
+
+                {/* Boutons Connexion / Rejoindre */}
+                <div className="grid grid-cols-2 gap-3 pt-1">
+                  <Link
+                    href="/login"
+                    onClick={closeMenu}
+                    className="btn btn-outline py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-center"
+                  >
+                    Connexion
+                  </Link>
+                  <Link
+                    href="/register"
+                    onClick={closeMenu}
+                    className="btn btn-primary py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-center"
+                  >
+                    Rejoindre
+                  </Link>
                 </div>
-              </Link>
-            </div>
-
-            {/* Pied du menu : Boutons d'authentification & signature en arches */}
-            <div className="pt-6 mt-6 border-t border-primary-200/80 relative">
-              <div className="grid grid-cols-2 gap-3 relative z-10">
-                <Link
-                  href="/login"
-                  onClick={closeMenu}
-                  className="btn btn-outline py-3 rounded-xl text-xs font-semibold uppercase tracking-wider text-center"
-                >
-                  Connexion
-                </Link>
-                <Link
-                  href="/register"
-                  onClick={closeMenu}
-                  className="btn btn-primary py-3 rounded-xl text-xs font-semibold uppercase tracking-wider text-center"
-                >
-                  Rejoindre
-                </Link>
-              </div>
-
-              {/* Arches décoratives en filigrane discret au bas du tiroir mobile */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -bottom-5 right-2 flex items-end opacity-15 select-none z-0"
-              >
-                <div className="w-16 h-24 rounded-b-none bg-earth-olive -mr-2" />
-                <div className="w-20 h-16 rounded-b-none bg-earth-terracotta" />
               </div>
             </div>
           </motion.div>

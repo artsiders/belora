@@ -154,7 +154,7 @@ export function ArtisanSpotlight() {
         {/* Slider horizontal Apple Pro : cartes uniformes, bordures parfaites, zéro surcharge */}
         <div
           ref={sliderRef}
-          className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-1 px-1 -mx-1 scrollbar-none focus:outline-none"
+          className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-1 px-1 -mr-5 scrollbar-none focus:outline-none"
         >
           {ARTISANS.map((artisan) => (
             <Link
@@ -163,7 +163,7 @@ export function ArtisanSpotlight() {
               className="group w-[260px] sm:w-[280px] shrink-0 snap-start flex flex-col justify-between bg-white rounded-3xl border border-primary-200/80 overflow-hidden shadow-2xs hover:shadow-lg hover:border-primary-300 transition-all duration-300 cursor-pointer"
             >
               {/* Photographie pleine largeur en haut : arrondis parfaitement harmonisés */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-sand-100">
+              <div className="relative aspect-4/5 w-full overflow-hidden bg-sand-100">
                 <Image
                   src={artisan.image}
                   alt={`Portrait de ${artisan.name}, ${artisan.role}`}
