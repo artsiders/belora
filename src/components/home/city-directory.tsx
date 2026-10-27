@@ -59,15 +59,6 @@ export function CityDirectory() {
           ))}
         </div>
       </div>
-
-      {/* Arches graphiques décoratives en variante filigrane pour signer la section */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 lg:right-16 hidden sm:flex flex-col opacity-20 select-none z-0"
-      >
-        <div className="h-24 lg:h-32 w-36 lg:w-48 arch-r rounded-b-none bg-earth-olive" />
-        <div className="h-32 lg:h-40 w-28 lg:w-36 arch-r rounded-b-none bg-earth-terracotta" />
-      </div>
  
     </section>
   );

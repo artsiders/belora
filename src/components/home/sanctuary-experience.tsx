@@ -79,7 +79,7 @@ export function SanctuaryExperience() {
           <div className="lg:col-span-6 relative">
             <div className="grid grid-cols-12 gap-3 sm:gap-4 items-end">
               {/* Arche Principale Photographique (Gauche) */}
-              <div className="col-span-8 relative aspect-[4/5] arch-t rounded-b-2xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-sm">
+              <div className="col-span-8 relative aspect-[4/5] rounded-b-xl overflow-hidden bg-sand-200 border border-sand-200/80 shadow-sm">
                 <Image
                   src="/images/sanctuaries/sanctuary-architecture.jpg"
                   alt="Intérieur minéral et épuré d'un sanctuaire partenaire Belora"
@@ -94,7 +94,7 @@ export function SanctuaryExperience() {
                   aria-hidden="true"
                 />
 
-                <div className="absolute bottom-3 inset-x-3 p-3 rounded-xl bg-white/95 backdrop-blur-xs border border-sand-200/80 text-sand-900 shadow-xs flex items-center justify-between gap-2">
+                <div className="absolute bottom-3 inset-x-3 p-3 rounded-md bg-white/95 backdrop-blur-xs border border-sand-200/80 text-sand-900 shadow-xs flex items-center justify-between gap-2">
                   <div>
                     <h4 className="text-xs font-bold text-sand-950">
                       Maison Albar Institut
@@ -110,7 +110,7 @@ export function SanctuaryExperience() {
               {/* Formes décoratives Arches en variante (Droite) */}
               <div className="col-span-4 flex flex-col gap-3 sm:gap-4 justify-end">
                 {/* Arche supérieure Terracotta douce avec promesse */}
-                <div className="h-44 sm:h-80 arch-t rounded-b-2xl bg-earth-terracotta p-3.5 sm:p-4 flex flex-col justify-center text-center text-white shadow-2xs">
+                <div className="h-44 sm:h-76 rounded-b-xl bg-primary-700 p-3.5 sm:p-4 flex flex-col justify-center text-center text-white shadow-2xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-white/80 mx-auto mb-2" />
                   <p className="text-xs font-semibold leading-snug">
                     Acoustique feutrée & calme absolu
@@ -118,7 +118,7 @@ export function SanctuaryExperience() {
                 </div>
 
                 {/* Arche inférieure Olive avec forme arrondie horizontale */}
-                <div className="h-28 sm:h-36 arch-r rounded-l-2xl bg-earth-olive shadow-2xs flex items-center justify-center text-white text-center p-2">
+                <div className="h-28 sm:h-36 rounded-r-xl bg-secondary-900 shadow-2xs flex items-center justify-center text-white text-center p-2">
                   <span className="text-xs font-bold tracking-wider uppercase">Audit Certifié</span>
                 </div>
               </div>

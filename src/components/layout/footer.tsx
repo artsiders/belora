@@ -46,8 +46,8 @@ export function Footer() {
         aria-hidden="true"
         className="pointer-events-none absolute bottom-32 md:bottom-0 right-4 lg:right-16 flex items-end opacity-85 select-none z-0"
       >
-        <div className="w-24 lg:w-32 h-44 lg:h-56 rounded-t-full rounded-b-none bg-earth-moss" />
-        <div className="w-32 lg:w-40 h-32 lg:h-40 rounded-t-full rounded-b-none bg-earth-terracotta" />
+        <div className="w-24 lg:w-32 h-44 lg:h-56 rounded-t-3xl rounded-b-none bg-primary-700" />
+        <div className="w-32 lg:w-40 h-32 lg:h-40 rounded-t-3xl rounded-b-none bg-secondary-500" />
       </div>
 
       <div className="container-belora relative z-10">
