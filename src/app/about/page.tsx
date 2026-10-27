@@ -113,7 +113,7 @@ export default function AboutPage() {
               {AUDIT_CRITERIA.map((crit) => (
                 <div
                   key={crit.num}
-                  className="p-8 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-200/90 space-y-3"
+                  className="p-8 rounded-xl bg-sand-50 border border-sand-200/90 space-y-3"
                 >
                   <span className="font-display text-2xl text-primary-700 block font-normal">
                     {crit.num}.

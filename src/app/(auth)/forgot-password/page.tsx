@@ -30,7 +30,7 @@ export default function ForgotPasswordPage() {
           <span>Retour à la connexion</span>
         </Link>
 
-        <div className="w-10 h-10 rounded-[var(--radius-sm)] bg-sand-200/80 border border-sand-300 text-sand-800 flex items-center justify-center mb-4">
+        <div className="w-10 h-10 rounded-xl bg-sand-200/80 border border-sand-300 text-sand-800 flex items-center justify-center mb-4">
           <KeyRound className="w-5 h-5 text-primary-600" />
         </div>
 
@@ -47,7 +47,7 @@ export default function ForgotPasswordPage() {
       </div>
 
       {submitted ? (
-        <div className="p-6 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300 text-center space-y-4">
+        <div className="p-6 rounded-xl bg-sand-50 border border-sand-300 text-center space-y-4">
           <div className="w-12 h-12 rounded-full bg-primary-50 text-primary-600 mx-auto flex items-center justify-center">
             <CheckCircle2 className="w-6 h-6" />
           </div>
@@ -64,7 +64,7 @@ export default function ForgotPasswordPage() {
           <div className="pt-2">
             <Link
               href="/login"
-              className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-[var(--radius-sm)] bg-primary-600 hover:bg-primary-700 text-sand-50 text-xs font-semibold uppercase tracking-wider transition-colors"
+              className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-primary-600 hover:bg-primary-700 text-sand-50 text-xs font-semibold uppercase tracking-wider transition-colors"
             >
               <span>Retour à la connexion</span>
               <ArrowRight className="w-3.5 h-3.5" />

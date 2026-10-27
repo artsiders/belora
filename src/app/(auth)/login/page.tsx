@@ -27,7 +27,7 @@ export default function LoginPage() {
   return (
     <div className="w-full">
       {/* 1. Bascule de type de compte : Client vs Professionnel */}
-      <div className="p-1 rounded-[var(--radius-sm)] bg-sand-200/60 border border-sand-300 flex items-center mb-8">
+      <div className="p-1 rounded-xl bg-sand-200/60 border border-sand-300 flex items-center mb-8">
         <button
           type="button"
           onClick={() => {
@@ -75,7 +75,7 @@ export default function LoginPage() {
 
       {/* Message de confirmation simulé */}
       {submitted ? (
-        <div className="p-6 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300 text-center space-y-4">
+        <div className="p-6 rounded-xl bg-sand-50 border border-sand-300 text-center space-y-4">
           <div className="w-12 h-12 rounded-full bg-primary-50 text-primary-600 mx-auto flex items-center justify-center">
             <CheckCircle2 className="w-6 h-6" />
           </div>

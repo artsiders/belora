@@ -35,7 +35,7 @@ export default function NotFound() {
           <form
             action="/search"
             method="GET"
-            className="flex items-center gap-2 max-w-md mx-auto mb-10 p-1.5 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300 shadow-2xs"
+            className="flex items-center gap-2 max-w-md mx-auto mb-10 p-1.5 rounded-xl bg-sand-50 border border-sand-300 shadow-2xs"
           >
             <div className="pl-3 text-sand-400">
               <Search className="w-4 h-4" />

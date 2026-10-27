@@ -134,7 +134,7 @@ export function AccountClient() {
       {activeTab === "upcoming" && (
         <div className="space-y-4 max-w-3xl">
           {UPCOMING_APPOINTMENTS.filter((a) => a.id !== cancelledId).length === 0 ? (
-            <div className="p-10 text-center rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300 space-y-3">
+            <div className="p-10 text-center rounded-xl bg-sand-50 border border-sand-300 space-y-3">
               <Calendar className="w-8 h-8 text-sand-400 mx-auto" />
               <h3 className="font-display text-xl text-sand-950">
                 Aucun rendez-vous à venir
@@ -150,10 +150,10 @@ export function AccountClient() {
             UPCOMING_APPOINTMENTS.filter((a) => a.id !== cancelledId).map((app) => (
               <div
                 key={app.id}
-                className="p-5 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300 shadow-2xs flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between"
+                className="p-5 rounded-xl bg-sand-50 border border-sand-300 shadow-2xs flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between"
               >
                 <div className="flex items-start gap-4">
-                  <div className="relative w-16 h-16 rounded-[var(--radius-sm)] overflow-hidden bg-sand-200 shrink-0">
+                  <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-sand-200 shrink-0">
                     <Image
                       src={app.venueImage}
                       alt={app.venueName}
@@ -214,7 +214,7 @@ export function AccountClient() {
               className="p-5 rounded-xl bg-primary-50/10 border border-primary-200/80 flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between"
             >
               <div className="flex items-start gap-4">
-                <div className="relative w-14 h-14 rounded-[var(--radius-sm)] overflow-hidden bg-sand-200 shrink-0">
+                <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-sand-200 shrink-0">
                   <Image
                     src={app.venueImage}
                     alt={app.venueName}
@@ -255,7 +255,7 @@ export function AccountClient() {
       )}
 
       {activeTab === "profile" && (
-        <div className="max-w-xl p-6 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300 space-y-5">
+        <div className="max-w-xl p-6 rounded-xl bg-sand-50 border border-sand-300 space-y-5">
           <h2 className="font-display text-xl text-sand-950 mb-4">
             Coordonnées personnelles
           </h2>

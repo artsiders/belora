@@ -108,7 +108,7 @@ export default function HelpPage() {
           </div>
 
           {/* Contact Direct */}
-          <div className="mt-16 p-8 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300 text-center space-y-4">
+          <div className="mt-16 p-8 rounded-xl bg-sand-50 border border-sand-300 text-center space-y-4">
             <h3 className="font-display text-2xl text-sand-950">
               Vous n’avez pas trouvé votre réponse ?
             </h3>

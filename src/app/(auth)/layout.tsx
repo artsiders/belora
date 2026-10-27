@@ -39,7 +39,7 @@ export default function AuthLayout({
 
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs text-sand-200/80 hover:text-sand-50 transition-colors py-1.5 px-3 rounded-[var(--radius-sm)] border border-sand-50/20 bg-sand-950/30 backdrop-blur-xs"
+            className="inline-flex items-center gap-1.5 text-xs text-sand-200/80 hover:text-sand-50 transition-colors py-1.5 px-3 rounded-xl border border-sand-50/20 bg-sand-950/30 backdrop-blur-xs"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Explorer le site</span>
@@ -48,7 +48,7 @@ export default function AuthLayout({
 
         {/* Pied de page visuel : Manifeste & Réassurance */}
         <div className="relative z-10 max-w-md space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[var(--radius-sm)] bg-sand-950/60 backdrop-blur-xs border border-sand-50/15 text-[11px] uppercase tracking-widest text-primary-200 font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-sand-950/60 backdrop-blur-xs border border-sand-50/15 text-[11px] uppercase tracking-widest text-primary-200 font-semibold">
             <span>Maison d’artisans du soin</span>
           </div>
 

@@ -64,7 +64,7 @@ export default function RegisterPage() {
             setRole("client");
             setSubmitted(false);
           }}
-          className={`p-3.5 rounded-[var(--radius-sm)] border text-left transition-all cursor-pointer ${
+          className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
             role === "client"
               ? "bg-sand-50 border-primary-600 ring-1 ring-primary-600 shadow-2xs"
               : "bg-sand-50/50 border-sand-300 hover:border-sand-400"
@@ -102,7 +102,7 @@ export default function RegisterPage() {
             setRole("pro");
             setSubmitted(false);
           }}
-          className={`p-3.5 rounded-[var(--radius-sm)] border text-left transition-all cursor-pointer ${
+          className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
             role === "pro"
               ? "bg-sand-50 border-primary-600 ring-1 ring-primary-600 shadow-2xs"
               : "bg-sand-50/50 border-sand-300 hover:border-sand-400"
@@ -136,7 +136,7 @@ export default function RegisterPage() {
       </div>
 
       {submitted ? (
-        <div className="p-6 rounded-[var(--radius-sm)] bg-sand-50 border border-sand-300 text-center space-y-4">
+        <div className="p-6 rounded-xl bg-sand-50 border border-sand-300 text-center space-y-4">
           <div className="w-12 h-12 rounded-full bg-primary-50 text-primary-600 mx-auto flex items-center justify-center">
             <CheckCircle2 className="w-6 h-6" />
           </div>
@@ -179,7 +179,7 @@ export default function RegisterPage() {
                       setFormData({ ...formData, businessName: e.target.value })
                     }
                     placeholder="Ex: L’Atelier des Ciseaux, Studio Séquoia…"
-                    className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-[var(--radius-sm)] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                    className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
                   />
                 </div>
 
@@ -197,7 +197,7 @@ export default function RegisterPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, businessCategory: e.target.value })
                       }
-                      className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-[var(--radius-sm)] text-sand-900 focus:outline-none focus:border-primary-600"
+                      className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-xl text-sand-900 focus:outline-none focus:border-primary-600"
                     >
                       <option value="coiffure">Coiffure</option>
                       <option value="visage">Soins Visage & Institut</option>
@@ -222,7 +222,7 @@ export default function RegisterPage() {
                         setFormData({ ...formData, city: e.target.value })
                       }
                       placeholder="Paris, Lyon…"
-                      className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-[var(--radius-sm)] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                      className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
                     />
                   </div>
                 </div>
@@ -247,7 +247,7 @@ export default function RegisterPage() {
                   }
                   placeholder="Camille"
                   autoComplete="given-name"
-                  className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-[var(--radius-sm)] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
                 />
               </div>
               <div>
@@ -267,7 +267,7 @@ export default function RegisterPage() {
                   }
                   placeholder="Dupont"
                   autoComplete="family-name"
-                  className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-[var(--radius-sm)] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
                 />
               </div>
             </div>
@@ -290,7 +290,7 @@ export default function RegisterPage() {
                   }
                   placeholder="nom@exemple.com"
                   autoComplete="email"
-                  className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-[var(--radius-sm)] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
                 />
                 <Mail className="w-4 h-4 text-sand-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
@@ -316,7 +316,7 @@ export default function RegisterPage() {
                   }
                   placeholder="06 12 34 56 78"
                   autoComplete="tel"
-                  className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-[var(--radius-sm)] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
                 />
                 <Phone className="w-4 h-4 text-sand-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
@@ -341,7 +341,7 @@ export default function RegisterPage() {
                   }
                   placeholder="••••••••••••"
                   autoComplete="new-password"
-                  className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-[var(--radius-sm)] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-sand-50 border border-sand-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
                 />
                 <button
                   type="button"
