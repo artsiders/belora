@@ -61,7 +61,7 @@ export function HeroCentered() {
   };
 
   return (
-    <section className="relative w-full h-[calc(100dvh-264px)] min-h-[460px] max-h-[calc(100dvh-191px)] overflow-hidden bg-sand-100 flex flex-col justify-end">
+    <section className="relative w-full h-[calc(100dvh-216px)] min-h-115 max-h-[calc(100dvh-191px)] overflow-hidden bg-sand-100 flex flex-col justify-end">
       {/* 1. Visuel d'arrière-plan */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -72,7 +72,7 @@ export function HeroCentered() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-black/10 pointer-events-none" />
       </div>
 
       {/* 2. Barre de Recherche Intégrale - Centrée au bas de la vue visible */}
@@ -219,7 +219,7 @@ export function HeroCentered() {
             <div className="pt-1.5 md:pt-0 shrink-0">
               <button
                 type="submit"
-                className="w-full md:w-auto flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium text-xs sm:text-sm px-6 py-3 rounded-2xl shadow-md transition-all active:scale-[0.98]"
+                className="btn btn-primary bg py-4.5 rounded-md"
               >
                 <Search className="w-4 h-4 text-white shrink-0" />
                 <span>Rechercher</span>

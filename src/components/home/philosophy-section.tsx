@@ -36,10 +36,10 @@ export function PhilosophySection() {
           {/* Titre Serif éditorial haut de gamme */}
           <h2
             id="philosophy-title"
-            className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-sand-950 leading-tight mb-5 sm:mb-6"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-sand-950 leading-tight mb-5 sm:mb-6"
           >
             Prendre soin de soi,{" "}
-            <span className="block text-primary-600 font-serif">
+            <span className="block text-primary-600">
               c’est déjà être beau.
             </span>
           </h2>
@@ -56,7 +56,7 @@ export function PhilosophySection() {
           <div>
             <Link
               href="/about"
-              className="btn btn-primary rounded-xl px-7 py-3.5 text-xs font-semibold tracking-wider uppercase inline-flex items-center justify-center text-white shadow-sm hover:shadow-md cursor-pointer transition-all"
+              className="btn btn-primary"
             >
               Découvrir notre univers
             </Link>

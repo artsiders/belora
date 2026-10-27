@@ -95,7 +95,7 @@ export function MainNav() {
             Connexion
           </Link>
 
-          <Link href="/register" className="btn btn-primary btn-sm rounded-xl">
+          <Link href="/register" className="btn btn-dark btn-sm">
             Rejoindre
           </Link>
         </div>
