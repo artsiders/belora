@@ -27,8 +27,8 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
   return (
     <section className="py-14 sm:py-20 bg-white border-b border-primary-200/80" aria-labelledby="cities-heading">
       <div className="container-belora">
-        {/* En-tête avec titre standardisé et mots en text-primary */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12 pb-5 border-b border-primary-200/80">
+        {/* En-tête sobre sans trait de séparation superflu */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12 pb-5 border-b border-neutral-100">
           <div>
             <span className="eyebrow text-sand-500 font-semibold block mb-1.5">
               Métropoles mondiales
@@ -40,12 +40,12 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
               </span>
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm text-sand-600 font-normal max-w-2xl">
-              Nos ateliers partenaires en {category.shortName.toLowerCase()} vous accueillent au cœur des douze métropoles culturelles et de mode les plus prestigieuses.
+              Nos ateliers partenaires en {category.shortName.toLowerCase()} vous accueillent au cœur des douze métropoles culturelles les plus réputées.
             </p>
           </div>
 
           {/* Filtres par continent (International) */}
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-sand-100 border border-primary-200/80 overflow-x-auto no-scrollbar shrink-0">
+          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-sand-100 border border-neutral-200/70 overflow-x-auto no-scrollbar shrink-0">
             <button
               onClick={() => setSelectedRegion("all")}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
@@ -89,16 +89,16 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
           </div>
         </div>
 
-        {/* Grille de cartes des métropoles */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        {/* Grille de cartes épurées sans sur-encadrement : l'image respire et prend toute la largeur */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
           {displayedCities.map((city: InternationalCity) => (
             <Link
               key={city.id}
               href={`/search?category=${category.slug}&location=${encodeURIComponent(city.name)}`}
-              className="group flex flex-col rounded-2xl border border-primary-200/80 bg-white overflow-hidden hover:border-primary-400 hover:shadow-md transition-all duration-300"
+              className="group flex flex-col"
             >
-              {/* Photo avec coins arrondis et badge pays */}
-              <div className="relative aspect-4/3 w-full overflow-hidden bg-sand-200">
+              {/* Photo pleine largeur de la colonne avec coins soignés */}
+              <div className="relative aspect-4/3 w-full rounded-2xl overflow-hidden bg-sand-200 mb-3">
                 <Image
                   src={city.image}
                   alt={`${category.shortName} à ${city.name}, ${city.country}`}
@@ -115,8 +115,8 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
                 </span>
               </div>
 
-              {/* Contenu textuel sous la photo */}
-              <div className="p-4 flex flex-col justify-between flex-1">
+              {/* Texte direct sous l'image, sans bordure ni padding gaspillé */}
+              <div className="flex items-center justify-between">
                 <div>
                   <h3 className="font-bold text-sm sm:text-base text-sand-950 group-hover:text-primary-600 transition-colors">
                     {category.shortName} {city.name}
@@ -125,13 +125,7 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
                     {city.count}
                   </span>
                 </div>
-
-                <div className="mt-3 pt-2.5 border-t border-neutral-100 flex items-center justify-between text-xs text-sand-600">
-                  <span className="font-medium text-primary-700">Adresses certifiées</span>
-                  <span className="text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all">
-                    Explorer &rarr;
-                  </span>
-                </div>
+                <ArrowUpRight className="w-4 h-4 text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
               </div>
             </Link>
           ))}
@@ -139,7 +133,7 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
 
         {/* Bouton pour afficher plus de villes */}
         {filteredCities.length > 8 && (
-          <div className="mt-8 flex justify-center">
+          <div className="mt-10 flex justify-center">
             <button
               onClick={() => setShowAll(!showAll)}
               className="btn btn-secondary px-6 py-2.5 rounded-xl inline-flex items-center gap-2 text-xs font-semibold cursor-pointer"

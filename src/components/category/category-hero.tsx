@@ -114,9 +114,12 @@ export function CategoryHero({ category }: CategoryHeroProps) {
             {category.name}
           </span>
 
-          {/* Titre sobre et concis */}
+          {/* Titre sobre et concis avec mots mis en valeur */}
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white leading-snug mb-2">
-            {category.heroTitle}
+            {category.titlePrefix}{" "}
+            <span className="text-primary-300 font-bold">
+              {category.titleHighlight}
+            </span>
           </h1>
 
           {/* Sous-titre sobre et court */}
@@ -135,7 +138,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
           >
             <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-0">
               {/* Champ 1 : Où ? */}
-              <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-primary-50/10/80 focus-within:bg-primary-50/10 rounded-2xl transition-colors">
+              <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-sand-50 focus-within:bg-sand-50 rounded-xl transition-colors">
                 <MapPin className="w-4 h-4 text-primary-600 shrink-0" />
                 <div className="flex-1 min-w-0">
                   <label
@@ -160,7 +163,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
               <div className="hidden md:block w-px h-8 bg-sand-200 shrink-0 mx-1" aria-hidden="true" />
 
               {/* Champ 2 : Prestation */}
-              <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-primary-50/10/80 focus-within:bg-primary-50/10 rounded-2xl transition-colors">
+              <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-sand-50 focus-within:bg-sand-50 rounded-xl transition-colors">
                 <Scissors className="w-4 h-4 text-primary-600 shrink-0" />
                 <div className="flex-1 min-w-0">
                   <label
@@ -189,7 +192,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
               <div ref={calendarRef} className="relative flex-1">
                 <div
                   onClick={handleToggleCalendar}
-                  className="flex items-center gap-3 px-3.5 py-2 hover:bg-primary-50/10/80 rounded-2xl cursor-pointer transition-colors"
+                  className="flex items-center gap-3 px-3.5 py-2 hover:bg-sand-50 rounded-xl cursor-pointer transition-colors"
                 >
                   <CalendarDays className="w-4 h-4 text-primary-600 shrink-0" />
                   <div className="flex-1 min-w-0">

@@ -9,10 +9,10 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
   const { guide } = category;
 
   return (
-    <section className="section bg-sand-50/60 border-b border-primary-200/80" aria-labelledby="guide-heading">
+    <section className="py-16 sm:py-24 bg-sand-50/60 border-b border-primary-200/80" aria-labelledby="guide-heading">
       <div className="container-belora">
-        {/* En-tête harmonisé avec mots en text-primary */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12 pb-5 border-b border-primary-200/80">
+        {/* En-tête sobre sans trait superflu */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16 pb-5 border-b border-neutral-200/80">
           <div>
             <span className="eyebrow text-sand-500 font-semibold block mb-1.5">
               Conseils d&apos;artisans
@@ -33,24 +33,21 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
           </span>
         </div>
 
-        {/* Grille créative des sections du guide */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-8">
+        {/* Colonnes éditoriales aérées : zéro encadrement artificiel */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
           {guide.sections.map((sec, idx) => (
-            <div
-              key={idx}
-              className="p-6 sm:p-8 rounded-2xl bg-white border border-primary-200/80 shadow-2xs hover:border-primary-300 hover:shadow-md transition-all duration-200 flex flex-col justify-between"
-            >
+            <div key={idx} className="flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className="w-8 h-8 rounded-full bg-primary-50 text-primary-700 font-bold text-xs flex items-center justify-center">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-2xl sm:text-3xl font-serif font-bold text-primary-600">
                     0{idx + 1}
                   </span>
                   <span className="text-xs font-semibold uppercase tracking-wider text-sand-400">
-                    Savoir-faire
+                    Savoir-faire artisanal
                   </span>
                 </div>
 
-                <h3 className="text-base sm:text-lg font-bold text-sand-950 mb-3 leading-snug">
+                <h3 className="text-lg sm:text-xl font-bold text-sand-950 mb-3 leading-snug">
                   {sec.title}
                 </h3>
 
@@ -59,19 +56,19 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-neutral-100 flex items-center gap-2 text-xs text-primary-700 font-semibold">
-                <CheckCircle2 className="w-4 h-4 text-primary-600" />
-                <span>Recommandé par nos maîtres artisans</span>
+              <div className="mt-6 flex items-center gap-2 text-xs text-primary-700 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-primary-600 shrink-0" />
+                <span>Recommandé par nos maîtres artisans certifiés</span>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Encadré d'engagement qualité créatif */}
-        <div className="p-6 rounded-2xl bg-white border border-primary-200/90 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        {/* Bandeau d'engagement épuré et horizontal (zéro boîte épaisse) */}
+        <div className="mt-14 pt-8 border-t border-neutral-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-full bg-primary-100/70 text-primary-700 flex items-center justify-center shrink-0">
-              <span className="font-serif font-bold text-base">B</span>
+            <div className="w-9 h-9 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center shrink-0">
+              <span className="font-serif font-bold text-sm">B</span>
             </div>
             <div>
               <h4 className="text-xs sm:text-sm font-bold text-sand-950">
