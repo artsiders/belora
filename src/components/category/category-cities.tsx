@@ -25,60 +25,66 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
   const displayedCities = showAll ? filteredCities : filteredCities.slice(0, 8);
 
   return (
-    <section className="section bg-white border-b border-primary-200/80" aria-labelledby="cities-title">
+    <section className="py-14 sm:py-20 bg-white border-b border-primary-200/80" aria-labelledby="cities-heading">
       <div className="container-belora">
-        {/* En-tête de section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-5 border-b border-primary-200/80">
+        {/* En-tête avec titre standardisé et mots en text-primary */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12 pb-5 border-b border-primary-200/80">
           <div>
-            <span className="eyebrow text-sand-500 font-semibold block mb-1">
-              Métropoles internationales
-            </span>
-            <h2 id="cities-title" className="text-2xl sm:text-3xl font-bold text-sand-950">
-              Villes & destinations de soin
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-xs uppercase font-semibold tracking-widest text-primary-700">
+                Métropoles mondiales
+              </span>
+              <span className="h-px w-10 bg-primary-400/80" aria-hidden="true" />
+            </div>
+            <h2 id="cities-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950">
+              Trouver un artisan{" "}
+              <span className="text-primary-600 font-bold">
+                dans les grandes capitales
+              </span>
             </h2>
-            <p className="mt-1 text-xs sm:text-sm text-sand-600">
-              Découvrez les adresses d&apos;exception sélectionnées pour votre {category.shortName.toLowerCase()} dans les plus grandes capitales.
+            <p className="mt-1.5 text-xs sm:text-sm text-sand-600 font-normal max-w-2xl">
+              Nos ateliers partenaires en {category.shortName.toLowerCase()} vous accueillent au cœur des douze métropoles culturelles et de mode les plus prestigieuses.
             </p>
           </div>
 
-          {/* Onglets Régions (International) */}
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-sand-100 border border-neutral-200/70 overflow-x-auto no-scrollbar shrink-0">
+          {/* Filtres par continent (International) */}
+          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-sand-100 border border-primary-200/80 overflow-x-auto no-scrollbar shrink-0">
             <button
               onClick={() => setSelectedRegion("all")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 selectedRegion === "all"
                   ? "bg-white text-sand-950 shadow-2xs"
-                  : "text-sand-600 hover:text-sand-900"
+                  : "text-sand-600 hover:text-sand-950"
               }`}
             >
               Toutes ({category.cities.length})
             </button>
             <button
               onClick={() => setSelectedRegion("Europe")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 selectedRegion === "Europe"
                   ? "bg-white text-sand-950 shadow-2xs"
-                  : "text-sand-600 hover:text-sand-900"
+                  : "text-sand-600 hover:text-sand-950"
               }`}
             >
               Europe
             </button>
             <button
               onClick={() => setSelectedRegion("Americas")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 selectedRegion === "Americas"
                   ? "bg-white text-sand-950 shadow-2xs"
-                  : "text-sand-600 hover:text-sand-900"
+                  : "text-sand-600 hover:text-sand-950"
               }`}
             >
               Amériques
             </button>
             <button
               onClick={() => setSelectedRegion("Asia & Middle East")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 selectedRegion === "Asia & Middle East"
                   ? "bg-white text-sand-950 shadow-2xs"
-                  : "text-sand-600 hover:text-sand-900"
+                  : "text-sand-600 hover:text-sand-950"
               }`}
             >
               Asie & Moyen-Orient
@@ -86,42 +92,48 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
           </div>
         </div>
 
-        {/* Grille de cartes de villes */}
+        {/* Grille de cartes des métropoles */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {displayedCities.map((city: InternationalCity) => (
             <Link
               key={city.id}
               href={`/search?category=${category.slug}&location=${encodeURIComponent(city.name)}`}
-              className="group flex flex-col rounded-2xl border border-neutral-200/80 bg-white overflow-hidden hover:border-primary-400 hover:shadow-md transition-all duration-200"
+              className="group flex flex-col rounded-2xl border border-primary-200/80 bg-white overflow-hidden hover:border-primary-400 hover:shadow-md transition-all duration-300"
             >
-              {/* Image de la métropole avec composant Next.js Image */}
-              <div className="relative w-full aspect-16/10 overflow-hidden bg-sand-100">
+              {/* Photo avec coins arrondis et badge pays */}
+              <div className="relative aspect-4/3 w-full overflow-hidden bg-sand-200">
                 <Image
                   src={city.image}
                   alt={`${category.shortName} à ${city.name}, ${city.country}`}
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-200" />
-                <span className="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-white/90 backdrop-blur-xs flex items-center justify-center text-sand-900 shadow-2xs opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors duration-300" />
+                <span className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-white/95 backdrop-blur-xs text-xs font-semibold text-sand-900 shadow-2xs">
+                  {city.country}
+                </span>
+                <span className="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-white/95 backdrop-blur-xs flex items-center justify-center text-sand-900 shadow-2xs opacity-0 group-hover:opacity-100 transition-opacity">
                   <ArrowUpRight className="w-3.5 h-3.5 text-sand-900" />
                 </span>
               </div>
 
               {/* Contenu textuel sous la photo */}
-              <div className="p-3.5 sm:p-4 flex flex-col justify-between flex-1">
+              <div className="p-4 flex flex-col justify-between flex-1">
                 <div>
-                  <h3 className="font-semibold text-sm sm:text-base text-sand-950 group-hover:text-primary-700 transition-colors">
+                  <h3 className="font-bold text-sm sm:text-base text-sand-950 group-hover:text-primary-600 transition-colors">
                     {category.shortName} {city.name}
                   </h3>
-                  <p className="text-xs text-sand-500 mt-0.5">
-                    {city.country}
-                  </p>
+                  <span className="text-xs text-sand-500 num block mt-0.5">
+                    {city.count}
+                  </span>
                 </div>
+
                 <div className="mt-3 pt-2.5 border-t border-neutral-100 flex items-center justify-between text-xs text-sand-600">
-                  <span className="num font-medium text-primary-800">{city.count}</span>
-                  <span className="text-sand-400 group-hover:text-primary-600 transition-colors">Explorer &rarr;</span>
+                  <span className="font-medium text-primary-700">Adresses certifiées</span>
+                  <span className="text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all">
+                    Explorer &rarr;
+                  </span>
                 </div>
               </div>
             </Link>
@@ -133,7 +145,7 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
           <div className="mt-8 flex justify-center">
             <button
               onClick={() => setShowAll(!showAll)}
-              className="btn-outline px-6 py-2.5 rounded-xl inline-flex items-center gap-2 text-xs font-semibold"
+              className="btn btn-secondary px-6 py-2.5 rounded-xl inline-flex items-center gap-2 text-xs font-semibold cursor-pointer"
             >
               {showAll ? (
                 <>
