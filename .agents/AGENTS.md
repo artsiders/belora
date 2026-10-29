@@ -1,4 +1,4 @@
-# Directives de Style & Règles de Code (Auto-Stop)
+# Directives de Style & Règles de Code
 
 ## 1. Interdiction des Icônes & Badges Génériques IA
 - **Ne jamais utiliser l'icône Sparkles** (`LuSparkles`, `IoSparkles`, `✨`, etc.).

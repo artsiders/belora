@@ -417,8 +417,174 @@ export const VENUES: Venue[] = [
       },
     ],
   },
+  {
+    id: "v6",
+    slug: "maison-vernis-paris",
+    name: "Maison Vernis & Soin",
+    tagline: "Manucure russe haute précision, gel porcelaine & rituels spa bio",
+    description:
+      "Installé à deux pas de la place Vendôme, Maison Vernis & Soin est un écrin dédié à la beauté des mains et des pieds. Protocoles d'hygiène stricts sous autoclave, vernis bio-sourcés et prothésistes formées aux techniques russes les plus exigeantes.",
+    badge: "Excellence Onglerie",
+    category: "nails",
+    categoryLabel: "Onglerie de Haute Volée",
+    city: "Paris",
+    district: "Place Vendôme (1er)",
+    address: "12 Rue de la Paix, 75001 Paris",
+    rating: "4,9",
+    reviewCount: 98,
+    startingPrice: "45 €",
+    image: "/images/editorial/nails-detail.jpg",
+    gallery: [
+      "/images/editorial/nails-detail.jpg",
+      "/images/editorial/nails-salon.jpg",
+      "/images/gallery/gallery-nails.jpg",
+    ],
+    features: [
+      "Stérilisation médicale sous autoclave de classe B",
+      "Vernis 10-Free sans perturbateurs endocriniens",
+      "Technique de manucure russe combinée sans douleur",
+      "Fauteuils spa massants ergonomiques pour les pieds",
+    ],
+    openingHours: [
+      { day: "Lundi", hours: "10h00 - 19h00" },
+      { day: "Mardi", hours: "10h00 - 20h00" },
+      { day: "Mercredi", hours: "10h00 - 20h00" },
+      { day: "Jeudi", hours: "10h00 - 20h00" },
+      { day: "Vendredi", hours: "10h00 - 20h30" },
+      { day: "Samedi", hours: "09h30 - 19h30" },
+      { day: "Dimanche", hours: "Fermé" },
+    ],
+    team: [
+      {
+        id: "t6",
+        name: "Camille Lesueur",
+        role: "Maître Prothésiste Ongulaire & Formatrice",
+        bio: "Formée à Saint-Pétersbourg et Paris, Camille maîtrise le travail millimétré des cuticules et le nail art architectural.",
+        avatar: "/images/artisans/artisan-3.jpg",
+      },
+    ],
+    services: [
+      {
+        id: "s13",
+        name: "Manucure Russe Signature & Vernis Semi-Permanent",
+        category: "Manucure & Mains",
+        durationMinutes: 60,
+        priceEuros: 65,
+        description:
+          "Nettoyage minutieux des cuticules à l'embout diamant, mise en forme et pose sous cuticule pour 4 semaines de perfection.",
+      },
+      {
+        id: "s14",
+        name: "Beauté des Pieds Spa & Bain aux Sels Détox",
+        category: "Pédicure & Pieds",
+        durationMinutes: 50,
+        priceEuros: 70,
+        description:
+          "Bain aux huiles essentielles, gommage doux aux sels d'Epsom, élimination des callosités et modelage nourrissant.",
+      },
+      {
+        id: "s15",
+        name: "Rallongement Gel Porcelaine Naturel",
+        category: "Rallongement & Gel",
+        durationMinutes: 90,
+        priceEuros: 110,
+        description:
+          "Sculpture sur chablon sans capsule, pour un galbe ultra fin, solide et indétectable.",
+      },
+    ],
+    reviews: [
+      {
+        id: "r6",
+        author: "Sophie M.",
+        rating: 5,
+        date: "22 octobre 2026",
+        comment:
+          "La meilleure manucure russe de Paris sans hésiter. Mes ongles n'ont jamais été aussi sains et le vernis tient plus de 4 semaines sans s'écailler.",
+        service: "Manucure Russe Signature & Vernis Semi-Permanent",
+      },
+    ],
+  },
+  {
+    id: "v7",
+    slug: "soho-nail-atelier-newyork",
+    name: "SoHo Nail Atelier",
+    tagline: "Minimalist Japanese nail art & organic restorative hand spas",
+    description:
+      "Situé au cœur de SoHo à New York, cet atelier d'inspiration tokyoïte propose un nail art architectural avant-gardiste et des rituels de soin des mains d'une pureté absolue.",
+    badge: "Sélection Internationale",
+    category: "nails",
+    categoryLabel: "Art Architectural Ongulaire",
+    city: "New York",
+    district: "SoHo, Manhattan",
+    address: "42 Mercer St, New York, NY 10013",
+    rating: "4,9",
+    reviewCount: 115,
+    startingPrice: "55 $",
+    image: "/images/editorial/nails-salon.jpg",
+    gallery: [
+      "/images/editorial/nails-salon.jpg",
+      "/images/editorial/nails-detail.jpg",
+      "/images/cities/new-york.jpg",
+    ],
+    features: [
+      "Vernis et gels importés directement de Tokyo",
+      "Protocoles de soin 100% sans solvants toxiques",
+      "Espace épuré zen en bois de cèdre et pierre naturelle",
+      "Service de thé matcha de cérémonie offert",
+    ],
+    openingHours: [
+      { day: "Lundi", hours: "10h00 - 19h00" },
+      { day: "Mardi", hours: "10h00 - 19h00" },
+      { day: "Mercredi", hours: "10h00 - 20h00" },
+      { day: "Jeudi", hours: "10h00 - 20h00" },
+      { day: "Vendredi", hours: "10h00 - 20h00" },
+      { day: "Samedi", hours: "09h00 - 19h00" },
+      { day: "Dimanche", hours: "11h00 - 18h00" },
+    ],
+    team: [
+      {
+        id: "t7",
+        name: "Yuki Tanaka",
+        role: "Head Nail Artist",
+        bio: "Artiste renommée à Ginza et Manhattan, réputée pour ses lignes fines et ses finitions chromées discrètes.",
+        avatar: "/images/artisans/artisan-2.jpg",
+      },
+    ],
+    services: [
+      {
+        id: "s16",
+        name: "Japanese Minimalist Gel Manicure",
+        category: "Manucure & Gel",
+        durationMinutes: 60,
+        priceEuros: 75,
+        description:
+          "Soin doux des ongles naturels avec gel japonais respirant haute brillance.",
+      },
+      {
+        id: "s17",
+        name: "Bespoke Architectural Nail Art",
+        category: "Nail Art",
+        durationMinutes: 75,
+        priceEuros: 95,
+        description:
+          "Création graphique personnalisée : lignes pures, dégradés d'aquarelle et accents dorés fins.",
+      },
+    ],
+    reviews: [
+      {
+        id: "r7",
+        author: "Emily R.",
+        rating: 5,
+        date: "18 octobre 2026",
+        comment:
+          "The precision of Yuki's work is unmatched anywhere in NYC. An incredible calming sanctuary in the middle of SoHo.",
+        service: "Japanese Minimalist Gel Manicure",
+      },
+    ],
+  },
 ];
 
 export function getVenueBySlug(slug: string): Venue | undefined {
   return VENUES.find((v) => v.slug === slug);
 }
+

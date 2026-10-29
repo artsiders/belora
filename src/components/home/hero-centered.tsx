@@ -10,11 +10,6 @@ export function HeroCentered() {
   const [currentMonth, setCurrentMonth] = useState<Date | null>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
 
-  // Initialisation différée de la date courante (évite l'erreur blocking-prerender au build)
-  useEffect(() => {
-    setCurrentMonth(new Date());
-  }, []);
-
   // Fermer le calendrier au clic extérieur
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

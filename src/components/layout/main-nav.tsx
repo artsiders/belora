@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const emptySubscribe = () => () => {};
 
 const NAV_LINKS = [
   {
@@ -35,21 +37,17 @@ const NAV_LINKS = [
 ];
 
 const CATEGORY_CHIPS = [
-  { name: "Coiffure", href: "/search?category=hair" },
-  { name: "Esthétique", href: "/search?category=facial" },
-  { name: "Onglerie", href: "/search?category=nails" },
-  { name: "Barbier", href: "/search?category=barber" },
-  { name: "Massages", href: "/search?category=massage" },
-  { name: "À domicile", href: "/search?type=home" },
+  { name: "Coiffure", href: "/category/hair" },
+  { name: "Esthétique", href: "/category/facial" },
+  { name: "Onglerie", href: "/category/nails" },
+  { name: "Barbier", href: "/category/barber" },
+  { name: "Massages", href: "/category/massage" },
+  { name: "À domicile", href: "/category/home" },
 ];
 
 export function MainNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
   const closeMenu = () => setMobileOpen(false);
 

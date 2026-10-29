@@ -20,13 +20,13 @@ const CATEGORIES: CategoryItem[] = [
   {
     id: "hair",
     name: "Coiffure",
-    href: "/search?category=hair",
+    href: "/category/hair",
     icon: <Scissors className="w-5 h-5 text-neutral-700 group-hover:text-neutral-950 transition-colors duration-150 stroke-[1.5]" />,
   },
   {
     id: "facial",
     name: "Esthétique",
-    href: "/search?category=facial",
+    href: "/category/facial",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -49,7 +49,7 @@ const CATEGORIES: CategoryItem[] = [
   {
     id: "nails",
     name: "Onglerie",
-    href: "/search?category=nails",
+    href: "/category/nails",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -70,7 +70,7 @@ const CATEGORIES: CategoryItem[] = [
   {
     id: "barber",
     name: "Barbier",
-    href: "/search?category=barber",
+    href: "/category/barber",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -89,13 +89,13 @@ const CATEGORIES: CategoryItem[] = [
   {
     id: "massage",
     name: "Corps et esprit",
-    href: "/search?category=massage",
+    href: "/category/massage",
     icon: <Leaf className="w-5 h-5 text-neutral-700 group-hover:text-neutral-950 transition-colors duration-150 stroke-[1.5]" />,
   },
   {
     id: "home",
     name: "À domicile",
-    href: "/search?type=home",
+    href: "/category/home",
     icon: <Home className="w-5 h-5 text-neutral-700 group-hover:text-neutral-950 transition-colors duration-150 stroke-[1.5]" />,
   },
 ];
@@ -112,7 +112,7 @@ export function CategoryCircles() {
             <Link
               key={cat.id}
               href={cat.href}
-              className="group flex flex-col items-center shrink-0 min-w-[64px] sm:min-w-[76px] rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/10 focus-visible:ring-offset-2"
+              className="group flex flex-col items-center shrink-0 min-w-16 sm:min-w-19 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/10 focus-visible:ring-offset-2"
             >
               {/* Cercle d'icône */}
               <div
@@ -126,7 +126,7 @@ export function CategoryCircles() {
               </div>
 
               {/* Libellé */}
-              <span className="mt-2.5 text-[12px] sm:text-[13px] font-medium tracking-tight text-neutral-600 group-hover:text-neutral-900 transition-colors duration-150 text-center leading-tight">
+              <span className="mt-2.5 text-xs font-medium tracking-tight text-neutral-600 group-hover:text-neutral-900 transition-colors duration-150 text-center leading-tight">
                 {cat.name}
               </span>
             </Link>

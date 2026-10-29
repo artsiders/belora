@@ -18,13 +18,26 @@ import {
 
 const CATEGORIES = [
   { id: "all", label: "Toutes les disciplines" },
+  { id: "nails", label: "Onglerie & Manucure" },
   { id: "hair", label: "Coiffure d’auteur" },
   { id: "facial", label: "Soins Visage" },
   { id: "massage", label: "Massages & Spas" },
   { id: "barber", label: "Barbiers & Homme" },
 ];
 
-const CITIES = ["Toutes les villes", "Paris", "Lyon", "Bordeaux", "Marseille"];
+const CITIES = [
+  "Toutes les villes",
+  "Paris",
+  "New York",
+  "Londres",
+  "Milan",
+  "Tokyo",
+  "Dubaï",
+  "Genève",
+  "Lyon",
+  "Bordeaux",
+  "Marseille",
+];
 
 export function SearchClient() {
   const searchParams = useSearchParams();
