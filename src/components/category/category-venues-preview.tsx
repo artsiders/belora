@@ -22,12 +22,9 @@ export function CategoryVenuesPreview({ category }: CategoryVenuesPreviewProps) 
         {/* En-tête de section avec titre harmonisé et mots en text-primary */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12">
           <div>
-            <div className="flex items-center gap-3 mb-2">
-              <span className="text-xs uppercase font-semibold tracking-widest text-primary-700">
-                Sélection d&apos;exception
-              </span>
-              <span className="h-px w-10 bg-primary-400/80" aria-hidden="true" />
-            </div>
+            <span className="eyebrow text-sand-500 font-semibold block mb-1.5">
+              Sélection d&apos;exception
+            </span>
             <h2 id="venues-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950">
               Nos havres recommandés,{" "}
               <span className="text-primary-600 font-bold">

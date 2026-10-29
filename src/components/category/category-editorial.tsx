@@ -23,13 +23,10 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Colonne Gauche : Manifeste & 3 Piliers d'Excellence */}
             <div className="lg:col-span-7">
-              {/* Eyebrow avec filet */}
-              <div className="flex items-center gap-3.5 mb-4 sm:mb-6">
-                <span className="text-xs uppercase font-semibold tracking-widest text-primary-700">
-                  Philosophie du soin — {category.name}
-                </span>
-                <span className="h-px w-12 sm:w-16 bg-primary-400/80" aria-hidden="true" />
-              </div>
+              {/* Eyebrow sobre sans trait décoratif */}
+              <span className="eyebrow text-primary-700 font-semibold block mb-2 sm:mb-3">
+                Philosophie du soin &bull; {category.name}
+              </span>
 
               {/* Titre avec mots en text-primary */}
               <h2
@@ -104,12 +101,9 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
           {/* En-tête harmonisé avec mot en text-primary */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12 pb-5 border-b border-primary-200/80">
             <div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-xs uppercase font-semibold tracking-widest text-primary-700">
-                  Tendances & Techniques
-                </span>
-                <span className="h-px w-10 bg-primary-400/80" aria-hidden="true" />
-              </div>
+              <span className="eyebrow text-sand-500 font-semibold block mb-1.5">
+                Tendances & Techniques
+              </span>
               <h2 id="frequent-searches-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950">
                 Recherches fréquentes,{" "}
                 <span className="text-primary-600 font-bold">

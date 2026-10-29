@@ -18,12 +18,9 @@ export function CategoryProCta({ category }: CategoryProCtaProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Colonne Gauche : Titre et bouton d'action */}
             <div className="lg:col-span-7 space-y-5">
-              <div className="flex items-center gap-3">
-                <span className="text-xs uppercase font-semibold tracking-widest text-primary-300">
-                  Espace Partenaires Pro
-                </span>
-                <span className="h-px w-10 bg-primary-400/80" aria-hidden="true" />
-              </div>
+              <span className="eyebrow text-primary-300 font-semibold block mb-1">
+                Espace Partenaires Pro
+              </span>
 
               <h2
                 id="pro-cta-heading"

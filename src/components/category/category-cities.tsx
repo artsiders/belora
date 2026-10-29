@@ -30,12 +30,9 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
         {/* En-tête avec titre standardisé et mots en text-primary */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12 pb-5 border-b border-primary-200/80">
           <div>
-            <div className="flex items-center gap-3 mb-2">
-              <span className="text-xs uppercase font-semibold tracking-widest text-primary-700">
-                Métropoles mondiales
-              </span>
-              <span className="h-px w-10 bg-primary-400/80" aria-hidden="true" />
-            </div>
+            <span className="eyebrow text-sand-500 font-semibold block mb-1.5">
+              Métropoles mondiales
+            </span>
             <h2 id="cities-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950">
               Trouver un artisan{" "}
               <span className="text-primary-600 font-bold">
