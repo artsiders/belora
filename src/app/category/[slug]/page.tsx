@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MainNav } from "@/components/layout/main-nav";
@@ -44,7 +45,44 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   };
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+function CategoryLoadingFallback() {
+  return (
+    <>
+      <CategorySwitcher currentSlug="" />
+      <main className="flex-1">
+        <section className="relative overflow-hidden bg-white border-b border-neutral-200/80">
+          <div className="container-belora py-10 lg:py-14">
+            <div className="max-w-3xl space-y-4">
+              <div className="h-4 w-28 bg-neutral-100 rounded animate-pulse" />
+              <div className="h-10 w-2/3 bg-neutral-100 rounded animate-pulse" />
+              <div className="h-4 w-1/2 bg-neutral-100 rounded animate-pulse" />
+              <div className="h-14 w-full max-w-2xl bg-neutral-50 border border-neutral-200/80 rounded-2xl mt-4 animate-pulse" />
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
+  );
+}
+
+export default function CategoryPage({ params }: CategoryPageProps) {
+  return (
+    <div className="flex flex-col min-h-screen bg-white text-neutral-900 selection:bg-primary-100 selection:text-primary-900">
+      {/* 1. Header & Navigation Institutionnelle */}
+      <MainNav />
+
+      {/* 2. Contenu dynamique encapsulé dans Suspense pour l'App Shell instantanée */}
+      <Suspense fallback={<CategoryLoadingFallback />}>
+        <CategoryDetails params={params} />
+      </Suspense>
+
+      {/* 3. Pied de Page Institutionnel */}
+      <Footer />
+    </div>
+  );
+}
+
+async function CategoryDetails({ params }: CategoryPageProps) {
   const { slug } = await params;
   const category = CATEGORIES_DATA[slug];
 
@@ -53,35 +91,29 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-neutral-900 selection:bg-primary-100 selection:text-primary-900">
-      {/* 1. Header & Navigation Institutionnelle */}
-      <MainNav />
-
-      {/* 2. Barre de navigation rapide entre univers */}
+    <>
+      {/* Barre de navigation rapide entre univers */}
       <CategorySwitcher currentSlug={slug} />
 
       <main className="flex-1">
-        {/* 3. Hero avec Titre dynamique & Capsule de Recherche */}
+        {/* Hero avec Titre dynamique & Capsule de Recherche */}
         <CategoryHero category={category} />
 
-        {/* 4. Répertoire de Métropoles Internationales avec photos et compteurs */}
+        {/* Répertoire de Métropoles Internationales avec photos et compteurs */}
         <CategoryCities category={category} />
 
-        {/* 5. Havres & Ateliers Certifiés Recommandés */}
+        {/* Havres & Ateliers Certifiés Recommandés */}
         <CategoryVenuesPreview category={category} />
 
-        {/* 6. Section Éditoriale & Recherches Fréquentes (Style Planity) */}
+        {/* Section Éditoriale & Recherches Fréquentes (Style Planity) */}
         <CategoryEditorial category={category} />
 
-        {/* 7. Guide & Conseils d'Experts */}
+        {/* Guide & Conseils d'Experts */}
         <CategoryGuide category={category} />
 
-        {/* 8. Appel à l'action pour les Établissements Partenaires */}
+        {/* Appel à l'action pour les Établissements Partenaires */}
         <CategoryProCta category={category} />
       </main>
-
-      {/* 9. Pied de Page Institutionnel */}
-      <Footer />
-    </div>
+    </>
   );
 }

@@ -17,14 +17,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BookPage({ params }: BookPageProps) {
-  const { venueSlug } = await params;
-  const venue = getVenueBySlug(venueSlug);
-
-  if (!venue) {
-    notFound();
-  }
-
+export default function BookPage({ params }: BookPageProps) {
   return (
     <div className="flex flex-col min-h-screen bg-white text-neutral-900 selection:bg-primary-100 selection:text-primary-900">
       <MainNav />
@@ -37,11 +30,22 @@ export default async function BookPage({ params }: BookPageProps) {
             </div>
           }
         >
-          <BookClient venue={venue} />
+          <BookContent params={params} />
         </Suspense>
       </main>
 
       <Footer />
     </div>
   );
+}
+
+async function BookContent({ params }: BookPageProps) {
+  const { venueSlug } = await params;
+  const venue = getVenueBySlug(venueSlug);
+
+  if (!venue) {
+    notFound();
+  }
+
+  return <BookClient venue={venue} />;
 }

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -25,7 +26,25 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function VenuePage({ params }: VenuePageProps) {
+export default function VenuePage({ params }: VenuePageProps) {
+  return (
+    <div className="flex flex-col min-h-screen bg-white text-white selection:bg-primary-100 selection:text-primary-900">
+      <MainNav />
+      <Suspense
+        fallback={
+          <div className="flex-1 container-belora py-16 text-center text-xs text-neutral-500">
+            Chargement de l&apos;établissement...
+          </div>
+        }
+      >
+        <VenueContent params={params} />
+      </Suspense>
+      <Footer />
+    </div>
+  );
+}
+
+async function VenueContent({ params }: VenuePageProps) {
   const { slug } = await params;
   const venue = getVenueBySlug(slug);
 
@@ -34,9 +53,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-white selection:bg-primary-100 selection:text-primary-900">
-      <MainNav />
-
+    <>
       {/* 1. Fil d'Ariane épuré */}
       <div className="border-b border-primary-200/80 bg-primary-600 py-3 text-xs text-white/80">
         <div className="container-belora flex items-center gap-2">
@@ -362,8 +379,6 @@ export default async function VenuePage({ params }: VenuePageProps) {
           </div>
         </div>
       </main>
-
-      <Footer />
-    </div>
+    </>
   );
 }

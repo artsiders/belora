@@ -13,7 +13,7 @@ import { CategoryVenuesPreview } from "@/components/category/category-venues-pre
 import { CategoryEditorial } from "@/components/category/category-editorial";
 import { CategoryGuide } from "@/components/category/category-guide";
 import { CategoryProCta } from "@/components/category/category-pro-cta";
-import { Star, MapPin, Heart, ArrowRight, Compass, ShieldCheck, SearchAlert } from "lucide-react";
+import { Star, MapPin, Heart, ArrowRight, SearchAlert } from "lucide-react";
 
 export function SearchClient() {
   const searchParams = useSearchParams();
