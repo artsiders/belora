@@ -92,7 +92,7 @@ export function HeroCentered() {
           action="/search"
           method="GET"
           role="search"
-          className="w-full max-w-4xl bg-white/95 backdrop-blur-md rounded-2xl border border-primary-200/90 shadow-2xl p-2 sm:p-2.5"
+          className="w-full max-w-4xl bg-white/95 backdrop-blur-md rounded-2xl p-2 sm:p-2.5"
         >
           <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-0">
             {/* Champ 1 : Où souhaitez-vous ? */}
@@ -230,7 +230,7 @@ export function HeroCentered() {
             <div className="pt-1.5 md:pt-0 shrink-0">
               <button
                 type="submit"
-                className="btn btn-primary py-3.5 rounded-xl w-full cursor-pointer"
+                className="btn btn-primary py-5 rounded-xl w-full cursor-pointer"
               >
                 <Search className="w-4 h-4 text-white shrink-0" />
                 <span>Rechercher</span>

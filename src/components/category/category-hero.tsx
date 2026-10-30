@@ -93,7 +93,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
       </div>
 
       {/* 2. Contenu principal : aligné à gauche avec boîte sobre et concise */}
-      <div className="container-belora relative z-20 flex flex-col items-start gap-5 sm:gap-6">
+      <div className="container-belora relative z-20 flex flex-col items-start gap-8 sm:gap-10">
         {/* Fil d'Ariane épuré sans fioritures */}
         <nav aria-label="Fil d'ariane" className="flex items-center gap-1.5 text-xs text-white/70">
           <Link href="/" className="hover:text-white transition-colors">
@@ -108,7 +108,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
         </nav>
 
         {/* Carré sobre, compact et professionnel (Noir encre architectural) */}
-        <div className="w-full max-w-xl lg:max-w-2xl bg-secondary-950/85 backdrop-blur-md rounded-2xl border border-white/10 p-5 sm:p-7 shadow-xl text-left">
+        <div className="w-full max-w-xl lg:max-w-2xl bg-secondary-950/50 backdrop-blur-sm rounded-2xl p-5 sm:p-7 text-left">
           {/* Eyebrow sobre sans trait décoratif */}
           <span className="block text-xs uppercase font-semibold tracking-wider text-sand-400 mb-2">
             {category.name}
@@ -134,7 +134,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
             action="/search"
             method="GET"
             role="search"
-            className="w-full bg-white/95 backdrop-blur-md rounded-2xl border border-primary-200/90 shadow-2xl p-2 sm:p-2.5"
+            className="w-full bg-white/95 backdrop-blur-md rounded-2xl p-2 sm:p-2.5"
           >
             <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-0">
               {/* Champ 1 : Où ? */}
@@ -276,7 +276,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
               <div className="pt-1.5 md:pt-0 shrink-0">
                 <button
                   type="submit"
-                  className="btn btn-primary py-3.5 rounded-xl w-full cursor-pointer flex items-center justify-center gap-2"
+                  className="btn btn-primary py-5 rounded-xl w-full cursor-pointer flex items-center justify-center gap-2"
                 >
                   <Search className="w-4 h-4 text-white shrink-0" />
                   <span>Rechercher</span>
