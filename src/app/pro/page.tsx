@@ -168,7 +168,7 @@ export default function ProPage() {
                 <div className="flex flex-wrap items-center gap-3.5 pt-2">
                   <Link
                     href="/register?role=pro"
-                    className="btn btn-primary py-3.5 px-6 text-xs sm:text-sm inline-flex items-center gap-2 rounded-xl"
+                    className="btn btn-primary py-3.5 px-6 text-sm sm:text-base inline-flex items-center gap-2 rounded-xl"
                   >
                     <span>Démarrer l’essai gratuit</span>
                     <ArrowRight className="w-4 h-4" />
@@ -176,7 +176,7 @@ export default function ProPage() {
 
                   <a
                     href="#agenda-demo"
-                    className="btn btn-outline py-3.5 px-6 text-xs sm:text-sm rounded-xl"
+                    className="btn btn-outline py-3.5 px-6 text-sm sm:text-base rounded-xl"
                   >
                     <span>Découvrir l’agenda en direct</span>
                   </a>
@@ -237,7 +237,7 @@ export default function ProPage() {
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-950 mb-3">
                 Un agenda silencieux, conçu pour le rythme de votre salon.
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal">
                 Développé avec des artisans pour supprimer les clics superflus. Vos membres d’équipe visualisent leurs rituels d’un seul coup d’œil.
               </p>
             </div>
@@ -275,7 +275,7 @@ export default function ProPage() {
                         />
                       </div>
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold text-neutral-950">
+                        <h4 className="text-sm sm:text-base font-bold text-neutral-950">
                           Hélène de Valois
                         </h4>
                         <p className="text-xs text-primary-600 font-medium">
@@ -325,7 +325,7 @@ export default function ProPage() {
                         />
                       </div>
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold text-neutral-950">
+                        <h4 className="text-sm sm:text-base font-bold text-neutral-950">
                           Marc Sémard
                         </h4>
                         <p className="text-xs text-secondary-600 font-medium">
@@ -375,7 +375,7 @@ export default function ProPage() {
                         />
                       </div>
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold text-neutral-950">
+                        <h4 className="text-sm sm:text-base font-bold text-neutral-950">
                           Nour Kaddour
                         </h4>
                         <p className="text-xs text-primary-600 font-medium">
@@ -433,7 +433,7 @@ export default function ProPage() {
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-950 mb-3">
                 Pourquoi les meilleurs ateliers choisissent Belora Pro.
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal">
                 Chaque fonctionnalité a été pensée pour supprimer les frictions et valoriser votre expertise artisanale.
               </p>
             </div>
@@ -477,7 +477,7 @@ export default function ProPage() {
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-950 mb-3">
                 Un modèle respectueux de votre indépendance.
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal">
                 Fini les commissions masquées et les logiciels complexes. Nous remettons l’artisan au centre.
               </p>
             </div>
@@ -545,7 +545,7 @@ export default function ProPage() {
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-950 mb-3">
                 Des forfaits fixes, sans commission abusive.
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal">
                 14 jours d’essai offert sur chaque plan. Modifiez ou résiliez à tout moment en un clic.
               </p>
 
@@ -629,7 +629,7 @@ export default function ProPage() {
 
                     <Link
                       href="/register?role=pro"
-                      className={`w-full btn py-3 text-xs sm:text-sm font-semibold rounded-xl text-center ${
+                      className={`w-full btn py-3 text-sm sm:text-base font-semibold rounded-xl text-center ${
                         plan.highlighted ? "btn-primary" : "btn-outline"
                       }`}
                     >
@@ -649,7 +649,7 @@ export default function ProPage() {
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-950 mb-3">
                 Tout ce que vous devez savoir.
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal">
                 Une question spécifique ? Notre équipe d’accompagnement est disponible par téléphone 6j/7.
               </p>
             </div>
@@ -678,7 +678,7 @@ export default function ProPage() {
                       />
                     </button>
                     {isOpen && (
-                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal border-t border-primary-100">
+                      <div className="px-5 pb-5 pt-1 text-sm sm:text-base text-neutral-600 leading-relaxed font-normal border-t border-primary-100">
                         {faq.answer}
                       </div>
                     )}
@@ -710,7 +710,7 @@ export default function ProPage() {
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight">
                   Rejoignez les maisons d’excellence référencées sur Belora.
                 </h2>
-                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-normal">
+                <p className="text-sm sm:text-base text-neutral-300 leading-relaxed font-normal">
                   Activation immédiate, 14 jours d’essai offert sans engagement, accompagnement sur-mesure.
                 </p>
               </div>
@@ -718,13 +718,13 @@ export default function ProPage() {
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 relative z-10 shrink-0">
                 <Link
                   href="/register?role=pro"
-                  className="btn btn-primary py-3.5 px-7 text-xs sm:text-sm font-semibold rounded-xl text-center"
+                  className="btn btn-primary py-3.5 px-7 text-sm sm:text-base font-semibold rounded-xl text-center"
                 >
                   Créer mon atelier gratuit
                 </Link>
                 <Link
                   href="/login"
-                  className="btn btn-outline py-3.5 px-6 text-xs sm:text-sm rounded-xl text-center text-white border-primary-700 hover:bg-neutral-900"
+                  className="btn btn-outline py-3.5 px-6 text-sm sm:text-base rounded-xl text-center text-white border-primary-700 hover:bg-neutral-900"
                 >
                   Connexion praticien
                 </Link>

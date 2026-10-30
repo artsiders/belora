@@ -45,7 +45,7 @@ export function PhilosophySection() {
           </h2>
 
           {/* Texte de présentation éditorial avec contraste et lisibilité parfaits */}
-          <p className="text-xs sm:text-sm lg:text-base text-neutral-700 leading-relaxed max-w-lg mb-6 sm:mb-8 font-normal">
+          <p className="text-sm sm:text-base lg:text-base text-neutral-700 leading-relaxed max-w-lg mb-6 sm:mb-8 font-normal">
             Chez Belora, nous croyons que la beauté commence par le bien-être.
             Découvrez et réservez les meilleurs salons, instituts et professionnels
             indépendants, sélectionnés pour la qualité de leurs services et le

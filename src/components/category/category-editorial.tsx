@@ -39,11 +39,11 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                 </span>
               </h2>
 
-              <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed font-medium mb-3">
+              <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-medium mb-3">
                 {story.lead}
               </p>
 
-              <div className="space-y-2 text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal mb-5">
+              <div className="space-y-2 text-sm sm:text-base text-neutral-600 leading-relaxed font-normal mb-5">
                 {story.paragraphs.map((p, idx) => (
                   <p key={idx}>{p}</p>
                 ))}
@@ -56,7 +56,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                     <span className="text-2xl font-bold text-primary-600 mb-1">
                       {pillar.num}
                     </span>
-                    <h3 className="text-xs sm:text-sm font-bold text-neutral-950 mb-0.5 leading-snug">
+                    <h3 className="text-sm sm:text-base font-bold text-neutral-950 mb-0.5 leading-snug">
                       {pillar.title}
                     </h3>
                     <p className="text-xs text-neutral-600 leading-relaxed font-normal">
@@ -105,7 +105,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                   les rituels les plus demandés.
                 </span>
               </h2>
-              <p className="mt-1 text-xs sm:text-sm text-neutral-600 font-normal">
+              <p className="mt-1 text-sm sm:text-base text-neutral-600 font-normal">
                 Les protocoles et soins signatures les plus plébiscités en {category.shortName.toLowerCase()}.
               </p>
             </div>
@@ -120,7 +120,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
             {/* Colonne 1 : Soins signatures */}
             <div>
               <div className="flex items-center justify-between pb-2.5 mb-1.5 border-b border-neutral-900/10">
-                <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-950">
+                <h3 className="text-sm sm:text-base font-bold uppercase tracking-wider text-neutral-950">
                   Soins signatures & rituels doux
                 </h3>
                 <span className="text-xs font-semibold text-primary-600">
@@ -141,7 +141,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                           {item.tag}
                         </span>
                       )}
-                      <span className="text-xs sm:text-sm font-medium text-neutral-950 group-hover:text-primary-600 transition-colors">
+                      <span className="text-sm sm:text-base font-medium text-neutral-950 group-hover:text-primary-600 transition-colors">
                         {item.title}
                       </span>
                     </div>
@@ -154,7 +154,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
             {/* Colonne 2 : Techniques de haute précision */}
             <div>
               <div className="flex items-center justify-between pb-2.5 mb-1.5 border-b border-neutral-900/10">
-                <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-950">
+                <h3 className="text-sm sm:text-base font-bold uppercase tracking-wider text-neutral-950">
                   Techniques avancées & finitions
                 </h3>
                 <span className="text-xs font-semibold text-primary-600">
@@ -175,7 +175,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                           {item.tag}
                         </span>
                       )}
-                      <span className="text-xs sm:text-sm font-medium text-neutral-950 group-hover:text-primary-600 transition-colors">
+                      <span className="text-sm sm:text-base font-medium text-neutral-950 group-hover:text-primary-600 transition-colors">
                         {item.title}
                       </span>
                     </div>

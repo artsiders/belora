@@ -76,7 +76,7 @@ export default function AboutPage() {
                 <h2 className="font-display text-3xl sm:text-4xl text-neutral-950">
                   La fin de la beauté industrielle.
                 </h2>
-                <div className="space-y-4 text-xs sm:text-sm text-neutral-700 leading-relaxed font-normal">
+                <div className="space-y-4 text-sm sm:text-base text-neutral-700 leading-relaxed font-normal">
                   <p>
                     Les plateformes généralistes ont standardisé la réservation en compressant les temps de pose, en banalisant les salons indépendants et en encourageant une course au volume délétère pour la qualité du geste.
                   </p>
@@ -103,7 +103,7 @@ export default function AboutPage() {
               <h2 className="font-display text-3xl sm:text-4xl text-neutral-950 mb-3">
                 Notre protocole d’audit en 4 critères.
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal">
                 Moins de 15% des établissements candidats intègrent la sélection officielle Belora.
               </p>
             </div>
@@ -120,7 +120,7 @@ export default function AboutPage() {
                   <h3 className="text-base font-semibold text-neutral-950">
                     {crit.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
+                  <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal">
                     {crit.description}
                   </p>
                 </div>

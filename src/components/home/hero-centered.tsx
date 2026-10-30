@@ -110,7 +110,7 @@ export function HeroCentered() {
                   name="location"
                   type="text"
                   placeholder="Ville, code postal..."
-                  className="w-full bg-transparent text-xs sm:text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none font-medium truncate"
+                  className="w-full bg-transparent text-sm sm:text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none font-medium truncate"
                 />
               </div>
             </div>
@@ -133,7 +133,7 @@ export function HeroCentered() {
                   name="category"
                   type="text"
                   placeholder="Coiffure, soins..."
-                  className="w-full bg-transparent text-xs sm:text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none font-medium truncate"
+                  className="w-full bg-transparent text-sm sm:text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none font-medium truncate"
                 />
               </div>
             </div>
@@ -157,7 +157,7 @@ export function HeroCentered() {
                     name="date"
                     value={selectedDate ? selectedDate.toISOString().split("T")[0] : ""}
                   />
-                  <span className="block text-xs sm:text-sm text-neutral-400 font-medium truncate">
+                  <span className="block text-sm sm:text-base text-neutral-400 font-medium truncate">
                     {selectedDate ? formatDisplayDate(selectedDate) : "Ajouter une date"}
                   </span>
                 </div>

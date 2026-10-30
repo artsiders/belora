@@ -39,7 +39,7 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
                 dans les grandes capitales
               </span>
             </h2>
-            <p className="mt-1 text-xs sm:text-sm text-neutral-600 font-normal">
+            <p className="mt-1 text-sm sm:text-base text-neutral-600 font-normal">
               Les meilleures adresses sélectionnées dans 12 capitales culturelles.
             </p>
           </div>

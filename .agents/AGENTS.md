@@ -39,7 +39,7 @@
 ## 8. Interdiction de la Surcharge des Composants Tailwind
 - **Interdiction de surcharger excessivement les composants Tailwind globaux** (ex : `btn-navy`, `btn-outline`, `input`, etc.).
 - Lorsqu'un composant réutilisable est appliqué, ne pas ré-ajouter une longue liste de classes utilitaires redondantes (paddings, typographies, ombres, flexions).
-- **Mauvais exemple à proscrire** : `className="shrink-0 text-xs sm:text-sm px-5 py-2.5 inline-flex items-center gap-1.5 font-extrabold shadow-sm"`
+- **Mauvais exemple à proscrire** : `className="shrink-0 text-sm sm:text-base px-5 py-2.5 inline-flex items-center gap-1.5 font-extrabold shadow-sm"`
 - **Bon exemple à privilégier** : `className="shrink-0"` (laisser la classe composant globale de `globals.css` gérer le style, le padding, l'alignement et la typographie).
 
 ## 9. Interdiction des Couleurs Hexadécimales en Dur (`bg-[#...]`, `text-[#...]`)

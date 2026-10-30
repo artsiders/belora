@@ -63,7 +63,7 @@ export default function HelpPage() {
             <h1 className="font-display text-4xl sm:text-5xl text-neutral-950 mb-4">
               Comment pouvons-nous vous aider ?
             </h1>
-            <p className="text-xs sm:text-sm text-neutral-600 mb-8 max-w-md mx-auto">
+            <p className="text-sm sm:text-base text-neutral-600 mb-8 max-w-md mx-auto">
               Retrouvez toutes les réponses concernant vos réservations, vos paiements et nos critères d’audit.
             </p>
 
@@ -73,7 +73,7 @@ export default function HelpPage() {
               <input
                 type="text"
                 placeholder="Rechercher une question, une règle d’annulation..."
-                className="input pl-11 py-2.5 text-xs sm:text-sm bg-primary-50/10"
+                className="input pl-11 py-2.5 text-sm sm:text-base bg-primary-50/10"
               />
             </div>
           </div>

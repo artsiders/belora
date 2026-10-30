@@ -51,7 +51,7 @@ export default function RegisterPage() {
         <h1 className="text-3xl sm:text-4xl text-neutral-950 tracking-tight">
           Rejoindre Belora
         </h1>
-        <p className="text-xs sm:text-sm text-neutral-600 mt-2 font-normal leading-relaxed">
+        <p className="text-sm sm:text-base text-neutral-600 mt-2 font-normal leading-relaxed">
           Choisissez l’expérience qui vous correspond pour débuter votre parcours.
         </p>
       </div>

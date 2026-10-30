@@ -123,7 +123,7 @@ export function ArtisanSpotlight() {
                 passionnés du geste.
               </span>
             </h2>
-            <p className="text-xs sm:text-sm text-neutral-500 font-normal">
+            <p className="text-sm sm:text-base text-neutral-500 font-normal">
               Des praticiens indépendants sélectionnés pour leur savoir-faire et leur exigence.
             </p>
           </div>

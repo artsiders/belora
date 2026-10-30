@@ -11,7 +11,7 @@ export function FeaturedSanctuary() {
               L’intimité d’un lieu d’exception
             </h2>
           </div>
-          <p className="text-xs sm:text-sm text-fg-muted max-w-md">
+          <p className="text-sm sm:text-base text-fg-muted max-w-md">
             Chaque salon référencé par Belora est visité et validé pour la qualité de son accueil, le silence du lieu et l’expertise de son équipe.
           </p>
         </div>
@@ -39,7 +39,7 @@ export function FeaturedSanctuary() {
             <h3 className="text-3xl sm:text-4xl text-neutral-50 mb-3">
               Maison Albar Institut & Spa
             </h3>
-            <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed mb-6 max-w-md">
+            <p className="text-sm sm:text-base text-neutral-200 leading-relaxed mb-6 max-w-md">
               Nichée au cœur de la Presqu’île de Lyon, cette ancienne demeure de maître réunit les rituels du visage sur-mesure et l’hydrothérapie dans un cadre minéral d’un calme absolu.
             </p>
 

@@ -44,7 +44,7 @@ export default function NotFound() {
               type="text"
               name="q"
               placeholder="Rechercher une maison, un artisan ou un soin..."
-              className="flex-1 bg-transparent border-0 py-1.5 px-2 text-xs sm:text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none"
+              className="flex-1 bg-transparent border-0 py-1.5 px-2 text-sm sm:text-base text-neutral-900 placeholder:text-neutral-400 focus:outline-none"
             />
             <button type="submit" className="btn btn-primary btn-xs sm:btn-sm">
               Chercher

@@ -84,7 +84,7 @@ export function CuratedVenues() {
             >
               Nos salons populaires près de chez vous
             </h2>
-            <p className="text-xs sm:text-sm text-neutral-500 font-normal">
+            <p className="text-sm sm:text-base text-neutral-500 font-normal">
               Une sélection d’adresses indépendantes auditées pour l’excellence de leurs praticiens.
             </p>
           </div>

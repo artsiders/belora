@@ -119,7 +119,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
           </h1>
 
           {/* Sous-titre sobre et court */}
-          <p className="text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed">
+          <p className="text-sm sm:text-base text-neutral-300 font-normal leading-relaxed">
             {category.heroSubtitle}
           </p>
         </div>
@@ -150,7 +150,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="Ville, code postal, pays..."
-                    className="w-full bg-transparent text-xs sm:text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none font-medium truncate"
+                    className="w-full bg-transparent text-sm sm:text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none font-medium truncate"
                   />
                 </div>
               </div>
@@ -176,7 +176,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder={category.searchPlaceholder}
-                    className="w-full bg-transparent text-xs sm:text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none font-medium truncate"
+                    className="w-full bg-transparent text-sm sm:text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none font-medium truncate"
                   />
                 </div>
               </div>
@@ -200,7 +200,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
                       name="date"
                       value={selectedDate ? selectedDate.toISOString().split("T")[0] : ""}
                     />
-                    <span className="block text-xs sm:text-sm text-neutral-400 font-medium truncate">
+                    <span className="block text-sm sm:text-base text-neutral-400 font-medium truncate">
                       {selectedDate ? formatDisplayDate(selectedDate) : "Ajouter une date"}
                     </span>
                   </div>

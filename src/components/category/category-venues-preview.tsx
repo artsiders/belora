@@ -31,7 +31,7 @@ export function CategoryVenuesPreview({ category }: CategoryVenuesPreviewProps) 
                 l&apos;artisanat du geste.
               </span>
             </h2>
-            <p className="mt-1 text-xs sm:text-sm text-neutral-600 font-normal">
+            <p className="mt-1 text-sm sm:text-base text-neutral-600 font-normal">
               Adresses indépendantes auditées pour l&apos;excellence de leurs artisans.
             </p>
           </div>

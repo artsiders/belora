@@ -37,7 +37,7 @@ export function CategoryProCta({ category }: CategoryProCtaProps) {
             </span>
           </h2>
 
-          <p className="text-xs sm:text-sm text-neutral-200/90 leading-relaxed font-normal mb-6">
+          <p className="text-sm sm:text-base text-neutral-200/90 leading-relaxed font-normal mb-6">
             {pro.description}
           </p>
 

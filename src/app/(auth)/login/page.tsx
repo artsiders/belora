@@ -66,7 +66,7 @@ export default function LoginPage() {
         <h1 className="text-3xl sm:text-4xl text-neutral-950 tracking-tight">
           {userType === "client" ? "Bienvenue à nouveau" : "Espace Artisan & Salon"}
         </h1>
-        <p className="text-xs sm:text-sm text-neutral-600 mt-2 font-normal leading-relaxed">
+        <p className="text-sm sm:text-base text-neutral-600 mt-2 font-normal leading-relaxed">
           {userType === "client"
             ? "Connectez-vous pour retrouver vos rendez-vous, vos ateliers favoris et vos praticiens."
             : "Accédez à votre agenda en temps réel, vos créneaux et vos réservations en ligne."}

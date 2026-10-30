@@ -132,7 +132,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                 <h2 className="font-display text-2xl text-neutral-950 mb-3">
                   L’esprit du lieu
                 </h2>
-                <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed font-normal mb-6">
+                <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-normal mb-6">
                   {venue.description}
                 </p>
 

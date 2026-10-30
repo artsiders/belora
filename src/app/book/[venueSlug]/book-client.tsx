@@ -101,7 +101,7 @@ export function BookClient({ venue }: BookClientProps) {
           Votre moment est sanctuarisé
         </h1>
 
-        <p className="text-xs sm:text-sm text-neutral-600 mb-8 leading-relaxed max-w-md mx-auto">
+        <p className="text-sm sm:text-base text-neutral-600 mb-8 leading-relaxed max-w-md mx-auto">
           Un e-mail de confirmation et un SMS de rappel vous ont été envoyés. {venue.name} vous attend le{" "}
           <strong className="text-neutral-950">{selectedDay}</strong> à{" "}
           <strong className="text-neutral-950">{selectedSlot}</strong>.
@@ -215,7 +215,7 @@ export function BookClient({ venue }: BookClientProps) {
                           {isChecked && <Check className="w-3.5 h-3.5" />}
                         </div>
                         <div>
-                          <h3 className="text-xs sm:text-sm font-semibold text-neutral-950">
+                          <h3 className="text-sm sm:text-base font-semibold text-neutral-950">
                             {service.name}
                           </h3>
                           <p className="text-xs text-neutral-500 flex items-center gap-2 mt-0.5 num">
@@ -293,7 +293,7 @@ export function BookClient({ venue }: BookClientProps) {
                     <User className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-xs sm:text-sm font-semibold text-neutral-950">
+                    <h3 className="text-sm sm:text-base font-semibold text-neutral-950">
                       Sans préférence
                     </h3>
                     <p className="text-xs text-neutral-500">
@@ -323,7 +323,7 @@ export function BookClient({ venue }: BookClientProps) {
                       />
                     </div>
                     <div>
-                      <h3 className="text-xs sm:text-sm font-semibold text-neutral-950">
+                      <h3 className="text-sm sm:text-base font-semibold text-neutral-950">
                         {member.name}
                       </h3>
                       <p className="text-xs text-primary-700 font-medium">

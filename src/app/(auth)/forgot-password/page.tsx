@@ -40,7 +40,7 @@ export default function ForgotPasswordPage() {
         <h1 className="text-3xl sm:text-4xl text-neutral-950 tracking-tight">
           Mot de passe oublié
         </h1>
-        <p className="text-xs sm:text-sm text-neutral-600 mt-2 font-normal leading-relaxed">
+        <p className="text-sm sm:text-base text-neutral-600 mt-2 font-normal leading-relaxed">
           Saisissez l’adresse e-mail associée à votre compte Belora. Nous vous
           enverrons un lien sécurisé à usage unique pour en définir un nouveau.
         </p>

@@ -125,7 +125,7 @@ export function SearchClient() {
                 <h3 className="text-lg sm:text-xl font-bold text-neutral-950">
                   Aucun établissement ne correspond à ces critères
                 </h3>
-                <p className="text-xs sm:text-sm text-neutral-600 max-w-md mx-auto font-normal">
+                <p className="text-sm sm:text-base text-neutral-600 max-w-md mx-auto font-normal">
                   Essayez d&apos;élargir vos termes de recherche ou de choisir une autre métropole culturelle.
                 </p>
                 <div className="pt-2">

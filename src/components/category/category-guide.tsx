@@ -23,7 +23,7 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
                 {guide.mainTitle.toLowerCase()}
               </span>
             </h2>
-            <p className="mt-1 text-xs sm:text-sm text-neutral-600 font-normal">
+            <p className="mt-1 text-sm sm:text-base text-neutral-600 font-normal">
               {guide.intro}
             </p>
           </div>
@@ -51,7 +51,7 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
                   {sec.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
+                <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal">
                   {sec.content}
                 </p>
               </div>
@@ -71,7 +71,7 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
               <span className="font-bold text-xs">B</span>
             </div>
             <div>
-              <h4 className="text-xs sm:text-sm font-bold text-neutral-950">
+              <h4 className="text-sm sm:text-base font-bold text-neutral-950">
                 La Charte Sanctuaire Belora
               </h4>
               <p className="text-xs text-neutral-500 font-normal">
