@@ -249,7 +249,7 @@ export function ProJoinFlow() {
                 className="w-full group p-5 rounded-2xl border border-neutral-200/90 bg-white hover:border-primary-600/80 hover:bg-neutral-50/50 shadow-xs hover:shadow-md transition-all duration-200 flex items-center justify-between cursor-pointer"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-50 text-primary-700 flex items-center justify-center shrink-0 border border-primary-100 group-hover:scale-105 transition-transform">
+                  <div className="w-12 h-12 rounded-full bg-primary-50 text-primary-700 flex items-center justify-center shrink-0 border border-primary-100">
                     <Scissors className="w-5 h-5 stroke-[1.8]" />
                   </div>
                   <div>
@@ -269,7 +269,7 @@ export function ProJoinFlow() {
                 className="w-full group p-5 rounded-2xl border border-neutral-200/90 bg-white hover:border-neutral-300 hover:bg-neutral-50/50 shadow-xs hover:shadow-md transition-all duration-200 flex items-center justify-between"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-neutral-100 text-neutral-700 flex items-center justify-center shrink-0 border border-neutral-200/70 group-hover:scale-105 transition-transform">
+                  <div className="w-12 h-12 rounded-full bg-neutral-100 text-neutral-700 flex items-center justify-center shrink-0 border border-neutral-200/70">
                     <Calendar className="w-5 h-5 stroke-[1.8]" />
                   </div>
                   <div>

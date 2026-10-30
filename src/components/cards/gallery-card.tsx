@@ -29,7 +29,7 @@ export function GalleryCard({ item }: GalleryCardProps) {
           alt={item.title}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover group-hover:scale-104 transition-transform duration-500 ease-out"
+          className="object-cover"
         />
 
         {/* Pastille de catégorie en bas de l'image */}

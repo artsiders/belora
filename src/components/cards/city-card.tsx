@@ -38,7 +38,7 @@ export function CityCard({ city, categorySlug, categoryShortName }: CityCardProp
             alt={categoryShortName ? `${categoryShortName} à ${city.name}` : `Salons à ${city.name}`}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-neutral-950/15 group-hover:bg-transparent transition-colors duration-300" />
 

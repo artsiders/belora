@@ -29,7 +29,7 @@ export function ArtisanCard({ artisan }: ArtisanCardProps) {
           alt={`Portrait de ${artisan.name}, ${artisan.role}`}
           fill
           sizes="(max-width: 640px) 260px, 280px"
-          className="object-cover group-hover:scale-104 transition-transform duration-500 ease-out"
+          className="object-cover"
         />
       </div>
 

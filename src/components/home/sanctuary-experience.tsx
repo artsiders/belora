@@ -87,7 +87,7 @@ export function SanctuaryExperience() {
                   alt="Intérieur minéral et épuré d'un sanctuaire partenaire Belora"
                   fill
                   sizes="(max-width: 1024px) 70vw, 30vw"
-                  className="object-cover group-hover:scale-103 transition-transform duration-500 ease-out"
+                  className="object-cover"
                 />
 
                 {/* Voile d'ombrage discret et cartouche sobre */}

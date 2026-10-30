@@ -82,7 +82,7 @@ export function VenueCard({
           fill
           priority={priority}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover group-hover:scale-104 transition-transform duration-500 ease-out"
+          className="object-cover"
         />
 
         {/* Bouton favori interactif en z-20 pour ne pas déclencher le lien de carte */}

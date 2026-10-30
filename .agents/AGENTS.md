@@ -99,3 +99,13 @@
 ## 18. Affichage Conditionnel & Feature Gating pendant le Chargement
 - **Interdiction de charger un état verrouillé (Feature Gated) par défaut** : Si l'accès à une fonctionnalité dépend d'une donnée en cours de chargement (ex : plan d'abonnement `subscriptionPlan`), ne jamais afficher l'UI de verrouillage (ex : icône de cadenas) pendant le chargement.
 - **Squelette Ciblé pour le Chargement** : Afficher un squelette (skeleton inline) ciblé à la place du cadenas ou de l'indicateur de restriction pendant le chargement de la donnée, pour éviter le "flickering" (l'icône apparaît puis disparaît une fois la donnée chargée). L'expérience utilisateur (UX) ne doit jamais tromper l'utilisateur.
+
+## 19. Interdiction Formelle des Effets de Zoom / Agrandissement au Survol (`hover:scale`)
+- **Interdiction absolue d'utiliser `hover:scale-*` ou `group-hover:scale-*`** (ex : `hover:scale-105`, `group-hover:scale-104`, `hover:scale-102`, `scale-105`, etc.) sur les images, cartes, icônes, conteneurs ou boutons.
+- **Interdiction des règles CSS appliquant un `scale` au survol** (ex : `.tile:hover .tile-media { @apply scale-105 }`).
+- **Privilégier des micro-interactions sobres, stables et luxueuses** conformes à la DA Belora :
+  - Transitions douces de bordure (`hover:border-neutral-300`, `hover:border-primary-600/80`).
+  - Ombres portées délicates (`hover:shadow-md`, `hover:shadow-xs`).
+  - Changements de teintes de fond ou de texte (`group-hover:text-primary-600`, `hover:bg-neutral-50`).
+  - Déplacements discrets d'icônes d'action (`group-hover:translate-x-0.5`, `group-hover:-translate-y-0.5`).
+- Les éléments doivent rester stables et fixes dans leur conteneur sans zoom ni effet de pulsation saccadé.

@@ -411,9 +411,6 @@
     content: "";
     @apply absolute inset-0 -z-10 bg-linear-to-t from-neutral-950/80 via-neutral-950/20 to-transparent;
   }
-  .tile:hover .tile-media {
-    @apply scale-105;
-  }
   .tile-body {
     @apply absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4.5;
   }
@@ -436,7 +433,7 @@
     @apply flex items-center justify-center w-8 h-8 rounded-pill border border-white/35 bg-neutral-950/35 text-white shrink-0 transition-all duration-200 ease-belora;
   }
   .tile:hover .tile-arrow-circle {
-    @apply bg-white border-white text-neutral-950 scale-105;
+    @apply bg-white border-white text-neutral-950;
   }
   .tile-wide {
     @apply aspect-4/3;
@@ -444,16 +441,13 @@
 
   /* ----- Carte établissement ----- */
   .venue-card {
-    @apply block text-inherit transition-transform duration-150 ease-belora;
+    @apply block text-inherit transition-colors duration-150 ease-belora;
   }
   .venue-media {
     @apply relative overflow-hidden aspect-4/5 rounded-photo bg-neutral-100 border border-line;
   }
   .venue-media img {
-    @apply w-full h-full object-cover transition-transform duration-700 ease-belora;
-  }
-  .venue-card:hover .venue-media img {
-    @apply scale-105;
+    @apply w-full h-full object-cover;
   }
   .venue-meta {
     @apply flex justify-between items-baseline gap-3 mt-3.5;
@@ -468,7 +462,7 @@
     @apply mt-1 text-xs uppercase text-fg-subtle;
   }
   .fav-btn {
-    @apply absolute top-3.5 end-3.5 grid place-items-center w-9 h-9 bg-white/90 text-neutral-950 border border-primary-300/60 rounded-pill cursor-pointer transition-all duration-150 ease-belora z-10 hover:bg-white hover:scale-105 hover:border-primary-950 aria-[pressed=true]:bg-primary-600 aria-[pressed=true]:border-primary-600 aria-[pressed=true]:text-white;
+    @apply absolute top-3.5 end-3.5 grid place-items-center w-9 h-9 bg-white/90 text-neutral-950 border border-primary-300/60 rounded-pill cursor-pointer transition-all duration-150 ease-belora z-10 hover:bg-white hover:border-primary-950 aria-[pressed=true]:bg-primary-600 aria-[pressed=true]:border-primary-600 aria-[pressed=true]:text-white;
   }
 
   /* ----- Ligne de service ----- */

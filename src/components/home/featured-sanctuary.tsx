@@ -31,7 +31,7 @@ export function FeaturedSanctuary() {
             alt="Maison Albar Institut - Un espace de soin d’une grande pureté architecturale"
             fill
             sizes="100vw"
-            className="object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
+            className="object-cover"
           />
 
           <div
