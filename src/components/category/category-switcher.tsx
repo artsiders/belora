@@ -149,7 +149,7 @@ export function CategorySwitcher({ currentSlug }: CategorySwitcherProps) {
                 <span
                   className={`mt-2 text-xs tracking-tight text-center leading-tight transition-colors duration-150 ${
                     isActive
-                      ? "font-bold text-sand-950"
+                      ? "font-bold text-neutral-950"
                       : "font-medium text-neutral-600 group-hover:text-neutral-900"
                   }`}
                 >

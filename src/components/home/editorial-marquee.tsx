@@ -26,7 +26,7 @@ export function EditorialMarquee() {
       >
         {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, index) => (
           <div key={index} className="flex items-center gap-10">
-            <span className="text-lg sm:text-xl tracking-wide text-sand-50/95">
+            <span className="text-lg sm:text-xl tracking-wide text-neutral-50/95">
               {item}
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-primary-400/80" />

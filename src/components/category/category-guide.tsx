@@ -9,26 +9,26 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
   const { guide } = category;
 
   return (
-    <section className="py-12 sm:py-16 bg-sand-50/60 border-b border-primary-200/80" aria-labelledby="guide-heading">
+    <section className="py-12 sm:py-16 bg-neutral-50/60 border-b border-primary-200/80" aria-labelledby="guide-heading">
       <div className="container-belora">
         {/* En-tête sobre sans trait superflu */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7 sm:mb-9 pb-4 border-b border-neutral-200/80">
           <div>
-            <span className="eyebrow text-sand-500 font-semibold block mb-1">
+            <span className="eyebrow text-neutral-500 font-semibold block mb-1">
               Conseils d&apos;artisans
             </span>
-            <h2 id="guide-heading" className="text-xl sm:text-2xl lg:text-3xl font-bold text-sand-950">
+            <h2 id="guide-heading" className="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-950">
               Guide pratique,{" "}
               <span className="text-primary-600 font-bold">
                 {guide.mainTitle.toLowerCase()}
               </span>
             </h2>
-            <p className="mt-1 text-xs sm:text-sm text-sand-600 font-normal">
+            <p className="mt-1 text-xs sm:text-sm text-neutral-600 font-normal">
               {guide.intro}
             </p>
           </div>
 
-          <span className="px-3 py-1.5 rounded-full bg-sand-100 text-sand-800 text-xs font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
+          <span className="px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 text-xs font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
             Audit bien-être
           </span>
         </div>
@@ -42,16 +42,16 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
                   <span className="text-xl sm:text-2xl font-serif font-bold text-primary-600">
                     0{idx + 1}
                   </span>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-sand-400">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
                     Savoir-faire artisanal
                   </span>
                 </div>
 
-                <h3 className="text-base sm:text-lg font-bold text-sand-950 mb-2 leading-snug">
+                <h3 className="text-base sm:text-lg font-bold text-neutral-950 mb-2 leading-snug">
                   {sec.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-sand-600 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
                   {sec.content}
                 </p>
               </div>
@@ -71,10 +71,10 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
               <span className="font-serif font-bold text-xs">B</span>
             </div>
             <div>
-              <h4 className="text-xs sm:text-sm font-bold text-sand-950">
+              <h4 className="text-xs sm:text-sm font-bold text-neutral-950">
                 La Charte Sanctuaire Belora
               </h4>
-              <p className="text-xs text-sand-500 font-normal">
+              <p className="text-xs text-neutral-500 font-normal">
                 Tous les établissements référencés sont visités et réévalués chaque trimestre.
               </p>
             </div>

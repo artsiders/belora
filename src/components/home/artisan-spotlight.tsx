@@ -116,14 +116,14 @@ export function ArtisanSpotlight() {
           <div>
             <h2
               id="artisans-heading"
-              className="section-title text-sand-950 max-w-xl"
+              className="section-title text-neutral-950 max-w-xl"
             >
               Rencontrez les artisans,{" "}
               <span className="block sm:inline text-primary-600 font-bold">
                 passionnés du geste.
               </span>
             </h2>
-            <p className="text-xs sm:text-sm text-sand-500 font-normal">
+            <p className="text-xs sm:text-sm text-neutral-500 font-normal">
               Des praticiens indépendants sélectionnés pour leur savoir-faire et leur exigence.
             </p>
           </div>
@@ -134,7 +134,7 @@ export function ArtisanSpotlight() {
               type="button"
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
-              className="w-10 h-10 rounded-full border border-primary-300 bg-white hover:border-primary-400 hover:bg-primary-50/10 flex items-center justify-center text-sand-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
+              className="w-10 h-10 rounded-full border border-primary-300 bg-white hover:border-primary-400 hover:bg-primary-50/10 flex items-center justify-center text-neutral-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
               aria-label="Artisans précédents"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -143,7 +143,7 @@ export function ArtisanSpotlight() {
               type="button"
               onClick={() => scroll("right")}
               disabled={!canScrollRight}
-              className="w-10 h-10 rounded-full border border-primary-300 bg-white hover:border-primary-400 hover:bg-primary-50/10 flex items-center justify-center text-sand-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
+              className="w-10 h-10 rounded-full border border-primary-300 bg-white hover:border-primary-400 hover:bg-primary-50/10 flex items-center justify-center text-neutral-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
               aria-label="Artisans suivants"
             >
               <ChevronRight className="w-4 h-4" />
@@ -163,7 +163,7 @@ export function ArtisanSpotlight() {
               className="group w-[260px] sm:w-[280px] shrink-0 snap-start flex flex-col justify-between bg-white rounded-3xl border border-primary-200/80 overflow-hidden shadow-2xs hover:shadow-lg hover:border-primary-300 transition-all duration-300 cursor-pointer"
             >
               {/* Photographie pleine largeur en haut : arrondis parfaitement harmonisés */}
-              <div className="relative aspect-4/5 w-full overflow-hidden bg-sand-100">
+              <div className="relative aspect-4/5 w-full overflow-hidden bg-neutral-100">
                 <Image
                   src={artisan.image}
                   alt={`Portrait de ${artisan.name}, ${artisan.role}`}
@@ -179,19 +179,19 @@ export function ArtisanSpotlight() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-primary-600 mb-1">
                     {artisan.role}
                   </p>
-                  <h3 className="text-base sm:text-lg font-bold text-sand-950 group-hover:text-primary-600 transition-colors">
+                  <h3 className="text-base sm:text-lg font-bold text-neutral-950 group-hover:text-primary-600 transition-colors">
                     {artisan.name}
                   </h3>
-                  <p className="text-xs text-sand-500 mt-1 flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-sand-400 shrink-0" />
+                  <p className="text-xs text-neutral-500 mt-1 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
                     <span>{artisan.salon} · {artisan.city}</span>
                   </p>
                 </div>
 
                 {/* Lien subtil en bas de carte */}
-                <div className="pt-3 mt-3 border-t border-primary-100 flex items-center justify-between text-xs font-semibold text-sand-800 group-hover:text-primary-600 transition-colors">
+                <div className="pt-3 mt-3 border-t border-primary-100 flex items-center justify-between text-xs font-semibold text-neutral-800 group-hover:text-primary-600 transition-colors">
                   <span>Voir le sanctuaire</span>
-                  <ArrowUpRight className="w-4 h-4 text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </div>
               </div>
             </Link>

@@ -4,7 +4,7 @@ import Link from "next/link";
 export function PhilosophySection() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-sand-warm border-b border-primary-200/80"
+      className="relative w-full overflow-hidden bg-neutral-50 border-b border-primary-200/80"
       aria-labelledby="philosophy-title"
     >
       {/* 1. Sur desktop (lg+) : Arrière-plan panoramique à droite (version validée et parfaite sur grand écran) */}
@@ -36,7 +36,7 @@ export function PhilosophySection() {
           {/* Titre éditorial haut de gamme */}
           <h2
             id="philosophy-title"
-            className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-sand-950 leading-tight mb-4"
+            className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-neutral-950 leading-tight mb-4"
           >
             Prendre soin de soi,{" "}
             <span className="block text-primary-600">
@@ -45,7 +45,7 @@ export function PhilosophySection() {
           </h2>
 
           {/* Texte de présentation éditorial avec contraste et lisibilité parfaits */}
-          <p className="text-xs sm:text-sm lg:text-base text-sand-700 leading-relaxed max-w-lg mb-6 sm:mb-8 font-normal">
+          <p className="text-xs sm:text-sm lg:text-base text-neutral-700 leading-relaxed max-w-lg mb-6 sm:mb-8 font-normal">
             Chez Belora, nous croyons que la beauté commence par le bien-être.
             Découvrez et réservez les meilleurs salons, instituts et professionnels
             indépendants, sélectionnés pour la qualité de leurs services et le

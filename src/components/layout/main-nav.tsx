@@ -65,7 +65,7 @@ export function MainNav() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-sand-200/80 bg-white/95 backdrop-blur-md">
+      <header className="sticky top-0 z-40 w-full border-b border-neutral-200/80 bg-white/95 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-18 flex items-center justify-between">
           {/* 1. Logo Belora officiel */}
           <Link
@@ -88,13 +88,13 @@ export function MainNav() {
           <div className="hidden sm:flex items-center gap-4">
             <Link
               href="/pro"
-              className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-sand-600 hover:text-primary-600 transition-colors"
+              className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:text-primary-600 transition-colors"
             >
               <span>Je suis un professionnel</span>
               <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
             </Link>
 
-            <span className="w-px h-3.5 bg-sand-300" aria-hidden="true" />
+            <span className="w-px h-3.5 bg-neutral-300" aria-hidden="true" />
 
             <Link href="/login" className="btn btn-ghost btn-sm">
               Connexion
@@ -109,7 +109,7 @@ export function MainNav() {
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full border border-sand-200 bg-sand-50/80 text-sand-900 hover:bg-sand-100 transition-colors cursor-pointer"
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 bg-neutral-50/80 text-neutral-900 hover:bg-neutral-100 transition-colors cursor-pointer"
             aria-label="Ouvrir le menu"
             aria-expanded={mobileOpen}
           >
@@ -131,7 +131,7 @@ export function MainNav() {
                 className="md:hidden fixed inset-0 z-[9999] bg-white flex flex-col h-dvh w-screen overflow-hidden"
               >
                 {/* Barre supérieure avec Logo et bouton de fermeture rond élégant */}
-                <div className="h-16 px-5 sm:px-8 border-b border-sand-200/80 flex items-center justify-between shrink-0 bg-white">
+                <div className="h-16 px-5 sm:px-8 border-b border-neutral-200/80 flex items-center justify-between shrink-0 bg-white">
                   <Link href="/" onClick={closeMenu} aria-label="Belora - Accueil">
                     <Image
                       src="/images/logos/belora.svg"
@@ -146,7 +146,7 @@ export function MainNav() {
                   <button
                     type="button"
                     onClick={closeMenu}
-                    className="w-10 h-10 rounded-full border border-sand-200 bg-sand-50 flex items-center justify-center text-sand-900 hover:bg-sand-100 transition-colors cursor-pointer shadow-2xs"
+                    className="w-10 h-10 rounded-full border border-neutral-200 bg-neutral-50 flex items-center justify-center text-neutral-900 hover:bg-neutral-100 transition-colors cursor-pointer shadow-2xs"
                     aria-label="Fermer le menu"
                   >
                     <X className="w-5 h-5 stroke-[1.8]" />
@@ -175,17 +175,17 @@ export function MainNav() {
                           <Link
                             href={link.href}
                             onClick={closeMenu}
-                            className="group flex items-baseline justify-between py-2 border-b border-sand-100"
+                            className="group flex items-baseline justify-between py-2 border-b border-neutral-100"
                           >
                             <div>
-                              <span className="text-2xl sm:text-3xl font-normal text-sand-950 group-hover:text-primary-600 transition-colors">
+                              <span className="text-2xl sm:text-3xl font-normal text-neutral-950 group-hover:text-primary-600 transition-colors">
                                 {link.title}
                               </span>
-                              <p className="text-xs text-sand-500 font-normal mt-0.5">
+                              <p className="text-xs text-neutral-500 font-normal mt-0.5">
                                 {link.subtitle}
                               </p>
                             </div>
-                            <span className="text-xs font-mono font-medium text-sand-400 group-hover:text-primary-600 transition-colors">
+                            <span className="text-xs font-mono font-medium text-neutral-400 group-hover:text-primary-600 transition-colors">
                               {link.number}
                             </span>
                           </Link>
@@ -195,7 +195,7 @@ export function MainNav() {
 
                     {/* Accès direct aux univers avec badges légers */}
                     <div className="pt-2">
-                      <span className="block text-xs uppercase font-semibold tracking-wider text-sand-400 mb-3">
+                      <span className="block text-xs uppercase font-semibold tracking-wider text-neutral-400 mb-3">
                         Recherche par catégorie
                       </span>
                       <div className="flex flex-wrap gap-2">
@@ -204,7 +204,7 @@ export function MainNav() {
                             key={chip.name}
                             href={chip.href}
                             onClick={closeMenu}
-                            className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-sand-100 text-sand-800 hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 border border-sand-200/80 transition-colors"
+                            className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-800 hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 border border-neutral-200/80 transition-colors"
                           >
                             {chip.name}
                           </Link>
@@ -214,23 +214,23 @@ export function MainNav() {
                   </div>
 
                   {/* Section inférieure : Belora Pro & Authentification */}
-                  <div className="space-y-4 pt-6 border-t border-sand-200/80">
+                  <div className="space-y-4 pt-6 border-t border-neutral-200/80">
                     {/* Carte raffinée Belora Pro */}
                     <Link
                       href="/pro"
                       onClick={closeMenu}
-                      className="flex items-center justify-between p-4 rounded-2xl bg-secondary-900 text-white hover:bg-sand-950 transition-colors shadow-sm"
+                      className="flex items-center justify-between p-4 rounded-2xl bg-secondary-900 text-white hover:bg-neutral-950 transition-colors shadow-sm"
                     >
                       <div>
-                        <span className="text-xs uppercase font-semibold tracking-wider text-sand-400 block mb-0.5">
+                        <span className="text-xs uppercase font-semibold tracking-wider text-neutral-400 block mb-0.5">
                           Espace Professionnel
                         </span>
-                        <span className="text-sm font-semibold text-sand-50">
+                        <span className="text-sm font-semibold text-neutral-50">
                           Développer votre salon avec Belora Pro
                         </span>
                       </div>
                       <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                        <ArrowUpRight className="w-4 h-4 text-sand-200" />
+                        <ArrowUpRight className="w-4 h-4 text-neutral-200" />
                       </div>
                     </Link>
 

@@ -32,7 +32,7 @@ export function CityDirectory() {
           }
           subtitle="Nos havres et ateliers partenaires vous accueillent au cœur des douze plus grandes métropoles françaises."
           action={
-            <span className="px-3 py-1.5 rounded-full bg-sand-100 text-sand-800 text-xs font-semibold num shadow-2xs">
+            <span className="px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 text-xs font-semibold num shadow-2xs">
               450+ adresses certifiées
             </span>
           }
@@ -44,17 +44,17 @@ export function CityDirectory() {
             <Link
               key={city.name}
               href={`/search?location=${encodeURIComponent(city.name)}`}
-              className="p-3.5 rounded-xl border border-primary-200/80 bg-white hover:border-primary-300 hover:shadow-xs transition-all text-xs text-sand-900 font-medium flex items-center justify-between group"
+              className="p-3.5 rounded-xl border border-primary-200/80 bg-white hover:border-primary-300 hover:shadow-xs transition-all text-xs text-neutral-900 font-medium flex items-center justify-between group"
             >
               <div className="flex flex-col">
-                <span className="font-semibold text-sand-950 group-hover:text-primary-600 transition-colors">
+                <span className="font-semibold text-neutral-950 group-hover:text-primary-600 transition-colors">
                   {city.name}
                 </span>
-                <span className="text-xs text-sand-500 num mt-0.5">
+                <span className="text-xs text-neutral-500 num mt-0.5">
                   {city.count}
                 </span>
               </div>
-              <ArrowUpRight className="w-3.5 h-3.5 text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
             </Link>
           ))}
         </div>

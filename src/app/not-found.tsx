@@ -13,20 +13,20 @@ export default function NotFound() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-sand-900 selection:bg-primary-100 selection:text-primary-900">
+    <div className="flex flex-col min-h-screen bg-white text-neutral-900 selection:bg-primary-100 selection:text-primary-900">
       <MainNav />
 
       <main className="flex-1 flex flex-col items-center justify-center py-20 px-4 sm:px-6">
         <div className="max-w-2xl w-full text-center">
-          <p className="eyebrow mb-3 text-sand-500 font-semibold tracking-widest">
+          <p className="eyebrow mb-3 text-neutral-500 font-semibold tracking-widest">
             Erreur 404 · Page Introuvable
           </p>
 
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-sand-950 mb-5 leading-tight text-balance">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-neutral-950 mb-5 leading-tight text-balance">
             Cette adresse semble s’être volatilisée.
           </h1>
 
-          <p className="text-sm sm:text-base text-sand-600 max-w-lg mx-auto mb-10 leading-relaxed font-normal text-pretty">
+          <p className="text-sm sm:text-base text-neutral-600 max-w-lg mx-auto mb-10 leading-relaxed font-normal text-pretty">
             La page que vous recherchez n’existe plus ou a été déplacée.
             Retrouvez le chemin de nos sanctuaires et artisans du soin d’exception.
           </p>
@@ -37,14 +37,14 @@ export default function NotFound() {
             method="GET"
             className="flex items-center gap-2 max-w-md mx-auto mb-10 p-1.5 rounded-xl bg-primary-50/10 border border-primary-300 shadow-2xs"
           >
-            <div className="pl-3 text-sand-400">
+            <div className="pl-3 text-neutral-400">
               <Search className="w-4 h-4" />
             </div>
             <input
               type="text"
               name="q"
               placeholder="Rechercher une maison, un artisan ou un soin..."
-              className="flex-1 bg-transparent border-0 py-1.5 px-2 text-xs sm:text-sm text-sand-900 placeholder:text-sand-400 focus:outline-none"
+              className="flex-1 bg-transparent border-0 py-1.5 px-2 text-xs sm:text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none"
             />
             <button type="submit" className="btn btn-primary btn-xs sm:btn-sm">
               Chercher
@@ -66,7 +66,7 @@ export default function NotFound() {
 
           {/* Raccourcis univers */}
           <div className="pt-8 border-t border-primary-200/80">
-            <p className="text-xs text-sand-500 uppercase tracking-wider font-semibold mb-3">
+            <p className="text-xs text-neutral-500 uppercase tracking-wider font-semibold mb-3">
               Univers recommandés
             </p>
             <div className="flex flex-wrap items-center justify-center gap-2">
@@ -74,7 +74,7 @@ export default function NotFound() {
                 <Link
                   key={cat.label}
                   href={cat.href}
-                  className="px-3 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium text-sand-700 bg-primary-50/10 hover:bg-sand-200/70 border border-primary-300/80 transition-colors"
+                  className="px-3 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium text-neutral-700 bg-primary-50/10 hover:bg-neutral-200/70 border border-primary-300/80 transition-colors"
                 >
                   {cat.label}
                 </Link>

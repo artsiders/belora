@@ -78,7 +78,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
   };
 
   return (
-    <section className="relative w-full h-auto overflow-hidden bg-sand-950 py-7 sm:py-10 select-none">
+    <section className="relative w-full h-auto overflow-hidden bg-neutral-950 py-7 sm:py-10 select-none">
       {/* 1. Visuel d'arrière-plan avec masque sombre neutre */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -110,7 +110,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
         {/* Carré sobre, compact et professionnel (Noir encre architectural) */}
         <div className="w-full max-w-xl lg:max-w-2xl bg-secondary-950/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 text-left">
           {/* Eyebrow sobre sans trait décoratif */}
-          <span className="block text-xs uppercase font-semibold tracking-wider text-sand-400 mb-1.5">
+          <span className="block text-xs uppercase font-semibold tracking-wider text-neutral-400 mb-1.5">
             {category.name}
           </span>
 
@@ -123,7 +123,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
           </h1>
 
           {/* Sous-titre sobre et court */}
-          <p className="text-xs sm:text-sm text-sand-300 font-normal leading-relaxed">
+          <p className="text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed">
             {category.heroSubtitle}
           </p>
         </div>
@@ -138,12 +138,12 @@ export function CategoryHero({ category }: CategoryHeroProps) {
           >
             <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-0">
               {/* Champ 1 : Où ? */}
-              <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-sand-50 focus-within:bg-sand-50 rounded-xl transition-colors">
+              <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-neutral-50 focus-within:bg-neutral-50 rounded-xl transition-colors">
                 <MapPin className="w-4 h-4 text-primary-600 shrink-0" />
                 <div className="flex-1 min-w-0">
                   <label
                     htmlFor="category-location"
-                    className="block text-xs font-semibold text-sand-950 uppercase tracking-wide cursor-pointer"
+                    className="block text-xs font-semibold text-neutral-950 uppercase tracking-wide cursor-pointer"
                   >
                     Où ?
                   </label>
@@ -154,21 +154,21 @@ export function CategoryHero({ category }: CategoryHeroProps) {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="Ville, code postal, pays..."
-                    className="w-full bg-transparent text-xs sm:text-sm text-sand-800 placeholder:text-sand-400 focus:outline-none font-medium truncate"
+                    className="w-full bg-transparent text-xs sm:text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none font-medium truncate"
                   />
                 </div>
               </div>
 
               {/* Séparateur vertical (desktop) */}
-              <div className="hidden md:block w-px h-8 bg-sand-200 shrink-0 mx-1" aria-hidden="true" />
+              <div className="hidden md:block w-px h-8 bg-neutral-200 shrink-0 mx-1" aria-hidden="true" />
 
               {/* Champ 2 : Prestation */}
-              <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-sand-50 focus-within:bg-sand-50 rounded-xl transition-colors">
+              <div className="flex-1 flex items-center gap-3 px-3.5 py-2 hover:bg-neutral-50 focus-within:bg-neutral-50 rounded-xl transition-colors">
                 <Scissors className="w-4 h-4 text-primary-600 shrink-0" />
                 <div className="flex-1 min-w-0">
                   <label
                     htmlFor="category-service"
-                    className="block text-xs font-semibold text-sand-950 uppercase tracking-wide cursor-pointer"
+                    className="block text-xs font-semibold text-neutral-950 uppercase tracking-wide cursor-pointer"
                   >
                     Prestation
                   </label>
@@ -180,23 +180,23 @@ export function CategoryHero({ category }: CategoryHeroProps) {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder={category.searchPlaceholder}
-                    className="w-full bg-transparent text-xs sm:text-sm text-sand-800 placeholder:text-sand-400 focus:outline-none font-medium truncate"
+                    className="w-full bg-transparent text-xs sm:text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none font-medium truncate"
                   />
                 </div>
               </div>
 
               {/* Séparateur vertical (desktop) */}
-              <div className="hidden md:block w-px h-8 bg-sand-200 shrink-0 mx-1" aria-hidden="true" />
+              <div className="hidden md:block w-px h-8 bg-neutral-200 shrink-0 mx-1" aria-hidden="true" />
 
               {/* Champ 3 : Date Moderne avec Dropdown Calendar */}
               <div ref={calendarRef} className="relative flex-1">
                 <div
                   onClick={handleToggleCalendar}
-                  className="flex items-center gap-3 px-3.5 py-2 hover:bg-sand-50 rounded-xl cursor-pointer transition-colors"
+                  className="flex items-center gap-3 px-3.5 py-2 hover:bg-neutral-50 rounded-xl cursor-pointer transition-colors"
                 >
                   <CalendarDays className="w-4 h-4 text-primary-600 shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <span className="block text-xs font-semibold text-sand-950 uppercase tracking-wide">
+                    <span className="block text-xs font-semibold text-neutral-950 uppercase tracking-wide">
                       Quand ?
                     </span>
                     <input
@@ -204,7 +204,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
                       name="date"
                       value={selectedDate ? selectedDate.toISOString().split("T")[0] : ""}
                     />
-                    <span className="block text-xs sm:text-sm text-sand-400 font-medium truncate">
+                    <span className="block text-xs sm:text-sm text-neutral-400 font-medium truncate">
                       {selectedDate ? formatDisplayDate(selectedDate) : "Ajouter une date"}
                     </span>
                   </div>
@@ -214,14 +214,14 @@ export function CategoryHero({ category }: CategoryHeroProps) {
                 {isCalendarOpen && (
                   <div className="absolute bottom-full mb-3 left-0 sm:left-auto sm:right-0 w-[280px] sm:w-[310px] bg-white rounded-2xl shadow-2xl border border-primary-200 p-4 z-50 animate-in fade-in zoom-in-95 duration-150">
                     <div className="flex items-center justify-between mb-3 px-1">
-                      <span className="text-xs font-bold text-sand-950 capitalize">
+                      <span className="text-xs font-bold text-neutral-950 capitalize">
                         {new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric" }).format(activeMonth)}
                       </span>
                       <div className="flex items-center gap-1">
                         <button
                           type="button"
                           onClick={handlePrevMonth}
-                          className="p-1 hover:bg-sand-100 rounded-lg text-sand-700 transition cursor-pointer"
+                          className="p-1 hover:bg-neutral-100 rounded-lg text-neutral-700 transition cursor-pointer"
                           aria-label="Mois précédent"
                         >
                           <ChevronLeft className="w-4 h-4" />
@@ -229,7 +229,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
                         <button
                           type="button"
                           onClick={handleNextMonth}
-                          className="p-1 hover:bg-sand-100 rounded-lg text-sand-700 transition cursor-pointer"
+                          className="p-1 hover:bg-neutral-100 rounded-lg text-neutral-700 transition cursor-pointer"
                           aria-label="Mois suivant"
                         >
                           <ChevronRight className="w-4 h-4" />
@@ -237,7 +237,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-7 gap-1 text-center mb-1 text-xs font-semibold text-sand-400">
+                    <div className="grid grid-cols-7 gap-1 text-center mb-1 text-xs font-semibold text-neutral-400">
                       <span>Lu</span><span>Ma</span><span>Me</span><span>Je</span><span>Ve</span><span>Sa</span><span>Di</span>
                     </div>
 
@@ -260,7 +260,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
                             className={`h-8 w-8 mx-auto flex items-center justify-center rounded-xl text-xs font-medium transition-colors cursor-pointer ${
                               isSelected
                                 ? "bg-primary-600 text-white font-bold"
-                                : "text-sand-800 hover:bg-sand-100"
+                                : "text-neutral-800 hover:bg-neutral-100"
                             }`}
                           >
                             {day}

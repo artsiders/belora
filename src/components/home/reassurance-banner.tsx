@@ -9,9 +9,9 @@ export function ReassuranceBanner() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Colonne Gauche : Titre et bouton d'action */}
           <div className="lg:col-span-5 space-y-4">
-            <h2 className="text-2xl sm:text-4xl font-semibold text-sand-50 leading-tight">
+            <h2 className="text-2xl sm:text-4xl font-semibold text-neutral-50 leading-tight">
               Votre rendez-vous beauté{" "}
-              <span className="block text-sand-200 font-bold">
+              <span className="block text-neutral-200 font-bold">
                 en toute simplicité.
               </span>
             </h2>
@@ -84,7 +84,7 @@ export function ReassuranceBanner() {
           <div className="hidden lg:flex lg:col-span-3 justify-end items-end self-end lg:-mb-20 relative">
             <div className="relative w-80 xl:w-96 h-80 xl:h-96 flex items-end gap-2.5">
               {/* Arche 1 : Gauche (Haute) */}
-              <div className="relative w-[155px] xl:w-[187px] h-80 xl:h-96 rounded-t-3xl rounded-b-none overflow-hidden border border-white/15 shadow-2xl shrink-0 bg-sand-900">
+              <div className="relative w-[155px] xl:w-[187px] h-80 xl:h-96 rounded-t-3xl rounded-b-none overflow-hidden border border-white/15 shadow-2xl shrink-0 bg-neutral-900">
                 <div className="absolute bottom-0 left-0 w-80 xl:w-96 h-80 xl:h-96">
                   <Image
                     src="/images/heroes/reassurance-salon.jpg"
@@ -98,7 +98,7 @@ export function ReassuranceBanner() {
               </div>
 
               {/* Arche 2 : Droite (Basse) - Le décalage négatif garantit la parfaite continuité de l'image */}
-              <div className="relative w-[155px] xl:w-[187px] h-60 xl:h-72 rounded-t-3xl rounded-b-none overflow-hidden border border-white/15 shadow-2xl shrink-0 bg-sand-900">
+              <div className="relative w-[155px] xl:w-[187px] h-60 xl:h-72 rounded-t-3xl rounded-b-none overflow-hidden border border-white/15 shadow-2xl shrink-0 bg-neutral-900">
                 <div className="absolute bottom-0 -left-[165px] xl:-left-[197px] w-80 xl:w-96 h-80 xl:h-96">
                   <Image
                     src="/images/heroes/reassurance-salon.jpg"

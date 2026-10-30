@@ -33,7 +33,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-sand-900 selection:bg-primary-100 selection:text-primary-900">
+    <div className="flex flex-col min-h-screen bg-white text-neutral-900 selection:bg-primary-100 selection:text-primary-900">
       <MainNav />
 
       <main className="flex-1">
@@ -45,11 +45,11 @@ export default function AboutPage() {
                 Manifeste · L’Esprit Belora
               </span>
 
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-sand-950 leading-[1.08] text-balance">
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-neutral-950 leading-[1.08] text-balance">
                 Rendre au soin sa noblesse d’artisanat.
               </h1>
 
-              <p className="text-base sm:text-lg text-sand-700 leading-relaxed font-normal text-pretty">
+              <p className="text-base sm:text-lg text-neutral-700 leading-relaxed font-normal text-pretty">
                 Dans un monde saturé d’usines à rendez-vous où les clients sont traités comme des numéros sur une chaîne d’assemblage, Belora est né d’une conviction simple : le cheveu, la peau et le corps méritent du temps, du silence et des mains expertes.
               </p>
             </div>
@@ -57,11 +57,11 @@ export default function AboutPage() {
         </section>
 
         {/* 2. Image d'ambiance et histoire */}
-        <section className="py-16 sm:py-20 border-b border-primary-200/80 bg-sand-100">
+        <section className="py-16 sm:py-20 border-b border-primary-200/80 bg-neutral-100">
           <div className="container-belora">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-6 relative">
-                <div className="relative aspect-[4/3] rounded-[var(--radius-photo)] overflow-hidden bg-sand-200 border border-primary-300 shadow-lg">
+                <div className="relative aspect-[4/3] rounded-[var(--radius-photo)] overflow-hidden bg-neutral-200 border border-primary-300 shadow-lg">
                   <Image
                     src="/images/about/about-craft.jpg"
                     alt="Le geste délicat d'une artisane du soin"
@@ -73,10 +73,10 @@ export default function AboutPage() {
               </div>
 
               <div className="lg:col-span-6 space-y-6">
-                <h2 className="font-display text-3xl sm:text-4xl text-sand-950">
+                <h2 className="font-display text-3xl sm:text-4xl text-neutral-950">
                   La fin de la beauté industrielle.
                 </h2>
-                <div className="space-y-4 text-xs sm:text-sm text-sand-700 leading-relaxed font-normal">
+                <div className="space-y-4 text-xs sm:text-sm text-neutral-700 leading-relaxed font-normal">
                   <p>
                     Les plateformes généralistes ont standardisé la réservation en compressant les temps de pose, en banalisant les salons indépendants et en encourageant une course au volume délétère pour la qualité du geste.
                   </p>
@@ -100,10 +100,10 @@ export default function AboutPage() {
         <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-primary-50/10/60">
           <div className="container-belora">
             <div className="max-w-2xl mb-14">
-              <h2 className="font-display text-3xl sm:text-4xl text-sand-950 mb-3">
+              <h2 className="font-display text-3xl sm:text-4xl text-neutral-950 mb-3">
                 Notre protocole d’audit en 4 critères.
               </h2>
-              <p className="text-xs sm:text-sm text-sand-600 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
                 Moins de 15% des établissements candidats intègrent la sélection officielle Belora.
               </p>
             </div>
@@ -117,10 +117,10 @@ export default function AboutPage() {
                   <span className="font-display text-2xl text-primary-700 block font-normal">
                     {crit.num}.
                   </span>
-                  <h3 className="text-base font-semibold text-sand-950">
+                  <h3 className="text-base font-semibold text-neutral-950">
                     {crit.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-sand-600 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
                     {crit.description}
                   </p>
                 </div>
@@ -130,38 +130,38 @@ export default function AboutPage() {
         </section>
 
         {/* 4. Chiffres clés */}
-        <section className="py-16 bg-sand-100">
+        <section className="py-16 bg-neutral-100">
           <div className="container-belora">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div>
-                <span className="font-display text-4xl sm:text-5xl text-sand-950 block num mb-1">
+                <span className="font-display text-4xl sm:text-5xl text-neutral-950 block num mb-1">
                   450+
                 </span>
-                <span className="text-xs text-sand-500 uppercase tracking-wider font-semibold">
+                <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold">
                   Ateliers Audités
                 </span>
               </div>
               <div>
-                <span className="font-display text-4xl sm:text-5xl text-sand-950 block num mb-1">
+                <span className="font-display text-4xl sm:text-5xl text-neutral-950 block num mb-1">
                   12
                 </span>
-                <span className="text-xs text-sand-500 uppercase tracking-wider font-semibold">
+                <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold">
                   Métropoles de France
                 </span>
               </div>
               <div>
-                <span className="font-display text-4xl sm:text-5xl text-sand-950 block num mb-1">
+                <span className="font-display text-4xl sm:text-5xl text-neutral-950 block num mb-1">
                   4,9 / 5
                 </span>
-                <span className="text-xs text-sand-500 uppercase tracking-wider font-semibold">
+                <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold">
                   Note Moyenne Vérifiée
                 </span>
               </div>
               <div>
-                <span className="font-display text-4xl sm:text-5xl text-sand-950 block num mb-1">
+                <span className="font-display text-4xl sm:text-5xl text-neutral-950 block num mb-1">
                   0 min
                 </span>
-                <span className="text-xs text-sand-500 uppercase tracking-wider font-semibold">
+                <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold">
                   Attente Garantie
                 </span>
               </div>

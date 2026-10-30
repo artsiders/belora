@@ -27,7 +27,7 @@ export default function LoginPage() {
   return (
     <div className="w-full">
       {/* 1. Bascule de type de compte : Client vs Professionnel */}
-      <div className="p-1 rounded-xl bg-sand-200/60 border border-primary-300 flex items-center mb-8">
+      <div className="p-1 rounded-xl bg-neutral-200/60 border border-primary-300 flex items-center mb-8">
         <button
           type="button"
           onClick={() => {
@@ -36,8 +36,8 @@ export default function LoginPage() {
           }}
           className={`flex-1 py-2 text-xs font-semibold tracking-wide uppercase rounded-[calc(var(--radius-sm)-2px)] transition-all ${
             userType === "client"
-              ? "bg-primary-50/10 text-sand-950 shadow-2xs"
-              : "text-sand-600 hover:text-sand-900"
+              ? "bg-primary-50/10 text-neutral-950 shadow-2xs"
+              : "text-neutral-600 hover:text-neutral-900"
           }`}
         >
           Compte Particulier
@@ -50,8 +50,8 @@ export default function LoginPage() {
           }}
           className={`flex-1 py-2 text-xs font-semibold tracking-wide uppercase rounded-[calc(var(--radius-sm)-2px)] transition-all ${
             userType === "pro"
-              ? "bg-primary-50/10 text-sand-950 shadow-2xs"
-              : "text-sand-600 hover:text-sand-900"
+              ? "bg-primary-50/10 text-neutral-950 shadow-2xs"
+              : "text-neutral-600 hover:text-neutral-900"
           }`}
         >
           Espace Professionnel
@@ -63,10 +63,10 @@ export default function LoginPage() {
         <span className="text-[11px] uppercase tracking-wider font-semibold text-primary-600 block mb-1.5">
           {userType === "client" ? "Réservations de soins" : "Gestion d’établissement"}
         </span>
-        <h1 className="text-3xl sm:text-4xl text-sand-950 tracking-tight">
+        <h1 className="text-3xl sm:text-4xl text-neutral-950 tracking-tight">
           {userType === "client" ? "Bienvenue à nouveau" : "Espace Artisan & Salon"}
         </h1>
-        <p className="text-xs sm:text-sm text-sand-600 mt-2 font-normal leading-relaxed">
+        <p className="text-xs sm:text-sm text-neutral-600 mt-2 font-normal leading-relaxed">
           {userType === "client"
             ? "Connectez-vous pour retrouver vos rendez-vous, vos ateliers favoris et vos praticiens."
             : "Accédez à votre agenda en temps réel, vos créneaux et vos réservations en ligne."}
@@ -80,8 +80,8 @@ export default function LoginPage() {
             <CheckCircle2 className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-xl text-sand-950 mb-1">Connexion validée</h3>
-            <p className="text-xs text-sand-600">
+            <h3 className="text-xl text-neutral-950 mb-1">Connexion validée</h3>
+            <p className="text-xs text-neutral-600">
               Bienvenue sur votre espace Belora. Redirection en cours…
             </p>
           </div>
@@ -100,7 +100,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="login-email"
-                className="block text-xs uppercase tracking-wider font-semibold text-sand-700 mb-1.5"
+                className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1.5"
               >
                 Adresse e-mail
               </label>
@@ -115,7 +115,7 @@ export default function LoginPage() {
                   autoComplete="email"
                   className="input pr-10"
                 />
-                <Mail className="w-4 h-4 text-sand-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Mail className="w-4 h-4 text-neutral-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
             </div>
 
@@ -123,7 +123,7 @@ export default function LoginPage() {
               <div className="flex items-center justify-between mb-1.5">
                 <label
                   htmlFor="login-password"
-                  className="block text-xs uppercase tracking-wider font-semibold text-sand-700"
+                  className="block text-xs uppercase tracking-wider font-semibold text-neutral-700"
                 >
                   Mot de passe
                 </label>
@@ -148,7 +148,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-sand-400 hover:text-sand-700 focus:outline-none"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 focus:outline-none"
                   aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -157,7 +157,7 @@ export default function LoginPage() {
             </div>
 
             <div className="flex items-center justify-between pt-1">
-              <label className="flex items-center gap-2 cursor-pointer text-xs text-sand-700">
+              <label className="flex items-center gap-2 cursor-pointer text-xs text-neutral-700">
                 <input
                   type="checkbox"
                   checked={rememberMe}
@@ -189,7 +189,7 @@ export default function LoginPage() {
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-primary-200" />
             </div>
-            <span className="relative px-3 bg-sand-100 text-xs text-sand-500 uppercase tracking-wider font-medium">
+            <span className="relative px-3 bg-neutral-100 text-xs text-neutral-500 uppercase tracking-wider font-medium">
               ou
             </span>
           </div>
@@ -222,7 +222,7 @@ export default function LoginPage() {
 
           {/* 6. Lien d'inscription */}
           <div className="mt-8 pt-6 border-t border-primary-200 text-center">
-            <p className="text-xs text-sand-600">
+            <p className="text-xs text-neutral-600">
               Vous n’avez pas encore de compte ?{" "}
               <Link
                 href="/register"

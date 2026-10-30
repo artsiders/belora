@@ -13,7 +13,7 @@ import { Footer } from "@/components/layout/footer";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen selection:bg-primary-100 selection:text-primary-900 bg-white text-sand-900">
+    <div className="flex flex-col min-h-screen selection:bg-primary-100 selection:text-primary-900 bg-white text-neutral-900">
       {/* 1. Header & Navigation Moderne & Épurée */}
       <MainNav />
 

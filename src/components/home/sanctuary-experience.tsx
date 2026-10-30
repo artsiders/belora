@@ -30,13 +30,13 @@ export function SanctuaryExperience() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Colonne Gauche : Manifeste & 3 engagements purs */}
           <div className="lg:col-span-6">
-            <h2 id="experience-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3 text-balance">
+            <h2 id="experience-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-950 mb-3 text-balance">
               Plus qu’un rendez-vous,{" "}
               <span className="block sm:inline text-primary-600 font-bold">
                 l’expérience sanctuaire.
               </span>
             </h2>
-            <p className="text-sm text-sand-600 leading-relaxed font-normal mb-8 max-w-xl">
+            <p className="text-sm text-neutral-600 leading-relaxed font-normal mb-8 max-w-xl">
               Belora ne référence pas de chaînes impersonnelles. Nous sélectionnons
               uniquement des ateliers indépendants où le soin est un art et votre tranquillité une priorité.
             </p>
@@ -52,10 +52,10 @@ export function SanctuaryExperience() {
                     {pillar.num}
                   </span>
                   <div>
-                    <h3 className="text-sm font-semibold text-sand-950 mb-1">
+                    <h3 className="text-sm font-semibold text-neutral-950 mb-1">
                       {pillar.title}
                     </h3>
-                    <p className="text-xs text-sand-600 leading-relaxed font-normal">
+                    <p className="text-xs text-neutral-600 leading-relaxed font-normal">
                       {pillar.description}
                     </p>
                   </div>
@@ -78,7 +78,7 @@ export function SanctuaryExperience() {
           <div className="lg:col-span-6 relative">
             <div className="grid grid-cols-12 gap-3 sm:gap-4 items-end">
               {/* Arche Principale Photographique (Gauche) */}
-              <div className="col-span-8 relative aspect-[4/5] rounded-b-xl overflow-hidden bg-sand-200 border border-primary-200/80 shadow-sm">
+              <div className="col-span-8 relative aspect-[4/5] rounded-b-xl overflow-hidden bg-neutral-200 border border-primary-200/80 shadow-sm">
                 <Image
                   src="/images/sanctuaries/sanctuary-architecture.jpg"
                   alt="Intérieur minéral et épuré d'un sanctuaire partenaire Belora"
@@ -89,16 +89,16 @@ export function SanctuaryExperience() {
 
                 {/* Voile d'ombrage discret et cartouche sobre */}
                 <div
-                  className="absolute inset-0 bg-sand-950/15"
+                  className="absolute inset-0 bg-neutral-950/15"
                   aria-hidden="true"
                 />
 
-                <div className="absolute bottom-3 inset-x-3 p-3 rounded-md bg-white/95 backdrop-blur-xs border border-primary-200/80 text-sand-900 shadow-xs flex items-center justify-between gap-2">
+                <div className="absolute bottom-3 inset-x-3 p-3 rounded-md bg-white/95 backdrop-blur-xs border border-primary-200/80 text-neutral-900 shadow-xs flex items-center justify-between gap-2">
                   <div>
-                    <h4 className="text-xs font-bold text-sand-950">
+                    <h4 className="text-xs font-bold text-neutral-950">
                       Maison Albar Institut
                     </h4>
-                    <p className="text-xs text-sand-500">
+                    <p className="text-xs text-neutral-500">
                       Lyon Presqu’île · Audit 2026
                     </p>
                   </div>

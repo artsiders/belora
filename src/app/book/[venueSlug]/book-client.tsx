@@ -97,34 +97,34 @@ export function BookClient({ venue }: BookClientProps) {
           Réservation Confirmée
         </span>
 
-        <h1 className="font-display text-3xl sm:text-4xl text-sand-950 mb-3">
+        <h1 className="font-display text-3xl sm:text-4xl text-neutral-950 mb-3">
           Votre moment est sanctuarisé
         </h1>
 
-        <p className="text-xs sm:text-sm text-sand-600 mb-8 leading-relaxed max-w-md mx-auto">
+        <p className="text-xs sm:text-sm text-neutral-600 mb-8 leading-relaxed max-w-md mx-auto">
           Un e-mail de confirmation et un SMS de rappel vous ont été envoyés. {venue.name} vous attend le{" "}
-          <strong className="text-sand-950">{selectedDay}</strong> à{" "}
-          <strong className="text-sand-950">{selectedSlot}</strong>.
+          <strong className="text-neutral-950">{selectedDay}</strong> à{" "}
+          <strong className="text-neutral-950">{selectedSlot}</strong>.
         </p>
 
         {/* Récapitulatif du rendez-vous */}
         <div className="p-6 rounded-xl bg-primary-50/10 border border-primary-300 text-left mb-8 space-y-4">
           <div className="border-b border-primary-200/80 pb-3">
-            <h3 className="font-display text-lg text-sand-950">{venue.name}</h3>
-            <p className="text-xs text-sand-500">{venue.address}</p>
+            <h3 className="font-display text-lg text-neutral-950">{venue.name}</h3>
+            <p className="text-xs text-neutral-500">{venue.address}</p>
           </div>
 
           <div className="space-y-2 text-xs">
-            <div className="text-sand-500">Soins réservés :</div>
+            <div className="text-neutral-500">Soins réservés :</div>
             {selectedServices.map((s) => (
-              <div key={s.id} className="flex justify-between font-medium text-sand-900">
+              <div key={s.id} className="flex justify-between font-medium text-neutral-900">
                 <span>{s.name} ({s.durationMinutes} min)</span>
                 <span className="num">{s.priceEuros} €</span>
               </div>
             ))}
           </div>
 
-          <div className="pt-3 border-t border-primary-200/80 flex justify-between text-xs font-semibold text-sand-950">
+          <div className="pt-3 border-t border-primary-200/80 flex justify-between text-xs font-semibold text-neutral-950">
             <span>Total à régler sur place</span>
             <span className="text-sm num">{totalPrice} €</span>
           </div>
@@ -149,19 +149,19 @@ export function BookClient({ venue }: BookClientProps) {
         <div>
           <Link
             href={`/venue/${venue.slug}`}
-            className="inline-flex items-center gap-1.5 text-xs text-sand-500 hover:text-sand-900 transition-colors mb-1"
+            className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-900 transition-colors mb-1"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Retour à la maison {venue.name}</span>
           </Link>
-          <h1 className="font-display text-2xl sm:text-3xl text-sand-950">
+          <h1 className="font-display text-2xl sm:text-3xl text-neutral-950">
             Réservation chez {venue.name}
           </h1>
         </div>
 
         {/* Indicateur d'étape */}
-        <div className="text-xs text-sand-500 hidden sm:block num">
-          Étape <strong className="text-sand-900">{step}</strong> sur 4
+        <div className="text-xs text-neutral-500 hidden sm:block num">
+          Étape <strong className="text-neutral-900">{step}</strong> sur 4
         </div>
       </div>
 
@@ -172,10 +172,10 @@ export function BookClient({ venue }: BookClientProps) {
           <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 1 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-sand-900 text-sand-50 text-xs flex items-center justify-center font-medium">
+                <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-xs flex items-center justify-center font-medium">
                   1
                 </span>
-                <h2 className="font-display text-xl text-sand-950">
+                <h2 className="font-display text-xl text-neutral-950">
                   Sélectionnez vos soins
                 </h2>
               </div>
@@ -200,7 +200,7 @@ export function BookClient({ venue }: BookClientProps) {
                       onClick={() => toggleService(service)}
                       className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center justify-between gap-4 ${
                         isChecked
-                          ? "bg-sand-100/70 border-primary-900"
+                          ? "bg-neutral-100/70 border-primary-900"
                           : "bg-primary-50/10 border-primary-200 hover:border-primary-300"
                       }`}
                     >
@@ -208,17 +208,17 @@ export function BookClient({ venue }: BookClientProps) {
                         <div
                           className={`w-5 h-5 rounded-[var(--radius-xs)] border mt-0.5 flex items-center justify-center shrink-0 transition-colors ${
                             isChecked
-                              ? "bg-sand-950 border-primary-950 text-sand-50"
+                              ? "bg-neutral-950 border-primary-950 text-neutral-50"
                               : "border-primary-300 bg-primary-50/10"
                           }`}
                         >
                           {isChecked && <Check className="w-3.5 h-3.5" />}
                         </div>
                         <div>
-                          <h3 className="text-xs sm:text-sm font-semibold text-sand-950">
+                          <h3 className="text-xs sm:text-sm font-semibold text-neutral-950">
                             {service.name}
                           </h3>
-                          <p className="text-xs text-sand-500 flex items-center gap-2 mt-0.5 num">
+                          <p className="text-xs text-neutral-500 flex items-center gap-2 mt-0.5 num">
                             <span>{service.durationMinutes} min</span>
                             <span>•</span>
                             <span>{service.category}</span>
@@ -226,7 +226,7 @@ export function BookClient({ venue }: BookClientProps) {
                         </div>
                       </div>
 
-                      <span className="text-sm font-semibold text-sand-950 num shrink-0">
+                      <span className="text-sm font-semibold text-neutral-950 num shrink-0">
                         {service.priceEuros} €
                       </span>
                     </div>
@@ -245,11 +245,11 @@ export function BookClient({ venue }: BookClientProps) {
                 </div>
               </div>
             ) : (
-              <div className="text-xs text-sand-700 space-y-1">
+              <div className="text-xs text-neutral-700 space-y-1">
                 {selectedServices.map((s) => (
                   <div key={s.id} className="flex justify-between">
                     <span>{s.name} ({s.durationMinutes} min)</span>
-                    <span className="font-semibold text-sand-900 num">{s.priceEuros} €</span>
+                    <span className="font-semibold text-neutral-900 num">{s.priceEuros} €</span>
                   </div>
                 ))}
               </div>
@@ -260,10 +260,10 @@ export function BookClient({ venue }: BookClientProps) {
           <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 2 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-sand-900 text-sand-50 text-xs flex items-center justify-center font-medium">
+                <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-xs flex items-center justify-center font-medium">
                   2
                 </span>
-                <h2 className="font-display text-xl text-sand-950">
+                <h2 className="font-display text-xl text-neutral-950">
                   Choisissez votre artisan
                 </h2>
               </div>
@@ -285,18 +285,18 @@ export function BookClient({ venue }: BookClientProps) {
                   onClick={() => setSelectedArtisan("any")}
                   className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center gap-4 ${
                     selectedArtisan === "any"
-                      ? "bg-sand-100/70 border-primary-900"
+                      ? "bg-neutral-100/70 border-primary-900"
                       : "bg-primary-50/10 border-primary-200 hover:border-primary-300"
                   }`}
                 >
-                  <div className="w-10 h-10 rounded-full bg-sand-200 text-sand-700 flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-neutral-200 text-neutral-700 flex items-center justify-center shrink-0">
                     <User className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-xs sm:text-sm font-semibold text-sand-950">
+                    <h3 className="text-xs sm:text-sm font-semibold text-neutral-950">
                       Sans préférence
                     </h3>
-                    <p className="text-xs text-sand-500">
+                    <p className="text-xs text-neutral-500">
                       Premier artisan d’excellence disponible
                     </p>
                   </div>
@@ -309,11 +309,11 @@ export function BookClient({ venue }: BookClientProps) {
                     onClick={() => setSelectedArtisan(member.id)}
                     className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center gap-4 ${
                       selectedArtisan === member.id
-                        ? "bg-sand-100/70 border-primary-900"
+                        ? "bg-neutral-100/70 border-primary-900"
                         : "bg-primary-50/10 border-primary-200 hover:border-primary-300"
                     }`}
                   >
-                    <div className="relative w-10 h-10 rounded-full overflow-hidden bg-sand-200 shrink-0">
+                    <div className="relative w-10 h-10 rounded-full overflow-hidden bg-neutral-200 shrink-0">
                       <Image
                         src={member.avatar}
                         alt={member.name}
@@ -323,7 +323,7 @@ export function BookClient({ venue }: BookClientProps) {
                       />
                     </div>
                     <div>
-                      <h3 className="text-xs sm:text-sm font-semibold text-sand-950">
+                      <h3 className="text-xs sm:text-sm font-semibold text-neutral-950">
                         {member.name}
                       </h3>
                       <p className="text-xs text-primary-700 font-medium">
@@ -347,9 +347,9 @@ export function BookClient({ venue }: BookClientProps) {
             )}
 
             {step > 2 && (
-              <p className="text-xs text-sand-700">
+              <p className="text-xs text-neutral-700">
                 Praticien :{" "}
-                <strong className="text-sand-900">
+                <strong className="text-neutral-900">
                   {selectedArtisan === "any"
                     ? "Sans préférence (premier disponible)"
                     : venue.team.find((m) => m.id === selectedArtisan)?.name}
@@ -362,10 +362,10 @@ export function BookClient({ venue }: BookClientProps) {
           <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 3 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-sand-900 text-sand-50 text-xs flex items-center justify-center font-medium">
+                <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-xs flex items-center justify-center font-medium">
                   3
                 </span>
-                <h2 className="font-display text-xl text-sand-950">
+                <h2 className="font-display text-xl text-neutral-950">
                   Date & heure du rendez-vous
                 </h2>
               </div>
@@ -384,7 +384,7 @@ export function BookClient({ venue }: BookClientProps) {
               <div className="space-y-6">
                 {/* Sélecteur de jour */}
                 <div>
-                  <span className="text-xs text-sand-500 font-medium block mb-2">
+                  <span className="text-xs text-neutral-500 font-medium block mb-2">
                     Choisissez votre jour :
                   </span>
                   <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
@@ -395,8 +395,8 @@ export function BookClient({ venue }: BookClientProps) {
                         onClick={() => setSelectedDay(d.date)}
                         className={`p-3 rounded-xl border text-center transition-all cursor-pointer ${
                           selectedDay === d.date
-                            ? "bg-sand-950 text-sand-50 border-primary-950"
-                            : "bg-primary-50/10 border-primary-200 text-sand-800 hover:border-primary-400"
+                            ? "bg-neutral-950 text-neutral-50 border-primary-950"
+                            : "bg-primary-50/10 border-primary-200 text-neutral-800 hover:border-primary-400"
                         }`}
                       >
                         <span className="text-[10px] uppercase font-bold tracking-wider block opacity-75">
@@ -412,7 +412,7 @@ export function BookClient({ venue }: BookClientProps) {
 
                 {/* Sélecteur de créneau horaire */}
                 <div>
-                  <span className="text-xs text-sand-500 font-medium block mb-2">
+                  <span className="text-xs text-neutral-500 font-medium block mb-2">
                     Créneaux disponibles le {selectedDay} :
                   </span>
                   <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -423,8 +423,8 @@ export function BookClient({ venue }: BookClientProps) {
                         onClick={() => setSelectedSlot(slot)}
                         className={`py-2 px-3 rounded-xl border text-xs font-semibold transition-all num cursor-pointer ${
                           selectedSlot === slot
-                            ? "bg-primary-600 text-sand-50 border-primary-600 shadow-2xs"
-                            : "bg-primary-50/10 border-primary-200 text-sand-900 hover:border-primary-400"
+                            ? "bg-primary-600 text-neutral-50 border-primary-600 shadow-2xs"
+                            : "bg-primary-50/10 border-primary-200 text-neutral-900 hover:border-primary-400"
                         }`}
                       >
                         {slot}
@@ -447,8 +447,8 @@ export function BookClient({ venue }: BookClientProps) {
             )}
 
             {step > 3 && (
-              <p className="text-xs text-sand-700">
-                Créneau : <strong className="text-sand-900">{selectedDay} à {selectedSlot}</strong>
+              <p className="text-xs text-neutral-700">
+                Créneau : <strong className="text-neutral-900">{selectedDay} à {selectedSlot}</strong>
               </p>
             )}
           </div>
@@ -456,10 +456,10 @@ export function BookClient({ venue }: BookClientProps) {
           {/* Étape 4 : Coordonnées & Validation */}
           <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 4 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center gap-2 mb-4">
-              <span className="w-6 h-6 rounded-full bg-sand-900 text-sand-50 text-xs flex items-center justify-center font-medium">
+              <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-xs flex items-center justify-center font-medium">
                 4
               </span>
-              <h2 className="font-display text-xl text-sand-950">
+              <h2 className="font-display text-xl text-neutral-950">
                 Vos coordonnées
               </h2>
             </div>
@@ -503,7 +503,7 @@ export function BookClient({ venue }: BookClientProps) {
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded bg-sand-100/70 border border-primary-200/80 text-xs text-sand-600 flex items-start gap-2.5">
+                <div className="p-3.5 rounded bg-neutral-100/70 border border-primary-200/80 text-xs text-neutral-600 flex items-start gap-2.5">
                   <ShieldCheck className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
                   <p className="leading-snug">
                     Aucun prépaiement requis aujourd’hui. Vous règlerez directement auprès de l’artisan lors de votre venue. Annulation sans frais jusqu’à 24h avant le créneau.
@@ -529,19 +529,19 @@ export function BookClient({ venue }: BookClientProps) {
               <span className="text-[10px] uppercase font-bold tracking-wider text-primary-700 block mb-1">
                 Récapitulatif de réservation
               </span>
-              <h3 className="font-display text-xl text-sand-950">{venue.name}</h3>
-              <p className="text-xs text-sand-500">{venue.address}</p>
+              <h3 className="font-display text-xl text-neutral-950">{venue.name}</h3>
+              <p className="text-xs text-neutral-500">{venue.address}</p>
             </div>
 
             <div className="pt-4 border-t border-primary-200/80 space-y-3">
-              <div className="text-xs font-semibold text-sand-900">
+              <div className="text-xs font-semibold text-neutral-900">
                 Prestations choisies ({selectedServices.length}) :
               </div>
               <div className="space-y-2">
                 {selectedServices.map((s) => (
                   <div key={s.id} className="text-xs flex justify-between">
-                    <span className="text-sand-700">{s.name}</span>
-                    <span className="font-semibold text-sand-950 num shrink-0">
+                    <span className="text-neutral-700">{s.name}</span>
+                    <span className="font-semibold text-neutral-950 num shrink-0">
                       {s.priceEuros} €
                     </span>
                   </div>
@@ -549,24 +549,24 @@ export function BookClient({ venue }: BookClientProps) {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-primary-200/80 space-y-2 text-xs text-sand-600">
+            <div className="pt-4 border-t border-primary-200/80 space-y-2 text-xs text-neutral-600">
               <div className="flex items-center justify-between">
                 <span>Durée estimée</span>
-                <span className="font-semibold text-sand-900 num">{totalDuration} min</span>
+                <span className="font-semibold text-neutral-900 num">{totalDuration} min</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Date & heure</span>
-                <span className="font-semibold text-sand-900">{selectedDay} · {selectedSlot}</span>
+                <span className="font-semibold text-neutral-900">{selectedDay} · {selectedSlot}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Artisan</span>
-                <span className="font-semibold text-sand-900">
+                <span className="font-semibold text-neutral-900">
                   {selectedArtisan === "any" ? "Sans préférence" : venue.team.find((m) => m.id === selectedArtisan)?.name}
                 </span>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-primary-200/80 flex items-center justify-between text-sand-950">
+            <div className="pt-4 border-t border-primary-200/80 flex items-center justify-between text-neutral-950">
               <span className="text-xs font-semibold">Total à régler</span>
               <span className="font-display text-2xl num">{totalPrice} €</span>
             </div>

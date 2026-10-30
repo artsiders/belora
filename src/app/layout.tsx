@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -33,6 +34,18 @@ export default function RootLayout({
       className={`h-full antialiased ${montserrat.variable} ${playfair.variable}`}
     >
       <body className="min-h-full flex flex-col font-sans bg-bg text-fg">
+        <NextTopLoader
+          color="#82385a"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={2.5}
+          crawl={true}
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px rgba(130, 56, 90, 0.4),0 0 5px rgba(130, 56, 90, 0.2)"
+          zIndex={99999}
+        />
         {children}
       </body>
     </html>

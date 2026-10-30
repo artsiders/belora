@@ -71,7 +71,7 @@ export function ResultsGallery() {
           action={
             <Link
               href="/search"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-sand-700 hover:text-primary-600 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-neutral-700 hover:text-primary-600 transition-colors"
             >
               <span>Explorer les soins</span>
               <ArrowRight className="w-4 h-4" />
@@ -89,7 +89,7 @@ export function ResultsGallery() {
               className="group flex flex-col bg-white border border-primary-200/80 p-3 rounded-2xl pt-0 shadow-2xs hover:shadow-md hover:border-primary-300 transition-all duration-300 focus:outline-none"
             >
               {/* Photographie avec arche douce supérieure (écho à la nouvelle DA) */}
-              <div className="relative aspect-[4/5] w-full rounded-b-xl overflow-hidden bg-sand-100 mb-3.5">
+              <div className="relative aspect-[4/5] w-full rounded-b-xl overflow-hidden bg-neutral-100 mb-3.5">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -99,7 +99,7 @@ export function ResultsGallery() {
                 />
 
                 {/* Pastille discrète de catégorie en haut de l'image */}
-                <div className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-xs font-semibold text-sand-900 shadow-xs">
+                <div className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-xs font-semibold text-neutral-900 shadow-xs">
                   {item.category}
                 </div>
               </div>
@@ -107,10 +107,10 @@ export function ResultsGallery() {
               {/* Informations textuelles lisibles en dessous, sans rognage */}
               <div className="flex flex-col flex-1 justify-between pt-1">
                 <div>
-                  <h3 className="text-sm sm:text-base font-bold text-sand-950 group-hover:text-primary-600 transition-colors leading-snug">
+                  <h3 className="text-sm sm:text-base font-bold text-neutral-950 group-hover:text-primary-600 transition-colors leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-sand-500 mt-1 font-normal">
+                  <p className="text-xs text-neutral-500 mt-1 font-normal">
                     {item.salon} · {item.city}
                   </p>
                 </div>

@@ -23,11 +23,11 @@ export function SectionHeader({
     >
       <div className="max-w-xl">
         {eyebrow && <p className="eyebrow mb-1.5">{eyebrow}</p>}
-        <h2 id={id} className="section-title text-sand-950">
+        <h2 id={id} className="section-title text-neutral-950">
           {title}
         </h2>
         {subtitle && (
-          <p className="text-xs sm:text-sm text-sand-700 mt-1.5 leading-relaxed font-normal">
+          <p className="text-xs sm:text-sm text-neutral-700 mt-1.5 leading-relaxed font-normal">
             {subtitle}
           </p>
         )}

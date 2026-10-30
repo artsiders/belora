@@ -7,7 +7,7 @@ export function FeaturedSanctuary() {
       <div className="container-belora">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 hairline-b">
           <div>
-            <h2 id="sanctuary-heading" className="display-md text-sand-900">
+            <h2 id="sanctuary-heading" className="display-md text-neutral-900">
               L’intimité d’un lieu d’exception
             </h2>
           </div>
@@ -17,7 +17,7 @@ export function FeaturedSanctuary() {
         </div>
 
         {/* Immense photographie panoramique architecturale */}
-        <div className="relative aspect-[16/9] min-h-[440px] sm:min-h-[580px] w-full rounded-[var(--radius-photo)] overflow-hidden border border-line bg-sand-200 shadow-xl">
+        <div className="relative aspect-[16/9] min-h-[440px] sm:min-h-[580px] w-full rounded-[var(--radius-photo)] overflow-hidden border border-line bg-neutral-200 shadow-xl">
           <Image
             src="/images/sanctuaries/sanctuary-architecture.jpg"
             alt="Maison Albar Institut - Un espace de soin d’une grande pureté architecturale"
@@ -27,19 +27,19 @@ export function FeaturedSanctuary() {
           />
 
           <div
-            className="absolute inset-0 bg-sand-950/35"
+            className="absolute inset-0 bg-neutral-950/35"
             aria-hidden="true"
           />
 
           {/* Cartouche d'artisan en bas à gauche */}
-          <div className="absolute bottom-6 sm:bottom-10 left-6 sm:left-10 max-w-xl text-sand-50">
-            <span className="inline-block px-3 py-1 rounded-[var(--radius-xs)] bg-primary-600/90 text-sand-50 text-xs tracking-widest uppercase font-semibold mb-3 backdrop-blur-sm">
+          <div className="absolute bottom-6 sm:bottom-10 left-6 sm:left-10 max-w-xl text-neutral-50">
+            <span className="inline-block px-3 py-1 rounded-[var(--radius-xs)] bg-primary-600/90 text-neutral-50 text-xs tracking-widest uppercase font-semibold mb-3 backdrop-blur-sm">
               Maison Coup de Cœur
             </span>
-            <h3 className="text-3xl sm:text-4xl text-sand-50 mb-3">
+            <h3 className="text-3xl sm:text-4xl text-neutral-50 mb-3">
               Maison Albar Institut & Spa
             </h3>
-            <p className="text-xs sm:text-sm text-sand-200 leading-relaxed mb-6 max-w-md">
+            <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed mb-6 max-w-md">
               Nichée au cœur de la Presqu’île de Lyon, cette ancienne demeure de maître réunit les rituels du visage sur-mesure et l’hydrothérapie dans un cadre minéral d’un calme absolu.
             </p>
 
@@ -64,7 +64,7 @@ export function FeaturedSanctuary() {
                 </svg>
               </Link>
 
-              <span className="text-xs text-sand-300 font-medium">
+              <span className="text-xs text-neutral-300 font-medium">
                 À partir de 80 € · 96 avis 5.0 ★
               </span>
             </div>

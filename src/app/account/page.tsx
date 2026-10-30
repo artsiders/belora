@@ -4,7 +4,7 @@ import { AccountClient } from "./account-client";
 
 export default function AccountPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-white text-sand-900 selection:bg-primary-100 selection:text-primary-900">
+    <div className="flex flex-col min-h-screen bg-white text-neutral-900 selection:bg-primary-100 selection:text-primary-900">
       <MainNav />
 
       <main className="flex-1">

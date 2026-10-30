@@ -131,7 +131,7 @@ export default function ProPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-sand-900 selection:bg-primary-100 selection:text-primary-900">
+    <div className="flex flex-col min-h-screen bg-white text-neutral-900 selection:bg-primary-100 selection:text-primary-900">
       <MainNav />
 
       <main className="flex-1">
@@ -148,19 +148,19 @@ export default function ProPage() {
               {/* Colonne gauche : Discours de marque sobre & précis */}
               <div className="lg:col-span-6 space-y-6">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs uppercase font-semibold tracking-wider text-sand-500">
+                  <span className="text-xs uppercase font-semibold tracking-wider text-neutral-500">
                     Belora Pro · Pour les Ateliers & Salons
                   </span>
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-sand-950 leading-tight text-balance">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-950 leading-tight text-balance">
                   L’artisanat d’exception mérite{" "}
                   <span className="block sm:inline text-primary-600 font-bold">
                     un outil à la hauteur de son geste.
                   </span>
                 </h1>
 
-                <p className="text-sm sm:text-base text-sand-600 max-w-xl leading-relaxed font-normal">
+                <p className="text-sm sm:text-base text-neutral-600 max-w-xl leading-relaxed font-normal">
                   Libérez-vous de la gestion administrative. Belora Pro réunit un agenda d’une fluidité absolue, la sécurisation des créneaux par acompte et la mise en avant de votre atelier auprès d’une clientèle sélective.
                 </p>
 
@@ -187,7 +187,7 @@ export default function ProPage() {
               <div className="lg:col-span-6 relative">
                 <div className="grid grid-cols-12 gap-3 sm:gap-4 items-end">
                   {/* principale photo pro */}
-                  <div className="col-span-8 relative h-[360px] sm:h-[440px] rounded-b-2xl overflow-hidden bg-sand-100 border border-primary-200/80 shadow-sm">
+                  <div className="col-span-8 relative h-[360px] sm:h-[440px] rounded-b-2xl overflow-hidden bg-neutral-100 border border-primary-200/80 shadow-sm">
                     <Image
                       src="/images/pro/pro-hero.jpg"
                       alt="Artisan coiffeur en plein geste dans son atelier partenaire Belora"
@@ -201,14 +201,14 @@ export default function ProPage() {
                   {/* graphiques d'impact */}
                   <div className="col-span-4 flex flex-col gap-3 sm:gap-4 h-[360px] sm:h-[440px]">
                     <div className="flex-1 rounded-b-2xl bg-secondary-900 p-4 sm:p-5 flex flex-col justify-end gap-2 text-white shadow-2xs">
-                      <span className="text-xs uppercase font-semibold text-sand-400">
+                      <span className="text-xs uppercase font-semibold text-neutral-400">
                         Performance
                       </span>
                       <div>
                         <p className="text-2xl sm:text-3xl font-bold num text-white">
                           +28%
                         </p>
-                        <p className="text-xs text-sand-300 font-normal leading-tight mt-0.5">
+                        <p className="text-xs text-neutral-300 font-normal leading-tight mt-0.5">
                           de chiffre d’affaires moyen
                         </p>
                       </div>
@@ -234,10 +234,10 @@ export default function ProPage() {
         >
           <div className="container-belora">
             <div className="max-w-2xl mb-10 sm:mb-12">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-950 mb-3">
                 Un agenda silencieux, conçu pour le rythme de votre salon.
               </h2>
-              <p className="text-xs sm:text-sm text-sand-600 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
                 Développé avec des artisans pour supprimer les clics superflus. Vos membres d’équipe visualisent leurs rituels d’un seul coup d’œil.
               </p>
             </div>
@@ -249,23 +249,23 @@ export default function ProPage() {
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-2">
                     <CalendarDays className="w-4 h-4 text-primary-600" />
-                    <span className="font-bold text-sand-950 text-sm sm:text-base">
+                    <span className="font-bold text-neutral-950 text-sm sm:text-base">
                       Mardi 21 Octobre 2026
                     </span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-sand-100 text-sand-700 text-xs font-medium">
+                  <span className="px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-700 text-xs font-medium">
                     Vue Journalière
                   </span>
                 </div>
               </div>
 
               {/* Colonnes des collaborateurs */}
-              <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-sand-200/80 p-4 sm:p-6 gap-6 md:gap-0">
+              <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80 p-4 sm:p-6 gap-6 md:gap-0">
                 {/* Colonne 1 : Hélène */}
                 <div className="md:px-4 space-y-3.5">
                   <div className="flex items-center justify-between pb-3 border-b border-primary-100">
                     <div className="flex items-center gap-2.5">
-                      <div className="relative w-8 h-8 rounded-full overflow-hidden bg-sand-100">
+                      <div className="relative w-8 h-8 rounded-full overflow-hidden bg-neutral-100">
                         <Image
                           src="/images/artisans/artisan-1.jpg"
                           alt="Hélène de Valois"
@@ -275,7 +275,7 @@ export default function ProPage() {
                         />
                       </div>
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold text-sand-950">
+                        <h4 className="text-xs sm:text-sm font-bold text-neutral-950">
                           Hélène de Valois
                         </h4>
                         <p className="text-xs text-primary-600 font-medium">
@@ -283,29 +283,29 @@ export default function ProPage() {
                         </p>
                       </div>
                     </div>
-                    <span className="text-xs text-sand-500 font-medium num">
+                    <span className="text-xs text-neutral-500 font-medium num">
                       5 créneaux
                     </span>
                   </div>
 
                   {/* Rendez-vous 1 */}
-                  <div className="p-3.5 bg-primary-50 border-l-4 border-primary-600 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-primary-50 border-l-4 border-primary-600 text-neutral-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Balayage Minéral & Soin</span>
-                      <span className="num font-semibold text-sand-700">10h00 - 12h00</span>
+                      <span className="num font-semibold text-neutral-700">10h00 - 12h00</span>
                     </div>
-                    <p className="text-xs text-sand-600">
+                    <p className="text-xs text-neutral-600">
                       Sophie M. · Acompte versé (45 €)
                     </p>
                   </div>
 
                   {/* Rendez-vous 2 */}
-                  <div className="p-3.5 bg-sand-100 border-l-4 border-primary-500 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-neutral-100 border-l-4 border-primary-500 text-neutral-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Coupe Signature à Sec</span>
-                      <span className="num font-semibold text-sand-700">14h00 - 15h00</span>
+                      <span className="num font-semibold text-neutral-700">14h00 - 15h00</span>
                     </div>
-                    <p className="text-xs text-sand-600">
+                    <p className="text-xs text-neutral-600">
                       Camille D. · Nouveau client Belora
                     </p>
                   </div>
@@ -315,7 +315,7 @@ export default function ProPage() {
                 <div className="md:px-4 space-y-3.5">
                   <div className="flex items-center justify-between pb-3 border-b border-primary-100">
                     <div className="flex items-center gap-2.5">
-                      <div className="relative w-8 h-8 rounded-full overflow-hidden bg-sand-100">
+                      <div className="relative w-8 h-8 rounded-full overflow-hidden bg-neutral-100">
                         <Image
                           src="/images/artisans/artisan-2.jpg"
                           alt="Marc Sémard"
@@ -325,7 +325,7 @@ export default function ProPage() {
                         />
                       </div>
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold text-sand-950">
+                        <h4 className="text-xs sm:text-sm font-bold text-neutral-950">
                           Marc Sémard
                         </h4>
                         <p className="text-xs text-secondary-600 font-medium">
@@ -333,29 +333,29 @@ export default function ProPage() {
                         </p>
                       </div>
                     </div>
-                    <span className="text-xs text-sand-500 font-medium num">
+                    <span className="text-xs text-neutral-500 font-medium num">
                       6 créneaux
                     </span>
                   </div>
 
                   {/* Rendez-vous 1 */}
-                  <div className="p-3.5 bg-secondary-50 border-l-4 border-secondary-600 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-secondary-50 border-l-4 border-secondary-600 text-neutral-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Rituel Rasage & Serviette Chaude</span>
-                      <span className="num font-semibold text-sand-700">11h00 - 12h00</span>
+                      <span className="num font-semibold text-neutral-700">11h00 - 12h00</span>
                     </div>
-                    <p className="text-xs text-sand-600">
+                    <p className="text-xs text-neutral-600">
                       Alexandre G. · Client fidèle
                     </p>
                   </div>
 
                   {/* Rendez-vous 2 */}
-                  <div className="p-3.5 bg-sand-100 border-l-4 border-primary-500 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-neutral-100 border-l-4 border-primary-500 text-neutral-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Taille de Barbe & Soin Huile</span>
-                      <span className="num font-semibold text-sand-700">15h30 - 16h15</span>
+                      <span className="num font-semibold text-neutral-700">15h30 - 16h15</span>
                     </div>
-                    <p className="text-xs text-sand-600">
+                    <p className="text-xs text-neutral-600">
                       Jeanne R. · Réservation en ligne
                     </p>
                   </div>
@@ -365,7 +365,7 @@ export default function ProPage() {
                 <div className="md:px-4 space-y-3.5">
                   <div className="flex items-center justify-between pb-3 border-b border-primary-100">
                     <div className="flex items-center gap-2.5">
-                      <div className="relative w-8 h-8 rounded-full overflow-hidden bg-sand-100">
+                      <div className="relative w-8 h-8 rounded-full overflow-hidden bg-neutral-100">
                         <Image
                           src="/images/artisans/artisan-3.jpg"
                           alt="Nour Kaddour"
@@ -375,7 +375,7 @@ export default function ProPage() {
                         />
                       </div>
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold text-sand-950">
+                        <h4 className="text-xs sm:text-sm font-bold text-neutral-950">
                           Nour Kaddour
                         </h4>
                         <p className="text-xs text-primary-600 font-medium">
@@ -383,29 +383,29 @@ export default function ProPage() {
                         </p>
                       </div>
                     </div>
-                    <span className="text-xs text-sand-500 font-medium num">
+                    <span className="text-xs text-neutral-500 font-medium num">
                       4 créneaux
                     </span>
                   </div>
 
                   {/* Rendez-vous 1 */}
-                  <div className="p-3.5 bg-primary-50 border-l-4 border-primary-600 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-primary-50 border-l-4 border-primary-600 text-neutral-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Grand Rituel Kobido Impérial</span>
-                      <span className="num font-semibold text-sand-700">14h00 - 15h15</span>
+                      <span className="num font-semibold text-neutral-700">14h00 - 15h15</span>
                     </div>
-                    <p className="text-xs text-sand-600">
+                    <p className="text-xs text-neutral-600">
                       Élodie B. · Cabine Sérénité (Acompte 50 €)
                     </p>
                   </div>
 
                   {/* Rendez-vous 2 */}
-                  <div className="p-3.5 bg-sand-100 border-l-4 border-primary-500 text-sand-950 space-y-1">
+                  <div className="p-3.5 bg-neutral-100 border-l-4 border-primary-500 text-neutral-950 space-y-1">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span>Consultation & Diagnostic Visage</span>
-                      <span className="num font-semibold text-sand-700">16h30 - 17h15</span>
+                      <span className="num font-semibold text-neutral-700">16h30 - 17h15</span>
                     </div>
-                    <p className="text-xs text-sand-600">
+                    <p className="text-xs text-neutral-600">
                       Thomas V. · Nouveau client
                     </p>
                   </div>
@@ -414,9 +414,9 @@ export default function ProPage() {
 
               {/* Pied du simulateur */}
               <div className="p-4 bg-primary-50/10 border-t border-primary-200/80 flex flex-wrap items-center justify-between gap-4 text-xs">
-                <span className="text-sand-600 font-normal">
+                <span className="text-neutral-600 font-normal">
                   Chiffre d’affaires de la journée :{" "}
-                  <strong className="text-sand-950 font-bold num">1 420 €</strong>
+                  <strong className="text-neutral-950 font-bold num">1 420 €</strong>
                 </span>
                 <span className="text-primary-700 font-semibold">
                   Acomptes bancaires sécurisés : 480 € garantis
@@ -430,10 +430,10 @@ export default function ProPage() {
         <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-white">
           <div className="container-belora">
             <div className="max-w-2xl mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-950 mb-3">
                 Pourquoi les meilleurs ateliers choisissent Belora Pro.
               </h2>
-              <p className="text-xs sm:text-sm text-sand-600 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
                 Chaque fonctionnalité a été pensée pour supprimer les frictions et valoriser votre expertise artisanale.
               </p>
             </div>
@@ -448,18 +448,18 @@ export default function ProPage() {
                   >
                     <div>
                       <div className="flex items-center justify-between mb-5">
-                        <div className="w-10 h-10 rounded-2xl bg-sand-100 flex items-center justify-center text-primary-600">
+                        <div className="w-10 h-10 rounded-2xl bg-neutral-100 flex items-center justify-center text-primary-600">
                           <Icon className="w-5 h-5" />
                         </div>
-                        <span className="text-xs font-bold num text-sand-400">
+                        <span className="text-xs font-bold num text-neutral-400">
                           {pillar.number}
                         </span>
                       </div>
 
-                      <h3 className="text-base font-bold text-sand-950 mb-2">
+                      <h3 className="text-base font-bold text-neutral-950 mb-2">
                         {pillar.title}
                       </h3>
-                      <p className="text-xs text-sand-600 leading-relaxed font-normal">
+                      <p className="text-xs text-neutral-600 leading-relaxed font-normal">
                         {pillar.description}
                       </p>
                     </div>
@@ -474,10 +474,10 @@ export default function ProPage() {
         <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-primary-50/10/50">
           <div className="container-belora">
             <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-950 mb-3">
                 Un modèle respectueux de votre indépendance.
               </h2>
-              <p className="text-xs sm:text-sm text-sand-600 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
                 Fini les commissions masquées et les logiciels complexes. Nous remettons l’artisan au centre.
               </p>
             </div>
@@ -485,25 +485,25 @@ export default function ProPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {/* Carte Logiciels Traditionnels */}
               <div className="p-6 sm:p-8 rounded-3xl bg-white border border-primary-200/80 space-y-4">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sand-500">
-                  <X className="w-4 h-4 text-sand-400" />
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-500">
+                  <X className="w-4 h-4 text-neutral-400" />
                   <span>Logiciels traditionnels & annuaires</span>
                 </div>
-                <ul className="space-y-3 text-xs text-sand-600">
+                <ul className="space-y-3 text-xs text-neutral-600">
                   <li className="flex items-start gap-2.5">
-                    <X className="w-4 h-4 text-sand-400 shrink-0 mt-0.5" />
+                    <X className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
                     <span>Commission prélevée sur chaque client, même vos habitués</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <X className="w-4 h-4 text-sand-400 shrink-0 mt-0.5" />
+                    <X className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
                     <span>Interface austère et obsolète avec trop de clics</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <X className="w-4 h-4 text-sand-400 shrink-0 mt-0.5" />
+                    <X className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
                     <span>Votre réputation mélangée à des salons de chaîne discount</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <X className="w-4 h-4 text-sand-400 shrink-0 mt-0.5" />
+                    <X className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
                     <span>Support technique impersonnel et peu réactif</span>
                   </li>
                 </ul>
@@ -515,7 +515,7 @@ export default function ProPage() {
                   <Check className="w-4 h-4 text-primary-600" />
                   <span>Le standard Belora Pro</span>
                 </div>
-                <ul className="space-y-3 text-xs text-sand-900 font-medium">
+                <ul className="space-y-3 text-xs text-neutral-900 font-medium">
                   <li className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
                     <span>0% de commission sur vos clients. Forfait fixe et clair.</span>
@@ -542,22 +542,22 @@ export default function ProPage() {
         <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-white" id="pricing">
           <div className="container-belora">
             <div className="max-w-xl mx-auto text-center mb-10 sm:mb-12">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-950 mb-3">
                 Des forfaits fixes, sans commission abusive.
               </h2>
-              <p className="text-xs sm:text-sm text-sand-600 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
                 14 jours d’essai offert sur chaque plan. Modifiez ou résiliez à tout moment en un clic.
               </p>
 
               {/* Sélecteur de cycle de facturation */}
-              <div className="inline-flex items-center p-1 rounded-full bg-sand-100 border border-primary-200 mt-6">
+              <div className="inline-flex items-center p-1 rounded-full bg-neutral-100 border border-primary-200 mt-6">
                 <button
                   type="button"
                   onClick={() => setBillingCycle("monthly")}
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                     billingCycle === "monthly"
-                      ? "bg-white text-sand-950 shadow-2xs"
-                      : "text-sand-600 hover:text-sand-900"
+                      ? "bg-white text-neutral-950 shadow-2xs"
+                      : "text-neutral-600 hover:text-neutral-900"
                   }`}
                 >
                   Mensuel
@@ -567,8 +567,8 @@ export default function ProPage() {
                   onClick={() => setBillingCycle("annual")}
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                     billingCycle === "annual"
-                      ? "bg-white text-sand-950 shadow-2xs"
-                      : "text-sand-600 hover:text-sand-900"
+                      ? "bg-white text-neutral-950 shadow-2xs"
+                      : "text-neutral-600 hover:text-neutral-900"
                   }`}
                 >
                   <span>Annuel</span>
@@ -601,23 +601,23 @@ export default function ProPage() {
                         </span>
                       )}
 
-                      <h3 className="text-xl sm:text-2xl font-bold text-sand-950 mb-1">
+                      <h3 className="text-xl sm:text-2xl font-bold text-neutral-950 mb-1">
                         {plan.name}
                       </h3>
-                      <p className="text-xs text-sand-600 mb-6 font-normal min-h-9">
+                      <p className="text-xs text-neutral-600 mb-6 font-normal min-h-9">
                         {plan.description}
                       </p>
 
                       <div className="flex items-baseline gap-1 mb-6 pb-6 border-b border-primary-100">
-                        <span className="text-4xl font-bold text-sand-950 num">
+                        <span className="text-4xl font-bold text-neutral-950 num">
                           {price} €
                         </span>
-                        <span className="text-xs text-sand-500 font-normal">
+                        <span className="text-xs text-neutral-500 font-normal">
                           /mois {billingCycle === "annual" && "facturé à l'année"}
                         </span>
                       </div>
 
-                      <ul className="space-y-3 text-xs text-sand-700 mb-8">
+                      <ul className="space-y-3 text-xs text-neutral-700 mb-8">
                         {plan.features.map((feature, i) => (
                           <li key={i} className="flex items-start gap-2.5">
                             <Check className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
@@ -646,10 +646,10 @@ export default function ProPage() {
         <section className="py-16 sm:py-24 border-b border-primary-200/80 bg-primary-50/10/50">
           <div className="container-belora">
             <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 mb-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-950 mb-3">
                 Tout ce que vous devez savoir.
               </h2>
-              <p className="text-xs sm:text-sm text-sand-600 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
                 Une question spécifique ? Notre équipe d’accompagnement est disponible par téléphone 6j/7.
               </p>
             </div>
@@ -668,17 +668,17 @@ export default function ProPage() {
                       className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer"
                       aria-expanded={isOpen}
                     >
-                      <span className="text-sm sm:text-base font-bold text-sand-950">
+                      <span className="text-sm sm:text-base font-bold text-neutral-950">
                         {faq.question}
                       </span>
                       <ChevronDown
-                        className={`w-4 h-4 text-sand-500 shrink-0 transition-transform duration-300 ${
+                        className={`w-4 h-4 text-neutral-500 shrink-0 transition-transform duration-300 ${
                           isOpen ? "rotate-180 text-primary-600" : ""
                         }`}
                       />
                     </button>
                     {isOpen && (
-                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-sand-600 leading-relaxed font-normal border-t border-primary-100">
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal border-t border-primary-100">
                         {faq.answer}
                       </div>
                     )}
@@ -692,7 +692,7 @@ export default function ProPage() {
         {/* 7. BANNIÈRE FINALE DE CONVERSION */}
         <section className="py-16 sm:py-24 bg-white">
           <div className="container-belora">
-            <div className="rounded-3xl bg-sand-950 text-white p-8 sm:p-12 lg:p-16 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-8">
+            <div className="rounded-3xl bg-neutral-950 text-white p-8 sm:p-12 lg:p-16 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-8">
               {/* filigrane décoratif dans le fond sombre */}
               <div
                 className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full border border-primary-800/60 pointer-events-none"
@@ -704,13 +704,13 @@ export default function ProPage() {
               />
 
               <div className="max-w-xl space-y-3 relative z-10">
-                <span className="text-xs uppercase font-semibold tracking-wider text-sand-400">
+                <span className="text-xs uppercase font-semibold tracking-wider text-neutral-400">
                   Prêt à transformer votre quotidien ?
                 </span>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight">
                   Rejoignez les maisons d’excellence référencées sur Belora.
                 </h2>
-                <p className="text-xs sm:text-sm text-sand-300 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-normal">
                   Activation immédiate, 14 jours d’essai offert sans engagement, accompagnement sur-mesure.
                 </p>
               </div>
@@ -724,7 +724,7 @@ export default function ProPage() {
                 </Link>
                 <Link
                   href="/login"
-                  className="btn btn-outline py-3.5 px-6 text-xs sm:text-sm rounded-xl text-center text-white border-primary-700 hover:bg-sand-900"
+                  className="btn btn-outline py-3.5 px-6 text-xs sm:text-sm rounded-xl text-center text-white border-primary-700 hover:bg-neutral-900"
                 >
                   Connexion praticien
                 </Link>

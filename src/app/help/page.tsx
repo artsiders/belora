@@ -50,7 +50,7 @@ export default function HelpPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-sand-900 selection:bg-primary-100 selection:text-primary-900">
+    <div className="flex flex-col min-h-screen bg-white text-neutral-900 selection:bg-primary-100 selection:text-primary-900">
       <MainNav />
 
       <main className="flex-1 pb-20">
@@ -60,16 +60,16 @@ export default function HelpPage() {
             <span className="eyebrow text-primary-700 font-semibold tracking-widest block mb-2">
               Centre d’Assistance
             </span>
-            <h1 className="font-display text-4xl sm:text-5xl text-sand-950 mb-4">
+            <h1 className="font-display text-4xl sm:text-5xl text-neutral-950 mb-4">
               Comment pouvons-nous vous aider ?
             </h1>
-            <p className="text-xs sm:text-sm text-sand-600 mb-8 max-w-md mx-auto">
+            <p className="text-xs sm:text-sm text-neutral-600 mb-8 max-w-md mx-auto">
               Retrouvez toutes les réponses concernant vos réservations, vos paiements et nos critères d’audit.
             </p>
 
             {/* Champ de recherche d'aide */}
             <div className="relative max-w-md mx-auto">
-              <Search className="w-4 h-4 text-sand-400 absolute left-4 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-neutral-400 absolute left-4 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Rechercher une question, une règle d’annulation..."
@@ -84,7 +84,7 @@ export default function HelpPage() {
           <div className="space-y-12">
             {FAQ_SECTIONS.map((section, idx) => (
               <div key={idx} className="space-y-4">
-                <h2 className="font-display text-2xl text-sand-950 border-b border-primary-200/80 pb-2">
+                <h2 className="font-display text-2xl text-neutral-950 border-b border-primary-200/80 pb-2">
                   {section.category}
                 </h2>
 
@@ -94,10 +94,10 @@ export default function HelpPage() {
                       key={i}
                       className="p-5 rounded-xl bg-primary-50/10 border border-primary-200/80 space-y-2"
                     >
-                      <h3 className="text-sm font-semibold text-sand-950">
+                      <h3 className="text-sm font-semibold text-neutral-950">
                         {faq.q}
                       </h3>
-                      <p className="text-xs text-sand-600 leading-relaxed font-normal">
+                      <p className="text-xs text-neutral-600 leading-relaxed font-normal">
                         {faq.a}
                       </p>
                     </div>
@@ -109,10 +109,10 @@ export default function HelpPage() {
 
           {/* Contact Direct */}
           <div className="mt-16 p-8 rounded-xl bg-primary-50/10 border border-primary-300 text-center space-y-4">
-            <h3 className="font-display text-2xl text-sand-950">
+            <h3 className="font-display text-2xl text-neutral-950">
               Vous n’avez pas trouvé votre réponse ?
             </h3>
-            <p className="text-xs text-sand-600 max-w-md mx-auto leading-relaxed">
+            <p className="text-xs text-neutral-600 max-w-md mx-auto leading-relaxed">
               Notre équipe d’assistance dédiée est joignable du lundi au samedi pour vous accompagner dans votre expérience de soin.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">

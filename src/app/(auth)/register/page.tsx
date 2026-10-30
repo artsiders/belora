@@ -48,10 +48,10 @@ export default function RegisterPage() {
         <span className="text-[11px] uppercase tracking-wider font-semibold text-primary-600 block mb-1.5">
           Inscription
         </span>
-        <h1 className="text-3xl sm:text-4xl text-sand-950 tracking-tight">
+        <h1 className="text-3xl sm:text-4xl text-neutral-950 tracking-tight">
           Rejoindre Belora
         </h1>
-        <p className="text-xs sm:text-sm text-sand-600 mt-2 font-normal leading-relaxed">
+        <p className="text-xs sm:text-sm text-neutral-600 mt-2 font-normal leading-relaxed">
           Choisissez l’expérience qui vous correspond pour débuter votre parcours.
         </p>
       </div>
@@ -73,7 +73,7 @@ export default function RegisterPage() {
           <div className="flex items-center justify-between mb-1.5">
             <User
               className={`w-4 h-4 ${
-                role === "client" ? "text-primary-600" : "text-sand-500"
+                role === "client" ? "text-primary-600" : "text-neutral-500"
               }`}
             />
             <span
@@ -88,10 +88,10 @@ export default function RegisterPage() {
               )}
             </span>
           </div>
-          <span className="block text-xs font-semibold text-sand-900">
+          <span className="block text-xs font-semibold text-neutral-900">
             Particulier
           </span>
-          <span className="block text-[11px] text-sand-500 mt-0.5 leading-snug">
+          <span className="block text-[11px] text-neutral-500 mt-0.5 leading-snug">
             Réserver des soins d’exception
           </span>
         </button>
@@ -111,7 +111,7 @@ export default function RegisterPage() {
           <div className="flex items-center justify-between mb-1.5">
             <Building2
               className={`w-4 h-4 ${
-                role === "pro" ? "text-primary-600" : "text-sand-500"
+                role === "pro" ? "text-primary-600" : "text-neutral-500"
               }`}
             />
             <span
@@ -126,10 +126,10 @@ export default function RegisterPage() {
               )}
             </span>
           </div>
-          <span className="block text-xs font-semibold text-sand-900">
+          <span className="block text-xs font-semibold text-neutral-900">
             Artisan & Salon
           </span>
-          <span className="block text-[11px] text-sand-500 mt-0.5 leading-snug">
+          <span className="block text-[11px] text-neutral-500 mt-0.5 leading-snug">
             Développer mon établissement
           </span>
         </button>
@@ -141,10 +141,10 @@ export default function RegisterPage() {
             <CheckCircle2 className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-xl text-sand-950 mb-1">
+            <h3 className="text-xl text-neutral-950 mb-1">
               Bienvenue dans la Maison Belora
             </h3>
-            <p className="text-xs text-sand-600">
+            <p className="text-xs text-neutral-600">
               Votre compte a été initialisé avec succès. Un e-mail de confirmation
               a été envoyé à votre adresse.
             </p>
@@ -166,7 +166,7 @@ export default function RegisterPage() {
                 <div>
                   <label
                     htmlFor="reg-business-name"
-                    className="block text-xs uppercase tracking-wider font-semibold text-sand-700 mb-1"
+                    className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
                   >
                     Nom de votre établissement
                   </label>
@@ -179,7 +179,7 @@ export default function RegisterPage() {
                       setFormData({ ...formData, businessName: e.target.value })
                     }
                     placeholder="Ex: L’Atelier des Ciseaux, Studio Séquoia…"
-                    className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                    className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
                   />
                 </div>
 
@@ -187,7 +187,7 @@ export default function RegisterPage() {
                   <div>
                     <label
                       htmlFor="reg-category"
-                      className="block text-xs uppercase tracking-wider font-semibold text-sand-700 mb-1"
+                      className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
                     >
                       Activité principale
                     </label>
@@ -197,7 +197,7 @@ export default function RegisterPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, businessCategory: e.target.value })
                       }
-                      className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-sand-900 focus:outline-none focus:border-primary-600"
+                      className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 focus:outline-none focus:border-primary-600"
                     >
                       <option value="coiffure">Coiffure</option>
                       <option value="visage">Soins Visage & Institut</option>
@@ -209,7 +209,7 @@ export default function RegisterPage() {
                   <div>
                     <label
                       htmlFor="reg-city"
-                      className="block text-xs uppercase tracking-wider font-semibold text-sand-700 mb-1"
+                      className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
                     >
                       Ville
                     </label>
@@ -222,7 +222,7 @@ export default function RegisterPage() {
                         setFormData({ ...formData, city: e.target.value })
                       }
                       placeholder="Paris, Lyon…"
-                      className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                      className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
                     />
                   </div>
                 </div>
@@ -233,7 +233,7 @@ export default function RegisterPage() {
               <div>
                 <label
                   htmlFor="reg-first-name"
-                  className="block text-xs uppercase tracking-wider font-semibold text-sand-700 mb-1"
+                  className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
                 >
                   Prénom
                 </label>
@@ -247,13 +247,13 @@ export default function RegisterPage() {
                   }
                   placeholder="Camille"
                   autoComplete="given-name"
-                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
                 />
               </div>
               <div>
                 <label
                   htmlFor="reg-last-name"
-                  className="block text-xs uppercase tracking-wider font-semibold text-sand-700 mb-1"
+                  className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
                 >
                   Nom
                 </label>
@@ -267,7 +267,7 @@ export default function RegisterPage() {
                   }
                   placeholder="Dupont"
                   autoComplete="family-name"
-                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
                 />
               </div>
             </div>
@@ -275,7 +275,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="reg-email"
-                className="block text-xs uppercase tracking-wider font-semibold text-sand-700 mb-1"
+                className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
               >
                 Adresse e-mail
               </label>
@@ -290,19 +290,19 @@ export default function RegisterPage() {
                   }
                   placeholder="nom@exemple.com"
                   autoComplete="email"
-                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
                 />
-                <Mail className="w-4 h-4 text-sand-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Mail className="w-4 h-4 text-neutral-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
             </div>
 
             <div>
               <label
                 htmlFor="reg-phone"
-                className="block text-xs uppercase tracking-wider font-semibold text-sand-700 mb-1"
+                className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
               >
                 Téléphone mobile{" "}
-                <span className="text-[11px] font-normal text-sand-500 lowercase">
+                <span className="text-[11px] font-normal text-neutral-500 lowercase">
                   (pour les rappels SMS de rdv)
                 </span>
               </label>
@@ -316,16 +316,16 @@ export default function RegisterPage() {
                   }
                   placeholder="06 12 34 56 78"
                   autoComplete="tel"
-                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
                 />
-                <Phone className="w-4 h-4 text-sand-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Phone className="w-4 h-4 text-neutral-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
             </div>
 
             <div>
               <label
                 htmlFor="reg-password"
-                className="block text-xs uppercase tracking-wider font-semibold text-sand-700 mb-1"
+                className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
               >
                 Mot de passe (8 caractères minimum)
               </label>
@@ -341,12 +341,12 @@ export default function RegisterPage() {
                   }
                   placeholder="••••••••••••"
                   autoComplete="new-password"
-                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-primary-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-sand-400 hover:text-sand-700 focus:outline-none"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 focus:outline-none"
                   aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -355,7 +355,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="pt-1">
-              <label className="flex items-start gap-2.5 cursor-pointer text-xs text-sand-600 leading-snug">
+              <label className="flex items-start gap-2.5 cursor-pointer text-xs text-neutral-600 leading-snug">
                 <input
                   type="checkbox"
                   required
@@ -365,7 +365,7 @@ export default function RegisterPage() {
                 />
                 <span>
                   J’accepte les{" "}
-                  <Link href="/terms" className="text-sand-900 underline underline-offset-2">
+                  <Link href="/terms" className="text-neutral-900 underline underline-offset-2">
                     conditions générales d’utilisation
                   </Link>{" "}
                   et confirme avoir pris connaissance de la politique de confidentialité.
@@ -393,7 +393,7 @@ export default function RegisterPage() {
 
           {/* 4. Lien de retour connexion */}
           <div className="mt-6 pt-5 border-t border-primary-200 text-center">
-            <p className="text-xs text-sand-600">
+            <p className="text-xs text-neutral-600">
               Déjà membre de la Maison Belora ?{" "}
               <Link
                 href="/login"

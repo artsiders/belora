@@ -40,7 +40,7 @@ function FacebookIcon({ className = "w-4 h-4" }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-secondary-950 text-sand-300 border-t border-white/10 pt-16 pb-12">
+    <footer className="relative overflow-hidden bg-secondary-950 text-neutral-300 border-t border-white/10 pt-16 pb-12">
       {/* Arches graphiques décoratives collées au bas du footer */}
       <div
         aria-hidden="true"
@@ -57,7 +57,7 @@ export function Footer() {
           <div className="col-span-2 md:col-span-5 lg:col-span-4 space-y-4 pr-0 md:pr-4">
             <Link
               href="/"
-              className="text-2xl font-bold tracking-tight text-sand-50 inline-block hover:text-white transition-colors"
+              className="text-2xl font-bold tracking-tight text-neutral-50 inline-block hover:text-white transition-colors"
             >
               <Image
                 src="/images/logos/belora.svg"
@@ -70,7 +70,7 @@ export function Footer() {
             </Link>
       
 
-            <p className="text-sm sm:text-base text-sand-300 leading-relaxed max-w-sm">
+            <p className="text-sm sm:text-base text-neutral-300 leading-relaxed max-w-sm">
               La maison de réservation des artisans indépendants de la coiffure,
               du soin et du bien-être d’exception.
             </p>
@@ -78,7 +78,7 @@ export function Footer() {
 
           {/* Colonne Univers */}
           <div className="col-span-1 md:col-span-3 lg:col-span-3 space-y-3">
-            <p className="text-sm font-semibold uppercase tracking-wider text-sand-200">
+            <p className="text-sm font-semibold uppercase tracking-wider text-neutral-200">
               Univers
             </p>
             <ul className="space-y-2.5 text-sm">
@@ -112,7 +112,7 @@ export function Footer() {
 
           {/* Colonne Professionnels */}
           <div className="col-span-1 md:col-span-2 lg:col-span-3 space-y-3">
-            <p className="text-sm font-semibold uppercase tracking-wider text-sand-200">
+            <p className="text-sm font-semibold uppercase tracking-wider text-neutral-200">
               Professionnels
             </p>
             <ul className="space-y-2.5 text-sm">
@@ -136,7 +136,7 @@ export function Footer() {
 
           {/* Colonne Maison & Suivi */}
           <div className="col-span-2 md:col-span-2 lg:col-span-2 space-y-3">
-            <p className="text-sm font-semibold uppercase tracking-wider text-sand-200">
+            <p className="text-sm font-semibold uppercase tracking-wider text-neutral-200">
               Maison
             </p>
             <ul className="space-y-2.5 text-sm">
@@ -153,10 +153,10 @@ export function Footer() {
             </ul>
 
             <div className="pt-4 space-y-2">
-              <p className="text-sm uppercase tracking-wider text-sand-400">
+              <p className="text-sm uppercase tracking-wider text-neutral-400">
                 Suivez-nous
               </p>
-              <div className="flex items-center gap-3 text-sand-300">
+              <div className="flex items-center gap-3 text-neutral-300">
                 <a
                   href="https://instagram.com"
                   target="_blank"
@@ -182,7 +182,7 @@ export function Footer() {
         </div>
 
         {/* Ligne inférieure */}
-        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-sand-400">
+        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
           <p>© 2026 Belora - L’artisanat du soin d’exception.</p>
 
           <div className="flex items-center gap-6">

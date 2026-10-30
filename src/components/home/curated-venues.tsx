@@ -80,18 +80,18 @@ export function CuratedVenues() {
           <div>
             <h2
               id="venues-heading"
-              className="text-2xl sm:text-3xl font-bold text-sand-950 mb-1"
+              className="text-2xl sm:text-3xl font-bold text-neutral-950 mb-1"
             >
               Nos salons populaires près de chez vous
             </h2>
-            <p className="text-xs sm:text-sm text-sand-500 font-normal">
+            <p className="text-xs sm:text-sm text-neutral-500 font-normal">
               Une sélection d’adresses indépendantes auditées pour l’excellence de leurs praticiens.
             </p>
           </div>
 
           <Link
             href="/search"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-sand-700 hover:text-primary-600 transition-colors shrink-0"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-neutral-700 hover:text-primary-600 transition-colors shrink-0"
           >
             <span>Voir tous les salons</span>
             <ArrowRight className="w-4 h-4" />
@@ -106,7 +106,7 @@ export function CuratedVenues() {
               className="group flex flex-col bg-white rounded-2xl border border-primary-200/80 shadow-2xs hover:shadow-md hover:border-primary-300 transition-all duration-300"
             >
               {/* Photo avec coins arrondis, pastille de note et favori */}
-              <div className="relative aspect-[4/3] w-full rounded-t-xl overflow-hidden bg-sand-200 mb-3.5">
+              <div className="relative aspect-[4/3] w-full rounded-t-xl overflow-hidden bg-neutral-200 mb-3.5">
                 <Image
                   src={venue.image}
                   alt={venue.name}
@@ -119,13 +119,13 @@ export function CuratedVenues() {
                 <button
                   type="button"
                   aria-label={`Ajouter ${venue.name} aux favoris`}
-                  className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-sand-950/40 hover:bg-sand-950/70 backdrop-blur-xs flex items-center justify-center text-white transition-colors cursor-pointer"
+                  className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-neutral-950/40 hover:bg-neutral-950/70 backdrop-blur-xs flex items-center justify-center text-white transition-colors cursor-pointer"
                 >
                   <Heart className="w-4 h-4" />
                 </button>
 
                 {/* Pastille de note en bas à gauche de la photo */}
-                <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-xs font-semibold text-sand-900 num flex items-center gap-1 shadow-xs">
+                <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-xs font-semibold text-neutral-900 num flex items-center gap-1 shadow-xs">
                   <Star className="w-3.5 h-3.5 fill-primary-600 text-primary-600" />
                   <span>
                     {venue.rating} ({venue.reviewCount})
@@ -136,12 +136,12 @@ export function CuratedVenues() {
               {/* Titre et détails de l'établissement */}
               <div className="flex flex-col flex-1 justify-between p-4 pt-0">
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-sand-950 group-hover:text-primary-600 transition-colors mb-1">
+                  <h3 className="text-base sm:text-lg font-bold text-neutral-950 group-hover:text-primary-600 transition-colors mb-1">
                     {venue.name}
                   </h3>
 
-                  <div className="flex items-center gap-1 text-xs text-sand-500 mb-3">
-                    <MapPin className="w-3.5 h-3.5 text-sand-400 shrink-0" />
+                  <div className="flex items-center gap-1 text-xs text-neutral-500 mb-3">
+                    <MapPin className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
                     <span>
                       {venue.district} · {venue.distance}
                     </span>
@@ -152,7 +152,7 @@ export function CuratedVenues() {
                     {venue.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2.5 py-0.5 rounded-full bg-sand-100 text-xs text-sand-700 font-medium"
+                        className="px-2.5 py-0.5 rounded-full bg-neutral-100 text-xs text-neutral-700 font-medium"
                       >
                         {tag}
                       </span>
@@ -170,7 +170,7 @@ export function CuratedVenues() {
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
 
-                  <span className="text-xs font-semibold text-sand-600 num">
+                  <span className="text-xs font-semibold text-neutral-600 num">
                     {venue.startingPrice}
                   </span>
                 </div>

@@ -73,14 +73,14 @@ export function AccountClient() {
       {/* En-tête profil */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-primary-200/80">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-full bg-sand-200 border border-primary-300 text-sand-800 flex items-center justify-center font-display text-xl font-normal">
+          <div className="w-14 h-14 rounded-full bg-neutral-200 border border-primary-300 text-neutral-800 flex items-center justify-center font-display text-xl font-normal">
             SM
           </div>
           <div>
-            <h1 className="font-display text-2xl sm:text-3xl text-sand-950">
+            <h1 className="font-display text-2xl sm:text-3xl text-neutral-950">
               Sophie Martin
             </h1>
-            <p className="text-xs text-sand-500">
+            <p className="text-xs text-neutral-500">
               sophie.martin@exemple.fr · Membre depuis 2026
             </p>
           </div>
@@ -98,8 +98,8 @@ export function AccountClient() {
           onClick={() => setActiveTab("upcoming")}
           className={`pb-3 font-semibold transition-colors cursor-pointer relative ${
             activeTab === "upcoming"
-              ? "text-sand-950 border-b-2 border-primary-600"
-              : "text-sand-500 hover:text-sand-800"
+              ? "text-neutral-950 border-b-2 border-primary-600"
+              : "text-neutral-500 hover:text-neutral-800"
           }`}
         >
           À venir ({UPCOMING_APPOINTMENTS.filter((a) => a.id !== cancelledId).length})
@@ -110,8 +110,8 @@ export function AccountClient() {
           onClick={() => setActiveTab("past")}
           className={`pb-3 font-semibold transition-colors cursor-pointer relative ${
             activeTab === "past"
-              ? "text-sand-950 border-b-2 border-primary-600"
-              : "text-sand-500 hover:text-sand-800"
+              ? "text-neutral-950 border-b-2 border-primary-600"
+              : "text-neutral-500 hover:text-neutral-800"
           }`}
         >
           Historique ({PAST_APPOINTMENTS.length})
@@ -122,8 +122,8 @@ export function AccountClient() {
           onClick={() => setActiveTab("profile")}
           className={`pb-3 font-semibold transition-colors cursor-pointer relative ${
             activeTab === "profile"
-              ? "text-sand-950 border-b-2 border-primary-600"
-              : "text-sand-500 hover:text-sand-800"
+              ? "text-neutral-950 border-b-2 border-primary-600"
+              : "text-neutral-500 hover:text-neutral-800"
           }`}
         >
           Mes informations
@@ -135,11 +135,11 @@ export function AccountClient() {
         <div className="space-y-4 max-w-3xl">
           {UPCOMING_APPOINTMENTS.filter((a) => a.id !== cancelledId).length === 0 ? (
             <div className="p-10 text-center rounded-xl bg-primary-50/10 border border-primary-300 space-y-3">
-              <Calendar className="w-8 h-8 text-sand-400 mx-auto" />
-              <h3 className="font-display text-xl text-sand-950">
+              <Calendar className="w-8 h-8 text-neutral-400 mx-auto" />
+              <h3 className="font-display text-xl text-neutral-950">
                 Aucun rendez-vous à venir
               </h3>
-              <p className="text-xs text-sand-600">
+              <p className="text-xs text-neutral-600">
                 Explorez nos maisons recommandées et sanctuarisez votre prochain rituel.
               </p>
               <Link href="/search" className="btn btn-primary btn-sm inline-block mt-2">
@@ -153,7 +153,7 @@ export function AccountClient() {
                 className="p-5 rounded-xl bg-primary-50/10 border border-primary-300 shadow-2xs flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between"
               >
                 <div className="flex items-start gap-4">
-                  <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-sand-200 shrink-0">
+                  <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-neutral-200 shrink-0">
                     <Image
                       src={app.venueImage}
                       alt={app.venueName}
@@ -167,21 +167,21 @@ export function AccountClient() {
                     <span className="text-[10px] uppercase font-bold tracking-wider text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded inline-block mb-1">
                       Confirmé
                     </span>
-                    <h3 className="text-base font-semibold text-sand-950">
+                    <h3 className="text-base font-semibold text-neutral-950">
                       {app.serviceName}
                     </h3>
-                    <p className="text-xs text-sand-600 font-medium">
+                    <p className="text-xs text-neutral-600 font-medium">
                       chez {app.venueName} · avec {app.artisanName}
                     </p>
-                    <p className="text-xs text-sand-500 flex items-center gap-1.5 mt-1">
-                      <Clock className="w-3.5 h-3.5 text-sand-400" />
+                    <p className="text-xs text-neutral-500 flex items-center gap-1.5 mt-1">
+                      <Clock className="w-3.5 h-3.5 text-neutral-400" />
                       <span>{app.date} à {app.time}</span>
                     </p>
                   </div>
                 </div>
 
                 <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2.5 w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-primary-200">
-                  <span className="font-display text-xl text-sand-950 num">
+                  <span className="font-display text-xl text-neutral-950 num">
                     {app.price} €
                   </span>
                   <div className="flex items-center gap-2">
@@ -214,7 +214,7 @@ export function AccountClient() {
               className="p-5 rounded-xl bg-primary-50/10 border border-primary-200/80 flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between"
             >
               <div className="flex items-start gap-4">
-                <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-sand-200 shrink-0">
+                <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-neutral-200 shrink-0">
                   <Image
                     src={app.venueImage}
                     alt={app.venueName}
@@ -225,20 +225,20 @@ export function AccountClient() {
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-semibold text-sand-950">
+                  <h3 className="text-sm font-semibold text-neutral-950">
                     {app.serviceName}
                   </h3>
-                  <p className="text-xs text-sand-600">
+                  <p className="text-xs text-neutral-600">
                     {app.venueName} · {app.date}
                   </p>
-                  <p className="text-[11px] text-sand-400 mt-0.5">
+                  <p className="text-[11px] text-neutral-400 mt-0.5">
                     Réalisé par {app.artisanName}
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-3 self-end sm:self-auto">
-                <span className="text-xs font-semibold text-sand-800 num">
+                <span className="text-xs font-semibold text-neutral-800 num">
                   {app.price} €
                 </span>
                 <Link
@@ -256,7 +256,7 @@ export function AccountClient() {
 
       {activeTab === "profile" && (
         <div className="max-w-xl p-6 rounded-xl bg-primary-50/10 border border-primary-300 space-y-5">
-          <h2 className="font-display text-xl text-sand-950 mb-4">
+          <h2 className="font-display text-xl text-neutral-950 mb-4">
             Coordonnées personnelles
           </h2>
 
@@ -288,7 +288,7 @@ export function AccountClient() {
           </div>
 
           <div className="pt-4 border-t border-primary-200/80 flex items-center justify-between">
-            <span className="text-xs text-sand-500">
+            <span className="text-xs text-neutral-500">
               Modifications enregistrées automatiquement
             </span>
             <button type="button" className="btn btn-primary btn-xs">

@@ -24,23 +24,23 @@ export default function ForgotPasswordPage() {
       <div className="mb-8">
         <Link
           href="/login"
-          className="inline-flex items-center gap-1.5 text-xs text-sand-600 hover:text-sand-950 transition-colors mb-6 group"
+          className="inline-flex items-center gap-1.5 text-xs text-neutral-600 hover:text-neutral-950 transition-colors mb-6 group"
         >
           <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
           <span>Retour à la connexion</span>
         </Link>
 
-        <div className="w-10 h-10 rounded-xl bg-sand-200/80 border border-primary-300 text-sand-800 flex items-center justify-center mb-4">
+        <div className="w-10 h-10 rounded-xl bg-neutral-200/80 border border-primary-300 text-neutral-800 flex items-center justify-center mb-4">
           <KeyRound className="w-5 h-5 text-primary-600" />
         </div>
 
         <span className="text-[11px] uppercase tracking-wider font-semibold text-primary-600 block mb-1">
           Sécurité du compte
         </span>
-        <h1 className="text-3xl sm:text-4xl text-sand-950 tracking-tight">
+        <h1 className="text-3xl sm:text-4xl text-neutral-950 tracking-tight">
           Mot de passe oublié
         </h1>
-        <p className="text-xs sm:text-sm text-sand-600 mt-2 font-normal leading-relaxed">
+        <p className="text-xs sm:text-sm text-neutral-600 mt-2 font-normal leading-relaxed">
           Saisissez l’adresse e-mail associée à votre compte Belora. Nous vous
           enverrons un lien sécurisé à usage unique pour en définir un nouveau.
         </p>
@@ -52,19 +52,19 @@ export default function ForgotPasswordPage() {
             <CheckCircle2 className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-xl text-sand-950 mb-1">
+            <h3 className="text-xl text-neutral-950 mb-1">
               Vérifiez votre boîte de réception
             </h3>
-            <p className="text-xs text-sand-600 leading-relaxed">
+            <p className="text-xs text-neutral-600 leading-relaxed">
               Un e-mail contenant les instructions de réinitialisation vient d’être
-              adressé à <span className="font-semibold text-sand-900">{email}</span>. Ce
+              adressé à <span className="font-semibold text-neutral-900">{email}</span>. Ce
               lien expirera dans 60 minutes.
             </p>
           </div>
           <div className="pt-2">
             <Link
               href="/login"
-              className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-primary-600 hover:bg-primary-700 text-sand-50 text-xs font-semibold uppercase tracking-wider transition-colors"
+              className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-primary-600 hover:bg-primary-700 text-neutral-50 text-xs font-semibold uppercase tracking-wider transition-colors"
             >
               <span>Retour à la connexion</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -76,7 +76,7 @@ export default function ForgotPasswordPage() {
           <div>
             <label
               htmlFor="forgot-email"
-              className="block text-xs uppercase tracking-wider font-semibold text-sand-700 mb-1.5"
+              className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1.5"
             >
               Adresse e-mail du compte
             </label>
@@ -91,7 +91,7 @@ export default function ForgotPasswordPage() {
                 autoComplete="email"
                 className="input pr-10"
               />
-              <Mail className="w-4 h-4 text-sand-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Mail className="w-4 h-4 text-neutral-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             </div>
           </div>
 
@@ -110,9 +110,9 @@ export default function ForgotPasswordPage() {
             )}
           </button>
 
-          <p className="text-[11px] text-sand-500 text-center pt-2">
+          <p className="text-[11px] text-neutral-500 text-center pt-2">
             Vous n’avez plus accès à cet e-mail ?{" "}
-            <Link href="/help" className="text-sand-800 underline underline-offset-2">
+            <Link href="/help" className="text-neutral-800 underline underline-offset-2">
               Contacter l’assistance Belora
             </Link>
           </p>

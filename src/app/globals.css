@@ -5,7 +5,7 @@
    Direction : éditoriale, moderne, monochrome & figue. (Light mode uniquement)
    Primaire : « Figue » (#82385a).
    Secondaire : « Monochrome / Encre » (nuances de noir, gris franc et blanc).
-   Neutres : « Sable » chauds (fond papier, surface, filets, texte).
+   Neutres : « Monochrome » épuré (fond blanc, surface, filets, texte).
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -38,24 +38,9 @@
   --secondary-900: #18181b;
   --secondary-950: #0a0a0b;
 
-  /* Neutres — Sable (fond, texte, filets) */
-  --sand-warm: #f8efea; /* fond chaleureux rituel */
-  --sand-50:  #fbf8f3; /* surface */
-  --sand-100: #f6f1ea; /* fond principal « papier » */
-  --sand-200: #eae3d8; /* filets */
-  --sand-300: #d9cfc0; /* filets forts */
-  --sand-400: #b3a794;
-  --sand-500: #8a7f70;
-  --sand-600: #6b6256; /* texte secondaire */
-  --sand-700: #4f483f;
-  --sand-800: #342f29;
-  --sand-900: #1e1a16; /* encre */
-  --sand-950: #12100d; /* charbon */
-
   /* Teintes Univers (adaptées en monochrome & figue) */
   --earth-terracotta: #82385a;
   --earth-olive:      #4f483f;
-  --earth-sand:       #eae3d8;
   --earth-moss:       #342f29;
   --earth-cognac:     #6a2d4a;
   --earth-espresso:   #12100d;
@@ -70,12 +55,12 @@
 
   /* Sémantique (Thème clair unique) */
   --bg: #ffffff;
-  --surface: var(--sand-50);
-  --fg: var(--sand-950);
-  --fg-muted: var(--sand-600);
-  --fg-subtle: var(--sand-500);
-  --line: var(--sand-200);
-  --line-strong: var(--sand-300);
+  --surface: #fafafa;
+  --fg: #0a0a0a;
+  --fg-muted: #525252;
+  --fg-subtle: #737373;
+  --line: #e5e5e5;
+  --line-strong: #d4d4d4;
   --accent: var(--primary-600);
   --accent-hover: var(--primary-700);
   --accent-soft: var(--primary-50);
@@ -96,13 +81,13 @@
 
   /* Agenda : 8 teintes modernes (figue, sable et monochrome) */
   --ev-1-bg: #f4e4e9; --ev-1-bar: #82385a;
-  --ev-2-bg: #eae3d8; --ev-2-bar: #342f29;
+  --ev-2-bg: #e5e5e5; --ev-2-bar: #262626;
   --ev-3-bg: #f4f4f5; --ev-3-bar: #18181b;
   --ev-4-bg: #e8c9d3; --ev-4-bar: #55253c;
   --ev-5-bg: #e4e4e7; --ev-5-bar: #52525b;
-  --ev-6-bg: #f6f1ea; --ev-6-bar: #8a7f70;
+  --ev-6-bg: #f5f5f5; --ev-6-bar: #525252;
   --ev-7-bg: #efe5ea; --ev-7-bar: #a04f6d;
-  --ev-8-bg: #d9cfc0; --ev-8-bar: #1e1a16;
+  --ev-8-bg: #d4d4d4; --ev-8-bar: #171717;
 }
 
 /* --------------------------------------------------------------------------
@@ -132,24 +117,8 @@
   --color-secondary-800: var(--secondary-800);
   --color-secondary-900: var(--secondary-900);
   --color-secondary-950: var(--secondary-950);
-
-  --color-sand-warm: var(--sand-warm);
-  --color-sand-50: var(--sand-50);
-  --color-sand-100: var(--sand-100);
-  --color-sand-200: var(--sand-200);
-  --color-sand-300: var(--sand-300);
-  --color-sand-400: var(--sand-400);
-  --color-sand-500: var(--sand-500);
-  --color-sand-600: var(--sand-600);
-  --color-sand-700: var(--sand-700);
-  --color-sand-800: var(--sand-800);
-  --color-sand-900: var(--sand-900);
-  --color-sand-950: var(--sand-950);
-
   --color-earth-terracotta: var(--earth-terracotta);
-  --color-earth-olive: var(--earth-olive);
-  --color-earth-sand: var(--earth-sand);
-  --color-earth-moss: var(--earth-moss);
+  --color-earth-olive: var(--earth-olive);  --color-earth-moss: var(--earth-moss);
   --color-earth-cognac: var(--earth-cognac);
   --color-earth-espresso: var(--earth-espresso);
 
@@ -254,10 +223,10 @@
   }
 
   .section-title {
-    @apply font-sans font-bold text-2xl sm:text-3xl lg:text-4xl text-sand-950;
+    @apply font-sans font-bold text-2xl sm:text-3xl lg:text-4xl text-neutral-950;
   }
   .section-subtitle {
-    @apply text-sm sm:text-base text-sand-600 font-normal;
+    @apply text-sm sm:text-base text-neutral-600 font-normal;
   }
   .section-header {
     @apply flex flex-col md:flex-row md:items-end md:justify-between gap-5 md:gap-8 mb-12 pb-6 border-b border-primary-200/85;
@@ -267,7 +236,7 @@
     @apply text-lg text-fg-muted max-w-xl;
   }
   .eyebrow {
-    @apply text-xs font-semibold uppercase text-sand-600;
+    @apply text-xs font-semibold uppercase text-neutral-600;
   }
   .small-caps-meta {
     @apply text-xs uppercase text-fg-subtle;
@@ -286,19 +255,19 @@
   }
 
   .btn-secondary {
-    @apply bg-sand-100 border-primary-300 text-sand-950 hover:not-disabled:bg-sand-200 hover:not-disabled:border-primary-400 hover:not-disabled:text-sand-950 hover:not-disabled:-translate-y-px;
+    @apply bg-neutral-100 border-primary-300 text-neutral-950 hover:not-disabled:bg-neutral-200 hover:not-disabled:border-primary-400 hover:not-disabled:text-neutral-950 hover:not-disabled:-translate-y-px;
   }
 
   .btn-dark {
-    @apply bg-sand-950 border-primary-950 text-white hover:not-disabled:bg-sand-800 hover:not-disabled:border-primary-800 hover:not-disabled:text-white hover:not-disabled:-translate-y-px;
+    @apply bg-neutral-950 border-primary-950 text-white hover:not-disabled:bg-neutral-800 hover:not-disabled:border-primary-800 hover:not-disabled:text-white hover:not-disabled:-translate-y-px;
   }
 
   .btn-ink {
-    @apply bg-sand-900 border-primary-900 text-sand-50 hover:not-disabled:bg-sand-950 hover:not-disabled:border-primary-950 hover:not-disabled:-translate-y-px;
+    @apply bg-neutral-900 border-primary-900 text-neutral-50 hover:not-disabled:bg-neutral-950 hover:not-disabled:border-primary-950 hover:not-disabled:-translate-y-px;
   }
 
   .btn-editorial {
-    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-line-strong rounded-sm text-sand-950 text-xs font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-sand-950 hover:not-disabled:border-primary-950 hover:not-disabled:text-white;
+    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-line-strong rounded-sm text-neutral-950 text-xs font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-neutral-950 hover:not-disabled:border-primary-950 hover:not-disabled:text-white;
   }
   .btn-editorial .btn-icon-slide {
     @apply transition-transform duration-200 ease-belora;
@@ -308,7 +277,7 @@
   }
 
   .btn-editorial-light {
-    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-primary-50/35 rounded-sm text-sand-50 text-xs font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-white hover:not-disabled:border-white hover:not-disabled:text-sand-950;
+    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-primary-50/35 rounded-sm text-neutral-50 text-xs font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-white hover:not-disabled:border-white hover:not-disabled:text-neutral-950;
   }
   .btn-editorial-light .btn-icon-slide {
     @apply transition-transform duration-200 ease-belora;
@@ -318,23 +287,23 @@
   }
 
   .btn-circle {
-    @apply inline-flex items-center justify-center w-10 h-10 rounded-pill bg-white border border-line text-sand-950 cursor-pointer transition-all duration-150 ease-belora hover:not-disabled:bg-sand-950 hover:not-disabled:border-primary-950 hover:not-disabled:text-white;
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-pill bg-white border border-line text-neutral-950 cursor-pointer transition-all duration-150 ease-belora hover:not-disabled:bg-neutral-950 hover:not-disabled:border-primary-950 hover:not-disabled:text-white;
   }
 
   .btn-outline {
-    @apply bg-transparent border-line-strong text-sand-950 shadow-none hover:not-disabled:border-primary-950 hover:not-disabled:bg-sand-100 hover:not-disabled:text-sand-950;
+    @apply bg-transparent border-line-strong text-neutral-950 shadow-none hover:not-disabled:border-primary-950 hover:not-disabled:bg-neutral-100 hover:not-disabled:text-neutral-950;
   }
 
   .btn-ghost {
-    @apply bg-transparent border-transparent text-sand-700 shadow-none hover:not-disabled:bg-sand-100 hover:not-disabled:text-sand-950;
+    @apply bg-transparent border-transparent text-neutral-700 shadow-none hover:not-disabled:bg-neutral-100 hover:not-disabled:text-neutral-950;
   }
 
   .btn-link {
-    @apply min-h-0 p-0 border-0 rounded-none bg-transparent text-sand-950 underline underline-offset-4 decoration-1 shadow-none hover:text-primary-600;
+    @apply min-h-0 p-0 border-0 rounded-none bg-transparent text-neutral-950 underline underline-offset-4 decoration-1 shadow-none hover:text-primary-600;
   }
 
   .btn-on-photo {
-    @apply bg-white border-white text-sand-950 hover:bg-sand-100 hover:border-primary-100;
+    @apply bg-white border-white text-neutral-950 hover:bg-neutral-100 hover:border-primary-100;
   }
 
   .btn-xs {
@@ -381,16 +350,16 @@
 
   /* ----- Barre de recherche ----- */
   .searchbar {
-    @apply flex flex-col md:flex-row items-stretch bg-white border border-line-strong rounded-sm text-sand-950;
+    @apply flex flex-col md:flex-row items-stretch bg-white border border-line-strong rounded-sm text-neutral-950;
   }
   .searchbar-field {
     @apply flex-1 flex flex-col justify-center gap-0.5 min-w-0 py-3 px-5 border-b md:border-b-0 md:border-e border-line last-of-type:border-e-0 focus-within:bg-primary-50;
   }
   .searchbar-label {
-    @apply text-xs uppercase text-sand-500;
+    @apply text-xs uppercase text-neutral-500;
   }
   .searchbar-input {
-    @apply w-full bg-transparent border-0 p-0 text-sm text-sand-950 placeholder:text-sand-500 focus:outline-none;
+    @apply w-full bg-transparent border-0 p-0 text-sm text-neutral-950 placeholder:text-neutral-500 focus:outline-none;
   }
   .searchbar-submit {
     @apply inline-flex items-center justify-center gap-2 px-7 min-h-12 md:min-h-0 bg-primary-600 text-white border-0 rounded-b-sm md:rounded-b-none md:rounded-r-sm text-sm font-medium cursor-pointer transition-colors duration-150 ease-belora hover:bg-primary-700;
@@ -398,13 +367,13 @@
 
   /* ----- Chips ----- */
   .chip {
-    @apply inline-flex items-center gap-1.5 min-h-9 px-4 bg-white border border-line-strong rounded-pill text-sand-900 text-xs font-medium whitespace-nowrap cursor-pointer shadow-2xs transition-colors duration-150 ease-belora hover:bg-sand-100 hover:border-primary-950 aria-[pressed=true]:bg-sand-950 aria-[pressed=true]:border-primary-950 aria-[pressed=true]:text-white;
+    @apply inline-flex items-center gap-1.5 min-h-9 px-4 bg-white border border-line-strong rounded-pill text-neutral-900 text-xs font-medium whitespace-nowrap cursor-pointer shadow-2xs transition-colors duration-150 ease-belora hover:bg-neutral-100 hover:border-primary-950 aria-[pressed=true]:bg-neutral-950 aria-[pressed=true]:border-primary-950 aria-[pressed=true]:text-white;
   }
   .chip-active {
-    @apply bg-sand-950 border-primary-950 text-white;
+    @apply bg-neutral-950 border-primary-950 text-white;
   }
   .chip-photo {
-    @apply bg-sand-950/55 border-white/35 text-white hover:bg-sand-950/80 hover:border-white;
+    @apply bg-neutral-950/55 border-white/35 text-white hover:bg-neutral-950/80 hover:border-white;
   }
   .chip-row {
     @apply flex flex-wrap gap-2;
@@ -419,14 +388,14 @@
 
   /* ----- Tuile catégorie ----- */
   .tile {
-    @apply relative block overflow-hidden aspect-3/4 rounded-photo bg-sand-900 text-white isolate border border-primary-950/10;
+    @apply relative block overflow-hidden aspect-3/4 rounded-photo bg-neutral-900 text-white isolate border border-primary-950/10;
   }
   .tile-media {
     @apply absolute inset-0 w-full h-full object-cover -z-20 transition-transform duration-700 ease-belora;
   }
   .tile::after {
     content: "";
-    @apply absolute inset-0 -z-10 bg-linear-to-t from-sand-950/80 via-sand-950/20 to-transparent;
+    @apply absolute inset-0 -z-10 bg-linear-to-t from-neutral-950/80 via-neutral-950/20 to-transparent;
   }
   .tile:hover .tile-media {
     @apply scale-105;
@@ -450,10 +419,10 @@
     @apply -scale-x-100 translate-x-0.5;
   }
   .tile-arrow-circle {
-    @apply flex items-center justify-center w-8 h-8 rounded-pill border border-white/35 bg-sand-950/35 text-white shrink-0 transition-all duration-200 ease-belora;
+    @apply flex items-center justify-center w-8 h-8 rounded-pill border border-white/35 bg-neutral-950/35 text-white shrink-0 transition-all duration-200 ease-belora;
   }
   .tile:hover .tile-arrow-circle {
-    @apply bg-white border-white text-sand-950 scale-105;
+    @apply bg-white border-white text-neutral-950 scale-105;
   }
   .tile-wide {
     @apply aspect-4/3;
@@ -464,7 +433,7 @@
     @apply block text-inherit transition-transform duration-150 ease-belora;
   }
   .venue-media {
-    @apply relative overflow-hidden aspect-4/5 rounded-photo bg-sand-100 border border-line;
+    @apply relative overflow-hidden aspect-4/5 rounded-photo bg-neutral-100 border border-line;
   }
   .venue-media img {
     @apply w-full h-full object-cover transition-transform duration-700 ease-belora;
@@ -476,7 +445,7 @@
     @apply flex justify-between items-baseline gap-3 mt-3.5;
   }
   .venue-name {
-    @apply font-display text-xl text-sand-950;
+    @apply font-display text-xl text-neutral-950;
   }
   .venue-rating {
     @apply text-xs tabular-nums whitespace-nowrap font-medium;
@@ -485,7 +454,7 @@
     @apply mt-1 text-xs uppercase text-fg-subtle;
   }
   .fav-btn {
-    @apply absolute top-3.5 end-3.5 grid place-items-center w-9 h-9 bg-white/90 text-sand-950 border border-primary-300/60 rounded-pill cursor-pointer transition-all duration-150 ease-belora z-10 hover:bg-white hover:scale-105 hover:border-primary-950 aria-[pressed=true]:bg-primary-600 aria-[pressed=true]:border-primary-600 aria-[pressed=true]:text-white;
+    @apply absolute top-3.5 end-3.5 grid place-items-center w-9 h-9 bg-white/90 text-neutral-950 border border-primary-300/60 rounded-pill cursor-pointer transition-all duration-150 ease-belora z-10 hover:bg-white hover:scale-105 hover:border-primary-950 aria-[pressed=true]:bg-primary-600 aria-[pressed=true]:border-primary-600 aria-[pressed=true]:text-white;
   }
 
   /* ----- Ligne de service ----- */
@@ -493,7 +462,7 @@
     @apply grid grid-cols-2 sm:grid-cols-4 items-center gap-x-6 gap-y-2 sm:gap-y-0 py-4.5 border-b border-line;
   }
   .service-name {
-    @apply font-medium text-sand-950;
+    @apply font-medium text-neutral-950;
   }
   .service-desc {
     @apply mt-0.5 text-xs text-fg-muted max-w-xl;
@@ -502,7 +471,7 @@
     @apply col-start-1 sm:col-auto text-xs text-fg-muted tabular-nums;
   }
   .service-price {
-    @apply col-start-2 row-start-1 sm:col-auto sm:row-auto min-w-18 text-end tabular-nums font-medium text-sand-950;
+    @apply col-start-2 row-start-1 sm:col-auto sm:row-auto min-w-18 text-end tabular-nums font-medium text-neutral-950;
   }
 
   /* ----- Créneaux horaires ----- */
@@ -527,18 +496,18 @@
     @apply flex justify-between gap-4 py-2.5 border-b border-line text-sm;
   }
   .summary-total {
-    @apply flex justify-between pt-4 font-semibold tabular-nums text-sand-950;
+    @apply flex justify-between pt-4 font-semibold tabular-nums text-neutral-950;
   }
 
   /* ----- Badges ----- */
   .badge {
-    @apply inline-flex items-center gap-1 py-0.5 px-2.5 rounded-xs bg-sand-200 text-sand-900 text-xs font-medium uppercase;
+    @apply inline-flex items-center gap-1 py-0.5 px-2.5 rounded-xs bg-neutral-200 text-neutral-900 text-xs font-medium uppercase;
   }
   .badge-accent {
     @apply bg-primary-100 text-primary-800;
   }
   .badge-dark {
-    @apply bg-sand-950 text-white;
+    @apply bg-neutral-950 text-white;
   }
   .badge-success {
     @apply bg-success-soft text-success;
@@ -561,7 +530,7 @@
     @apply absolute inset-x-0 bg-transparent border-b-transparent text-white;
   }
   .nav-logo {
-    @apply font-display text-2xl text-sand-950;
+    @apply font-display text-2xl text-neutral-950;
   }
   .nav-transparent .nav-logo {
     @apply text-white;
@@ -609,7 +578,7 @@
     @apply py-5 border-t border-line-strong;
   }
   .stat-value {
-    @apply font-display text-4xl tabular-nums text-sand-950;
+    @apply font-display text-4xl tabular-nums text-neutral-950;
   }
   .stat-label {
     @apply mt-2 text-xs uppercase text-fg-muted;
@@ -629,7 +598,7 @@
     @apply relative border-s border-line;
   }
   .agenda-event {
-    @apply absolute inset-x-1 py-1.5 px-2 border-s-4 rounded-xs text-sand-950 text-xs overflow-hidden cursor-pointer transition-all duration-150 ease-belora hover:brightness-95;
+    @apply absolute inset-x-1 py-1.5 px-2 border-s-4 rounded-xs text-neutral-950 text-xs overflow-hidden cursor-pointer transition-all duration-150 ease-belora hover:brightness-95;
     background-color: var(--ev-bg, var(--ev-8-bg));
     border-inline-start-color: var(--ev-bar, var(--ev-8-bar));
   }
@@ -650,7 +619,7 @@
 
   /* ----- Modale ----- */
   .modal-backdrop {
-    @apply fixed inset-0 z-50 grid place-items-center p-4 bg-sand-950/60;
+    @apply fixed inset-0 z-50 grid place-items-center p-4 bg-neutral-950/60;
   }
   .modal {
     @apply w-full max-w-lg max-h-dvh overflow-auto bg-white border border-line rounded-md p-7;
@@ -661,7 +630,7 @@
 
   /* ----- Squelette de chargement ----- */
   .skeleton {
-    @apply bg-linear-to-r from-sand-200 via-sand-100 to-sand-200 rounded-xs animate-pulse;
+    @apply bg-linear-to-r from-neutral-200 via-neutral-100 to-neutral-200 rounded-xs animate-pulse;
   }
 
   /* ----- Hero photographique ----- */
@@ -673,7 +642,7 @@
   }
   .hero::after {
     content: "";
-    @apply absolute inset-0 -z-10 bg-linear-to-t from-sand-950/60 via-sand-950/5 to-transparent;
+    @apply absolute inset-0 -z-10 bg-linear-to-t from-neutral-950/60 via-neutral-950/5 to-transparent;
   }
 }
 
@@ -689,13 +658,13 @@
   }
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: var(--sand-300) transparent;
+    scrollbar-color: #d4d4d4 transparent;
   }
   .custom-scrollbar::-webkit-scrollbar {
     @apply w-1.5 h-1.5;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-sand-300 rounded-pill;
+    @apply bg-neutral-300 rounded-pill;
   }
   .safe-bottom {
     @apply pb-4;

@@ -29,7 +29,7 @@ export function CategoryProCta({ category }: CategoryProCtaProps) {
         <div className="max-w-2xl">
           <h2
             id="pro-cta-heading"
-            className="text-xl sm:text-3xl lg:text-4xl font-bold text-sand-50 leading-tight mb-3"
+            className="text-xl sm:text-3xl lg:text-4xl font-bold text-neutral-50 leading-tight mb-3"
           >
             Vous dirigez un salon de {category.shortName.toLowerCase()} ?{" "}
             <span className="block text-primary-500 font-bold">
@@ -37,7 +37,7 @@ export function CategoryProCta({ category }: CategoryProCtaProps) {
             </span>
           </h2>
 
-          <p className="text-xs sm:text-sm text-sand-200/90 leading-relaxed font-normal mb-6">
+          <p className="text-xs sm:text-sm text-neutral-200/90 leading-relaxed font-normal mb-6">
             {pro.description}
           </p>
 
@@ -50,7 +50,7 @@ export function CategoryProCta({ category }: CategoryProCtaProps) {
               <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5">
                 Réservations 24h/24
               </h3>
-              <p className="text-sm text-sand-300/80 leading-relaxed">
+              <p className="text-sm text-neutral-300/80 leading-relaxed">
                 Synchronisation en temps réel sans commissions abusives.
               </p>
             </div>
@@ -62,7 +62,7 @@ export function CategoryProCta({ category }: CategoryProCtaProps) {
               <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5">
                 Visibilité certifiée
               </h3>
-              <p className="text-sm text-sand-300/80 leading-relaxed">
+              <p className="text-sm text-neutral-300/80 leading-relaxed">
                 Attirez une clientèle haut de gamme locale et voyageuse.
               </p>
             </div>
@@ -74,7 +74,7 @@ export function CategoryProCta({ category }: CategoryProCtaProps) {
               <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5">
                 Zéro no-show
               </h3>
-              <p className="text-sm text-sand-300/80 leading-relaxed">
+              <p className="text-sm text-neutral-300/80 leading-relaxed">
                 Acomptes sécurisés et rappels automatiques par SMS.
               </p>
             </div>
@@ -88,7 +88,7 @@ export function CategoryProCta({ category }: CategoryProCtaProps) {
               <span>{pro.ctaText}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <span className="text-sm text-sand-300/80">
+            <span className="text-sm text-neutral-300/80">
               Adhésion sur candidature &bull; 100% vérifié
             </span>
           </div>
