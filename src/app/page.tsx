@@ -1,6 +1,6 @@
 import { MainNav } from "@/components/layout/main-nav";
 import { HeroCentered } from "@/components/home/hero-centered";
-import { CategoryCircles } from "@/components/home/category-circles";
+import { CategorySwitcher } from "@/components/category/category-switcher";
 import { PhilosophySection } from "@/components/home/philosophy-section";
 import { EditorialMarquee } from "@/components/home/editorial-marquee";
 import { CuratedVenues } from "@/components/home/curated-venues";
@@ -21,7 +21,7 @@ export default function HomePage() {
       <HeroCentered />
 
       {/* 3. Bandeau Catégories / Prestations (7 Univers Circulaires) */}
-      <CategoryCircles />
+      <CategorySwitcher variant="home" />
 
       {/* 4. Section Notre Philosophie : Prendre soin de soi, c’est déjà être beau */}
       <PhilosophySection />
