@@ -217,7 +217,7 @@ export function ProJoinFlow() {
         <main className="flex-1 flex items-center justify-center py-12 sm:py-20 px-5">
           <div className="w-full max-w-xl text-center space-y-8">
             <div className="space-y-3">
-              <span className="text-xs font-semibold uppercase tracking-widest text-primary-700 block">
+              <span className="text-sm font-semibold uppercase tracking-widest text-primary-700 block">
                 Programme Partenaires
               </span>
               <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-neutral-950 font-normal tracking-tight text-balance">
@@ -227,13 +227,13 @@ export function ProJoinFlow() {
                 Rejoignez le premier cercle d’artisans et maisons du soin.
               </p>
 
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-xs text-neutral-700 font-medium">
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm text-neutral-700 font-medium">
                 <span className="inline-flex items-center gap-1.5">
-                  <Check className="w-4 h-4 text-primary-600 stroke-[2]" />
+                  <Check className="w-4 h-4 text-primary-600 stroke-2" />
                   Sans engagement
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                  <Check className="w-4 h-4 text-primary-600 stroke-[2]" />
+                  <Check className="w-4 h-4 text-primary-600 stroke-2" />
                   0% de commission sur vos clients
                 </span>
               </div>
@@ -257,7 +257,7 @@ export function ProJoinFlow() {
                     <h2 className="text-base sm:text-lg font-semibold text-neutral-950 group-hover:text-primary-700 transition-colors">
                       Je suis gérant d’un établissement
                     </h2>
-                    <p className="text-xs text-neutral-500 font-normal mt-0.5">
+                    <p className="text-sm text-neutral-500 font-normal mt-0.5">
                       Coiffure, esthétique, barbier, bien-être, spa...
                     </p>
                   </div>
@@ -277,7 +277,7 @@ export function ProJoinFlow() {
                     <h2 className="text-base sm:text-lg font-semibold text-neutral-950 group-hover:text-neutral-900 transition-colors">
                       Je ne suis pas un professionnel
                     </h2>
-                    <p className="text-xs text-neutral-500 font-normal mt-0.5">
+                    <p className="text-sm text-neutral-500 font-normal mt-0.5">
                       Je souhaite prendre un rendez-vous beauté ou bien-être
                     </p>
                   </div>
@@ -286,7 +286,7 @@ export function ProJoinFlow() {
               </Link>
             </div>
 
-            <p className="text-xs text-neutral-500 font-normal pt-2">
+            <p className="text-sm text-neutral-500 font-normal pt-2">
               Déjà partenaire ?{" "}
               <Link
                 href="/login"
@@ -319,11 +319,11 @@ export function ProJoinFlow() {
         {/* ===================================================================
             PANNEAU GAUCHE : SOMBRE & ÉDITORIAL (Texte allégé & 3 belles photos)
             =================================================================== */}
-        <section className="lg:col-span-5 bg-neutral-950 text-white p-8 sm:p-12 lg:p-14 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-neutral-900">
+        <section className="lg:col-span-5 bg-primary-900 text-white p-8 sm:p-12 lg:p-14 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-neutral-900">
           <div className="space-y-6 max-w-lg">
             {/* Tag marque épuré */}
             <div className="inline-flex items-center gap-2">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-primary-300 bg-primary-950/80 px-2.5 py-1 rounded-full border border-primary-800/60">
+              <span className="text-sm font-bold uppercase tracking-widest text-primary-300">
                 Belora Pro
               </span>
             </div>
@@ -339,39 +339,26 @@ export function ProJoinFlow() {
             </p>
 
             {/* 3 points forts concis */}
-            <ul className="space-y-2.5 pt-1 text-xs sm:text-sm text-neutral-200">
+            <ul className="space-y-2.5 pt-1 text-sm sm:text-base text-neutral-200">
               <li className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full bg-primary-900/80 border border-primary-700/80 flex items-center justify-center shrink-0">
-                  <Check className="w-3.5 h-3.5 text-primary-200 stroke-[2.5]" />
+                <div className="w-8 h-8 rounded-full bg-primary-900/80 border border-primary-700/80 flex items-center justify-center shrink-0">
+                  <Check className="w-5 h-5 text-primary-200 stroke-[2.5]" />
                 </div>
                 <span>Agenda haute précision sans no-show</span>
               </li>
               <li className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full bg-primary-900/80 border border-primary-700/80 flex items-center justify-center shrink-0">
-                  <Check className="w-3.5 h-3.5 text-primary-200 stroke-[2.5]" />
+                <div className="w-8 h-8 rounded-full bg-primary-900/80 border border-primary-700/80 flex items-center justify-center shrink-0">
+                  <Check className="w-5 h-5 text-primary-200 stroke-[2.5]" />
                 </div>
                 <span>Acomptes & paiements en direct</span>
               </li>
               <li className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full bg-primary-900/80 border border-primary-700/80 flex items-center justify-center shrink-0">
-                  <Check className="w-3.5 h-3.5 text-primary-200 stroke-[2.5]" />
+                <div className="w-8 h-8 rounded-full bg-primary-900/80 border border-primary-700/80 flex items-center justify-center shrink-0">
+                  <Check className="w-5 h-5 text-primary-200 stroke-[2.5]" />
                 </div>
                 <span>Sans engagement ni commission</span>
               </li>
             </ul>
-
-            {/* Note d'avis sobre */}
-            <div className="pt-1 flex items-center gap-2 text-xs text-neutral-400">
-              <div className="flex items-center text-primary-400">
-                <Star className="w-3.5 h-3.5 fill-primary-400 stroke-none" />
-                <Star className="w-3.5 h-3.5 fill-primary-400 stroke-none" />
-                <Star className="w-3.5 h-3.5 fill-primary-400 stroke-none" />
-                <Star className="w-3.5 h-3.5 fill-primary-400 stroke-none" />
-                <Star className="w-3.5 h-3.5 fill-primary-400 stroke-none" />
-              </div>
-              <span className="font-semibold text-white">4,9 / 5</span>
-              <span>· 450+ avis artisans</span>
-            </div>
           </div>
 
           {/* Collage des 3 belles photos conservées intactes */}
@@ -419,12 +406,12 @@ export function ProJoinFlow() {
                     <div
                       key={seg}
                       className={`h-1.5 rounded-full transition-all duration-300 ${
-                        step >= seg ? "bg-neutral-950" : "bg-neutral-200"
+                        step >= seg ? "bg-primary-700" : "bg-neutral-200"
                       }`}
                     />
                   ))}
                 </div>
-                <div className="flex items-center justify-between text-[11px] text-neutral-500 font-medium">
+                <div className="flex items-center justify-between text-sm text-neutral-500 font-medium">
                   <span>Étape {step} sur 4</span>
                   {step > 1 && (
                     <button
@@ -432,7 +419,7 @@ export function ProJoinFlow() {
                       onClick={handleBack}
                       className="inline-flex items-center gap-1 hover:text-neutral-950 transition-colors cursor-pointer"
                     >
-                      <ArrowLeft className="w-3.5 h-3.5" />
+                      <ArrowLeft className="w-5 h-5" />
                       <span>Retour</span>
                     </button>
                   )}
@@ -480,7 +467,7 @@ export function ProJoinFlow() {
                 <div className="pt-3 text-center sm:text-left">
                   <Link
                     href="/"
-                    className="text-xs text-neutral-500 hover:text-neutral-900 transition-colors font-medium inline-flex items-center gap-1"
+                    className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors font-medium inline-flex items-center gap-1"
                   >
                     <span>Je souhaite prendre un rendez-vous beauté ou bien-être</span>
                     <ArrowRight className="w-3 h-3" />
@@ -529,9 +516,9 @@ export function ProJoinFlow() {
                   <button
                     type="button"
                     onClick={handleBack}
-                    className="text-xs font-semibold text-neutral-600 hover:text-neutral-950 inline-flex items-center gap-1.5 cursor-pointer"
+                    className="text-sm font-semibold text-neutral-600 hover:text-neutral-950 inline-flex items-center gap-1.5 cursor-pointer"
                   >
-                    <ArrowLeft className="w-3.5 h-3.5" />
+                    <ArrowLeft className="w-5 h-5" />
                     <span>Modifier la catégorie d&apos;établissement</span>
                   </button>
                 </div>
@@ -553,7 +540,7 @@ export function ProJoinFlow() {
                   <h2 className="font-display text-2xl sm:text-3xl text-neutral-950 font-normal">
                     Votre atelier
                   </h2>
-                  <p className="text-xs text-neutral-500 mt-1">
+                  <p className="text-sm text-neutral-500 mt-1">
                     Spécialité : <strong className="text-neutral-900">{selectedSpecialty}</strong>
                   </p>
                 </div>
@@ -562,7 +549,7 @@ export function ProJoinFlow() {
                   <div>
                     <label
                       htmlFor="businessName"
-                      className="block text-xs font-semibold text-neutral-700 uppercase tracking-wider mb-1.5"
+                      className="block text-sm font-semibold text-neutral-700 uppercase tracking-wider mb-1.5"
                     >
                       Nom de l&apos;établissement *
                     </label>
@@ -583,7 +570,7 @@ export function ProJoinFlow() {
                   <div>
                     <label
                       htmlFor="city"
-                      className="block text-xs font-semibold text-neutral-700 uppercase tracking-wider mb-1.5"
+                      className="block text-sm font-semibold text-neutral-700 uppercase tracking-wider mb-1.5"
                     >
                       Ville ou métropole *
                     </label>
@@ -602,7 +589,7 @@ export function ProJoinFlow() {
                   </div>
 
                   <div>
-                    <span className="block text-xs font-semibold text-neutral-700 uppercase tracking-wider mb-1.5">
+                    <span className="block text-sm font-semibold text-neutral-700 uppercase tracking-wider mb-1.5">
                       Taille de l&apos;équipe
                     </span>
                     <div className="grid grid-cols-3 gap-2">
@@ -615,7 +602,7 @@ export function ProJoinFlow() {
                           key={size.id}
                           type="button"
                           onClick={() => setTeamSize(size.id)}
-                          className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+                          className={`py-2 px-3 rounded-lg text-sm font-semibold border transition-all cursor-pointer ${
                             teamSize === size.id
                               ? "bg-neutral-950 text-white border-neutral-950"
                               : "bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300"
@@ -662,7 +649,7 @@ export function ProJoinFlow() {
                   <h2 className="font-display text-2xl sm:text-3xl text-neutral-950 font-normal">
                     Vos coordonnées
                   </h2>
-                  <p className="text-xs text-neutral-500 mt-1">
+                  <p className="text-sm text-neutral-500 mt-1">
                     Pour organiser votre démonstration privée.
                   </p>
                 </div>
@@ -671,7 +658,7 @@ export function ProJoinFlow() {
                   <div>
                     <label
                       htmlFor="fullName"
-                      className="block text-xs font-semibold text-neutral-700 uppercase tracking-wider mb-1.5"
+                      className="block text-sm font-semibold text-neutral-700 uppercase tracking-wider mb-1.5"
                     >
                       Prénom et nom *
                     </label>
@@ -692,7 +679,7 @@ export function ProJoinFlow() {
                   <div>
                     <label
                       htmlFor="phone"
-                      className="block text-xs font-semibold text-neutral-700 uppercase tracking-wider mb-1.5"
+                      className="block text-sm font-semibold text-neutral-700 uppercase tracking-wider mb-1.5"
                     >
                       Téléphone portable professionnel *
                     </label>
@@ -713,7 +700,7 @@ export function ProJoinFlow() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-xs font-semibold text-neutral-700 uppercase tracking-wider mb-1.5"
+                      className="block text-sm font-semibold text-neutral-700 uppercase tracking-wider mb-1.5"
                     >
                       E-mail professionnel *
                     </label>
@@ -762,36 +749,36 @@ export function ProJoinFlow() {
                 className="space-y-5 text-center py-6"
               >
                 <div className="w-14 h-14 rounded-full bg-primary-50 text-primary-600 border border-primary-200/80 mx-auto flex items-center justify-center">
-                  <CheckCircle2 className="w-7 h-7 stroke-[2]" />
+                  <CheckCircle2 className="w-7 h-7 stroke-2" />
                 </div>
 
                 <div className="space-y-1.5">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-primary-700 block">
+                  <span className="text-sm font-semibold uppercase tracking-widest text-primary-700 block">
                     Demande transmise
                   </span>
                   <h2 className="font-display text-2xl sm:text-3xl text-neutral-950 font-normal">
                     Merci {fullName.split(" ")[0] || ""} !
                   </h2>
-                  <p className="text-xs sm:text-sm text-neutral-600 max-w-sm mx-auto leading-relaxed">
+                  <p className="text-sm sm:text-base text-neutral-600 max-w-sm mx-auto leading-relaxed">
                     Votre demande pour <strong>{businessName}</strong> ({selectedSpecialty} à {city}) a bien été enregistrée.
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200/80 text-left space-y-1.5 text-xs text-neutral-700 max-w-sm mx-auto">
+                <div className="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200/80 text-left space-y-1.5 text-sm text-neutral-700 max-w-sm mx-auto">
                   <div className="flex items-center gap-1.5 font-semibold text-neutral-900">
                     <ShieldCheck className="w-4 h-4 text-primary-600" />
                     <span>Rappel sous 24h ouvrées :</span>
                   </div>
-                  <p className="text-neutral-600 text-[11px] leading-relaxed">
+                  <p className="text-neutral-600 text-sm leading-relaxed">
                     Un conseiller dédié vous contactera au <strong>{phone}</strong> pour préparer votre essai personnalisé.
                   </p>
                 </div>
 
                 <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-2.5">
-                  <Link href="/pro#pricing" className="btn btn-outline text-xs w-full sm:w-auto">
+                  <Link href="/pro#pricing" className="btn btn-outline text-sm w-full sm:w-auto">
                     Voir les tarifs
                   </Link>
-                  <Link href="/" className="btn btn-dark text-xs w-full sm:w-auto">
+                  <Link href="/" className="btn btn-dark text-sm w-full sm:w-auto">
                     Retour à l&apos;accueil
                   </Link>
                 </div>
@@ -801,7 +788,7 @@ export function ProJoinFlow() {
 
           {/* Chiffres clés sobres au bas du formulaire */}
           <div className="pt-8 border-t border-neutral-100 mt-6">
-            <div className="flex items-center justify-center gap-8 sm:gap-12 text-center text-xs text-neutral-500">
+            <div className="flex items-center justify-center gap-8 sm:gap-12 text-center text-sm text-neutral-500">
               <div>
                 <span className="block font-bold text-neutral-900 text-sm">4,9 / 5</span>
                 <span>Note artisans</span>
