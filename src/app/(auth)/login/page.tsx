@@ -17,7 +17,6 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulation de connexion propre
     setTimeout(() => {
       setIsLoading(false);
       setSubmitted(true);
@@ -26,18 +25,18 @@ export default function LoginPage() {
 
   return (
     <div className="w-full">
-      {/* 1. Bascule de type de compte : Client vs Professionnel */}
-      <div className="p-1 rounded-xl bg-neutral-200/60 border border-primary-300 flex items-center mb-8">
+      {/* 1. Bascule de type de compte : Particulier vs Professionnel */}
+      <div className="p-1.5 rounded-2xl bg-neutral-100 border border-neutral-200/80 flex items-center mb-8">
         <button
           type="button"
           onClick={() => {
             setUserType("client");
             setSubmitted(false);
           }}
-          className={`flex-1 py-2 text-xs font-semibold tracking-wide uppercase rounded-[calc(var(--radius-sm)-2px)] transition-all ${
+          className={`flex-1 py-2.5 text-sm font-semibold rounded-xl transition-all cursor-pointer ${
             userType === "client"
-              ? "bg-primary-50/10 text-neutral-950 shadow-2xs"
-              : "text-neutral-600 hover:text-neutral-900"
+              ? "bg-white text-neutral-950 shadow-xs"
+              : "text-neutral-500 hover:text-neutral-900"
           }`}
         >
           Compte Particulier
@@ -48,10 +47,10 @@ export default function LoginPage() {
             setUserType("pro");
             setSubmitted(false);
           }}
-          className={`flex-1 py-2 text-xs font-semibold tracking-wide uppercase rounded-[calc(var(--radius-sm)-2px)] transition-all ${
+          className={`flex-1 py-2.5 text-sm font-semibold rounded-xl transition-all cursor-pointer ${
             userType === "pro"
-              ? "bg-primary-50/10 text-neutral-950 shadow-2xs"
-              : "text-neutral-600 hover:text-neutral-900"
+              ? "bg-white text-neutral-950 shadow-xs"
+              : "text-neutral-500 hover:text-neutral-900"
           }`}
         >
           Espace Professionnel
@@ -60,47 +59,49 @@ export default function LoginPage() {
 
       {/* 2. Titre et sous-titre éditorial */}
       <div className="mb-8">
-        <span className="text-[11px] uppercase tracking-wider font-semibold text-primary-600 block mb-1.5">
-          {userType === "client" ? "Réservations de soins" : "Gestion d’établissement"}
+        <span className="text-sm font-semibold uppercase tracking-wider text-primary-700 block mb-1">
+          {userType === "client" ? "Réservation de soins" : "Gestion d’atelier"}
         </span>
-        <h1 className="text-3xl sm:text-4xl text-neutral-950 tracking-tight">
+        <h1 className="font-display text-3xl sm:text-4xl text-neutral-950 tracking-tight font-normal">
           {userType === "client" ? "Bienvenue à nouveau" : "Espace Artisan & Salon"}
         </h1>
         <p className="text-sm sm:text-base text-neutral-600 mt-2 font-normal leading-relaxed">
           {userType === "client"
-            ? "Connectez-vous pour retrouver vos rendez-vous, vos ateliers favoris et vos praticiens."
-            : "Accédez à votre agenda en temps réel, vos créneaux et vos réservations en ligne."}
+            ? "Connectez-vous pour retrouver vos rendez-vous et vos salons favoris."
+            : "Accédez à votre agenda en direct et à la gestion de vos réservations."}
         </p>
       </div>
 
       {/* Message de confirmation simulé */}
       {submitted ? (
-        <div className="p-6 rounded-xl bg-primary-50/10 border border-primary-300 text-center space-y-4">
-          <div className="w-12 h-12 rounded-full bg-primary-50 text-primary-600 mx-auto flex items-center justify-center">
-            <CheckCircle2 className="w-6 h-6" />
+        <div className="p-8 rounded-2xl bg-primary-50/20 border border-primary-200 text-center space-y-4">
+          <div className="w-14 h-14 rounded-full bg-primary-50 text-primary-600 mx-auto flex items-center justify-center">
+            <CheckCircle2 className="w-7 h-7 stroke-[2]" />
           </div>
-          <div>
-            <h3 className="text-xl text-neutral-950 mb-1">Connexion validée</h3>
-            <p className="text-xs text-neutral-600">
+          <div className="space-y-1">
+            <h3 className="text-xl text-neutral-950 font-medium">Connexion réussie</h3>
+            <p className="text-sm text-neutral-600">
               Bienvenue sur votre espace Belora. Redirection en cours…
             </p>
           </div>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary-600 hover:underline"
-          >
-            <span>Retour à l’accueil</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          <div className="pt-2">
+            <Link
+              href="/"
+              className="btn btn-dark inline-flex items-center gap-2 text-sm"
+            >
+              <span>Accéder à l’accueil</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       ) : (
         <>
-          {/* 3. Formulaire de connexion */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          {/* 3. Formulaire de connexion épuré avec inputs grands et arrondis */}
+          <form onSubmit={handleSubmit} className="space-y-4.5">
             <div>
               <label
                 htmlFor="login-email"
-                className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1.5"
+                className="block text-sm font-semibold text-neutral-800 mb-2"
               >
                 Adresse e-mail
               </label>
@@ -113,23 +114,23 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="nom@exemple.com"
                   autoComplete="email"
-                  className="input pr-10"
+                  className="input pr-12"
                 />
-                <Mail className="w-4 h-4 text-neutral-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Mail className="w-5 h-5 text-neutral-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
             </div>
 
             <div>
-              <div className="flex items-center justify-between mb-1.5">
+              <div className="flex items-center justify-between mb-2">
                 <label
                   htmlFor="login-password"
-                  className="block text-xs uppercase tracking-wider font-semibold text-neutral-700"
+                  className="block text-sm font-semibold text-neutral-800"
                 >
                   Mot de passe
                 </label>
                 <Link
                   href="/forgot-password"
-                  className="text-xs text-primary-600 hover:text-primary-700 hover:underline"
+                  className="text-sm font-medium text-primary-600 hover:text-primary-700 hover:underline"
                 >
                   Mot de passe oublié ?
                 </Link>
@@ -143,26 +144,26 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
                   autoComplete="current-password"
-                  className="input pr-10"
+                  className="input pr-12"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 focus:outline-none"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 focus:outline-none p-1 cursor-pointer"
                   aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                 >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
             </div>
 
             <div className="flex items-center justify-between pt-1">
-              <label className="flex items-center gap-2 cursor-pointer text-xs text-neutral-700">
+              <label className="flex items-center gap-2.5 cursor-pointer text-sm text-neutral-700">
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="rounded-[2px] border-primary-300 text-primary-600 focus:ring-primary-500 w-4 h-4"
+                  className="checkbox"
                 />
                 <span>Mémoriser mes identifiants</span>
               </label>
@@ -171,10 +172,10 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="btn btn-primary btn-block mt-4"
+              className="btn btn-primary w-full h-13 rounded-2xl text-sm font-semibold normal-case mt-4"
             >
               {isLoading ? (
-                <span className="inline-block w-4 h-4 border-2 border-primary-50 border-t-transparent rounded-full animate-spin" />
+                <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
                   <span>Se connecter</span>
@@ -184,22 +185,22 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* 4. Séparateur sobre */}
+          {/* 4. Séparateur épuré */}
           <div className="relative my-6 text-center">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-primary-200" />
+              <div className="w-full border-t border-neutral-200/80" />
             </div>
-            <span className="relative px-3 bg-neutral-100 text-xs text-neutral-500 uppercase tracking-wider font-medium">
+            <span className="relative px-4 bg-white text-sm text-neutral-400 uppercase tracking-wider font-medium">
               ou
             </span>
           </div>
 
-          {/* 5. Connexion SSO Google */}
+          {/* 5. Connexion SSO Google épurée */}
           <button
             type="button"
-            className="btn btn-outline btn-block"
+            className="w-full h-13 rounded-2xl border border-neutral-300 bg-white hover:bg-neutral-50 hover:border-neutral-400 text-sm font-medium text-neutral-800 transition-all flex items-center justify-center gap-3 cursor-pointer"
           >
-            <svg className="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true">
+            <svg className="w-4.5 h-4.5" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 fill="#4285F4"
                 d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"
@@ -221,8 +222,8 @@ export default function LoginPage() {
           </button>
 
           {/* 6. Lien d'inscription */}
-          <div className="mt-8 pt-6 border-t border-primary-200 text-center">
-            <p className="text-xs text-neutral-600">
+          <div className="mt-8 pt-6 border-t border-neutral-200/80 text-center">
+            <p className="text-sm text-neutral-600">
               Vous n’avez pas encore de compte ?{" "}
               <Link
                 href="/register"

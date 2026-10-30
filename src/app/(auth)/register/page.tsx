@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   Eye,
   EyeOff,
@@ -13,8 +14,11 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-export default function RegisterPage() {
-  const [role, setRole] = useState<"client" | "pro">("client");
+function RegisterFormContent() {
+  const searchParams = useSearchParams();
+  const initialRole = searchParams.get("role") === "pro" ? "pro" : "client";
+
+  const [role, setRole] = useState<"client" | "pro">(initialRole);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -43,12 +47,12 @@ export default function RegisterPage() {
 
   return (
     <div className="w-full">
-      {/* 1. Sélecteur de profil éditorial */}
+      {/* 1. Titre et introduction */}
       <div className="mb-6">
-        <span className="text-[11px] uppercase tracking-wider font-semibold text-primary-600 block mb-1.5">
+        <span className="text-sm font-semibold uppercase tracking-wider text-primary-700 block mb-1">
           Inscription
         </span>
-        <h1 className="text-3xl sm:text-4xl text-neutral-950 tracking-tight">
+        <h1 className="font-display text-3xl sm:text-4xl text-neutral-950 tracking-tight font-normal">
           Rejoindre Belora
         </h1>
         <p className="text-sm sm:text-base text-neutral-600 mt-2 font-normal leading-relaxed">
@@ -56,7 +60,7 @@ export default function RegisterPage() {
         </p>
       </div>
 
-      {/* 2. Choix du profil en 2 cartes distinctes */}
+      {/* 2. Choix du profil en 2 cartes modernes et arrondies */}
       <div className="grid grid-cols-2 gap-3 mb-6">
         <button
           type="button"
@@ -64,35 +68,35 @@ export default function RegisterPage() {
             setRole("client");
             setSubmitted(false);
           }}
-          className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
             role === "client"
-              ? "bg-primary-50/10 border-primary-600 ring-1 ring-primary-600 shadow-2xs"
-              : "bg-primary-50/10/50 border-primary-300 hover:border-primary-400"
+              ? "bg-primary-50/20 border-primary-600 ring-1 ring-primary-600 shadow-xs"
+              : "bg-white border-neutral-200/90 hover:border-neutral-300"
           }`}
         >
-          <div className="flex items-center justify-between mb-1.5">
+          <div className="flex items-center justify-between mb-2">
             <User
-              className={`w-4 h-4 ${
+              className={`w-5 h-5 ${
                 role === "client" ? "text-primary-600" : "text-neutral-500"
               }`}
             />
             <span
-              className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
+              className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                 role === "client"
                   ? "border-primary-600 bg-primary-600"
-                  : "border-primary-400"
+                  : "border-neutral-300"
               }`}
             >
               {role === "client" && (
-                <span className="w-1.5 h-1.5 rounded-full bg-primary-50/10" />
+                <span className="w-1.5 h-1.5 rounded-full bg-white" />
               )}
             </span>
           </div>
-          <span className="block text-xs font-semibold text-neutral-900">
+          <span className="block text-sm font-semibold text-neutral-950">
             Particulier
           </span>
-          <span className="block text-[11px] text-neutral-500 mt-0.5 leading-snug">
-            Réserver des soins d’exception
+          <span className="block text-sm text-neutral-500 mt-0.5 leading-snug">
+            Réserver des soins
           </span>
         </button>
 
@@ -102,71 +106,73 @@ export default function RegisterPage() {
             setRole("pro");
             setSubmitted(false);
           }}
-          className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
             role === "pro"
-              ? "bg-primary-50/10 border-primary-600 ring-1 ring-primary-600 shadow-2xs"
-              : "bg-primary-50/10/50 border-primary-300 hover:border-primary-400"
+              ? "bg-primary-50/20 border-primary-600 ring-1 ring-primary-600 shadow-xs"
+              : "bg-white border-neutral-200/90 hover:border-neutral-300"
           }`}
         >
-          <div className="flex items-center justify-between mb-1.5">
+          <div className="flex items-center justify-between mb-2">
             <Building2
-              className={`w-4 h-4 ${
+              className={`w-5 h-5 ${
                 role === "pro" ? "text-primary-600" : "text-neutral-500"
               }`}
             />
             <span
-              className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
+              className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                 role === "pro"
                   ? "border-primary-600 bg-primary-600"
-                  : "border-primary-400"
+                  : "border-neutral-300"
               }`}
             >
               {role === "pro" && (
-                <span className="w-1.5 h-1.5 rounded-full bg-primary-50/10" />
+                <span className="w-1.5 h-1.5 rounded-full bg-white" />
               )}
             </span>
           </div>
-          <span className="block text-xs font-semibold text-neutral-900">
+          <span className="block text-sm font-semibold text-neutral-950">
             Artisan & Salon
           </span>
-          <span className="block text-[11px] text-neutral-500 mt-0.5 leading-snug">
-            Développer mon établissement
+          <span className="block text-sm text-neutral-500 mt-0.5 leading-snug">
+            Développer mon atelier
           </span>
         </button>
       </div>
 
       {submitted ? (
-        <div className="p-6 rounded-xl bg-primary-50/10 border border-primary-300 text-center space-y-4">
-          <div className="w-12 h-12 rounded-full bg-primary-50 text-primary-600 mx-auto flex items-center justify-center">
-            <CheckCircle2 className="w-6 h-6" />
+        <div className="p-8 rounded-2xl bg-primary-50/20 border border-primary-200 text-center space-y-4">
+          <div className="w-14 h-14 rounded-full bg-primary-50 text-primary-600 mx-auto flex items-center justify-center">
+            <CheckCircle2 className="w-7 h-7 stroke-[2]" />
           </div>
-          <div>
-            <h3 className="text-xl text-neutral-950 mb-1">
+          <div className="space-y-1">
+            <h3 className="text-xl text-neutral-950 font-medium">
               Bienvenue dans la Maison Belora
             </h3>
-            <p className="text-xs text-neutral-600">
+            <p className="text-sm text-neutral-600">
               Votre compte a été initialisé avec succès. Un e-mail de confirmation
               a été envoyé à votre adresse.
             </p>
           </div>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary-600 hover:underline"
-          >
-            <span>Explorer les ateliers</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          <div className="pt-2">
+            <Link
+              href="/"
+              className="btn btn-dark inline-flex items-center gap-2 text-sm"
+            >
+              <span>Explorer les ateliers</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       ) : (
         <>
-          {/* 3. Formulaire adapté */}
-          <form onSubmit={handleSubmit} className="space-y-3.5">
+          {/* 3. Formulaire avec inputs grands et arrondis */}
+          <form onSubmit={handleSubmit} className="space-y-4">
             {role === "pro" && (
               <>
                 <div>
                   <label
                     htmlFor="reg-business-name"
-                    className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
+                    className="block text-sm font-semibold text-neutral-800 mb-1.5"
                   >
                     Nom de votre établissement
                   </label>
@@ -178,16 +184,16 @@ export default function RegisterPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, businessName: e.target.value })
                     }
-                    placeholder="Ex: L’Atelier des Ciseaux, Studio Séquoia…"
-                    className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
+                    placeholder="Ex: Atelier Saint-Honoré, Studio Botanique…"
+                    className="input"
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label
                       htmlFor="reg-category"
-                      className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
+                      className="block text-sm font-semibold text-neutral-800 mb-1.5"
                     >
                       Activité principale
                     </label>
@@ -197,7 +203,7 @@ export default function RegisterPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, businessCategory: e.target.value })
                       }
-                      className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 focus:outline-none focus:border-primary-600"
+                      className="select"
                     >
                       <option value="coiffure">Coiffure</option>
                       <option value="visage">Soins Visage & Institut</option>
@@ -209,7 +215,7 @@ export default function RegisterPage() {
                   <div>
                     <label
                       htmlFor="reg-city"
-                      className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
+                      className="block text-sm font-semibold text-neutral-800 mb-1.5"
                     >
                       Ville
                     </label>
@@ -221,19 +227,19 @@ export default function RegisterPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, city: e.target.value })
                       }
-                      placeholder="Paris, Lyon…"
-                      className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
+                      placeholder="Paris, Lyon, Genève…"
+                      className="input"
                     />
                   </div>
                 </div>
               </>
             )}
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label
                   htmlFor="reg-first-name"
-                  className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
+                  className="block text-sm font-semibold text-neutral-800 mb-1.5"
                 >
                   Prénom
                 </label>
@@ -247,13 +253,13 @@ export default function RegisterPage() {
                   }
                   placeholder="Camille"
                   autoComplete="given-name"
-                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
+                  className="input"
                 />
               </div>
               <div>
                 <label
                   htmlFor="reg-last-name"
-                  className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
+                  className="block text-sm font-semibold text-neutral-800 mb-1.5"
                 >
                   Nom
                 </label>
@@ -267,7 +273,7 @@ export default function RegisterPage() {
                   }
                   placeholder="Dupont"
                   autoComplete="family-name"
-                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
+                  className="input"
                 />
               </div>
             </div>
@@ -275,7 +281,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="reg-email"
-                className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
+                className="block text-sm font-semibold text-neutral-800 mb-1.5"
               >
                 Adresse e-mail
               </label>
@@ -290,21 +296,18 @@ export default function RegisterPage() {
                   }
                   placeholder="nom@exemple.com"
                   autoComplete="email"
-                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
+                  className="input pr-12"
                 />
-                <Mail className="w-4 h-4 text-neutral-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Mail className="w-5 h-5 text-neutral-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
             </div>
 
             <div>
               <label
                 htmlFor="reg-phone"
-                className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
+                className="block text-sm font-semibold text-neutral-800 mb-1.5"
               >
-                Téléphone mobile{" "}
-                <span className="text-[11px] font-normal text-neutral-500 lowercase">
-                  (pour les rappels SMS de rdv)
-                </span>
+                Téléphone mobile
               </label>
               <div className="relative">
                 <input
@@ -314,18 +317,18 @@ export default function RegisterPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
                   }
-                  placeholder="06 12 34 56 78"
+                  placeholder="+33 6 12 34 56 78"
                   autoComplete="tel"
-                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
+                  className="input pr-12"
                 />
-                <Phone className="w-4 h-4 text-neutral-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Phone className="w-5 h-5 text-neutral-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
             </div>
 
             <div>
               <label
                 htmlFor="reg-password"
-                className="block text-xs uppercase tracking-wider font-semibold text-neutral-700 mb-1"
+                className="block text-sm font-semibold text-neutral-800 mb-1.5"
               >
                 Mot de passe (8 caractères minimum)
               </label>
@@ -341,34 +344,34 @@ export default function RegisterPage() {
                   }
                   placeholder="••••••••••••"
                   autoComplete="new-password"
-                  className="w-full px-3.5 py-2.5 text-sm bg-primary-50/10 border border-primary-300 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
+                  className="input pr-12"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 focus:outline-none"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 focus:outline-none p-1 cursor-pointer"
                   aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                 >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
             </div>
 
             <div className="pt-1">
-              <label className="flex items-start gap-2.5 cursor-pointer text-xs text-neutral-600 leading-snug">
+              <label className="flex items-start gap-3 cursor-pointer text-sm text-neutral-600 leading-snug">
                 <input
                   type="checkbox"
                   required
                   checked={acceptTerms}
                   onChange={(e) => setAcceptTerms(e.target.checked)}
-                  className="mt-0.5 rounded-[2px] border-primary-300 text-primary-600 focus:ring-primary-500 w-4 h-4"
+                  className="checkbox mt-0.5"
                 />
                 <span>
                   J’accepte les{" "}
-                  <Link href="/terms" className="text-neutral-900 underline underline-offset-2">
+                  <Link href="/terms" className="text-neutral-900 underline underline-offset-2 hover:text-primary-600">
                     conditions générales d’utilisation
                   </Link>{" "}
-                  et confirme avoir pris connaissance de la politique de confidentialité.
+                  et la politique de confidentialité.
                 </span>
               </label>
             </div>
@@ -376,10 +379,10 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={isLoading || !acceptTerms}
-              className="btn btn-primary btn-block mt-3"
+              className="btn btn-primary w-full h-13 rounded-2xl text-sm font-semibold normal-case mt-4"
             >
               {isLoading ? (
-                <span className="inline-block w-4 h-4 border-2 border-primary-50 border-t-transparent rounded-full animate-spin" />
+                <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
                   <span>
@@ -392,8 +395,8 @@ export default function RegisterPage() {
           </form>
 
           {/* 4. Lien de retour connexion */}
-          <div className="mt-6 pt-5 border-t border-primary-200 text-center">
-            <p className="text-xs text-neutral-600">
+          <div className="mt-8 pt-6 border-t border-neutral-200/80 text-center">
+            <p className="text-sm text-neutral-600">
               Déjà membre de la Maison Belora ?{" "}
               <Link
                 href="/login"
@@ -406,5 +409,13 @@ export default function RegisterPage() {
         </>
       )}
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={null}>
+      <RegisterFormContent />
+    </Suspense>
   );
 }
