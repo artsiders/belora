@@ -3,6 +3,7 @@ import { LayoutGrid, Scissors, Leaf, Home } from "lucide-react";
 
 interface CategorySwitcherProps {
   currentSlug: string;
+  onSelectCategory?: (slug: string) => void;
 }
 
 interface CategoryNavCircle {
@@ -118,22 +119,18 @@ const CATEGORY_CIRCLES: CategoryNavCircle[] = [
   },
 ];
 
-export function CategorySwitcher({ currentSlug }: CategorySwitcherProps) {
+export function CategorySwitcher({ currentSlug, onSelectCategory }: CategorySwitcherProps) {
   return (
     <section
-      className="w-full bg-white border-b border-primary-200/80 py-5 sm:py-6 select-none"
+      className="w-full bg-white border-b border-primary-200/80 py-4 sm:py-5 select-none"
       aria-label="Univers de prestations"
     >
       <div className="container-belora">
         <div className="flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 overflow-x-auto no-scrollbar px-1 py-1">
           {CATEGORY_CIRCLES.map((cat) => {
             const isActive = cat.slug === currentSlug;
-            return (
-              <Link
-                key={cat.id}
-                href={cat.href}
-                className="group flex flex-col items-center shrink-0 min-w-16 sm:min-w-19 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/10 focus-visible:ring-offset-2"
-              >
+            const content = (
+              <>
                 {/* Cercle d'icône identique à la page d'accueil */}
                 <div
                   className={`w-12 h-12 sm:w-13 sm:h-13 rounded-full flex items-center justify-center transition-all duration-150 ${
@@ -147,7 +144,7 @@ export function CategorySwitcher({ currentSlug }: CategorySwitcherProps) {
 
                 {/* Libellé */}
                 <span
-                  className={`mt-2.5 text-xs tracking-tight text-center leading-tight transition-colors duration-150 ${
+                  className={`mt-2 text-xs tracking-tight text-center leading-tight transition-colors duration-150 ${
                     isActive
                       ? "font-bold text-sand-950"
                       : "font-medium text-neutral-600 group-hover:text-neutral-900"
@@ -155,6 +152,29 @@ export function CategorySwitcher({ currentSlug }: CategorySwitcherProps) {
                 >
                   {cat.name}
                 </span>
+              </>
+            );
+
+            if (onSelectCategory) {
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => onSelectCategory(cat.slug)}
+                  className="group flex flex-col items-center shrink-0 min-w-16 sm:min-w-19 rounded-xl cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/10 focus-visible:ring-offset-2"
+                >
+                  {content}
+                </button>
+              );
+            }
+
+            return (
+              <Link
+                key={cat.id}
+                href={cat.href}
+                className="group flex flex-col items-center shrink-0 min-w-16 sm:min-w-19 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/10 focus-visible:ring-offset-2"
+              >
+                {content}
               </Link>
             );
           })}
