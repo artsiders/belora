@@ -13,7 +13,7 @@ import { CategoryVenuesPreview } from "@/components/category/category-venues-pre
 import { CategoryEditorial } from "@/components/category/category-editorial";
 import { CategoryGuide } from "@/components/category/category-guide";
 import { CategoryProCta } from "@/components/category/category-pro-cta";
-import { Star, MapPin, Heart, ArrowRight, Compass, ShieldCheck } from "lucide-react";
+import { Star, MapPin, Heart, ArrowRight, Compass, ShieldCheck, SearchAlert } from "lucide-react";
 
 export function SearchClient() {
   const searchParams = useSearchParams();
@@ -115,18 +115,13 @@ export function SearchClient() {
                 >
                   Effacer les filtres
                 </Link>
-                <span className="text-neutral-300">|</span>
-                <div className="flex items-center gap-1.5 text-xs text-neutral-500 font-medium">
-                  <ShieldCheck className="w-4 h-4 text-primary-600" />
-                  <span>100% audités sur place</span>
-                </div>
               </div>
             </div>
 
             {/* Grille des résultats ou état vide */}
             {searchResults.length === 0 ? (
               <div className="p-10 sm:p-14 text-center rounded-3xl bg-white border border-primary-200/70 space-y-4">
-                <Compass className="w-8 h-8 text-primary-600 mx-auto" />
+                <SearchAlert className="w-10 h-10 text-primary-200 mx-auto" />
                 <h3 className="text-lg sm:text-xl font-bold text-neutral-950">
                   Aucun établissement ne correspond à ces critères
                 </h3>

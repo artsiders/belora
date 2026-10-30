@@ -53,7 +53,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-4 border-t border-primary-200/70">
                 {pillars.map((pillar: SanctuaryPillar) => (
                   <div key={pillar.num} className="flex flex-col">
-                    <span className="text-lg font-serif font-bold text-primary-600 mb-1">
+                    <span className="text-2xl font-bold text-primary-600 mb-1">
                       {pillar.num}
                     </span>
                     <h3 className="text-xs sm:text-sm font-bold text-neutral-950 mb-0.5 leading-snug">
@@ -68,7 +68,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
             </div>
 
             {/* Colonne Droite : Visuel éditorial architectural grand format, sans cadre artificiel */}
-            <div className="lg:col-span-5 relative w-full aspect-4/5 rounded-3xl overflow-hidden shadow-xl bg-neutral-200">
+            <div className="lg:col-span-5 relative w-full aspect-4/4 rounded-3xl overflow-hidden shadow-xl bg-neutral-200">
               <Image
                 src={story.image}
                 alt={story.imageAlt}

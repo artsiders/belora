@@ -39,7 +39,7 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
             <div key={idx} className="flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-2.5 mb-2">
-                  <span className="text-xl sm:text-2xl font-serif font-bold text-primary-600">
+                  <span className="text-2xl sm:text-3xl font-bold text-primary-600">
                     0{idx + 1}
                   </span>
                   <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
@@ -68,7 +68,7 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
         <div className="mt-9 pt-5 border-t border-neutral-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center shrink-0">
-              <span className="font-serif font-bold text-xs">B</span>
+              <span className="font-bold text-xs">B</span>
             </div>
             <div>
               <h4 className="text-xs sm:text-sm font-bold text-neutral-950">

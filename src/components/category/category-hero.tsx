@@ -93,9 +93,9 @@ export function CategoryHero({ category }: CategoryHeroProps) {
       </div>
 
       {/* 2. Contenu principal : aligné à gauche avec boîte sobre et concise */}
-      <div className="container-belora relative z-20 flex flex-col items-start gap-4 sm:gap-5">
+      <div className="container-belora relative z-20 flex flex-col items-start gap-7 sm:gap-10">
         {/* Fil d'Ariane épuré sans fioritures */}
-        <nav aria-label="Fil d'ariane" className="flex items-center gap-1.5 text-xs text-white/70">
+        <nav aria-label="Fil d'ariane" className="flex items-center gap-1.5 text-base text-white/70">
           <Link href="/" className="hover:text-white transition-colors">
             Accueil
           </Link>
@@ -109,10 +109,6 @@ export function CategoryHero({ category }: CategoryHeroProps) {
 
         {/* Carré sobre, compact et professionnel (Noir encre architectural) */}
         <div className="w-full max-w-xl lg:max-w-2xl bg-secondary-950/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 text-left">
-          {/* Eyebrow sobre sans trait décoratif */}
-          <span className="block text-xs uppercase font-semibold tracking-wider text-neutral-400 mb-1.5">
-            {category.name}
-          </span>
 
           {/* Titre sobre et concis avec mots mis en valeur */}
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white leading-snug mb-2">
