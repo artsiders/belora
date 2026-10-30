@@ -10,7 +10,6 @@ import {
   ArrowRight,
   ArrowLeft,
   Check,
-  Star,
   ShieldCheck,
   Store,
   MapPin,

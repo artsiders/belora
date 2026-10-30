@@ -198,9 +198,15 @@ export default function LoginPage() {
           {/* 5. Connexion SSO Google épurée */}
           <button
             type="button"
-            className="w-full h-13 rounded-2xl border border-neutral-300 bg-white hover:bg-neutral-50 hover:border-neutral-400 text-sm font-medium text-neutral-800 transition-all flex items-center justify-center gap-3 cursor-pointer"
+            className="w-full h-13 rounded-2xl border border-neutral-300 bg-white hover:bg-neutral-50 hover:border-neutral-400 text-sm font-medium text-neutral-800 shadow-2xs transition-all flex items-center justify-center gap-3 cursor-pointer"
           >
-            <svg className="w-4.5 h-4.5" viewBox="0 0 24 24" aria-hidden="true">
+            <svg
+              className="w-5 h-5 shrink-0"
+              width={20}
+              height={20}
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
               <path
                 fill="#4285F4"
                 d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"

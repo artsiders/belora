@@ -68,13 +68,17 @@
   --on-accent: #ffffff;
   --focus: var(--primary-600);
 
-  /* Rayons */
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 10px;
+  /* Rayons harmonisés */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 22px;
+  --radius-3xl: 26px;
+  --radius-full: 9999px;
   --radius-photo: 16px;
-  --radius-pill: 999px;
+  --radius-pill: 9999px;
 
   /* Mouvement */
   --ease: cubic-bezier(0.2, 0, 0, 1);
@@ -147,6 +151,10 @@
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+  --radius-full: var(--radius-full);
   --radius-photo: var(--radius-photo);
   --radius-pill: var(--radius-pill);
 
@@ -334,16 +342,16 @@
   }
 
   .input, .input-primary, .select {
-    @apply w-full h-13 px-4.5 bg-white border border-neutral-300 rounded-2xl text-neutral-900 text-sm transition-all duration-150 ease-belora placeholder:text-neutral-400 hover:border-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-3 focus:ring-primary-600/15 disabled:opacity-50 disabled:bg-neutral-50 disabled:cursor-not-allowed aria-[invalid=true]:border-danger aria-[invalid=true]:ring-3 aria-[invalid=true]:ring-danger/15;
+    @apply w-full h-13 px-5 bg-white border border-neutral-300 rounded-2xl text-neutral-900 text-sm shadow-2xs transition-all duration-150 ease-belora placeholder:text-neutral-400 hover:border-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-4 focus:ring-primary-600/15 disabled:opacity-50 disabled:bg-neutral-50 disabled:cursor-not-allowed aria-[invalid=true]:border-danger aria-[invalid=true]:ring-4 aria-[invalid=true]:ring-danger/15;
   }
   .textarea {
-    @apply w-full h-auto min-h-28 py-3.5 px-4.5 bg-white border border-neutral-300 rounded-2xl text-neutral-900 text-sm transition-all duration-150 ease-belora placeholder:text-neutral-400 hover:border-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-3 focus:ring-primary-600/15 disabled:opacity-50 disabled:bg-neutral-50 disabled:cursor-not-allowed resize-y;
+    @apply w-full h-auto min-h-28 py-3.5 px-5 bg-white border border-neutral-300 rounded-2xl text-neutral-900 text-sm shadow-2xs transition-all duration-150 ease-belora placeholder:text-neutral-400 hover:border-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-4 focus:ring-primary-600/15 disabled:opacity-50 disabled:bg-neutral-50 disabled:cursor-not-allowed resize-y;
   }
   .input-sm {
-    @apply h-11 px-3.5 rounded-xl text-sm;
+    @apply h-11 px-4 rounded-xl text-sm;
   }
   .input-lg {
-    @apply h-14 px-5 rounded-2xl text-base;
+    @apply h-14 px-5.5 rounded-2xl text-base;
   }
 
   .input-underline {
@@ -351,7 +359,7 @@
   }
 
   .checkbox, .radio {
-    @apply accent-primary-600 w-4.5 h-4.5 rounded-sm;
+    @apply accent-primary-600 w-5 h-5 rounded-md cursor-pointer;
   }
 
   /* ----- Barre de recherche ----- */
@@ -413,7 +421,7 @@
     @apply font-display text-xl lg:text-2xl;
   }
   .tile-arrow {
-    @apply w-4.5 h-4.5 transition-transform duration-200 ease-belora;
+    @apply w-5 h-5 transition-transform duration-200 ease-belora;
   }
   .tile:hover .tile-arrow {
     @apply translate-x-0.5 -translate-y-0.5;

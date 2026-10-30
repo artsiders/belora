@@ -70,7 +70,7 @@ export default function AuthLayout({
 
           <div className="pt-4 border-t border-white/15 flex items-center justify-between text-sm text-neutral-300">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4.5 h-4.5 text-primary-300" />
+              <ShieldCheck className="w-5 h-5 text-primary-300" />
               <span>Artisans audités</span>
             </div>
             <div className="flex items-center gap-1.5 font-medium num text-neutral-100">
