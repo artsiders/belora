@@ -78,24 +78,27 @@ export function SanctuaryExperience() {
           <div className="lg:col-span-6 relative">
             <div className="grid grid-cols-12 gap-3 sm:gap-4 items-end">
               {/* Arche Principale Photographique (Gauche) */}
-              <div className="col-span-8 relative aspect-[4/5] rounded-b-xl overflow-hidden bg-neutral-200 border border-primary-200/80 shadow-sm">
+              <Link
+                href="/venue/maison-albar-soins"
+                className="group col-span-8 relative aspect-4/5 rounded-b-xl overflow-hidden bg-neutral-200 border border-primary-200/80 shadow-sm block cursor-pointer"
+              >
                 <Image
                   src="/images/sanctuaries/sanctuary-architecture.jpg"
                   alt="Intérieur minéral et épuré d'un sanctuaire partenaire Belora"
                   fill
                   sizes="(max-width: 1024px) 70vw, 30vw"
-                  className="object-cover"
+                  className="object-cover group-hover:scale-103 transition-transform duration-500 ease-out"
                 />
 
                 {/* Voile d'ombrage discret et cartouche sobre */}
                 <div
-                  className="absolute inset-0 bg-neutral-950/15"
+                  className="absolute inset-0 bg-neutral-950/15 group-hover:bg-transparent transition-colors duration-300"
                   aria-hidden="true"
                 />
 
                 <div className="absolute bottom-3 inset-x-3 p-3 rounded-md bg-white/95 backdrop-blur-xs border border-primary-200/80 text-neutral-900 shadow-xs flex items-center justify-between gap-2">
                   <div>
-                    <h4 className="text-xs font-bold text-neutral-950">
+                    <h4 className="text-xs font-bold text-neutral-950 group-hover:text-primary-600 transition-colors">
                       Maison Albar Institut
                     </h4>
                     <p className="text-xs text-neutral-500">
@@ -104,7 +107,7 @@ export function SanctuaryExperience() {
                   </div>
                   <CheckCircle2 className="w-4 h-4 text-primary-600 shrink-0" />
                 </div>
-              </div>
+              </Link>
 
               {/* Formes décoratives Arches en variante (Droite) */}
               <div className="col-span-4 flex flex-col gap-3 sm:gap-4 justify-end">

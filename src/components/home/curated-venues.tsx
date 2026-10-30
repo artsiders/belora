@@ -1,22 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Star, MapPin, Heart, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { VenueCard, VenueCardData } from "@/components/cards";
 
-interface Venue {
-  slug: string;
-  name: string;
-  category: string;
-  tags: string[];
-  city: string;
-  district: string;
-  distance: string;
-  rating: string;
-  reviewCount: number;
-  startingPrice: string;
-  image: string;
-}
-
-const CURATED_VENUES: Venue[] = [
+const CURATED_VENUES: VenueCardData[] = [
   {
     slug: "atelier-botanique-paris",
     name: "L’Atelier Botanique",
@@ -75,7 +61,7 @@ export function CuratedVenues() {
   return (
     <section className="py-14 sm:py-20 bg-white border-b border-primary-200/80" aria-labelledby="venues-heading">
       <div className="container-belora">
-        {/* En-tête avec titre et vraie icône Lucide */}
+        {/* En-tête avec titre et lien vers la recherche */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12">
           <div>
             <h2
@@ -91,91 +77,17 @@ export function CuratedVenues() {
 
           <Link
             href="/search"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-neutral-700 hover:text-primary-600 transition-colors shrink-0"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold tracking-wider uppercase text-neutral-700 hover:text-primary-600 transition-colors shrink-0"
           >
             <span>Voir tous les salons</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        {/* Grille des cartes salons inspirée de la référence */}
+        {/* Grille des cartes salons : chaque carte est entièrement cliquable */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {CURATED_VENUES.map((venue) => (
-            <div
-              key={venue.slug}
-              className="group flex flex-col bg-white rounded-2xl border border-primary-200/80 shadow-2xs hover:shadow-md hover:border-primary-300 transition-all duration-300"
-            >
-              {/* Photo avec coins arrondis, pastille de note et favori */}
-              <div className="relative aspect-[4/3] w-full rounded-t-xl overflow-hidden bg-neutral-200 mb-3.5">
-                <Image
-                  src={venue.image}
-                  alt={venue.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover"
-                />
-
-                {/* Bouton favori cœur discret */}
-                <button
-                  type="button"
-                  aria-label={`Ajouter ${venue.name} aux favoris`}
-                  className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-neutral-950/40 hover:bg-neutral-950/70 backdrop-blur-xs flex items-center justify-center text-white transition-colors cursor-pointer"
-                >
-                  <Heart className="w-4 h-4" />
-                </button>
-
-                {/* Pastille de note en bas à gauche de la photo */}
-                <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-xs font-semibold text-neutral-900 num flex items-center gap-1 shadow-xs">
-                  <Star className="w-3.5 h-3.5 fill-primary-600 text-primary-600" />
-                  <span>
-                    {venue.rating} ({venue.reviewCount})
-                  </span>
-                </div>
-              </div>
-
-              {/* Titre et détails de l'établissement */}
-              <div className="flex flex-col flex-1 justify-between p-4 pt-0">
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-neutral-950 group-hover:text-primary-600 transition-colors mb-1">
-                    {venue.name}
-                  </h3>
-
-                  <div className="flex items-center gap-1 text-xs text-neutral-500 mb-3">
-                    <MapPin className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
-                    <span>
-                      {venue.district} · {venue.distance}
-                    </span>
-                  </div>
-
-                  {/* Prestations */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {venue.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2.5 py-0.5 rounded-full bg-neutral-100 text-xs text-neutral-700 font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Lien d'action "Voir les prestations" avec vraie icône Lucide ArrowRight */}
-                <div className="pt-3 border-t border-primary-100 flex items-center justify-between">
-                  <Link
-                    href={`/venue/${venue.slug}`}
-                    className="text-xs font-semibold text-primary-700 group-hover:text-primary-800 transition-colors inline-flex items-center gap-1.5"
-                  >
-                    <span>Voir les prestations</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-
-                  <span className="text-xs font-semibold text-neutral-600 num">
-                    {venue.startingPrice}
-                  </span>
-                </div>
-              </div>
-            </div>
+            <VenueCard key={venue.slug} venue={venue} />
           ))}
         </div>
       </div>

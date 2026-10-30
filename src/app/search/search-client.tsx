@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { VENUES, Venue } from "@/lib/data/venues";
@@ -13,7 +12,8 @@ import { CategoryVenuesPreview } from "@/components/category/category-venues-pre
 import { CategoryEditorial } from "@/components/category/category-editorial";
 import { CategoryGuide } from "@/components/category/category-guide";
 import { CategoryProCta } from "@/components/category/category-pro-cta";
-import { Star, MapPin, Heart, ArrowRight, SearchAlert } from "lucide-react";
+import { SearchAlert } from "lucide-react";
+import { VenueCard } from "@/components/cards";
 
 export function SearchClient() {
   const searchParams = useSearchParams();
@@ -136,85 +136,14 @@ export function SearchClient() {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                {searchResults.map((venue: Venue) => {
-                  const isFavorite = Boolean(favorites[venue.id]);
-
-                  return (
-                    <article key={venue.id} className="group flex flex-col">
-                      {/* Photo pleine largeur avec badges flottants */}
-                      <div className="relative aspect-4/3 w-full rounded-2xl overflow-hidden bg-neutral-200 mb-3.5 shadow-2xs group-hover:shadow-md transition-shadow">
-                        <Image
-                          src={venue.image}
-                          alt={venue.name}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                          className="object-cover group-hover:scale-104 transition-transform duration-500 ease-out"
-                        />
-
-                        {/* Note en haut à gauche */}
-                        <div className="absolute top-3 left-3 flex items-center gap-1 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-md shadow-2xs text-xs font-bold text-neutral-900">
-                          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                          <span>{venue.rating}</span>
-                          <span className="text-neutral-400 font-normal">({venue.reviewCount})</span>
-                        </div>
-
-                        {/* Bouton favori visuel */}
-                        <button
-                          type="button"
-                          onClick={() => toggleFavorite(venue.id)}
-                          aria-label={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
-                          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-xs flex items-center justify-center text-neutral-700 hover:text-primary-600 transition-colors shadow-2xs cursor-pointer"
-                        >
-                          <Heart
-                            className={`w-4 h-4 transition-colors ${
-                              isFavorite ? "fill-red-500 text-red-500" : ""
-                            }`}
-                          />
-                        </button>
-
-                        {/* Badge de prix dès... */}
-                        <div className="absolute bottom-3 right-3 bg-neutral-950/85 backdrop-blur-xs text-white text-xs font-semibold px-2.5 py-1 rounded-md num shadow-2xs">
-                          dès {venue.startingPrice}
-                        </div>
-                      </div>
-
-                      {/* Métadonnées alignées sous la photo */}
-                      <div className="flex flex-col flex-1">
-                        <div className="flex items-center justify-between text-xs mb-1">
-                          <span className="font-semibold uppercase tracking-wider text-primary-700">
-                            {venue.categoryLabel}
-                          </span>
-                          <span className="text-neutral-500 font-medium flex items-center gap-1">
-                            <MapPin className="w-3 h-3 text-neutral-400 shrink-0" />
-                            <span className="truncate">{venue.district || venue.city}</span>
-                          </span>
-                        </div>
-
-                        <h3 className="text-base font-bold text-neutral-950 group-hover:text-primary-600 transition-colors line-clamp-1">
-                          <Link href={`/venue/${venue.slug}`}>{venue.name}</Link>
-                        </h3>
-
-                        <p className="text-xs text-neutral-600 line-clamp-1 mt-1 font-normal leading-relaxed">
-                          {venue.tagline}
-                        </p>
-
-                        <div className="mt-3 flex items-center justify-between pt-2.5 border-t border-neutral-100 text-xs">
-                          <span className="text-neutral-500">
-                            Dès{" "}
-                            <strong className="text-neutral-950 font-bold num">{venue.startingPrice}</strong>
-                          </span>
-                          <Link
-                            href={`/book/${venue.slug}`}
-                            className="font-semibold text-primary-700 hover:text-primary-900 inline-flex items-center gap-1"
-                          >
-                            <span>Réserver</span>
-                            <ArrowRight className="w-3.5 h-3.5" />
-                          </Link>
-                        </div>
-                      </div>
-                    </article>
-                  );
-                })}
+                {searchResults.map((venue: Venue) => (
+                  <VenueCard
+                    key={venue.id}
+                    venue={venue}
+                    isFavorite={Boolean(favorites[venue.id])}
+                    onToggleFavorite={toggleFavorite}
+                  />
+                ))}
               </div>
             )}
           </div>

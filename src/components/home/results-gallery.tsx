@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { SectionHeader } from "@/components/ui/section-header";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { GalleryCard } from "@/components/cards";
 
 interface GalleryItem {
   id: string;
@@ -83,44 +83,7 @@ export function ResultsGallery() {
         {/* Grille de 4 réalisations en arches : aérée, sans blocs noirs superposés ni textes tronqués */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {GALLERY_ITEMS.map((item) => (
-            <Link
-              key={item.id}
-              href={`/venue/${item.slug}`}
-              className="group flex flex-col bg-white border border-primary-200/80 p-3 rounded-2xl pt-0 shadow-2xs hover:shadow-md hover:border-primary-300 transition-all duration-300 focus:outline-none"
-            >
-              {/* Photographie avec arche douce supérieure (écho à la nouvelle DA) */}
-              <div className="relative aspect-[4/5] w-full rounded-b-xl overflow-hidden bg-neutral-100 mb-3.5">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover"
-                />
-
-                {/* Pastille discrète de catégorie en haut de l'image */}
-                <div className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-xs font-semibold text-neutral-900 shadow-xs">
-                  {item.category}
-                </div>
-              </div>
-
-              {/* Informations textuelles lisibles en dessous, sans rognage */}
-              <div className="flex flex-col flex-1 justify-between pt-1">
-                <div>
-                  <h3 className="text-sm sm:text-base font-bold text-neutral-950 group-hover:text-primary-600 transition-colors leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-neutral-500 mt-1 font-normal">
-                    {item.salon} · {item.city}
-                  </p>
-                </div>
-
-                <div className="pt-3 mt-3 border-t border-primary-100 flex items-center justify-between text-xs text-primary-700 font-semibold group-hover:text-primary-800 transition-colors">
-                  <span>Découvrir la maison</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </div>
-              </div>
-            </Link>
+            <GalleryCard key={item.id} item={item} />
           ))}
         </div>
       </div>

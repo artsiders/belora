@@ -1,9 +1,8 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArtisanCard } from "@/components/cards";
 
 interface Artisan {
   id: string;
@@ -157,44 +156,7 @@ export function ArtisanSpotlight() {
           className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-1 px-1 -mr-5 scrollbar-none focus:outline-none"
         >
           {ARTISANS.map((artisan) => (
-            <Link
-              key={artisan.id}
-              href={`/venue/${artisan.venueSlug}`}
-              className="group w-[260px] sm:w-[280px] shrink-0 snap-start flex flex-col justify-between bg-white rounded-3xl border border-primary-200/80 overflow-hidden shadow-2xs hover:shadow-lg hover:border-primary-300 transition-all duration-300 cursor-pointer"
-            >
-              {/* Photographie pleine largeur en haut : arrondis parfaitement harmonisés */}
-              <div className="relative aspect-4/5 w-full overflow-hidden bg-neutral-100">
-                <Image
-                  src={artisan.image}
-                  alt={`Portrait de ${artisan.name}, ${artisan.role}`}
-                  fill
-                  sizes="(max-width: 640px) 260px, 280px"
-                  className="object-cover"
-                />
-              </div>
-
-              {/* Contenu épuré & hiérarchisé */}
-              <div className="p-4 sm:p-5 flex flex-col justify-between flex-1">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-primary-600 mb-1">
-                    {artisan.role}
-                  </p>
-                  <h3 className="text-base sm:text-lg font-bold text-neutral-950 group-hover:text-primary-600 transition-colors">
-                    {artisan.name}
-                  </h3>
-                  <p className="text-xs text-neutral-500 mt-1 flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
-                    <span>{artisan.salon} · {artisan.city}</span>
-                  </p>
-                </div>
-
-                {/* Lien subtil en bas de carte */}
-                <div className="pt-3 mt-3 border-t border-primary-100 flex items-center justify-between text-xs font-semibold text-neutral-800 group-hover:text-primary-600 transition-colors">
-                  <span>Voir le sanctuaire</span>
-                  <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                </div>
-              </div>
-            </Link>
+            <ArtisanCard key={artisan.id} artisan={artisan} />
           ))}
         </div>
       </div>

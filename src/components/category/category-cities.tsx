@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { CategoryData, InternationalCity } from "@/lib/data/categories";
+import { CityCard } from "@/components/cards";
 
 interface CategoryCitiesProps {
   category: CategoryData;
@@ -89,45 +88,15 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
           </div>
         </div>
 
-        {/* Grille de cartes épurées sans sur-encadrement : l'image respire et prend toute la largeur */}
+        {/* Grille de cartes épurées */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
           {displayedCities.map((city: InternationalCity) => (
-            <Link
+            <CityCard
               key={city.id}
-              href={`/search?category=${category.slug}&location=${encodeURIComponent(city.name)}`}
-              className="group flex flex-col"
-            >
-              {/* Photo pleine largeur de la colonne avec coins soignés */}
-              <div className="relative aspect-4/3 w-full rounded-2xl overflow-hidden bg-neutral-200 mb-3">
-                <Image
-                  src={city.image}
-                  alt={`${category.shortName} à ${city.name}, ${city.country}`}
-                  fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                />
-                <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors duration-300" />
-                <span className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-white/95 backdrop-blur-xs text-xs font-semibold text-neutral-900 shadow-2xs">
-                  {city.country}
-                </span>
-                <span className="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-white/95 backdrop-blur-xs flex items-center justify-center text-neutral-900 shadow-2xs opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowUpRight className="w-3.5 h-3.5 text-neutral-900" />
-                </span>
-              </div>
-
-              {/* Texte direct sous l'image, sans bordure ni padding gaspillé */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="font-bold text-sm sm:text-base text-neutral-950 group-hover:text-primary-600 transition-colors">
-                    {category.shortName} {city.name}
-                  </h3>
-                  <span className="text-xs text-neutral-500 num block mt-0.5">
-                    {city.count}
-                  </span>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
-              </div>
-            </Link>
+              city={city}
+              categorySlug={category.slug}
+              categoryShortName={category.shortName}
+            />
           ))}
         </div>
 

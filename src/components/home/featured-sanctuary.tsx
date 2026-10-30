@@ -17,26 +17,34 @@ export function FeaturedSanctuary() {
         </div>
 
         {/* Immense photographie panoramique architecturale */}
-        <div className="relative aspect-[16/9] min-h-[440px] sm:min-h-[580px] w-full rounded-[var(--radius-photo)] overflow-hidden border border-line bg-neutral-200 shadow-xl">
+        <div className="group relative aspect-16/9 min-h-[440px] sm:min-h-[580px] w-full rounded-3xl overflow-hidden border border-neutral-200/80 bg-neutral-200 shadow-xl cursor-pointer">
+          <Link
+            href="/venue/maison-albar-soins"
+            className="absolute inset-0 z-10"
+            aria-label="Découvrir Maison Albar Institut & Spa"
+          >
+            <span className="sr-only">Découvrir Maison Albar Institut & Spa</span>
+          </Link>
+
           <Image
             src="/images/sanctuaries/sanctuary-architecture.jpg"
             alt="Maison Albar Institut - Un espace de soin d’une grande pureté architecturale"
             fill
             sizes="100vw"
-            className="object-cover"
+            className="object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
           />
 
           <div
-            className="absolute inset-0 bg-neutral-950/35"
+            className="absolute inset-0 bg-neutral-950/35 pointer-events-none"
             aria-hidden="true"
           />
 
           {/* Cartouche d'artisan en bas à gauche */}
-          <div className="absolute bottom-6 sm:bottom-10 left-6 sm:left-10 max-w-xl text-neutral-50">
-            <span className="inline-block px-3 py-1 rounded-[var(--radius-xs)] bg-primary-600/90 text-neutral-50 text-xs tracking-widest uppercase font-semibold mb-3 backdrop-blur-sm">
+          <div className="pointer-events-none absolute bottom-6 sm:bottom-10 left-6 sm:left-10 max-w-xl text-neutral-50 z-20">
+            <span className="inline-block px-3 py-1 rounded-md bg-primary-600/90 text-neutral-50 text-xs tracking-widest uppercase font-semibold mb-3 backdrop-blur-xs">
               Maison Coup de Cœur
             </span>
-            <h3 className="text-3xl sm:text-4xl text-neutral-50 mb-3">
+            <h3 className="text-3xl sm:text-4xl text-neutral-50 mb-3 font-bold">
               Maison Albar Institut & Spa
             </h3>
             <p className="text-sm sm:text-base text-neutral-200 leading-relaxed mb-6 max-w-md">
@@ -44,10 +52,7 @@ export function FeaturedSanctuary() {
             </p>
 
             <div className="flex items-center gap-4">
-              <Link
-                href="/venue/maison-albar-soins"
-                className="btn btn-editorial-light btn-sm"
-              >
+              <span className="btn btn-editorial-light btn-sm">
                 <span>Découvrir la maison</span>
                 <svg
                   className="w-3.5 h-3.5 btn-icon-slide"
@@ -62,7 +67,7 @@ export function FeaturedSanctuary() {
                   <path d="M5 12h14" />
                   <path d="m12 5 7 7-7 7" />
                 </svg>
-              </Link>
+              </span>
 
               <span className="text-xs text-neutral-300 font-medium">
                 À partir de 80 € · 96 avis 5.0 ★
