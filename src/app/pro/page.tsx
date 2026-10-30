@@ -167,10 +167,10 @@ export default function ProPage() {
                 {/* Boutons d'action */}
                 <div className="flex flex-wrap items-center gap-3.5 pt-2">
                   <Link
-                    href="/register?role=pro"
+                    href="/pro/join"
                     className="btn btn-primary py-3.5 px-6 text-sm sm:text-base inline-flex items-center gap-2 rounded-xl"
                   >
-                    <span>Démarrer l’essai gratuit</span>
+                    <span>Demander une démo privée</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
 
@@ -628,7 +628,7 @@ export default function ProPage() {
                     </div>
 
                     <Link
-                      href="/register?role=pro"
+                      href="/pro/join"
                       className={`w-full btn py-3 text-sm sm:text-base font-semibold rounded-xl text-center ${
                         plan.highlighted ? "btn-primary" : "btn-outline"
                       }`}
@@ -717,10 +717,10 @@ export default function ProPage() {
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 relative z-10 shrink-0">
                 <Link
-                  href="/register?role=pro"
+                  href="/pro/join"
                   className="btn btn-primary py-3.5 px-7 text-sm sm:text-base font-semibold rounded-xl text-center"
                 >
-                  Créer mon atelier gratuit
+                  Demander une démo personnalisée
                 </Link>
                 <Link
                   href="/login"

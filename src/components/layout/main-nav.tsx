@@ -87,7 +87,7 @@ export function MainNav() {
           {/* 2. Actions Desktop à droite */}
           <div className="hidden sm:flex items-center gap-4">
             <Link
-              href="/pro"
+              href="/pro/join"
               className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:text-primary-600 transition-colors"
             >
               <span>Je suis un professionnel</span>
@@ -217,7 +217,7 @@ export function MainNav() {
                   <div className="space-y-4 pt-6 border-t border-neutral-200/80">
                     {/* Carte raffinée Belora Pro */}
                     <Link
-                      href="/pro"
+                      href="/pro/join"
                       onClick={closeMenu}
                       className="flex items-center justify-between p-4 rounded-2xl bg-secondary-900 text-white hover:bg-neutral-950 transition-colors shadow-sm"
                     >
