@@ -156,7 +156,7 @@ function RegisterFormContent() {
           <div className="pt-2">
             <Link
               href="/"
-              className="btn btn-dark inline-flex items-center gap-2 text-sm"
+              className="btn btn-dark inline-flex"
             >
               <span>Explorer les ateliers</span>
               <ArrowRight className="w-4 h-4" />

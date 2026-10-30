@@ -87,7 +87,7 @@ export default function LoginPage() {
           <div className="pt-2">
             <Link
               href="/"
-              className="btn btn-dark inline-flex items-center gap-2 text-sm"
+              className="btn btn-dark inline-flex"
             >
               <span>Accéder à l’accueil</span>
               <ArrowRight className="w-4 h-4" />

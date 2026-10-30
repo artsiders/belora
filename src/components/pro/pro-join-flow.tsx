@@ -624,7 +624,7 @@ export function ProJoinFlow() {
                   </button>
                   <button
                     type="submit"
-                    className="btn btn-dark flex-1 inline-flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="btn btn-dark flex-1 inline-flex"
                   >
                     <span>Continuer</span>
                     <ArrowRight className="w-4 h-4" />
@@ -728,7 +728,7 @@ export function ProJoinFlow() {
                   </button>
                   <button
                     type="submit"
-                    className="btn btn-dark flex-1 inline-flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="btn btn-dark flex-1 inline-flex"
                   >
                     <span>Demander ma démo</span>
                     <ArrowRight className="w-4 h-4" />
@@ -777,7 +777,7 @@ export function ProJoinFlow() {
                   <Link href="/pro#pricing" className="btn btn-outline text-sm w-full sm:w-auto">
                     Voir les tarifs
                   </Link>
-                  <Link href="/" className="btn btn-dark text-sm w-full sm:w-auto">
+                  <Link href="/" className="btn btn-dark w-full sm:w-auto">
                     Retour à l&apos;accueil
                   </Link>
                 </div>

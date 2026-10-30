@@ -100,7 +100,7 @@ export function MainNav() {
               Connexion
             </Link>
 
-            <Link href="/register" className="btn btn-dark btn-sm">
+            <Link href="/register" className="btn btn-dark">
               Rejoindre
             </Link>
           </div>

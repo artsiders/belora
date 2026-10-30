@@ -14,7 +14,7 @@ export function ProNav({ onStartDemo, showNavLinks = true }: ProNavProps) {
     <header className="sticky top-0 z-40 w-full border-b border-neutral-200/80 bg-white/95 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-18 flex items-center justify-between">
         {/* 1. Logo Belora Pro officiel */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-end gap-3">
           <Link
             href="/"
             className="flex items-center gap-2 group"
@@ -28,7 +28,7 @@ export function ProNav({ onStartDemo, showNavLinks = true }: ProNavProps) {
               priority
               className="object-contain h-7 w-auto"
             />
-            <span className="text-[11px] font-bold tracking-widest text-primary-700 uppercase bg-primary-50 px-2 py-0.5 rounded-full border border-primary-200/70">
+            <span className="text-sx font-bold tracking-widest text-primary-700 uppercase">
               Pro
             </span>
           </Link>
@@ -72,7 +72,7 @@ export function ProNav({ onStartDemo, showNavLinks = true }: ProNavProps) {
             <button
               type="button"
               onClick={onStartDemo}
-              className="btn btn-dark btn-sm inline-flex items-center gap-1.5 cursor-pointer"
+              className="btn btn-dark"
             >
               <span>Demander une démo</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -80,7 +80,7 @@ export function ProNav({ onStartDemo, showNavLinks = true }: ProNavProps) {
           ) : (
             <Link
               href="/pro/join"
-              className="btn btn-dark btn-sm inline-flex items-center gap-1.5"
+              className="btn btn-dark"
             >
               <span>Demander une démo</span>
               <ArrowRight className="w-3.5 h-3.5" />
