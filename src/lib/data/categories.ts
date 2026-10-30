@@ -163,6 +163,85 @@ export const INTERNATIONAL_CITIES_GLOBAL: InternationalCity[] = [
 ];
 
 export const CATEGORIES_DATA: Record<string, CategoryData> = {
+  all: {
+    id: "all",
+    slug: "all",
+    name: "Tous les univers",
+    shortName: "Soins & Beauté",
+    eyebrow: "L'artisanat du geste",
+    titlePrefix: "Réserver en ligne les meilleurs havres",
+    titleHighlight: "et artisans d'exception dans le monde.",
+    heroTitle: "Réserver en ligne dans les meilleurs havres de soin",
+    heroSubtitle: "Salons d'auteur, stylistes prothésistes, maîtres barbiers et sanctuaires spa dans les grandes capitales mondiales.",
+    heroImage: "/images/heroes/hero-banner.webp",
+    searchPlaceholder: "Coiffure, manucure, massage, barbier, soin visage...",
+    cities: INTERNATIONAL_CITIES_GLOBAL,
+    pillars: [
+      {
+        num: "01",
+        title: "Artisans d'auteur certifiés",
+        description: "Chaque praticien est audité sur place pour son excellence technique et son accueil.",
+      },
+      {
+        num: "02",
+        title: "Protocoles d'hygiène stricts",
+        description: "Stérilisation médicale, formules saines et respect absolu de votre bien-être.",
+      },
+      {
+        num: "03",
+        title: "Accueil garanti sans attente",
+        description: "Créneaux sanctuarisés et synchronisation temps réel pour une quiétude totale.",
+      },
+    ],
+    story: {
+      title: "L'artisanat du soin, l'avènement des sanctuaires urbains.",
+      lead: "Belora réunit les ateliers et artisans indépendants qui hissent la beauté et le bien-être au rang d'art.",
+      paragraphs: [
+        "De Paris à Tokyo, nos maisons partenaires célèbrent le geste précis, les formules botaniques pures et l'hospitalité bienveillante dans des espaces conçus comme de véritables havres de déconnexion.",
+      ],
+      image: "/images/editorial/hair-detail.jpg",
+      imageAlt: "Artisan de soin exerçant son geste dans un salon d'exception",
+      caption: "L'excellence artisanale et l'accueil attentionné",
+    },
+    frequentSearches: {
+      col1: [
+        { title: "Manucure russe sans cuticules", query: "manucure russe", tag: "Signature" },
+        { title: "Balayage minéral & reflets naturels", query: "balayage mineral", tag: "Lumière" },
+        { title: "Massage facialiste Kobido liftant", query: "kobido", tag: "Japon" },
+        { title: "Massage Deep Tissue décontracturant", query: "deep tissue", tag: "Musculaire" },
+        { title: "Taille de barbe au coupe-choux", query: "taille de barbe", tag: "Tradition" },
+      ],
+      col2: [
+        { title: "Coloration végétale 100% bio", query: "coloration vegetale", tag: "Bio" },
+        { title: "Pose de vernis semi-permanent", query: "vernis semi-permanent", tag: "Populaire" },
+        { title: "Drainage lymphatique du corps", query: "drainage lymphatique", tag: "Détox" },
+        { title: "Coupe sur cheveux secs sur-mesure", query: "coupe cheveux secs", tag: "Artisan" },
+        { title: "Rituel spa & massage pierres chaudes", query: "pierres chaudes", tag: "Spa" },
+      ],
+    },
+    guide: {
+      mainTitle: "Comment choisir votre havre de soin sur Belora ?",
+      intro: "Chaque maison référencée répond à des critères d'audit rigoureux pour garantir une expérience irréprochable.",
+      sections: [
+        {
+          title: "Des professionnels audités sur place",
+          content: "Nous visitons et réévaluons chaque salon pour contrôler la qualité d'accueil et le savoir-faire des praticiens.",
+        },
+        {
+          title: "Réservation fluide et sans attente",
+          content: "Votre créneau est sanctuarisé dès la validation en ligne, avec rappels automatiques et prise en charge instantanée.",
+        },
+      ],
+    },
+    pro: {
+      title: "Vous dirigez un établissement de beauté d'exception ?",
+      description: "Rejoignez l'élite Belora Pro pour attirer une clientèle locale et internationale sans commissions abusives.",
+      ctaText: "Rejoindre Belora Pro",
+      ctaHref: "/pro",
+      image: "/images/editorial/pro-manager.jpg",
+      imageAlt: "Responsable d'établissement utilisant Belora Pro",
+    },
+  },
   nails: {
     id: "nails",
     slug: "nails",
