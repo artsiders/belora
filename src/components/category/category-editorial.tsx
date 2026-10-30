@@ -18,20 +18,20 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
   return (
     <>
       {/* 1. Section Récit Éditorial & Philosophie inspirée de PhilosophySection & SanctuaryExperience */}
-      <section className="py-16 sm:py-24 bg-sand-warm border-b border-primary-200/80" aria-labelledby="editorial-story-heading">
+      <section className="py-12 sm:py-16 bg-sand-warm border-b border-primary-200/80" aria-labelledby="editorial-story-heading">
         <div className="container-belora">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Colonne Gauche : Manifeste & 3 Piliers d'Excellence */}
             <div className="lg:col-span-7">
               {/* Eyebrow sobre sans trait décoratif */}
-              <span className="eyebrow text-primary-700 font-semibold block mb-2 sm:mb-3">
+              <span className="eyebrow text-primary-700 font-semibold block mb-1.5 sm:mb-2">
                 Philosophie du soin &bull; {category.name}
               </span>
 
               {/* Titre avec mots en text-primary */}
               <h2
                 id="editorial-story-heading"
-                className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950 leading-tight mb-4"
+                className="text-xl sm:text-2xl lg:text-3xl font-bold text-sand-950 leading-tight mb-3"
               >
                 {prefixTitle},{" "}
                 <span className="block sm:inline text-primary-600 font-bold">
@@ -39,24 +39,24 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                 </span>
               </h2>
 
-              <p className="text-xs sm:text-sm lg:text-base text-sand-700 leading-relaxed font-medium mb-6">
+              <p className="text-xs sm:text-sm text-sand-700 leading-relaxed font-medium mb-3">
                 {story.lead}
               </p>
 
-              <div className="space-y-3.5 text-xs sm:text-sm text-sand-600 leading-relaxed font-normal mb-8">
+              <div className="space-y-2 text-xs sm:text-sm text-sand-600 leading-relaxed font-normal mb-5">
                 {story.paragraphs.map((p, idx) => (
                   <p key={idx}>{p}</p>
                 ))}
               </div>
 
               {/* 3 Piliers en colonnes aérées et horizontales : zéro boîte encadrée */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-primary-200/70">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-4 border-t border-primary-200/70">
                 {pillars.map((pillar: SanctuaryPillar) => (
                   <div key={pillar.num} className="flex flex-col">
-                    <span className="text-xl font-serif font-bold text-primary-600 mb-1.5">
+                    <span className="text-lg font-serif font-bold text-primary-600 mb-1">
                       {pillar.num}
                     </span>
-                    <h3 className="text-xs sm:text-sm font-bold text-sand-950 mb-1 leading-snug">
+                    <h3 className="text-xs sm:text-sm font-bold text-sand-950 mb-0.5 leading-snug">
                       {pillar.title}
                     </h3>
                     <p className="text-xs text-sand-600 leading-relaxed font-normal">
@@ -91,22 +91,22 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
       </section>
 
       {/* 2. Section Recherches Fréquentes & Rituels Prisés (Style Planity aéré et typographique) */}
-      <section className="py-16 sm:py-24 bg-white border-b border-primary-200/80" aria-labelledby="frequent-searches-heading">
+      <section className="py-12 sm:py-16 bg-white border-b border-primary-200/80" aria-labelledby="frequent-searches-heading">
         <div className="container-belora">
           {/* En-tête sobre et direct */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12 pb-5 border-b border-neutral-100">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7 sm:mb-9 pb-4 border-b border-neutral-100">
             <div>
-              <span className="eyebrow text-sand-500 font-semibold block mb-1.5">
+              <span className="eyebrow text-sand-500 font-semibold block mb-1">
                 Tendances & Techniques
               </span>
-              <h2 id="frequent-searches-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950">
+              <h2 id="frequent-searches-heading" className="text-xl sm:text-2xl lg:text-3xl font-bold text-sand-950">
                 Recherches fréquentes,{" "}
                 <span className="text-primary-600 font-bold">
                   les rituels les plus demandés.
                 </span>
               </h2>
-              <p className="mt-1.5 text-xs sm:text-sm text-sand-600 font-normal">
-                Accédez directement aux créneaux des soins et protocoles les plus plébiscités par nos membres en {category.shortName.toLowerCase()}.
+              <p className="mt-1 text-xs sm:text-sm text-sand-600 font-normal">
+                Les protocoles et soins signatures les plus plébiscités en {category.shortName.toLowerCase()}.
               </p>
             </div>
 
@@ -116,11 +116,11 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
           </div>
 
           {/* Grille typographique épurée sans double boîte ni paddings gaspillés */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 lg:gap-x-14 gap-y-6">
             {/* Colonne 1 : Soins signatures */}
             <div>
-              <div className="flex items-center justify-between pb-3 mb-2 border-b border-sand-900/10">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-sand-950">
+              <div className="flex items-center justify-between pb-2.5 mb-1.5 border-b border-sand-900/10">
+                <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-sand-950">
                   Soins signatures & rituels doux
                 </h3>
                 <span className="text-xs font-semibold text-primary-600">
@@ -133,9 +133,9 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                   <Link
                     key={idx}
                     href={`/search?category=${category.slug}&q=${encodeURIComponent(item.query)}`}
-                    className="group flex items-center justify-between py-3.5 hover:pl-1.5 transition-all"
+                    className="group flex items-center justify-between py-2.5 hover:pl-1 transition-all"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2.5">
                       {item.tag && (
                         <span className="px-2 py-0.5 rounded-md bg-sand-100 text-sand-700 text-xs font-semibold shrink-0">
                           {item.tag}
@@ -145,7 +145,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                         {item.title}
                       </span>
                     </div>
-                    <ArrowUpRight className="w-4 h-4 text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
+                    <ArrowUpRight className="w-3.5 h-3.5 text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
                   </Link>
                 ))}
               </div>
@@ -153,9 +153,9 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
 
             {/* Colonne 2 : Techniques de haute précision */}
             <div>
-              <div className="flex items-center justify-between pb-3 mb-2 border-b border-sand-900/10">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-sand-950">
-                  Techniques avancées & finitions d&apos;art
+              <div className="flex items-center justify-between pb-2.5 mb-1.5 border-b border-sand-900/10">
+                <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-sand-950">
+                  Techniques avancées & finitions
                 </h3>
                 <span className="text-xs font-semibold text-primary-600">
                   {frequentSearches.col2.length} rituels
@@ -167,9 +167,9 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                   <Link
                     key={idx}
                     href={`/search?category=${category.slug}&q=${encodeURIComponent(item.query)}`}
-                    className="group flex items-center justify-between py-3.5 hover:pl-1.5 transition-all"
+                    className="group flex items-center justify-between py-2.5 hover:pl-1 transition-all"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2.5">
                       {item.tag && (
                         <span className="px-2 py-0.5 rounded-md bg-sand-100 text-sand-700 text-xs font-semibold shrink-0">
                           {item.tag}
@@ -179,7 +179,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                         {item.title}
                       </span>
                     </div>
-                    <ArrowUpRight className="w-4 h-4 text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
+                    <ArrowUpRight className="w-3.5 h-3.5 text-sand-400 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
                   </Link>
                 ))}
               </div>

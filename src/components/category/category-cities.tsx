@@ -25,22 +25,22 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
   const displayedCities = showAll ? filteredCities : filteredCities.slice(0, 8);
 
   return (
-    <section className="py-14 sm:py-20 bg-white border-b border-primary-200/80" aria-labelledby="cities-heading">
+    <section className="py-10 sm:py-14 bg-white border-b border-primary-200/80" aria-labelledby="cities-heading">
       <div className="container-belora">
         {/* En-tête sobre sans trait de séparation superflu */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12 pb-5 border-b border-neutral-100">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7 sm:mb-9 pb-4 border-b border-neutral-100">
           <div>
-            <span className="eyebrow text-sand-500 font-semibold block mb-1.5">
+            <span className="eyebrow text-sand-500 font-semibold block mb-1">
               Métropoles mondiales
             </span>
-            <h2 id="cities-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950">
+            <h2 id="cities-heading" className="text-xl sm:text-2xl lg:text-3xl font-bold text-sand-950">
               Trouver un artisan{" "}
               <span className="text-primary-600 font-bold">
                 dans les grandes capitales
               </span>
             </h2>
-            <p className="mt-1.5 text-xs sm:text-sm text-sand-600 font-normal max-w-2xl">
-              Nos ateliers partenaires en {category.shortName.toLowerCase()} vous accueillent au cœur des douze métropoles culturelles les plus réputées.
+            <p className="mt-1 text-xs sm:text-sm text-sand-600 font-normal">
+              Les meilleures adresses sélectionnées dans 12 capitales culturelles.
             </p>
           </div>
 

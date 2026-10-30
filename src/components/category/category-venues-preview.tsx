@@ -17,22 +17,22 @@ export function CategoryVenuesPreview({ category }: CategoryVenuesPreviewProps) 
   const displayVenues = matchingVenues.length > 0 ? matchingVenues.slice(0, 4) : VENUES.slice(0, 4);
 
   return (
-    <section className="py-14 sm:py-20 bg-white border-b border-primary-200/80" aria-labelledby="venues-heading">
+    <section className="py-10 sm:py-14 bg-white border-b border-primary-200/80" aria-labelledby="venues-heading">
       <div className="container-belora">
         {/* En-tête de section avec titre harmonisé et mots en text-primary */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7 sm:mb-9">
           <div>
-            <span className="eyebrow text-sand-500 font-semibold block mb-1.5">
+            <span className="eyebrow text-sand-500 font-semibold block mb-1">
               Sélection d&apos;exception
             </span>
-            <h2 id="venues-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sand-950">
+            <h2 id="venues-heading" className="text-xl sm:text-2xl lg:text-3xl font-bold text-sand-950">
               Nos havres recommandés,{" "}
               <span className="text-primary-600 font-bold">
                 l&apos;artisanat du geste.
               </span>
             </h2>
-            <p className="mt-1.5 text-xs sm:text-sm text-sand-600 font-normal">
-              Une sélection d&apos;adresses indépendantes auditées pour l&apos;excellence technique et l&apos;accueil attentionné de leurs praticiens.
+            <p className="mt-1 text-xs sm:text-sm text-sand-600 font-normal">
+              Adresses indépendantes auditées pour l&apos;excellence de leurs artisans.
             </p>
           </div>
 

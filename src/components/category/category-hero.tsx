@@ -78,7 +78,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
   };
 
   return (
-    <section className="relative w-full h-auto overflow-hidden bg-sand-950 py-8 sm:py-12 lg:py-14 select-none">
+    <section className="relative w-full h-auto overflow-hidden bg-sand-950 py-7 sm:py-10 select-none">
       {/* 1. Visuel d'arrière-plan avec masque sombre neutre */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -93,7 +93,7 @@ export function CategoryHero({ category }: CategoryHeroProps) {
       </div>
 
       {/* 2. Contenu principal : aligné à gauche avec boîte sobre et concise */}
-      <div className="container-belora relative z-20 flex flex-col items-start gap-8 sm:gap-10">
+      <div className="container-belora relative z-20 flex flex-col items-start gap-4 sm:gap-5">
         {/* Fil d'Ariane épuré sans fioritures */}
         <nav aria-label="Fil d'ariane" className="flex items-center gap-1.5 text-xs text-white/70">
           <Link href="/" className="hover:text-white transition-colors">
@@ -108,9 +108,9 @@ export function CategoryHero({ category }: CategoryHeroProps) {
         </nav>
 
         {/* Carré sobre, compact et professionnel (Noir encre architectural) */}
-        <div className="w-full max-w-xl lg:max-w-2xl bg-secondary-950/50 backdrop-blur-sm rounded-2xl p-5 sm:p-7 text-left">
+        <div className="w-full max-w-xl lg:max-w-2xl bg-secondary-950/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 text-left">
           {/* Eyebrow sobre sans trait décoratif */}
-          <span className="block text-xs uppercase font-semibold tracking-wider text-sand-400 mb-2">
+          <span className="block text-xs uppercase font-semibold tracking-wider text-sand-400 mb-1.5">
             {category.name}
           </span>
 
