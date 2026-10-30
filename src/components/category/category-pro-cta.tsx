@@ -22,21 +22,17 @@ export function CategoryProCta({ category }: CategoryProCtaProps) {
           className="object-cover object-center"
         />
         {/* Aplat solide sombre pour contraste et lisibilité sans dégradé */}
-        <div className="absolute inset-0 bg-secondary-950/90" />
+        <div className="absolute inset-0 bg-linear-to-r from-secondary-950/90 via-secondary-950/90 to-transparent" />
       </div>
 
       <div className="container-belora relative z-10">
         <div className="max-w-2xl">
-          <span className="eyebrow text-primary-300 font-semibold block mb-2">
-            Espace Partenaires Pro &bull; {category.name}
-          </span>
-
           <h2
             id="pro-cta-heading"
             className="text-xl sm:text-3xl lg:text-4xl font-bold text-sand-50 leading-tight mb-3"
           >
             Vous dirigez un salon de {category.shortName.toLowerCase()} ?{" "}
-            <span className="block text-primary-200 font-bold">
+            <span className="block text-primary-500 font-bold">
               Rejoignez l&apos;élite Belora Pro.
             </span>
           </h2>
@@ -48,37 +44,37 @@ export function CategoryProCta({ category }: CategoryProCtaProps) {
           {/* 3 piliers d'engagement en ligne aérée avec séparateur minimal */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-5 border-t border-white/15 mb-6">
             <div className="flex flex-col">
-              <div className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-primary-200 mb-2">
+              <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white mb-2">
                 <Smartphone className="w-4 h-4" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xs sm:text-sm font-semibold text-white mb-0.5">
+              <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5">
                 Réservations 24h/24
               </h3>
-              <p className="text-xs text-sand-300/80 leading-relaxed">
+              <p className="text-sm text-sand-300/80 leading-relaxed">
                 Synchronisation en temps réel sans commissions abusives.
               </p>
             </div>
 
             <div className="flex flex-col">
-              <div className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-primary-200 mb-2">
+              <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white mb-2">
                 <ShieldCheck className="w-4 h-4" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xs sm:text-sm font-semibold text-white mb-0.5">
+              <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5">
                 Visibilité certifiée
               </h3>
-              <p className="text-xs text-sand-300/80 leading-relaxed">
+              <p className="text-sm text-sand-300/80 leading-relaxed">
                 Attirez une clientèle haut de gamme locale et voyageuse.
               </p>
             </div>
 
             <div className="flex flex-col">
-              <div className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-primary-200 mb-2">
+              <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white mb-2">
                 <Lock className="w-4 h-4" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xs sm:text-sm font-semibold text-white mb-0.5">
+              <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5">
                 Zéro no-show
               </h3>
-              <p className="text-xs text-sand-300/80 leading-relaxed">
+              <p className="text-sm text-sand-300/80 leading-relaxed">
                 Acomptes sécurisés et rappels automatiques par SMS.
               </p>
             </div>
@@ -92,7 +88,7 @@ export function CategoryProCta({ category }: CategoryProCtaProps) {
               <span>{pro.ctaText}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <span className="text-xs text-sand-300/80">
+            <span className="text-sm text-sand-300/80">
               Adhésion sur candidature &bull; 100% vérifié
             </span>
           </div>
