@@ -32,7 +32,7 @@ export function AppointmentCard({
         height: `${Math.max(34, heightPx - 2)}px`,
         borderInlineStartColor: colorBorder,
       }}
-      className="absolute inset-x-1.5 rounded-lg border-s-4 bg-white border border-neutral-200/90 shadow-2xs hover:shadow-xs transition-shadow duration-150 p-2 cursor-pointer z-10 overflow-hidden flex flex-col justify-between select-none"
+      className="absolute inset-x-1.5 border-s-4 bg-white border border-neutral-200/90 shadow-2xs hover:shadow-xs transition-shadow duration-150 p-2 cursor-pointer z-10 overflow-hidden flex flex-col justify-between select-none"
     >
       <div>
         {/* Ligne 1 : Heure & Récurrence */}
@@ -42,13 +42,14 @@ export function AppointmentCard({
           </span>
           <div className="flex items-center gap-1">
             {appointment.isRecurring && (
-              <Repeat className="w-3 h-3 text-neutral-400" title="Client régulier" />
+              <span title="Client régulier">
+                <Repeat className="w-3 h-3 text-neutral-400" />
+              </span>
             )}
             {appointment.depositPaid > 0 && (
-              <ShieldCheck
-                className="w-3.5 h-3.5 text-primary-700"
-                title={`Acompte de ${appointment.depositPaid} € perçu via Stripe Connect`}
-              />
+              <span title={`Acompte de ${appointment.depositPaid} € perçu via Stripe Connect`}>
+                <ShieldCheck className="w-3.5 h-3.5 text-primary-700" />
+              </span>
             )}
           </div>
         </div>

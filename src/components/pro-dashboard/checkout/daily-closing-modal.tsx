@@ -63,10 +63,7 @@ export function DailyClosingModal({
       isOpen={isOpen}
       onClose={onClose}
       title="Clôture de Caisse Journalière (Z de Caisse)"
-      description={`Rapport fiscal et comptable • ${new Date().toLocaleDateString(
-        "fr-FR",
-        { weekday: "long", day: "numeric", month: "long", year: "numeric" }
-      )}`}
+      description="Rapport fiscal, comptable et contrôle des espèces de la journée."
       maxWidth="xl"
       footer={
         <div className="flex items-center justify-between w-full">

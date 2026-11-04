@@ -214,19 +214,19 @@ export default function ProPage() {
             {/* Boutons d'action modernes arrondis */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
-                href="/pro/join"
+                href="/pro/agenda"
                 className="btn btn-primary h-13 px-7 rounded-2xl text-sm font-semibold inline-flex items-center gap-2 shadow-sm"
               >
-                <span>Demander une démo privée</span>
+                <span>Ouvrir l’Espace Pro (Dashboard)</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
-              <a
-                href="#agenda-demo"
+              <Link
+                href="/pro/join"
                 className="btn h-13 px-6 rounded-2xl text-sm font-semibold border border-white/25 text-white hover:bg-white/10 transition-colors"
               >
-                <span>Découvrir l’agenda en direct</span>
-              </a>
+                <span>Demander une démo privée</span>
+              </Link>
             </div>
 
             {/* Bandeau de 3 réassurances clés en bas de Hero */}

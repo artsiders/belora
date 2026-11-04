@@ -18,11 +18,11 @@ import {
   ProStaffMember,
 } from "@/lib/data/pro-mock-data";
 
-export default function AgendaPage() {
+function AgendaContent() {
   const router = useRouter();
 
   // État date & affichage
-  const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  const [currentDate, setCurrentDate] = useState<Date>(() => new Date());
   const [viewMode, setViewMode] = useState<"day" | "week">("day");
   const [intervalMinutes, setIntervalMinutes] = useState<number>(15);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
@@ -286,5 +286,19 @@ export default function AgendaPage() {
         onToggleClockIn={handleToggleClockIn}
       />
     </div>
+  );
+}
+
+export default function AgendaPage() {
+  return (
+    <React.Suspense
+      fallback={
+        <div className="flex-1 flex items-center justify-center p-12 text-xs text-neutral-500">
+          Chargement du planning...
+        </div>
+      }
+    >
+      <AgendaContent />
+    </React.Suspense>
   );
 }

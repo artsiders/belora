@@ -62,6 +62,13 @@ export function ProNav({ onStartDemo, showNavLinks = true }: ProNavProps) {
         {/* 3. Actions à droite */}
         <div className="flex items-center gap-3 sm:gap-4">
           <Link
+            href="/pro/agenda"
+            className="text-xs font-bold text-primary-700 hover:text-primary-800 transition-colors px-2.5 py-1.5 rounded-lg bg-primary-50 border border-primary-200"
+          >
+            Accéder à l&apos;Espace Pro
+          </Link>
+
+          <Link
             href="/login"
             className="text-xs font-semibold text-neutral-700 hover:text-neutral-950 transition-colors px-2 py-1.5"
           >

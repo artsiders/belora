@@ -148,25 +148,29 @@ Légende : **P0** = indispensable au lancement, **P1** = souhaitable si le temps
 | Favoris | P1 |
 | Liste d'attente, cartes cadeaux, offres, parrainage, app mobile | Later |
 
-### 5.2 Backoffice professionnel
+### 5.2 Backoffice professionnel (Espace Pro / Dashboard Établissement)
+
+*Inspiré de l'ergonomie opérationnelle Planity Pro (navigation à 4 piliers : Agenda, Caisse, Clients, Admin) tout en conservant l'identité éditoriale Belora.*
 
 | Fonctionnalité | Priorité |
 |---|---|
 | Inscription pro et onboarding guidé (établissement, adresse, catégories, horaires, services, équipe, compte de paiement) | P0 |
-| Profil établissement : description, photos, galerie, localisation, devise, fuseau | P0 |
-| Catalogue de services : catégories, durée, prix, buffer, services assignés aux membres | P0 |
-| Équipe : membres, rôles (propriétaire, manager, staff), horaires hebdomadaires, congés | P0 |
-| Agenda : vue jour et semaine par membre, création, déplacement, annulation, blocage de créneaux | P0 |
-| Réservation en ligne : acceptation automatique, délais min/max, politique d'annulation | P0 |
-| Rendez-vous manuels (téléphone, sur place) | P0 |
-| Fiches clients minimales : coordonnées, historique, notes | P0 |
+| **Top bar permanente** : sélecteur d'établissement, onglets (Agenda, Caisse, Clients, Admin), sélecteur jour/semaine, intervalle (15/20/30 min), horloge temps réel, notifications | P0 |
+| **Agenda multi-colonnes** : vue jour & semaine par membre ET par ressource/cabine (double allocation synchronisée) | P0 |
+| **Gestion des créneaux & rendez-vous** : création directe au clic, déplacement, drag & drop, annulation, indisponibilités/pauses | P0 |
+| **Indicateur temporel temps réel** (ligne encre/figue traversant la grille à la minute exacte) | P0 |
+| **Filtres latéraux dynamiques** : mini-calendrier mensuel, sélection collaborative par cases à cocher, filtre cabines/ressources, badges d'heures | P0 |
+| **Horaires de présence & Pointage** : enregistrement des pointages arrivées/départs des collaborateurs | P0 |
+| **Catalogue & Gestion des prestations (Admin)** : arborescence par catégories, durées, temps de pose, prix TTC, duplication, édition en masse des tarifs | P0 |
+| **Paramètres Établissement (Admin)** : coordonnées légales (SIRET, TVA), adresse, horaires d'ouverture hebdomadaires, délais min/max et politique d'annulation | P0 |
+| **Caisse & Encaissement V1 (POS léger)** : encaissement d'un RDV, déduction automatique de l'acompte Stripe, multi-règlements (CB, espèces), ticket de caisse, clôture de caisse quotidienne (Z de caisse) | P0 |
+| **Fichier Clients (CRM Salon)** : annuaire, recherche instantanée, fiches clients complètes avec **fiches techniques** (formules de coloration, historique, notes de préférences) | P0 |
 | Paiements : connexion Stripe Connect, paramétrage acompte/total, suivi des encaissements et des versements | P0 |
+| Notifications pro & rappels clients automatiques (SMS et E-mails configurables) | P0 |
 | Abonnement Belora : plan, facturation, moyens de paiement | P0 |
-| Notifications pro (nouvelle réservation, annulation) | P0 |
 | Avis reçus et réponse | P1 |
 | Statistiques simples : rendez-vous, chiffre d'affaires, taux d'annulation | P1 |
-| Multi-établissements | Later |
-| POS, inventaire, marketing, fidélité, commissions d'équipe, app mobile pro | Later |
+| Multi-établissements complet, gestion d'inventaire avancée, fidélité, commissions d'équipe, app mobile pro | Later |
 
 ### 5.3 Panneau d'administration
 
