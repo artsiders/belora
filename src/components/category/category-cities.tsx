@@ -10,16 +10,27 @@ interface CategoryCitiesProps {
 }
 
 export function CategoryCities({ category }: CategoryCitiesProps) {
-  const [selectedRegion, setSelectedRegion] = useState<string>("all");
+  const [selectedCountry, setSelectedCountry] = useState<string>("all");
   const [showAll, setShowAll] = useState(false);
+
+  // Extraire les pays européens uniques représentés
+  const countries = useMemo(() => {
+    const list: string[] = [];
+    category.cities.forEach((c) => {
+      if (c.country && !list.includes(c.country)) {
+        list.push(c.country);
+      }
+    });
+    return list;
+  }, [category.cities]);
 
   const filteredCities = useMemo(() => {
     let list = category.cities;
-    if (selectedRegion !== "all") {
-      list = list.filter((c) => c.region === selectedRegion);
+    if (selectedCountry !== "all") {
+      list = list.filter((c) => c.country === selectedCountry);
     }
     return list;
-  }, [category.cities, selectedRegion]);
+  }, [category.cities, selectedCountry]);
 
   const displayedCities = showAll ? filteredCities : filteredCities.slice(0, 8);
 
@@ -30,7 +41,7 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7 sm:mb-9 pb-4 border-b border-neutral-100">
           <div>
             <span className="eyebrow text-neutral-500 font-semibold block mb-1">
-              Métropoles mondiales
+              Métropoles européennes
             </span>
             <h2 id="cities-heading" className="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-950">
               Trouver un artisan{" "}
@@ -39,52 +50,37 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
               </span>
             </h2>
             <p className="mt-1 text-sm sm:text-base text-neutral-600 font-normal">
-              Les meilleures adresses sélectionnées dans 12 capitales culturelles.
+              Les meilleures adresses sélectionnées dans les capitales culturelles d&apos;Europe.
             </p>
           </div>
 
-          {/* Filtres par continent (International) */}
+          {/* Filtres par pays européens */}
           <div className="flex items-center gap-1.5 p-1 rounded-xl bg-neutral-100 border border-neutral-200/70 overflow-x-auto no-scrollbar shrink-0">
             <button
-              onClick={() => setSelectedRegion("all")}
+              type="button"
+              onClick={() => setSelectedCountry("all")}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-                selectedRegion === "all"
+                selectedCountry === "all"
                   ? "bg-white text-neutral-950 shadow-2xs"
                   : "text-neutral-600 hover:text-neutral-950"
               }`}
             >
-              Toutes ({category.cities.length})
+              Tous ({category.cities.length})
             </button>
-            <button
-              onClick={() => setSelectedRegion("Europe")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-                selectedRegion === "Europe"
-                  ? "bg-white text-neutral-950 shadow-2xs"
-                  : "text-neutral-600 hover:text-neutral-950"
-              }`}
-            >
-              Europe
-            </button>
-            <button
-              onClick={() => setSelectedRegion("Americas")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-                selectedRegion === "Americas"
-                  ? "bg-white text-neutral-950 shadow-2xs"
-                  : "text-neutral-600 hover:text-neutral-950"
-              }`}
-            >
-              Amériques
-            </button>
-            <button
-              onClick={() => setSelectedRegion("Asia & Middle East")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-                selectedRegion === "Asia & Middle East"
-                  ? "bg-white text-neutral-950 shadow-2xs"
-                  : "text-neutral-600 hover:text-neutral-950"
-              }`}
-            >
-              Asie & Moyen-Orient
-            </button>
+            {countries.map((country) => (
+              <button
+                key={country}
+                type="button"
+                onClick={() => setSelectedCountry(country)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+                  selectedCountry === country
+                    ? "bg-white text-neutral-950 shadow-2xs"
+                    : "text-neutral-600 hover:text-neutral-950"
+                }`}
+              >
+                {country}
+              </button>
+            ))}
           </div>
         </div>
 

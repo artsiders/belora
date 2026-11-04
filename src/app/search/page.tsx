@@ -7,7 +7,7 @@ import { SearchClient } from "./search-client";
 export const metadata: Metadata = {
   title: "Rechercher un havre ou un artisan de soin | Belora",
   description:
-    "Explorez et réservez instantanément les salons de coiffure, instituts de manucure, spas et barbiers d'exception à Paris, New York, Londres, Tokyo et Milan.",
+    "Explorez et réservez instantanément les salons de coiffure, instituts de manucure, spas et barbiers d'exception à Paris, Londres, Milan, Rome et Genève.",
 };
 
 export default function SearchPage() {
