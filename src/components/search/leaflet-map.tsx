@@ -94,7 +94,7 @@ export function LeafletMap({
           } ${isHighlighted ? "px-2.5 py-1" : "p-1.5"}">
             ${
               isHighlighted
-                ? `<span class="text-xs font-bold whitespace-nowrap flex items-center gap-1">
+                ? `<span class="text-sm font-bold whitespace-nowrap flex items-center gap-1">
                     <svg class="w-3 h-3 fill-white text-white shrink-0" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
                     <span>${venue.startingPrice}</span>
                   </span>`
@@ -253,10 +253,10 @@ export function LeafletMap({
               <h4 className="font-bold text-sm text-neutral-950 truncate">
                 {activeVenue.name}
               </h4>
-              <p className="text-xs text-neutral-500 truncate mt-0.5">
+              <p className="text-sm text-neutral-500 truncate mt-0.5">
                 {activeVenue.address}
               </p>
-              <div className="flex items-center gap-1.5 mt-1 text-xs text-neutral-700">
+              <div className="flex items-center gap-1.5 mt-1 text-sm text-neutral-700">
                 <Star className="w-3 h-3 fill-amber-400 text-amber-400 shrink-0" />
                 <span className="font-bold num">{activeVenue.rating}</span>
                 <span className="text-neutral-400">•</span>
@@ -270,14 +270,14 @@ export function LeafletMap({
           <div className="mt-3 pt-2.5 border-t border-neutral-100 flex items-center justify-between gap-2">
             <Link
               href={`/venue/${activeVenue.slug}`}
-              className="text-xs font-semibold text-neutral-700 hover:text-primary-600 transition-colors"
+              className="text-sm font-semibold text-neutral-700 hover:text-primary-600 transition-colors"
             >
               Voir la fiche
             </Link>
 
             <Link
               href={`/book/${activeVenue.slug}`}
-              className="btn btn-dark text-xs px-3 py-1.5 rounded-lg font-semibold shadow-2xs"
+              className="btn btn-dark text-sm px-3 py-1.5 rounded-lg font-semibold shadow-2xs"
             >
               Prendre RDV
             </Link>

@@ -69,7 +69,7 @@ function ClientsContent() {
       sortable: true,
       render: (client) => (
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full bg-neutral-100 text-neutral-800 font-bold text-xs flex items-center justify-center shrink-0 border border-neutral-200">
+          <div className="w-8 h-8 rounded-full bg-neutral-100 text-neutral-800 font-bold text-sm flex items-center justify-center shrink-0 border border-neutral-200">
             {client.firstName.charAt(0)}
           </div>
           <div>
@@ -188,7 +188,7 @@ function ClientsContent() {
       </div>
 
       {/* Filtres de segmentation rapide */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 text-sm">
         <button
           type="button"
           onClick={() => setFilterSegment("all")}
@@ -286,7 +286,7 @@ export default function ClientsPage() {
   return (
     <Suspense
       fallback={
-        <div className="flex-1 flex items-center justify-center p-12 text-xs text-neutral-500">
+        <div className="flex-1 flex items-center justify-center p-12 text-sm text-neutral-500">
           Chargement du fichier clients...
         </div>
       }

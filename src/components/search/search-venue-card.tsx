@@ -67,7 +67,7 @@ export function SearchVenueCard({
 
           {/* Indicateur de badge discret */}
           {venue.badge && (
-            <span className="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded-md bg-white/95 text-xs font-semibold text-neutral-900 shadow-2xs">
+            <span className="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded-md bg-white/95 text-sm font-semibold text-neutral-900 shadow-2xs">
               {venue.badge}
             </span>
           )}
@@ -78,7 +78,7 @@ export function SearchVenueCard({
           <Link
             href={`/venue/${venue.slug}`}
             onClick={(e) => e.stopPropagation()}
-            className="text-xs font-semibold text-neutral-900 underline underline-offset-4 hover:text-primary-600 transition-colors inline-flex items-center gap-1"
+            className="text-sm font-semibold text-neutral-900 underline underline-offset-4 hover:text-primary-600 transition-colors inline-flex items-center gap-1"
           >
             <span>Plus d&apos;informations</span>
             <ChevronRight className="w-3 h-3 text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all" />
@@ -99,23 +99,23 @@ export function SearchVenueCard({
               >
                 {venue.name}
               </Link>
-              <p className="text-xs text-neutral-500 font-medium mt-0.5">
+              <p className="text-sm text-neutral-500 font-medium mt-0.5">
                 {venue.categoryLabel}
               </p>
             </div>
-            <span className="text-xs font-bold text-neutral-900 num shrink-0">
+            <span className="text-sm font-bold text-neutral-900 num shrink-0">
               {venue.startingPrice}
             </span>
           </div>
 
           {/* Adresse avec icône */}
-          <p className="text-xs text-neutral-600 flex items-center gap-1.5 mt-1.5 truncate">
+          <p className="text-sm text-neutral-600 flex items-center gap-1.5 mt-1.5 truncate">
             <MapPin className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
             <span className="truncate">{venue.address}</span>
           </p>
 
           {/* Note et avis */}
-          <div className="flex items-center gap-2 mt-1.5 text-xs text-neutral-700">
+          <div className="flex items-center gap-2 mt-1.5 text-sm text-neutral-700">
             <div className="flex items-center gap-1">
               <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400 shrink-0" />
               <span className="font-bold text-neutral-900 num">{venue.rating}</span>
@@ -137,7 +137,7 @@ export function SearchVenueCard({
                 {/* Ligne Matin */}
                 {venue.slots.morning && venue.slots.morning.length > 0 && (
                   <div className="flex items-center gap-2">
-                    <span className="text-xs uppercase font-bold text-neutral-500 tracking-wider w-20 shrink-0">
+                    <span className="text-sm uppercase font-bold text-neutral-500 tracking-wider w-20 shrink-0">
                       Matin
                     </span>
                     <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
@@ -146,7 +146,7 @@ export function SearchVenueCard({
                           key={idx}
                           href={`/book/${venue.slug}?slot=${encodeURIComponent(slot)}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-primary-300 text-primary-700 bg-primary-50/60 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer shrink-0"
+                          className="px-2.5 py-1 rounded-lg text-sm font-semibold border border-primary-300 text-primary-700 bg-primary-50/60 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer shrink-0"
                         >
                           {slot}
                         </Link>
@@ -158,7 +158,7 @@ export function SearchVenueCard({
                 {/* Ligne Après-midi */}
                 {venue.slots.afternoon && venue.slots.afternoon.length > 0 && (
                   <div className="flex items-center gap-2">
-                    <span className="text-xs uppercase font-bold text-neutral-500 tracking-wider w-20 shrink-0">
+                    <span className="text-sm uppercase font-bold text-neutral-500 tracking-wider w-20 shrink-0">
                       Après-midi
                     </span>
                     <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
@@ -167,7 +167,7 @@ export function SearchVenueCard({
                           key={idx}
                           href={`/book/${venue.slug}?slot=${encodeURIComponent(slot)}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-primary-300 text-primary-700 bg-primary-50/60 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer shrink-0"
+                          className="px-2.5 py-1 rounded-lg text-sm font-semibold border border-primary-300 text-primary-700 bg-primary-50/60 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer shrink-0"
                         >
                           {slot}
                         </Link>
@@ -180,11 +180,11 @@ export function SearchVenueCard({
               /* Bloc Prochaine disponibilité */
               <div className="p-2.5 rounded-xl bg-neutral-50 border border-neutral-200/80 flex items-center gap-2.5">
                 <Calendar className="w-4 h-4 text-neutral-500 shrink-0" />
-                <div className="text-xs leading-tight">
-                  <span className="text-neutral-500 font-semibold uppercase tracking-wider block text-xs">
+                <div className="text-sm leading-tight">
+                  <span className="text-neutral-500 font-semibold uppercase tracking-wider block text-sm">
                     Prochaine disponibilité
                   </span>
-                  <span className="font-semibold text-primary-700 text-xs">
+                  <span className="font-semibold text-primary-700 text-sm">
                     {venue.nextAvailability || "Demain à 10h00"}
                   </span>
                 </div>
@@ -198,7 +198,7 @@ export function SearchVenueCard({
           <Link
             href={`/book/${venue.slug}?gift=true`}
             onClick={(e) => e.stopPropagation()}
-            className="btn btn-outline text-xs px-3 py-1.5 rounded-xl flex items-center gap-1.5 font-semibold text-neutral-700 hover:text-neutral-950"
+            className="btn btn-outline text-sm px-3 py-1.5 rounded-xl flex items-center gap-1.5 font-semibold text-neutral-700 hover:text-neutral-950"
           >
             <Gift className="w-3.5 h-3.5 text-neutral-500" />
             <span>Offrir</span>
@@ -207,7 +207,7 @@ export function SearchVenueCard({
           <Link
             href={`/book/${venue.slug}`}
             onClick={(e) => e.stopPropagation()}
-            className="btn btn-dark text-xs px-4 py-1.5 rounded-xl font-semibold shadow-2xs"
+            className="btn btn-dark text-sm px-4 py-1.5 rounded-xl font-semibold shadow-2xs"
           >
             Prendre RDV
           </Link>

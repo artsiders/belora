@@ -66,7 +66,7 @@ export default function NotFound() {
 
           {/* Raccourcis univers */}
           <div className="pt-8 border-t border-primary-200/80">
-            <p className="text-xs text-neutral-500 uppercase tracking-wider font-semibold mb-3">
+            <p className="text-sm text-neutral-500 uppercase tracking-wider font-semibold mb-3">
               Univers recommandés
             </p>
             <div className="flex flex-wrap items-center justify-center gap-2">
@@ -74,7 +74,7 @@ export default function NotFound() {
                 <Link
                   key={cat.label}
                   href={cat.href}
-                  className="px-3 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium text-neutral-700 bg-primary-50/10 hover:bg-neutral-200/70 border border-primary-300/80 transition-colors"
+                  className="px-3 py-1.5 rounded-[var(--radius-pill)] text-sm font-medium text-neutral-700 bg-primary-50/10 hover:bg-neutral-200/70 border border-primary-300/80 transition-colors"
                 >
                   {cat.label}
                 </Link>

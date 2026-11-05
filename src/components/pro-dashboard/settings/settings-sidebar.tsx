@@ -30,12 +30,12 @@ export function SettingsSidebar() {
         <h2 className="text-sm font-bold text-neutral-950 uppercase tracking-wider">
           Configuration &bull; Admin
         </h2>
-        <p className="text-xs text-neutral-500 mt-0.5">
+        <p className="text-sm text-neutral-500 mt-0.5">
           Paramètres opérationnels de l&apos;atelier
         </p>
       </div>
 
-      <nav className="p-3 space-y-1 text-xs">
+      <nav className="p-3 space-y-1 text-sm">
         {/* Accordéon 1 : Paramètres Agenda */}
         <div>
           <button
@@ -144,7 +144,7 @@ export function SettingsSidebar() {
         <Link
           href="/help"
           target="_blank"
-          className="w-full h-10 px-3 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-800 text-xs font-semibold flex items-center justify-center gap-2 shadow-2xs transition-colors"
+          className="w-full h-10 px-3 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-800 text-sm font-semibold flex items-center justify-center gap-2 shadow-2xs transition-colors"
         >
           <HelpCircle className="w-4 h-4 text-neutral-600" />
           <span>Centre d&apos;aide Belora Pro</span>

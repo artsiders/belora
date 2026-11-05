@@ -43,7 +43,7 @@ export function CityCard({ city, categorySlug, categoryShortName }: CityCardProp
           <div className="absolute inset-0 bg-neutral-950/15 group-hover:bg-transparent transition-colors duration-300" />
 
           {city.country && (
-            <span className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-white/95 backdrop-blur-xs text-xs font-semibold text-neutral-900 shadow-2xs">
+            <span className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-white/95 backdrop-blur-xs text-sm font-semibold text-neutral-900 shadow-2xs">
               {city.country}
             </span>
           )}
@@ -59,7 +59,7 @@ export function CityCard({ city, categorySlug, categoryShortName }: CityCardProp
             <h3 className="font-bold text-sm sm:text-base text-neutral-950 group-hover:text-primary-600 transition-colors">
               {categoryShortName ? `${categoryShortName} ${city.name}` : city.name}
             </h3>
-            <span className="text-xs text-neutral-500 num block mt-0.5">
+            <span className="text-sm text-neutral-500 num block mt-0.5">
               {city.count}
             </span>
           </div>
@@ -79,7 +79,7 @@ export function CityCard({ city, categorySlug, categoryShortName }: CityCardProp
         <span className="font-semibold text-sm text-neutral-950 group-hover:text-primary-600 transition-colors">
           {city.name}
         </span>
-        <span className="text-xs text-neutral-500 num mt-0.5">
+        <span className="text-sm text-neutral-500 num mt-0.5">
           {city.count}
         </span>
       </div>

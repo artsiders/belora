@@ -71,7 +71,7 @@ export function ResultsGallery() {
           action={
             <Link
               href="/search"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-neutral-700 hover:text-primary-600 transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold tracking-wider uppercase text-neutral-700 hover:text-primary-600 transition-colors"
             >
               <span>Explorer les soins</span>
               <ArrowRight className="w-4 h-4" />

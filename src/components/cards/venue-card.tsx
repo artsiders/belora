@@ -100,7 +100,7 @@ export function VenueCard({
         </button>
 
         {/* Pastille de note en bas à gauche de la photo */}
-        <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-xs font-bold text-neutral-900 num flex items-center gap-1.5 shadow-xs pointer-events-none">
+        <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-sm font-bold text-neutral-900 num flex items-center gap-1.5 shadow-xs pointer-events-none">
           <Star className="w-3.5 h-3.5 fill-primary-600 text-primary-600" />
           <span>{venue.rating}</span>
           <span className="text-neutral-400 font-normal">({venue.reviewCount})</span>
@@ -116,7 +116,7 @@ export function VenueCard({
           </h3>
 
           {/* Localisation & distance */}
-          <div className="flex items-center gap-1.5 text-xs text-neutral-500 mb-3">
+          <div className="flex items-center gap-1.5 text-sm text-neutral-500 mb-3">
             <MapPin className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
             <span className="truncate">{locationLabel}</span>
           </div>
@@ -126,7 +126,7 @@ export function VenueCard({
             {displayTags.map((tag) => (
               <span
                 key={tag}
-                className="px-2.5 py-0.5 rounded-full bg-neutral-100 text-xs text-neutral-700 font-medium truncate max-w-[130px]"
+                className="px-2.5 py-0.5 rounded-full bg-neutral-100 text-sm text-neutral-700 font-medium truncate max-w-[130px]"
               >
                 {tag}
               </span>

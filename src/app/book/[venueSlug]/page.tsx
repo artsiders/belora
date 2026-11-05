@@ -25,7 +25,7 @@ export default function BookPage({ params }: BookPageProps) {
       <main className="flex-1">
         <Suspense
           fallback={
-            <div className="container-belora py-16 text-center text-xs text-neutral-500">
+            <div className="container-belora py-16 text-center text-sm text-neutral-500">
               Chargement de la réservation...
             </div>
           }

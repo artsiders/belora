@@ -244,10 +244,10 @@
     @apply text-lg text-fg-muted max-w-xl;
   }
   .eyebrow {
-    @apply text-xs font-semibold uppercase text-neutral-600;
+    @apply text-sm font-semibold uppercase text-neutral-600;
   }
   .small-caps-meta {
-    @apply text-xs uppercase text-fg-subtle;
+    @apply text-sm uppercase text-fg-subtle;
   }
   .num {
     @apply tabular-nums;
@@ -255,7 +255,7 @@
 
   /* ----- Boutons ----- */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 min-h-10.5 px-5 border border-transparent rounded-lg text-xs font-semibold uppercase whitespace-nowrap cursor-pointer select-none shadow-2xs transition-all duration-150 ease-belora active:translate-y-px active:shadow-none disabled:opacity-45 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none aria-[disabled=true]:opacity-45 aria-[disabled=true]:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 min-h-10.5 px-5 border border-transparent rounded-lg text-sm font-semibold uppercase whitespace-nowrap cursor-pointer select-none shadow-2xs transition-all duration-150 ease-belora active:translate-y-px active:shadow-none disabled:opacity-45 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none aria-[disabled=true]:opacity-45 aria-[disabled=true]:cursor-not-allowed;
   }
 
   .btn-primary {
@@ -275,7 +275,7 @@
   }
 
   .btn-editorial {
-    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-line-strong rounded-sm text-neutral-950 text-xs font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-neutral-950 hover:not-disabled:border-primary-950 hover:not-disabled:text-white;
+    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-line-strong rounded-sm text-neutral-950 text-sm font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-neutral-950 hover:not-disabled:border-primary-950 hover:not-disabled:text-white;
   }
   .btn-editorial .btn-icon-slide {
     @apply transition-transform duration-200 ease-belora;
@@ -285,7 +285,7 @@
   }
 
   .btn-editorial-light {
-    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-primary-50/35 rounded-sm text-neutral-50 text-xs font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-white hover:not-disabled:border-white hover:not-disabled:text-neutral-950;
+    @apply inline-flex items-center justify-center gap-2.5 min-h-11.5 px-6 bg-transparent border border-primary-50/35 rounded-sm text-neutral-50 text-sm font-semibold uppercase cursor-pointer transition-all duration-200 ease-belora hover:not-disabled:bg-white hover:not-disabled:border-white hover:not-disabled:text-neutral-950;
   }
   .btn-editorial-light .btn-icon-slide {
     @apply transition-transform duration-200 ease-belora;
@@ -315,10 +315,10 @@
   }
 
   .btn-xs {
-    @apply min-h-7.5 px-3 text-xs;
+    @apply min-h-7.5 px-3 text-sm;
   }
   .btn-sm {
-    @apply min-h-9 px-4 text-xs;
+    @apply min-h-9 px-4 text-sm;
   }
   .btn-lg {
     @apply min-h-12 px-6.5 text-sm;
@@ -370,7 +370,7 @@
     @apply flex-1 flex flex-col justify-center gap-0.5 min-w-0 py-3 px-5 border-b md:border-b-0 md:border-e border-line last-of-type:border-e-0 focus-within:bg-primary-50;
   }
   .searchbar-label {
-    @apply text-xs uppercase text-neutral-500;
+    @apply text-sm uppercase text-neutral-500;
   }
   .searchbar-input {
     @apply w-full bg-transparent border-0 p-0 text-sm text-neutral-950 placeholder:text-neutral-500 focus:outline-none;
@@ -381,7 +381,7 @@
 
   /* ----- Chips ----- */
   .chip {
-    @apply inline-flex items-center gap-1.5 min-h-9 px-4 bg-white border border-line-strong rounded-pill text-neutral-900 text-xs font-medium whitespace-nowrap cursor-pointer shadow-2xs transition-colors duration-150 ease-belora hover:bg-neutral-100 hover:border-primary-950 aria-[pressed=true]:bg-neutral-950 aria-[pressed=true]:border-primary-950 aria-[pressed=true]:text-white;
+    @apply inline-flex items-center gap-1.5 min-h-9 px-4 bg-white border border-line-strong rounded-pill text-neutral-900 text-sm font-medium whitespace-nowrap cursor-pointer shadow-2xs transition-colors duration-150 ease-belora hover:bg-neutral-100 hover:border-primary-950 aria-[pressed=true]:bg-neutral-950 aria-[pressed=true]:border-primary-950 aria-[pressed=true]:text-white;
   }
   .chip-active {
     @apply bg-neutral-950 border-primary-950 text-white;
@@ -456,10 +456,10 @@
     @apply font-display text-xl text-neutral-950;
   }
   .venue-rating {
-    @apply text-xs tabular-nums whitespace-nowrap font-medium;
+    @apply text-sm tabular-nums whitespace-nowrap font-medium;
   }
   .venue-sub {
-    @apply mt-1 text-xs uppercase text-fg-subtle;
+    @apply mt-1 text-sm uppercase text-fg-subtle;
   }
   .fav-btn {
     @apply absolute top-3.5 end-3.5 grid place-items-center w-9 h-9 bg-white/90 text-neutral-950 border border-primary-300/60 rounded-pill cursor-pointer transition-all duration-150 ease-belora z-10 hover:bg-white hover:border-primary-950 aria-[pressed=true]:bg-primary-600 aria-[pressed=true]:border-primary-600 aria-[pressed=true]:text-white;
@@ -473,10 +473,10 @@
     @apply font-medium text-neutral-950;
   }
   .service-desc {
-    @apply mt-0.5 text-xs text-fg-muted max-w-xl;
+    @apply mt-0.5 text-sm text-fg-muted max-w-xl;
   }
   .service-duration {
-    @apply col-start-1 sm:col-auto text-xs text-fg-muted tabular-nums;
+    @apply col-start-1 sm:col-auto text-sm text-fg-muted tabular-nums;
   }
   .service-price {
     @apply col-start-2 row-start-1 sm:col-auto sm:row-auto min-w-18 text-end tabular-nums font-medium text-neutral-950;
@@ -509,7 +509,7 @@
 
   /* ----- Badges ----- */
   .badge {
-    @apply inline-flex items-center gap-1 py-0.5 px-2.5 rounded-xs bg-neutral-200 text-neutral-900 text-xs font-medium uppercase;
+    @apply inline-flex items-center gap-1 py-0.5 px-2.5 rounded-xs bg-neutral-200 text-neutral-900 text-sm font-medium uppercase;
   }
   .badge-accent {
     @apply bg-primary-100 text-primary-800;
@@ -569,10 +569,10 @@
 
   /* ----- Tableaux denses ----- */
   .table-dense {
-    @apply w-full border-collapse text-xs;
+    @apply w-full border-collapse text-sm;
   }
   .table-dense th {
-    @apply py-2.5 px-3.5 text-start text-xs font-medium uppercase text-fg-subtle border-b border-line-strong;
+    @apply py-2.5 px-3.5 text-start text-sm font-medium uppercase text-fg-subtle border-b border-line-strong;
   }
   .table-dense td {
     @apply py-2.5 px-3.5 border-b border-line tabular-nums;
@@ -589,7 +589,7 @@
     @apply font-display text-4xl tabular-nums text-neutral-950;
   }
   .stat-label {
-    @apply mt-2 text-xs uppercase text-fg-muted;
+    @apply mt-2 text-sm uppercase text-fg-muted;
   }
 
   /* ----- Agenda professionnel ----- */
@@ -597,16 +597,16 @@
     @apply grid grid-cols-5 bg-white border border-line overflow-auto;
   }
   .agenda-head {
-    @apply sticky top-0 z-10 p-3 bg-surface border-b border-line-strong border-s border-s-line text-xs font-medium;
+    @apply sticky top-0 z-10 p-3 bg-surface border-b border-line-strong border-s border-s-line text-sm font-medium;
   }
   .agenda-hour {
-    @apply py-1 px-2 text-xs text-fg-subtle tabular-nums border-t border-line;
+    @apply py-1 px-2 text-sm text-fg-subtle tabular-nums border-t border-line;
   }
   .agenda-col {
     @apply relative border-s border-line;
   }
   .agenda-event {
-    @apply absolute inset-x-1 py-1.5 px-2 border-s-4 rounded-xs text-neutral-950 text-xs overflow-hidden cursor-pointer transition-all duration-150 ease-belora hover:brightness-95;
+    @apply absolute inset-x-1 py-1.5 px-2 border-s-4 rounded-xs text-neutral-950 text-sm overflow-hidden cursor-pointer transition-all duration-150 ease-belora hover:brightness-95;
     background-color: var(--ev-bg, var(--ev-8-bg));
     border-inline-start-color: var(--ev-bar, var(--ev-8-bar));
   }

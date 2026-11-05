@@ -26,7 +26,7 @@ export default function CashRegisterSettingsPage() {
   return (
     <div className="p-4 sm:p-8 space-y-6 max-w-4xl">
       {notification && (
-        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2 shadow-sm">
+        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold flex items-center gap-2 shadow-sm">
           <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>{notification}</span>
         </div>
@@ -93,7 +93,7 @@ export default function CashRegisterSettingsPage() {
             Taux de TVA applicables
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <FormInput
               label="Taux standard prestations & revente (%)"
               defaultValue="20.0"

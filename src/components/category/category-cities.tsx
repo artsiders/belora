@@ -59,7 +59,7 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
             <button
               type="button"
               onClick={() => setSelectedCountry("all")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 selectedCountry === "all"
                   ? "bg-white text-neutral-950 shadow-2xs"
                   : "text-neutral-600 hover:text-neutral-950"
@@ -72,7 +72,7 @@ export function CategoryCities({ category }: CategoryCitiesProps) {
                 key={country}
                 type="button"
                 onClick={() => setSelectedCountry(country)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                   selectedCountry === country
                     ? "bg-white text-neutral-950 shadow-2xs"
                     : "text-neutral-600 hover:text-neutral-950"

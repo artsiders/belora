@@ -28,7 +28,7 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
             </p>
           </div>
 
-          <span className="px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 text-xs font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
+          <span className="px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 text-sm font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
             Audit bien-être
           </span>
         </div>
@@ -42,7 +42,7 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
                   <span className="text-2xl sm:text-3xl font-bold text-primary-600">
                     0{idx + 1}
                   </span>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+                  <span className="text-sm font-semibold uppercase tracking-wider text-neutral-400">
                     Savoir-faire artisanal
                   </span>
                 </div>
@@ -56,7 +56,7 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
                 </p>
               </div>
 
-              <div className="mt-4 flex items-center gap-2 text-xs text-primary-700 font-medium">
+              <div className="mt-4 flex items-center gap-2 text-sm text-primary-700 font-medium">
                 <CheckCircle2 className="w-4 h-4 text-primary-600 shrink-0" />
                 <span>Recommandé par nos maîtres artisans certifiés</span>
               </div>
@@ -68,18 +68,18 @@ export function CategoryGuide({ category }: CategoryGuideProps) {
         <div className="mt-9 pt-5 border-t border-neutral-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center shrink-0">
-              <span className="font-bold text-xs">B</span>
+              <span className="font-bold text-sm">B</span>
             </div>
             <div>
               <h4 className="text-sm sm:text-base font-bold text-neutral-950">
                 La Charte Sanctuaire Belora
               </h4>
-              <p className="text-xs text-neutral-500 font-normal">
+              <p className="text-sm text-neutral-500 font-normal">
                 Tous les établissements référencés sont visités et réévalués chaque trimestre.
               </p>
             </div>
           </div>
-          <span className="text-xs font-semibold text-primary-600 uppercase tracking-wider">
+          <span className="text-sm font-semibold text-primary-600 uppercase tracking-wider">
             100% Vérifié & Garanti
           </span>
         </div>

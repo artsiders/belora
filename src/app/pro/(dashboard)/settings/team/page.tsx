@@ -18,7 +18,7 @@ export default function TeamSettingsPage() {
   return (
     <div className="p-4 sm:p-8 space-y-6 max-w-5xl">
       {feedback && (
-        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2 shadow-sm">
+        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold flex items-center gap-2 shadow-sm">
           <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>{feedback}</span>
         </div>
@@ -67,7 +67,7 @@ export default function TeamSettingsPage() {
                   <h3 className="font-bold text-sm sm:text-base text-neutral-950">
                     {staff.name}
                   </h3>
-                  <p className="text-xs text-neutral-500 font-medium">
+                  <p className="text-sm text-neutral-500 font-medium">
                     {staff.role}
                   </p>
                   <p className="text-sm text-neutral-400 mt-0.5">
@@ -84,7 +84,7 @@ export default function TeamSettingsPage() {
             </div>
 
             {/* Horaires et Présence */}
-            <div className="p-3 rounded-xl bg-neutral-50 border border-neutral-100 flex items-center justify-between text-xs">
+            <div className="p-3 rounded-xl bg-neutral-50 border border-neutral-100 flex items-center justify-between text-sm">
               <div className="flex items-center gap-2 text-neutral-700">
                 <Clock className="w-3.5 h-3.5 text-neutral-500" />
                 <span>
@@ -104,7 +104,7 @@ export default function TeamSettingsPage() {
             </div>
 
             {/* Jours travaillés */}
-            <div className="flex items-center justify-between pt-1 text-xs text-neutral-600">
+            <div className="flex items-center justify-between pt-1 text-sm text-neutral-600">
               <span>Jours travaillés : Mar, Mer, Jeu, Ven, Sam</span>
               <button
                 type="button"

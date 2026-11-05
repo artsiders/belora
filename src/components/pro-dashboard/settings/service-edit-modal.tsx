@@ -179,14 +179,14 @@ function ServiceEditInnerForm({
 
       {/* Praticiens habilités */}
       <div className="space-y-2">
-        <label className="text-xs font-semibold text-neutral-800 uppercase tracking-wider block">
+        <label className="text-sm font-semibold text-neutral-800 uppercase tracking-wider block">
           Collaborateurs habilités
         </label>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {staffList.map((st) => (
             <label
               key={st.id}
-              className="flex items-center gap-2 p-2 rounded-lg border border-neutral-200 bg-white text-xs cursor-pointer hover:bg-neutral-50"
+              className="flex items-center gap-2 p-2 rounded-lg border border-neutral-200 bg-white text-sm cursor-pointer hover:bg-neutral-50"
             >
               <input
                 type="checkbox"

@@ -80,7 +80,7 @@ export function AccountClient() {
             <h1 className="font-display text-2xl sm:text-3xl text-neutral-950">
               Sophie Martin
             </h1>
-            <p className="text-xs text-neutral-500">
+            <p className="text-sm text-neutral-500">
               sophie.martin@exemple.fr · Membre depuis 2026
             </p>
           </div>
@@ -92,7 +92,7 @@ export function AccountClient() {
       </div>
 
       {/* Navigation par onglets sobres */}
-      <div className="flex items-center gap-6 border-b border-primary-200/80 mb-8 overflow-x-auto text-xs">
+      <div className="flex items-center gap-6 border-b border-primary-200/80 mb-8 overflow-x-auto text-sm">
         <button
           type="button"
           onClick={() => setActiveTab("upcoming")}
@@ -139,7 +139,7 @@ export function AccountClient() {
               <h3 className="font-display text-xl text-neutral-950">
                 Aucun rendez-vous à venir
               </h3>
-              <p className="text-xs text-neutral-600">
+              <p className="text-sm text-neutral-600">
                 Explorez nos maisons recommandées et sanctuarisez votre prochain rituel.
               </p>
               <Link href="/search" className="btn btn-primary btn-sm inline-block mt-2">
@@ -170,10 +170,10 @@ export function AccountClient() {
                     <h3 className="text-base font-semibold text-neutral-950">
                       {app.serviceName}
                     </h3>
-                    <p className="text-xs text-neutral-600 font-medium">
+                    <p className="text-sm text-neutral-600 font-medium">
                       chez {app.venueName} · avec {app.artisanName}
                     </p>
-                    <p className="text-xs text-neutral-500 flex items-center gap-1.5 mt-1">
+                    <p className="text-sm text-neutral-500 flex items-center gap-1.5 mt-1">
                       <Clock className="w-3.5 h-3.5 text-neutral-400" />
                       <span>{app.date} à {app.time}</span>
                     </p>
@@ -228,7 +228,7 @@ export function AccountClient() {
                   <h3 className="text-sm font-semibold text-neutral-950">
                     {app.serviceName}
                   </h3>
-                  <p className="text-xs text-neutral-600">
+                  <p className="text-sm text-neutral-600">
                     {app.venueName} · {app.date}
                   </p>
                   <p className="text-sm text-neutral-400 mt-0.5">
@@ -238,7 +238,7 @@ export function AccountClient() {
               </div>
 
               <div className="flex items-center gap-3 self-end sm:self-auto">
-                <span className="text-xs font-semibold text-neutral-800 num">
+                <span className="text-sm font-semibold text-neutral-800 num">
                   {app.price} €
                 </span>
                 <Link
@@ -260,7 +260,7 @@ export function AccountClient() {
             Coordonnées personnelles
           </h2>
 
-          <div className="space-y-4 text-xs">
+          <div className="space-y-4 text-sm">
             <div>
               <label className="label mb-1 block">Nom complet</label>
               <input
@@ -288,7 +288,7 @@ export function AccountClient() {
           </div>
 
           <div className="pt-4 border-t border-primary-200/80 flex items-center justify-between">
-            <span className="text-xs text-neutral-500">
+            <span className="text-sm text-neutral-500">
               Modifications enregistrées automatiquement
             </span>
             <button type="button" className="btn btn-primary btn-xs">

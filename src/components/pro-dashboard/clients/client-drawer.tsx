@@ -129,7 +129,7 @@ function ClientDrawerInner({
       {/* KPI Synthèse Client */}
       <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-neutral-50/80 border border-neutral-200">
         <div>
-          <span className="text-neutral-500 text-xs block mb-0.5">
+          <span className="text-neutral-500 text-sm block mb-0.5">
             Visites totales
           </span>
           <span className="font-bold text-base text-neutral-950 tabular-nums">
@@ -138,7 +138,7 @@ function ClientDrawerInner({
         </div>
 
         <div>
-          <span className="text-neutral-500 text-xs block mb-0.5">
+          <span className="text-neutral-500 text-sm block mb-0.5">
             Panier moyen
           </span>
           <span className="font-bold text-base text-neutral-950 tabular-nums">
@@ -147,7 +147,7 @@ function ClientDrawerInner({
         </div>
 
         <div>
-          <span className="text-neutral-500 text-xs block mb-0.5">
+          <span className="text-neutral-500 text-sm block mb-0.5">
             CA cumulé
           </span>
           <span className="font-bold text-base text-primary-800 tabular-nums">
@@ -157,7 +157,7 @@ function ClientDrawerInner({
       </div>
 
       {/* Navigation par Onglets */}
-      <div className="flex items-center gap-2 border-b border-neutral-200 pb-1 text-xs font-semibold">
+      <div className="flex items-center gap-2 border-b border-neutral-200 pb-1 text-sm font-semibold">
         <button
           type="button"
           onClick={() => setActiveTab("profile")}
@@ -199,7 +199,7 @@ function ClientDrawerInner({
       {activeTab === "profile" && (
         <div className="space-y-4">
           {feedbackSaved && (
-            <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2">
+            <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-600" />
               <span>Modifications enregistrées avec succès.</span>
             </div>
@@ -211,7 +211,7 @@ function ClientDrawerInner({
                 Client Privilégié / VIP
               </Badge>
             )}
-            <span className="text-xs text-neutral-500">
+            <span className="text-sm text-neutral-500">
               Dernière visite au salon : {client.lastVisit}
             </span>
           </div>
@@ -256,7 +256,7 @@ function ClientDrawerInner({
         <div className="space-y-5">
           {/* Diagnostic de base */}
           <div className="p-4 rounded-xl border border-neutral-200 bg-neutral-50/50 space-y-3">
-            <h4 className="font-bold text-xs uppercase tracking-wider text-neutral-900">
+            <h4 className="font-bold text-sm uppercase tracking-wider text-neutral-900">
               Diagnostic morphologique & capillaire
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -276,13 +276,13 @@ function ClientDrawerInner({
           {/* Historique des Formules Techniques */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h4 className="font-bold text-xs uppercase tracking-wider text-neutral-900">
+              <h4 className="font-bold text-sm uppercase tracking-wider text-neutral-900">
                 Historique des formules & mélanges
               </h4>
               <button
                 type="button"
                 onClick={() => setIsAddingFormula(!isAddingFormula)}
-                className="text-xs font-semibold text-primary-700 hover:underline flex items-center gap-1 cursor-pointer"
+                className="text-sm font-semibold text-primary-700 hover:underline flex items-center gap-1 cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Ajouter une formule</span>
@@ -295,7 +295,7 @@ function ClientDrawerInner({
                 onSubmit={handleAddFormulaSubmit}
                 className="p-4 rounded-xl border border-primary-200 bg-primary-50/30 space-y-3"
               >
-                <h5 className="font-bold text-xs text-primary-950">
+                <h5 className="font-bold text-sm text-primary-950">
                   Nouvelle formule technique
                 </h5>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -350,7 +350,7 @@ function ClientDrawerInner({
                     key={idx}
                     className="p-3.5 rounded-xl border border-neutral-200 bg-white space-y-1.5"
                   >
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-sm">
                       <span className="font-bold text-neutral-900">
                         {form.service}
                       </span>
@@ -358,7 +358,7 @@ function ClientDrawerInner({
                         {form.date} &bull; Par {form.colorist}
                       </span>
                     </div>
-                    <p className="text-xs text-neutral-700 font-mono bg-neutral-50 p-2 rounded-lg border border-neutral-100">
+                    <p className="text-sm text-neutral-700 font-mono bg-neutral-50 p-2 rounded-lg border border-neutral-100">
                       {form.formula}
                     </p>
                     <div className="flex items-center gap-1.5 text-sm text-neutral-500 pt-1">
@@ -368,7 +368,7 @@ function ClientDrawerInner({
                   </div>
                 ))
               ) : (
-                <p className="text-xs text-neutral-400 italic py-4 text-center">
+                <p className="text-sm text-neutral-400 italic py-4 text-center">
                   Aucune formule technique enregistrée pour ce client.
                 </p>
               )}
@@ -384,7 +384,7 @@ function ClientDrawerInner({
             clientAppointments.map((apt) => (
               <div
                 key={apt.id}
-                className="p-3.5 rounded-xl border border-neutral-200 bg-white flex items-center justify-between gap-3 text-xs"
+                className="p-3.5 rounded-xl border border-neutral-200 bg-white flex items-center justify-between gap-3 text-sm"
               >
                 <div className="space-y-1">
                   <span className="font-bold text-neutral-900 block">
@@ -420,7 +420,7 @@ function ClientDrawerInner({
               </div>
             ))
           ) : (
-            <p className="text-xs text-neutral-400 italic py-6 text-center">
+            <p className="text-sm text-neutral-400 italic py-6 text-center">
               Aucun rendez-vous antérieur répertorié.
             </p>
           )}

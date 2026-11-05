@@ -24,7 +24,7 @@ const LeafletMap = dynamic(
     ssr: false,
     loading: () => (
       <div className="w-full h-full min-h-[400px] bg-neutral-100 flex items-center justify-center">
-        <div className="flex items-center gap-2 text-xs font-semibold text-neutral-500">
+        <div className="flex items-center gap-2 text-sm font-semibold text-neutral-500">
           <span className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
           <span>Chargement de la carte interactive...</span>
         </div>

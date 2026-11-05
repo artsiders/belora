@@ -76,7 +76,7 @@ export function AgendaToolbar({
         <button
           type="button"
           onClick={handleToday}
-          className="px-3 py-1.5 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-50 text-neutral-800 text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
+          className="px-3 py-1.5 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-50 text-neutral-800 text-sm font-semibold shadow-2xs transition-colors cursor-pointer"
         >
           Aujourd&apos;hui
         </button>
@@ -112,7 +112,7 @@ export function AgendaToolbar({
       {/* Vue jour/semaine, intervalle et bouton Création */}
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Toggle Vue jour / Vue semaine */}
-        <div className="inline-flex p-1 rounded-xl bg-neutral-100 border border-neutral-200/80 text-xs font-semibold">
+        <div className="inline-flex p-1 rounded-xl bg-neutral-100 border border-neutral-200/80 text-sm font-semibold">
           <button
             type="button"
             onClick={() => onViewModeChange("day")}
@@ -138,12 +138,12 @@ export function AgendaToolbar({
         </div>
 
         {/* Granularité des créneaux (15 min / 20 min / 30 min) */}
-        <div className="hidden md:flex items-center gap-1.5 text-xs text-neutral-600">
+        <div className="hidden md:flex items-center gap-1.5 text-sm text-neutral-600">
           <span className="text-neutral-500">Pas :</span>
           <select
             value={intervalMinutes}
             onChange={(e) => onIntervalChange(Number(e.target.value))}
-            className="bg-white border border-neutral-200 rounded-lg px-2 py-1 text-xs font-semibold text-neutral-800 focus:outline-none focus:border-primary-600 cursor-pointer"
+            className="bg-white border border-neutral-200 rounded-lg px-2 py-1 text-sm font-semibold text-neutral-800 focus:outline-none focus:border-primary-600 cursor-pointer"
           >
             <option value={10}>10 min</option>
             <option value={15}>15 min</option>

@@ -41,7 +41,7 @@ export function FeaturedSanctuary() {
 
           {/* Cartouche d'artisan en bas à gauche */}
           <div className="pointer-events-none absolute bottom-6 sm:bottom-10 left-6 sm:left-10 max-w-xl text-neutral-50 z-20">
-            <span className="inline-block px-3 py-1 rounded-md bg-primary-600/90 text-neutral-50 text-xs tracking-widest uppercase font-semibold mb-3 backdrop-blur-xs">
+            <span className="inline-block px-3 py-1 rounded-md bg-primary-600/90 text-neutral-50 text-sm tracking-widest uppercase font-semibold mb-3 backdrop-blur-xs">
               Maison Coup de Cœur
             </span>
             <h3 className="text-3xl sm:text-4xl text-neutral-50 mb-3 font-bold">
@@ -69,7 +69,7 @@ export function FeaturedSanctuary() {
                 </svg>
               </span>
 
-              <span className="text-xs text-neutral-300 font-medium">
+              <span className="text-sm text-neutral-300 font-medium">
                 À partir de 80 € · 96 avis 5.0 ★
               </span>
             </div>

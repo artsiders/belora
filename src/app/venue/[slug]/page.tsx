@@ -32,7 +32,7 @@ export default function VenuePage({ params }: VenuePageProps) {
       <MainNav />
       <Suspense
         fallback={
-          <div className="flex-1 container-belora py-16 text-center text-xs text-neutral-500">
+          <div className="flex-1 container-belora py-16 text-center text-sm text-neutral-500">
             Chargement de l&apos;établissement...
           </div>
         }
@@ -55,7 +55,7 @@ async function VenueContent({ params }: VenuePageProps) {
   return (
     <>
       {/* 1. Fil d'Ariane épuré */}
-      <div className="border-b border-primary-200/80 bg-primary-600 py-3 text-xs text-white/80">
+      <div className="border-b border-primary-200/80 bg-primary-600 py-3 text-sm text-white/80">
         <div className="container-belora flex items-center gap-2">
           <Link href="/" className="hover:text-white transition-colors">
             Accueil
@@ -86,7 +86,7 @@ async function VenueContent({ params }: VenuePageProps) {
                 sizes="(max-width: 768px) 100vw, 66vw"
                 className="object-cover"
               />
-              <span className="absolute top-4 left-4 px-3 py-1 rounded-[var(--radius-xs)] bg-neutral-950/80 backdrop-blur-xs text-neutral-50 text-xs uppercase font-semibold tracking-wider">
+              <span className="absolute top-4 left-4 px-3 py-1 rounded-[var(--radius-xs)] bg-neutral-950/80 backdrop-blur-xs text-neutral-50 text-sm uppercase font-semibold tracking-wider">
                 {venue.badge}
               </span>
             </div>
@@ -122,7 +122,7 @@ async function VenueContent({ params }: VenuePageProps) {
             <div className="lg:col-span-8 space-y-12">
               {/* En-tête de l'établissement */}
               <div>
-                <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-500 mb-2">
+                <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-500 mb-2">
                   <span className="flex items-center gap-1 font-semibold text-neutral-900 num">
                     <Star className="w-3.5 h-3.5 fill-primary-600 text-primary-600" />
                     <span>{venue.rating}</span>
@@ -158,7 +158,7 @@ async function VenueContent({ params }: VenuePageProps) {
                   {venue.features.map((feature, i) => (
                     <div
                       key={i}
-                      className="flex items-center gap-2.5 text-xs text-neutral-800 bg-primary-50 p-3 rounded-sm border border-primary-200/80"
+                      className="flex items-center gap-2.5 text-sm text-neutral-800 bg-primary-50 p-3 rounded-sm border border-primary-200/80"
                     >
                       <Check className="w-4 h-4 text-primary-600 shrink-0" />
                       <span>{feature}</span>
@@ -176,7 +176,7 @@ async function VenueContent({ params }: VenuePageProps) {
                       Prestations & Rituels
                     </h2>
                   </div>
-                  <span className="text-xs text-neutral-500">
+                  <span className="text-sm text-neutral-500">
                     {venue.services.length} soins disponibles
                   </span>
                 </div>
@@ -193,7 +193,7 @@ async function VenueContent({ params }: VenuePageProps) {
                             {service.category}
                           </span>
                           <span className="text-neutral-300">•</span>
-                          <span className="text-xs text-neutral-500 flex items-center gap-1 num">
+                          <span className="text-sm text-neutral-500 flex items-center gap-1 num">
                             <Clock className="w-3 h-3" />
                             {service.durationMinutes} min
                           </span>
@@ -201,7 +201,7 @@ async function VenueContent({ params }: VenuePageProps) {
                         <h3 className="text-sm sm:text-base font-semibold text-neutral-950 mb-1">
                           {service.name}
                         </h3>
-                        <p className="text-xs text-neutral-600 leading-relaxed font-normal">
+                        <p className="text-sm text-neutral-600 leading-relaxed font-normal">
                           {service.description}
                         </p>
                       </div>
@@ -251,7 +251,7 @@ async function VenueContent({ params }: VenuePageProps) {
                         <p className="text-sm text-primary-700 font-medium mb-1">
                           {member.role}
                         </p>
-                        <p className="text-xs text-neutral-600 leading-relaxed font-normal">
+                        <p className="text-sm text-neutral-600 leading-relaxed font-normal">
                           {member.bio}
                         </p>
                       </div>
@@ -269,7 +269,7 @@ async function VenueContent({ params }: VenuePageProps) {
                       Avis certifiés ({venue.reviewCount})
                     </h2>
                   </div>
-                  <div className="flex items-center gap-1.5 text-xs font-semibold text-neutral-900 num">
+                  <div className="flex items-center gap-1.5 text-sm font-semibold text-neutral-900 num">
                     <Star className="w-4 h-4 fill-primary-600 text-primary-600" />
                     <span>{venue.rating} / 5</span>
                   </div>
@@ -283,7 +283,7 @@ async function VenueContent({ params }: VenuePageProps) {
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-semibold text-neutral-950">
+                          <span className="text-sm font-semibold text-neutral-950">
                             {rev.author}
                           </span>
                           <span className="text-[10px] text-primary-700 font-medium bg-primary-50 px-2 py-0.5 rounded">
@@ -292,7 +292,7 @@ async function VenueContent({ params }: VenuePageProps) {
                         </div>
                         <span className="text-sm text-neutral-400">{rev.date}</span>
                       </div>
-                      <p className="text-xs text-neutral-700 leading-relaxed ">
+                      <p className="text-sm text-neutral-700 leading-relaxed ">
                         « {rev.comment} »
                       </p>
                     </div>
@@ -312,11 +312,11 @@ async function VenueContent({ params }: VenuePageProps) {
                     <span className="font-display text-3xl text-neutral-950 num">
                       dès {venue.startingPrice}
                     </span>
-                    <span className="text-xs text-neutral-500">selon prestation</span>
+                    <span className="text-sm text-neutral-500">selon prestation</span>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-primary-200/80 space-y-3 text-xs text-neutral-700">
+                <div className="pt-4 border-t border-primary-200/80 space-y-3 text-sm text-neutral-700">
                   <div className="flex items-center justify-between">
                     <span className="text-neutral-500">Disponibilité</span>
                     <span className="font-medium text-emerald-800">
@@ -359,10 +359,10 @@ async function VenueContent({ params }: VenuePageProps) {
 
                 {/* Horaires hebdomadaires */}
                 <div className="pt-4 border-t border-primary-200/80">
-                  <span className="text-xs font-semibold text-neutral-900 block mb-2.5">
+                  <span className="text-sm font-semibold text-neutral-900 block mb-2.5">
                     Horaires d’ouverture
                   </span>
-                  <div className="space-y-1.5 text-xs text-neutral-600">
+                  <div className="space-y-1.5 text-sm text-neutral-600">
                     {venue.openingHours.map((slot) => (
                       <div
                         key={slot.day}

@@ -97,7 +97,7 @@ export default function HelpPage() {
                       <h3 className="text-sm font-semibold text-neutral-950">
                         {faq.q}
                       </h3>
-                      <p className="text-xs text-neutral-600 leading-relaxed font-normal">
+                      <p className="text-sm text-neutral-600 leading-relaxed font-normal">
                         {faq.a}
                       </p>
                     </div>
@@ -112,7 +112,7 @@ export default function HelpPage() {
             <h3 className="font-display text-2xl text-neutral-950">
               Vous n’avez pas trouvé votre réponse ?
             </h3>
-            <p className="text-xs text-neutral-600 max-w-md mx-auto leading-relaxed">
+            <p className="text-sm text-neutral-600 max-w-md mx-auto leading-relaxed">
               Notre équipe d’assistance dédiée est joignable du lundi au samedi pour vous accompagner dans votre expérience de soin.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">

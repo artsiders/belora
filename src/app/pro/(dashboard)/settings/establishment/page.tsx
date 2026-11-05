@@ -43,7 +43,7 @@ export default function EstablishmentSettingsPage() {
     <div className="p-4 sm:p-8 space-y-8 max-w-4xl">
       {/* Toast de sauvegarde */}
       {savedNotification && (
-        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2 shadow-sm">
+        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold flex items-center gap-2 shadow-sm">
           <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>Paramètres de l&apos;établissement enregistrés avec succès.</span>
         </div>
@@ -215,7 +215,7 @@ export default function EstablishmentSettingsPage() {
             {establishment.openingHours.map((oh) => (
               <div
                 key={oh.day}
-                className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
+                className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm"
               >
                 <div className="w-28 font-bold text-neutral-900 text-sm">
                   {oh.day}
@@ -238,7 +238,7 @@ export default function EstablishmentSettingsPage() {
                     />
                     <label
                       htmlFor={`day-${oh.day}`}
-                      className="text-xs font-semibold cursor-pointer text-neutral-800"
+                      className="text-sm font-semibold cursor-pointer text-neutral-800"
                     >
                       {oh.isOpen ? "Ouvert" : "Fermé"}
                     </label>
@@ -256,7 +256,7 @@ export default function EstablishmentSettingsPage() {
                             e.target.value
                           )
                         }
-                        className="h-8 px-2 bg-neutral-50 border border-neutral-300 rounded font-semibold text-xs"
+                        className="h-8 px-2 bg-neutral-50 border border-neutral-300 rounded font-semibold text-sm"
                       />
                       <span className="text-neutral-400">à</span>
                       <input
@@ -269,11 +269,11 @@ export default function EstablishmentSettingsPage() {
                             e.target.value
                           )
                         }
-                        className="h-8 px-2 bg-neutral-50 border border-neutral-300 rounded font-semibold text-xs"
+                        className="h-8 px-2 bg-neutral-50 border border-neutral-300 rounded font-semibold text-sm"
                       />
                     </div>
                   ) : (
-                    <span className="text-xs text-neutral-400 italic">
+                    <span className="text-sm text-neutral-400 italic">
                       Journée de fermeture
                     </span>
                   )}

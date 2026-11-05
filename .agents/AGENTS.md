@@ -6,7 +6,7 @@
 - Conserver des titres de section propres, sobres, et directement alignés avec l'identité éditoriale de la marque.
 
 ## 2. Standardisation Typographique & Composants Tailwind
-- **Privilégier systématiquement les classes typographiques standard de Tailwind CSS** (`text-xs`, `text-sm`, `text-base`, `text-lg`, `text-xl`, `text-2xl`, `text-3xl`, `text-4xl`, `text-5xl`).
+- **Privilégier systématiquement les classes typographiques standard de Tailwind CSS** (`text-sm` minumum, `text-base`, `text-lg`, `text-xl`, `text-2xl`, `text-3xl`, `text-4xl`, `text-5xl`).
 - **Éviter les valeurs arbitraires en crochets** (ex : `text-[11px]`, `text-[20px]`, `text-[13px]`) sauf contrainte de layout SVG indispensable.
 - **Réutilisation des composants d'interface** : Utiliser les classes de composants globales déclarées dans `globals.css` (`.btn-primary`, `.btn-secondary`, `.btn-dark`, `.btn-outline`, `.btn-ghost`, `.input`, etc.) ou des composants UI modulaires pour éviter les répétitions de classes utilitaires et garantir une uniformité parfaite.
 

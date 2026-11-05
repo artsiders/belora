@@ -36,13 +36,13 @@ export function ArtisanCard({ artisan }: ArtisanCardProps) {
       {/* Détails et coordonnées */}
       <div className="p-4 sm:p-5 flex flex-col justify-between flex-1">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-primary-700 mb-1">
+          <p className="text-sm font-semibold uppercase tracking-wider text-primary-700 mb-1">
             {artisan.role}
           </p>
           <h3 className="text-base sm:text-lg font-bold text-neutral-950 group-hover:text-primary-600 transition-colors">
             {artisan.name}
           </h3>
-          <p className="text-xs text-neutral-500 mt-1 flex items-center gap-1.5">
+          <p className="text-sm text-neutral-500 mt-1 flex items-center gap-1.5">
             <MapPin className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
             <span>
               {artisan.salon} · {artisan.city}

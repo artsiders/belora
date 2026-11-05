@@ -35,7 +35,7 @@ function CheckoutContent() {
           <h1 className="text-base sm:text-lg font-bold text-neutral-950 leading-tight">
             Caisse & Encaissement POS
           </h1>
-          <p className="text-xs text-neutral-500">
+          <p className="text-sm text-neutral-500">
             {tickets.length} encaissement{tickets.length > 1 ? "s" : ""} enregistré{tickets.length > 1 ? "s" : ""} aujourd&apos;hui &bull; Total :{" "}
             <strong className="text-neutral-900 font-bold tabular-nums">
               {totalDayRevenue.toFixed(2)} €
@@ -82,7 +82,7 @@ export default function CheckoutPage() {
   return (
     <Suspense
       fallback={
-        <div className="flex-1 flex items-center justify-center p-12 text-xs text-neutral-500">
+        <div className="flex-1 flex items-center justify-center p-12 text-sm text-neutral-500">
           Chargement de la caisse...
         </div>
       }

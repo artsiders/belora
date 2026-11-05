@@ -55,7 +55,7 @@ export function AppointmentCard({
         </div>
 
         {/* Ligne 2 : Nom du client */}
-        <div className="font-semibold text-xs text-neutral-950 truncate mt-0.5">
+        <div className="font-semibold text-sm text-neutral-950 truncate mt-0.5">
           {appointment.clientName}
         </div>
 

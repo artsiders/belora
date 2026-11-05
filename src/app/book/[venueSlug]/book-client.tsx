@@ -111,10 +111,10 @@ export function BookClient({ venue }: BookClientProps) {
         <div className="p-6 rounded-xl bg-primary-50/10 border border-primary-300 text-left mb-8 space-y-4">
           <div className="border-b border-primary-200/80 pb-3">
             <h3 className="font-display text-lg text-neutral-950">{venue.name}</h3>
-            <p className="text-xs text-neutral-500">{venue.address}</p>
+            <p className="text-sm text-neutral-500">{venue.address}</p>
           </div>
 
-          <div className="space-y-2 text-xs">
+          <div className="space-y-2 text-sm">
             <div className="text-neutral-500">Soins réservés :</div>
             {selectedServices.map((s) => (
               <div key={s.id} className="flex justify-between font-medium text-neutral-900">
@@ -124,7 +124,7 @@ export function BookClient({ venue }: BookClientProps) {
             ))}
           </div>
 
-          <div className="pt-3 border-t border-primary-200/80 flex justify-between text-xs font-semibold text-neutral-950">
+          <div className="pt-3 border-t border-primary-200/80 flex justify-between text-sm font-semibold text-neutral-950">
             <span>Total à régler sur place</span>
             <span className="text-sm num">{totalPrice} €</span>
           </div>
@@ -149,7 +149,7 @@ export function BookClient({ venue }: BookClientProps) {
         <div>
           <Link
             href={`/venue/${venue.slug}`}
-            className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-900 transition-colors mb-1"
+            className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-neutral-900 transition-colors mb-1"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Retour à la maison {venue.name}</span>
@@ -160,7 +160,7 @@ export function BookClient({ venue }: BookClientProps) {
         </div>
 
         {/* Indicateur d'étape */}
-        <div className="text-xs text-neutral-500 hidden sm:block num">
+        <div className="text-sm text-neutral-500 hidden sm:block num">
           Étape <strong className="text-neutral-900">{step}</strong> sur 4
         </div>
       </div>
@@ -172,7 +172,7 @@ export function BookClient({ venue }: BookClientProps) {
           <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 1 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-xs flex items-center justify-center font-medium">
+                <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-sm flex items-center justify-center font-medium">
                   1
                 </span>
                 <h2 className="font-display text-xl text-neutral-950">
@@ -183,7 +183,7 @@ export function BookClient({ venue }: BookClientProps) {
                 <button
                   type="button"
                   onClick={() => setStep(1)}
-                  className="text-xs text-primary-700 hover:underline font-medium"
+                  className="text-sm text-primary-700 hover:underline font-medium"
                 >
                   Modifier
                 </button>
@@ -218,7 +218,7 @@ export function BookClient({ venue }: BookClientProps) {
                           <h3 className="text-sm sm:text-base font-semibold text-neutral-950">
                             {service.name}
                           </h3>
-                          <p className="text-xs text-neutral-500 flex items-center gap-2 mt-0.5 num">
+                          <p className="text-sm text-neutral-500 flex items-center gap-2 mt-0.5 num">
                             <span>{service.durationMinutes} min</span>
                             <span>•</span>
                             <span>{service.category}</span>
@@ -245,7 +245,7 @@ export function BookClient({ venue }: BookClientProps) {
                 </div>
               </div>
             ) : (
-              <div className="text-xs text-neutral-700 space-y-1">
+              <div className="text-sm text-neutral-700 space-y-1">
                 {selectedServices.map((s) => (
                   <div key={s.id} className="flex justify-between">
                     <span>{s.name} ({s.durationMinutes} min)</span>
@@ -260,7 +260,7 @@ export function BookClient({ venue }: BookClientProps) {
           <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 2 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-xs flex items-center justify-center font-medium">
+                <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-sm flex items-center justify-center font-medium">
                   2
                 </span>
                 <h2 className="font-display text-xl text-neutral-950">
@@ -271,7 +271,7 @@ export function BookClient({ venue }: BookClientProps) {
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="text-xs text-primary-700 hover:underline font-medium"
+                  className="text-sm text-primary-700 hover:underline font-medium"
                 >
                   Modifier
                 </button>
@@ -296,7 +296,7 @@ export function BookClient({ venue }: BookClientProps) {
                     <h3 className="text-sm sm:text-base font-semibold text-neutral-950">
                       Sans préférence
                     </h3>
-                    <p className="text-xs text-neutral-500">
+                    <p className="text-sm text-neutral-500">
                       Premier artisan d’excellence disponible
                     </p>
                   </div>
@@ -326,7 +326,7 @@ export function BookClient({ venue }: BookClientProps) {
                       <h3 className="text-sm sm:text-base font-semibold text-neutral-950">
                         {member.name}
                       </h3>
-                      <p className="text-xs text-primary-700 font-medium">
+                      <p className="text-sm text-primary-700 font-medium">
                         {member.role}
                       </p>
                     </div>
@@ -347,7 +347,7 @@ export function BookClient({ venue }: BookClientProps) {
             )}
 
             {step > 2 && (
-              <p className="text-xs text-neutral-700">
+              <p className="text-sm text-neutral-700">
                 Praticien :{" "}
                 <strong className="text-neutral-900">
                   {selectedArtisan === "any"
@@ -362,7 +362,7 @@ export function BookClient({ venue }: BookClientProps) {
           <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 3 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-xs flex items-center justify-center font-medium">
+                <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-sm flex items-center justify-center font-medium">
                   3
                 </span>
                 <h2 className="font-display text-xl text-neutral-950">
@@ -373,7 +373,7 @@ export function BookClient({ venue }: BookClientProps) {
                 <button
                   type="button"
                   onClick={() => setStep(3)}
-                  className="text-xs text-primary-700 hover:underline font-medium"
+                  className="text-sm text-primary-700 hover:underline font-medium"
                 >
                   Modifier
                 </button>
@@ -384,7 +384,7 @@ export function BookClient({ venue }: BookClientProps) {
               <div className="space-y-6">
                 {/* Sélecteur de jour */}
                 <div>
-                  <span className="text-xs text-neutral-500 font-medium block mb-2">
+                  <span className="text-sm text-neutral-500 font-medium block mb-2">
                     Choisissez votre jour :
                   </span>
                   <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
@@ -402,7 +402,7 @@ export function BookClient({ venue }: BookClientProps) {
                         <span className="text-[10px] uppercase font-bold tracking-wider block opacity-75">
                           {d.label}
                         </span>
-                        <span className="text-xs font-semibold block mt-0.5">
+                        <span className="text-sm font-semibold block mt-0.5">
                           {d.date.split(" ")[0]} {d.date.split(" ")[1]}
                         </span>
                       </button>
@@ -412,7 +412,7 @@ export function BookClient({ venue }: BookClientProps) {
 
                 {/* Sélecteur de créneau horaire */}
                 <div>
-                  <span className="text-xs text-neutral-500 font-medium block mb-2">
+                  <span className="text-sm text-neutral-500 font-medium block mb-2">
                     Créneaux disponibles le {selectedDay} :
                   </span>
                   <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -421,7 +421,7 @@ export function BookClient({ venue }: BookClientProps) {
                         key={slot}
                         type="button"
                         onClick={() => setSelectedSlot(slot)}
-                        className={`py-2 px-3 rounded-xl border text-xs font-semibold transition-all num cursor-pointer ${
+                        className={`py-2 px-3 rounded-xl border text-sm font-semibold transition-all num cursor-pointer ${
                           selectedSlot === slot
                             ? "bg-primary-600 text-neutral-50 border-primary-600 shadow-2xs"
                             : "bg-primary-50/10 border-primary-200 text-neutral-900 hover:border-primary-400"
@@ -447,7 +447,7 @@ export function BookClient({ venue }: BookClientProps) {
             )}
 
             {step > 3 && (
-              <p className="text-xs text-neutral-700">
+              <p className="text-sm text-neutral-700">
                 Créneau : <strong className="text-neutral-900">{selectedDay} à {selectedSlot}</strong>
               </p>
             )}
@@ -456,7 +456,7 @@ export function BookClient({ venue }: BookClientProps) {
           {/* Étape 4 : Coordonnées & Validation */}
           <div className={`p-6 rounded-xl bg-primary-50/10 border transition-all ${step === 4 ? "border-primary-400 shadow-sm" : "border-primary-200/80"}`}>
             <div className="flex items-center gap-2 mb-4">
-              <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-xs flex items-center justify-center font-medium">
+              <span className="w-6 h-6 rounded-full bg-neutral-900 text-neutral-50 text-sm flex items-center justify-center font-medium">
                 4
               </span>
               <h2 className="font-display text-xl text-neutral-950">
@@ -503,7 +503,7 @@ export function BookClient({ venue }: BookClientProps) {
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded bg-neutral-100/70 border border-primary-200/80 text-xs text-neutral-600 flex items-start gap-2.5">
+                <div className="p-3.5 rounded bg-neutral-100/70 border border-primary-200/80 text-sm text-neutral-600 flex items-start gap-2.5">
                   <ShieldCheck className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
                   <p className="leading-snug">
                     Aucun prépaiement requis aujourd’hui. Vous règlerez directement auprès de l’artisan lors de votre venue. Annulation sans frais jusqu’à 24h avant le créneau.
@@ -530,16 +530,16 @@ export function BookClient({ venue }: BookClientProps) {
                 Récapitulatif de réservation
               </span>
               <h3 className="font-display text-xl text-neutral-950">{venue.name}</h3>
-              <p className="text-xs text-neutral-500">{venue.address}</p>
+              <p className="text-sm text-neutral-500">{venue.address}</p>
             </div>
 
             <div className="pt-4 border-t border-primary-200/80 space-y-3">
-              <div className="text-xs font-semibold text-neutral-900">
+              <div className="text-sm font-semibold text-neutral-900">
                 Prestations choisies ({selectedServices.length}) :
               </div>
               <div className="space-y-2">
                 {selectedServices.map((s) => (
-                  <div key={s.id} className="text-xs flex justify-between">
+                  <div key={s.id} className="text-sm flex justify-between">
                     <span className="text-neutral-700">{s.name}</span>
                     <span className="font-semibold text-neutral-950 num shrink-0">
                       {s.priceEuros} €
@@ -549,7 +549,7 @@ export function BookClient({ venue }: BookClientProps) {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-primary-200/80 space-y-2 text-xs text-neutral-600">
+            <div className="pt-4 border-t border-primary-200/80 space-y-2 text-sm text-neutral-600">
               <div className="flex items-center justify-between">
                 <span>Durée estimée</span>
                 <span className="font-semibold text-neutral-900 num">{totalDuration} min</span>
@@ -567,7 +567,7 @@ export function BookClient({ venue }: BookClientProps) {
             </div>
 
             <div className="pt-4 border-t border-primary-200/80 flex items-center justify-between text-neutral-950">
-              <span className="text-xs font-semibold">Total à régler</span>
+              <span className="text-sm font-semibold">Total à régler</span>
               <span className="font-display text-2xl num">{totalPrice} €</span>
             </div>
           </div>

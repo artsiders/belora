@@ -59,7 +59,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                     <h3 className="text-sm sm:text-base font-bold text-neutral-950 mb-0.5 leading-snug">
                       {pillar.title}
                     </h3>
-                    <p className="text-xs text-neutral-600 leading-relaxed font-normal">
+                    <p className="text-sm text-neutral-600 leading-relaxed font-normal">
                       {pillar.description}
                     </p>
                   </div>
@@ -78,8 +78,8 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
               />
               <div className="absolute inset-0 bg-black/10 pointer-events-none" />
               {story.caption && (
-                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-neutral-950/80 backdrop-blur-xs text-white text-xs">
-                  <span className="text-primary-300 block text-xs uppercase font-bold tracking-wider mb-0.5">
+                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-neutral-950/80 backdrop-blur-xs text-white text-sm">
+                  <span className="text-primary-300 block text-sm uppercase font-bold tracking-wider mb-0.5">
                     Engagement Belora
                   </span>
                   <p className="font-normal text-white/90">{story.caption}</p>
@@ -110,7 +110,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
               </p>
             </div>
 
-            <span className="px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 text-xs font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
+            <span className="px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 text-sm font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
               10 spécialités phares
             </span>
           </div>
@@ -123,7 +123,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                 <h3 className="text-sm sm:text-base font-bold uppercase tracking-wider text-neutral-950">
                   Soins signatures & rituels doux
                 </h3>
-                <span className="text-xs font-semibold text-primary-600">
+                <span className="text-sm font-semibold text-primary-600">
                   {frequentSearches.col1.length} rituels
                 </span>
               </div>
@@ -137,7 +137,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                   >
                     <div className="flex items-center gap-2.5">
                       {item.tag && (
-                        <span className="px-2 py-0.5 rounded-md bg-neutral-100 text-neutral-700 text-xs font-semibold shrink-0">
+                        <span className="px-2 py-0.5 rounded-md bg-neutral-100 text-neutral-700 text-sm font-semibold shrink-0">
                           {item.tag}
                         </span>
                       )}
@@ -157,7 +157,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                 <h3 className="text-sm sm:text-base font-bold uppercase tracking-wider text-neutral-950">
                   Techniques avancées & finitions
                 </h3>
-                <span className="text-xs font-semibold text-primary-600">
+                <span className="text-sm font-semibold text-primary-600">
                   {frequentSearches.col2.length} rituels
                 </span>
               </div>
@@ -171,7 +171,7 @@ export function CategoryEditorial({ category }: CategoryEditorialProps) {
                   >
                     <div className="flex items-center gap-2.5">
                       {item.tag && (
-                        <span className="px-2 py-0.5 rounded-md bg-neutral-100 text-neutral-700 text-xs font-semibold shrink-0">
+                        <span className="px-2 py-0.5 rounded-md bg-neutral-100 text-neutral-700 text-sm font-semibold shrink-0">
                           {item.tag}
                         </span>
                       )}

@@ -88,7 +88,7 @@ export function MainNav() {
           <div className="hidden sm:flex items-center gap-4">
             <Link
               href="/pro/join"
-              className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:text-primary-600 transition-colors"
+              className="inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wider text-neutral-600 hover:text-primary-600 transition-colors"
             >
               <span>Je suis un professionnel</span>
               <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
@@ -158,7 +158,7 @@ export function MainNav() {
                   {/* Navigation Principale Éditoriale */}
                   <div className="space-y-6">
                     <div className="flex items-center gap-3">
-                      <span className="text-xs uppercase font-semibold tracking-widest text-primary-700">
+                      <span className="text-sm uppercase font-semibold tracking-widest text-primary-700">
                         Navigation
                       </span>
                       <span className="h-px w-10 bg-primary-300" aria-hidden="true" />
@@ -181,11 +181,11 @@ export function MainNav() {
                               <span className="text-2xl sm:text-3xl font-normal text-neutral-950 group-hover:text-primary-600 transition-colors">
                                 {link.title}
                               </span>
-                              <p className="text-xs text-neutral-500 font-normal mt-0.5">
+                              <p className="text-sm text-neutral-500 font-normal mt-0.5">
                                 {link.subtitle}
                               </p>
                             </div>
-                            <span className="text-xs font-mono font-medium text-neutral-400 group-hover:text-primary-600 transition-colors">
+                            <span className="text-sm font-mono font-medium text-neutral-400 group-hover:text-primary-600 transition-colors">
                               {link.number}
                             </span>
                           </Link>
@@ -195,7 +195,7 @@ export function MainNav() {
 
                     {/* Accès direct aux univers avec badges légers */}
                     <div className="pt-2">
-                      <span className="block text-xs uppercase font-semibold tracking-wider text-neutral-400 mb-3">
+                      <span className="block text-sm uppercase font-semibold tracking-wider text-neutral-400 mb-3">
                         Recherche par catégorie
                       </span>
                       <div className="flex flex-wrap gap-2">
@@ -204,7 +204,7 @@ export function MainNav() {
                             key={chip.name}
                             href={chip.href}
                             onClick={closeMenu}
-                            className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-800 hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 border border-neutral-200/80 transition-colors"
+                            className="px-3.5 py-1.5 rounded-full text-sm font-medium bg-neutral-100 text-neutral-800 hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 border border-neutral-200/80 transition-colors"
                           >
                             {chip.name}
                           </Link>
@@ -222,7 +222,7 @@ export function MainNav() {
                       className="flex items-center justify-between p-4 rounded-2xl bg-secondary-900 text-white hover:bg-neutral-950 transition-colors shadow-sm"
                     >
                       <div>
-                        <span className="text-xs uppercase font-semibold tracking-wider text-neutral-400 block mb-0.5">
+                        <span className="text-sm uppercase font-semibold tracking-wider text-neutral-400 block mb-0.5">
                           Espace Professionnel
                         </span>
                         <span className="text-sm font-semibold text-neutral-50">
@@ -239,14 +239,14 @@ export function MainNav() {
                       <Link
                         href="/login"
                         onClick={closeMenu}
-                        className="btn btn-outline py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-center"
+                        className="btn btn-outline py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-center"
                       >
                         Connexion
                       </Link>
                       <Link
                         href="/register"
                         onClick={closeMenu}
-                        className="btn btn-primary py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-center"
+                        className="btn btn-primary py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-center"
                       >
                         Rejoindre
                       </Link>

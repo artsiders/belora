@@ -101,7 +101,7 @@ export function HeroCentered() {
               <div className="flex-1 min-w-0">
                 <label
                   htmlFor="hero-location"
-                  className="block text-xs font-semibold text-neutral-950 uppercase tracking-wide cursor-pointer"
+                  className="block text-sm font-semibold text-neutral-950 uppercase tracking-wide cursor-pointer"
                 >
                   Où ?
                 </label>
@@ -124,7 +124,7 @@ export function HeroCentered() {
               <div className="flex-1 min-w-0">
                 <label
                   htmlFor="hero-service"
-                  className="block text-xs font-semibold text-neutral-950 uppercase tracking-wide cursor-pointer"
+                  className="block text-sm font-semibold text-neutral-950 uppercase tracking-wide cursor-pointer"
                 >
                   Prestation
                 </label>
@@ -149,7 +149,7 @@ export function HeroCentered() {
               >
                 <CalendarDays className="w-4 h-4 text-primary-600 shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <span className="block text-xs font-semibold text-neutral-950 uppercase tracking-wide">
+                  <span className="block text-sm font-semibold text-neutral-950 uppercase tracking-wide">
                     Quand ?
                   </span>
                   <input
@@ -168,7 +168,7 @@ export function HeroCentered() {
                 <div className="absolute bottom-full mb-3 left-0 sm:left-auto sm:right-0 w-[280px] sm:w-[310px] bg-white rounded-2xl shadow-2xl border border-primary-200 p-4 z-50 animate-in fade-in zoom-in-95 duration-150">
                   {/* Entête du mois */}
                   <div className="flex items-center justify-between mb-3 px-1">
-                    <span className="text-xs font-bold text-neutral-950 capitalize">
+                    <span className="text-sm font-bold text-neutral-950 capitalize">
                       {new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric" }).format(activeMonth)}
                     </span>
                     <div className="flex items-center gap-1">
@@ -190,12 +190,12 @@ export function HeroCentered() {
                   </div>
 
                   {/* Noms des jours */}
-                  <div className="grid grid-cols-7 gap-1 text-center mb-1 text-xs font-semibold text-neutral-400">
+                  <div className="grid grid-cols-7 gap-1 text-center mb-1 text-sm font-semibold text-neutral-400">
                     <span>Lu</span><span>Ma</span><span>Me</span><span>Je</span><span>Ve</span><span>Sa</span><span>Di</span>
                   </div>
 
                   {/* Grille des jours */}
-                  <div className="grid grid-cols-7 gap-1 text-xs">
+                  <div className="grid grid-cols-7 gap-1 text-sm">
                     {Array.from({ length: startOffset }).map((_, index) => (
                       <div key={`empty-${index}`} className="h-8" />
                     ))}
@@ -211,7 +211,7 @@ export function HeroCentered() {
                           key={day}
                           type="button"
                           onClick={() => handleSelectDay(day)}
-                          className={`h-8 w-8 mx-auto flex items-center justify-center rounded-xl text-xs font-medium transition-colors cursor-pointer ${
+                          className={`h-8 w-8 mx-auto flex items-center justify-center rounded-xl text-sm font-medium transition-colors cursor-pointer ${
                             isSelected
                               ? "bg-primary-600 text-white font-bold"
                               : "text-neutral-800 hover:bg-neutral-100"

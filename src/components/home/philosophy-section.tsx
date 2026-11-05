@@ -24,7 +24,7 @@ export function PhilosophySection() {
         <div className="max-w-xl lg:max-w-2xl">
           {/* Eyebrow éditorial avec filet linéaire bordeaux/figue */}
           <div className="flex items-center gap-3.5 mb-4 sm:mb-6">
-            <span className="text-xs uppercase font-semibold tracking-widest text-primary-700">
+            <span className="text-sm uppercase font-semibold tracking-widest text-primary-700">
               Notre philosophie
             </span>
             <span

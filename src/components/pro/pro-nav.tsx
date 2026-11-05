@@ -36,7 +36,7 @@ export function ProNav({ onStartDemo, showNavLinks = true }: ProNavProps) {
 
         {/* 2. Menu Pro au centre (visible sur grand écran) */}
         {showNavLinks && (
-          <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-neutral-600">
+          <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold uppercase tracking-wider text-neutral-600">
             <Link
               href="/pro#features"
               className="hover:text-primary-600 transition-colors inline-flex items-center gap-1"
@@ -63,14 +63,14 @@ export function ProNav({ onStartDemo, showNavLinks = true }: ProNavProps) {
         <div className="flex items-center gap-3 sm:gap-4">
           <Link
             href="/pro/agenda"
-            className="text-xs font-bold text-primary-700 hover:text-primary-800 transition-colors px-2.5 py-1.5 rounded-lg bg-primary-50 border border-primary-200"
+            className="text-sm font-bold text-primary-700 hover:text-primary-800 transition-colors px-2.5 py-1.5 rounded-lg bg-primary-50 border border-primary-200"
           >
             Accéder à l&apos;Espace Pro
           </Link>
 
           <Link
             href="/login"
-            className="text-xs font-semibold text-neutral-700 hover:text-neutral-950 transition-colors px-2 py-1.5"
+            className="text-sm font-semibold text-neutral-700 hover:text-neutral-950 transition-colors px-2 py-1.5"
           >
             Se connecter
           </Link>

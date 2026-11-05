@@ -137,7 +137,7 @@ export default function AboutPage() {
                 <span className="font-display text-4xl sm:text-5xl text-neutral-950 block num mb-1">
                   450+
                 </span>
-                <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold">
+                <span className="text-sm text-neutral-500 uppercase tracking-wider font-semibold">
                   Ateliers Audités
                 </span>
               </div>
@@ -145,7 +145,7 @@ export default function AboutPage() {
                 <span className="font-display text-4xl sm:text-5xl text-neutral-950 block num mb-1">
                   12
                 </span>
-                <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold">
+                <span className="text-sm text-neutral-500 uppercase tracking-wider font-semibold">
                   Métropoles de France
                 </span>
               </div>
@@ -153,7 +153,7 @@ export default function AboutPage() {
                 <span className="font-display text-4xl sm:text-5xl text-neutral-950 block num mb-1">
                   4,9 / 5
                 </span>
-                <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold">
+                <span className="text-sm text-neutral-500 uppercase tracking-wider font-semibold">
                   Note Moyenne Vérifiée
                 </span>
               </div>
@@ -161,7 +161,7 @@ export default function AboutPage() {
                 <span className="font-display text-4xl sm:text-5xl text-neutral-950 block num mb-1">
                   0 min
                 </span>
-                <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold">
+                <span className="text-sm text-neutral-500 uppercase tracking-wider font-semibold">
                   Attente Garantie
                 </span>
               </div>

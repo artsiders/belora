@@ -166,14 +166,14 @@ export function AppointmentModal({
           <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80 space-y-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-full bg-neutral-200 text-neutral-800 font-bold text-xs flex items-center justify-center">
+                <div className="w-9 h-9 rounded-full bg-neutral-200 text-neutral-800 font-bold text-sm flex items-center justify-center">
                   {appointment.clientName.charAt(0)}
                 </div>
                 <div>
                   <h4 className="font-bold text-neutral-950 text-base">
                     {appointment.clientName}
                   </h4>
-                  <p className="text-xs text-neutral-500">Client habitué</p>
+                  <p className="text-sm text-neutral-500">Client habitué</p>
                 </div>
               </div>
 
@@ -181,13 +181,13 @@ export function AppointmentModal({
                 href={`/pro/clients?search=${encodeURIComponent(
                   appointment.clientName
                 )}`}
-                className="text-xs text-primary-700 font-semibold hover:underline"
+                className="text-sm text-primary-700 font-semibold hover:underline"
               >
                 Voir fiche CRM &rarr;
               </Link>
             </div>
 
-            <div className="pt-2 border-t border-neutral-200/60 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-neutral-600">
+            <div className="pt-2 border-t border-neutral-200/60 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-neutral-600">
               <div className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-neutral-400" />
                 <span>{appointment.clientPhone}</span>
@@ -202,7 +202,7 @@ export function AppointmentModal({
           {/* Prestation & Créneau */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider block">
+              <span className="text-sm font-semibold text-neutral-500 uppercase tracking-wider block">
                 Prestation
               </span>
               <p className="font-semibold text-neutral-950 text-sm">
@@ -211,7 +211,7 @@ export function AppointmentModal({
             </div>
 
             <div className="space-y-1">
-              <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider block">
+              <span className="text-sm font-semibold text-neutral-500 uppercase tracking-wider block">
                 Horaires
               </span>
               <p className="font-semibold text-neutral-950 text-sm tabular-nums flex items-center gap-1.5">
@@ -223,7 +223,7 @@ export function AppointmentModal({
             </div>
 
             <div className="space-y-1">
-              <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider block">
+              <span className="text-sm font-semibold text-neutral-500 uppercase tracking-wider block">
                 Collaborateur assigné
               </span>
               <p className="font-semibold text-neutral-900 text-sm">
@@ -232,7 +232,7 @@ export function AppointmentModal({
             </div>
 
             <div className="space-y-1">
-              <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider block">
+              <span className="text-sm font-semibold text-neutral-500 uppercase tracking-wider block">
                 Cabine / Ressource
               </span>
               <p className="font-semibold text-neutral-900 text-sm">
@@ -243,14 +243,14 @@ export function AppointmentModal({
 
           {/* Synthèse Financière & Acompte Stripe */}
           <div className="p-4 rounded-xl border border-neutral-200 bg-white space-y-2.5">
-            <div className="flex items-center justify-between text-xs">
+            <div className="flex items-center justify-between text-sm">
               <span className="text-neutral-600">Montant total de la prestation</span>
               <span className="font-semibold text-neutral-950 tabular-nums">
                 {appointment.price} € TTC
               </span>
             </div>
 
-            <div className="flex items-center justify-between text-xs text-primary-700">
+            <div className="flex items-center justify-between text-sm text-primary-700">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Acompte sécurisé Stripe Connect déjà perçu</span>
@@ -269,7 +269,7 @@ export function AppointmentModal({
           </div>
 
           {appointment.notes && (
-            <div className="text-xs text-neutral-600 bg-neutral-50 p-3 rounded-lg border border-neutral-200/60">
+            <div className="text-sm text-neutral-600 bg-neutral-50 p-3 rounded-lg border border-neutral-200/60">
               <strong className="block text-neutral-800 mb-0.5">Notes :</strong>
               {appointment.notes}
             </div>
@@ -372,7 +372,7 @@ export function AppointmentModal({
           />
 
           {/* Note sur acompte */}
-          <div className="flex flex-col justify-end pb-1 text-xs text-neutral-500">
+          <div className="flex flex-col justify-end pb-1 text-sm text-neutral-500">
             <span className="font-semibold text-neutral-800">
               Réservation en salon
             </span>

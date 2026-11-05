@@ -42,7 +42,7 @@ export default function NotificationsSettingsPage() {
     <div className="p-4 sm:p-8 space-y-8 max-w-4xl">
       {/* Toast Notification */}
       {notification && (
-        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2 shadow-sm">
+        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold flex items-center gap-2 shadow-sm">
           <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>{notification}</span>
         </div>
@@ -130,12 +130,12 @@ export default function NotificationsSettingsPage() {
           {/* Mock Aperçu Téléphone Mobile */}
           <div className="md:col-span-5 p-5 sm:p-6 rounded-2xl bg-neutral-900 text-white shadow-md flex flex-col justify-between">
             <div className="space-y-3">
-              <div className="flex items-center gap-2 pb-3 border-b border-neutral-800 text-xs text-neutral-400">
+              <div className="flex items-center gap-2 pb-3 border-b border-neutral-800 text-sm text-neutral-400">
                 <Smartphone className="w-4 h-4 text-primary-300" />
                 <span>Aperçu sur le mobile du client</span>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-neutral-800/80 border border-neutral-700 text-xs text-neutral-100 leading-relaxed font-sans shadow-sm">
+              <div className="p-3.5 rounded-2xl bg-neutral-800/80 border border-neutral-700 text-sm text-neutral-100 leading-relaxed font-sans shadow-sm">
                 <p className="font-semibold text-primary-200 mb-1">BELORA</p>
                 <p>{previewSms}</p>
               </div>

@@ -18,7 +18,7 @@ export default function ProJoinPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-white flex items-center justify-center p-8 text-xs text-neutral-500">
+        <div className="min-h-screen bg-white flex items-center justify-center p-8 text-sm text-neutral-500">
           Chargement de l&apos;espace Belora Pro...
         </div>
       }

@@ -81,7 +81,7 @@ export function DashboardHeader() {
               priority
               className="h-5 sm:h-6 w-auto object-contain"
             />
-            <span className="text-xs font-bold uppercase tracking-wider text-primary-700 bg-primary-50 px-1.5 py-0.5 rounded">
+            <span className="text-sm font-bold uppercase tracking-wider text-primary-700 bg-primary-50 px-1.5 py-0.5 rounded">
               Pro
             </span>
           </Link>
@@ -95,7 +95,6 @@ export function DashboardHeader() {
               onClick={() => setSalonSwitcherOpen(!salonSwitcherOpen)}
               className="flex items-center gap-2 text-sm sm:text-base font-semibold text-neutral-900 hover:text-primary-700 transition-colors px-2 py-1.5 rounded-lg hover:bg-neutral-100 cursor-pointer"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
               <span className="truncate max-w-[130px] sm:max-w-[200px]">
                 {MOCK_ESTABLISHMENT.name}
               </span>
@@ -108,7 +107,7 @@ export function DashboardHeader() {
                   className="fixed inset-0 z-40"
                   onClick={() => setSalonSwitcherOpen(false)}
                 />
-                <div className="absolute left-0 mt-1 w-64 rounded-xl border border-neutral-200 bg-white p-2 shadow-lg z-50 text-xs">
+                <div className="absolute left-0 mt-1 w-64 rounded-xl border border-neutral-200 bg-white p-2 shadow-lg z-50 text-sm">
                   <div className="px-3 py-2 text-neutral-400 font-medium border-b border-neutral-100 uppercase tracking-wider">
                     Établissement actif
                   </div>
@@ -161,7 +160,7 @@ export function DashboardHeader() {
         {/* Section Droite : Horloge, Notifications, Profil */}
         <div className="flex items-center gap-2 sm:gap-4 shrink-0">
           {/* Horloge en direct */}
-          <div className="hidden md:flex items-center gap-1.5 text-xs text-neutral-600 font-medium bg-neutral-100/80 px-2.5 py-1 rounded-lg">
+          <div className="hidden md:flex items-center gap-1.5 text-sm text-neutral-600 font-medium bg-neutral-100/80 px-2.5 py-1 rounded-lg">
             <Clock className="w-3.5 h-3.5 text-neutral-500" />
             <span className="tabular-nums font-semibold text-neutral-900">
               {currentTime || "14:37"}
@@ -193,7 +192,7 @@ export function DashboardHeader() {
                   className="fixed inset-0 z-40"
                   onClick={() => setShowNotifications(false)}
                 />
-                <div className="absolute right-0 mt-2 w-80 rounded-2xl border border-neutral-200 bg-white p-3 shadow-xl z-50 text-xs">
+                <div className="absolute right-0 mt-2 w-80 rounded-2xl border border-neutral-200 bg-white p-3 shadow-xl z-50 text-sm">
                   <div className="flex items-center justify-between pb-2 border-b border-neutral-100 px-2">
                     <span className="font-bold text-neutral-900">
                       Notifications du salon
@@ -205,7 +204,7 @@ export function DashboardHeader() {
                       <p className="font-semibold text-neutral-900">
                         Nouvelle réservation en ligne
                       </p>
-                      <p className="text-neutral-600 text-xs mt-0.5">
+                      <p className="text-neutral-600 text-sm mt-0.5">
                         Sophie Martin &bull; Grand Rituel Kobido (14h00)
                       </p>
                       <span className="text-neutral-400 text-[10px] mt-1 block">
@@ -216,7 +215,7 @@ export function DashboardHeader() {
                       <p className="font-semibold text-neutral-900">
                         Rappel SMS envoyé
                       </p>
-                      <p className="text-neutral-600 text-xs mt-0.5">
+                      <p className="text-neutral-600 text-sm mt-0.5">
                         Antoine Dupont confirmé pour 10h00 demain
                       </p>
                       <span className="text-neutral-400 text-[10px] mt-1 block">
@@ -227,7 +226,7 @@ export function DashboardHeader() {
                       <p className="font-semibold text-neutral-900">
                         Pointage équipe validé
                       </p>
-                      <p className="text-neutral-600 text-xs mt-0.5">
+                      <p className="text-neutral-600 text-sm mt-0.5">
                         Clément Roux a pointé son arrivée à 09:55
                       </p>
                       <span className="text-neutral-400 text-[10px] mt-1 block">
@@ -245,14 +244,14 @@ export function DashboardHeader() {
             href={`/venue/${MOCK_ESTABLISHMENT.slug}`}
             target="_blank"
             title="Consulter ma fiche en ligne sur Belora"
-            className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-neutral-200 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50 text-xs font-semibold transition-colors"
+            className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-neutral-200 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50 text-sm font-semibold transition-colors"
           >
             <span>Fiche publique</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </Link>
 
           {/* Avatar Pro */}
-          <div className="w-8 h-8 rounded-full bg-primary-100 border border-primary-200 text-primary-900 font-bold text-xs flex items-center justify-center shrink-0">
+          <div className="w-12 h-12 rounded-full bg-primary-100 text-primary-900 font-bold text-sm flex items-center justify-center shrink-0">
             HV
           </div>
         </div>

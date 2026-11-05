@@ -90,7 +90,7 @@ export function PresenceModal({
                   <h4 className="text-sm font-bold text-neutral-950">
                     {staff.name}
                   </h4>
-                  <p className="text-xs text-neutral-500">{staff.role}</p>
+                  <p className="text-sm text-neutral-500">{staff.role}</p>
                 </div>
               </div>
 
@@ -104,9 +104,9 @@ export function PresenceModal({
                       [staff.id]: { ...times, start: e.target.value },
                     })
                   }
-                  className="h-9 px-2.5 bg-white border border-neutral-300 rounded-lg text-xs font-semibold text-neutral-900"
+                  className="h-9 px-2.5 bg-white border border-neutral-300 rounded-lg text-sm font-semibold text-neutral-900"
                 />
-                <span className="text-neutral-400 text-xs">à</span>
+                <span className="text-neutral-400 text-sm">à</span>
                 <input
                   type="time"
                   value={times.end}
@@ -116,7 +116,7 @@ export function PresenceModal({
                       [staff.id]: { ...times, end: e.target.value },
                     })
                   }
-                  className="h-9 px-2.5 bg-white border border-neutral-300 rounded-lg text-xs font-semibold text-neutral-900"
+                  className="h-9 px-2.5 bg-white border border-neutral-300 rounded-lg text-sm font-semibold text-neutral-900"
                 />
               </div>
             </div>

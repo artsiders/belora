@@ -293,7 +293,7 @@ export default function AgendaPage() {
   return (
     <React.Suspense
       fallback={
-        <div className="flex-1 flex items-center justify-center p-12 text-xs text-neutral-500">
+        <div className="flex-1 flex items-center justify-center p-12 text-sm text-neutral-500">
           Chargement du planning...
         </div>
       }

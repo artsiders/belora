@@ -100,7 +100,7 @@ export function AgendaGrid({
       {/* Header des colonnes (Sticky) */}
       <div className="sticky top-0 z-20 flex bg-white border-b border-neutral-200/90 shadow-2xs">
         {/* Coin supérieur gauche (échelle horaire) */}
-        <div className="w-16 sm:w-20 shrink-0 p-3 bg-neutral-50/90 border-e border-neutral-200/80 text-center text-xs font-semibold text-neutral-500">
+        <div className="w-16 sm:w-20 shrink-0 p-3 bg-neutral-50/90 border-e border-neutral-200/80 text-center text-sm font-semibold text-neutral-500">
           Heures
         </div>
 
@@ -161,7 +161,7 @@ export function AgendaGrid({
             <div
               key={hour}
               style={{ height: HOUR_HEIGHT }}
-              className="relative p-2 text-end text-xs font-semibold tabular-nums text-neutral-500 border-b border-neutral-100"
+              className="relative p-2 text-end text-sm font-semibold tabular-nums text-neutral-500 border-b border-neutral-100"
             >
               <span className="-translate-y-2 block">{hour}</span>
             </div>

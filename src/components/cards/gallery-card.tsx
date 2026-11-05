@@ -33,7 +33,7 @@ export function GalleryCard({ item }: GalleryCardProps) {
         />
 
         {/* Pastille de catégorie en bas de l'image */}
-        <div className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-xs font-semibold text-neutral-900 shadow-xs">
+        <div className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-sm font-semibold text-neutral-900 shadow-xs">
           {item.category}
         </div>
       </div>
@@ -44,7 +44,7 @@ export function GalleryCard({ item }: GalleryCardProps) {
           <h3 className="text-sm sm:text-base font-bold text-neutral-950 group-hover:text-primary-600 transition-colors leading-snug">
             {item.title}
           </h3>
-          <p className="text-xs text-neutral-500 mt-1 font-normal">
+          <p className="text-sm text-neutral-500 mt-1 font-normal">
             {item.salon} · {item.city}
           </p>
         </div>

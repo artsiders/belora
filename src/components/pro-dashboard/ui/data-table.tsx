@@ -98,12 +98,12 @@ export function DataTable<T>({
         <h4 className="text-sm font-bold text-neutral-900">
           Une erreur est survenue lors du chargement des données
         </h4>
-        <p className="text-xs text-neutral-600 max-w-md mx-auto">{error}</p>
+        <p className="text-sm text-neutral-600 max-w-md mx-auto">{error}</p>
         {onRetry && (
           <button
             type="button"
             onClick={onRetry}
-            className="btn btn-outline btn-sm text-xs mt-2"
+            className="btn btn-outline btn-sm text-sm mt-2"
           >
             Réessayer
           </button>
@@ -152,7 +152,7 @@ export function DataTable<T>({
                 {columns.map((col) => (
                   <th
                     key={col.key}
-                    className={`py-3.5 px-4 font-semibold uppercase tracking-wider text-xs ${
+                    className={`py-3.5 px-4 font-semibold uppercase tracking-wider text-sm ${
                       col.className || ""
                     }`}
                   >
@@ -184,7 +184,7 @@ export function DataTable<T>({
                       <p className="font-semibold text-neutral-900 text-sm">
                         {emptyMessage}
                       </p>
-                      <p className="text-xs text-neutral-500">
+                      <p className="text-sm text-neutral-500">
                         {emptySubMessage}
                       </p>
                     </div>
@@ -222,7 +222,7 @@ export function DataTable<T>({
 
         {/* Pagination Footer */}
         {sortedData.length > pageSize && (
-          <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-200/80 bg-neutral-50/60 text-xs text-neutral-600">
+          <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-200/80 bg-neutral-50/60 text-sm text-neutral-600">
             <span>
               Affichage de{" "}
               <strong className="text-neutral-900 font-semibold">

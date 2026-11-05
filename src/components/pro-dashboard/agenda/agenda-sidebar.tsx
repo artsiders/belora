@@ -96,7 +96,7 @@ export function AgendaSidebar({
       {/* 1. Mini Calendrier Interactif (Style Planity) */}
       <div className="p-4 border-b border-neutral-200/80">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs font-bold text-neutral-900 capitalize">
+          <span className="text-sm font-bold text-neutral-900 capitalize">
             {monthNames[calMonth]} {calYear}
           </span>
           <div className="flex items-center gap-1">
@@ -131,7 +131,7 @@ export function AgendaSidebar({
         </div>
 
         {/* Grille des jours */}
-        <div className="grid grid-cols-7 gap-1 text-center text-xs">
+        <div className="grid grid-cols-7 gap-1 text-center text-sm">
           {Array.from({ length: startingDay }).map((_, idx) => (
             <div key={`empty-${idx}`} className="h-7 w-7" />
           ))}
@@ -153,7 +153,7 @@ export function AgendaSidebar({
                 onClick={() => {
                   onDateSelect(new Date(calYear, calMonth, dayNum));
                 }}
-                className={`h-7 w-7 rounded-lg text-xs font-medium flex items-center justify-center transition-colors cursor-pointer ${
+                className={`h-7 w-7 rounded-lg text-sm font-medium flex items-center justify-center transition-colors cursor-pointer ${
                   isSelected
                     ? "bg-primary-600 text-white font-bold shadow-2xs"
                     : isToday
@@ -171,7 +171,7 @@ export function AgendaSidebar({
       {/* 2. Filtres Collaborateurs */}
       <div className="p-4 border-b border-neutral-200/80">
         <div className="flex items-center justify-between mb-2.5">
-          <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-neutral-900 uppercase tracking-wider">
+          <label className="flex items-center gap-2 cursor-pointer text-sm font-bold text-neutral-900 uppercase tracking-wider">
             <input
               type="checkbox"
               checked={allStaffSelected}
@@ -213,7 +213,7 @@ export function AgendaSidebar({
                     />
                   </div>
                   <div className="truncate">
-                    <p className="text-xs font-semibold text-neutral-900 truncate">
+                    <p className="text-sm font-semibold text-neutral-900 truncate">
                       {staff.name}
                     </p>
                   </div>
@@ -232,7 +232,7 @@ export function AgendaSidebar({
       {/* 3. Filtres Cabines & Ressources */}
       <div className="p-4 border-b border-neutral-200/80">
         <div className="flex items-center justify-between mb-2.5">
-          <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-neutral-900 uppercase tracking-wider">
+          <label className="flex items-center gap-2 cursor-pointer text-sm font-bold text-neutral-900 uppercase tracking-wider">
             <input
               type="checkbox"
               checked={allResourcesSelected}
@@ -249,7 +249,7 @@ export function AgendaSidebar({
             return (
               <label
                 key={res.id}
-                className={`flex items-center gap-2.5 p-2 rounded-xl border text-xs font-medium cursor-pointer transition-colors ${
+                className={`flex items-center gap-2.5 p-2 rounded-xl border text-sm font-medium cursor-pointer transition-colors ${
                   isChecked
                     ? "bg-neutral-50/80 border-neutral-200 text-neutral-900"
                     : "bg-white border-transparent text-neutral-500 opacity-60 hover:opacity-90"
@@ -273,7 +273,7 @@ export function AgendaSidebar({
         <button
           type="button"
           onClick={onOpenPresenceModal}
-          className="w-full h-10 px-3 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-800 text-xs font-semibold flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
+          className="w-full h-10 px-3 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-800 text-sm font-semibold flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
         >
           <CalendarCheck2 className="w-4 h-4 text-neutral-600" />
           <span>Horaires de présence</span>
@@ -282,7 +282,7 @@ export function AgendaSidebar({
         <button
           type="button"
           onClick={onOpenClockInModal}
-          className="w-full h-11 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
+          className="w-full h-11 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
         >
           <Clock className="w-4 h-4" />
           <span>Pointage équipe</span>

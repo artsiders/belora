@@ -38,7 +38,7 @@ export function CategoryVenuesPreview({ category }: CategoryVenuesPreviewProps) 
 
           <Link
             href={`/search?category=${category.slug}`}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-neutral-700 hover:text-primary-600 transition-colors shrink-0 self-start sm:self-auto"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold tracking-wider uppercase text-neutral-700 hover:text-primary-600 transition-colors shrink-0 self-start sm:self-auto"
           >
             <span>Voir tous les salons ({matchingVenues.length})</span>
             <ArrowRight className="w-4 h-4" />

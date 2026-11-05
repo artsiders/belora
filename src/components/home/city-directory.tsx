@@ -31,7 +31,7 @@ export function CityDirectory() {
           }
           subtitle="Nos havres et ateliers partenaires vous accueillent au cœur des douze plus grandes métropoles françaises."
           action={
-            <span className="px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 text-xs font-semibold num shadow-2xs">
+            <span className="px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 text-sm font-semibold num shadow-2xs">
               450+ adresses certifiées
             </span>
           }

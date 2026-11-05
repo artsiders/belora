@@ -55,7 +55,7 @@ export function SanctuaryExperience() {
                     <h3 className="text-sm font-semibold text-neutral-950 mb-1">
                       {pillar.title}
                     </h3>
-                    <p className="text-xs text-neutral-600 leading-relaxed font-normal">
+                    <p className="text-sm text-neutral-600 leading-relaxed font-normal">
                       {pillar.description}
                     </p>
                   </div>
@@ -98,10 +98,10 @@ export function SanctuaryExperience() {
 
                 <div className="absolute bottom-3 inset-x-3 p-3 rounded-md bg-white/95 backdrop-blur-xs border border-primary-200/80 text-neutral-900 shadow-xs flex items-center justify-between gap-2">
                   <div>
-                    <h4 className="text-xs font-bold text-neutral-950 group-hover:text-primary-600 transition-colors">
+                    <h4 className="text-sm font-bold text-neutral-950 group-hover:text-primary-600 transition-colors">
                       Maison Albar Institut
                     </h4>
-                    <p className="text-xs text-neutral-500">
+                    <p className="text-sm text-neutral-500">
                       Lyon Presqu’île · Audit 2026
                     </p>
                   </div>
@@ -114,14 +114,14 @@ export function SanctuaryExperience() {
                 {/* Arche supérieure Terracotta douce avec promesse */}
                 <div className="h-44 sm:h-76 rounded-b-xl bg-primary-700 p-3.5 sm:p-4 flex flex-col justify-center text-center text-white shadow-2xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-white/80 mx-auto mb-2" />
-                  <p className="text-xs font-semibold leading-snug">
+                  <p className="text-sm font-semibold leading-snug">
                     Acoustique feutrée & calme absolu
                   </p>
                 </div>
 
                 {/* Arche inférieure Olive avec forme arrondie horizontale */}
                 <div className="h-28 sm:h-36 rounded-r-xl bg-secondary-900 shadow-2xs flex items-center justify-center text-white text-center p-2">
-                  <span className="text-xs font-bold tracking-wider uppercase">Audit Certifié</span>
+                  <span className="text-sm font-bold tracking-wider uppercase">Audit Certifié</span>
                 </div>
               </div>
             </div>

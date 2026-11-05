@@ -105,7 +105,7 @@ export function DailyClosingModal({
               <strong className="block font-bold">
                 Clôture de caisse validée avec succès.
               </strong>
-              <p className="text-xs text-emerald-700">
+              <p className="text-sm text-emerald-700">
                 Le journal des ventes a été archivé et les totaux ont été
                 verrouillés pour la comptabilité.
               </p>
@@ -116,7 +116,7 @@ export function DailyClosingModal({
         {/* Synthèse des Recettes */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200">
-            <span className="text-neutral-500 text-xs block mb-1">
+            <span className="text-neutral-500 text-sm block mb-1">
               Chiffre d’Affaires TTC
             </span>
             <span className="font-bold text-lg text-neutral-950 tabular-nums">
@@ -125,7 +125,7 @@ export function DailyClosingModal({
           </div>
 
           <div className="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200">
-            <span className="text-neutral-500 text-xs block mb-1">
+            <span className="text-neutral-500 text-sm block mb-1">
               Total Hors Taxes (HT)
             </span>
             <span className="font-bold text-lg text-neutral-950 tabular-nums">
@@ -134,7 +134,7 @@ export function DailyClosingModal({
           </div>
 
           <div className="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200">
-            <span className="text-neutral-500 text-xs block mb-1">
+            <span className="text-neutral-500 text-sm block mb-1">
               TVA Collectée (20%)
             </span>
             <span className="font-bold text-lg text-neutral-950 tabular-nums">
@@ -143,7 +143,7 @@ export function DailyClosingModal({
           </div>
 
           <div className="p-3.5 rounded-xl bg-primary-50/50 border border-primary-200">
-            <span className="text-primary-800 text-xs block mb-1 font-semibold">
+            <span className="text-primary-800 text-sm block mb-1 font-semibold">
               Acomptes Stripe perçus
             </span>
             <span className="font-bold text-lg text-primary-900 tabular-nums">
@@ -154,7 +154,7 @@ export function DailyClosingModal({
 
         {/* Ventilation par Moyen de Règlement */}
         <div className="rounded-xl border border-neutral-200 overflow-hidden">
-          <div className="bg-neutral-50/90 px-4 py-2.5 font-bold text-neutral-900 text-xs uppercase tracking-wider border-b border-neutral-200">
+          <div className="bg-neutral-50/90 px-4 py-2.5 font-bold text-neutral-900 text-sm uppercase tracking-wider border-b border-neutral-200">
             Ventilation des encaissements en salon
           </div>
           <div className="divide-y divide-neutral-100 p-2">
@@ -187,12 +187,12 @@ export function DailyClosingModal({
 
         {/* Contrôle du Tiroir Caisse & Écart */}
         <div className="p-4 rounded-xl border border-neutral-200 bg-neutral-50/40 space-y-3">
-          <h4 className="font-bold text-neutral-900 text-xs uppercase tracking-wider">
+          <h4 className="font-bold text-neutral-900 text-sm uppercase tracking-wider">
             Comptage physique des espèces
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <span className="text-xs text-neutral-500 block mb-1">
+              <span className="text-sm text-neutral-500 block mb-1">
                 Fond de caisse initial
               </span>
               <span className="font-semibold text-neutral-900 tabular-nums">
@@ -200,7 +200,7 @@ export function DailyClosingModal({
               </span>
             </div>
             <div>
-              <span className="text-xs text-neutral-500 block mb-1">
+              <span className="text-sm text-neutral-500 block mb-1">
                 Espèces théoriques attendues
               </span>
               <span className="font-semibold text-neutral-900 tabular-nums">
@@ -208,7 +208,7 @@ export function DailyClosingModal({
               </span>
             </div>
             <div>
-              <label className="text-xs font-semibold text-neutral-800 block mb-1">
+              <label className="text-sm font-semibold text-neutral-800 block mb-1">
                 Montant compté dans le tiroir
               </label>
               <input
@@ -216,12 +216,12 @@ export function DailyClosingModal({
                 step="0.01"
                 value={cashCounted}
                 onChange={(e) => setCashCounted(e.target.value)}
-                className="w-full h-9 px-3 bg-white border border-neutral-300 rounded-lg text-xs font-semibold tabular-nums text-neutral-900"
+                className="w-full h-9 px-3 bg-white border border-neutral-300 rounded-lg text-sm font-semibold tabular-nums text-neutral-900"
               />
             </div>
           </div>
 
-          <div className="pt-2 border-t border-neutral-200/80 flex items-center justify-between text-xs">
+          <div className="pt-2 border-t border-neutral-200/80 flex items-center justify-between text-sm">
             <span className="text-neutral-600">Écart de caisse :</span>
             <span
               className={`font-bold tabular-nums ${
@@ -241,7 +241,7 @@ export function DailyClosingModal({
 
         {/* Chiffre d'Affaires par Collaborateur */}
         <div className="rounded-xl border border-neutral-200 overflow-hidden">
-          <div className="bg-neutral-50/90 px-4 py-2.5 font-bold text-neutral-900 text-xs uppercase tracking-wider border-b border-neutral-200">
+          <div className="bg-neutral-50/90 px-4 py-2.5 font-bold text-neutral-900 text-sm uppercase tracking-wider border-b border-neutral-200">
             Performance & Recettes par Praticien
           </div>
           <div className="divide-y divide-neutral-100">
@@ -256,7 +256,7 @@ export function DailyClosingModal({
               return (
                 <div
                   key={staff.id}
-                  className="flex items-center justify-between py-2 px-4 text-xs"
+                  className="flex items-center justify-between py-2 px-4 text-sm"
                 >
                   <div className="flex items-center gap-2">
                     <span

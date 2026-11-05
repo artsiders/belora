@@ -55,7 +55,7 @@ export function ClockInModal({
     >
       <div className="space-y-4">
         {successMessage && (
-          <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2">
+          <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-emerald-600" />
             <span>{successMessage}</span>
           </div>
@@ -84,7 +84,7 @@ export function ClockInModal({
                     <h4 className="text-sm font-bold text-neutral-950">
                       {staff.name}
                     </h4>
-                    <p className="text-xs text-neutral-500 flex items-center gap-1.5 mt-0.5">
+                    <p className="text-sm text-neutral-500 flex items-center gap-1.5 mt-0.5">
                       <Clock className="w-3.5 h-3.5 text-neutral-400" />
                       <span>
                         {isClockedIn
@@ -98,7 +98,7 @@ export function ClockInModal({
                 <button
                   type="button"
                   onClick={() => handleAction(staff)}
-                  className={`btn btn-sm text-xs font-semibold rounded-xl flex items-center gap-1.5 cursor-pointer ${
+                  className={`btn btn-sm text-sm font-semibold rounded-xl flex items-center gap-1.5 cursor-pointer ${
                     isClockedIn
                       ? "bg-rose-50 border border-rose-200 text-rose-800 hover:bg-rose-100"
                       : "bg-emerald-600 text-white hover:bg-emerald-700 shadow-2xs"

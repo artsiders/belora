@@ -18,7 +18,7 @@ export const FormInput = React.forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-xs font-semibold text-neutral-800 uppercase tracking-wider"
+            className="block text-sm font-semibold text-neutral-800 uppercase tracking-wider"
           >
             {label}
             {props.required && <span className="text-rose-600 ml-1">*</span>}
@@ -43,9 +43,9 @@ export const FormInput = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
         </div>
-        {error && <p className="text-xs text-rose-600">{error}</p>}
+        {error && <p className="text-sm text-rose-600">{error}</p>}
         {helper && !error && (
-          <p className="text-xs text-neutral-500">{helper}</p>
+          <p className="text-sm text-neutral-500">{helper}</p>
         )}
       </div>
     );
@@ -77,7 +77,7 @@ export const FormSelect = React.forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label
             htmlFor={selectId}
-            className="block text-xs font-semibold text-neutral-800 uppercase tracking-wider"
+            className="block text-sm font-semibold text-neutral-800 uppercase tracking-wider"
           >
             {label}
             {props.required && <span className="text-rose-600 ml-1">*</span>}
@@ -99,9 +99,9 @@ export const FormSelect = React.forwardRef<HTMLSelectElement, SelectProps>(
             </option>
           ))}
         </select>
-        {error && <p className="text-xs text-rose-600">{error}</p>}
+        {error && <p className="text-sm text-rose-600">{error}</p>}
         {helper && !error && (
-          <p className="text-xs text-neutral-500">{helper}</p>
+          <p className="text-sm text-neutral-500">{helper}</p>
         )}
       </div>
     );
@@ -128,7 +128,7 @@ export const FormTextarea = React.forwardRef<
       {label && (
         <label
           htmlFor={textareaId}
-          className="block text-xs font-semibold text-neutral-800 uppercase tracking-wider"
+          className="block text-sm font-semibold text-neutral-800 uppercase tracking-wider"
         >
           {label}
           {props.required && <span className="text-rose-600 ml-1">*</span>}
@@ -144,8 +144,8 @@ export const FormTextarea = React.forwardRef<
         } ${className}`}
         {...props}
       />
-      {error && <p className="text-xs text-rose-600">{error}</p>}
-      {helper && !error && <p className="text-xs text-neutral-500">{helper}</p>}
+      {error && <p className="text-sm text-rose-600">{error}</p>}
+      {helper && !error && <p className="text-sm text-neutral-500">{helper}</p>}
     </div>
   );
 });
@@ -183,7 +183,7 @@ export function FormCheckbox({
           {label}
         </span>
         {description && (
-          <p className="text-xs text-neutral-500 mt-0.5 font-normal">
+          <p className="text-sm text-neutral-500 mt-0.5 font-normal">
             {description}
           </p>
         )}
@@ -217,7 +217,7 @@ export function ToggleSwitch({
             </span>
           )}
           {description && (
-            <span className="text-xs text-neutral-500 block">
+            <span className="text-sm text-neutral-500 block">
               {description}
             </span>
           )}

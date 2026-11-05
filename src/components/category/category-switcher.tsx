@@ -192,7 +192,7 @@ export function CategorySwitcher({
 
                 {/* Libellé */}
                 <span
-                  className={`mt-2.5 text-xs tracking-tight text-center leading-tight transition-colors duration-150 ${
+                  className={`mt-2.5 text-sm tracking-tight text-center leading-tight transition-colors duration-150 ${
                     isActive
                       ? "font-bold text-neutral-950"
                       : "font-medium text-neutral-600 group-hover:text-neutral-950"

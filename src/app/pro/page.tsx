@@ -192,7 +192,7 @@ export default function ProPage() {
                 Accueil
               </Link>
               <span>/</span>
-              <span className="text-primary-300 font-semibold uppercase tracking-wider text-xs">
+              <span className="text-primary-300 font-semibold uppercase tracking-wider text-sm">
                 Belora Pro &bull; Maisons & Salons
               </span>
             </div>
@@ -237,7 +237,7 @@ export default function ProPage() {
                 </div>
                 <div>
                   <strong className="block text-white font-semibold">0% de commission</strong>
-                  <span className="text-neutral-400 text-xs">Sur tous vos clients réguliers</span>
+                  <span className="text-neutral-400 text-sm">Sur tous vos clients réguliers</span>
                 </div>
               </div>
 
@@ -247,7 +247,7 @@ export default function ProPage() {
                 </div>
                 <div>
                   <strong className="block text-white font-semibold">Acomptes sécurisés</strong>
-                  <span className="text-neutral-400 text-xs">Zéro no-show garanti via Stripe</span>
+                  <span className="text-neutral-400 text-sm">Zéro no-show garanti via Stripe</span>
                 </div>
               </div>
 
@@ -257,7 +257,7 @@ export default function ProPage() {
                 </div>
                 <div>
                   <strong className="block text-white font-semibold">Migration en 24h</strong>
-                  <span className="text-neutral-400 text-xs">Prise en charge intégrale gratuite</span>
+                  <span className="text-neutral-400 text-sm">Prise en charge intégrale gratuite</span>
                 </div>
               </div>
             </div>
@@ -294,7 +294,7 @@ export default function ProPage() {
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="px-3 py-1.5 rounded-full bg-white border border-neutral-200/80 text-neutral-800 text-xs font-semibold num shadow-2xs shrink-0">
+                <span className="px-3 py-1.5 rounded-full bg-white border border-neutral-200/80 text-neutral-800 text-sm font-semibold num shadow-2xs shrink-0">
                   3 praticiens actifs
                 </span>
               </div>
@@ -311,13 +311,13 @@ export default function ProPage() {
                       Mardi 21 Octobre 2026
                     </span>
                   </div>
-                  <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-700 text-xs font-medium">
+                  <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-700 text-sm font-medium">
                     Vue Journalière
                   </span>
                 </div>
 
                 {/* Filtre de vue praticien */}
-                <div className="flex items-center gap-1.5 p-1 rounded-xl bg-neutral-100 border border-neutral-200/80 text-xs font-medium">
+                <div className="flex items-center gap-1.5 p-1 rounded-xl bg-neutral-100 border border-neutral-200/80 text-sm font-medium">
                   <button
                     type="button"
                     onClick={() => setSelectedArtisanTab("all")}
@@ -385,19 +385,19 @@ export default function ProPage() {
                           <h4 className="text-sm sm:text-base font-bold text-neutral-950">
                             Hélène de Valois
                           </h4>
-                          <p className="text-xs text-primary-700 font-semibold">
+                          <p className="text-sm text-primary-700 font-semibold">
                             Artisan Coloriste
                           </p>
                         </div>
                       </div>
-                      <span className="text-xs text-neutral-500 font-medium num">
+                      <span className="text-sm text-neutral-500 font-medium num">
                         5 créneaux
                       </span>
                     </div>
 
                     {/* Rendez-vous 1 */}
                     <div className="p-4 rounded-2xl bg-primary-50/40 border border-primary-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
-                      <div className="flex justify-between items-center text-xs font-bold">
+                      <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Balayage Minéral & Soin
                         </span>
@@ -405,10 +405,10 @@ export default function ProPage() {
                           10h00 - 12h00
                         </span>
                       </div>
-                      <p className="text-xs text-neutral-600">
+                      <p className="text-sm text-neutral-600">
                         Sophie M. &bull; Acompte versé (45 €)
                       </p>
-                      <div className="flex items-center gap-1.5 text-xs text-primary-700 font-medium pt-1">
+                      <div className="flex items-center gap-1.5 text-sm text-primary-700 font-medium pt-1">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>Créneau garanti &bull; 185 €</span>
                       </div>
@@ -416,7 +416,7 @@ export default function ProPage() {
 
                     {/* Rendez-vous 2 */}
                     <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
-                      <div className="flex justify-between items-center text-xs font-bold">
+                      <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Coupe Signature à Sec
                         </span>
@@ -424,10 +424,10 @@ export default function ProPage() {
                           14h00 - 15h00
                         </span>
                       </div>
-                      <p className="text-xs text-neutral-600">
+                      <p className="text-sm text-neutral-600">
                         Camille D. &bull; Client régulier Belora
                       </p>
-                      <div className="flex items-center gap-1.5 text-xs text-neutral-600 font-medium pt-1">
+                      <div className="flex items-center gap-1.5 text-sm text-neutral-600 font-medium pt-1">
                         <Clock className="w-3.5 h-3.5 text-neutral-400" />
                         <span>Temps de coiffage 60 min &bull; 80 €</span>
                       </div>
@@ -453,19 +453,19 @@ export default function ProPage() {
                           <h4 className="text-sm sm:text-base font-bold text-neutral-950">
                             Marc Sémard
                           </h4>
-                          <p className="text-xs text-secondary-700 font-semibold">
+                          <p className="text-sm text-secondary-700 font-semibold">
                             Maître Barbier
                           </p>
                         </div>
                       </div>
-                      <span className="text-xs text-neutral-500 font-medium num">
+                      <span className="text-sm text-neutral-500 font-medium num">
                         6 créneaux
                       </span>
                     </div>
 
                     {/* Rendez-vous 1 */}
                     <div className="p-4 rounded-2xl bg-secondary-50/40 border border-secondary-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
-                      <div className="flex justify-between items-center text-xs font-bold">
+                      <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Rituel Rasage & Serviette
                         </span>
@@ -473,10 +473,10 @@ export default function ProPage() {
                           11h00 - 12h00
                         </span>
                       </div>
-                      <p className="text-xs text-neutral-600">
+                      <p className="text-sm text-neutral-600">
                         Alexandre G. &bull; Cabine Barbier Studio
                       </p>
-                      <div className="flex items-center gap-1.5 text-xs text-secondary-700 font-medium pt-1">
+                      <div className="flex items-center gap-1.5 text-sm text-secondary-700 font-medium pt-1">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>Empreinte enregistrée &bull; 65 €</span>
                       </div>
@@ -484,7 +484,7 @@ export default function ProPage() {
 
                     {/* Rendez-vous 2 */}
                     <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
-                      <div className="flex justify-between items-center text-xs font-bold">
+                      <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Taille de Barbe & Huile
                         </span>
@@ -492,10 +492,10 @@ export default function ProPage() {
                           15h30 - 16h15
                         </span>
                       </div>
-                      <p className="text-xs text-neutral-600">
+                      <p className="text-sm text-neutral-600">
                         Julien R. &bull; Réservation en ligne
                       </p>
-                      <div className="flex items-center gap-1.5 text-xs text-neutral-600 font-medium pt-1">
+                      <div className="flex items-center gap-1.5 text-sm text-neutral-600 font-medium pt-1">
                         <Clock className="w-3.5 h-3.5 text-neutral-400" />
                         <span>Durée 45 min &bull; 45 €</span>
                       </div>
@@ -521,19 +521,19 @@ export default function ProPage() {
                           <h4 className="text-sm sm:text-base font-bold text-neutral-950">
                             Nour Kaddour
                           </h4>
-                          <p className="text-xs text-primary-700 font-semibold">
+                          <p className="text-sm text-primary-700 font-semibold">
                             Facialiste & Kobido
                           </p>
                         </div>
                       </div>
-                      <span className="text-xs text-neutral-500 font-medium num">
+                      <span className="text-sm text-neutral-500 font-medium num">
                         4 créneaux
                       </span>
                     </div>
 
                     {/* Rendez-vous 1 */}
                     <div className="p-4 rounded-2xl bg-primary-50/40 border border-primary-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
-                      <div className="flex justify-between items-center text-xs font-bold">
+                      <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Grand Rituel Kobido
                         </span>
@@ -541,10 +541,10 @@ export default function ProPage() {
                           14h00 - 15h15
                         </span>
                       </div>
-                      <p className="text-xs text-neutral-600">
+                      <p className="text-sm text-neutral-600">
                         Élodie B. &bull; Cabine Sérénité (Acompte 50 €)
                       </p>
-                      <div className="flex items-center gap-1.5 text-xs text-primary-700 font-medium pt-1">
+                      <div className="flex items-center gap-1.5 text-sm text-primary-700 font-medium pt-1">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>Acompte Stripe versé &bull; 140 €</span>
                       </div>
@@ -552,7 +552,7 @@ export default function ProPage() {
 
                     {/* Rendez-vous 2 */}
                     <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
-                      <div className="flex justify-between items-center text-xs font-bold">
+                      <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Diagnostic & Soin Visage
                         </span>
@@ -560,10 +560,10 @@ export default function ProPage() {
                           16h30 - 17h15
                         </span>
                       </div>
-                      <p className="text-xs text-neutral-600">
+                      <p className="text-sm text-neutral-600">
                         Thomas V. &bull; Nouveau client Belora
                       </p>
-                      <div className="flex items-center gap-1.5 text-xs text-neutral-600 font-medium pt-1">
+                      <div className="flex items-center gap-1.5 text-sm text-neutral-600 font-medium pt-1">
                         <Clock className="w-3.5 h-3.5 text-neutral-400" />
                         <span>Durée 45 min &bull; 95 €</span>
                       </div>
@@ -615,7 +615,7 @@ export default function ProPage() {
                 </p>
               </div>
 
-              <span className="px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 text-xs font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
+              <span className="px-3 py-1.5 rounded-full bg-neutral-100 text-neutral-800 text-sm font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
                 4 engagements
               </span>
             </div>
@@ -645,7 +645,7 @@ export default function ProPage() {
                       </p>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center gap-1.5 text-xs text-primary-700 font-semibold">
+                    <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center gap-1.5 text-sm text-primary-700 font-semibold">
                       <Check className="w-3.5 h-3.5 text-primary-600" />
                       <span>Inclus dans toutes les formules</span>
                     </div>
@@ -684,7 +684,7 @@ export default function ProPage() {
                 </p>
               </div>
 
-              <span className="px-3 py-1.5 rounded-full bg-white border border-neutral-200 text-neutral-800 text-xs font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
+              <span className="px-3 py-1.5 rounded-full bg-white border border-neutral-200 text-neutral-800 text-sm font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
                 0% commission habitués
               </span>
             </div>
@@ -702,7 +702,7 @@ export default function ProPage() {
                       <h3 className="text-sm sm:text-base font-bold text-neutral-800">
                         Logiciels & Annuaires Traditionnels
                       </h3>
-                      <p className="text-xs text-neutral-500">
+                      <p className="text-sm text-neutral-500">
                         Modèle basé sur la captation de commission
                       </p>
                     </div>
@@ -716,7 +716,7 @@ export default function ProPage() {
                           <strong className="block text-neutral-700 font-medium">
                             {comp.topic}
                           </strong>
-                          <span className="text-xs text-neutral-500 mt-0.5 block">
+                          <span className="text-sm text-neutral-500 mt-0.5 block">
                             {comp.traditional}
                           </span>
                         </div>
@@ -735,7 +735,7 @@ export default function ProPage() {
                       <h3 className="text-sm sm:text-base font-bold text-neutral-950">
                         Le Standard Belora Pro
                       </h3>
-                      <p className="text-xs text-primary-700 font-medium">
+                      <p className="text-sm text-primary-700 font-medium">
                         Forfait fixe, liberté totale et respect du savoir-faire
                       </p>
                     </div>
@@ -749,7 +749,7 @@ export default function ProPage() {
                           <strong className="block text-neutral-950 font-semibold">
                             {comp.topic}
                           </strong>
-                          <span className="text-xs text-primary-800 font-medium mt-0.5 block">
+                          <span className="text-sm text-primary-800 font-medium mt-0.5 block">
                             {comp.belora}
                           </span>
                         </div>
@@ -814,7 +814,7 @@ export default function ProPage() {
                   }`}
                 >
                   <span>Annuel</span>
-                  <span className="text-xs text-primary-700 font-bold uppercase bg-primary-50 px-2 py-0.5 rounded-md">
+                  <span className="text-sm text-primary-700 font-bold uppercase bg-primary-50 px-2 py-0.5 rounded-md">
                     -20%
                   </span>
                 </button>
@@ -838,7 +838,7 @@ export default function ProPage() {
                   >
                     <div>
                       {plan.highlighted && (
-                        <span className="px-3 py-1 rounded-full bg-primary-50 text-primary-700 text-xs font-bold uppercase tracking-wider inline-block mb-3">
+                        <span className="px-3 py-1 rounded-full bg-primary-50 text-primary-700 text-sm font-bold uppercase tracking-wider inline-block mb-3">
                           Formule Signature
                         </span>
                       )}
@@ -914,7 +914,7 @@ export default function ProPage() {
                 </p>
               </div>
 
-              <span className="px-3 py-1.5 rounded-full bg-white border border-neutral-200 text-neutral-800 text-xs font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
+              <span className="px-3 py-1.5 rounded-full bg-white border border-neutral-200 text-neutral-800 text-sm font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
                 Support 6j/7
               </span>
             </div>
@@ -1000,7 +1000,7 @@ export default function ProPage() {
                   <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5">
                     Réservations 24h/24
                   </h3>
-                  <p className="text-xs text-neutral-300/80 leading-relaxed">
+                  <p className="text-sm text-neutral-300/80 leading-relaxed">
                     Synchronisation directe sans commissions sur vos habitués.
                   </p>
                 </div>
@@ -1012,7 +1012,7 @@ export default function ProPage() {
                   <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5">
                     Visibilité sélective
                   </h3>
-                  <p className="text-xs text-neutral-300/80 leading-relaxed">
+                  <p className="text-sm text-neutral-300/80 leading-relaxed">
                     Attirez une clientèle respectueuse du savoir-faire.
                   </p>
                 </div>
@@ -1024,7 +1024,7 @@ export default function ProPage() {
                   <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5">
                     Zéro no-show
                   </h3>
-                  <p className="text-xs text-neutral-300/80 leading-relaxed">
+                  <p className="text-sm text-neutral-300/80 leading-relaxed">
                     Acomptes bancaires sécurisés et rappels automatiques.
                   </p>
                 </div>

@@ -121,7 +121,7 @@ export default function ServicesSettingsPage() {
     <div className="p-4 sm:p-8 space-y-6 max-w-6xl">
       {/* Toast Notification */}
       {notification && (
-        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2 shadow-sm">
+        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold flex items-center gap-2 shadow-sm">
           <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>{notification}</span>
         </div>
@@ -138,7 +138,7 @@ export default function ServicesSettingsPage() {
       </div>
 
       {/* Barre d'actions supérieures (Exact Planity Screenshot 2) */}
-      <div className="flex flex-wrap items-center gap-2 pb-4 border-b border-neutral-200 text-xs font-semibold">
+      <div className="flex flex-wrap items-center gap-2 pb-4 border-b border-neutral-200 text-sm font-semibold">
         <button
           type="button"
           onClick={() => setIsCategoryModalOpen(true)}
@@ -186,12 +186,12 @@ export default function ServicesSettingsPage() {
               <div className="p-4 sm:p-4.5 bg-neutral-50/90 border-b border-neutral-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <h3 className="font-bold text-sm sm:text-base text-neutral-950">
                   {cat.name}{" "}
-                  <span className="text-xs font-normal text-neutral-400">
+                  <span className="text-sm font-normal text-neutral-400">
                     ({categoryServices.length})
                   </span>
                 </h3>
 
-                <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-600">
+                <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-600">
                   <button
                     type="button"
                     onClick={() => {
@@ -221,7 +221,7 @@ export default function ServicesSettingsPage() {
               {/* Liste des Prestations dans la Catégorie */}
               <div className="divide-y divide-neutral-100">
                 {categoryServices.length === 0 ? (
-                  <div className="p-6 text-center text-xs text-neutral-400 italic">
+                  <div className="p-6 text-center text-sm text-neutral-400 italic">
                     Aucune prestation dans cette catégorie.
                   </div>
                 ) : (
@@ -238,7 +238,7 @@ export default function ServicesSettingsPage() {
                             <h4 className="text-sm sm:text-base font-semibold text-neutral-950">
                               {srv.name}
                             </h4>
-                            <span className="text-xs text-neutral-500 tabular-nums font-medium">
+                            <span className="text-sm text-neutral-500 tabular-nums font-medium">
                               {srv.durationMinutes >= 60
                                 ? `${Math.floor(srv.durationMinutes / 60)} h ${
                                     srv.durationMinutes % 60 > 0
@@ -262,7 +262,7 @@ export default function ServicesSettingsPage() {
                       </div>
 
                       {/* Côté Droit : Actions (Dupliquer, Modifier, Supprimer) */}
-                      <div className="flex items-center gap-4 text-xs font-medium self-end sm:self-auto shrink-0">
+                      <div className="flex items-center gap-4 text-sm font-medium self-end sm:self-auto shrink-0">
                         <button
                           type="button"
                           onClick={() => handleDuplicateService(srv)}
