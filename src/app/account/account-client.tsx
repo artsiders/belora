@@ -231,7 +231,7 @@ export function AccountClient() {
                   <p className="text-xs text-neutral-600">
                     {app.venueName} · {app.date}
                   </p>
-                  <p className="text-[11px] text-neutral-400 mt-0.5">
+                  <p className="text-sm text-neutral-400 mt-0.5">
                     Réalisé par {app.artisanName}
                   </p>
                 </div>

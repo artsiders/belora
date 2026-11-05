@@ -83,7 +83,7 @@ function ClientsContent() {
                 </Badge>
               )}
             </div>
-            <span className="text-[11px] text-neutral-500">
+            <span className="text-sm text-neutral-500">
               Inscrit le {client.createdAt}
             </span>
           </div>

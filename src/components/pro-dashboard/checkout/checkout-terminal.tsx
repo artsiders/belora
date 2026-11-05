@@ -386,7 +386,7 @@ export function CheckoutTerminal({
           {!isAnonymousClient && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="text-[11px] font-semibold text-neutral-500 block mb-1">
+                <label className="text-sm font-semibold text-neutral-500 block mb-1">
                   Rechercher un client du fichier
                 </label>
                 <select
@@ -403,7 +403,7 @@ export function CheckoutTerminal({
               </div>
 
               <div>
-                <label className="text-[11px] font-semibold text-neutral-500 block mb-1">
+                <label className="text-sm font-semibold text-neutral-500 block mb-1">
                   Rendez-vous du jour à encaisser
                 </label>
                 <select
@@ -499,7 +499,7 @@ export function CheckoutTerminal({
                       <h4 className="font-bold text-sm sm:text-base text-neutral-950 group-hover:text-primary-700 transition-colors">
                         {srv.name}
                       </h4>
-                      <p className="text-[11px] text-neutral-500 mt-0.5">
+                      <p className="text-sm text-neutral-500 mt-0.5">
                         {srv.durationMinutes} min
                       </p>
                     </div>
@@ -532,7 +532,7 @@ export function CheckoutTerminal({
                       <h4 className="font-bold text-sm sm:text-base text-neutral-950 group-hover:text-primary-700 transition-colors">
                         {prd.name}
                       </h4>
-                      <p className="text-[11px] text-neutral-500">
+                      <p className="text-sm text-neutral-500">
                         {prd.category}
                       </p>
                     </div>
@@ -576,7 +576,7 @@ export function CheckoutTerminal({
             <div className="py-12 text-center text-neutral-400 space-y-2">
               <ShoppingBag className="w-8 h-8 mx-auto text-neutral-300" />
               <p className="text-xs">Le ticket de caisse est vide.</p>
-              <p className="text-[11px] text-neutral-400">
+              <p className="text-sm text-neutral-400">
                 Sélectionnez une prestation ou un produit à gauche.
               </p>
             </div>
@@ -607,7 +607,7 @@ export function CheckoutTerminal({
                     onChange={(e) =>
                       handleUpdateStaff(item.id, e.target.value)
                     }
-                    className="h-7 px-2 bg-white border border-neutral-200 rounded-md text-[11px] font-medium text-neutral-800"
+                    className="h-7 px-2 bg-white border border-neutral-200 rounded-md text-sm font-medium text-neutral-800"
                   >
                     {staffList.map((st) => (
                       <option key={st.id} value={st.id}>
@@ -722,7 +722,7 @@ export function CheckoutTerminal({
               <span className="text-[10px] uppercase font-semibold text-neutral-400 block tracking-wider">
                 Reste à régler au salon
               </span>
-              <span className="text-[11px] text-neutral-400">
+              <span className="text-sm text-neutral-400">
                 dont TVA 20% : {vatAmount.toFixed(2)} €
               </span>
             </div>
@@ -733,7 +733,7 @@ export function CheckoutTerminal({
 
           {/* Moyens de règlement */}
           <div className="space-y-2">
-            <span className="text-[11px] font-bold text-neutral-700 uppercase tracking-wider block">
+            <span className="text-sm font-bold text-neutral-700 uppercase tracking-wider block">
               Moyen de règlement
             </span>
             <div className="grid grid-cols-3 gap-2">

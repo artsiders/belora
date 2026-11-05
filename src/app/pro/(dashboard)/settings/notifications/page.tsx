@@ -141,7 +141,7 @@ export default function NotificationsSettingsPage() {
               </div>
             </div>
 
-            <span className="text-[11px] text-neutral-500 pt-4 block">
+            <span className="text-sm text-neutral-500 pt-4 block">
               Expéditeur affiché : Belora • Conforme réglementation ARCEP
             </span>
           </div>

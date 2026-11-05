@@ -36,7 +36,7 @@ export function AppointmentCard({
     >
       <div>
         {/* Ligne 1 : Heure & Récurrence */}
-        <div className="flex items-center justify-between gap-1 text-[11px] font-bold text-neutral-900 leading-tight">
+        <div className="flex items-center justify-between gap-1 text-sm font-bold text-neutral-900 leading-tight">
           <span className="tabular-nums">
             {appointment.startTime} - {appointment.endTime}
           </span>
@@ -61,7 +61,7 @@ export function AppointmentCard({
 
         {/* Ligne 3 : Prestation (si hauteur suffisante) */}
         {!isCompact && (
-          <div className="text-[11px] text-neutral-600 truncate mt-0.5">
+          <div className="text-sm text-neutral-600 truncate mt-0.5">
             {appointment.serviceName}
           </div>
         )}

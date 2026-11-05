@@ -198,7 +198,7 @@ export function DashboardHeader() {
                     <span className="font-bold text-neutral-900">
                       Notifications du salon
                     </span>
-                    <span className="text-neutral-400 text-[11px]">Direct</span>
+                    <span className="text-neutral-400 text-sm">Direct</span>
                   </div>
                   <div className="divide-y divide-neutral-100">
                     <div className="py-2.5 px-2 hover:bg-neutral-50 rounded-lg">

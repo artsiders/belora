@@ -93,7 +93,7 @@ export function BookClient({ venue }: BookClientProps) {
           <CheckCircle2 className="w-8 h-8" />
         </div>
 
-        <span className="text-[11px] uppercase font-semibold text-primary-700 tracking-wider block mb-2">
+        <span className="text-sm uppercase font-semibold text-primary-700 tracking-wider block mb-2">
           Réservation Confirmée
         </span>
 

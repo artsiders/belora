@@ -70,7 +70,7 @@ export default function TeamSettingsPage() {
                   <p className="text-xs text-neutral-500 font-medium">
                     {staff.role}
                   </p>
-                  <p className="text-[11px] text-neutral-400 mt-0.5">
+                  <p className="text-sm text-neutral-400 mt-0.5">
                     {staff.email} &bull; {staff.phone}
                   </p>
                 </div>

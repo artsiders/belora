@@ -248,7 +248,7 @@ async function VenueContent({ params }: VenuePageProps) {
                         <h3 className="text-sm font-semibold text-neutral-950">
                           {member.name}
                         </h3>
-                        <p className="text-[11px] text-primary-700 font-medium mb-1">
+                        <p className="text-sm text-primary-700 font-medium mb-1">
                           {member.role}
                         </p>
                         <p className="text-xs text-neutral-600 leading-relaxed font-normal">
@@ -290,7 +290,7 @@ async function VenueContent({ params }: VenuePageProps) {
                             {rev.service}
                           </span>
                         </div>
-                        <span className="text-[11px] text-neutral-400">{rev.date}</span>
+                        <span className="text-sm text-neutral-400">{rev.date}</span>
                       </div>
                       <p className="text-xs text-neutral-700 leading-relaxed ">
                         « {rev.comment} »
@@ -305,7 +305,7 @@ async function VenueContent({ params }: VenuePageProps) {
             <div className="lg:col-span-4 sticky top-24">
               <div className="p-6 rounded-2xl bg-primary-50/10 border border-primary-300 shadow-sm space-y-6">
                 <div>
-                  <span className="text-[11px] uppercase font-semibold tracking-wider text-neutral-500 block mb-1">
+                  <span className="text-sm uppercase font-semibold tracking-wider text-neutral-500 block mb-1">
                     Tarif indicatif
                   </span>
                   <div className="flex items-baseline gap-2">
@@ -346,7 +346,7 @@ async function VenueContent({ params }: VenuePageProps) {
                 </Link>
 
                 {/* Réassurance de marque */}
-                <div className="p-3.5 rounded bg-neutral-100/70 text-[11px] text-neutral-600 space-y-1.5 border border-primary-200/60">
+                <div className="p-3.5 rounded bg-neutral-100/70 text-sm text-neutral-600 space-y-1.5 border border-primary-200/60">
                   <div className="flex items-center gap-1.5 font-semibold text-neutral-800">
                     <ShieldCheck className="w-3.5 h-3.5 text-primary-600" />
                     <span>Garantie Sanctuaire Belora</span>
@@ -366,7 +366,7 @@ async function VenueContent({ params }: VenuePageProps) {
                     {venue.openingHours.map((slot) => (
                       <div
                         key={slot.day}
-                        className="flex items-center justify-between text-[11px]"
+                        className="flex items-center justify-between text-sm"
                       >
                         <span className="font-medium text-neutral-700">{slot.day}</span>
                         <span className="num">{slot.hours}</span>

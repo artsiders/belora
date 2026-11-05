@@ -361,7 +361,7 @@ function ClientDrawerInner({
                     <p className="text-xs text-neutral-700 font-mono bg-neutral-50 p-2 rounded-lg border border-neutral-100">
                       {form.formula}
                     </p>
-                    <div className="flex items-center gap-1.5 text-[11px] text-neutral-500 pt-1">
+                    <div className="flex items-center gap-1.5 text-sm text-neutral-500 pt-1">
                       <Clock className="w-3 h-3 text-neutral-400" />
                       <span>Temps de pose : {form.leaveInTime}</span>
                     </div>

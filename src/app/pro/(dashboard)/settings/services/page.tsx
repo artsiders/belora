@@ -254,7 +254,7 @@ export default function ServicesSettingsPage() {
                           </div>
 
                           {srv.breakDurationMinutes && srv.breakDurationMinutes > 0 ? (
-                            <span className="text-[11px] text-primary-700 font-medium">
+                            <span className="text-sm text-primary-700 font-medium">
                               Temps de pose autonome : {srv.breakDurationMinutes} min
                             </span>
                           ) : null}

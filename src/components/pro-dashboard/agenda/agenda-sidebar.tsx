@@ -120,7 +120,7 @@ export function AgendaSidebar({
         </div>
 
         {/* Jours de la semaine */}
-        <div className="grid grid-cols-7 gap-1 text-center text-[11px] font-semibold text-neutral-400 mb-1">
+        <div className="grid grid-cols-7 gap-1 text-center text-sm font-semibold text-neutral-400 mb-1">
           <span>L</span>
           <span>M</span>
           <span>M</span>
