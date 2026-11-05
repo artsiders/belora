@@ -57,7 +57,7 @@ export function DashboardHeader() {
     },
     {
       label: "Admin",
-      href: "/pro/settings",
+      href: "/pro/settings/services",
       icon: Settings,
       active: pathname.startsWith("/pro/settings"),
     },
