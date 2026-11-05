@@ -201,19 +201,19 @@ export function SearchClient() {
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <form
             onSubmit={handleSearchSubmit}
-            className="flex flex-col md:flex-row items-stretch md:items-center gap-2 p-1.5 rounded-2xl bg-neutral-50 border border-neutral-200/90 shadow-2xs"
+            className="flex flex-col md:flex-row items-stretch md:items-center gap-2 rounded-2xl"
           >
             {/* Prestation / Catégorie */}
-            <div className="flex-1 flex items-center gap-2.5 px-3.5 py-2 bg-white rounded-xl border border-neutral-200/70">
+            <div className="flex-1 flex items-center gap-2 px-4 py-4 h-16 bg-white rounded-xl border border-neutral-200/70">
               <Search className="w-4 h-4 text-primary-600 shrink-0" />
               <div className="flex-1 min-w-0">
-                <span className="text-xs uppercase font-bold text-neutral-400 block tracking-wider leading-none">
+                <span className="text-sm uppercase font-bold text-neutral-400 block tracking-wider leading-none">
                   Prestation
                 </span>
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-neutral-900 focus:outline-hidden cursor-pointer"
+                  className="w-full bg-transparent text-sm sm:text-base font-semibold text-neutral-900 focus:outline-hidden cursor-pointer"
                 >
                   {CATEGORY_OPTIONS.map((opt) => (
                     <option key={opt.slug} value={opt.slug}>
@@ -225,10 +225,10 @@ export function SearchClient() {
             </div>
 
             {/* Ville / Localisation */}
-            <div className="flex-1 flex items-center gap-2.5 px-3.5 py-2 bg-white rounded-xl border border-neutral-200/70">
+            <div className="flex-1 flex items-center gap-2 px-4 py-4 h-16 bg-white rounded-xl border border-neutral-200/70">
               <MapPin className="w-4 h-4 text-primary-600 shrink-0" />
               <div className="flex-1 min-w-0">
-                <span className="text-xs uppercase font-bold text-neutral-400 block tracking-wider leading-none">
+                <span className="text-sm uppercase font-bold text-neutral-400 block tracking-wider leading-none">
                   Où
                 </span>
                 <input
@@ -236,7 +236,7 @@ export function SearchClient() {
                   value={locationInput}
                   onChange={(e) => setLocationInput(e.target.value)}
                   placeholder="Paris, Londres, Milan..."
-                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-neutral-900 focus:outline-hidden placeholder:text-neutral-400"
+                  className="w-full bg-transparent text-sm sm:text-base font-semibold text-neutral-900 focus:outline-hidden placeholder:text-neutral-400"
                 />
               </div>
               {locationInput && (
@@ -251,13 +251,13 @@ export function SearchClient() {
             </div>
 
             {/* Moment / Date */}
-            <div className="hidden lg:flex items-center gap-2.5 px-3.5 py-2 bg-white rounded-xl border border-neutral-200/70 w-52 shrink-0">
+            <div className="hidden lg:flex items-center gap-2 px-4 py-4 h-16 bg-white rounded-xl border border-neutral-200/70 w-52 shrink-0">
               <Calendar className="w-4 h-4 text-primary-600 shrink-0" />
               <div className="flex-1 min-w-0">
-                <span className="text-xs uppercase font-bold text-neutral-400 block tracking-wider leading-none">
+                <span className="text-sm uppercase font-bold text-neutral-400 block tracking-wider leading-none">
                   Quand
                 </span>
-                <span className="text-xs sm:text-sm font-semibold text-neutral-900 block truncate">
+                <span className="text-sm sm:text-base font-semibold text-neutral-900 block truncate">
                   À tout moment
                 </span>
               </div>
@@ -266,7 +266,7 @@ export function SearchClient() {
             {/* Bouton Rechercher */}
             <button
               type="submit"
-              className="btn btn-dark text-xs sm:text-sm px-6 py-3 rounded-xl flex items-center justify-center gap-2 shrink-0 font-bold shadow-2xs cursor-pointer"
+              className="btn btn-primary py-4 h-16"
             >
               <Search className="w-4 h-4 text-white" />
               <span>Rechercher</span>
@@ -277,7 +277,7 @@ export function SearchClient() {
           <div className="flex items-center gap-2 mt-3 overflow-x-auto no-scrollbar py-0.5">
             <button
               type="button"
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-neutral-200/80 bg-white text-neutral-700 hover:text-neutral-950 flex items-center gap-1.5 shrink-0 shadow-2xs cursor-pointer"
+              className="px-3 py-1.5 rounded-lg text-sm font-semibold border border-neutral-200/80 bg-white text-neutral-700 hover:text-neutral-950 flex items-center gap-1.5 shrink-0 shadow-2xs cursor-pointer"
             >
               <SlidersHorizontal className="w-3.5 h-3.5 text-neutral-500" />
               <span>Filtres</span>
@@ -288,7 +288,7 @@ export function SearchClient() {
                 key={filter}
                 type="button"
                 onClick={() => setActiveSubFilter(filter)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer shrink-0 ${
+                className={`px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer shrink-0 ${
                   activeSubFilter === filter
                     ? "bg-neutral-900 text-white shadow-2xs"
                     : "bg-white border border-neutral-200/80 text-neutral-700 hover:text-neutral-950 shadow-2xs"
@@ -314,14 +314,14 @@ export function SearchClient() {
             <h1 className="text-lg sm:text-xl font-bold text-neutral-950">
               Sélectionnez {categoryTitleLabel}
             </h1>
-            <p className="text-xs sm:text-sm text-neutral-600 mt-0.5">
+            <p className="text-sm sm:text-base text-neutral-600 mt-0.5">
               Les meilleurs salons et instituts aux alentours de{" "}
               <span className="font-semibold text-neutral-900">
                 {locationParam || "toutes métropoles"}
               </span>{" "}
               : Réservation en ligne
             </p>
-            <span className="text-xs text-neutral-500 num block mt-1">
+            <span className="text-sm text-neutral-500 num block mt-1">
               {filteredVenues.length}{" "}
               {filteredVenues.length > 1 ? "établissements disponibles" : "établissement disponible"}
             </span>
@@ -334,7 +334,7 @@ export function SearchClient() {
               <h3 className="text-base sm:text-lg font-bold text-neutral-950">
                 Aucun établissement trouvé
               </h3>
-              <p className="text-xs sm:text-sm text-neutral-600 max-w-sm mx-auto">
+              <p className="text-sm sm:text-base text-neutral-600 max-w-sm mx-auto">
                 Aucun salon ne correspond exactement à vos critères. Essayez d&apos;élargir vos filtres ou de choisir une autre métropole européenne.
               </p>
               <div className="pt-2">
@@ -347,7 +347,7 @@ export function SearchClient() {
                     setActiveSubFilter("Tous");
                     router.push("/search");
                   }}
-                  className="btn btn-outline text-xs px-4 py-2 rounded-xl cursor-pointer"
+                  className="btn btn-outline text-sm px-4 py-2 rounded-xl cursor-pointer"
                 >
                   Réinitialiser la recherche
                 </button>
@@ -394,7 +394,7 @@ export function SearchClient() {
         <button
           type="button"
           onClick={() => setMobileView((v) => (v === "list" ? "map" : "list"))}
-          className="btn btn-dark text-xs px-5 py-2.5 rounded-full flex items-center gap-2 shadow-xl font-bold cursor-pointer"
+          className="btn btn-dark text-sm px-5 py-2.5 rounded-full flex items-center gap-2 shadow-xl font-bold cursor-pointer"
         >
           {mobileView === "list" ? (
             <>
