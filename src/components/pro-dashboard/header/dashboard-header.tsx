@@ -93,7 +93,7 @@ export function DashboardHeader() {
             <button
               type="button"
               onClick={() => setSalonSwitcherOpen(!salonSwitcherOpen)}
-              className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-neutral-900 hover:text-primary-700 transition-colors px-2 py-1.5 rounded-lg hover:bg-neutral-100 cursor-pointer"
+              className="flex items-center gap-2 text-sm sm:text-base font-semibold text-neutral-900 hover:text-primary-700 transition-colors px-2 py-1.5 rounded-lg hover:bg-neutral-100 cursor-pointer"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
               <span className="truncate max-w-[130px] sm:max-w-[200px]">
@@ -145,7 +145,7 @@ export function DashboardHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-150 ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm sm:text-base font-semibold transition-all duration-150 ${
                   item.active
                     ? "bg-primary-600 text-white shadow-2xs"
                     : "text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100"

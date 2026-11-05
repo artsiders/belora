@@ -128,7 +128,7 @@ export function AgendaGrid({
                   </div>
                 )}
                 <div className="truncate">
-                  <h4 className="text-xs sm:text-sm font-bold text-neutral-950 truncate">
+                  <h4 className="text-sm sm:text-base font-bold text-neutral-950 truncate">
                     {col.name}
                   </h4>
                   <p className="text-[10px] text-neutral-500 truncate">

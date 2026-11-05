@@ -171,7 +171,7 @@ function ClientsContent() {
           <h1 className="text-xl sm:text-2xl font-bold text-neutral-950">
             Fichier Clients & CRM
           </h1>
-          <p className="text-xs sm:text-sm text-neutral-500 mt-0.5">
+          <p className="text-sm sm:text-base text-neutral-500 mt-0.5">
             Gérez vos fiches contacts, fiches techniques capillaires et
             l&apos;historique des soins de vos habitués.
           </p>

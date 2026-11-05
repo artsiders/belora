@@ -573,7 +573,7 @@ export default function ProPage() {
               </div>
 
               {/* Pied du simulateur d'agenda : Synthèse comptable en direct */}
-              <div className="p-4 sm:p-5 bg-neutral-50 border-t border-neutral-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm">
+              <div className="p-4 sm:p-5 bg-neutral-50 border-t border-neutral-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm sm:text-base">
                 <span className="text-neutral-700 font-normal">
                   Chiffre d’affaires de la journée :{" "}
                   <strong className="text-neutral-950 font-bold num text-base">1 420 €</strong>
@@ -796,7 +796,7 @@ export default function ProPage() {
                 <button
                   type="button"
                   onClick={() => setBillingCycle("monthly")}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                  className={`px-4 py-2 rounded-xl text-sm sm:text-base font-semibold transition-all cursor-pointer ${
                     billingCycle === "monthly"
                       ? "bg-white text-neutral-950 shadow-2xs"
                       : "text-neutral-600 hover:text-neutral-900"
@@ -807,7 +807,7 @@ export default function ProPage() {
                 <button
                   type="button"
                   onClick={() => setBillingCycle("annual")}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
+                  className={`px-4 py-2 rounded-xl text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                     billingCycle === "annual"
                       ? "bg-white text-neutral-950 shadow-2xs"
                       : "text-neutral-600 hover:text-neutral-900"
@@ -854,7 +854,7 @@ export default function ProPage() {
                         <span className="text-4xl font-bold text-neutral-950 num">
                           {price} €
                         </span>
-                        <span className="text-xs sm:text-sm text-neutral-500 font-normal">
+                        <span className="text-sm sm:text-base text-neutral-500 font-normal">
                           /mois {billingCycle === "annual" ? "(facturé à l'année)" : ""}
                         </span>
                       </div>

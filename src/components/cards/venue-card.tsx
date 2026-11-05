@@ -135,16 +135,16 @@ export function VenueCard({
         </div>
 
         {/* 4. Pied de carte : CTA 'Voir les prestations' et prix d'appel */}
-        <div className="pt-3 border-t border-neutral-100 flex items-center justify-between text-xs sm:text-sm">
-          <span className="font-semibold text-primary-700 group-hover:text-primary-800 transition-colors inline-flex items-center gap-1.5">
-            <span>Voir les prestations</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-          </span>
-
-          <span className="font-bold text-neutral-900 num">
+        <div className="pt-3 border-t border-neutral-100 flex flex-col items-end justify-between text-sm sm:text-base">
+          <span className="font-bold text-neutral-900 num whitespace-nowrap">
             {venue.startingPrice.startsWith("dès")
               ? venue.startingPrice
               : `dès ${venue.startingPrice}`}
+          </span>
+
+          <span className="font-semibold text-primary-700 group-hover:text-primary-800 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap">
+            <span>Voir les prestations</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </span>
         </div>
       </div>

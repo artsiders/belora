@@ -128,7 +128,7 @@ export function DataTable<T>({
                   setCurrentPage(1);
                 }}
                 placeholder={searchPlaceholder}
-                className="w-full h-10 ps-10 pe-3.5 bg-white border border-neutral-300 rounded-xl text-neutral-900 text-xs sm:text-sm placeholder:text-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 transition-colors"
+                className="w-full h-10 ps-10 pe-3.5 bg-white border border-neutral-300 rounded-xl text-neutral-900 text-sm sm:text-base placeholder:text-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 transition-colors"
               />
             </div>
           ) : (
@@ -146,7 +146,7 @@ export function DataTable<T>({
       {/* Table Container */}
       <div className="rounded-2xl border border-neutral-200/90 bg-white overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs sm:text-sm border-collapse">
+          <table className="w-full text-left text-sm sm:text-base border-collapse">
             <thead>
               <tr className="border-b border-neutral-200/80 bg-neutral-50/80 text-neutral-600">
                 {columns.map((col) => (

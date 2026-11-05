@@ -132,7 +132,7 @@ export default function ServicesSettingsPage() {
         <h1 className="text-xl sm:text-2xl font-bold text-neutral-950">
           Gestion des prestations
         </h1>
-        <p className="text-xs sm:text-sm text-neutral-500 mt-0.5">
+        <p className="text-sm sm:text-base text-neutral-500 mt-0.5">
           Organisez vos tarifs, temps de pose, rituels et catégories de soins.
         </p>
       </div>
@@ -235,7 +235,7 @@ export default function ServicesSettingsPage() {
                         <span className="w-1 h-8 rounded-full bg-primary-600 shrink-0" />
                         <div>
                           <div className="flex items-baseline gap-2">
-                            <h4 className="text-xs sm:text-sm font-semibold text-neutral-950">
+                            <h4 className="text-sm sm:text-base font-semibold text-neutral-950">
                               {srv.name}
                             </h4>
                             <span className="text-xs text-neutral-500 tabular-nums font-medium">

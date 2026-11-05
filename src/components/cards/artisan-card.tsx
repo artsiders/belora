@@ -51,7 +51,7 @@ export function ArtisanCard({ artisan }: ArtisanCardProps) {
         </div>
 
         {/* CTA en bas de carte */}
-        <div className="pt-3 mt-4 border-t border-neutral-100 flex items-center justify-between text-xs sm:text-sm text-primary-700 font-semibold group-hover:text-primary-800 transition-colors">
+        <div className="pt-3 mt-4 border-t border-neutral-100 flex items-center justify-between text-sm sm:text-base text-primary-700 font-semibold group-hover:text-primary-800 transition-colors">
           <span>Prendre rendez-vous</span>
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
         </div>

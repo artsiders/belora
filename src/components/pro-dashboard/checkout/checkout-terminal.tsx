@@ -288,7 +288,7 @@ export function CheckoutTerminal({
           <h2 className="text-xl sm:text-2xl font-bold text-neutral-950">
             Encaissement validé !
           </h2>
-          <p className="text-xs sm:text-sm text-neutral-600">
+          <p className="text-sm sm:text-base text-neutral-600">
             Ticket #{completedTicket.id.toUpperCase()} • Règlements enregistrés
             avec succès.
           </p>
@@ -496,7 +496,7 @@ export function CheckoutTerminal({
                     className="p-3.5 rounded-xl border border-neutral-200/90 hover:border-primary-600/80 bg-white hover:bg-neutral-50/50 text-left transition-all flex flex-col justify-between gap-2 shadow-2xs cursor-pointer group"
                   >
                     <div>
-                      <h4 className="font-bold text-xs sm:text-sm text-neutral-950 group-hover:text-primary-700 transition-colors">
+                      <h4 className="font-bold text-sm sm:text-base text-neutral-950 group-hover:text-primary-700 transition-colors">
                         {srv.name}
                       </h4>
                       <p className="text-[11px] text-neutral-500 mt-0.5">
@@ -529,7 +529,7 @@ export function CheckoutTerminal({
                   <div className="flex items-start gap-2">
                     <ShoppingBag className="w-4 h-4 text-neutral-400 mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="font-bold text-xs sm:text-sm text-neutral-950 group-hover:text-primary-700 transition-colors">
+                      <h4 className="font-bold text-sm sm:text-base text-neutral-950 group-hover:text-primary-700 transition-colors">
                         {prd.name}
                       </h4>
                       <p className="text-[11px] text-neutral-500">

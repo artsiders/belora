@@ -97,7 +97,7 @@ export function DailyClosingModal({
         </div>
       }
     >
-      <div className="space-y-6 text-xs sm:text-sm">
+      <div className="space-y-6 text-sm sm:text-base">
         {isClosed && (
           <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-3">
             <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />

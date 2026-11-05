@@ -38,7 +38,7 @@ export default function CashRegisterSettingsPage() {
           <h1 className="text-xl sm:text-2xl font-bold text-neutral-950">
             Paramètres Caisse & Règlements
           </h1>
-          <p className="text-xs sm:text-sm text-neutral-500 mt-0.5">
+          <p className="text-sm sm:text-base text-neutral-500 mt-0.5">
             Modes de paiement acceptés, taux de TVA et personnalisation du reçu.
           </p>
         </div>

@@ -49,7 +49,7 @@ export function GalleryCard({ item }: GalleryCardProps) {
           </p>
         </div>
 
-        <div className="pt-3 mt-3 border-t border-neutral-100 flex items-center justify-between text-xs sm:text-sm text-primary-700 font-semibold group-hover:text-primary-800 transition-colors">
+        <div className="pt-3 mt-3 border-t border-neutral-100 flex items-center justify-between text-sm sm:text-base text-primary-700 font-semibold group-hover:text-primary-800 transition-colors">
           <span>Découvrir la maison</span>
           <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </div>

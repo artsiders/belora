@@ -103,7 +103,7 @@ export function AgendaToolbar({
         {/* Affichage de la date sélectionnée (Style Planity) */}
         <div className="flex items-center gap-2 px-2">
           <Calendar className="w-4 h-4 text-primary-700 hidden sm:block" />
-          <span className="text-xs sm:text-sm font-bold text-neutral-950 capitalize">
+          <span className="text-sm sm:text-base font-bold text-neutral-950 capitalize">
             {formattedDate}
           </span>
         </div>

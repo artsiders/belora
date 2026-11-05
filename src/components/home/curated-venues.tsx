@@ -77,7 +77,7 @@ export function CuratedVenues() {
 
           <Link
             href="/search"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold tracking-wider uppercase text-neutral-700 hover:text-primary-600 transition-colors shrink-0"
+            className="inline-flex items-center gap-1.5 text-sm sm:text-base font-semibold tracking-wider uppercase text-neutral-700 hover:text-primary-600 transition-colors shrink-0"
           >
             <span>Voir tous les salons</span>
             <ArrowRight className="w-4 h-4" />

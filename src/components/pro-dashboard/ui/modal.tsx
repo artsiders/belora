@@ -83,7 +83,7 @@ export function Modal({
                   {title}
                 </h3>
                 {description && (
-                  <p className="text-xs sm:text-sm text-neutral-600 font-normal">
+                  <p className="text-sm sm:text-base text-neutral-600 font-normal">
                     {description}
                   </p>
                 )}

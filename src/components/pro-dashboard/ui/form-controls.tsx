@@ -179,7 +179,7 @@ export function FormCheckbox({
         {...props}
       />
       <div>
-        <span className="text-xs sm:text-sm font-medium text-neutral-900 group-hover:text-primary-700 transition-colors">
+        <span className="text-sm sm:text-base font-medium text-neutral-900 group-hover:text-primary-700 transition-colors">
           {label}
         </span>
         {description && (
@@ -212,7 +212,7 @@ export function ToggleSwitch({
       {(label || description) && (
         <div>
           {label && (
-            <span className="text-xs sm:text-sm font-semibold text-neutral-900 block">
+            <span className="text-sm sm:text-base font-semibold text-neutral-900 block">
               {label}
             </span>
           )}

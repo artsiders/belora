@@ -54,7 +54,7 @@ export default function NotificationsSettingsPage() {
           <h1 className="text-xl sm:text-2xl font-bold text-neutral-950">
             SMS & E-mails de rappels
           </h1>
-          <p className="text-xs sm:text-sm text-neutral-500 mt-0.5">
+          <p className="text-sm sm:text-base text-neutral-500 mt-0.5">
             Automatisez la confirmation et les rappels pour éliminer les rendez-vous manqués.
           </p>
         </div>
