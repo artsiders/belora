@@ -198,7 +198,7 @@ export function SearchClient() {
     <div className="flex flex-col min-h-screen bg-neutral-50/40">
       {/* 1. Barre de recherche Planity-style en haut */}
       <section className="bg-white border-b border-neutral-200/90 py-3.5 sticky top-0 z-30 shadow-2xs">
-        <div className="container-belora">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <form
             onSubmit={handleSearchSubmit}
             className="flex flex-col md:flex-row items-stretch md:items-center gap-2 p-1.5 rounded-2xl bg-neutral-50 border border-neutral-200/90 shadow-2xs"
@@ -301,92 +301,90 @@ export function SearchClient() {
         </div>
       </section>
 
-      {/* 3. Corps principal : Layout 2 colonnes (Liste à gauche + Carte sticky à droite) */}
-      <main className="flex-1 container-belora py-6 sm:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-          {/* COLONNE GAUCHE : Liste des salons (affichée selon mobileView sur mobile) */}
-          <div
-            className={`lg:col-span-7 flex flex-col space-y-4 ${
-              mobileView === "map" ? "hidden lg:flex" : "flex"
-            }`}
-          >
-            {/* En-tête des résultats */}
-            <div className="pb-3 border-b border-neutral-200/80">
-              <h1 className="text-lg sm:text-xl font-bold text-neutral-950">
-                Sélectionnez {categoryTitleLabel}
-              </h1>
-              <p className="text-xs sm:text-sm text-neutral-600 mt-0.5">
-                Les meilleurs salons et instituts aux alentours de{" "}
-                <span className="font-semibold text-neutral-900">
-                  {locationParam || "toutes métropoles"}
-                </span>{" "}
-                : Réservation en ligne
-              </p>
-              <span className="text-xs text-neutral-500 num block mt-1">
-                {filteredVenues.length}{" "}
-                {filteredVenues.length > 1 ? "établissements disponibles" : "établissement disponible"}
-              </span>
-            </div>
-
-            {/* Liste des cartes ou état vide */}
-            {filteredVenues.length === 0 ? (
-              <div className="p-8 sm:p-12 text-center rounded-2xl bg-white border border-neutral-200/80 space-y-3">
-                <SearchX className="w-10 h-10 text-neutral-300 mx-auto" />
-                <h3 className="text-base sm:text-lg font-bold text-neutral-950">
-                  Aucun établissement trouvé
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-600 max-w-sm mx-auto">
-                  Aucun salon ne correspond exactement à vos critères. Essayez d&apos;élargir vos filtres ou de choisir une autre métropole européenne.
-                </p>
-                <div className="pt-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedCategory("all");
-                      setLocationInput("");
-                      setQueryInput("");
-                      setActiveSubFilter("Tous");
-                      router.push("/search");
-                    }}
-                    className="btn btn-outline text-xs px-4 py-2 rounded-xl cursor-pointer"
-                  >
-                    Réinitialiser la recherche
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {filteredVenues.map((venue) => (
-                  <SearchVenueCard
-                    key={venue.id}
-                    venue={venue}
-                    isFavorite={Boolean(favorites[venue.id])}
-                    isSelected={selectedVenueId === venue.id}
-                    onToggleFavorite={toggleFavorite}
-                    onHover={setHoveredVenueId}
-                    onSelect={(id) => setSelectedVenueId(id)}
-                  />
-                ))}
-              </div>
-            )}
+      {/* 3. Corps principal : Layout 2 colonnes pleine largeur (Liste à gauche + Carte immersive à droite) */}
+      <main className="flex-1 w-full flex flex-col lg:flex-row items-stretch">
+        {/* COLONNE GAUCHE : Liste des salons (affichée selon mobileView sur mobile) */}
+        <div
+          className={`w-full lg:w-[54%] xl:w-[50%] 2xl:w-[46%] px-4 sm:px-6 lg:px-8 py-6 flex flex-col space-y-4 shrink-0 ${
+            mobileView === "map" ? "hidden lg:flex" : "flex"
+          }`}
+        >
+          {/* En-tête des résultats */}
+          <div className="pb-3 border-b border-neutral-200/80">
+            <h1 className="text-lg sm:text-xl font-bold text-neutral-950">
+              Sélectionnez {categoryTitleLabel}
+            </h1>
+            <p className="text-xs sm:text-sm text-neutral-600 mt-0.5">
+              Les meilleurs salons et instituts aux alentours de{" "}
+              <span className="font-semibold text-neutral-900">
+                {locationParam || "toutes métropoles"}
+              </span>{" "}
+              : Réservation en ligne
+            </p>
+            <span className="text-xs text-neutral-500 num block mt-1">
+              {filteredVenues.length}{" "}
+              {filteredVenues.length > 1 ? "établissements disponibles" : "établissement disponible"}
+            </span>
           </div>
 
-          {/* COLONNE DROITE : Carte interactive sticky (style Planity) */}
-          <div
-            className={`lg:col-span-5 ${
-              mobileView === "list" ? "hidden lg:block" : "block"
-            }`}
-          >
-            <div className="sticky top-36 h-[calc(100vh-10rem)] min-h-[460px] rounded-2xl overflow-hidden border border-neutral-200/90 shadow-xs bg-white">
-              <SearchMap
-                venues={filteredVenues}
-                initialCenter={{ lat: mapCenterConfig.lat, lng: mapCenterConfig.lng }}
-                initialZoom={mapCenterConfig.zoom}
-                selectedVenueId={selectedVenueId}
-                hoveredVenueId={hoveredVenueId}
-                onSelectVenue={handleSelectVenueFromMap}
-              />
+          {/* Liste des cartes ou état vide */}
+          {filteredVenues.length === 0 ? (
+            <div className="p-8 sm:p-12 text-center rounded-2xl bg-white border border-neutral-200/80 space-y-3">
+              <SearchX className="w-10 h-10 text-neutral-300 mx-auto" />
+              <h3 className="text-base sm:text-lg font-bold text-neutral-950">
+                Aucun établissement trouvé
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-600 max-w-sm mx-auto">
+                Aucun salon ne correspond exactement à vos critères. Essayez d&apos;élargir vos filtres ou de choisir une autre métropole européenne.
+              </p>
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedCategory("all");
+                    setLocationInput("");
+                    setQueryInput("");
+                    setActiveSubFilter("Tous");
+                    router.push("/search");
+                  }}
+                  className="btn btn-outline text-xs px-4 py-2 rounded-xl cursor-pointer"
+                >
+                  Réinitialiser la recherche
+                </button>
+              </div>
             </div>
+          ) : (
+            <div className="space-y-4">
+              {filteredVenues.map((venue) => (
+                <SearchVenueCard
+                  key={venue.id}
+                  venue={venue}
+                  isFavorite={Boolean(favorites[venue.id])}
+                  isSelected={selectedVenueId === venue.id}
+                  onToggleFavorite={toggleFavorite}
+                  onHover={setHoveredVenueId}
+                  onSelect={(id) => setSelectedVenueId(id)}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* COLONNE DROITE : Carte interactive sticky pleine hauteur et plein écran (style Planity) */}
+        <div
+          className={`w-full lg:flex-1 lg:min-w-0 sticky top-[73px] h-[calc(100vh-73px)] border-l border-neutral-200/90 ${
+            mobileView === "list" ? "hidden lg:block" : "block"
+          }`}
+        >
+          <div className="w-full h-full relative bg-neutral-100">
+            <SearchMap
+              venues={filteredVenues}
+              initialCenter={{ lat: mapCenterConfig.lat, lng: mapCenterConfig.lng }}
+              initialZoom={mapCenterConfig.zoom}
+              selectedVenueId={selectedVenueId}
+              hoveredVenueId={hoveredVenueId}
+              onSelectVenue={handleSelectVenueFromMap}
+            />
           </div>
         </div>
       </main>

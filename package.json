@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "framer-motion": "^14.3.0",
+    "leaflet": "file:leaflet.tgz",
     "lucide-react": "^1.59.0",
     "next": "16.4.3",
     "nextjs-toploader": "^3.9.17",
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
+    "@types/leaflet": "file:types-leaflet.tgz",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
