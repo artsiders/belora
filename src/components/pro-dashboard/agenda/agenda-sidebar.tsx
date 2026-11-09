@@ -12,6 +12,7 @@ import {
   ProStaffMember,
   ProResource,
 } from "@/lib/data/pro-mock-data";
+import { Checkbox } from "@/components/pro-dashboard/ui/form-controls";
 
 interface AgendaSidebarProps {
   currentDate: Date;
@@ -87,9 +88,14 @@ export function AgendaSidebar({
 
   const allStaffSelected =
     staffList.length > 0 && selectedStaffIds.length === staffList.length;
+  const someStaffSelected =
+    selectedStaffIds.length > 0 && !allStaffSelected;
+
   const allResourcesSelected =
     resourceList.length > 0 &&
     selectedResourceIds.length === resourceList.length;
+  const someResourcesSelected =
+    selectedResourceIds.length > 0 && !allResourcesSelected;
 
   return (
     <aside className="w-64 sm:w-72 bg-white border-e border-neutral-200/90 flex flex-col shrink-0 overflow-y-auto custom-scrollbar select-none">
@@ -171,39 +177,34 @@ export function AgendaSidebar({
       {/* 2. Filtres Collaborateurs */}
       <div className="p-4 border-b border-neutral-200/80">
         <div className="flex items-center justify-between mb-2.5">
-          <label className="flex items-center gap-2 cursor-pointer text-sm font-bold text-neutral-900 uppercase tracking-wider">
-            <input
-              type="checkbox"
+          <label className="group flex items-center gap-2.5 cursor-pointer text-xs font-bold text-neutral-800 uppercase tracking-wider select-none">
+            <Checkbox
               checked={allStaffSelected}
+              indeterminate={someStaffSelected}
               onChange={(e) => onToggleAllStaff(e.target.checked)}
-              className="accent-primary-600 w-4 h-4 rounded cursor-pointer"
             />
             <span>Collaborateurs ({staffList.length})</span>
           </label>
         </div>
 
-        <div className="space-y-2 mt-2">
+        <div className="space-y-1.5 mt-2">
           {staffList.map((staff) => {
             const isChecked = selectedStaffIds.includes(staff.id);
             return (
-              <div
+              <label
                 key={staff.id}
-                onClick={() => onToggleStaff(staff.id)}
-                className={`flex items-center justify-between p-2 rounded-xl border transition-all cursor-pointer ${
+                className={`group flex items-center justify-between p-2 rounded-xl border transition-all duration-150 cursor-pointer select-none ${
                   isChecked
-                    ? "bg-neutral-50/80 border-neutral-200"
-                    : "bg-white border-transparent opacity-60 hover:opacity-90"
+                    ? "bg-neutral-50/90 border-neutral-200/90 text-neutral-900 shadow-2xs"
+                    : "bg-white border-transparent text-neutral-600 hover:bg-neutral-50/60 hover:border-neutral-200/70"
                 }`}
               >
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <input
-                    type="checkbox"
+                  <Checkbox
                     checked={isChecked}
                     onChange={() => onToggleStaff(staff.id)}
-                    onClick={(e) => e.stopPropagation()}
-                    className="accent-primary-600 w-4 h-4 rounded cursor-pointer shrink-0"
                   />
-                  <div className="relative w-6 h-6 rounded-full overflow-hidden bg-neutral-200 shrink-0">
+                  <div className="relative w-6 h-6 rounded-full overflow-hidden bg-neutral-200 shrink-0 ring-1 ring-neutral-200/80">
                     <Image
                       src={staff.avatar}
                       alt={staff.name}
@@ -220,10 +221,10 @@ export function AgendaSidebar({
                 </div>
 
                 {/* Badge d'heures de présence journalières */}
-                <span className="text-[10px] font-semibold text-neutral-500 tabular-nums bg-white px-1.5 py-0.5 rounded border border-neutral-200/80 shrink-0">
+                <span className="text-xs font-medium text-neutral-500 tabular-nums bg-white px-2 py-0.5 rounded-md border border-neutral-200/80 shrink-0 shadow-2xs">
                   {staff.presenceToday.totalLogged}
                 </span>
-              </div>
+              </label>
             );
           })}
         </div>
@@ -232,12 +233,11 @@ export function AgendaSidebar({
       {/* 3. Filtres Cabines & Ressources */}
       <div className="p-4 border-b border-neutral-200/80">
         <div className="flex items-center justify-between mb-2.5">
-          <label className="flex items-center gap-2 cursor-pointer text-sm font-bold text-neutral-900 uppercase tracking-wider">
-            <input
-              type="checkbox"
+          <label className="group flex items-center gap-2.5 cursor-pointer text-xs font-bold text-neutral-800 uppercase tracking-wider select-none">
+            <Checkbox
               checked={allResourcesSelected}
+              indeterminate={someResourcesSelected}
               onChange={(e) => onToggleAllResources(e.target.checked)}
-              className="accent-primary-600 w-4 h-4 rounded cursor-pointer"
             />
             <span>Ressources ({resourceList.length})</span>
           </label>
@@ -249,17 +249,15 @@ export function AgendaSidebar({
             return (
               <label
                 key={res.id}
-                className={`flex items-center gap-2.5 p-2 rounded-xl border text-sm font-medium cursor-pointer transition-colors ${
+                className={`group flex items-center gap-2.5 p-2 rounded-xl border text-sm font-medium cursor-pointer transition-all duration-150 select-none ${
                   isChecked
-                    ? "bg-neutral-50/80 border-neutral-200 text-neutral-900"
-                    : "bg-white border-transparent text-neutral-500 opacity-60 hover:opacity-90"
+                    ? "bg-neutral-50/90 border-neutral-200/90 text-neutral-900 shadow-2xs"
+                    : "bg-white border-transparent text-neutral-600 hover:bg-neutral-50/60 hover:border-neutral-200/70"
                 }`}
               >
-                <input
-                  type="checkbox"
+                <Checkbox
                   checked={isChecked}
                   onChange={() => onToggleResource(res.id)}
-                  className="accent-primary-600 w-4 h-4 rounded cursor-pointer shrink-0"
                 />
                 <span className="truncate">{res.name}</span>
               </label>

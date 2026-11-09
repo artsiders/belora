@@ -7,6 +7,7 @@ import {
   FormSelect,
   FormTextarea,
   FormCheckbox,
+  Checkbox,
 } from "@/components/pro-dashboard/ui/form-controls";
 import {
   ProService,
@@ -186,13 +187,11 @@ function ServiceEditInnerForm({
           {staffList.map((st) => (
             <label
               key={st.id}
-              className="flex items-center gap-2 p-2 rounded-lg border border-neutral-200 bg-white text-sm cursor-pointer hover:bg-neutral-50"
+              className="group flex items-center gap-2.5 p-2 rounded-lg border border-neutral-200 bg-white text-sm cursor-pointer hover:bg-neutral-50 transition-colors"
             >
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={assignedStaffIds.includes(st.id)}
                 onChange={() => handleToggleStaff(st.id)}
-                className="accent-primary-600 rounded"
               />
               <span className="truncate font-medium text-neutral-800">
                 {st.name}

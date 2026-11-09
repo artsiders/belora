@@ -12,6 +12,7 @@ import {
 import {
   FormInput,
   FormTextarea,
+  Checkbox,
 } from "@/components/pro-dashboard/ui/form-controls";
 import { MOCK_ESTABLISHMENT, ProEstablishment } from "@/lib/data/pro-mock-data";
 
@@ -222,9 +223,11 @@ export default function EstablishmentSettingsPage() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
+                  <label
+                    htmlFor={`day-${oh.day}`}
+                    className="group flex items-center gap-2 cursor-pointer select-none"
+                  >
+                    <Checkbox
                       id={`day-${oh.day}`}
                       checked={oh.isOpen}
                       onChange={(e) =>
@@ -234,15 +237,11 @@ export default function EstablishmentSettingsPage() {
                           e.target.checked
                         )
                       }
-                      className="accent-primary-600 rounded cursor-pointer w-4 h-4"
                     />
-                    <label
-                      htmlFor={`day-${oh.day}`}
-                      className="text-sm font-semibold cursor-pointer text-neutral-800"
-                    >
+                    <span className="text-sm font-semibold text-neutral-800">
                       {oh.isOpen ? "Ouvert" : "Fermé"}
-                    </label>
-                  </div>
+                    </span>
+                  </label>
 
                   {oh.isOpen ? (
                     <div className="flex items-center gap-2">

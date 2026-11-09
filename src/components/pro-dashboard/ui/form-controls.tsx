@@ -1,4 +1,5 @@
 import React from "react";
+import { Check, Minus } from "lucide-react";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -152,30 +153,101 @@ export const FormTextarea = React.forwardRef<
 FormTextarea.displayName = "FormTextarea";
 
 export interface CheckboxProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
+  indeterminate?: boolean;
+}
+
+export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+  (
+    {
+      checked,
+      indeterminate = false,
+      className = "",
+      disabled,
+      onChange,
+      ...props
+    },
+    ref
+  ) => {
+    const inputRef = React.useRef<HTMLInputElement | null>(null);
+
+    React.useEffect(() => {
+      if (inputRef.current) {
+        inputRef.current.indeterminate = Boolean(indeterminate);
+      }
+    }, [indeterminate]);
+
+    const isIndeterminate = Boolean(indeterminate);
+    const isChecked = Boolean(checked && !isIndeterminate);
+    const isActive = isChecked || isIndeterminate;
+
+    return (
+      <div
+        className={`relative inline-flex items-center justify-center shrink-0 w-4.5 h-4.5 ${className}`}
+      >
+        <input
+          ref={(node) => {
+            inputRef.current = node;
+            if (typeof ref === "function") ref(node);
+            else if (ref)
+              (
+                ref as React.MutableRefObject<HTMLInputElement | null>
+              ).current = node;
+          }}
+          type="checkbox"
+          checked={Boolean(checked)}
+          disabled={disabled}
+          onChange={onChange}
+          className="peer absolute inset-0 opacity-0 w-full h-full cursor-pointer disabled:cursor-not-allowed z-10"
+          {...props}
+        />
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none w-4.5 h-4.5 rounded-[5px] border flex items-center justify-center transition-all duration-150 select-none ${
+            disabled
+              ? "bg-neutral-100 border-neutral-200 text-neutral-400"
+              : isActive
+              ? "bg-primary-600 border-primary-600 text-white shadow-2xs peer-hover:bg-primary-700 peer-hover:border-primary-700"
+              : "bg-white border-neutral-300 text-transparent shadow-2xs peer-hover:border-neutral-400 group-hover:border-neutral-400"
+          } peer-focus-visible:ring-2 peer-focus-visible:ring-primary-500/30 peer-focus-visible:ring-offset-1`}
+        >
+          {isIndeterminate ? (
+            <Minus className="w-3 h-3 stroke-[3]" />
+          ) : isChecked ? (
+            <Check className="w-3 h-3 stroke-[2.75]" />
+          ) : null}
+        </div>
+      </div>
+    );
+  }
+);
+Checkbox.displayName = "Checkbox";
+
+export interface FormCheckboxProps extends CheckboxProps {
   label: React.ReactNode;
   description?: string;
+  containerClassName?: string;
 }
 
 export function FormCheckbox({
   label,
   description,
+  containerClassName = "",
   className = "",
   id,
   ...props
-}: CheckboxProps) {
+}: FormCheckboxProps) {
   const generatedId = React.useId();
   const checkboxId = id || generatedId;
 
   return (
     <label
       htmlFor={checkboxId}
-      className={`flex items-start gap-3 cursor-pointer select-none group ${className}`}
+      className={`flex items-start gap-3 cursor-pointer select-none group ${containerClassName}`}
     >
-      <input
-        type="checkbox"
+      <Checkbox
         id={checkboxId}
-        className="mt-0.5 w-4.5 h-4.5 rounded border-neutral-300 text-primary-600 focus:ring-primary-600 cursor-pointer accent-primary-600"
+        className={`mt-0.5 ${className}`}
         {...props}
       />
       <div>
