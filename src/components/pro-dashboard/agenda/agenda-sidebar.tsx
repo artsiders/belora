@@ -176,14 +176,19 @@ export function AgendaSidebar({
 
       {/* 2. Filtres Collaborateurs */}
       <div className="p-4 border-b border-neutral-200/80">
-        <div className="flex items-center justify-between mb-2.5">
-          <label className="group flex items-center gap-2.5 cursor-pointer text-xs font-bold text-neutral-800 uppercase tracking-wider select-none">
+        <div className="flex items-center justify-between mb-3">
+          <label className="group flex items-center gap-2.5 cursor-pointer select-none">
             <Checkbox
               checked={allStaffSelected}
               indeterminate={someStaffSelected}
               onChange={(e) => onToggleAllStaff(e.target.checked)}
             />
-            <span>Collaborateurs ({staffList.length})</span>
+            <span className="text-xs font-bold text-neutral-800 uppercase tracking-wider">
+              Collaborateurs
+            </span>
+            <span className="text-xs font-semibold text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-full">
+              {staffList.length}
+            </span>
           </label>
         </div>
 
@@ -193,35 +198,39 @@ export function AgendaSidebar({
             return (
               <label
                 key={staff.id}
-                className={`group flex items-center justify-between p-2 rounded-xl border transition-all duration-150 cursor-pointer select-none ${
+                className={`group flex items-center justify-between px-3 py-2.5 rounded-2xl border transition-all duration-150 cursor-pointer select-none ${
                   isChecked
-                    ? "bg-neutral-50/90 border-neutral-200/90 text-neutral-900 shadow-2xs"
-                    : "bg-white border-transparent text-neutral-600 hover:bg-neutral-50/60 hover:border-neutral-200/70"
+                    ? "bg-primary-50/40 border-primary-200/70 text-neutral-900 shadow-2xs"
+                    : "bg-white border-neutral-200/60 text-neutral-500 hover:bg-neutral-50/80 hover:border-neutral-300 hover:text-neutral-700"
                 }`}
               >
-                <div className="flex items-center gap-2.5 min-w-0">
+                <div className="flex items-center gap-3 min-w-0">
                   <Checkbox
                     checked={isChecked}
                     onChange={() => onToggleStaff(staff.id)}
                   />
-                  <div className="relative w-6 h-6 rounded-full overflow-hidden bg-neutral-200 shrink-0 ring-1 ring-neutral-200/80">
+                  <div className="relative w-7 h-7 rounded-full overflow-hidden bg-neutral-200 shrink-0 ring-1 ring-neutral-200/80">
                     <Image
                       src={staff.avatar}
                       alt={staff.name}
                       fill
-                      sizes="24px"
+                      sizes="28px"
                       className="object-cover"
                     />
                   </div>
                   <div className="truncate">
-                    <p className="text-sm font-semibold text-neutral-900 truncate">
+                    <p
+                      className={`text-sm font-semibold truncate ${
+                        isChecked ? "text-neutral-900" : "text-neutral-600"
+                      }`}
+                    >
                       {staff.name}
                     </p>
                   </div>
                 </div>
 
                 {/* Badge d'heures de présence journalières */}
-                <span className="text-xs font-medium text-neutral-500 tabular-nums bg-white px-2 py-0.5 rounded-md border border-neutral-200/80 shrink-0 shadow-2xs">
+                <span className="text-xs font-semibold tabular-nums text-neutral-500 bg-white px-2 py-0.5 rounded-full border border-neutral-200/80 shrink-0 shadow-2xs">
                   {staff.presenceToday.totalLogged}
                 </span>
               </label>
@@ -232,14 +241,19 @@ export function AgendaSidebar({
 
       {/* 3. Filtres Cabines & Ressources */}
       <div className="p-4 border-b border-neutral-200/80">
-        <div className="flex items-center justify-between mb-2.5">
-          <label className="group flex items-center gap-2.5 cursor-pointer text-xs font-bold text-neutral-800 uppercase tracking-wider select-none">
+        <div className="flex items-center justify-between mb-3">
+          <label className="group flex items-center gap-2.5 cursor-pointer select-none">
             <Checkbox
               checked={allResourcesSelected}
               indeterminate={someResourcesSelected}
               onChange={(e) => onToggleAllResources(e.target.checked)}
             />
-            <span>Ressources ({resourceList.length})</span>
+            <span className="text-xs font-bold text-neutral-800 uppercase tracking-wider">
+              Ressources
+            </span>
+            <span className="text-xs font-semibold text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-full">
+              {resourceList.length}
+            </span>
           </label>
         </div>
 
@@ -249,17 +263,23 @@ export function AgendaSidebar({
             return (
               <label
                 key={res.id}
-                className={`group flex items-center gap-2.5 p-2 rounded-xl border text-sm font-medium cursor-pointer transition-all duration-150 select-none ${
+                className={`group flex items-center gap-3 px-3 py-2.5 rounded-2xl border text-sm font-medium cursor-pointer transition-all duration-150 select-none ${
                   isChecked
-                    ? "bg-neutral-50/90 border-neutral-200/90 text-neutral-900 shadow-2xs"
-                    : "bg-white border-transparent text-neutral-600 hover:bg-neutral-50/60 hover:border-neutral-200/70"
+                    ? "bg-primary-50/40 border-primary-200/70 text-neutral-900 shadow-2xs"
+                    : "bg-white border-neutral-200/60 text-neutral-500 hover:bg-neutral-50/80 hover:border-neutral-300 hover:text-neutral-700"
                 }`}
               >
                 <Checkbox
                   checked={isChecked}
                   onChange={() => onToggleResource(res.id)}
                 />
-                <span className="truncate">{res.name}</span>
+                <span
+                  className={`truncate font-semibold ${
+                    isChecked ? "text-neutral-900" : "text-neutral-600"
+                  }`}
+                >
+                  {res.name}
+                </span>
               </label>
             );
           })}

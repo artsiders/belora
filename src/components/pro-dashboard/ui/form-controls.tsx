@@ -155,6 +155,7 @@ FormTextarea.displayName = "FormTextarea";
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
   indeterminate?: boolean;
+  shape?: "circle" | "square";
 }
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
@@ -162,6 +163,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     {
       checked,
       indeterminate = false,
+      shape = "circle",
       className = "",
       disabled,
       onChange,
@@ -181,9 +183,12 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const isChecked = Boolean(checked && !isIndeterminate);
     const isActive = isChecked || isIndeterminate;
 
+    const shapeClasses =
+      shape === "circle" ? "rounded-full" : "rounded-md";
+
     return (
       <div
-        className={`relative inline-flex items-center justify-center shrink-0 w-4.5 h-4.5 ${className}`}
+        className={`relative inline-flex items-center justify-center shrink-0 w-5 h-5 ${className}`}
       >
         <input
           ref={(node) => {
@@ -203,18 +208,18 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         />
         <div
           aria-hidden="true"
-          className={`pointer-events-none w-4.5 h-4.5 rounded-[5px] border flex items-center justify-center transition-all duration-150 select-none ${
+          className={`pointer-events-none w-5 h-5 ${shapeClasses} border-2 flex items-center justify-center transition-all duration-150 select-none ${
             disabled
               ? "bg-neutral-100 border-neutral-200 text-neutral-400"
               : isActive
               ? "bg-primary-600 border-primary-600 text-white shadow-2xs peer-hover:bg-primary-700 peer-hover:border-primary-700"
-              : "bg-white border-neutral-300 text-transparent shadow-2xs peer-hover:border-neutral-400 group-hover:border-neutral-400"
+              : "bg-white border-neutral-300 text-transparent shadow-2xs peer-hover:border-primary-500 group-hover:border-primary-500"
           } peer-focus-visible:ring-2 peer-focus-visible:ring-primary-500/30 peer-focus-visible:ring-offset-1`}
         >
           {isIndeterminate ? (
             <Minus className="w-3 h-3 stroke-[3]" />
           ) : isChecked ? (
-            <Check className="w-3 h-3 stroke-[2.75]" />
+            <Check className="w-3.5 h-3.5 stroke-[2.75]" />
           ) : null}
         </div>
       </div>
