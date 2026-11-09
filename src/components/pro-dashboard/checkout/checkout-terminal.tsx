@@ -24,6 +24,7 @@ import {
   ProSaleTicket,
 } from "@/lib/data/pro-mock-data";
 import { FormSelect } from "@/components/pro-dashboard/ui/form-controls";
+import { CheckoutSidebar } from "@/components/pro-dashboard/checkout/checkout-sidebar";
 
 export interface CartItem {
   id: string;
@@ -68,6 +69,9 @@ interface CheckoutTerminalProps {
   appointments: ProAppointment[];
   initialAppointmentId?: string | null;
   onTicketCompleted: (ticket: ProSaleTicket) => void;
+  tickets?: ProSaleTicket[];
+  totalDayRevenue?: number;
+  onOpenClosingModal?: () => void;
 }
 
 export function CheckoutTerminal({
@@ -77,6 +81,9 @@ export function CheckoutTerminal({
   appointments,
   initialAppointmentId,
   onTicketCompleted,
+  tickets = [],
+  totalDayRevenue = 0,
+  onOpenClosingModal = () => {},
 }: CheckoutTerminalProps) {
   // Client sélectionné
   const [selectedClientId, setSelectedClientId] = useState<string>(() => {
@@ -87,6 +94,27 @@ export function CheckoutTerminal({
     return clients[0]?.id || "cli-1";
   });
   const [isAnonymousClient, setIsAnonymousClient] = useState<boolean>(false);
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState<
+    string | null
+  >(initialAppointmentId || null);
+
+  const handleSelectAppointment = (apt: ProAppointment) => {
+    setSelectedAppointmentId(apt.id);
+    setSelectedClientId(apt.clientId);
+    setIsAnonymousClient(false);
+    setDepositDeducted(apt.depositPaid || 0);
+
+    setCart([
+      {
+        id: `item-${Date.now()}`,
+        title: apt.serviceName,
+        type: "service",
+        price: apt.price,
+        quantity: 1,
+        staffId: apt.staffId,
+      },
+    ]);
+  };
 
   // Panier
   const [cart, setCart] = useState<CartItem[]>(() => {
@@ -351,81 +379,32 @@ export function CheckoutTerminal({
   }
 
   // --------------------------------------------------------------------------
-  // TERMINAL POS ACTIF (2 COLONNES)
+  // TERMINAL POS ACTIF (SIDEBAR 280PX + CATALOGUE + TICKET)
   // --------------------------------------------------------------------------
   return (
-    <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 p-4 sm:p-6 overflow-hidden">
-      {/* =====================================================================
-          COLONNE GAUCHE (7/12) : CHOIX CLIENT & CATALOGUE PRESTATIONS/PRODUITS
-          ===================================================================== */}
-      <div className="lg:col-span-7 flex flex-col gap-4 overflow-hidden">
-        {/* Sélecteur Client & RDV */}
-        <div className="p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-bold text-neutral-900 uppercase tracking-wider flex items-center gap-2">
-              <User className="w-4 h-4 text-primary-700" />
-              <span>Attribution Client</span>
-            </span>
+    <div className="flex-1 flex h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] overflow-hidden">
+      {/* Sidebar Caisse & POS (Attribution Client, RDV du jour, Clôture Z) */}
+      <CheckoutSidebar
+        clients={clients}
+        selectedClientId={selectedClientId}
+        onSelectClient={(id) => {
+          setSelectedClientId(id);
+          setIsAnonymousClient(false);
+        }}
+        isAnonymousClient={isAnonymousClient}
+        onToggleAnonymous={setIsAnonymousClient}
+        appointments={appointments}
+        activeAppointmentId={selectedAppointmentId}
+        onSelectAppointment={handleSelectAppointment}
+        totalDayRevenue={totalDayRevenue}
+        ticketsCount={tickets.length}
+        onOpenClosingModal={onOpenClosingModal}
+      />
 
-            <button
-              type="button"
-              onClick={() => setIsAnonymousClient(!isAnonymousClient)}
-              className={
-                isAnonymousClient
-                  ? "btn btn-dark btn-xs"
-                  : "btn btn-outline btn-xs"
-              }
-            >
-              Client de passage (sans fiche)
-            </button>
-          </div>
-
-          {!isAnonymousClient && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <FormSelect
-                label="Rechercher un client du fichier"
-                value={selectedClientId}
-                onChange={(e) => setSelectedClientId(e.target.value)}
-                options={clients.map((c) => ({
-                  value: c.id,
-                  label: `${c.firstName} ${c.lastName} (${c.phone})`,
-                }))}
-              />
-
-              <FormSelect
-                label="Rendez-vous du jour à encaisser"
-                value=""
-                onChange={(e) => {
-                  const aptId = e.target.value;
-                  const apt = appointments.find((a) => a.id === aptId);
-                  if (apt) {
-                    setCart([
-                      {
-                        id: `item-${Date.now()}`,
-                        title: apt.serviceName,
-                        type: "service",
-                        price: apt.price,
-                        quantity: 1,
-                        staffId: apt.staffId,
-                      },
-                    ]);
-                    setDepositDeducted(apt.depositPaid);
-                  }
-                }}
-                options={[
-                  { value: "", label: "Sélectionner un RDV du jour..." },
-                  ...appointments.map((a) => ({
-                    value: a.id,
-                    label: `${a.startTime} - ${a.clientName} (${a.serviceName})`,
-                  })),
-                ]}
-              />
-            </div>
-          )}
-        </div>
-
-        {/* Catalogue de Vente (Prestations vs Produits) */}
-        <div className="flex-1 flex flex-col p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs overflow-hidden">
+      {/* Zone Centrale & Droite : Catalogue + Ticket POS */}
+      <div className="flex-1 flex flex-col lg:flex-row gap-4 p-4 sm:p-6 overflow-hidden bg-neutral-50/40">
+        {/* Colonne Centre : Catalogue de Vente (Prestations vs Produits) */}
+        <div className="flex-1 flex flex-col p-4 sm:p-5 rounded-xl bg-white border border-neutral-200/90 shadow-2xs overflow-hidden">
           {/* Navigation Catalogue */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pb-3 border-b border-neutral-200">
             <div className="inline-flex p-1 rounded-lg bg-neutral-100 text-sm font-semibold">
@@ -537,12 +516,11 @@ export function CheckoutTerminal({
             )}
           </div>
         </div>
-      </div>
 
-      {/* =====================================================================
-          COLONNE DROITE (5/12) : TICKET DE CAISSE EN COURS & RÈGLEMENT
-          ===================================================================== */}
-      <div className="lg:col-span-5 flex flex-col p-5 rounded-xl bg-white border border-neutral-200/90 shadow-sm overflow-hidden">
+        {/* =====================================================================
+            COLONNE DROITE : TICKET DE CAISSE EN COURS & RÈGLEMENT (POS)
+            ===================================================================== */}
+        <div className="w-full lg:w-96 flex flex-col p-4 sm:p-5 rounded-xl bg-white border border-neutral-200/90 shadow-2xs overflow-hidden shrink-0">
         {/* Header Ticket */}
         <div className="flex items-center justify-between pb-3 border-b border-neutral-200">
           <div className="flex items-center gap-2">
@@ -821,6 +799,7 @@ export function CheckoutTerminal({
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 }
