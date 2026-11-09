@@ -166,7 +166,7 @@ export function AppointmentModal({
           <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80 space-y-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-full bg-neutral-200 text-neutral-800 font-bold text-sm flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-primary-50 text-primary-900 border border-primary-200/60 font-bold text-sm flex items-center justify-center shrink-0">
                   {appointment.clientName.charAt(0)}
                 </div>
                 <div>

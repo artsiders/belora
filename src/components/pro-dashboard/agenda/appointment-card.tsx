@@ -30,13 +30,18 @@ export function AppointmentCard({
       style={{
         top: `${topPx}px`,
         height: `${Math.max(34, heightPx - 2)}px`,
-        borderInlineStartColor: colorBorder,
       }}
-      className="absolute inset-x-1.5 border-s-4 bg-white border border-neutral-200/90 shadow-2xs hover:shadow-xs transition-shadow duration-150 p-2 cursor-pointer z-10 overflow-hidden flex flex-col justify-between select-none"
+      className="absolute inset-x-1.5 rounded-xl bg-white border border-neutral-200/90 shadow-2xs hover:shadow-xs transition-shadow duration-150 p-2.5 ps-3 cursor-pointer z-10 overflow-hidden flex flex-col justify-between select-none group"
     >
-      <div>
-        {/* Ligne 1 : Heure & Récurrence */}
-        <div className="flex items-center justify-between gap-1 text-sm font-bold text-neutral-900 leading-tight">
+      {/* Barre d'accentuation latérale */}
+      <span
+        className="absolute start-0 top-0 bottom-0 w-1.5 rounded-s-xl"
+        style={{ backgroundColor: colorBorder }}
+      />
+
+      <div className="min-w-0">
+        {/* Ligne 1 : Heure & Badges de sécurité/récurrence */}
+        <div className="flex items-center justify-between gap-1 text-xs font-bold text-neutral-900 leading-tight">
           <span className="tabular-nums">
             {appointment.startTime} - {appointment.endTime}
           </span>
@@ -55,25 +60,25 @@ export function AppointmentCard({
         </div>
 
         {/* Ligne 2 : Nom du client */}
-        <div className="font-semibold text-sm text-neutral-950 truncate mt-0.5">
+        <div className="font-bold text-sm text-neutral-950 truncate mt-0.5">
           {appointment.clientName}
         </div>
 
         {/* Ligne 3 : Prestation (si hauteur suffisante) */}
         {!isCompact && (
-          <div className="text-sm text-neutral-600 truncate mt-0.5">
+          <div className="text-xs text-neutral-600 truncate mt-0.5 font-medium">
             {appointment.serviceName}
           </div>
         )}
       </div>
 
-      {/* Ligne basse : Ressource / Statut (si hauteur suffisante) */}
+      {/* Ligne basse : Ressource / Prix (si hauteur suffisante) */}
       {!isCompact && heightPx > 70 && (
-        <div className="flex items-center justify-between gap-1 pt-1 mt-1 border-t border-neutral-100 text-[10px] text-neutral-500">
-          <span className="truncate">
+        <div className="flex items-center justify-between gap-1 pt-1.5 mt-1 border-t border-neutral-100 text-xs text-neutral-500">
+          <span className="truncate font-medium">
             {appointment.resourceName || "Sans cabine"}
           </span>
-          <span className="font-bold tabular-nums text-neutral-900 shrink-0">
+          <span className="font-bold tabular-nums text-neutral-950 shrink-0">
             {appointment.price} €
           </span>
         </div>

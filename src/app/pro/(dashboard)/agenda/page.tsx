@@ -230,6 +230,8 @@ function AgendaContent() {
           resourceList={visibleResources}
           appointments={appointments}
           intervalMinutes={intervalMinutes}
+          viewMode={viewMode}
+          currentDate={currentDate}
           onSelectAppointment={handleSelectAppointment}
           onSlotClick={handleSlotClick}
         />

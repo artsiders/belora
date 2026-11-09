@@ -167,7 +167,7 @@ export function DashboardHeader() {
             </span>
           </div>
 
-          {/* Cloche de notifications avec badge Planity-style */}
+          {/* Cloche de notifications */}
           <div className="relative">
             <button
               type="button"
@@ -180,7 +180,7 @@ export function DashboardHeader() {
             >
               <Bell className="w-4.5 h-4.5" />
               {unreadNotifications > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-primary-600 text-white text-[10px] font-bold flex items-center justify-center">
+                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-primary-600 text-white text-xs font-bold flex items-center justify-center leading-none">
                   {unreadNotifications}
                 </span>
               )}
@@ -197,17 +197,17 @@ export function DashboardHeader() {
                     <span className="font-bold text-neutral-900">
                       Notifications du salon
                     </span>
-                    <span className="text-neutral-400 text-sm">Direct</span>
+                    <span className="text-neutral-400 text-xs">Direct</span>
                   </div>
                   <div className="divide-y divide-neutral-100">
                     <div className="py-2.5 px-2 hover:bg-neutral-50 rounded-lg">
                       <p className="font-semibold text-neutral-900">
                         Nouvelle réservation en ligne
                       </p>
-                      <p className="text-neutral-600 text-sm mt-0.5">
+                      <p className="text-neutral-600 text-xs mt-0.5">
                         Sophie Martin &bull; Grand Rituel Kobido (14h00)
                       </p>
-                      <span className="text-neutral-400 text-[10px] mt-1 block">
+                      <span className="text-neutral-400 text-xs mt-1 block">
                         Il y a 12 minutes &bull; Acompte 40 € perçu
                       </span>
                     </div>
@@ -215,10 +215,10 @@ export function DashboardHeader() {
                       <p className="font-semibold text-neutral-900">
                         Rappel SMS envoyé
                       </p>
-                      <p className="text-neutral-600 text-sm mt-0.5">
+                      <p className="text-neutral-600 text-xs mt-0.5">
                         Antoine Dupont confirmé pour 10h00 demain
                       </p>
-                      <span className="text-neutral-400 text-[10px] mt-1 block">
+                      <span className="text-neutral-400 text-xs mt-1 block">
                         Il y a 1 heure
                       </span>
                     </div>
@@ -226,10 +226,10 @@ export function DashboardHeader() {
                       <p className="font-semibold text-neutral-900">
                         Pointage équipe validé
                       </p>
-                      <p className="text-neutral-600 text-sm mt-0.5">
+                      <p className="text-neutral-600 text-xs mt-0.5">
                         Clément Roux a pointé son arrivée à 09:55
                       </p>
-                      <span className="text-neutral-400 text-[10px] mt-1 block">
+                      <span className="text-neutral-400 text-xs mt-1 block">
                         Ce matin
                       </span>
                     </div>
@@ -251,7 +251,7 @@ export function DashboardHeader() {
           </Link>
 
           {/* Avatar Pro */}
-          <div className="w-12 h-12 rounded-full bg-primary-100 text-primary-900 font-bold text-sm flex items-center justify-center shrink-0">
+          <div className="w-9 h-9 rounded-full bg-primary-100 text-primary-900 font-bold text-xs flex items-center justify-center shrink-0 border border-primary-200/60 shadow-2xs">
             HV
           </div>
         </div>

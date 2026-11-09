@@ -78,7 +78,13 @@ export function CheckoutTerminal({
   onTicketCompleted,
 }: CheckoutTerminalProps) {
   // Client sélectionné
-  const [selectedClientId, setSelectedClientId] = useState<string>("cli-1");
+  const [selectedClientId, setSelectedClientId] = useState<string>(() => {
+    if (initialAppointmentId) {
+      const apt = appointments.find((a) => a.id === initialAppointmentId);
+      if (apt?.clientId) return apt.clientId;
+    }
+    return clients[0]?.id || "cli-1";
+  });
   const [isAnonymousClient, setIsAnonymousClient] = useState<boolean>(false);
 
   // Panier
@@ -99,26 +105,16 @@ export function CheckoutTerminal({
         ];
       }
     }
-    // Panier par défaut
-    return [
-      {
-        id: "item-init-1",
-        title: services[0]?.name || "Prestation",
-        type: "service",
-        price: services[0]?.priceEuros || 50,
-        quantity: 1,
-        staffId: staffList[0]?.id || "staff-1",
-      },
-    ];
+    return [];
   });
 
-  // Acompte déjà perçu
+  // Acompte déjà perçu sur réservation en ligne
   const [depositDeducted, setDepositDeducted] = useState<number>(() => {
     if (initialAppointmentId) {
       const apt = appointments.find((a) => a.id === initialAppointmentId);
       return apt?.depositPaid || 0;
     }
-    return 15; // 15 € d'acompte simulé par défaut
+    return 0;
   });
 
   // Remise
@@ -507,8 +503,8 @@ export function CheckoutTerminal({
                       <span className="text-sm font-bold text-neutral-950 tabular-nums">
                         {srv.priceEuros.toFixed(2)} €
                       </span>
-                      <span className="text-[10px] font-semibold text-primary-700 flex items-center gap-1">
-                        <Plus className="w-3 h-3" />
+                      <span className="text-xs font-semibold text-primary-700 flex items-center gap-1">
+                        <Plus className="w-3.5 h-3.5" />
                         <span>Ajouter</span>
                       </span>
                     </div>
@@ -541,8 +537,8 @@ export function CheckoutTerminal({
                     <span className="text-sm font-bold text-neutral-950 tabular-nums">
                       {prd.price.toFixed(2)} €
                     </span>
-                    <span className="text-[10px] font-semibold text-primary-700 flex items-center gap-1">
-                      <Plus className="w-3 h-3" />
+                    <span className="text-xs font-semibold text-primary-700 flex items-center gap-1">
+                      <Plus className="w-3.5 h-3.5" />
                       <span>Ajouter</span>
                     </span>
                   </div>
@@ -591,7 +587,7 @@ export function CheckoutTerminal({
                     <h5 className="font-bold text-sm text-neutral-950 truncate">
                       {item.title}
                     </h5>
-                    <span className="text-[10px] text-neutral-500 uppercase tracking-wider">
+                    <span className="text-xs text-neutral-500 uppercase tracking-wider font-medium">
                       {item.type === "service" ? "Prestation" : "Produit boutique"}
                     </span>
                   </div>
@@ -653,80 +649,74 @@ export function CheckoutTerminal({
         {/* Pied du Ticket : Remise, Acompte, Total & Mode de paiement */}
         <div className="pt-3 border-t border-neutral-200 space-y-3 shrink-0">
           {/* Ligne Remise & Acompte */}
-          <div className="space-y-1.5 text-sm">
-            <div className="flex items-center justify-between text-neutral-600">
+          <div className="space-y-2 text-sm">
+            <div className="flex items-center justify-between text-neutral-600 font-medium">
               <span>Sous-total articles</span>
-              <span className="tabular-nums font-semibold text-neutral-900">
+              <span className="tabular-nums font-bold text-neutral-900">
                 {rawSubtotal.toFixed(2)} €
               </span>
             </div>
 
             {/* Remise éventuelle */}
-            <div className="flex items-center justify-between text-neutral-600">
-              <span className="flex items-center gap-1">
-                <Percent className="w-3 h-3" />
+            <div className="flex items-center justify-between text-neutral-600 font-medium">
+              <span className="flex items-center gap-1.5">
+                <Percent className="w-3.5 h-3.5 text-neutral-400" />
                 <span>Remise commerciale</span>
               </span>
-              <div className="flex items-center gap-1">
-                <button
-                  type="button"
-                  onClick={() => setDiscountPercent(discountPercent === 10 ? 0 : 10)}
-                  className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${
-                    discountPercent === 10
-                      ? "bg-neutral-900 text-white border-neutral-900"
-                      : "bg-white text-neutral-600 border-neutral-200"
-                  }`}
-                >
-                  -10%
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setDiscountPercent(discountPercent === 20 ? 0 : 20)}
-                  className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${
-                    discountPercent === 20
-                      ? "bg-neutral-900 text-white border-neutral-900"
-                      : "bg-white text-neutral-600 border-neutral-200"
-                  }`}
-                >
-                  -20%
-                </button>
+              <div className="flex items-center gap-1.5">
+                {[10, 20, 30].map((pct) => (
+                  <button
+                    key={pct}
+                    type="button"
+                    onClick={() =>
+                      setDiscountPercent(discountPercent === pct ? 0 : pct)
+                    }
+                    className={`px-2 py-0.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+                      discountPercent === pct
+                        ? "bg-primary-600 text-white border-primary-600 shadow-2xs font-bold"
+                        : "bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50"
+                    }`}
+                  >
+                    -{pct}%
+                  </button>
+                ))}
               </div>
             </div>
 
             {/* Déduction Acompte Stripe Connect */}
-            <div className="flex items-center justify-between p-2 rounded-lg bg-primary-50/70 border border-primary-200 text-primary-800 font-semibold">
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Acompte Stripe perçu en ligne</span>
-              </span>
-              <div className="flex items-center gap-1">
-                <span className="tabular-nums">
-                  - {depositDeducted.toFixed(2)} €
+            {depositDeducted > 0 && (
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-primary-50/70 border border-primary-200/80 text-primary-900 text-xs font-semibold">
+                <span className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-primary-700" />
+                  <span>Acompte Stripe perçu en ligne</span>
                 </span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setDepositDeducted(depositDeducted > 0 ? 0 : 15)
-                  }
-                  className="text-[10px] underline ml-1 cursor-pointer text-neutral-500"
-                >
-                  {depositDeducted > 0 ? "Annuler" : "Appliquer"}
-                </button>
+                <div className="flex items-center gap-1">
+                  <span className="tabular-nums font-bold">
+                    - {depositDeducted.toFixed(2)} €
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setDepositDeducted(0)}
+                    className="text-xs underline ml-2 cursor-pointer text-neutral-500 hover:text-rose-700"
+                  >
+                    Retirer
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Grand Total */}
-          <div className="p-3 rounded-xl bg-neutral-900 text-white flex items-center justify-between">
+          <div className="p-3.5 rounded-2xl bg-neutral-50 border border-neutral-200/90 flex items-center justify-between">
             <div>
-              <span className="text-[10px] uppercase font-semibold text-neutral-400 block tracking-wider">
+              <span className="text-xs uppercase font-bold text-neutral-500 block tracking-wider">
                 Reste à régler au salon
               </span>
-              <span className="text-sm text-neutral-400">
-                dont TVA 20% : {vatAmount.toFixed(2)} €
+              <span className="text-xs text-neutral-400 font-medium">
+                dont TVA (20%) : {vatAmount.toFixed(2)} €
               </span>
             </div>
-            <span className="font-bold text-2xl tabular-nums">
+            <span className="font-extrabold text-2xl sm:text-3xl tabular-nums text-neutral-950">
               {totalDue.toFixed(2)} €
             </span>
           </div>

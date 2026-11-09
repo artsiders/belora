@@ -6,7 +6,7 @@ import {
   Trash2,
   Copy,
   Edit2,
-  DollarSign,
+  SlidersHorizontal,
   CheckCircle2,
 } from "lucide-react";
 import { ServiceEditModal } from "@/components/pro-dashboard/settings/service-edit-modal";
@@ -153,7 +153,7 @@ export default function ServicesSettingsPage() {
           onClick={() => setIsMassPriceModalOpen(true)}
           className="btn btn-outline btn-xs flex items-center gap-1.5 text-primary-800 border-primary-200 bg-primary-50/50 hover:bg-primary-50"
         >
-          <DollarSign className="w-3.5 h-3.5" />
+          <SlidersHorizontal className="w-3.5 h-3.5" />
           <span>Éditer les prix en masse</span>
         </button>
 
@@ -191,18 +191,18 @@ export default function ServicesSettingsPage() {
                   </span>
                 </h3>
 
-                <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-600">
+                <div className="flex flex-wrap items-center gap-2 text-sm">
                   <button
                     type="button"
                     onClick={() => {
                       setEditingService(null);
                       setIsServiceModalOpen(true);
                     }}
-                    className="hover:text-neutral-950 font-semibold cursor-pointer underline decoration-neutral-300 underline-offset-2"
+                    className="px-2.5 py-1 rounded-lg text-xs font-semibold text-neutral-700 bg-white hover:bg-neutral-100 border border-neutral-300 transition-colors flex items-center gap-1 cursor-pointer"
                   >
-                    Ajouter une prestation
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>Ajouter une prestation</span>
                   </button>
-                  <span className="text-neutral-300">&bull;</span>
                   <button
                     type="button"
                     onClick={() => {
@@ -211,9 +211,10 @@ export default function ServicesSettingsPage() {
                       );
                       showNotification(`Catégorie "${cat.name}" supprimée.`);
                     }}
-                    className="hover:text-rose-700 cursor-pointer"
+                    className="p-1.5 rounded-lg text-neutral-400 hover:text-rose-700 hover:bg-rose-50 transition-colors cursor-pointer"
+                    title="Supprimer la catégorie"
                   >
-                    Supprimer catégorie
+                    <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
@@ -232,9 +233,9 @@ export default function ServicesSettingsPage() {
                     >
                       {/* Côté Gauche : Barre d'accent + Nom + Durée + Prix */}
                       <div className="flex items-center gap-3 min-w-0">
-                        <span className="w-1 h-8 rounded-full bg-primary-600 shrink-0" />
+                        <span className="w-1.5 h-9 rounded-full bg-primary-600 shrink-0" />
                         <div>
-                          <div className="flex items-baseline gap-2">
+                          <div className="flex items-baseline gap-2 flex-wrap">
                             <h4 className="text-sm sm:text-base font-semibold text-neutral-950">
                               {srv.name}
                             </h4>
@@ -246,7 +247,7 @@ export default function ServicesSettingsPage() {
                                       : ""
                                   }`
                                 : `${srv.durationMinutes}min`}{" "}
-                              -{" "}
+                              &bull;{" "}
                               <strong className="text-neutral-900 font-bold">
                                 {srv.priceEuros.toFixed(2)} €
                               </strong>
@@ -254,21 +255,22 @@ export default function ServicesSettingsPage() {
                           </div>
 
                           {srv.breakDurationMinutes && srv.breakDurationMinutes > 0 ? (
-                            <span className="text-sm text-primary-700 font-medium">
+                            <span className="text-xs text-primary-700 font-medium block mt-0.5">
                               Temps de pose autonome : {srv.breakDurationMinutes} min
                             </span>
                           ) : null}
                         </div>
                       </div>
 
-                      {/* Côté Droit : Actions (Dupliquer, Modifier, Supprimer) */}
-                      <div className="flex items-center gap-4 text-sm font-medium self-end sm:self-auto shrink-0">
+                      {/* Côté Droit : Actions Modernes (Dupliquer, Modifier, Supprimer) */}
+                      <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
                         <button
                           type="button"
                           onClick={() => handleDuplicateService(srv)}
-                          className="text-neutral-600 hover:text-neutral-950 cursor-pointer underline decoration-neutral-200 underline-offset-2 flex items-center gap-1"
+                          className="px-2.5 py-1 rounded-lg text-xs font-semibold text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 border border-neutral-200 transition-colors flex items-center gap-1.5 cursor-pointer"
+                          title="Dupliquer cette prestation"
                         >
-                          <Copy className="w-3 h-3" />
+                          <Copy className="w-3 h-3 text-neutral-500" />
                           <span>Dupliquer</span>
                         </button>
 
@@ -278,19 +280,20 @@ export default function ServicesSettingsPage() {
                             setEditingService(srv);
                             setIsServiceModalOpen(true);
                           }}
-                          className="text-neutral-600 hover:text-neutral-950 cursor-pointer underline decoration-neutral-200 underline-offset-2 flex items-center gap-1"
+                          className="px-2.5 py-1 rounded-lg text-xs font-semibold text-primary-800 bg-primary-50/70 hover:bg-primary-100/70 border border-primary-200/70 transition-colors flex items-center gap-1.5 cursor-pointer"
+                          title="Modifier les détails et tarifs"
                         >
-                          <Edit2 className="w-3 h-3" />
+                          <Edit2 className="w-3 h-3 text-primary-600" />
                           <span>Modifier</span>
                         </button>
 
                         <button
                           type="button"
                           onClick={() => handleDeleteService(srv.id)}
-                          className="text-rose-600 hover:text-rose-800 cursor-pointer flex items-center gap-1"
+                          className="p-1.5 rounded-lg text-neutral-400 hover:text-rose-700 hover:bg-rose-50 transition-colors cursor-pointer"
+                          title="Supprimer la prestation"
                         >
-                          <Trash2 className="w-3 h-3" />
-                          <span>Supprimer</span>
+                          <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </div>

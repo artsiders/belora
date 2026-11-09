@@ -67,34 +67,37 @@ function ClientsContent() {
       key: "name",
       header: "Client",
       sortable: true,
-      render: (client) => (
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full bg-neutral-100 text-neutral-800 font-bold text-sm flex items-center justify-center shrink-0 border border-neutral-200">
-            {client.firstName.charAt(0)}
-          </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-bold text-neutral-950">
-                {client.firstName} {client.lastName}
-              </span>
-              {client.isVip && (
-                <Badge variant="primary" size="sm">
-                  VIP
-                </Badge>
-              )}
+      render: (client) => {
+        const initials = `${client.firstName.charAt(0)}${client.lastName.charAt(0)}`;
+        return (
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-full bg-primary-50 text-primary-900 font-bold text-xs flex items-center justify-center shrink-0 border border-primary-200/60 shadow-2xs">
+              {initials}
             </div>
-            <span className="text-sm text-neutral-500">
-              Inscrit le {client.createdAt}
-            </span>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-neutral-950 text-sm">
+                  {client.firstName} {client.lastName}
+                </span>
+                {client.isVip && (
+                  <Badge variant="primary" size="sm">
+                    VIP
+                  </Badge>
+                )}
+              </div>
+              <span className="text-xs text-neutral-500 font-medium">
+                Inscrit le {client.createdAt}
+              </span>
+            </div>
           </div>
-        </div>
-      ),
+        );
+      },
     },
     {
       key: "phone",
       header: "Téléphone",
       render: (client) => (
-        <div className="flex items-center gap-1.5 text-neutral-700">
+        <div className="flex items-center gap-1.5 text-neutral-700 text-sm">
           <Phone className="w-3.5 h-3.5 text-neutral-400" />
           <span className="tabular-nums font-medium">{client.phone}</span>
         </div>
@@ -104,7 +107,7 @@ function ClientsContent() {
       key: "email",
       header: "Adresse e-mail",
       render: (client) => (
-        <div className="flex items-center gap-1.5 text-neutral-700">
+        <div className="flex items-center gap-1.5 text-neutral-700 text-sm">
           <Mail className="w-3.5 h-3.5 text-neutral-400" />
           <span>{client.email}</span>
         </div>
@@ -115,7 +118,7 @@ function ClientsContent() {
       header: "Dernière visite",
       sortable: true,
       render: (client) => (
-        <span className="text-neutral-600 tabular-nums">
+        <span className="text-neutral-600 text-sm tabular-nums font-medium">
           {client.lastVisit}
         </span>
       ),
@@ -126,7 +129,7 @@ function ClientsContent() {
       sortable: true,
       className: "text-center",
       render: (client) => (
-        <span className="font-semibold tabular-nums text-neutral-900 bg-neutral-100 px-2 py-0.5 rounded">
+        <span className="font-semibold text-xs tabular-nums text-neutral-800 bg-neutral-100 px-2.5 py-1 rounded-full">
           {client.totalVisits}
         </span>
       ),
@@ -137,7 +140,7 @@ function ClientsContent() {
       sortable: true,
       className: "text-right",
       render: (client) => (
-        <span className="font-bold tabular-nums text-primary-800">
+        <span className="font-bold text-sm tabular-nums text-primary-800">
           {client.totalSpent.toFixed(2)} €
         </span>
       ),
@@ -154,9 +157,9 @@ function ClientsContent() {
             setSelectedClient(client);
             setIsDrawerOpen(true);
           }}
-          className="btn btn-outline btn-xs inline-flex items-center gap-1 hover:border-neutral-900"
+          className="btn btn-outline btn-xs rounded-lg inline-flex items-center gap-1.5 hover:border-primary-600 hover:text-primary-700"
         >
-          <Eye className="w-3 h-3" />
+          <Eye className="w-3.5 h-3.5" />
           <span>Fiche</span>
         </button>
       ),
@@ -188,13 +191,13 @@ function ClientsContent() {
       </div>
 
       {/* Filtres de segmentation rapide */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 text-sm">
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 text-sm font-semibold">
         <button
           type="button"
           onClick={() => setFilterSegment("all")}
-          className={`px-3 py-1.5 rounded-xl border transition-colors cursor-pointer ${
+          className={`px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
             filterSegment === "all"
-              ? "bg-neutral-950 text-white border-neutral-950 font-bold"
+              ? "bg-primary-600 text-white border-primary-600 shadow-2xs font-bold"
               : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
           }`}
         >
@@ -204,9 +207,9 @@ function ClientsContent() {
         <button
           type="button"
           onClick={() => setFilterSegment("vip")}
-          className={`px-3 py-1.5 rounded-xl border transition-colors cursor-pointer ${
+          className={`px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
             filterSegment === "vip"
-              ? "bg-neutral-950 text-white border-neutral-950 font-bold"
+              ? "bg-primary-600 text-white border-primary-600 shadow-2xs font-bold"
               : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
           }`}
         >
@@ -216,9 +219,9 @@ function ClientsContent() {
         <button
           type="button"
           onClick={() => setFilterSegment("regulars")}
-          className={`px-3 py-1.5 rounded-xl border transition-colors cursor-pointer ${
+          className={`px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
             filterSegment === "regulars"
-              ? "bg-neutral-950 text-white border-neutral-950 font-bold"
+              ? "bg-primary-600 text-white border-primary-600 shadow-2xs font-bold"
               : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
           }`}
         >
@@ -229,9 +232,9 @@ function ClientsContent() {
         <button
           type="button"
           onClick={() => setFilterSegment("new")}
-          className={`px-3 py-1.5 rounded-xl border transition-colors cursor-pointer ${
+          className={`px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
             filterSegment === "new"
-              ? "bg-neutral-950 text-white border-neutral-950 font-bold"
+              ? "bg-primary-600 text-white border-primary-600 shadow-2xs font-bold"
               : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
           }`}
         >

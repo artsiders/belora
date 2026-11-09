@@ -255,9 +255,9 @@ export default function EstablishmentSettingsPage() {
                             e.target.value
                           )
                         }
-                        className="h-8 px-2 bg-neutral-50 border border-neutral-300 rounded font-semibold text-sm"
+                        className="h-9 px-3 bg-white border border-neutral-300 rounded-lg font-semibold text-sm focus:border-primary-600 focus:ring-1 focus:ring-primary-600 outline-none shadow-2xs"
                       />
-                      <span className="text-neutral-400">à</span>
+                      <span className="text-neutral-400 font-medium">à</span>
                       <input
                         type="time"
                         value={oh.closeTime}
@@ -268,7 +268,7 @@ export default function EstablishmentSettingsPage() {
                             e.target.value
                           )
                         }
-                        className="h-8 px-2 bg-neutral-50 border border-neutral-300 rounded font-semibold text-sm"
+                        className="h-9 px-3 bg-white border border-neutral-300 rounded-lg font-semibold text-sm focus:border-primary-600 focus:ring-1 focus:ring-primary-600 outline-none shadow-2xs"
                       />
                     </div>
                   ) : (

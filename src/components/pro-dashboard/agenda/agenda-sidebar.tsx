@@ -300,7 +300,7 @@ export function AgendaSidebar({
         <button
           type="button"
           onClick={onOpenClockInModal}
-          className="w-full h-11 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
+          className="w-full h-11 px-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
         >
           <Clock className="w-4 h-4" />
           <span>Pointage équipe</span>

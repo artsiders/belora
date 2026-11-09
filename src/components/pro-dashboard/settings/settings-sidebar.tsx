@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -10,13 +10,10 @@ import {
   CreditCard,
   MessageSquare,
   HelpCircle,
-  ChevronDown,
-  ChevronRight,
 } from "lucide-react";
 
 export function SettingsSidebar() {
   const pathname = usePathname();
-  const [agendaExpanded, setAgendaExpanded] = useState(true);
 
   const isServicesActive = pathname === "/pro/settings/services" || pathname === "/pro/settings";
   const isEstablishmentActive = pathname === "/pro/settings/establishment";
@@ -35,103 +32,61 @@ export function SettingsSidebar() {
         </p>
       </div>
 
-      <nav className="p-3 space-y-1 text-sm">
-        {/* Accordéon 1 : Paramètres Agenda */}
-        <div>
-          <button
-            type="button"
-            onClick={() => setAgendaExpanded(!agendaExpanded)}
-            className="w-full flex items-center justify-between p-2.5 rounded-xl text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50 font-bold transition-colors cursor-pointer"
-          >
-            <div className="flex items-center gap-2.5">
-              <Calendar className="w-4 h-4 text-primary-700" />
-              <span>Paramètres Agenda</span>
-            </div>
-            {agendaExpanded ? (
-              <ChevronDown className="w-3.5 h-3.5 text-neutral-400" />
-            ) : (
-              <ChevronRight className="w-3.5 h-3.5 text-neutral-400" />
-            )}
-          </button>
-
-          {agendaExpanded && (
-            <div className="ps-6 pe-2 py-1 space-y-1">
-              <Link
-                href="/pro/settings/services"
-                className={`block px-3 py-2 rounded-lg font-medium transition-colors ${
-                  isServicesActive
-                    ? "bg-primary-50 text-primary-800 font-bold"
-                    : "text-neutral-600 hover:text-neutral-950 hover:bg-neutral-50"
-                }`}
-              >
-                Gestion des prestations
-              </Link>
-              <span className="block px-3 py-2 rounded-lg text-neutral-400 cursor-not-allowed">
-                Gestion des agendas
-              </span>
-              <span className="block px-3 py-2 rounded-lg text-neutral-400 cursor-not-allowed">
-                Affichage des rendez-vous
-              </span>
-              <span className="block px-3 py-2 rounded-lg text-neutral-400 cursor-not-allowed">
-                Contenu de marque
-              </span>
-            </div>
-          )}
-        </div>
-
-        {/* Section 2 : Paramètres Établissement (Prioritaire / Encadré rouge) */}
+      <nav className="p-3 space-y-1 text-sm font-semibold">
         <Link
-          href="/pro/settings/establishment"
-          className={`flex items-center justify-between p-2.5 rounded-xl font-bold transition-colors ${
-            isEstablishmentActive
-              ? "bg-primary-600 text-white shadow-2xs"
-              : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50"
+          href="/pro/settings/services"
+          className={`flex items-center gap-2.5 p-2.5 rounded-xl transition-all duration-150 ${
+            isServicesActive
+              ? "bg-primary-600 text-white shadow-2xs font-bold"
+              : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
           }`}
         >
-          <div className="flex items-center gap-2.5">
-            <Building2 className="w-4 h-4 shrink-0" />
-            <span>Paramètres Établissement</span>
-          </div>
-          <span
-            className={`w-2 h-2 rounded-full ${
-              isEstablishmentActive ? "bg-white" : "bg-primary-600"
-            }`}
-          />
+          <Calendar className="w-4 h-4 shrink-0" />
+          <span>Gestion des prestations</span>
         </Link>
 
-        {/* Section 3 : Gestion Temps de Travail & Équipe */}
+        <Link
+          href="/pro/settings/establishment"
+          className={`flex items-center gap-2.5 p-2.5 rounded-xl transition-all duration-150 ${
+            isEstablishmentActive
+              ? "bg-primary-600 text-white shadow-2xs font-bold"
+              : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
+          }`}
+        >
+          <Building2 className="w-4 h-4 shrink-0" />
+          <span>Paramètres Établissement</span>
+        </Link>
+
         <Link
           href="/pro/settings/team"
-          className={`flex items-center gap-2.5 p-2.5 rounded-xl font-bold transition-colors ${
+          className={`flex items-center gap-2.5 p-2.5 rounded-xl transition-all duration-150 ${
             isTeamActive
-              ? "bg-primary-600 text-white shadow-2xs"
-              : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50"
+              ? "bg-primary-600 text-white shadow-2xs font-bold"
+              : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
           }`}
         >
           <Clock className="w-4 h-4 shrink-0" />
           <span>Gestion Temps de Travail</span>
         </Link>
 
-        {/* Section 4 : Paramètres Caisse */}
         <Link
           href="/pro/settings/cash-register"
-          className={`flex items-center gap-2.5 p-2.5 rounded-xl font-bold transition-colors ${
+          className={`flex items-center gap-2.5 p-2.5 rounded-xl transition-all duration-150 ${
             isCashActive
-              ? "bg-primary-600 text-white shadow-2xs"
-              : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50"
+              ? "bg-primary-600 text-white shadow-2xs font-bold"
+              : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
           }`}
         >
           <CreditCard className="w-4 h-4 shrink-0" />
           <span>Paramètres Caisse</span>
         </Link>
 
-        {/* Section 5 : SMS & Emails */}
         <Link
           href="/pro/settings/notifications"
-          className={`flex items-center gap-2.5 p-2.5 rounded-xl font-bold transition-colors ${
+          className={`flex items-center gap-2.5 p-2.5 rounded-xl transition-all duration-150 ${
             isNotificationsActive
-              ? "bg-primary-600 text-white shadow-2xs"
-              : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50"
+              ? "bg-primary-600 text-white shadow-2xs font-bold"
+              : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
           }`}
         >
           <MessageSquare className="w-4 h-4 shrink-0" />
