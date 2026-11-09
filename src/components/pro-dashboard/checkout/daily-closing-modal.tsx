@@ -216,7 +216,7 @@ export function DailyClosingModal({
                 step="0.01"
                 value={cashCounted}
                 onChange={(e) => setCashCounted(e.target.value)}
-                className="w-full h-9 px-3 bg-white border border-neutral-300 rounded-lg text-sm font-semibold tabular-nums text-neutral-900"
+                className="input input-sm w-full font-semibold tabular-nums text-neutral-900"
               />
             </div>
           </div>

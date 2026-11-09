@@ -144,7 +144,7 @@ export function DashboardHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm sm:text-base font-semibold transition-all duration-150 ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-semibold transition-all duration-150 ${
                   item.active
                     ? "bg-primary-600 text-white shadow-2xs"
                     : "text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100"
@@ -160,7 +160,7 @@ export function DashboardHeader() {
         {/* Section Droite : Horloge, Notifications, Profil */}
         <div className="flex items-center gap-2 sm:gap-4 shrink-0">
           {/* Horloge en direct */}
-          <div className="hidden md:flex items-center gap-1.5 text-sm text-neutral-600 font-medium bg-neutral-100/80 px-2.5 py-1 rounded-lg">
+          <div className="hidden md:flex items-center gap-1.5 text-sm text-neutral-600 font-medium bg-neutral-100/80 px-2.5 py-1 rounded-md">
             <Clock className="w-3.5 h-3.5 text-neutral-500" />
             <span className="tabular-nums font-semibold text-neutral-900">
               {currentTime || "14:37"}
@@ -176,7 +176,7 @@ export function DashboardHeader() {
                 setUnreadNotifications(0);
               }}
               aria-label="Centre de notifications"
-              className="relative p-2 rounded-xl text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 transition-colors cursor-pointer"
+              className="relative p-2 rounded-lg text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 transition-colors cursor-pointer"
             >
               <Bell className="w-4.5 h-4.5" />
               {unreadNotifications > 0 && (
@@ -192,7 +192,7 @@ export function DashboardHeader() {
                   className="fixed inset-0 z-40"
                   onClick={() => setShowNotifications(false)}
                 />
-                <div className="absolute right-0 mt-2 w-80 rounded-2xl border border-neutral-200 bg-white p-3 shadow-xl z-50 text-sm">
+                <div className="absolute right-0 mt-2 w-80 rounded-xl border border-neutral-200 bg-white p-3 shadow-xl z-50 text-sm">
                   <div className="flex items-center justify-between pb-2 border-b border-neutral-100 px-2">
                     <span className="font-bold text-neutral-900">
                       Notifications du salon
@@ -244,7 +244,7 @@ export function DashboardHeader() {
             href={`/venue/${MOCK_ESTABLISHMENT.slug}`}
             target="_blank"
             title="Consulter ma fiche en ligne sur Belora"
-            className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-neutral-200 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50 text-sm font-semibold transition-colors"
+            className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-neutral-200 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50 text-sm font-semibold transition-colors"
           >
             <span>Fiche publique</span>
             <ExternalLink className="w-3.5 h-3.5" />

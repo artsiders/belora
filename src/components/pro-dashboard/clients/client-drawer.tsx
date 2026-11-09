@@ -127,7 +127,7 @@ function ClientDrawerInner({
   return (
     <div className="space-y-6">
       {/* KPI Synthèse Client */}
-      <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-neutral-50/80 border border-neutral-200">
+      <div className="grid grid-cols-3 gap-3 p-4 rounded-xl bg-neutral-50/80 border border-neutral-200">
         <div>
           <span className="text-neutral-500 text-sm block mb-0.5">
             Visites totales

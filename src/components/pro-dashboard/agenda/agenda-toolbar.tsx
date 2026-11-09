@@ -63,7 +63,7 @@ export function AgendaToolbar({
           type="button"
           onClick={onToggleSidebar}
           aria-label="Basculer le panneau latéral"
-          className={`p-2 rounded-xl border text-neutral-700 transition-colors cursor-pointer ${
+          className={`p-2 rounded-lg border text-neutral-700 transition-colors cursor-pointer ${
             isSidebarOpen
               ? "bg-neutral-100 border-neutral-300 text-neutral-950"
               : "bg-white border-neutral-200 hover:bg-neutral-50"
@@ -76,16 +76,16 @@ export function AgendaToolbar({
         <button
           type="button"
           onClick={handleToday}
-          className="px-3 py-1.5 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-50 text-neutral-800 text-sm font-semibold shadow-2xs transition-colors cursor-pointer"
+          className="btn btn-outline btn-sm"
         >
           Aujourd&apos;hui
         </button>
 
-        <div className="flex items-center gap-1 border border-neutral-200 rounded-xl bg-white p-0.5 shadow-2xs">
+        <div className="flex items-center gap-0.5 border border-neutral-200 rounded-lg bg-white p-0.5 shadow-2xs">
           <button
             type="button"
             onClick={handlePrevDay}
-            className="p-1 rounded-lg text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 transition-colors cursor-pointer"
+            className="p-1 rounded-md text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 transition-colors cursor-pointer"
             aria-label="Jour précédent"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -93,7 +93,7 @@ export function AgendaToolbar({
           <button
             type="button"
             onClick={handleNextDay}
-            className="p-1 rounded-lg text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 transition-colors cursor-pointer"
+            className="p-1 rounded-md text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 transition-colors cursor-pointer"
             aria-label="Jour suivant"
           >
             <ChevronRight className="w-4 h-4" />
@@ -112,11 +112,11 @@ export function AgendaToolbar({
       {/* Vue jour/semaine, intervalle et bouton Création */}
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Toggle Vue jour / Vue semaine */}
-        <div className="inline-flex p-1 rounded-xl bg-neutral-100 border border-neutral-200/80 text-sm font-semibold">
+        <div className="inline-flex p-1 rounded-lg bg-neutral-100 border border-neutral-200/80 text-sm font-semibold">
           <button
             type="button"
             onClick={() => onViewModeChange("day")}
-            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+            className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
               viewMode === "day"
                 ? "bg-white text-neutral-950 shadow-2xs font-bold"
                 : "text-neutral-600 hover:text-neutral-900"
@@ -127,7 +127,7 @@ export function AgendaToolbar({
           <button
             type="button"
             onClick={() => onViewModeChange("week")}
-            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+            className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
               viewMode === "week"
                 ? "bg-white text-neutral-950 shadow-2xs font-bold"
                 : "text-neutral-600 hover:text-neutral-900"
@@ -143,7 +143,7 @@ export function AgendaToolbar({
           <select
             value={intervalMinutes}
             onChange={(e) => onIntervalChange(Number(e.target.value))}
-            className="bg-white border border-neutral-200 rounded-lg px-2 py-1 text-sm font-semibold text-neutral-800 focus:outline-none focus:border-primary-600 cursor-pointer"
+            className="select h-8 px-2 py-0 text-sm font-semibold text-neutral-800"
           >
             <option value={10}>10 min</option>
             <option value={15}>15 min</option>
@@ -156,7 +156,7 @@ export function AgendaToolbar({
         <button
           type="button"
           onClick={onNewAppointment}
-          className="btn btn-primary btn-sm flex items-center gap-1.5 rounded-xl cursor-pointer shadow-2xs"
+          className="btn btn-primary btn-sm flex items-center gap-1.5"
         >
           <Plus className="w-4 h-4" />
           <span>Nouveau RDV</span>

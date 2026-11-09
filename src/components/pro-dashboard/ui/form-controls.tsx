@@ -1,5 +1,5 @@
 import React from "react";
-import { Check, Minus } from "lucide-react";
+import { Check, Minus, ChevronDown } from "lucide-react";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -25,7 +25,7 @@ export const FormInput = React.forwardRef<HTMLInputElement, InputProps>(
             {props.required && <span className="text-rose-600 ml-1">*</span>}
           </label>
         )}
-        <div className="relative rounded-xl">
+        <div className="relative rounded-lg">
           {Icon && (
             <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none text-neutral-400">
               <Icon className="w-4 h-4" />
@@ -34,7 +34,7 @@ export const FormInput = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             id={inputId}
-            className={`w-full h-11 px-3.5 bg-white border rounded-xl text-neutral-900 text-sm transition-colors duration-150 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 disabled:opacity-50 disabled:bg-neutral-50 ${
+            className={`w-full h-11 px-3.5 bg-white border rounded-lg text-neutral-900 text-sm transition-colors duration-150 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 disabled:opacity-50 disabled:bg-neutral-50 ${
               Icon ? "ps-10" : ""
             } ${
               error
@@ -84,22 +84,27 @@ export const FormSelect = React.forwardRef<HTMLSelectElement, SelectProps>(
             {props.required && <span className="text-rose-600 ml-1">*</span>}
           </label>
         )}
-        <select
-          ref={ref}
-          id={selectId}
-          className={`w-full h-11 px-3.5 bg-white border rounded-xl text-neutral-900 text-sm transition-colors duration-150 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 disabled:opacity-50 disabled:bg-neutral-50 cursor-pointer ${
-            error
-              ? "border-rose-400 focus:border-rose-600"
-              : "border-neutral-300 hover:border-neutral-400"
-          } ${className}`}
-          {...props}
-        >
-          {options.map((opt) => (
-            <option key={opt.value} value={opt.value} disabled={opt.disabled}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
+        <div className="relative">
+          <select
+            ref={ref}
+            id={selectId}
+            className={`w-full h-11 ps-3.5 pe-9 bg-white border rounded-lg text-neutral-900 text-sm transition-colors duration-150 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 disabled:opacity-50 disabled:bg-neutral-50 cursor-pointer appearance-none ${
+              error
+                ? "border-rose-400 focus:border-rose-600"
+                : "border-neutral-300 hover:border-neutral-400"
+            } ${className}`}
+            {...props}
+          >
+            {options.map((opt) => (
+              <option key={opt.value} value={opt.value} disabled={opt.disabled}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+          <div className="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none text-neutral-400">
+            <ChevronDown className="w-4 h-4" />
+          </div>
+        </div>
         {error && <p className="text-sm text-rose-600">{error}</p>}
         {helper && !error && (
           <p className="text-sm text-neutral-500">{helper}</p>
@@ -138,7 +143,7 @@ export const FormTextarea = React.forwardRef<
       <textarea
         ref={ref}
         id={textareaId}
-        className={`w-full p-3 bg-white border rounded-xl text-neutral-900 text-sm transition-colors duration-150 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 disabled:opacity-50 disabled:bg-neutral-50 resize-y min-h-24 ${
+        className={`w-full p-3 bg-white border rounded-lg text-neutral-900 text-sm transition-colors duration-150 placeholder:text-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 disabled:opacity-50 disabled:bg-neutral-50 resize-y min-h-24 ${
           error
             ? "border-rose-400 focus:border-rose-600"
             : "border-neutral-300 hover:border-neutral-400"
@@ -163,7 +168,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     {
       checked,
       indeterminate = false,
-      shape = "circle",
+      shape = "square",
       className = "",
       disabled,
       onChange,
@@ -317,5 +322,82 @@ export function ToggleSwitch({
         />
       </button>
     </div>
+  );
+}
+
+export interface RadioProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
+  className?: string;
+}
+
+export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
+  ({ checked, className = "", disabled, onChange, ...props }, ref) => {
+    return (
+      <div
+        className={`relative inline-flex items-center justify-center shrink-0 w-5 h-5 ${className}`}
+      >
+        <input
+          ref={ref}
+          type="radio"
+          checked={Boolean(checked)}
+          disabled={disabled}
+          onChange={onChange}
+          className="peer absolute inset-0 opacity-0 w-full h-full cursor-pointer disabled:cursor-not-allowed z-10"
+          {...props}
+        />
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-150 select-none ${
+            disabled
+              ? "bg-neutral-100 border-neutral-200 text-neutral-400"
+              : checked
+              ? "bg-white border-primary-600 shadow-2xs"
+              : "bg-white border-neutral-300 shadow-2xs peer-hover:border-primary-500 group-hover:border-primary-500"
+          } peer-focus-visible:ring-2 peer-focus-visible:ring-primary-500/30 peer-focus-visible:ring-offset-1`}
+        >
+          {checked && (
+            <span className="w-2.5 h-2.5 rounded-full bg-primary-600 block" />
+          )}
+        </div>
+      </div>
+    );
+  }
+);
+Radio.displayName = "Radio";
+
+export interface FormRadioProps extends RadioProps {
+  label: React.ReactNode;
+  description?: string;
+  containerClassName?: string;
+}
+
+export function FormRadio({
+  label,
+  description,
+  containerClassName = "",
+  className = "",
+  id,
+  ...props
+}: FormRadioProps) {
+  const generatedId = React.useId();
+  const radioId = id || generatedId;
+
+  return (
+    <label
+      htmlFor={radioId}
+      className={`flex items-start gap-3 cursor-pointer select-none group ${containerClassName}`}
+    >
+      <Radio id={radioId} className={`mt-0.5 ${className}`} {...props} />
+      <div>
+        <span className="text-sm font-medium text-neutral-900 group-hover:text-primary-700 transition-colors">
+          {label}
+        </span>
+        {description && (
+          <p className="text-sm text-neutral-500 mt-0.5 font-normal">
+            {description}
+          </p>
+        )}
+      </div>
+    </label>
   );
 }

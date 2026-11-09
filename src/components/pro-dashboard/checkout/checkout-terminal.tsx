@@ -23,6 +23,7 @@ import {
   ProAppointment,
   ProSaleTicket,
 } from "@/lib/data/pro-mock-data";
+import { FormSelect } from "@/components/pro-dashboard/ui/form-controls";
 
 export interface CartItem {
   id: string;
@@ -275,7 +276,7 @@ export function CheckoutTerminal({
   // --------------------------------------------------------------------------
   if (completedTicket) {
     return (
-      <div className="max-w-xl mx-auto p-6 sm:p-8 my-8 bg-white rounded-3xl border border-neutral-200 shadow-md text-center space-y-6">
+      <div className="max-w-xl mx-auto p-6 sm:p-8 my-8 bg-white rounded-xl border border-neutral-200 shadow-md text-center space-y-6">
         <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
           <CheckCircle2 className="w-8 h-8" />
         </div>
@@ -291,7 +292,7 @@ export function CheckoutTerminal({
         </div>
 
         {/* Détails du ticket */}
-        <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-left space-y-3 text-sm">
+        <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80 text-left space-y-3 text-sm">
           <div className="flex justify-between border-b border-neutral-200 pb-2 font-semibold text-neutral-900">
             <span>Client : {completedTicket.clientName}</span>
             <span>{completedTicket.time}</span>
@@ -359,7 +360,7 @@ export function CheckoutTerminal({
           ===================================================================== */}
       <div className="lg:col-span-7 flex flex-col gap-4 overflow-hidden">
         {/* Sélecteur Client & RDV */}
-        <div className="p-4 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs space-y-3">
+        <div className="p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-sm font-bold text-neutral-900 uppercase tracking-wider flex items-center gap-2">
               <User className="w-4 h-4 text-primary-700" />
@@ -369,11 +370,11 @@ export function CheckoutTerminal({
             <button
               type="button"
               onClick={() => setIsAnonymousClient(!isAnonymousClient)}
-              className={`text-sm font-semibold px-2.5 py-1 rounded-lg border transition-colors cursor-pointer ${
+              className={
                 isAnonymousClient
-                  ? "bg-neutral-900 text-white border-neutral-900"
-                  : "bg-white text-neutral-700 border-neutral-300 hover:bg-neutral-50"
-              }`}
+                  ? "btn btn-dark btn-xs"
+                  : "btn btn-outline btn-xs"
+              }
             >
               Client de passage (sans fiche)
             </button>
@@ -381,68 +382,57 @@ export function CheckoutTerminal({
 
           {!isAnonymousClient && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="text-sm font-semibold text-neutral-500 block mb-1">
-                  Rechercher un client du fichier
-                </label>
-                <select
-                  value={selectedClientId}
-                  onChange={(e) => setSelectedClientId(e.target.value)}
-                  className="w-full h-10 px-3 bg-white border border-neutral-300 rounded-xl text-sm font-semibold text-neutral-900 focus:outline-none focus:border-primary-600 cursor-pointer"
-                >
-                  {clients.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.firstName} {c.lastName} ({c.phone})
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <FormSelect
+                label="Rechercher un client du fichier"
+                value={selectedClientId}
+                onChange={(e) => setSelectedClientId(e.target.value)}
+                options={clients.map((c) => ({
+                  value: c.id,
+                  label: `${c.firstName} ${c.lastName} (${c.phone})`,
+                }))}
+              />
 
-              <div>
-                <label className="text-sm font-semibold text-neutral-500 block mb-1">
-                  Rendez-vous du jour à encaisser
-                </label>
-                <select
-                  onChange={(e) => {
-                    const aptId = e.target.value;
-                    const apt = appointments.find((a) => a.id === aptId);
-                    if (apt) {
-                      setCart([
-                        {
-                          id: `item-${Date.now()}`,
-                          title: apt.serviceName,
-                          type: "service",
-                          price: apt.price,
-                          quantity: 1,
-                          staffId: apt.staffId,
-                        },
-                      ]);
-                      setDepositDeducted(apt.depositPaid);
-                    }
-                  }}
-                  className="w-full h-10 px-3 bg-white border border-neutral-300 rounded-xl text-sm font-semibold text-neutral-900 focus:outline-none focus:border-primary-600 cursor-pointer"
-                >
-                  <option value="">Sélectionner un RDV du jour...</option>
-                  {appointments.map((a) => (
-                    <option key={a.id} value={a.id}>
-                      {a.startTime} - {a.clientName} ({a.serviceName})
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <FormSelect
+                label="Rendez-vous du jour à encaisser"
+                value=""
+                onChange={(e) => {
+                  const aptId = e.target.value;
+                  const apt = appointments.find((a) => a.id === aptId);
+                  if (apt) {
+                    setCart([
+                      {
+                        id: `item-${Date.now()}`,
+                        title: apt.serviceName,
+                        type: "service",
+                        price: apt.price,
+                        quantity: 1,
+                        staffId: apt.staffId,
+                      },
+                    ]);
+                    setDepositDeducted(apt.depositPaid);
+                  }
+                }}
+                options={[
+                  { value: "", label: "Sélectionner un RDV du jour..." },
+                  ...appointments.map((a) => ({
+                    value: a.id,
+                    label: `${a.startTime} - ${a.clientName} (${a.serviceName})`,
+                  })),
+                ]}
+              />
             </div>
           )}
         </div>
 
         {/* Catalogue de Vente (Prestations vs Produits) */}
-        <div className="flex-1 flex flex-col p-4 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs overflow-hidden">
+        <div className="flex-1 flex flex-col p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs overflow-hidden">
           {/* Navigation Catalogue */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pb-3 border-b border-neutral-200">
-            <div className="inline-flex p-1 rounded-xl bg-neutral-100 text-sm font-semibold">
+            <div className="inline-flex p-1 rounded-lg bg-neutral-100 text-sm font-semibold">
               <button
                 type="button"
                 onClick={() => setCatalogTab("services")}
-                className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
                   catalogTab === "services"
                     ? "bg-white text-neutral-950 shadow-2xs font-bold"
                     : "text-neutral-600 hover:text-neutral-950"
@@ -453,7 +443,7 @@ export function CheckoutTerminal({
               <button
                 type="button"
                 onClick={() => setCatalogTab("products")}
-                className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
                   catalogTab === "products"
                     ? "bg-white text-neutral-950 shadow-2xs font-bold"
                     : "text-neutral-600 hover:text-neutral-950"
@@ -470,7 +460,7 @@ export function CheckoutTerminal({
                 placeholder="Filtrer le catalogue..."
                 value={searchCatalog}
                 onChange={(e) => setSearchCatalog(e.target.value)}
-                className="w-full sm:w-48 h-9 ps-8 pe-3 bg-neutral-50 border border-neutral-200 rounded-lg text-sm placeholder:text-neutral-400 focus:outline-none focus:border-primary-600"
+                className="input input-sm w-full sm:w-48 ps-8"
               />
             </div>
           </div>
@@ -489,7 +479,7 @@ export function CheckoutTerminal({
                     onClick={() =>
                       handleAddItem(srv.name, "service", srv.priceEuros)
                     }
-                    className="p-3.5 rounded-xl border border-neutral-200/90 hover:border-primary-600/80 bg-white hover:bg-neutral-50/50 text-left transition-all flex flex-col justify-between gap-2 shadow-2xs cursor-pointer group"
+                    className="p-3.5 rounded-lg border border-neutral-200/90 hover:border-primary-600/80 bg-white hover:bg-neutral-50/50 text-left transition-all flex flex-col justify-between gap-2 shadow-2xs cursor-pointer group"
                   >
                     <div>
                       <h4 className="font-bold text-sm sm:text-base text-neutral-950 group-hover:text-primary-700 transition-colors">
@@ -520,7 +510,7 @@ export function CheckoutTerminal({
                   onClick={() =>
                     handleAddItem(prd.name, "product", prd.price)
                   }
-                  className="p-3.5 rounded-xl border border-neutral-200/90 hover:border-primary-600/80 bg-white hover:bg-neutral-50/50 text-left transition-all flex flex-col justify-between gap-2 shadow-2xs cursor-pointer group"
+                  className="p-3.5 rounded-lg border border-neutral-200/90 hover:border-primary-600/80 bg-white hover:bg-neutral-50/50 text-left transition-all flex flex-col justify-between gap-2 shadow-2xs cursor-pointer group"
                 >
                   <div className="flex items-start gap-2">
                     <ShoppingBag className="w-4 h-4 text-neutral-400 mt-0.5 shrink-0" />
@@ -552,7 +542,7 @@ export function CheckoutTerminal({
       {/* =====================================================================
           COLONNE DROITE (5/12) : TICKET DE CAISSE EN COURS & RÈGLEMENT
           ===================================================================== */}
-      <div className="lg:col-span-5 flex flex-col p-5 rounded-2xl bg-white border border-neutral-200/90 shadow-sm overflow-hidden">
+      <div className="lg:col-span-5 flex flex-col p-5 rounded-xl bg-white border border-neutral-200/90 shadow-sm overflow-hidden">
         {/* Header Ticket */}
         <div className="flex items-center justify-between pb-3 border-b border-neutral-200">
           <div className="flex items-center gap-2">
@@ -580,7 +570,7 @@ export function CheckoutTerminal({
             cart.map((item) => (
               <div
                 key={item.id}
-                className="p-3 rounded-xl border border-neutral-200 bg-neutral-50/50 space-y-2"
+                className="p-3 rounded-lg border border-neutral-200 bg-neutral-50/50 space-y-2"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
@@ -603,7 +593,7 @@ export function CheckoutTerminal({
                     onChange={(e) =>
                       handleUpdateStaff(item.id, e.target.value)
                     }
-                    className="h-7 px-2 bg-white border border-neutral-200 rounded-md text-sm font-medium text-neutral-800"
+                    className="select h-7 py-0 px-2 text-sm font-medium text-neutral-800"
                   >
                     {staffList.map((st) => (
                       <option key={st.id} value={st.id}>
@@ -671,7 +661,7 @@ export function CheckoutTerminal({
                     onClick={() =>
                       setDiscountPercent(discountPercent === pct ? 0 : pct)
                     }
-                    className={`px-2 py-0.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+                    className={`px-2 py-0.5 rounded-md text-xs font-semibold border transition-all cursor-pointer ${
                       discountPercent === pct
                         ? "bg-primary-600 text-white border-primary-600 shadow-2xs font-bold"
                         : "bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50"
@@ -685,7 +675,7 @@ export function CheckoutTerminal({
 
             {/* Déduction Acompte Stripe Connect */}
             {depositDeducted > 0 && (
-              <div className="flex items-center justify-between p-2.5 rounded-xl bg-primary-50/70 border border-primary-200/80 text-primary-900 text-xs font-semibold">
+              <div className="flex items-center justify-between p-2.5 rounded-lg bg-primary-50/70 border border-primary-200/80 text-primary-900 text-xs font-semibold">
                 <span className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-primary-700" />
                   <span>Acompte Stripe perçu en ligne</span>
@@ -707,7 +697,7 @@ export function CheckoutTerminal({
           </div>
 
           {/* Grand Total */}
-          <div className="p-3.5 rounded-2xl bg-neutral-50 border border-neutral-200/90 flex items-center justify-between">
+          <div className="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200/90 flex items-center justify-between">
             <div>
               <span className="text-xs uppercase font-bold text-neutral-500 block tracking-wider">
                 Reste à régler au salon
@@ -730,7 +720,7 @@ export function CheckoutTerminal({
               <button
                 type="button"
                 onClick={() => setPaymentMethod("card")}
-                className={`py-2 px-2.5 rounded-xl border text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                className={`py-2 px-2.5 rounded-lg border text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
                   paymentMethod === "card"
                     ? "bg-primary-600 text-white border-primary-600 shadow-2xs"
                     : "bg-white text-neutral-800 border-neutral-300 hover:bg-neutral-50"
@@ -743,7 +733,7 @@ export function CheckoutTerminal({
               <button
                 type="button"
                 onClick={() => setPaymentMethod("cash")}
-                className={`py-2 px-2.5 rounded-xl border text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                className={`py-2 px-2.5 rounded-lg border text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
                   paymentMethod === "cash"
                     ? "bg-primary-600 text-white border-primary-600 shadow-2xs"
                     : "bg-white text-neutral-800 border-neutral-300 hover:bg-neutral-50"
@@ -756,7 +746,7 @@ export function CheckoutTerminal({
               <button
                 type="button"
                 onClick={() => setPaymentMethod("mixed")}
-                className={`py-2 px-2.5 rounded-xl border text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                className={`py-2 px-2.5 rounded-lg border text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
                   paymentMethod === "mixed"
                     ? "bg-primary-600 text-white border-primary-600 shadow-2xs"
                     : "bg-white text-neutral-800 border-neutral-300 hover:bg-neutral-50"
@@ -768,7 +758,7 @@ export function CheckoutTerminal({
 
             {/* Calcul de la monnaie si Espèces */}
             {paymentMethod === "cash" && (
-              <div className="p-3 rounded-xl border border-neutral-200 bg-neutral-50/80 space-y-2 text-sm">
+              <div className="p-3 rounded-lg border border-neutral-200 bg-neutral-50/80 space-y-2 text-sm">
                 <div className="flex items-center justify-between">
                   <span className="text-neutral-600">Montant reçu :</span>
                   <input
@@ -777,7 +767,7 @@ export function CheckoutTerminal({
                     placeholder="Ex : 50.00"
                     value={cashGiven}
                     onChange={(e) => setCashGiven(e.target.value)}
-                    className="w-24 h-8 px-2 bg-white border border-neutral-300 rounded text-sm font-semibold text-right tabular-nums"
+                    className="input input-sm w-28 text-right font-semibold tabular-nums"
                   />
                 </div>
                 {cashGivenNum > 0 && (
@@ -793,7 +783,7 @@ export function CheckoutTerminal({
 
             {/* Détail mixte */}
             {paymentMethod === "mixed" && (
-              <div className="p-3 rounded-xl border border-neutral-200 bg-neutral-50/80 space-y-2 text-sm">
+              <div className="p-3 rounded-lg border border-neutral-200 bg-neutral-50/80 space-y-2 text-sm">
                 <div className="flex items-center justify-between">
                   <span className="text-neutral-600">Montant Carte CB :</span>
                   <input
@@ -802,7 +792,7 @@ export function CheckoutTerminal({
                     placeholder="Ex : 30.00"
                     value={cardMixedAmount}
                     onChange={(e) => setCardMixedAmount(e.target.value)}
-                    className="w-24 h-8 px-2 bg-white border border-neutral-300 rounded text-sm font-semibold text-right tabular-nums"
+                    className="input input-sm w-28 text-right font-semibold tabular-nums"
                   />
                 </div>
                 <div className="flex items-center justify-between">
@@ -813,7 +803,7 @@ export function CheckoutTerminal({
                     placeholder="Ex : 20.00"
                     value={cashMixedAmount}
                     onChange={(e) => setCashMixedAmount(e.target.value)}
-                    className="w-24 h-8 px-2 bg-white border border-neutral-300 rounded text-sm font-semibold text-right tabular-nums"
+                    className="input input-sm w-28 text-right font-semibold tabular-nums"
                   />
                 </div>
               </div>
@@ -825,7 +815,7 @@ export function CheckoutTerminal({
             type="button"
             onClick={handleValidateCheckout}
             disabled={cart.length === 0}
-            className="btn btn-primary w-full h-12 text-sm font-bold rounded-xl cursor-pointer shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
+            className="btn btn-primary btn-lg w-full"
           >
             <span>Valider et encaisser {totalDue.toFixed(2)} €</span>
           </button>

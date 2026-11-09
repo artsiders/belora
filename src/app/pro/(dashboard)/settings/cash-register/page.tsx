@@ -46,7 +46,7 @@ export default function CashRegisterSettingsPage() {
         <button
           type="button"
           onClick={handleSave}
-          className="btn btn-primary btn-sm flex items-center gap-1.5 self-start sm:self-auto rounded-xl shadow-2xs"
+          className="btn btn-primary btn-sm flex items-center gap-1.5 self-start sm:self-auto"
         >
           <Save className="w-4 h-4" />
           <span>Enregistrer les paramètres</span>
@@ -55,7 +55,7 @@ export default function CashRegisterSettingsPage() {
 
       <form onSubmit={handleSave} className="space-y-6">
         {/* Moyens de Paiement */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-4">
+        <div className="p-5 sm:p-6 rounded-xl bg-white border border-neutral-200 shadow-2xs space-y-4">
           <div className="flex items-center gap-2 pb-3 border-b border-neutral-100">
             <CreditCard className="w-4.5 h-4.5 text-primary-700" />
             <h2 className="text-sm font-bold text-neutral-950 uppercase tracking-wider">
@@ -88,7 +88,7 @@ export default function CashRegisterSettingsPage() {
         </div>
 
         {/* Taux de TVA */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-4">
+        <div className="p-5 sm:p-6 rounded-xl bg-white border border-neutral-200 shadow-2xs space-y-4">
           <h2 className="text-sm font-bold text-neutral-950 uppercase tracking-wider pb-2 border-b border-neutral-100">
             Taux de TVA applicables
           </h2>
@@ -109,7 +109,7 @@ export default function CashRegisterSettingsPage() {
         </div>
 
         {/* Mentions sur le Ticket de Caisse */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-4">
+        <div className="p-5 sm:p-6 rounded-xl bg-white border border-neutral-200 shadow-2xs space-y-4">
           <h2 className="text-sm font-bold text-neutral-950 uppercase tracking-wider pb-2 border-b border-neutral-100">
             Personnalisation du ticket de caisse
           </h2>

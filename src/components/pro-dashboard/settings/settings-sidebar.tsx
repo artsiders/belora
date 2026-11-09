@@ -35,7 +35,7 @@ export function SettingsSidebar() {
       <nav className="p-3 space-y-1 text-sm font-semibold">
         <Link
           href="/pro/settings/services"
-          className={`flex items-center gap-2.5 p-2.5 rounded-xl transition-all duration-150 ${
+          className={`flex items-center gap-2.5 p-2.5 rounded-lg transition-all duration-150 ${
             isServicesActive
               ? "bg-primary-600 text-white shadow-2xs font-bold"
               : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
@@ -47,7 +47,7 @@ export function SettingsSidebar() {
 
         <Link
           href="/pro/settings/establishment"
-          className={`flex items-center gap-2.5 p-2.5 rounded-xl transition-all duration-150 ${
+          className={`flex items-center gap-2.5 p-2.5 rounded-lg transition-all duration-150 ${
             isEstablishmentActive
               ? "bg-primary-600 text-white shadow-2xs font-bold"
               : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
@@ -59,7 +59,7 @@ export function SettingsSidebar() {
 
         <Link
           href="/pro/settings/team"
-          className={`flex items-center gap-2.5 p-2.5 rounded-xl transition-all duration-150 ${
+          className={`flex items-center gap-2.5 p-2.5 rounded-lg transition-all duration-150 ${
             isTeamActive
               ? "bg-primary-600 text-white shadow-2xs font-bold"
               : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
@@ -71,7 +71,7 @@ export function SettingsSidebar() {
 
         <Link
           href="/pro/settings/cash-register"
-          className={`flex items-center gap-2.5 p-2.5 rounded-xl transition-all duration-150 ${
+          className={`flex items-center gap-2.5 p-2.5 rounded-lg transition-all duration-150 ${
             isCashActive
               ? "bg-primary-600 text-white shadow-2xs font-bold"
               : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
@@ -83,7 +83,7 @@ export function SettingsSidebar() {
 
         <Link
           href="/pro/settings/notifications"
-          className={`flex items-center gap-2.5 p-2.5 rounded-xl transition-all duration-150 ${
+          className={`flex items-center gap-2.5 p-2.5 rounded-lg transition-all duration-150 ${
             isNotificationsActive
               ? "bg-primary-600 text-white shadow-2xs font-bold"
               : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
@@ -99,7 +99,7 @@ export function SettingsSidebar() {
         <Link
           href="/help"
           target="_blank"
-          className="w-full h-10 px-3 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-800 text-sm font-semibold flex items-center justify-center gap-2 shadow-2xs transition-colors"
+          className="btn btn-outline btn-sm w-full flex items-center justify-center gap-2 text-neutral-800"
         >
           <HelpCircle className="w-4 h-4 text-neutral-600" />
           <span>Centre d&apos;aide Belora Pro</span>

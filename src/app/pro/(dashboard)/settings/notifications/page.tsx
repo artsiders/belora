@@ -62,7 +62,7 @@ export default function NotificationsSettingsPage() {
         <button
           type="button"
           onClick={handleSave}
-          className="btn btn-primary btn-sm flex items-center gap-1.5 self-start sm:self-auto rounded-xl shadow-2xs"
+          className="btn btn-primary btn-sm flex items-center gap-1.5 self-start sm:self-auto"
         >
           <Save className="w-4 h-4" />
           <span>Enregistrer les modèles</span>
@@ -71,7 +71,7 @@ export default function NotificationsSettingsPage() {
 
       <div className="space-y-6">
         {/* Déclencheurs de Rappels */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-5">
+        <div className="p-5 sm:p-6 rounded-xl bg-white border border-neutral-200 shadow-2xs space-y-5">
           <div className="flex items-center gap-2 pb-3 border-b border-neutral-100">
             <Mail className="w-4.5 h-4.5 text-primary-700" />
             <h2 className="text-sm font-bold text-neutral-950 uppercase tracking-wider">
@@ -111,7 +111,7 @@ export default function NotificationsSettingsPage() {
 
         {/* Modèle de SMS Personnalisable & Aperçu */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          <div className="md:col-span-7 p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-4">
+          <div className="md:col-span-7 p-5 sm:p-6 rounded-xl bg-white border border-neutral-200 shadow-2xs space-y-4">
             <div className="flex items-center gap-2 pb-3 border-b border-neutral-100">
               <MessageSquare className="w-4.5 h-4.5 text-primary-700" />
               <h2 className="text-sm font-bold text-neutral-950 uppercase tracking-wider">
@@ -128,14 +128,14 @@ export default function NotificationsSettingsPage() {
           </div>
 
           {/* Mock Aperçu Téléphone Mobile */}
-          <div className="md:col-span-5 p-5 sm:p-6 rounded-2xl bg-neutral-900 text-white shadow-md flex flex-col justify-between">
+          <div className="md:col-span-5 p-5 sm:p-6 rounded-xl bg-neutral-900 text-white shadow-md flex flex-col justify-between">
             <div className="space-y-3">
               <div className="flex items-center gap-2 pb-3 border-b border-neutral-800 text-sm text-neutral-400">
                 <Smartphone className="w-4 h-4 text-primary-300" />
                 <span>Aperçu sur le mobile du client</span>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-neutral-800/80 border border-neutral-700 text-sm text-neutral-100 leading-relaxed font-sans shadow-sm">
+              <div className="p-3.5 rounded-lg bg-neutral-800/80 border border-neutral-700 text-sm text-neutral-100 leading-relaxed font-sans shadow-sm">
                 <p className="font-semibold text-primary-200 mb-1">BELORA</p>
                 <p>{previewSms}</p>
               </div>

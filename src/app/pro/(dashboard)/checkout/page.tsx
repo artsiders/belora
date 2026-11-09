@@ -47,7 +47,7 @@ function CheckoutContent() {
           <button
             type="button"
             onClick={() => setIsClosingModalOpen(true)}
-            className="btn btn-outline btn-sm flex items-center gap-1.5 rounded-xl cursor-pointer shadow-2xs"
+            className="btn btn-outline btn-sm flex items-center gap-1.5"
           >
             <Lock className="w-4 h-4 text-neutral-600" />
             <span>Clôture Z de caisse</span>

@@ -83,7 +83,7 @@ export function MassPriceModal({
             <button
               type="button"
               onClick={() => setEditType("percent")}
-              className={`p-2.5 rounded-xl border text-sm font-semibold transition-colors cursor-pointer ${
+              className={`p-2.5 rounded-lg border text-sm font-semibold transition-colors cursor-pointer ${
                 editType === "percent"
                   ? "bg-primary-600 text-white border-primary-600 shadow-2xs"
                   : "bg-white text-neutral-800 border-neutral-300 hover:bg-neutral-50"
@@ -94,7 +94,7 @@ export function MassPriceModal({
             <button
               type="button"
               onClick={() => setEditType("fixed")}
-              className={`p-2.5 rounded-xl border text-sm font-semibold transition-colors cursor-pointer ${
+              className={`p-2.5 rounded-lg border text-sm font-semibold transition-colors cursor-pointer ${
                 editType === "fixed"
                   ? "bg-primary-600 text-white border-primary-600 shadow-2xs"
                   : "bg-white text-neutral-800 border-neutral-300 hover:bg-neutral-50"

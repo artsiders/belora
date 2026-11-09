@@ -180,7 +180,7 @@ export default function ServicesSettingsPage() {
           return (
             <div
               key={cat.id}
-              className="rounded-2xl border border-neutral-200 bg-white overflow-hidden shadow-2xs"
+              className="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-2xs"
             >
               {/* Header de la Catégorie (Style Planity) */}
               <div className="p-4 sm:p-4.5 bg-neutral-50/90 border-b border-neutral-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -198,7 +198,7 @@ export default function ServicesSettingsPage() {
                       setEditingService(null);
                       setIsServiceModalOpen(true);
                     }}
-                    className="px-2.5 py-1 rounded-lg text-xs font-semibold text-neutral-700 bg-white hover:bg-neutral-100 border border-neutral-300 transition-colors flex items-center gap-1 cursor-pointer"
+                    className="btn btn-outline btn-xs flex items-center gap-1"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Ajouter une prestation</span>
@@ -211,7 +211,7 @@ export default function ServicesSettingsPage() {
                       );
                       showNotification(`Catégorie "${cat.name}" supprimée.`);
                     }}
-                    className="p-1.5 rounded-lg text-neutral-400 hover:text-rose-700 hover:bg-rose-50 transition-colors cursor-pointer"
+                    className="btn btn-ghost btn-xs text-neutral-400 hover:text-rose-700 hover:bg-rose-50 p-1.5"
                     title="Supprimer la catégorie"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
@@ -233,10 +233,9 @@ export default function ServicesSettingsPage() {
                     >
                       {/* Côté Gauche : Barre d'accent + Nom + Durée + Prix */}
                       <div className="flex items-center gap-3 min-w-0">
-                        <span className="w-1.5 h-9 rounded-full bg-primary-600 shrink-0" />
                         <div>
                           <div className="flex items-baseline gap-2 flex-wrap">
-                            <h4 className="text-sm sm:text-base font-semibold text-neutral-950">
+                            <h4 className="text-sm sm:text-base font-normal text-neutral-950">
                               {srv.name}
                             </h4>
                             <span className="text-sm text-neutral-500 tabular-nums font-medium">
@@ -267,7 +266,7 @@ export default function ServicesSettingsPage() {
                         <button
                           type="button"
                           onClick={() => handleDuplicateService(srv)}
-                          className="px-2.5 py-1 rounded-lg text-xs font-semibold text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 border border-neutral-200 transition-colors flex items-center gap-1.5 cursor-pointer"
+                          className="btn btn-outline btn-xs flex items-center gap-1.5"
                           title="Dupliquer cette prestation"
                         >
                           <Copy className="w-3 h-3 text-neutral-500" />
@@ -280,17 +279,17 @@ export default function ServicesSettingsPage() {
                             setEditingService(srv);
                             setIsServiceModalOpen(true);
                           }}
-                          className="px-2.5 py-1 rounded-lg text-xs font-semibold text-primary-800 bg-primary-50/70 hover:bg-primary-100/70 border border-primary-200/70 transition-colors flex items-center gap-1.5 cursor-pointer"
+                          className="btn btn-primary btn-xs flex items-center gap-1.5"
                           title="Modifier les détails et tarifs"
                         >
-                          <Edit2 className="w-3 h-3 text-primary-600" />
+                          <Edit2 className="w-3 h-3" />
                           <span>Modifier</span>
                         </button>
 
                         <button
                           type="button"
                           onClick={() => handleDeleteService(srv.id)}
-                          className="p-1.5 rounded-lg text-neutral-400 hover:text-rose-700 hover:bg-rose-50 transition-colors cursor-pointer"
+                          className="btn btn-ghost btn-xs text-neutral-400 hover:text-rose-700 hover:bg-rose-50 p-1.5"
                           title="Supprimer la prestation"
                         >
                           <Trash2 className="w-3.5 h-3.5" />

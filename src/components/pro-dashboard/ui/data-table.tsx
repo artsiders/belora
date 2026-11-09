@@ -91,7 +91,7 @@ export function DataTable<T>({
   // État d'erreur strict (Règle 16)
   if (error) {
     return (
-      <div className="rounded-2xl border border-rose-200 bg-rose-50/40 p-8 text-center space-y-3">
+      <div className="rounded-xl border border-rose-200 bg-rose-50/40 p-8 text-center space-y-3">
         <div className="w-10 h-10 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center mx-auto">
           <AlertCircle className="w-5 h-5" />
         </div>
@@ -128,7 +128,7 @@ export function DataTable<T>({
                   setCurrentPage(1);
                 }}
                 placeholder={searchPlaceholder}
-                className="w-full h-10 ps-10 pe-3.5 bg-white border border-neutral-300 rounded-xl text-neutral-900 text-sm sm:text-base placeholder:text-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 transition-colors"
+                className="w-full h-10 ps-10 pe-3.5 bg-white border border-neutral-300 rounded-lg text-neutral-900 text-sm sm:text-base placeholder:text-neutral-400 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 transition-colors"
               />
             </div>
           ) : (
@@ -144,7 +144,7 @@ export function DataTable<T>({
       )}
 
       {/* Table Container */}
-      <div className="rounded-2xl border border-neutral-200/90 bg-white overflow-hidden shadow-2xs">
+      <div className="rounded-xl border border-neutral-200/90 bg-white overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm sm:text-base border-collapse">
             <thead>

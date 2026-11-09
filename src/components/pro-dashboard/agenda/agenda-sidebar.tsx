@@ -198,23 +198,23 @@ export function AgendaSidebar({
             return (
               <label
                 key={staff.id}
-                className={`group flex items-center justify-between px-3 py-2.5 rounded-2xl border transition-all duration-150 cursor-pointer select-none ${
+                className={`group flex items-center justify-between px-3 py-2 rounded-lg border transition-all duration-150 cursor-pointer select-none ${
                   isChecked
                     ? "bg-primary-50/40 border-primary-200/70 text-neutral-900 shadow-2xs"
                     : "bg-white border-neutral-200/60 text-neutral-500 hover:bg-neutral-50/80 hover:border-neutral-300 hover:text-neutral-700"
                 }`}
               >
-                <div className="flex items-center gap-3 min-w-0">
+                <div className="flex items-center gap-2.5 min-w-0">
                   <Checkbox
                     checked={isChecked}
                     onChange={() => onToggleStaff(staff.id)}
                   />
-                  <div className="relative w-7 h-7 rounded-full overflow-hidden bg-neutral-200 shrink-0 ring-1 ring-neutral-200/80">
+                  <div className="relative w-6.5 h-6.5 rounded-full overflow-hidden bg-neutral-200 shrink-0 ring-1 ring-neutral-200/80">
                     <Image
                       src={staff.avatar}
                       alt={staff.name}
                       fill
-                      sizes="28px"
+                      sizes="26px"
                       className="object-cover"
                     />
                   </div>
@@ -230,7 +230,7 @@ export function AgendaSidebar({
                 </div>
 
                 {/* Badge d'heures de présence journalières */}
-                <span className="text-xs font-semibold tabular-nums text-neutral-500 bg-white px-2 py-0.5 rounded-full border border-neutral-200/80 shrink-0 shadow-2xs">
+                <span className="text-xs font-semibold tabular-nums text-neutral-500 bg-white px-2 py-0.5 rounded-md border border-neutral-200/80 shrink-0 shadow-2xs">
                   {staff.presenceToday.totalLogged}
                 </span>
               </label>
@@ -251,7 +251,7 @@ export function AgendaSidebar({
             <span className="text-xs font-bold text-neutral-800 uppercase tracking-wider">
               Ressources
             </span>
-            <span className="text-xs font-semibold text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-full">
+            <span className="text-xs font-semibold text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-md">
               {resourceList.length}
             </span>
           </label>
@@ -263,7 +263,7 @@ export function AgendaSidebar({
             return (
               <label
                 key={res.id}
-                className={`group flex items-center gap-3 px-3 py-2.5 rounded-2xl border text-sm font-medium cursor-pointer transition-all duration-150 select-none ${
+                className={`group flex items-center gap-2.5 px-3 py-2 rounded-lg border text-sm font-medium cursor-pointer transition-all duration-150 select-none ${
                   isChecked
                     ? "bg-primary-50/40 border-primary-200/70 text-neutral-900 shadow-2xs"
                     : "bg-white border-neutral-200/60 text-neutral-500 hover:bg-neutral-50/80 hover:border-neutral-300 hover:text-neutral-700"
@@ -287,11 +287,11 @@ export function AgendaSidebar({
       </div>
 
       {/* 4. Boutons d'action RH (Horaires de présence & Pointage) */}
-      <div className="p-4 mt-auto space-y-2.5 bg-neutral-50/50">
+      <div className="p-4 mt-auto space-y-2 bg-neutral-50/50">
         <button
           type="button"
           onClick={onOpenPresenceModal}
-          className="w-full h-10 px-3 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-800 text-sm font-semibold flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
+          className="btn btn-outline btn-sm w-full flex items-center justify-center gap-2"
         >
           <CalendarCheck2 className="w-4 h-4 text-neutral-600" />
           <span>Horaires de présence</span>
@@ -300,7 +300,7 @@ export function AgendaSidebar({
         <button
           type="button"
           onClick={onOpenClockInModal}
-          className="w-full h-11 px-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
+          className="btn btn-dark btn-sm w-full flex items-center justify-center gap-2"
         >
           <Clock className="w-4 h-4" />
           <span>Pointage équipe</span>

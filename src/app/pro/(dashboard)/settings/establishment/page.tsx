@@ -64,7 +64,7 @@ export default function EstablishmentSettingsPage() {
         <button
           type="button"
           onClick={handleSave}
-          className="btn btn-primary btn-sm flex items-center gap-1.5 self-start sm:self-auto rounded-xl shadow-2xs"
+          className="btn btn-primary btn-sm flex items-center gap-1.5 self-start sm:self-auto"
         >
           <Save className="w-4 h-4" />
           <span>Enregistrer les paramètres</span>
@@ -75,7 +75,7 @@ export default function EstablishmentSettingsPage() {
         {/* ===================================================================
             SECTION 1 : IDENTITÉ LÉGALE & CONTACT
             =================================================================== */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-5">
+        <div className="p-5 sm:p-6 rounded-xl bg-white border border-neutral-200 shadow-2xs space-y-5">
           <div className="flex items-center gap-2 pb-3 border-b border-neutral-100">
             <Building2 className="w-4.5 h-4.5 text-primary-700" />
             <h2 className="text-sm font-bold text-neutral-950 uppercase tracking-wider">
@@ -161,7 +161,7 @@ export default function EstablishmentSettingsPage() {
         {/* ===================================================================
             SECTION 2 : ADRESSE PHYSIQUE
             =================================================================== */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-5">
+        <div className="p-5 sm:p-6 rounded-xl bg-white border border-neutral-200 shadow-2xs space-y-5">
           <div className="flex items-center gap-2 pb-3 border-b border-neutral-100">
             <MapPin className="w-4.5 h-4.5 text-primary-700" />
             <h2 className="text-sm font-bold text-neutral-950 uppercase tracking-wider">
@@ -204,7 +204,7 @@ export default function EstablishmentSettingsPage() {
         {/* ===================================================================
             SECTION 3 : HORAIRES D'OUVERTURE HEBDOMADAIRES
             =================================================================== */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-5">
+        <div className="p-5 sm:p-6 rounded-xl bg-white border border-neutral-200 shadow-2xs space-y-5">
           <div className="flex items-center gap-2 pb-3 border-b border-neutral-100">
             <Clock className="w-4.5 h-4.5 text-primary-700" />
             <h2 className="text-sm font-bold text-neutral-950 uppercase tracking-wider">
@@ -255,7 +255,7 @@ export default function EstablishmentSettingsPage() {
                             e.target.value
                           )
                         }
-                        className="h-9 px-3 bg-white border border-neutral-300 rounded-lg font-semibold text-sm focus:border-primary-600 focus:ring-1 focus:ring-primary-600 outline-none shadow-2xs"
+                        className="input input-sm font-semibold"
                       />
                       <span className="text-neutral-400 font-medium">à</span>
                       <input
@@ -268,7 +268,7 @@ export default function EstablishmentSettingsPage() {
                             e.target.value
                           )
                         }
-                        className="h-9 px-3 bg-white border border-neutral-300 rounded-lg font-semibold text-sm focus:border-primary-600 focus:ring-1 focus:ring-primary-600 outline-none shadow-2xs"
+                        className="input input-sm font-semibold"
                       />
                     </div>
                   ) : (
@@ -285,7 +285,7 @@ export default function EstablishmentSettingsPage() {
         {/* ===================================================================
             SECTION 4 : POLITIQUES DE RÉSERVATION & STRIPE CONNECT
             =================================================================== */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-5">
+        <div className="p-5 sm:p-6 rounded-xl bg-white border border-neutral-200 shadow-2xs space-y-5">
           <div className="flex items-center gap-2 pb-3 border-b border-neutral-100">
             <ShieldCheck className="w-4.5 h-4.5 text-primary-700" />
             <h2 className="text-sm font-bold text-neutral-950 uppercase tracking-wider">
@@ -331,7 +331,7 @@ export default function EstablishmentSettingsPage() {
         <div className="flex justify-end pt-2">
           <button
             type="submit"
-            className="btn btn-primary h-12 px-6 rounded-xl text-sm font-bold shadow-sm"
+            className="btn btn-primary btn-lg"
           >
             <span>Enregistrer toutes les modifications</span>
           </button>

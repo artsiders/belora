@@ -168,11 +168,11 @@ export function AgendaGrid({
       {/* Barre de contrôle contextuelle (Filtre praticiens/cabines en vue jour ou sélecteur en vue semaine) */}
       <div className="sticky top-0 z-30 flex items-center justify-between px-4 py-2 bg-neutral-50/95 border-b border-neutral-200/90 backdrop-blur-xs">
         {viewMode === "day" ? (
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white border border-neutral-200/80 shadow-2xs text-xs font-semibold">
+          <div className="flex items-center gap-1 p-1 rounded-lg bg-white border border-neutral-200/80 shadow-2xs text-xs font-semibold">
             <button
               type="button"
               onClick={() => setDayColumnFilter("staff")}
-              className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-md flex items-center gap-1.5 transition-all cursor-pointer ${
                 dayColumnFilter === "staff"
                   ? "bg-primary-600 text-white shadow-2xs font-bold"
                   : "text-neutral-600 hover:text-neutral-900"
@@ -185,7 +185,7 @@ export function AgendaGrid({
             <button
               type="button"
               onClick={() => setDayColumnFilter("resource")}
-              className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-md flex items-center gap-1.5 transition-all cursor-pointer ${
                 dayColumnFilter === "resource"
                   ? "bg-primary-600 text-white shadow-2xs font-bold"
                   : "text-neutral-600 hover:text-neutral-900"
@@ -198,7 +198,7 @@ export function AgendaGrid({
             <button
               type="button"
               onClick={() => setDayColumnFilter("all")}
-              className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-md flex items-center gap-1.5 transition-all cursor-pointer ${
                 dayColumnFilter === "all"
                   ? "bg-primary-600 text-white shadow-2xs font-bold"
                   : "text-neutral-600 hover:text-neutral-900"
@@ -210,14 +210,14 @@ export function AgendaGrid({
           </div>
         ) : (
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-neutral-500">
+            <span className="text-sm font-medium text-neutral-500">
               Planning hebdomadaire de :
             </span>
             <div className="relative inline-flex items-center">
               <select
                 value={selectedWeekStaffId}
                 onChange={(e) => setSelectedWeekStaffId(e.target.value)}
-                className="h-8 ps-3 pe-8 rounded-lg border border-neutral-300 bg-white text-xs font-bold text-neutral-900 focus:outline-none focus:border-primary-600 cursor-pointer shadow-2xs appearance-none"
+                className="select h-8 ps-3 pe-8 text-sm font-bold text-neutral-900 appearance-none shadow-2xs"
               >
                 {staffList.map((s) => (
                   <option key={s.id} value={s.id}>
@@ -261,7 +261,7 @@ export function AgendaGrid({
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <span
-                      className="w-1.5 h-6 rounded-full shrink-0"
+                      className="w-1 h-6 rounded-full shrink-0"
                       style={{ backgroundColor: col.color }}
                     />
                     {col.avatar && (

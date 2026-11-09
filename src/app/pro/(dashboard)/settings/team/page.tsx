@@ -38,7 +38,7 @@ export default function TeamSettingsPage() {
         <button
           type="button"
           onClick={() => showFeedback("Fonctionnalité d'invitation active.")}
-          className="btn btn-primary btn-sm flex items-center gap-1.5 self-start sm:self-auto rounded-xl shadow-2xs"
+          className="btn btn-primary btn-sm flex items-center gap-1.5 self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Inviter un collaborateur</span>
@@ -50,7 +50,7 @@ export default function TeamSettingsPage() {
         {staffList.map((staff) => (
           <div
             key={staff.id}
-            className="p-5 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-4"
+            className="p-5 rounded-xl bg-white border border-neutral-200 shadow-2xs space-y-4"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3">
@@ -84,7 +84,7 @@ export default function TeamSettingsPage() {
             </div>
 
             {/* Horaires et Présence */}
-            <div className="p-3 rounded-xl bg-neutral-50 border border-neutral-100 flex items-center justify-between text-sm">
+            <div className="p-3 rounded-lg bg-neutral-50 border border-neutral-100 flex items-center justify-between text-sm">
               <div className="flex items-center gap-2 text-neutral-700">
                 <Clock className="w-3.5 h-3.5 text-neutral-500" />
                 <span>
@@ -111,7 +111,7 @@ export default function TeamSettingsPage() {
                 onClick={() =>
                   showFeedback(`Plannings de ${staff.name} configurables.`)
                 }
-                className="text-primary-700 font-semibold hover:underline cursor-pointer"
+                className="btn btn-outline btn-xs"
               >
                 Modifier planning &rarr;
               </button>

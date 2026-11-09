@@ -211,11 +211,11 @@ export default function ProPage() {
               </p>
             </div>
 
-            {/* Boutons d'action modernes arrondis */}
+            {/* Boutons d'action modernes */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 href="/pro/agenda"
-                className="btn btn-primary h-13 px-7 rounded-2xl text-sm font-semibold inline-flex items-center gap-2 shadow-sm"
+                className="btn btn-primary btn-lg inline-flex items-center gap-2 shadow-sm"
               >
                 <span>Ouvrir l’Espace Pro (Dashboard)</span>
                 <ArrowRight className="w-4 h-4" />
@@ -223,7 +223,7 @@ export default function ProPage() {
 
               <Link
                 href="/pro/join"
-                className="btn h-13 px-6 rounded-2xl text-sm font-semibold border border-white/25 text-white hover:bg-white/10 transition-colors"
+                className="btn btn-outline btn-lg text-white border-white/25 hover:bg-white/10 hover:text-white transition-colors"
               >
                 <span>Demander une démo privée</span>
               </Link>
@@ -301,7 +301,7 @@ export default function ProPage() {
             </div>
 
             {/* Vue Interactive iPad / Desktop de l'Agenda */}
-            <div className="rounded-3xl border border-neutral-200/90 bg-white shadow-md overflow-hidden">
+            <div className="rounded-xl border border-neutral-200/90 bg-white shadow-md overflow-hidden">
               {/* Barre d'outils supérieure de l'agenda */}
               <div className="p-4 sm:p-5 border-b border-neutral-200/80 flex flex-wrap items-center justify-between gap-4 bg-white">
                 <div className="flex items-center gap-3">
@@ -311,13 +311,13 @@ export default function ProPage() {
                       Mardi 21 Octobre 2026
                     </span>
                   </div>
-                  <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-700 text-sm font-medium">
+                  <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded-md bg-neutral-100 text-neutral-700 text-sm font-medium">
                     Vue Journalière
                   </span>
                 </div>
 
                 {/* Filtre de vue praticien */}
-                <div className="flex items-center gap-1.5 p-1 rounded-xl bg-neutral-100 border border-neutral-200/80 text-sm font-medium">
+                <div className="flex items-center gap-1.5 p-1 rounded-lg bg-neutral-100 border border-neutral-200/80 text-sm font-medium">
                   <button
                     type="button"
                     onClick={() => setSelectedArtisanTab("all")}
@@ -396,12 +396,12 @@ export default function ProPage() {
                     </div>
 
                     {/* Rendez-vous 1 */}
-                    <div className="p-4 rounded-2xl bg-primary-50/40 border border-primary-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
+                    <div className="p-4 rounded-none border-s-3 border-s-primary-600 bg-primary-50/40 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-xs transition-shadow">
                       <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Balayage Minéral & Soin
                         </span>
-                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-md border border-primary-200">
+                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-sm border border-neutral-200">
                           10h00 - 12h00
                         </span>
                       </div>
@@ -415,12 +415,12 @@ export default function ProPage() {
                     </div>
 
                     {/* Rendez-vous 2 */}
-                    <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
+                    <div className="p-4 rounded-none border-s-3 border-s-neutral-400 bg-neutral-50 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-xs transition-shadow">
                       <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Coupe Signature à Sec
                         </span>
-                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-md border border-neutral-200">
+                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-sm border border-neutral-200">
                           14h00 - 15h00
                         </span>
                       </div>
@@ -464,12 +464,12 @@ export default function ProPage() {
                     </div>
 
                     {/* Rendez-vous 1 */}
-                    <div className="p-4 rounded-2xl bg-secondary-50/40 border border-secondary-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
+                    <div className="p-4 rounded-none border-s-3 border-s-secondary-600 bg-secondary-50/40 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-xs transition-shadow">
                       <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Rituel Rasage & Serviette
                         </span>
-                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-md border border-secondary-200">
+                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-sm border border-secondary-200">
                           11h00 - 12h00
                         </span>
                       </div>
@@ -483,12 +483,12 @@ export default function ProPage() {
                     </div>
 
                     {/* Rendez-vous 2 */}
-                    <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
+                    <div className="p-4 rounded-none border-s-3 border-s-neutral-400 bg-neutral-50 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-xs transition-shadow">
                       <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Taille de Barbe & Huile
                         </span>
-                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-md border border-neutral-200">
+                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-sm border border-neutral-200">
                           15h30 - 16h15
                         </span>
                       </div>
@@ -532,12 +532,12 @@ export default function ProPage() {
                     </div>
 
                     {/* Rendez-vous 1 */}
-                    <div className="p-4 rounded-2xl bg-primary-50/40 border border-primary-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
+                    <div className="p-4 rounded-none border-s-3 border-s-primary-600 bg-primary-50/40 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-xs transition-shadow">
                       <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Grand Rituel Kobido
                         </span>
-                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-md border border-primary-200">
+                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-sm border border-primary-200">
                           14h00 - 15h15
                         </span>
                       </div>
@@ -551,12 +551,12 @@ export default function ProPage() {
                     </div>
 
                     {/* Rendez-vous 2 */}
-                    <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-sm transition-shadow">
+                    <div className="p-4 rounded-none border-s-3 border-s-neutral-400 bg-neutral-50 border border-neutral-200/80 text-neutral-950 space-y-1.5 hover:shadow-xs transition-shadow">
                       <div className="flex justify-between items-center text-sm font-bold">
                         <span className="text-sm font-semibold text-neutral-950">
                           Diagnostic & Soin Visage
                         </span>
-                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-md border border-neutral-200">
+                        <span className="num font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded-sm border border-neutral-200">
                           16h30 - 17h15
                         </span>
                       </div>
@@ -628,7 +628,7 @@ export default function ProPage() {
                   <div key={pillar.number} className="flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-12 h-12 rounded-2xl bg-neutral-100 border border-neutral-200/80 flex items-center justify-center text-primary-600">
+                        <div className="w-12 h-12 rounded-xl bg-neutral-100 border border-neutral-200/80 flex items-center justify-center text-primary-600">
                           <Icon className="w-5 h-5 stroke-[1.75]" />
                         </div>
                         <span className="text-2xl font-bold num text-neutral-300">
@@ -690,7 +690,7 @@ export default function ProPage() {
             </div>
 
             {/* Tableau comparatif moderne et aéré */}
-            <div className="rounded-3xl border border-neutral-200/90 bg-white overflow-hidden shadow-sm">
+            <div className="rounded-xl border border-neutral-200/90 bg-white overflow-hidden shadow-sm">
               <div className="grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80">
                 {/* Colonne Gauche : Anciens logiciels & annuaires */}
                 <div className="md:col-span-6 p-6 sm:p-8 space-y-6 bg-neutral-50/40">
@@ -792,11 +792,11 @@ export default function ProPage() {
               </div>
 
               {/* Sélecteur de cycle de facturation */}
-              <div className="inline-flex items-center p-1 rounded-2xl bg-neutral-100 border border-neutral-200/80 shrink-0 self-start sm:self-auto">
+              <div className="inline-flex items-center p-1 rounded-xl bg-neutral-100 border border-neutral-200/80 shrink-0 self-start sm:self-auto">
                 <button
                   type="button"
                   onClick={() => setBillingCycle("monthly")}
-                  className={`px-4 py-2 rounded-xl text-sm sm:text-base font-semibold transition-all cursor-pointer ${
+                  className={`px-4 py-2 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer ${
                     billingCycle === "monthly"
                       ? "bg-white text-neutral-950 shadow-2xs"
                       : "text-neutral-600 hover:text-neutral-900"
@@ -807,7 +807,7 @@ export default function ProPage() {
                 <button
                   type="button"
                   onClick={() => setBillingCycle("annual")}
-                  className={`px-4 py-2 rounded-xl text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
+                  className={`px-4 py-2 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                     billingCycle === "annual"
                       ? "bg-white text-neutral-950 shadow-2xs"
                       : "text-neutral-600 hover:text-neutral-900"
@@ -821,7 +821,7 @@ export default function ProPage() {
               </div>
             </div>
 
-            {/* Cartes de prix avec nos nouveaux boutons arrondis h-13 */}
+            {/* Cartes de prix harmonisées */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
               {PRICING_PLANS.map((plan) => {
                 const price =
@@ -830,7 +830,7 @@ export default function ProPage() {
                 return (
                   <div
                     key={plan.name}
-                    className={`p-7 sm:p-8 rounded-3xl flex flex-col justify-between border transition-all duration-300 ${
+                    className={`p-7 sm:p-8 rounded-xl flex flex-col justify-between border transition-all duration-300 ${
                       plan.highlighted
                         ? "bg-white border-primary-600 ring-2 ring-primary-600/20 shadow-lg relative"
                         : "bg-white border-neutral-200/90 shadow-2xs hover:shadow-md hover:border-neutral-300"
@@ -838,7 +838,7 @@ export default function ProPage() {
                   >
                     <div>
                       {plan.highlighted && (
-                        <span className="px-3 py-1 rounded-full bg-primary-50 text-primary-700 text-sm font-bold uppercase tracking-wider inline-block mb-3">
+                        <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-sm font-bold uppercase tracking-wider inline-block mb-3">
                           Formule Signature
                         </span>
                       )}
@@ -871,10 +871,10 @@ export default function ProPage() {
 
                     <Link
                       href="/pro/join"
-                      className={`w-full btn h-13 rounded-2xl text-sm font-semibold flex items-center justify-center transition-all ${
+                      className={`w-full btn btn-lg flex items-center justify-center transition-all ${
                         plan.highlighted
                           ? "btn-primary shadow-sm"
-                          : "border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-900"
+                          : "btn-outline text-neutral-900"
                       }`}
                     >
                       {plan.cta}
@@ -919,14 +919,14 @@ export default function ProPage() {
               </span>
             </div>
 
-            {/* Accordéon FAQ épuré avec cartes rounded-2xl */}
+            {/* Accordéon FAQ épuré avec cartes rounded-xl */}
             <div className="max-w-3xl mx-auto space-y-3.5">
               {FAQS.map((faq, index) => {
                 const isOpen = openFaq === index;
                 return (
                   <div
                     key={index}
-                    className="rounded-2xl border border-neutral-200/80 bg-white overflow-hidden transition-all shadow-2xs"
+                    className="rounded-xl border border-neutral-200/80 bg-white overflow-hidden transition-all shadow-2xs"
                   >
                     <button
                       type="button"
@@ -1034,14 +1034,14 @@ export default function ProPage() {
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 <Link
                   href="/pro/join"
-                  className="btn btn-primary h-13 px-8 rounded-2xl text-sm font-semibold inline-flex items-center justify-center gap-2 shadow-lg"
+                  className="btn btn-primary btn-lg inline-flex items-center justify-center gap-2 shadow-lg"
                 >
                   <span>Rejoindre Belora Pro</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/login"
-                  className="btn h-13 px-6 rounded-2xl text-sm font-semibold border border-white/25 text-white hover:bg-white/10 transition-colors inline-flex items-center justify-center"
+                  className="btn btn-outline btn-lg text-white border-white/25 hover:bg-white/10 hover:text-white transition-colors inline-flex items-center justify-center"
                 >
                   <span>Connexion praticien</span>
                 </Link>

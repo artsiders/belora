@@ -71,7 +71,7 @@ export function Modal({
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
-            className={`relative w-full ${widthClasses[maxWidth]} bg-white rounded-2xl border border-neutral-200/90 shadow-xl overflow-hidden my-8 z-10`}
+            className={`relative w-full ${widthClasses[maxWidth]} bg-white rounded-xl border border-neutral-200/90 shadow-xl overflow-hidden my-8 z-10`}
           >
             {/* Header */}
             <div className="flex items-start justify-between p-5 sm:p-6 border-b border-neutral-200/80 bg-white">

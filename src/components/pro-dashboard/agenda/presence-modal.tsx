@@ -104,7 +104,7 @@ export function PresenceModal({
                       [staff.id]: { ...times, start: e.target.value },
                     })
                   }
-                  className="h-9 px-2.5 bg-white border border-neutral-300 rounded-lg text-sm font-semibold text-neutral-900"
+                  className="input input-sm font-semibold text-neutral-900"
                 />
                 <span className="text-neutral-400 text-sm">à</span>
                 <input
@@ -116,7 +116,7 @@ export function PresenceModal({
                       [staff.id]: { ...times, end: e.target.value },
                     })
                   }
-                  className="h-9 px-2.5 bg-white border border-neutral-300 rounded-lg text-sm font-semibold text-neutral-900"
+                  className="input input-sm font-semibold text-neutral-900"
                 />
               </div>
             </div>

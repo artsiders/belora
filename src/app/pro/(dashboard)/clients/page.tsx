@@ -183,7 +183,7 @@ function ClientsContent() {
         <button
           type="button"
           onClick={() => setIsNewClientModalOpen(true)}
-          className="btn btn-primary btn-sm flex items-center gap-1.5 self-start sm:self-auto rounded-xl shadow-2xs"
+          className="btn btn-primary btn-sm flex items-center gap-1.5 self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Nouveau client</span>
@@ -195,7 +195,7 @@ function ClientsContent() {
         <button
           type="button"
           onClick={() => setFilterSegment("all")}
-          className={`px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
+          className={`px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
             filterSegment === "all"
               ? "bg-primary-600 text-white border-primary-600 shadow-2xs font-bold"
               : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
@@ -207,7 +207,7 @@ function ClientsContent() {
         <button
           type="button"
           onClick={() => setFilterSegment("vip")}
-          className={`px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
+          className={`px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
             filterSegment === "vip"
               ? "bg-primary-600 text-white border-primary-600 shadow-2xs font-bold"
               : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
@@ -219,7 +219,7 @@ function ClientsContent() {
         <button
           type="button"
           onClick={() => setFilterSegment("regulars")}
-          className={`px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
+          className={`px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
             filterSegment === "regulars"
               ? "bg-primary-600 text-white border-primary-600 shadow-2xs font-bold"
               : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
@@ -232,7 +232,7 @@ function ClientsContent() {
         <button
           type="button"
           onClick={() => setFilterSegment("new")}
-          className={`px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
+          className={`px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
             filterSegment === "new"
               ? "bg-primary-600 text-white border-primary-600 shadow-2xs font-bold"
               : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"

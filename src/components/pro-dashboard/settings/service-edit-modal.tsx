@@ -156,7 +156,7 @@ function ServiceEditInnerForm({
       </div>
 
       {/* Acompte en ligne Stripe Connect */}
-      <div className="p-3.5 rounded-xl border border-neutral-200 bg-neutral-50/60 space-y-3">
+      <div className="p-3.5 rounded-lg border border-neutral-200 bg-neutral-50/60 space-y-3">
         <FormCheckbox
           label="Exiger un acompte à la réservation en ligne"
           description="Sécurise le créneau contre les no-shows via Stripe Connect."
