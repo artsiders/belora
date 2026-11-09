@@ -38,7 +38,7 @@ export function AppointmentCard({
     >
       {/* Barre d'accentuation latérale droite et nette (sans arrondi) */}
       <span
-        className="absolute start-0 top-0 bottom-0 w-1.5 rounded-none"
+        className="absolute start-0 top-0 bottom-0 w-[2px] rounded-none"
         style={{ backgroundColor: colorBorder }}
       />
 
