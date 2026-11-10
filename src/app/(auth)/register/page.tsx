@@ -2,7 +2,8 @@
 
 import { useState, Suspense } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 import {
   Eye,
   EyeOff,
@@ -11,10 +12,12 @@ import {
   Mail,
   Phone,
   ArrowRight,
+  AlertCircle,
   CheckCircle2,
 } from "lucide-react";
 
 function RegisterFormContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const initialRole = searchParams.get("role") === "pro" ? "pro" : "client";
 
@@ -27,22 +30,85 @@ function RegisterFormContent() {
     password: "",
     businessName: "",
     businessCategory: "coiffure",
+    address: "",
+    postalCode: "",
     city: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!acceptTerms) return;
 
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    setErrorMessage(null);
+
+    try {
+      const endpoint = role === "pro" ? "/api/auth/register-pro" : "/api/auth/register";
+      const payload =
+        role === "pro"
+          ? {
+              email: formData.email,
+              password: formData.password,
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              phone: formData.phone,
+              venueName: formData.businessName,
+              venueAddress: formData.address || `${formData.city}`,
+              venueCity: formData.city,
+              venuePostalCode: formData.postalCode || "75000",
+            }
+          : {
+              email: formData.email,
+              password: formData.password,
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              phone: formData.phone,
+            };
+
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMessage(data.error || "Impossible d'effectuer l'inscription. Veuillez vérifier vos informations.");
+        setIsLoading(false);
+        return;
+      }
+
       setSubmitted(true);
-    }, 900);
+
+      // Connexion automatique après inscription
+      const loginRes = await signIn("credentials", {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
+      });
+
+      setTimeout(() => {
+        if (!loginRes?.error) {
+          if (role === "pro") {
+            router.push("/pro/agenda");
+          } else {
+            router.push("/account");
+          }
+          router.refresh();
+        } else {
+          router.push("/login");
+        }
+      }, 1000);
+    } catch {
+      setErrorMessage("Une erreur réseau est survenue. Veuillez réessayer.");
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -60,13 +126,14 @@ function RegisterFormContent() {
         </p>
       </div>
 
-      {/* 2. Choix du profil en 2 cartes modernes et arrondies */}
+      {/* 2. Choix du profil en 2 cartes modernes */}
       <div className="grid grid-cols-2 gap-3 mb-6">
         <button
           type="button"
           onClick={() => {
             setRole("client");
             setSubmitted(false);
+            setErrorMessage(null);
           }}
           className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
             role === "client"
@@ -105,6 +172,7 @@ function RegisterFormContent() {
           onClick={() => {
             setRole("pro");
             setSubmitted(false);
+            setErrorMessage(null);
           }}
           className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
             role === "pro"
@@ -149,23 +217,19 @@ function RegisterFormContent() {
               Bienvenue dans la Maison Belora
             </h3>
             <p className="text-sm text-neutral-600">
-              Votre compte a été initialisé avec succès. Un e-mail de confirmation
-              a été envoyé à votre adresse.
+              Votre compte a été créé avec succès. Connexion et redirection en cours…
             </p>
-          </div>
-          <div className="pt-2">
-            <Link
-              href="/"
-              className="btn btn-dark inline-flex"
-            >
-              <span>Explorer les ateliers</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
         </div>
       ) : (
         <>
-          {/* 3. Formulaire avec inputs grands et arrondis */}
+          {errorMessage && (
+            <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 flex items-start gap-3 text-red-800 text-sm">
+              <AlertCircle className="w-5 h-5 shrink-0 text-red-600 mt-0.5" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
             {role === "pro" && (
               <>
@@ -192,25 +256,22 @@ function RegisterFormContent() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label
-                      htmlFor="reg-category"
+                      htmlFor="reg-address"
                       className="block text-sm font-semibold text-neutral-800 mb-1.5"
                     >
-                      Activité principale
+                      Adresse
                     </label>
-                    <select
-                      id="reg-category"
-                      value={formData.businessCategory}
+                    <input
+                      id="reg-address"
+                      type="text"
+                      required
+                      value={formData.address}
                       onChange={(e) =>
-                        setFormData({ ...formData, businessCategory: e.target.value })
+                        setFormData({ ...formData, address: e.target.value })
                       }
-                      className="select"
-                    >
-                      <option value="coiffure">Coiffure</option>
-                      <option value="visage">Soins Visage & Institut</option>
-                      <option value="massage">Massage & Spa</option>
-                      <option value="barbier">Barbier</option>
-                      <option value="onglerie">Onglerie</option>
-                    </select>
+                      placeholder="18 Rue de Turenne"
+                      className="input"
+                    />
                   </div>
                   <div>
                     <label
@@ -313,11 +374,12 @@ function RegisterFormContent() {
                 <input
                   id="reg-phone"
                   type="tel"
+                  required
                   value={formData.phone}
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
                   }
-                  placeholder="+33 6 12 34 56 78"
+                  placeholder="06 12 34 56 78"
                   autoComplete="tel"
                   className="input pr-12"
                 />
@@ -330,7 +392,7 @@ function RegisterFormContent() {
                 htmlFor="reg-password"
                 className="block text-sm font-semibold text-neutral-800 mb-1.5"
               >
-                Mot de passe (8 caractères minimum)
+                Mot de passe (8 car. min, 1 majuscule, 1 chiffre)
               </label>
               <div className="relative">
                 <input
@@ -394,7 +456,6 @@ function RegisterFormContent() {
             </button>
           </form>
 
-          {/* 4. Lien de retour connexion */}
           <div className="mt-8 pt-6 border-t border-neutral-200/80 text-center">
             <p className="text-sm text-neutral-600">
               Déjà membre de la Maison Belora ?{" "}
@@ -414,7 +475,7 @@ function RegisterFormContent() {
 
 export default function RegisterPage() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<div className="w-full h-80 animate-pulse bg-neutral-100 rounded-2xl" />}>
       <RegisterFormContent />
     </Suspense>
   );

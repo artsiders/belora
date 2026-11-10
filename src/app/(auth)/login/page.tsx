@@ -1,26 +1,63 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
-import { Eye, EyeOff, Mail, ArrowRight, CheckCircle2 } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { Eye, EyeOff, Mail, ArrowRight, AlertCircle, CheckCircle2 } from "lucide-react";
 
-export default function LoginPage() {
+function LoginForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
+
   const [userType, setUserType] = useState<"client" | "pro">("client");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setErrorMessage(null);
 
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (res?.error) {
+        setErrorMessage("Identifiants incorrects. Veuillez vérifier votre adresse e-mail et votre mot de passe.");
+        setIsLoading(false);
+        return;
+      }
+
       setSubmitted(true);
-    }, 800);
+      setTimeout(() => {
+        if (callbackUrl) {
+          router.push(callbackUrl);
+        } else if (userType === "pro") {
+          router.push("/pro/agenda");
+        } else {
+          router.push("/account");
+        }
+        router.refresh();
+      }, 600);
+    } catch {
+      setErrorMessage("Une erreur de connexion est survenue. Veuillez réessayer.");
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = () => {
+    const targetUrl = callbackUrl || (userType === "pro" ? "/pro/agenda" : "/account");
+    signIn("google", { callbackUrl: targetUrl });
   };
 
   return (
@@ -32,6 +69,7 @@ export default function LoginPage() {
           onClick={() => {
             setUserType("client");
             setSubmitted(false);
+            setErrorMessage(null);
           }}
           className={`flex-1 py-2.5 text-sm font-semibold rounded-xl transition-all cursor-pointer ${
             userType === "client"
@@ -46,6 +84,7 @@ export default function LoginPage() {
           onClick={() => {
             setUserType("pro");
             setSubmitted(false);
+            setErrorMessage(null);
           }}
           className={`flex-1 py-2.5 text-sm font-semibold rounded-xl transition-all cursor-pointer ${
             userType === "pro"
@@ -72,7 +111,7 @@ export default function LoginPage() {
         </p>
       </div>
 
-      {/* Message de confirmation simulé */}
+      {/* Message de succès */}
       {submitted ? (
         <div className="p-8 rounded-2xl bg-primary-50/20 border border-primary-200 text-center space-y-4">
           <div className="w-14 h-14 rounded-full bg-primary-50 text-primary-600 mx-auto flex items-center justify-center">
@@ -81,22 +120,21 @@ export default function LoginPage() {
           <div className="space-y-1">
             <h3 className="text-xl text-neutral-950 font-medium">Connexion réussie</h3>
             <p className="text-sm text-neutral-600">
-              Bienvenue sur votre espace Belora. Redirection en cours…
+              Redirection en cours vers votre espace…
             </p>
-          </div>
-          <div className="pt-2">
-            <Link
-              href="/"
-              className="btn btn-dark inline-flex"
-            >
-              <span>Accéder à l’accueil</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
         </div>
       ) : (
         <>
-          {/* 3. Formulaire de connexion épuré avec inputs grands et arrondis */}
+          {/* Feedback d'erreur utilisateur */}
+          {errorMessage && (
+            <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 flex items-start gap-3 text-red-800 text-sm">
+              <AlertCircle className="w-5 h-5 shrink-0 text-red-600 mt-0.5" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
+
+          {/* Formulaire de connexion */}
           <form onSubmit={handleSubmit} className="space-y-4.5">
             <div>
               <label
@@ -185,7 +223,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* 4. Séparateur épuré */}
+          {/* Séparateur */}
           <div className="relative my-6 text-center">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-neutral-200/80" />
@@ -195,9 +233,10 @@ export default function LoginPage() {
             </span>
           </div>
 
-          {/* 5. Connexion SSO Google épurée */}
+          {/* Connexion SSO Google */}
           <button
             type="button"
+            onClick={handleGoogleSignIn}
             className="w-full h-13 rounded-2xl border border-neutral-300 bg-white hover:bg-neutral-50 hover:border-neutral-400 text-sm font-medium text-neutral-800 shadow-2xs transition-all flex items-center justify-center gap-3 cursor-pointer"
           >
             <svg
@@ -227,20 +266,28 @@ export default function LoginPage() {
             <span>Continuer avec Google</span>
           </button>
 
-          {/* 6. Lien d'inscription */}
+          {/* Lien d'inscription */}
           <div className="mt-8 pt-6 border-t border-neutral-200/80 text-center">
             <p className="text-sm text-neutral-600">
               Vous n’avez pas encore de compte ?{" "}
               <Link
-                href="/register"
+                href={userType === "pro" ? "/pro/join" : "/register"}
                 className="font-semibold text-primary-600 hover:text-primary-700 hover:underline"
               >
-                Créer un compte Belora
+                {userType === "pro" ? "Créer un espace professionnel" : "Créer un compte Belora"}
               </Link>
             </p>
           </div>
         </>
       )}
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="w-full h-80 animate-pulse bg-neutral-100 rounded-2xl" />}>
+      <LoginForm />
+    </Suspense>
   );
 }
