@@ -60,6 +60,18 @@ export function AppointmentModal({
   const [startTime, setStartTime] = useState(defaultTime);
   const [customNotes, setCustomNotes] = useState("");
 
+  React.useEffect(() => {
+    if (isOpen) {
+      if (clientsList[0]?.id && !selectedClientId) setSelectedClientId(clientsList[0].id);
+      if (servicesList[0]?.id && !selectedServiceId) setSelectedServiceId(servicesList[0].id);
+      if (defaultStaffId) setSelectedStaffId(defaultStaffId);
+      else if (staffList[0]?.id && !selectedStaffId) setSelectedStaffId(staffList[0].id);
+      if (defaultResourceId) setSelectedResourceId(defaultResourceId);
+      else if (resourceList[0]?.id && !selectedResourceId) setSelectedResourceId(resourceList[0].id);
+      if (defaultTime) setStartTime(defaultTime);
+    }
+  }, [isOpen, clientsList, servicesList, staffList, resourceList, defaultStaffId, defaultResourceId, defaultTime, selectedClientId, selectedServiceId, selectedStaffId, selectedResourceId]);
+
   const handleCreateSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const service = servicesList.find((s) => s.id === selectedServiceId);

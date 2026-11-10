@@ -21,15 +21,29 @@ export function PresenceModal({
 }: PresenceModalProps) {
   const [localTimes, setLocalTimes] = useState<
     Record<string, { start: string; end: string }>
-  >(
+  >(() =>
     staffList.reduce((acc, st) => {
       acc[st.id] = {
-        start: st.presenceToday.plannedStart,
-        end: st.presenceToday.plannedEnd,
+        start: st.presenceToday?.plannedStart || "09:00",
+        end: st.presenceToday?.plannedEnd || "19:00",
       };
       return acc;
     }, {} as Record<string, { start: string; end: string }>)
   );
+
+  React.useEffect(() => {
+    if (staffList.length > 0) {
+      setLocalTimes(
+        staffList.reduce((acc, st) => {
+          acc[st.id] = {
+            start: st.presenceToday?.plannedStart || "09:00",
+            end: st.presenceToday?.plannedEnd || "19:00",
+          };
+          return acc;
+        }, {} as Record<string, { start: string; end: string }>)
+      );
+    }
+  }, [staffList, isOpen]);
 
   const handleSave = () => {
     Object.entries(localTimes).forEach(([staffId, times]) => {

@@ -111,3 +111,36 @@ export function createUtcDateFromLocal(
   const targetLocalMs = Date.UTC(year, month - 1, day, Math.floor(minutesSinceMidnight / 60), minutesSinceMidnight % 60);
   return new Date(targetLocalMs - offsetMs);
 }
+
+/**
+ * Décompose un instant Date UTC en date locale ("YYYY-MM-DD") et heure locale ("HH:mm")
+ * selon le fuseau horaire spécifié (par défaut Europe/Paris).
+ */
+export function formatUtcToLocalParts(
+  date: Date,
+  timezone: string = "Europe/Paris"
+): { date: string; time: string } {
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: timezone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  });
+
+  const parts = formatter.formatToParts(date);
+  const getPart = (type: string) => parts.find((p) => p.type === type)?.value || "00";
+
+  const year = getPart("year");
+  const month = getPart("month");
+  const day = getPart("day");
+  const hour = getPart("hour");
+  const minute = getPart("minute");
+
+  return {
+    date: `${year}-${month}-${day}`,
+    time: `${hour}:${minute}`,
+  };
+}

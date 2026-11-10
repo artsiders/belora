@@ -3,6 +3,7 @@ import { Montserrat, Playfair_Display } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import { SessionProvider } from "@/providers/session-provider";
 import { QueryProvider } from "@/providers/query-provider";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -49,7 +50,10 @@ export default function RootLayout({
           zIndex={99999}
         />
         <SessionProvider>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            {children}
+            <Toaster position="top-right" richColors />
+          </QueryProvider>
         </SessionProvider>
       </body>
     </html>
