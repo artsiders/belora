@@ -794,6 +794,71 @@ async function main() {
     },
   });
 
+  // Réservation 5 : Nathalie Vidal - Passée (il y a 2 semaines) avec Clément
+  const customerNathalie = createdCustomers.find((c) => c.email === "nathalie.vidal@yopmail.com");
+  const startTimeRdv5 = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
+  startTimeRdv5.setHours(15, 0, 0, 0);
+  const endTimeRdv5 = new Date(startTimeRdv5.getTime() + 60 * 60 * 1000);
+
+  const booking5 = await prisma.booking.create({
+    data: {
+      reference: "#BEL-8496",
+      venueId: venue.id,
+      customerId: customerNathalie?.id,
+      clientName: "Nathalie Vidal",
+      clientPhone: "06 91 82 73 64",
+      clientEmail: "nathalie.vidal@yopmail.com",
+      status: BookingStatus.COMPLETED,
+      totalPriceCents: 7500,
+      depositCents: 2500,
+      remainingCents: 5000,
+      paymentStatus: PaymentStatus.SUCCEEDED,
+      notes: "Coupe d'entretien et soin profond avant départ en vacances.",
+      items: {
+        create: {
+          serviceId: srvCoupeSoin.id,
+          staffId: staffClement.id,
+          resourceId: resFauteuil1.id,
+          startTime: startTimeRdv5,
+          endTime: endTimeRdv5,
+          priceCents: 7500,
+        },
+      },
+    },
+  });
+
+  // Réservation 6 : Nathalie Vidal - À venir dans 4 jours à 14:00 avec Hélène
+  const startTimeRdv6 = new Date(Date.now() + 4 * 24 * 60 * 60 * 1000);
+  startTimeRdv6.setHours(14, 0, 0, 0);
+  const endTimeRdv6 = new Date(startTimeRdv6.getTime() + 90 * 60 * 1000);
+
+  await prisma.booking.create({
+    data: {
+      reference: "#BEL-8497",
+      venueId: venue.id,
+      customerId: customerNathalie?.id,
+      clientName: "Nathalie Vidal",
+      clientPhone: "06 91 82 73 64",
+      clientEmail: "nathalie.vidal@yopmail.com",
+      status: BookingStatus.CONFIRMED,
+      totalPriceCents: 9500,
+      depositCents: 3000,
+      remainingCents: 6500,
+      paymentStatus: PaymentStatus.SUCCEEDED,
+      notes: "Balayage Minéral à l'argile - retouche racine.",
+      items: {
+        create: {
+          serviceId: srvColoration.id,
+          staffId: staffHelene.id,
+          resourceId: resFauteuil2.id,
+          startTime: startTimeRdv6,
+          endTime: endTimeRdv6,
+          priceCents: 9500,
+        },
+      },
+    },
+  });
+
   console.log("📅 Created bookings & agenda appointments with staff & resource links.");
 
   // 12. Avis Clients Vérifiés
@@ -827,6 +892,23 @@ async function main() {
       replyAt: new Date(),
     },
   });
+
+  if (customerNathalie?.userId) {
+    await prisma.review.create({
+      data: {
+        venueId: venue.id,
+        bookingId: booking5.id,
+        userId: customerNathalie.userId,
+        authorName: "Nathalie Vidal",
+        rating: 5,
+        comment:
+          "Prestation remarquable avec Clément ! Le rituel de soin aux huiles de camélia a redonné une texture soyeuse à mes longueurs. Salon lumineux et ambiance sereine.",
+        isVerified: true,
+        reply: "Merci infiniment Nathalie, c'est toujours un bonheur de vous recevoir à l'Atelier !",
+        replyAt: new Date(),
+      },
+    });
+  }
 
   console.log("⭐ Created verified reviews with owner replies.");
   console.log("✅ Belora seed completed successfully!");

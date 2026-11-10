@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { MainNav } from "@/components/layout/main-nav";
 import { Footer } from "@/components/layout/footer";
 import { AccountClient } from "./account-client";
@@ -8,7 +9,15 @@ export default function AccountPage() {
       <MainNav />
 
       <main className="flex-1">
-        <AccountClient />
+        <Suspense
+          fallback={
+            <div className="container-belora py-12">
+              <div className="h-40 bg-neutral-100 rounded-2xl animate-pulse" />
+            </div>
+          }
+        >
+          <AccountClient />
+        </Suspense>
       </main>
 
       <Footer />

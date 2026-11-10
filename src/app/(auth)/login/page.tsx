@@ -3,7 +3,7 @@
 import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import { Eye, EyeOff, Mail, ArrowRight, AlertCircle, CheckCircle2 } from "lucide-react";
 
 function LoginForm() {
@@ -39,16 +39,21 @@ function LoginForm() {
       }
 
       setSubmitted(true);
+      const session = await getSession();
+      const role = (session?.user as any)?.role;
+
       setTimeout(() => {
-        if (callbackUrl) {
+        if (callbackUrl && !callbackUrl.includes("/login")) {
           router.push(callbackUrl);
-        } else if (userType === "pro") {
+        } else if (role === "ADMIN") {
+          router.push("/admin/dashboard");
+        } else if (role === "PRO") {
           router.push("/pro/agenda");
         } else {
           router.push("/account");
         }
         router.refresh();
-      }, 600);
+      }, 500);
     } catch {
       setErrorMessage("Une erreur de connexion est survenue. Veuillez réessayer.");
       setIsLoading(false);

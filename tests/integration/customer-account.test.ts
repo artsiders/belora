@@ -389,4 +389,37 @@ describe("Sprint 11 — Compte Client, Annulations & Avis Vérifiés", () => {
       },
     });
   });
+
+  it("7. GET /api/account/bookings and profile for Nathalie Vidal return seeded history, upcoming appointment, and verified review", async () => {
+    const nathalieUser = await db.user.findUnique({
+      where: { email: "nathalie.vidal@yopmail.com" },
+    });
+    expect(nathalieUser).toBeDefined();
+
+    const bookingsReq = new Request(
+      `http://localhost:3000/api/account/bookings?email=nathalie.vidal@yopmail.com`
+    );
+    const bookingsRes = await getAccountBookingsRoute(bookingsReq);
+    expect(bookingsRes.status).toBe(200);
+
+    const bookingsData = await bookingsRes.json();
+    expect(bookingsData.upcoming.length).toBeGreaterThanOrEqual(1);
+    expect(bookingsData.past.length).toBeGreaterThanOrEqual(1);
+
+    const pastWithReview = bookingsData.past.find((b: any) => b.hasReview);
+    expect(pastWithReview).toBeDefined();
+    expect(pastWithReview.review.rating).toBe(5);
+    expect(pastWithReview.review.reply).toBeDefined();
+
+    const profileReq = new Request(
+      `http://localhost:3000/api/account/profile?email=nathalie.vidal@yopmail.com`
+    );
+    const profileRes = await getProfileRoute(profileReq);
+    expect(profileRes.status).toBe(200);
+
+    const profileData = await profileRes.json();
+    expect(profileData.user.firstName).toBe("Nathalie");
+    expect(profileData.user.lastName).toBe("Vidal");
+    expect(profileData.user.role).toBe(Role.CUSTOMER);
+  });
 });

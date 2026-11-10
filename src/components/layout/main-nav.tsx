@@ -1,10 +1,21 @@
 "use client";
 
-import { useState, useEffect, useSyncExternalStore } from "react";
+import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
+import {
+  Menu,
+  X,
+  ArrowUpRight,
+  User,
+  Calendar,
+  LogOut,
+  ChevronDown,
+  Shield,
+  Store,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const emptySubscribe = () => () => {};
@@ -46,10 +57,31 @@ const CATEGORY_CHIPS = [
 ];
 
 export function MainNav() {
+  const { data: session, status } = useSession();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
   const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
   const closeMenu = () => setMobileOpen(false);
+
+  // Fermer le dropdown utilisateur au clic extérieur
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        userMenuRef.current &&
+        !userMenuRef.current.contains(event.target as Node)
+      ) {
+        setUserMenuOpen(false);
+      }
+    }
+    if (userMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [userMenuOpen]);
 
   // Verrouillage du scroll arrière-plan quand le menu mobile est ouvert
   useEffect(() => {
@@ -62,6 +94,22 @@ export function MainNav() {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  const user = session?.user;
+  const role = (user as { role?: string })?.role;
+  const userInitials = (
+    user?.name
+      ? user.name
+          .split(" ")
+          .map((n) => n[0])
+          .join("")
+      : "MB"
+  )
+    .toUpperCase()
+    .slice(0, 2);
+
+  const displayName =
+    user?.name?.split(" ")[0] || "Mon Compte";
 
   return (
     <>
@@ -86,23 +134,173 @@ export function MainNav() {
 
           {/* 2. Actions Desktop à droite */}
           <div className="hidden sm:flex items-center gap-4">
-            <Link
-              href="/pro/join"
-              className="inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wider text-neutral-600 hover:text-primary-600 transition-colors"
-            >
-              <span>Je suis un professionnel</span>
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
-            </Link>
+            {status === "loading" ? (
+              <div className="flex items-center gap-2">
+                <div className="h-8 w-8 rounded-full bg-neutral-200 animate-pulse" />
+                <div className="h-4 w-20 rounded bg-neutral-100 animate-pulse" />
+              </div>
+            ) : status === "authenticated" && user ? (
+              <div className="flex items-center gap-3">
+                {role === "PRO" ? (
+                  <Link
+                    href="/pro/agenda"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-primary-50 text-primary-900 border border-primary-200/80 hover:bg-primary-100 transition-colors"
+                  >
+                    <Store className="w-3.5 h-3.5 text-primary-700" />
+                    <span>Espace Pro</span>
+                  </Link>
+                ) : role === "ADMIN" ? (
+                  <Link
+                    href="/admin/dashboard"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-neutral-900 text-neutral-100 hover:bg-neutral-800 transition-colors"
+                  >
+                    <Shield className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Super-Admin</span>
+                  </Link>
+                ) : (
+                  <Link
+                    href="/search"
+                    className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:text-primary-600 transition-colors"
+                  >
+                    <span>Réserver un rituel</span>
+                  </Link>
+                )}
 
-            <span className="w-px h-3.5 bg-neutral-300" aria-hidden="true" />
+                <span className="w-px h-3.5 bg-neutral-300" aria-hidden="true" />
 
-            <Link href="/login" className="btn btn-ghost btn-sm">
-              Connexion
-            </Link>
+                {/* Dropdown Menu Utilisateur */}
+                <div className="relative" ref={userMenuRef}>
+                  <button
+                    type="button"
+                    onClick={() => setUserMenuOpen((prev) => !prev)}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-200/90 hover:border-neutral-300 bg-white hover:bg-neutral-50 transition-colors cursor-pointer text-left shadow-2xs"
+                    aria-expanded={userMenuOpen}
+                    aria-label="Menu utilisateur"
+                  >
+                    <div className="w-7 h-7 rounded-full bg-primary-900 text-white font-medium text-xs flex items-center justify-center shrink-0 tracking-wider">
+                      {userInitials}
+                    </div>
+                    <span className="text-sm font-semibold text-neutral-900 max-w-[130px] truncate">
+                      {displayName}
+                    </span>
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 text-neutral-400 transition-transform duration-200 ${
+                        userMenuOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
 
-            <Link href="/register" className="btn btn-dark">
-              Rejoindre
-            </Link>
+                  {userMenuOpen && (
+                    <div className="absolute right-0 mt-2 w-72 rounded-2xl bg-white border border-neutral-200/90 shadow-lg py-2 z-50">
+                      <div className="px-4 py-3 border-b border-neutral-100">
+                        <p className="text-sm font-semibold text-neutral-950 truncate">
+                          {user.name || displayName}
+                        </p>
+                        <p className="text-xs text-neutral-500 truncate mb-2">
+                          {user.email}
+                        </p>
+                        <span className="inline-block text-xs uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-neutral-100 text-neutral-700 border border-neutral-200/60">
+                          {role === "ADMIN"
+                            ? "Administrateur"
+                            : role === "PRO"
+                            ? "Professionnel Belora"
+                            : "Membre Belora"}
+                        </span>
+                      </div>
+
+                      <div className="py-1">
+                        <Link
+                          href="/account"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50 transition-colors"
+                        >
+                          <User className="w-4 h-4 text-neutral-400" />
+                          <span>Mon Compte</span>
+                        </Link>
+
+                        <Link
+                          href="/account?tab=upcoming"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50 transition-colors"
+                        >
+                          <Calendar className="w-4 h-4 text-neutral-400" />
+                          <span>Mes Rendez-vous</span>
+                        </Link>
+
+                        {role === "PRO" && (
+                          <>
+                            <div className="my-1 border-t border-neutral-100" />
+                            <Link
+                              href="/pro/agenda"
+                              onClick={() => setUserMenuOpen(false)}
+                              className="flex items-center gap-3 px-4 py-2 text-sm font-semibold text-primary-900 bg-primary-50/50 hover:bg-primary-50 transition-colors"
+                            >
+                              <Store className="w-4 h-4 text-primary-700" />
+                              <span>Agenda & Réservations</span>
+                            </Link>
+                            <Link
+                              href="/pro/checkout"
+                              onClick={() => setUserMenuOpen(false)}
+                              className="flex items-center gap-3 px-4 py-2 text-sm text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50 transition-colors pl-11"
+                            >
+                              <span>Caisse & Facturation</span>
+                            </Link>
+                          </>
+                        )}
+
+                        {role === "ADMIN" && (
+                          <>
+                            <div className="my-1 border-t border-neutral-100" />
+                            <Link
+                              href="/admin/dashboard"
+                              onClick={() => setUserMenuOpen(false)}
+                              className="flex items-center gap-3 px-4 py-2 text-sm font-semibold text-neutral-900 bg-neutral-100/70 hover:bg-neutral-100 transition-colors"
+                            >
+                              <Shield className="w-4 h-4 text-amber-600" />
+                              <span>Console Super-Admin</span>
+                            </Link>
+                          </>
+                        )}
+                      </div>
+
+                      <div className="pt-1 border-t border-neutral-100">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setUserMenuOpen(false);
+                            signOut({ callbackUrl: "/" });
+                          }}
+                          className="w-full flex items-center gap-3 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50/60 transition-colors cursor-pointer text-left font-medium"
+                        >
+                          <LogOut className="w-4 h-4 text-rose-500" />
+                          <span>Se déconnecter</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <>
+                <Link
+                  href="/pro/join"
+                  className="inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wider text-neutral-600 hover:text-primary-600 transition-colors"
+                >
+                  <span>Je suis un professionnel</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+                </Link>
+
+                <span className="w-px h-3.5 bg-neutral-300" aria-hidden="true" />
+
+                <Link href="/login" className="btn btn-ghost btn-sm">
+                  Connexion
+                </Link>
+
+                <Link href="/register" className="btn btn-dark">
+                  Rejoindre
+                </Link>
+              </>
+            )}
           </div>
 
           {/* 3. Bouton Burger Mobile Design Épuré */}
@@ -215,42 +413,120 @@ export function MainNav() {
 
                   {/* Section inférieure : Belora Pro & Authentification */}
                   <div className="space-y-4 pt-6 border-t border-neutral-200/80">
-                    {/* Carte raffinée Belora Pro */}
-                    <Link
-                      href="/pro/join"
-                      onClick={closeMenu}
-                      className="flex items-center justify-between p-4 rounded-2xl bg-secondary-900 text-white hover:bg-neutral-950 transition-colors shadow-sm"
-                    >
-                      <div>
-                        <span className="text-sm uppercase font-semibold tracking-wider text-neutral-400 block mb-0.5">
-                          Espace Professionnel
-                        </span>
-                        <span className="text-sm font-semibold text-neutral-50">
-                          Développer votre salon avec Belora Pro
-                        </span>
-                      </div>
-                      <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                        <ArrowUpRight className="w-4 h-4 text-neutral-200" />
-                      </div>
-                    </Link>
+                    {status === "authenticated" && user ? (
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-neutral-50 border border-neutral-200/80">
+                          <div className="w-11 h-11 rounded-full bg-primary-900 text-white font-medium text-sm flex items-center justify-center shrink-0 tracking-wider">
+                            {userInitials}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-sm font-semibold text-neutral-950 truncate">
+                              {user.name || displayName}
+                            </p>
+                            <p className="text-xs text-neutral-500 truncate">
+                              {user.email}
+                            </p>
+                            <span className="inline-block mt-1 text-xs uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-neutral-100 text-neutral-700 border border-neutral-200/60">
+                              {role === "ADMIN"
+                                ? "Administrateur"
+                                : role === "PRO"
+                                ? "Professionnel"
+                                : "Client Belora"}
+                            </span>
+                          </div>
+                        </div>
 
-                    {/* Boutons Connexion / Rejoindre */}
-                    <div className="grid grid-cols-2 gap-3 pt-1">
-                      <Link
-                        href="/login"
-                        onClick={closeMenu}
-                        className="btn btn-outline py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-center"
-                      >
-                        Connexion
-                      </Link>
-                      <Link
-                        href="/register"
-                        onClick={closeMenu}
-                        className="btn btn-primary py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-center"
-                      >
-                        Rejoindre
-                      </Link>
-                    </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <Link
+                            href="/account"
+                            onClick={closeMenu}
+                            className="btn btn-outline py-2.5 rounded-xl text-xs font-semibold text-center"
+                          >
+                            Mon Compte
+                          </Link>
+                          <Link
+                            href="/account?tab=upcoming"
+                            onClick={closeMenu}
+                            className="btn btn-primary py-2.5 rounded-xl text-xs font-semibold text-center"
+                          >
+                            Mes Rendez-vous
+                          </Link>
+                        </div>
+
+                        {role === "PRO" && (
+                          <Link
+                            href="/pro/agenda"
+                            onClick={closeMenu}
+                            className="flex items-center justify-between p-3.5 rounded-xl bg-primary-900 text-white hover:bg-neutral-950 transition-colors text-xs font-semibold"
+                          >
+                            <span>Espace Pro (Agenda & Caisse)</span>
+                            <ArrowUpRight className="w-4 h-4 text-neutral-200" />
+                          </Link>
+                        )}
+
+                        {role === "ADMIN" && (
+                          <Link
+                            href="/admin/dashboard"
+                            onClick={closeMenu}
+                            className="flex items-center justify-between p-3.5 rounded-xl bg-neutral-900 text-white hover:bg-neutral-950 transition-colors text-xs font-semibold"
+                          >
+                            <span>Console Super-Admin</span>
+                            <ArrowUpRight className="w-4 h-4 text-amber-400" />
+                          </Link>
+                        )}
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            closeMenu();
+                            signOut({ callbackUrl: "/" });
+                          }}
+                          className="w-full flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer border border-rose-200"
+                        >
+                          <LogOut className="w-3.5 h-3.5 text-rose-500" />
+                          <span>Se déconnecter</span>
+                        </button>
+                      </div>
+                    ) : (
+                      <>
+                        {/* Carte raffinée Belora Pro */}
+                        <Link
+                          href="/pro/join"
+                          onClick={closeMenu}
+                          className="flex items-center justify-between p-4 rounded-2xl bg-secondary-900 text-white hover:bg-neutral-950 transition-colors shadow-sm"
+                        >
+                          <div>
+                            <span className="text-sm uppercase font-semibold tracking-wider text-neutral-400 block mb-0.5">
+                              Espace Professionnel
+                            </span>
+                            <span className="text-sm font-semibold text-neutral-50">
+                              Développer votre salon avec Belora Pro
+                            </span>
+                          </div>
+                          <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                            <ArrowUpRight className="w-4 h-4 text-neutral-200" />
+                          </div>
+                        </Link>
+
+                        {/* Boutons Connexion / Rejoindre */}
+                        <div className="grid grid-cols-2 gap-3 pt-1">
+                          <Link
+                            href="/login"
+                            onClick={closeMenu}
+                            className="btn btn-outline py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-center"
+                          >
+                            Connexion
+                          </Link>
+                          <Link
+                            href="/register"
+                            onClick={closeMenu}
+                            className="btn btn-primary py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-center"
+                          >
+                            Rejoindre
+                          </Link>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </motion.div>
