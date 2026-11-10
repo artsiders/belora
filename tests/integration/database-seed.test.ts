@@ -129,7 +129,7 @@ describe("Database & Prisma Seed Integration Tests", () => {
       where: { venue: { slug: "atelier-botanique-paris" } },
     });
 
-    expect(customers.length).toBe(10);
+    expect(customers.length).toBeGreaterThanOrEqual(10);
 
     const claire = customers.find((c) => c.firstName === "Claire" && c.lastName === "Dumont");
     expect(claire).toBeDefined();

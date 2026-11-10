@@ -103,7 +103,7 @@ export class LockService {
    */
   public static async releaseLock(lockKey: string): Promise<boolean> {
     try {
-      await db.holdingLock.delete({
+      await db.holdingLock.deleteMany({
         where: { lockKey },
       });
       return true;
