@@ -2,7 +2,10 @@
 
 import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { Plus, Phone, Mail, Eye } from "lucide-react";
+import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { Plus, Phone, Mail, Eye, AlertCircle, RefreshCw } from "lucide-react";
+import { apiClient } from "@/lib/api-client";
 import { DataTable, Column } from "@/components/pro-dashboard/ui/data-table";
 import { Badge } from "@/components/pro-dashboard/ui/badge";
 import { NewClientModal } from "@/components/pro-dashboard/clients/new-client-modal";
@@ -11,74 +14,137 @@ import {
   ClientsSidebar,
   ClientFilterSegment,
 } from "@/components/pro-dashboard/clients/clients-sidebar";
-import {
-  MOCK_CLIENTS,
-  MOCK_APPOINTMENTS,
-  ProClient,
-} from "@/lib/data/pro-mock-data";
+import { ProClient, ProAppointment } from "@/lib/data/pro-mock-data";
 
 function ClientsContent() {
   const searchParams = useSearchParams();
   const initialSearch = searchParams.get("search") || "";
+  const queryClient = useQueryClient();
 
-  const [clients, setClients] = useState<ProClient[]>(MOCK_CLIENTS);
   const [filterSegment, setFilterSegment] = useState<ClientFilterSegment>("all");
   const [searchQuery, setSearchQuery] = useState<string>(initialSearch);
-  const [selectedClient, setSelectedClient] = useState<ProClient | null>(() => {
-    if (initialSearch) {
-      return (
-        MOCK_CLIENTS.find((c) =>
-          `${c.firstName} ${c.lastName}`
-            .toLowerCase()
-            .includes(initialSearch.toLowerCase())
-        ) || null
-      );
-    }
-    return null;
+  const [selectedClient, setSelectedClient] = useState<ProClient | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(() => Boolean(initialSearch));
+  const [isNewClientModalOpen, setIsNewClientModalOpen] = useState<boolean>(false);
+
+  // 1. Requête Clients CRM avec segmentation serveur
+  const {
+    data: clientsResponse,
+    isLoading: isClientsLoading,
+    isFetching: isClientsFetching,
+    isError: isClientsError,
+    refetch: refetchClients,
+  } = useQuery<{
+    clients: ProClient[];
+    counts: {
+      all: number;
+      vip: number;
+      regulars: number;
+      new: number;
+      inactive: number;
+    };
+    totals: {
+      totalRevenue: number;
+      avgSpendPerClient: number;
+      retentionRate: number;
+    };
+  }>({
+    queryKey: ["pro", "clients", filterSegment, searchQuery],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      if (filterSegment !== "all") params.append("segment", filterSegment);
+      if (searchQuery.trim()) params.append("search", searchQuery.trim());
+
+      const res = await apiClient.get<{
+        clients: ProClient[];
+        counts: {
+          all: number;
+          vip: number;
+          regulars: number;
+          new: number;
+          inactive: number;
+        };
+        totals: {
+          totalRevenue: number;
+          avgSpendPerClient: number;
+          retentionRate: number;
+        };
+      }>(`/pro/clients?${params.toString()}`);
+      return res.data;
+    },
+    placeholderData: keepPreviousData,
+    staleTime: 30_000,
   });
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(() => {
-    return Boolean(initialSearch);
+  // 2. Requête Rendez-vous pour l'historique complet dans le tiroir (drawer)
+  const { data: appointments = [] } = useQuery<ProAppointment[]>({
+    queryKey: ["pro", "appointments"],
+    queryFn: async () => {
+      const res = await apiClient.get<{ appointments: ProAppointment[] }>("/pro/appointments");
+      return res.data.appointments;
+    },
+    staleTime: 60_000,
   });
-  const [isNewClientModalOpen, setIsNewClientModalOpen] =
-    useState<boolean>(false);
 
-  // Filtrage combiné (segment + recherche)
-  const filteredClients = clients.filter((c) => {
-    if (filterSegment === "vip" && !c.isVip) return false;
-    if (filterSegment === "regulars" && c.totalVisits < 4) return false;
-    if (filterSegment === "new" && c.totalVisits > 1) return false;
-    if (
-      filterSegment === "inactive" &&
-      !c.lastVisit.includes("2025") &&
-      c.totalVisits > 0
-    )
-      return false;
+  const clients = clientsResponse?.clients || [];
 
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      const match =
-        c.firstName.toLowerCase().includes(q) ||
-        c.lastName.toLowerCase().includes(q) ||
-        c.phone.includes(q) ||
-        c.email.toLowerCase().includes(q);
-      if (!match) return false;
-    }
+  // Mutation création fiche client
+  const createClientMutation = useMutation({
+    mutationFn: async (payload: {
+      firstName: string;
+      lastName: string;
+      phone: string;
+      email: string;
+      isVip: boolean;
+      notes: string;
+    }) => {
+      const res = await apiClient.post<{ client: ProClient }>("/pro/clients", payload);
+      return res.data.client;
+    },
+    onSuccess: (newClient) => {
+      queryClient.invalidateQueries({ queryKey: ["pro", "clients"] });
+      setSelectedClient(newClient);
+      setIsDrawerOpen(true);
+      toast.success(`Fiche de ${newClient.firstName} ${newClient.lastName} créée`);
+    },
+    onError: (err: any) => {
+      const msg = err.response?.data?.error || err.message || "Erreur lors de la création de la fiche client.";
+      toast.error(msg);
+    },
+  });
 
-    return true;
+  // Mutation mise à jour fiche client
+  const updateClientMutation = useMutation({
+    mutationFn: async (updated: ProClient) => {
+      const res = await apiClient.patch<{ client: ProClient }>(`/pro/clients/${updated.id}`, {
+        firstName: updated.firstName,
+        lastName: updated.lastName,
+        phone: updated.phone,
+        email: updated.email,
+        isVip: updated.isVip,
+        notes: updated.notes,
+        techSheet: updated.techSheet,
+      });
+      return res.data.client;
+    },
+    onSuccess: (saved) => {
+      queryClient.invalidateQueries({ queryKey: ["pro", "clients"] });
+      setSelectedClient(saved);
+      toast.success("Fiche client mise à jour");
+    },
+    onError: (err: any) => {
+      const msg = err.response?.data?.error || err.message || "Erreur de mise à jour.";
+      toast.error(msg);
+    },
   });
 
   const handleCreateClient = (newClient: ProClient) => {
-    setClients((prev) => [newClient, ...prev]);
     setSelectedClient(newClient);
     setIsDrawerOpen(true);
   };
 
   const handleUpdateClient = (updated: ProClient) => {
-    setClients((prev) =>
-      prev.map((c) => (c.id === updated.id ? updated : c))
-    );
-    setSelectedClient(updated);
+    updateClientMutation.mutate(updated);
   };
 
   // Définition des colonnes du tableau
@@ -129,7 +195,7 @@ function ClientsContent() {
       render: (client) => (
         <div className="flex items-center gap-1.5 text-neutral-700 text-sm">
           <Mail className="w-3.5 h-3.5 text-neutral-400" />
-          <span>{client.email}</span>
+          <span>{client.email || "-"}</span>
         </div>
       ),
     },
@@ -201,8 +267,34 @@ function ClientsContent() {
     }
   };
 
+  // État d'erreur conforme à AGENTS.md
+  if (isClientsError) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-neutral-50 text-center">
+        <div className="w-12 h-12 rounded-full bg-rose-50 border border-rose-200/80 flex items-center justify-center text-rose-700 mb-4">
+          <AlertCircle className="w-6 h-6" />
+        </div>
+        <h3 className="text-lg font-bold text-neutral-900 mb-1">
+          Impossible de charger le fichier clients
+        </h3>
+        <p className="text-sm text-neutral-600 max-w-md mb-6">
+          Une erreur est survenue lors de la synchronisation de l&apos;annuaire client.
+          Veuillez vérifier votre connexion et réessayez.
+        </p>
+        <button
+          type="button"
+          onClick={() => refetchClients()}
+          className="btn btn-primary btn-sm flex items-center gap-2"
+        >
+          <RefreshCw className="w-4 h-4" />
+          <span>Réessayer</span>
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex-1 flex h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] overflow-hidden">
+    <div className="flex-1 flex h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] overflow-hidden relative">
       {/* Sidebar Dédiée Fichier Clients */}
       <ClientsSidebar
         clients={clients}
@@ -221,7 +313,7 @@ function ClientsContent() {
             <h1 className="text-lg sm:text-xl font-bold text-neutral-950 flex items-center gap-2">
               <span>{getSegmentTitle(filterSegment)}</span>
               <span className="text-xs px-2 py-0.5 rounded-md bg-neutral-100 text-neutral-600 font-semibold border border-neutral-200 tabular-nums">
-                {filteredClients.length} fiche{filteredClients.length > 1 ? "s" : ""}
+                {clients.length} fiche{clients.length > 1 ? "s" : ""}
               </span>
             </h1>
             <p className="text-sm text-neutral-500">
@@ -244,7 +336,7 @@ function ClientsContent() {
         {/* Tableau réutilisable DataTable */}
         <div className="flex-1">
           <DataTable<ProClient>
-            data={filteredClients}
+            data={clients}
             columns={columns}
             rowKey={(c) => c.id}
             searchPlaceholder="Filtrer dans la sélection..."
@@ -264,7 +356,7 @@ function ClientsContent() {
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
         client={selectedClient}
-        appointments={MOCK_APPOINTMENTS}
+        appointments={appointments}
         onUpdateClient={handleUpdateClient}
       />
 
@@ -273,6 +365,10 @@ function ClientsContent() {
         isOpen={isNewClientModalOpen}
         onClose={() => setIsNewClientModalOpen(false)}
         onClientCreated={handleCreateClient}
+        isCreating={createClientMutation.isPending}
+        onCreateClientAction={async (payload) => {
+          return await createClientMutation.mutateAsync(payload);
+        }}
       />
     </div>
   );

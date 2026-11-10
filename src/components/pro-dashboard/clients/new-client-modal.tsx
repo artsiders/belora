@@ -13,12 +13,23 @@ interface NewClientModalProps {
   isOpen: boolean;
   onClose: () => void;
   onClientCreated: (client: ProClient) => void;
+  isCreating?: boolean;
+  onCreateClientAction?: (payload: {
+    firstName: string;
+    lastName: string;
+    phone: string;
+    email: string;
+    isVip: boolean;
+    notes: string;
+  }) => Promise<ProClient>;
 }
 
 export function NewClientModal({
   isOpen,
   onClose,
   onClientCreated,
+  isCreating = false,
+  onCreateClientAction,
 }: NewClientModalProps) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -27,9 +38,33 @@ export function NewClientModal({
   const [isVip, setIsVip] = useState(false);
   const [notes, setNotes] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!firstName.trim() || !lastName.trim()) return;
+
+    if (onCreateClientAction) {
+      try {
+        const created = await onCreateClientAction({
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          phone: phone.trim() || "06 00 00 00 00",
+          email: email.trim(),
+          isVip,
+          notes: notes.trim(),
+        });
+        onClientCreated(created);
+        onClose();
+        setFirstName("");
+        setLastName("");
+        setPhone("");
+        setEmail("");
+        setIsVip(false);
+        setNotes("");
+      } catch {
+        // Handled in mutation onError
+      }
+      return;
+    }
 
     const newClient: ProClient = {
       id: `cli-${Date.now()}`,

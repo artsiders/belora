@@ -9,7 +9,7 @@ import {
   UserX,
   Plus,
   Search,
-  Sparkle,
+  Crown,
   TrendingUp,
 } from "lucide-react";
 import { ProClient } from "@/lib/data/pro-mock-data";
@@ -59,7 +59,7 @@ export function ClientsSidebar({
       id: "vip" as const,
       label: "Clients Privilégiés / VIP",
       count: vipCount,
-      icon: Sparkle,
+      icon: Crown,
       badgeColor: "bg-amber-100 text-amber-900 border-amber-200",
     },
     {

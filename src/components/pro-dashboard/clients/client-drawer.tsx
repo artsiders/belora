@@ -42,7 +42,7 @@ function ClientDrawerInner({
     "profile" | "tech" | "history"
   >("profile");
 
-  // Initialisation directe sans useEffect
+  // Initialisation directe et synchronisation sur changement de client
   const [phone, setPhone] = useState(client.phone);
   const [email, setEmail] = useState(client.email);
   const [notes, setNotes] = useState(client.notes || "");
@@ -54,6 +54,14 @@ function ClientDrawerInner({
   const [sensitivities, setSensitivities] = useState(
     client.techSheet?.sensitivities || "Sensibilité cuir chevelu"
   );
+
+  React.useEffect(() => {
+    setPhone(client.phone);
+    setEmail(client.email);
+    setNotes(client.notes || "");
+    setHairType(client.techSheet?.hairType || "Cheveux ondulés, texture fine");
+    setSensitivities(client.techSheet?.sensitivities || "Sensibilité cuir chevelu");
+  }, [client]);
   const [isAddingFormula, setIsAddingFormula] = useState(false);
   const [newFormulaService, setNewFormulaService] = useState("");
   const [newFormulaText, setNewFormulaText] = useState("");
