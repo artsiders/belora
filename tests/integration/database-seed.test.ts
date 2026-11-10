@@ -15,25 +15,25 @@ describe("Database & Prisma Seed Integration Tests", () => {
 
   it("has the 3 core accounts with correct roles and valid bcrypt password hashes", async () => {
     const admin = await prisma.user.findUnique({
-      where: { email: "admin@belora.com" },
+      where: { email: "admin@yopmail.com" },
     });
     expect(admin).not.toBeNull();
     expect(admin?.role).toBe(Role.ADMIN);
-    expect(await bcrypt.compare("BeloraAdmin2026!", admin!.passwordHash!)).toBe(true);
+    expect(await bcrypt.compare("@Motdepass1", admin!.passwordHash!)).toBe(true);
 
     const pro = await prisma.user.findUnique({
-      where: { email: "pro@atelierbotanique.fr" },
+      where: { email: "pro@yopmail.com" },
     });
     expect(pro).not.toBeNull();
     expect(pro?.role).toBe(Role.PRO);
-    expect(await bcrypt.compare("AtelierPro2026!", pro!.passwordHash!)).toBe(true);
+    expect(await bcrypt.compare("@Motdepass1", pro!.passwordHash!)).toBe(true);
 
     const client = await prisma.user.findUnique({
-      where: { email: "client@belora.com" },
+      where: { email: "client@yopmail.com" },
     });
     expect(client).not.toBeNull();
     expect(client?.role).toBe(Role.CUSTOMER);
-    expect(await bcrypt.compare("ClientBelora2026!", client!.passwordHash!)).toBe(true);
+    expect(await bcrypt.compare("@Motdepass1", client!.passwordHash!)).toBe(true);
   });
 
   it("contains L'Atelier Botanique with valid geo, opening hours, and active owner", async () => {
@@ -52,7 +52,8 @@ describe("Database & Prisma Seed Integration Tests", () => {
     expect(venue?.latitude).toBeCloseTo(48.8566, 2);
     expect(venue?.longitude).toBeCloseTo(2.3622, 2);
     expect(venue?.commissionRate).toBe(0.018);
-    expect(venue?.owner.email).toBe("pro@atelierbotanique.fr");
+    expect(venue?.owner.email).toBe("pro@yopmail.com");
+    expect(venue?.email).toBe("contact.atelierbotanique@yopmail.com");
 
     // Doit contenir 7 jours d'horaires
     expect(venue?.openingHours.length).toBe(7);

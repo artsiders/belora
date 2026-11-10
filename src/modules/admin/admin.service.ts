@@ -67,7 +67,7 @@ export async function getAdminContext(
       where: {
         OR: [
           ...(paramAdminEmail ? [{ email: paramAdminEmail }] : []),
-          ...(headerAdminKey ? [{ email: "admin@belora.com" }] : []),
+          ...(headerAdminKey ? [{ email: "admin@yopmail.com" }, { email: "admin@belora.com" }] : []),
         ],
       },
     });

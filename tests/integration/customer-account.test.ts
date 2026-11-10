@@ -14,7 +14,7 @@ describe("Sprint 11 — Compte Client, Annulations & Avis Vérifiés", () => {
   let serviceId: string;
   let staffId: string;
   let clientUserId: string;
-  const clientEmail = "client@belora.com";
+  const clientEmail = "client@yopmail.com";
 
   let futureEligibleBookingId: string;
   let futureLateBookingId: string;

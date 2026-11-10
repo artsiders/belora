@@ -30,7 +30,7 @@ export default function AdminLayout({
             </span>
             <div className="h-8 w-px bg-neutral-200" />
             <span className="text-xs text-neutral-600 font-medium">
-              admin@belora.com
+              admin@yopmail.com
             </span>
           </div>
         </header>

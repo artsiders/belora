@@ -38,17 +38,15 @@ async function main() {
     },
   });
 
-  // 3. Mots de passe sécurisés hashés par bcrypt
+  // 3. Mots de passe sécurisés hashés par bcrypt ("@Motdepass1" pour tous les comptes)
   const salt = await bcrypt.genSalt(10);
-  const adminPasswordHash = await bcrypt.hash("BeloraAdmin2026!", salt);
-  const proPasswordHash = await bcrypt.hash("AtelierPro2026!", salt);
-  const clientPasswordHash = await bcrypt.hash("ClientBelora2026!", salt);
+  const commonPasswordHash = await bcrypt.hash("@Motdepass1", salt);
 
-  // 4. Utilisateurs Clés (Admin, Pro, Client)
+  // 4. Utilisateurs Clés (Admin, Pro, Client) avec adresses @yopmail.com
   const adminUser = await prisma.user.create({
     data: {
-      email: "admin@belora.com",
-      passwordHash: adminPasswordHash,
+      email: "admin@yopmail.com",
+      passwordHash: commonPasswordHash,
       firstName: "Alexandre",
       lastName: "De Belora",
       phone: "01 89 00 00 01",
@@ -59,8 +57,8 @@ async function main() {
 
   const proUser = await prisma.user.create({
     data: {
-      email: "pro@atelierbotanique.fr",
-      passwordHash: proPasswordHash,
+      email: "pro@yopmail.com",
+      passwordHash: commonPasswordHash,
       firstName: "Hélène",
       lastName: "de Valois",
       phone: "06 12 34 56 01",
@@ -71,8 +69,8 @@ async function main() {
 
   const clientUser = await prisma.user.create({
     data: {
-      email: "client@belora.com",
-      passwordHash: clientPasswordHash,
+      email: "client@yopmail.com",
+      passwordHash: commonPasswordHash,
       firstName: "Camille",
       lastName: "Dupont",
       phone: "06 98 76 54 32",
@@ -98,7 +96,7 @@ async function main() {
       latitude: 48.8566,
       longitude: 2.3622,
       phone: "01 42 68 90 12",
-      email: "contact@atelierbotanique-paris.fr",
+      email: "contact.atelierbotanique@yopmail.com",
       currency: "EUR",
       timezone: "Europe/Paris",
       status: VenueStatus.PUBLISHED,
@@ -426,7 +424,7 @@ async function main() {
       firstName: "Claire",
       lastName: "Dumont",
       phone: "06 20 40 60 80",
-      email: "claire.dumont@gmail.com",
+      email: "claire.dumont@yopmail.com",
       isVip: true,
       notes: "Adepte exclusive des colorations végétales chaudes. Café noir sans sucre.",
       techFormulas: {
@@ -450,7 +448,7 @@ async function main() {
       firstName: "Marc",
       lastName: "Antoine",
       phone: "06 11 22 33 44",
-      email: "marc.antoine@free.fr",
+      email: "marc.antoine@yopmail.com",
       isVip: false,
       notes: "Coupe aux ciseaux uniquement, pas de tondeuse.",
       techFormulas: {
@@ -465,7 +463,7 @@ async function main() {
       firstName: "Sophie",
       lastName: "Lemoine",
       phone: "06 44 55 66 77",
-      email: "sophie.lemoine@outlook.com",
+      email: "sophie.lemoine@yopmail.com",
       isVip: true,
       notes: "Cheveux très longs et fragiles. Démêlage ultra doux recommandé.",
       techFormulas: {
@@ -489,7 +487,7 @@ async function main() {
       firstName: "Camille",
       lastName: "Dupont",
       phone: "06 98 76 54 32",
-      email: "client@belora.com",
+      email: "client@yopmail.com",
       userId: clientUser.id,
       isVip: false,
       notes: "Compte particulier test Belora. Première visite en cours.",
@@ -504,7 +502,7 @@ async function main() {
       firstName: "Juliette",
       lastName: "Roche",
       phone: "06 77 88 99 00",
-      email: "juliette.roche@wanadoo.fr",
+      email: "juliette.roche@yopmail.com",
       isVip: true,
       notes: "Passionnée par le Shirodhara. Prendre le temps pour le rituel.",
       techFormulas: {
@@ -518,7 +516,7 @@ async function main() {
       firstName: "Antoine",
       lastName: "De La Tour",
       phone: "06 33 44 55 66",
-      email: "antoine.delatour@cabinet.fr",
+      email: "antoine.delatour@yopmail.com",
       isVip: false,
       notes: "Rendez-vous souvent calés le jeudi soir pendant la nocturne.",
       totalVisits: 4,
@@ -528,7 +526,7 @@ async function main() {
       firstName: "Émilie",
       lastName: "Benoît",
       phone: "06 18 29 30 41",
-      email: "emilie.benoit@gmail.com",
+      email: "emilie.benoit@yopmail.com",
       isVip: false,
       notes: "Soin régulier toutes les 6 semaines.",
       totalVisits: 6,
@@ -538,7 +536,7 @@ async function main() {
       firstName: "Guillaume",
       lastName: "Perrin",
       phone: "06 52 63 74 85",
-      email: "guillaume.perrin@yahoo.fr",
+      email: "guillaume.perrin@yopmail.com",
       isVip: false,
       notes: "Coupe classique dégradée.",
       totalVisits: 3,
@@ -548,7 +546,7 @@ async function main() {
       firstName: "Nathalie",
       lastName: "Vidal",
       phone: "06 91 82 73 64",
-      email: "nathalie.vidal@orange.fr",
+      email: "nathalie.vidal@yopmail.com",
       isVip: true,
       notes: "Balayage régulier avant chaque départ en vacances.",
       techFormulas: {
@@ -571,7 +569,7 @@ async function main() {
       firstName: "Léa",
       lastName: "Morin",
       phone: "06 45 78 12 90",
-      email: "lea.morin@free.fr",
+      email: "lea.morin@yopmail.com",
       isVip: false,
       notes: "Nouvelle cliente orientée via la marketplace Belora.",
       totalVisits: 2,
@@ -605,7 +603,7 @@ async function main() {
       customerId: createdCustomers[0].id, // Claire Dumont
       clientName: "Claire Dumont",
       clientPhone: "06 20 40 60 80",
-      clientEmail: "claire.dumont@gmail.com",
+      clientEmail: "claire.dumont@yopmail.com",
       status: BookingStatus.COMPLETED,
       totalPriceCents: 9500,
       depositCents: 3000,
@@ -654,7 +652,7 @@ async function main() {
       customerId: createdCustomers[1].id, // Marc Antoine
       clientName: "Marc Antoine",
       clientPhone: "06 11 22 33 44",
-      clientEmail: "marc.antoine@free.fr",
+      clientEmail: "marc.antoine@yopmail.com",
       status: BookingStatus.COMPLETED,
       totalPriceCents: 5000,
       depositCents: 1500,
@@ -685,7 +683,7 @@ async function main() {
       customerId: createdCustomers[2].id, // Sophie Lemoine
       clientName: "Sophie Lemoine",
       clientPhone: "06 44 55 66 77",
-      clientEmail: "sophie.lemoine@outlook.com",
+      clientEmail: "sophie.lemoine@yopmail.com",
       status: BookingStatus.CONFIRMED,
       totalPriceCents: 8500,
       depositCents: 2500,
@@ -717,7 +715,7 @@ async function main() {
       customerId: createdCustomers[3].id, // Camille Dupont
       clientName: "Camille Dupont",
       clientPhone: "06 98 76 54 32",
-      clientEmail: "client@belora.com",
+      clientEmail: "client@yopmail.com",
       status: BookingStatus.CONFIRMED,
       totalPriceCents: 7500,
       depositCents: 2500,
