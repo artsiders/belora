@@ -72,6 +72,18 @@ interface CheckoutTerminalProps {
   tickets?: ProSaleTicket[];
   totalDayRevenue?: number;
   onOpenClosingModal?: () => void;
+  isCheckoutLoading?: boolean;
+  onValidateCheckoutAction?: (payload: {
+    bookingId?: string | null;
+    clientId?: string | null;
+    clientName: string;
+    items: Array<{ title: string; type: "service" | "product"; price: number; quantity: number; staffId?: string }>;
+    depositDeducted: number;
+    discountPercent: number;
+    paymentMethod: "card" | "cash" | "mixed";
+    cardAmount?: number;
+    cashAmount?: number;
+  }) => Promise<ProSaleTicket>;
 }
 
 export function CheckoutTerminal({
@@ -84,6 +96,8 @@ export function CheckoutTerminal({
   tickets = [],
   totalDayRevenue = 0,
   onOpenClosingModal = () => {},
+  isCheckoutLoading = false,
+  onValidateCheckoutAction,
 }: CheckoutTerminalProps) {
   // Client sélectionné
   const [selectedClientId, setSelectedClientId] = useState<string>(() => {
@@ -238,7 +252,7 @@ export function CheckoutTerminal({
   };
 
   // Valider l'encaissement
-  const handleValidateCheckout = () => {
+  const handleValidateCheckout = async () => {
     if (cart.length === 0) return;
 
     const primaryStaff = staffList.find((s) => s.id === cart[0].staffId) || staffList[0];
@@ -247,6 +261,45 @@ export function CheckoutTerminal({
       : activeClient
       ? `${activeClient.firstName} ${activeClient.lastName}`
       : "Client";
+
+    const payload = {
+      bookingId: selectedAppointmentId || null,
+      clientId: isAnonymousClient ? null : activeClient?.id || null,
+      clientName,
+      items: cart.map((i) => ({
+        title: i.title,
+        type: i.type,
+        price: i.price,
+        quantity: i.quantity,
+        staffId: i.staffId,
+      })),
+      depositDeducted,
+      discountPercent,
+      paymentMethod,
+      cardAmount:
+        paymentMethod === "card"
+          ? totalDue
+          : paymentMethod === "mixed"
+          ? parseFloat(cardMixedAmount) || 0
+          : undefined,
+      cashAmount:
+        paymentMethod === "cash"
+          ? totalDue
+          : paymentMethod === "mixed"
+          ? parseFloat(cashMixedAmount) || 0
+          : undefined,
+    };
+
+    if (onValidateCheckoutAction) {
+      try {
+        const ticket = await onValidateCheckoutAction(payload);
+        setCompletedTicket(ticket);
+        onTicketCompleted(ticket);
+      } catch {
+        // Erreur déjà gérée par le toast de la mutation
+      }
+      return;
+    }
 
     const newTicket: ProSaleTicket = {
       id: `tkt-${Date.now().toString().slice(-4)}`,

@@ -14,6 +14,9 @@ interface DailyClosingModalProps {
   onClose: () => void;
   tickets: ProSaleTicket[];
   staffList: ProStaffMember[];
+  isClosed?: boolean;
+  isClosingLoading?: boolean;
+  onPerformClosing?: (cashCounted: number) => void;
 }
 
 export function DailyClosingModal({
@@ -21,9 +24,16 @@ export function DailyClosingModal({
   onClose,
   tickets,
   staffList,
+  isClosed: initialClosed = false,
+  isClosingLoading = false,
+  onPerformClosing,
 }: DailyClosingModalProps) {
   const [cashCounted, setCashCounted] = useState<string>("170.00");
-  const [isClosed, setIsClosed] = useState(false);
+  const [isClosed, setIsClosed] = useState(initialClosed);
+
+  React.useEffect(() => {
+    setIsClosed(initialClosed);
+  }, [initialClosed]);
 
   // Calculs totaux
   const totalTtc = tickets.reduce((acc, t) => acc + t.totalTtc, 0);
@@ -86,12 +96,23 @@ export function DailyClosingModal({
             </button>
             <button
               type="button"
-              onClick={() => setIsClosed(true)}
-              disabled={isClosed}
+              onClick={() => {
+                setIsClosed(true);
+                if (onPerformClosing) {
+                  onPerformClosing(actualCash);
+                }
+              }}
+              disabled={isClosed || isClosingLoading}
               className="btn btn-primary btn-sm flex items-center gap-1.5"
             >
               <Lock className="w-4 h-4" />
-              <span>{isClosed ? "Caisse Clôturée" : "Clôturer la journée"}</span>
+              <span>
+                {isClosingLoading
+                  ? "Clôture en cours..."
+                  : isClosed
+                  ? "Caisse Clôturée"
+                  : "Clôturer la journée"}
+              </span>
             </button>
           </div>
         </div>
