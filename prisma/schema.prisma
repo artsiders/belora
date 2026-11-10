@@ -145,6 +145,12 @@ model Venue {
   stripeChargesEnabled Boolean     @default(false)
   commissionRate       Float       @default(0.018) // 1.8% Belora platform commission
   ownerId              String
+  siret                String?
+  vatNumber            String?
+  cancellationDelayHours Int       @default(24)
+  depositPercentage    Int         @default(30)
+  cashSettings         Json?
+  notificationSettings Json?
   createdAt            DateTime    @default(now())
   updatedAt            DateTime    @updatedAt
 

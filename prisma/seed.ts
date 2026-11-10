@@ -104,6 +104,23 @@ async function main() {
       status: VenueStatus.PUBLISHED,
       commissionRate: 0.018,
       ownerId: proUser.id,
+      siret: "849 201 942 00019",
+      vatNumber: "FR 82 849201942",
+      cancellationDelayHours: 24,
+      depositPercentage: 30,
+      cashSettings: {
+        acceptCard: true,
+        acceptCash: true,
+        acceptCheck: false,
+        ticketFooter: "Merci de votre visite et de votre confiance. Prenez soin de vous !",
+      },
+      notificationSettings: {
+        emailConfirmEnabled: true,
+        sms24hEnabled: true,
+        sms2hEnabled: false,
+        smsTemplate:
+          "Bonjour {client_name}, votre rendez-vous chez {venue_name} pour {service_name} est confirmé le {date} à {time}. En cas d'empêchement, vous pouvez modifier votre créneau ici : {link}",
+      },
     },
   });
 
