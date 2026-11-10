@@ -271,6 +271,56 @@ function LoginForm() {
             <span>Continuer avec Google</span>
           </button>
 
+          {/* Raccourcis Comptes de Démonstration */}
+          <div className="mt-6 p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-left space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs uppercase font-bold tracking-wider text-neutral-500">
+                Comptes de test & démo
+              </span>
+              <span className="text-xs font-mono text-neutral-600 font-semibold bg-neutral-200/60 px-1.5 py-0.5 rounded">
+                Mot de passe : @Motdepass1
+              </span>
+            </div>
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail("pro@yopmail.com");
+                  setPassword("@Motdepass1");
+                  setUserType("pro");
+                  setErrorMessage(null);
+                }}
+                className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-white border border-neutral-200 text-neutral-800 hover:border-primary-500 hover:text-primary-700 transition-colors shadow-2xs cursor-pointer"
+              >
+                Gérant Pro (pro@yopmail.com)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail("nathalie.vidal@yopmail.com");
+                  setPassword("@Motdepass1");
+                  setUserType("client");
+                  setErrorMessage(null);
+                }}
+                className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-white border border-neutral-200 text-neutral-800 hover:border-primary-500 hover:text-primary-700 transition-colors shadow-2xs cursor-pointer"
+              >
+                Client (nathalie.vidal@yopmail.com)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail("admin@yopmail.com");
+                  setPassword("@Motdepass1");
+                  setUserType("pro");
+                  setErrorMessage(null);
+                }}
+                className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-white border border-neutral-200 text-neutral-800 hover:border-primary-500 hover:text-primary-700 transition-colors shadow-2xs cursor-pointer"
+              >
+                Super-Admin (admin@yopmail.com)
+              </button>
+            </div>
+          </div>
+
           {/* Lien d'inscription */}
           <div className="mt-8 pt-6 border-t border-neutral-200/80 text-center">
             <p className="text-sm text-neutral-600">
