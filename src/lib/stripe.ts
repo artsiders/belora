@@ -127,3 +127,24 @@ export async function createAccountLink(accountId: string, returnUrl: string, re
 
   return accountLink;
 }
+
+export async function refundPaymentIntent(
+  paymentIntentId: string,
+  amountCents?: number
+) {
+  if (!isStripeConfigured() || paymentIntentId.startsWith("pi_mock_")) {
+    return {
+      id: `re_mock_${Date.now()}`,
+      status: "succeeded",
+      amount: amountCents,
+      isMock: true,
+    };
+  }
+
+  const refund = await stripe.refunds.create({
+    payment_intent: paymentIntentId,
+    ...(amountCents ? { amount: amountCents } : {}),
+  });
+
+  return refund;
+}
