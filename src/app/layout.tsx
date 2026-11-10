@@ -1,24 +1,9 @@
 import type { Metadata } from "next";
-import { Montserrat, Playfair_Display } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import { SessionProvider } from "@/providers/session-provider";
 import { QueryProvider } from "@/providers/query-provider";
 import { Toaster } from "sonner";
 import "./globals.css";
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-montserrat",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
 
 export const metadata: Metadata = {
   title: "Belora - Réservation de soins beauté & bien-être",
@@ -34,7 +19,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`h-full antialiased ${montserrat.variable} ${playfair.variable}`}
+      className="h-full antialiased"
     >
       <body className="min-h-full flex flex-col font-sans bg-bg text-fg">
         <NextTopLoader
