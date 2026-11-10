@@ -26,6 +26,7 @@
     "nextjs-toploader": "^3.9.17",
     "react": "19.3.0",
     "react-dom": "19.3.0",
+    "resend": "^6.37.0",
     "stripe": "^23.1.0",
     "zod": "^4.6.7"
   },

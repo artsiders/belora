@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { stripe, isStripeConfigured } from "@/lib/stripe";
 import { db } from "@/lib/db";
 import { BookingStatus, PaymentStatus } from "@prisma/client";
+import { sendBookingConfirmationEmail, sendProNewBookingNotificationEmail } from "@/lib/email";
 import type Stripe from "stripe";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -51,6 +52,14 @@ export async function POST(request: Request) {
               },
             });
             console.log(`Réservation confirmée via Stripe: ${booking.reference}`);
+
+            // Envoi des notifications automatiques client et pro
+            sendBookingConfirmationEmail(bookingId).catch((err) =>
+              console.error("Erreur envoi email client webhook:", err)
+            );
+            sendProNewBookingNotificationEmail(bookingId).catch((err) =>
+              console.error("Erreur envoi email pro webhook:", err)
+            );
           }
         }
         break;
