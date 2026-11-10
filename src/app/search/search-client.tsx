@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import {
   Search,
   MapPin,
@@ -11,10 +12,13 @@ import {
   List as ListIcon,
   SearchX,
   X,
+  AlertCircle,
+  RotateCcw,
 } from "lucide-react";
-import { VENUES, Venue, CITY_COORDINATES } from "@/lib/data/venues";
+import { Venue, CITY_COORDINATES } from "@/lib/data/venues";
 import { SearchVenueCard } from "@/components/search/search-venue-card";
 import { SearchMap } from "@/components/search/search-map";
+import { apiClient } from "@/lib/api-client";
 
 const CATEGORY_OPTIONS = [
   { slug: "all", label: "Toutes prestations" },
@@ -33,6 +37,23 @@ const SUB_FILTERS: Record<string, string[]> = {
   nails: ["Tous", "Manucure russe", "Semi-permanent", "Beauté des pieds"],
   all: ["Tous", "Coiffure", "Soins Visage", "Barbier", "Massage", "Ongles"],
 };
+
+function SearchCardSkeleton() {
+  return (
+    <div className="flex flex-col sm:flex-row bg-white rounded-2xl border border-neutral-200/90 p-4 gap-4 sm:gap-5">
+      <div className="shrink-0 w-full sm:w-56 md:w-60 aspect-4/3 sm:aspect-square rounded-xl bg-neutral-200 animate-pulse" />
+      <div className="flex-1 space-y-3 py-1">
+        <div className="h-5 w-48 bg-neutral-200 rounded-md animate-pulse" />
+        <div className="h-4 w-64 bg-neutral-100 rounded-md animate-pulse" />
+        <div className="h-4 w-32 bg-neutral-100 rounded-md animate-pulse" />
+        <div className="pt-4 flex gap-2">
+          <div className="h-8 w-24 bg-neutral-100 rounded-lg animate-pulse" />
+          <div className="h-8 w-24 bg-neutral-100 rounded-lg animate-pulse" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function SearchClient() {
   const router = useRouter();
@@ -79,6 +100,32 @@ export function SearchClient() {
   // Vue mobile (liste vs carte)
   const [mobileView, setMobileView] = useState<"list" | "map">("list");
 
+  // Requête API via React Query & apiClient (règles 16 & 17)
+  const {
+    data,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["venues", { categoryParam, locationParam, queryParam }],
+    queryFn: async () => {
+      const params: Record<string, string> = {};
+      if (categoryParam && categoryParam !== "all") params.category = categoryParam;
+      if (locationParam.trim()) params.location = locationParam.trim();
+      if (queryParam.trim()) params.q = queryParam.trim();
+
+      const res = await apiClient.get<{ venues: Venue[]; pagination: { total: number } }>("/venues", {
+        params,
+      });
+      return res.data;
+    },
+    staleTime: 60_000,
+    gcTime: 600_000,
+    placeholderData: keepPreviousData,
+  });
+
+  const venues: Venue[] = data?.venues || [];
+
   const toggleFavorite = (venueId: string) => {
     setFavorites((prev) => ({
       ...prev,
@@ -97,54 +144,22 @@ export function SearchClient() {
     return CITY_COORDINATES["paris"];
   }, [locationParam, locationInput]);
 
-  // Filtrage des résultats
+  // Sous-filtrage interactif côté client (règle 17 : pas de refetch sur sous-filtres visuels)
   const filteredVenues = useMemo(() => {
-    return VENUES.filter((venue: Venue) => {
-      // 1. Filtre catégorie
-      if (categoryParam !== "all" && venue.category !== categoryParam && venue.id !== categoryParam) {
-        return false;
-      }
+    if (activeSubFilter === "Tous") return venues;
 
-      // 2. Filtre localisation
-      if (locationParam.trim()) {
-        const loc = locationParam.toLowerCase().trim();
-        const matchesCity = venue.city.toLowerCase().includes(loc);
-        const matchesDistrict = (venue.district || "").toLowerCase().includes(loc);
-        const matchesAddress = venue.address.toLowerCase().includes(loc);
-        if (!matchesCity && !matchesDistrict && !matchesAddress) {
-          return false;
-        }
-      }
-
-      // 3. Filtre texte libre (q)
-      if (queryParam.trim()) {
-        const q = queryParam.toLowerCase().trim();
-        const matchesName = venue.name.toLowerCase().includes(q);
-        const matchesTagline = venue.tagline.toLowerCase().includes(q);
-        const matchesCategory = venue.categoryLabel.toLowerCase().includes(q);
-        const matchesCity = venue.city.toLowerCase().includes(q);
-        const matchesService = venue.services?.some((s) => s.name.toLowerCase().includes(q));
-        if (!matchesName && !matchesTagline && !matchesCategory && !matchesCity && !matchesService) {
-          return false;
-        }
-      }
-
-      // 4. Sous-filtre interactif
-      if (activeSubFilter !== "Tous") {
-        const filter = activeSubFilter.toLowerCase();
-        const matchesService = venue.services?.some((s) =>
-          s.name.toLowerCase().includes(filter) || s.category.toLowerCase().includes(filter)
-        );
-        const matchesTagline = venue.tagline.toLowerCase().includes(filter);
-        const matchesCategory = venue.categoryLabel.toLowerCase().includes(filter);
-        if (!matchesService && !matchesTagline && !matchesCategory) {
-          return false;
-        }
-      }
-
-      return true;
+    const filter = activeSubFilter.toLowerCase();
+    return venues.filter((venue) => {
+      const matchesService = venue.services?.some(
+        (s) =>
+          s.name.toLowerCase().includes(filter) ||
+          (s.category && s.category.toLowerCase().includes(filter))
+      );
+      const matchesTagline = (venue.tagline || "").toLowerCase().includes(filter);
+      const matchesCategory = (venue.categoryLabel || "").toLowerCase().includes(filter);
+      return matchesService || matchesTagline || matchesCategory;
     });
-  }, [categoryParam, locationParam, queryParam, activeSubFilter]);
+  }, [venues, activeSubFilter]);
 
   // Déclencher la recherche
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -235,7 +250,7 @@ export function SearchClient() {
                   type="text"
                   value={locationInput}
                   onChange={(e) => setLocationInput(e.target.value)}
-                  placeholder="Paris, Londres, Milan..."
+                  placeholder="Paris, Lyon, Marseille..."
                   className="w-full bg-transparent text-sm sm:text-base font-semibold text-neutral-900 focus:outline-hidden placeholder:text-neutral-400"
                 />
               </div>
@@ -301,15 +316,15 @@ export function SearchClient() {
         </div>
       </section>
 
-      {/* 3. Corps principal : Layout 2 colonnes pleine largeur (Liste à gauche + Carte immersive à droite) */}
+      {/* 3. Corps principal : Layout 2 colonnes pleine largeur */}
       <main className="flex-1 w-full flex flex-col lg:flex-row items-stretch">
-        {/* COLONNE GAUCHE : Liste des salons (affichée selon mobileView sur mobile) */}
+        {/* COLONNE GAUCHE : Liste des salons */}
         <div
           className={`w-full lg:w-[54%] xl:w-[50%] 2xl:w-[46%] px-4 sm:px-6 lg:px-8 py-6 flex flex-col space-y-4 shrink-0 ${
             mobileView === "map" ? "hidden lg:flex" : "flex"
           }`}
         >
-          {/* En-tête des résultats */}
+          {/* En-tête des résultats (toujours stable, avec squelette inline sur le nombre selon Règle 15) */}
           <div className="pb-3 border-b border-neutral-200/80">
             <h1 className="text-lg sm:text-xl font-bold text-neutral-950">
               Sélectionnez {categoryTitleLabel}
@@ -321,21 +336,57 @@ export function SearchClient() {
               </span>{" "}
               : Réservation en ligne
             </p>
-            <span className="text-sm text-neutral-500 num block mt-1">
-              {filteredVenues.length}{" "}
-              {filteredVenues.length > 1 ? "établissements disponibles" : "établissement disponible"}
-            </span>
+            <div className="mt-1 text-sm text-neutral-500">
+              {isLoading ? (
+                <span className="inline-block h-4 w-28 rounded-md bg-neutral-200 animate-pulse align-middle" />
+              ) : (
+                <span className="num">
+                  {filteredVenues.length}{" "}
+                  {filteredVenues.length > 1
+                    ? "établissements disponibles"
+                    : "établissement disponible"}
+                </span>
+              )}
+            </div>
           </div>
 
-          {/* Liste des cartes ou état vide */}
-          {filteredVenues.length === 0 ? (
+          {/* Gestion des états : Erreur vs Chargement vs Vide vs Liste (Règles 15 et 16) */}
+          {isError ? (
+            <div className="p-8 sm:p-12 text-center rounded-2xl bg-white border border-neutral-200/80 space-y-3">
+              <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 mx-auto flex items-center justify-center">
+                <AlertCircle className="w-6 h-6" />
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-neutral-950">
+                Impossible de charger les établissements
+              </h3>
+              <p className="text-sm sm:text-base text-neutral-600 max-w-sm mx-auto">
+                Un problème de connexion est survenu lors de la recherche. Veuillez vérifier votre réseau et réessayez.
+              </p>
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => refetch()}
+                  className="btn btn-outline text-sm px-4 py-2 rounded-xl inline-flex items-center gap-2 cursor-pointer"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  <span>Réessayer</span>
+                </button>
+              </div>
+            </div>
+          ) : isLoading ? (
+            <div className="space-y-4">
+              <SearchCardSkeleton />
+              <SearchCardSkeleton />
+              <SearchCardSkeleton />
+            </div>
+          ) : filteredVenues.length === 0 ? (
             <div className="p-8 sm:p-12 text-center rounded-2xl bg-white border border-neutral-200/80 space-y-3">
               <SearchX className="w-10 h-10 text-neutral-300 mx-auto" />
               <h3 className="text-base sm:text-lg font-bold text-neutral-950">
                 Aucun établissement trouvé
               </h3>
               <p className="text-sm sm:text-base text-neutral-600 max-w-sm mx-auto">
-                Aucun salon ne correspond exactement à vos critères. Essayez d&apos;élargir vos filtres ou de choisir une autre métropole européenne.
+                Aucun salon ne correspond exactement à vos critères. Essayez d&apos;élargir vos filtres ou de choisir une autre métropole.
               </p>
               <div className="pt-2">
                 <button
@@ -370,7 +421,7 @@ export function SearchClient() {
           )}
         </div>
 
-        {/* COLONNE DROITE : Carte interactive sticky pleine hauteur et plein écran (style Planity) */}
+        {/* COLONNE DROITE : Carte interactive sticky pleine hauteur */}
         <div
           className={`w-full lg:flex-1 lg:min-w-0 sticky top-[73px] h-[calc(100vh-73px)] border-l border-neutral-200/90 ${
             mobileView === "list" ? "hidden lg:block" : "block"
@@ -389,7 +440,7 @@ export function SearchClient() {
         </div>
       </main>
 
-      {/* 4. Bouton flottant de bascule Carte / Liste sur mobile (style Planity / Airbnb) */}
+      {/* 4. Bouton flottant de bascule Carte / Liste sur mobile */}
       <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
         <button
           type="button"
