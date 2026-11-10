@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import { SessionProvider } from "@/providers/session-provider";
+import { QueryProvider } from "@/providers/query-provider";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -47,7 +48,9 @@ export default function RootLayout({
           shadow="0 0 10px rgba(130, 56, 90, 0.4),0 0 5px rgba(130, 56, 90, 0.2)"
           zIndex={99999}
         />
-        <SessionProvider>{children}</SessionProvider>
+        <SessionProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </SessionProvider>
       </body>
     </html>
   );
