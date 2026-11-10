@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -111,7 +111,10 @@ export function BookClient({ venue }: BookClientProps) {
       if (selectedArtisan !== "any") {
         params.staffId = selectedArtisan;
       }
-      const res = await apiClient.get<{ slots: string[]; date: string }>("/availability", {
+      const res = await apiClient.get<{
+        slots: Array<string | { time: string; startTime?: string; endTime?: string }>;
+        date: string;
+      }>("/availability", {
         params,
       });
       return res.data;
@@ -120,7 +123,23 @@ export function BookClient({ venue }: BookClientProps) {
     staleTime: 30_000,
   });
 
-  const availableSlots = availabilityData?.slots || [];
+  const rawSlots = availabilityData?.slots || [];
+  const availableSlots = useMemo(() => {
+    return rawSlots.map((slot, index) => {
+      if (typeof slot === "string") {
+        return { time: slot, key: `${slot}-${index}` };
+      }
+      return {
+        time: slot.time,
+        key: slot.startTime || `${slot.time}-${index}`,
+      };
+    });
+  }, [rawSlots]);
+
+  // Réinitialiser le créneau sélectionné si l'on change de jour ou d'artisan
+  useEffect(() => {
+    setSelectedTimeSlot("");
+  }, [selectedDayCode, selectedArtisan]);
 
   // Calculs financiers
   const totalDuration = selectedServices.reduce((acc, s) => acc + s.durationMinutes, 0);
@@ -592,16 +611,16 @@ export function BookClient({ venue }: BookClientProps) {
                     <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                       {availableSlots.map((slot) => (
                         <button
-                          key={slot}
+                          key={slot.key}
                           type="button"
-                          onClick={() => setSelectedTimeSlot(slot)}
+                          onClick={() => setSelectedTimeSlot(slot.time)}
                           className={`py-2 px-3 rounded-xl border text-sm font-semibold transition-all num cursor-pointer ${
-                            selectedTimeSlot === slot
+                            selectedTimeSlot === slot.time
                               ? "bg-primary-600 text-white border-primary-600 shadow-2xs"
                               : "bg-white border-neutral-200/80 text-neutral-900 hover:border-neutral-300"
                           }`}
                         >
-                          {slot}
+                          {slot.time}
                         </button>
                       ))}
                     </div>
