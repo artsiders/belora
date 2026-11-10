@@ -1,0 +1,50 @@
+# =============================================================================
+# Configuration Caddy Reverse Proxy - Belora Production
+# =============================================================================
+
+{
+    email admin@belora.com
+    admin off
+}
+
+# Redirection www vers apex (ou inversement selon configuration)
+www.belora.com {
+    redir https://belora.com{uri} permanent
+}
+
+# Domaine Principal Belora
+belora.com {
+    # Encodage zstd et gzip
+    encode zstd gzip
+
+    # Headers de sécurité complémentaires
+    header {
+        Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+        -Server
+    }
+
+    # Proxy vers l'application Next.js standalone
+    reverse_proxy app:3000 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+
+        # Healthcheck périodique vers le conteneur Next.js
+        health_uri /api/health
+        health_interval 15s
+        health_timeout 5s
+    }
+
+    # Logs d'accès au format JSON
+    log {
+        output file /var/log/caddy/access.log {
+            roll_size 50mb
+            roll_keep 5
+        }
+    }
+}

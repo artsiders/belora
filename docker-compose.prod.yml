@@ -1,0 +1,96 @@
+version: "3.8"
+
+services:
+  # =============================================================================
+  # Base de données PostgreSQL 16
+  # =============================================================================
+  db:
+    image: postgres:16-alpine
+    container_name: belora-db-prod
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ChangeMeSecurePassword123!}
+      POSTGRES_DB: ${POSTGRES_DB:-belora_prod}
+    volumes:
+      - belora_pgdata_prod:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-belora_prod}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - belora-net
+
+  # =============================================================================
+  # Application Next.js 16 Standalone
+  # =============================================================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: belora-app
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: "0.0.0.0"
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-ChangeMeSecurePassword123!}@db:5432/${POSTGRES_DB:-belora_prod}?schema=public
+      AUTH_SECRET: ${AUTH_SECRET}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-https://belora.com}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-https://belora.com}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      BREVO_API_KEY: ${BREVO_API_KEY}
+      CRON_SECRET: ${CRON_SECRET}
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3000/api/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    networks:
+      - belora-net
+
+  # =============================================================================
+  # Reverse-Proxy Caddy (SSL Let's Encrypt automatique & HTTP/2 / HTTP/3)
+  # =============================================================================
+  proxy:
+    image: caddy:2-alpine
+    container_name: belora-proxy
+    restart: always
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp" # Support HTTP/3 QUIC
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data # Certificats SSL persistants
+      - caddy_config:/config
+      - caddy_logs:/var/log/caddy
+    networks:
+      - belora-net
+
+volumes:
+  belora_pgdata_prod:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
+  caddy_logs:
+    driver: local
+
+networks:
+  belora-net:
+    driver: bridge
