@@ -143,7 +143,43 @@ async function main() {
     });
   }
 
-  // 7. Collaborateurs / Artisans de l'Atelier
+  // 7. Collaborateurs / Artisans de l'Atelier avec comptes utilisateurs PRO
+  const clementUser = await prisma.user.create({
+    data: {
+      email: "clement.roux@yopmail.com",
+      passwordHash: commonPasswordHash,
+      firstName: "Clément",
+      lastName: "Roux",
+      phone: "06 12 34 56 02",
+      role: Role.PRO,
+      emailVerified: new Date(),
+    },
+  });
+
+  const elodieUser = await prisma.user.create({
+    data: {
+      email: "elodie.martin@yopmail.com",
+      passwordHash: commonPasswordHash,
+      firstName: "Élodie",
+      lastName: "Martin",
+      phone: "06 12 34 56 03",
+      role: Role.PRO,
+      emailVerified: new Date(),
+    },
+  });
+
+  const thomasUser = await prisma.user.create({
+    data: {
+      email: "thomas.mercier@yopmail.com",
+      passwordHash: commonPasswordHash,
+      firstName: "Thomas",
+      lastName: "Mercier",
+      phone: "06 12 34 56 04",
+      role: Role.PRO,
+      emailVerified: new Date(),
+    },
+  });
+
   const staffHelene = await prisma.staffMember.create({
     data: {
       venueId: venue.id,
@@ -159,6 +195,7 @@ async function main() {
   const staffClement = await prisma.staffMember.create({
     data: {
       venueId: venue.id,
+      userId: clementUser.id,
       name: "Clément Roux",
       role: "Maître Coiffeur Créateur",
       color: "#27272a", // Encre sombre
@@ -170,6 +207,7 @@ async function main() {
   const staffElodie = await prisma.staffMember.create({
     data: {
       venueId: venue.id,
+      userId: elodieUser.id,
       name: "Élodie Martin",
       role: "Praticienne Soins Holistiques & Cuir Chevelu",
       color: "#a04f6d", // Figue claire
@@ -181,6 +219,7 @@ async function main() {
   const staffThomas = await prisma.staffMember.create({
     data: {
       venueId: venue.id,
+      userId: thomasUser.id,
       name: "Thomas Mercier",
       role: "Artisan Coloriste Junior",
       color: "#52525b", // Zinc
@@ -579,10 +618,31 @@ async function main() {
 
   const createdCustomers: any[] = [];
   for (const c of crmClientsData) {
+    // Créer ou récupérer le compte User correspondant pour permettre la connexion
+    let userRecord = await prisma.user.findUnique({
+      where: { email: c.email },
+    });
+    if (!userRecord) {
+      userRecord = await prisma.user.create({
+        data: {
+          email: c.email,
+          passwordHash: commonPasswordHash,
+          firstName: c.firstName,
+          lastName: c.lastName,
+          phone: c.phone,
+          role: Role.CUSTOMER,
+          emailVerified: new Date(),
+        },
+      });
+    }
+
+    const { userId: explicitUserId, ...restData } = c as any;
+
     const created = await prisma.customerCRM.create({
       data: {
         venueId: venue.id,
-        ...c,
+        userId: explicitUserId || userRecord.id,
+        ...restData,
       },
     });
     createdCustomers.push(created);
@@ -741,7 +801,7 @@ async function main() {
     data: {
       venueId: venue.id,
       bookingId: booking1.id,
-      userId: null,
+      userId: createdCustomers[0].userId,
       authorName: "Claire Dumont",
       rating: 5,
       comment:
@@ -757,7 +817,7 @@ async function main() {
     data: {
       venueId: venue.id,
       bookingId: booking2.id,
-      userId: null,
+      userId: createdCustomers[1].userId,
       authorName: "Marc Antoine",
       rating: 5,
       comment:
