@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: belora-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: belora_dev
+    ports:
+      - "5433:5432"
+    volumes:
+      - belora_pgdata:/var/lib/postgresql/data
+
+volumes:
+  belora_pgdata:
+    driver: local
