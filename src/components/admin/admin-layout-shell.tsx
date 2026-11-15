@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
@@ -44,7 +44,7 @@ export function useAdminSidebar() {
 
 interface AdminLayoutShellProps {
   children: React.ReactNode;
-  userEmail: string;
+  userEmail?: string;
   userName?: string;
 }
 
@@ -62,13 +62,17 @@ const SECTION_TITLES: Record<string, string> = {
 
 export function AdminLayoutShell({
   children,
-  userEmail,
-  userName = "Administrateur Belora",
+  userEmail: propEmail,
+  userName: propName,
 }: AdminLayoutShellProps) {
   const pathname = usePathname();
+  const { data: session } = useSession();
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [isMobileOpen, setIsMobileOpen] = useState<boolean>(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false);
+
+  const userName = session?.user?.name || propName || "Administrateur Belora";
+  const userEmail = session?.user?.email || propEmail || "admin@belora.com";
 
   // Restore collapsed preference from localStorage
   useEffect(() => {
