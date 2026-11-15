@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   ArrowLeft,
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const NAV_ITEMS = [
   {
@@ -45,17 +46,17 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-secondary-900 text-neutral-100 flex flex-col shrink-0 min-h-screen border-r border-neutral-800">
+    <aside className="w-64 bg-neutral-950 text-neutral-100 flex flex-col shrink-0 min-h-screen border-r border-neutral-800">
       {/* Brand Header */}
       <div className="p-6 border-b border-neutral-800 flex items-center justify-between">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <span className="text-xl tracking-wider text-white font-medium">
               BELORA
             </span>
-            <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold px-2 py-0.5 rounded bg-neutral-800 border border-amber-500/30">
+            <Badge variant="gold" size="sm">
               Admin
-            </span>
+            </Badge>
           </div>
           <p className="text-xs text-neutral-400 mt-1">
             Supervision Plateforme
@@ -75,15 +76,15 @@ export function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                 isActive
-                  ? "bg-amber-300/10 text-white font-semibold"
-                  : "text-neutral-300 hover:bg-neutral-800/60 hover:text-white"
+                  ? "bg-secondary-500/15 text-white font-semibold border border-secondary-500/30"
+                  : "text-neutral-300 hover:bg-neutral-900 hover:text-white"
               }`}
             >
               <Icon
                 className={`w-4 h-4 shrink-0 ${
-                  isActive ? "text-amber-400" : "text-neutral-400"
+                  isActive ? "text-secondary-400" : "text-neutral-400"
                 }`}
               />
               <span>{item.label}</span>
@@ -92,18 +93,21 @@ export function AdminSidebar() {
         })}
       </nav>
 
-      {/* Footer Navigation */}
-      <div className="p-4 border-t border-neutral-800 space-y-2">
+      {/* Footer Navigation avec padding de sécurité pour les overlays */}
+      <div className="p-4 pb-16 sm:pb-8 border-t border-neutral-800 space-y-2.5">
         <Link
           href="/"
-          className="flex items-center gap-2 px-3 py-2 text-xs text-neutral-400 hover:text-white hover:bg-neutral-800/50 rounded-md transition-colors"
+          className="flex items-center gap-2 px-3 py-2 text-xs text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-lg transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Retour sur Belora.com</span>
         </Link>
-        <div className="px-3 py-2 text-xs text-neutral-400 border border-neutral-800 rounded-md bg-neutral-900/50">
-          <p className="font-medium text-neutral-300">Environnement Sécurisé</p>
-          <p className="text-[11px] text-neutral-400 mt-0.5">Accès Super-Administrateur</p>
+        <div className="p-3 text-xs text-neutral-400 border border-neutral-800/80 rounded-xl bg-neutral-900/60 space-y-1">
+          <div className="flex items-center gap-1.5 text-neutral-200 font-semibold">
+            <ShieldCheck className="w-3.5 h-3.5 text-secondary-500" />
+            <span>Environnement Sécurisé</span>
+          </div>
+          <p className="text-xs text-neutral-400">Accès Super-Administrateur</p>
         </div>
       </div>
     </aside>

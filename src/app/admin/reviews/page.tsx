@@ -15,6 +15,10 @@ import {
   ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
+import { Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { EmptyState } from "@/components/ui/empty-state";
+import { InlineSkeleton } from "@/components/ui/inline-skeleton";
 
 interface AdminReviewItem {
   id: string;
@@ -37,12 +41,12 @@ export default function AdminReviewsPage() {
   const [selectedRating, setSelectedRating] = useState<string>("ALL");
   const [reviewToDelete, setReviewToDelete] = useState<AdminReviewItem | null>(null);
 
-  const { data, isLoading, isError, error, refetch } = useQuery<ReviewsResponse>({
+  const { data, isLoading, isError, error, refetch, isFetching } = useQuery<ReviewsResponse>({
     queryKey: ["admin", "reviews", selectedRating],
     queryFn: async () => {
       const params = new URLSearchParams();
       if (selectedRating === "LOW") params.set("minRating", "1");
-      const res = await apiClient.get<ReviewsResponse>(`/api/admin/reviews?${params.toString()}`);
+      const res = await apiClient.get<ReviewsResponse>(`/admin/reviews?${params.toString()}`);
       return res.data;
     },
   });
@@ -51,7 +55,7 @@ export default function AdminReviewsPage() {
 
   const deleteMutation = useMutation({
     mutationFn: async (reviewId: string) => {
-      const res = await apiClient.delete(`/api/admin/reviews/${reviewId}`);
+      const res = await apiClient.delete(`/admin/reviews/${reviewId}`);
       return res.data;
     },
     onSuccess: () => {
@@ -87,24 +91,18 @@ export default function AdminReviewsPage() {
 
       {/* Erreur */}
       {isError && (
-        <div className="p-4 rounded-xl border border-red-200 bg-red-50 text-red-800 flex items-start gap-3">
-          <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-          <div className="flex-1">
-            <h4 className="text-sm font-semibold text-red-900">
-              Erreur lors du chargement des avis
-            </h4>
-            <p className="text-xs text-red-700 mt-1">
-              {error instanceof Error ? error.message : "Erreur de connexion serveur."}
-            </p>
-            <button
-              onClick={() => refetch()}
-              className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded bg-red-600 text-white text-xs font-medium hover:bg-red-700 transition-colors"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-              Réessayer
-            </button>
-          </div>
-        </div>
+        <Alert
+          variant="error"
+          title="Erreur lors du chargement des avis"
+          description={
+            error instanceof Error ? error.message : "Erreur de connexion serveur."
+          }
+          action={{
+            label: "Réessayer",
+            onClick: () => refetch(),
+            isLoading: isFetching,
+          }}
+        />
       )}
 
       {/* Liste des Avis */}
@@ -120,16 +118,20 @@ export default function AdminReviewsPage() {
             Array.from({ length: 3 }).map((_, i) => (
               <div key={i} className="p-6 space-y-3 animate-pulse">
                 <div className="flex items-center justify-between">
-                  <div className="h-4 w-32 bg-neutral-200 rounded" />
-                  <div className="h-4 w-20 bg-neutral-200 rounded" />
+                  <InlineSkeleton width="w-32" height="h-4" />
+                  <InlineSkeleton width="w-20" height="h-4" />
                 </div>
-                <div className="h-4 w-3/4 bg-neutral-200 rounded" />
-                <div className="h-4 w-1/2 bg-neutral-200 rounded" />
+                <InlineSkeleton width="w-3/4" height="h-4" />
+                <InlineSkeleton width="w-1/2" height="h-4" />
               </div>
             ))
           ) : reviews.length === 0 ? (
-            <div className="p-12 text-center text-sm text-neutral-500">
-              Aucun avis déposé pour le moment sur la plateforme.
+            <div className="p-8">
+              <EmptyState
+                icon={MessageSquare}
+                title="Aucun avis recensé"
+                description="Aucun avis ne correspond aux critères de filtrage pour le moment."
+              />
             </div>
           ) : (
             reviews.map((review) => (
@@ -141,14 +143,13 @@ export default function AdminReviewsPage() {
                         {review.authorName}
                       </span>
                       {review.isVerified && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
-                          <CheckCircle2 className="w-3 h-3" />
+                        <Badge variant="success" icon={CheckCircle2}>
                           Visite certifiée
-                        </span>
+                        </Badge>
                       )}
                       <span className="text-xs text-neutral-400">&bull;</span>
                       <Link
-                        href={`/salons/${review.venueSlug}`}
+                        href={`/venue/${review.venueSlug}`}
                         target="_blank"
                         className="text-xs font-medium text-neutral-600 hover:text-neutral-900 flex items-center gap-1"
                       >

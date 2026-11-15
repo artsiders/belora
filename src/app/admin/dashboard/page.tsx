@@ -8,12 +8,14 @@ import {
   Coins,
   CalendarCheck,
   Store,
-  Users,
-  AlertCircle,
   RefreshCw,
   ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
+import { Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { InlineSkeleton } from "@/components/ui/inline-skeleton";
+import { EmptyState } from "@/components/ui/empty-state";
 
 interface DashboardMetricsResponse {
   metrics: {
@@ -44,14 +46,20 @@ interface DashboardMetricsResponse {
 }
 
 export default function AdminDashboardPage() {
-  const { data, isLoading, isError, error, refetch } = useQuery<DashboardMetricsResponse>({
-    queryKey: ["admin", "dashboard"],
-    queryFn: async () => {
-      const res = await apiClient.get<DashboardMetricsResponse>("/api/admin/dashboard");
-      return res.data;
-    },
-    staleTime: 30_000,
-  });
+  const { data, isLoading, isError, error, refetch, isFetching } =
+    useQuery<DashboardMetricsResponse>({
+      queryKey: ["admin", "dashboard"],
+      queryFn: async () => {
+        const res = await apiClient.get<DashboardMetricsResponse>("/admin/dashboard");
+        return res.data;
+      },
+      staleTime: 30_000,
+    });
+
+  const hasError = isError || Boolean((data as any)?.error);
+  const errorMessage =
+    (data as any)?.error ||
+    (error instanceof Error ? error.message : "Une erreur réseau est survenue.");
 
   const kpis = data?.metrics?.kpis;
   const recentBookings = data?.metrics?.recentBookings || [];
@@ -78,40 +86,33 @@ export default function AdminDashboardPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => refetch()}
-            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-neutral-700 bg-white border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors shadow-xs"
+            disabled={isFetching}
+            className="btn btn-outline text-xs px-3.5 py-2 inline-flex items-center gap-2 cursor-pointer disabled:opacity-50"
           >
-            <RefreshCw className="w-3.5 h-3.5" />
-            Actualiser
+            <RefreshCw className={`w-3.5 h-3.5 ${isFetching ? "animate-spin" : ""}`} />
+            <span>Actualiser</span>
           </button>
           <Link
             href="/admin/venues/create-assisted"
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-neutral-900 rounded-lg hover:bg-neutral-800 transition-colors shadow-xs"
+            className="btn btn-primary text-xs px-4 py-2 inline-flex items-center gap-2 cursor-pointer"
           >
-            Nouveau Salon Partenaire
+            <span>Nouveau Salon Partenaire</span>
           </Link>
         </div>
       </div>
 
-      {/* État d'erreur explicite avec bouton Réessayer */}
-      {isError && (
-        <div className="p-5 rounded-xl border border-red-200 bg-red-50/70 text-red-800 flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-          <div className="flex-1">
-            <h3 className="text-sm font-semibold text-red-900">
-              Impossible de charger les indicateurs de la plateforme
-            </h3>
-            <p className="text-xs text-red-700 mt-1">
-              {error instanceof Error ? error.message : "Une erreur réseau est survenue."}
-            </p>
-            <button
-              onClick={() => refetch()}
-              className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-red-600 text-white text-xs font-medium hover:bg-red-700 transition-colors"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-              Réessayer
-            </button>
-          </div>
-        </div>
+      {/* État d'erreur réutilisable */}
+      {hasError && (
+        <Alert
+          variant="error"
+          title="Impossible de charger les indicateurs de la plateforme"
+          description={errorMessage}
+          action={{
+            label: "Réessayer",
+            onClick: () => refetch(),
+            isLoading: isFetching,
+          }}
+        />
       )}
 
       {/* Cartes KPI (Chirurgical inline skeletons) */}
@@ -128,7 +129,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="mt-4">
             {isLoading ? (
-              <span className="block h-8 w-32 rounded bg-neutral-200 animate-pulse my-1" />
+              <InlineSkeleton width="w-32" height="h-8" />
             ) : (
               <div className="text-2xl font-bold text-neutral-900">
                 {formatEuro(kpis?.gmvEuros || 0)}
@@ -146,15 +147,15 @@ export default function AdminDashboardPage() {
             <span className="text-xs font-medium text-neutral-500 uppercase tracking-wider">
               Commissions Plateforme
             </span>
-            <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-amber-700">
+            <div className="w-8 h-8 rounded-lg bg-secondary-50 flex items-center justify-center text-secondary-800">
               <Coins className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-4">
             {isLoading ? (
-              <span className="block h-8 w-28 rounded bg-neutral-200 animate-pulse my-1" />
+              <InlineSkeleton width="w-28" height="h-8" />
             ) : (
-              <div className="text-2xl font-bold text-amber-700">
+              <div className="text-2xl font-bold text-secondary-900">
                 {formatEuro(kpis?.commissionsEuros || 0)}
               </div>
             )}
@@ -176,7 +177,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="mt-4">
             {isLoading ? (
-              <span className="block h-8 w-20 rounded bg-neutral-200 animate-pulse my-1" />
+              <InlineSkeleton width="w-20" height="h-8" />
             ) : (
               <div className="text-2xl font-bold text-neutral-900">
                 {kpis?.totalBookings || 0}
@@ -200,7 +201,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="mt-4">
             {isLoading ? (
-              <span className="block h-8 w-20 rounded bg-neutral-200 animate-pulse my-1" />
+              <InlineSkeleton width="w-20" height="h-8" />
             ) : (
               <div className="text-2xl font-bold text-neutral-900">
                 {kpis?.activeVenuesCount || 0}
@@ -226,9 +227,10 @@ export default function AdminDashboardPage() {
           </div>
           <Link
             href="/admin/venues"
-            className="text-xs font-medium text-neutral-700 hover:text-neutral-900 flex items-center gap-1"
+            className="text-xs font-semibold text-neutral-700 hover:text-neutral-900 flex items-center gap-1.5 transition-colors"
           >
-            Voir les établissements <ExternalLink className="w-3.5 h-3.5" />
+            <span>Voir les établissements</span>
+            <ExternalLink className="w-3.5 h-3.5" />
           </Link>
         </div>
 
@@ -249,64 +251,69 @@ export default function AdminDashboardPage() {
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, i) => (
                   <tr key={i} className="animate-pulse">
-                    <td className="px-6 py-4"><div className="h-4 w-20 bg-neutral-200 rounded" /></td>
-                    <td className="px-6 py-4"><div className="h-4 w-28 bg-neutral-200 rounded" /></td>
-                    <td className="px-6 py-4"><div className="h-4 w-32 bg-neutral-200 rounded" /></td>
-                    <td className="px-6 py-4"><div className="h-4 w-16 bg-neutral-200 rounded" /></td>
-                    <td className="px-6 py-4"><div className="h-4 w-16 bg-neutral-200 rounded" /></td>
-                    <td className="px-6 py-4"><div className="h-5 w-20 bg-neutral-200 rounded-full" /></td>
-                    <td className="px-6 py-4"><div className="h-4 w-24 bg-neutral-200 rounded" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-20" height="h-4" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-28" height="h-4" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-32" height="h-4" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-16" height="h-4" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-16" height="h-4" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-20" height="h-5" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-24" height="h-4" /></td>
                   </tr>
                 ))
               ) : recentBookings.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-sm text-neutral-500">
-                    Aucune réservation enregistrée sur la plateforme pour le moment.
+                  <td colSpan={7} className="p-8 text-center">
+                    <EmptyState
+                      icon={CalendarCheck}
+                      title="Aucune transaction récente"
+                      description="Les réservations effectuées par les clients s'afficheront ici en direct."
+                    />
                   </td>
                 </tr>
               ) : (
-                recentBookings.map((b) => (
-                  <tr key={b.id} className="hover:bg-neutral-50/50 transition-colors">
-                    <td className="px-6 py-4 font-mono font-medium text-neutral-800 text-xs">
-                      {b.reference}
-                    </td>
-                    <td className="px-6 py-4 font-medium text-neutral-900">
-                      {b.clientName}
-                    </td>
-                    <td className="px-6 py-4 text-neutral-600">
-                      {b.venueName}
-                    </td>
-                    <td className="px-6 py-4 font-medium text-neutral-900">
-                      {formatEuro(b.totalPriceEuros)}
-                    </td>
-                    <td className="px-6 py-4 font-medium text-amber-700">
-                      {formatEuro(b.commissionEuros)}
-                    </td>
-                    <td className="px-6 py-4">
-                      <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                          b.status === "completed"
-                            ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                            : b.status === "confirmed"
-                            ? "bg-blue-50 text-blue-700 border border-blue-200"
-                            : b.status === "cancelled"
-                            ? "bg-red-50 text-red-700 border border-red-200"
-                            : "bg-neutral-100 text-neutral-700 border border-neutral-200"
-                        }`}
-                      >
-                        {b.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-xs text-neutral-500">
-                      {new Date(b.createdAt).toLocaleDateString("fr-FR", {
-                        day: "2-digit",
-                        month: "short",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </td>
-                  </tr>
-                ))
+                recentBookings.map((b) => {
+                  const statusConfig =
+                    b.status === "completed"
+                      ? { label: "Honorée", variant: "success" as const }
+                      : b.status === "confirmed"
+                      ? { label: "Confirmée", variant: "info" as const }
+                      : b.status === "cancelled"
+                      ? { label: "Annulée", variant: "danger" as const }
+                      : { label: b.status, variant: "neutral" as const };
+
+                  return (
+                    <tr key={b.id} className="hover:bg-neutral-50/50 transition-colors">
+                      <td className="px-6 py-4 font-mono font-medium text-neutral-800 text-xs">
+                        {b.reference}
+                      </td>
+                      <td className="px-6 py-4 font-medium text-neutral-900">
+                        {b.clientName}
+                      </td>
+                      <td className="px-6 py-4 text-neutral-600">
+                        {b.venueName}
+                      </td>
+                      <td className="px-6 py-4 font-medium text-neutral-900">
+                        {formatEuro(b.totalPriceEuros)}
+                      </td>
+                      <td className="px-6 py-4 font-medium text-secondary-800">
+                        {formatEuro(b.commissionEuros)}
+                      </td>
+                      <td className="px-6 py-4">
+                        <Badge variant={statusConfig.variant}>
+                          {statusConfig.label}
+                        </Badge>
+                      </td>
+                      <td className="px-6 py-4 text-xs text-neutral-500">
+                        {new Date(b.createdAt).toLocaleDateString("fr-FR", {
+                          day: "2-digit",
+                          month: "short",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>

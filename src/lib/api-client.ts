@@ -21,6 +21,10 @@ export const apiClient: AxiosInstance = axios.create({
 
 apiClient.interceptors.request.use(
   (config) => {
+    // Normalisation préventive pour éviter les dédoublements de préfixe (/api/api/...)
+    if (config.url?.startsWith("/api/")) {
+      config.url = config.url.replace(/^\/api/, "");
+    }
     return config;
   },
   (error) => {

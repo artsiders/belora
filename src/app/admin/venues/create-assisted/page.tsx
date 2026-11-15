@@ -17,6 +17,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import Link from "next/link";
+import { Alert } from "@/components/ui/alert";
 
 interface CreateAssistedResponse {
   venue: {
@@ -56,7 +57,7 @@ export default function CreateAssistedVenuePage() {
   const mutation = useMutation({
     mutationFn: async (payload: any) => {
       const res = await apiClient.post<CreateAssistedResponse>(
-        "/api/admin/venues/assisted",
+        "/admin/venues/assisted",
         payload
       );
       return res.data;

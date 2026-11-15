@@ -18,6 +18,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { VenueStatus } from "@prisma/client";
+import { Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { InlineSkeleton } from "@/components/ui/inline-skeleton";
+import { EmptyState } from "@/components/ui/empty-state";
 
 interface AdminVenueItem {
   id: string;
@@ -47,13 +51,13 @@ export default function AdminVenuesPage() {
   const [editingVenue, setEditingVenue] = useState<AdminVenueItem | null>(null);
   const [newRatePercent, setNewRatePercent] = useState<number>(1.8);
 
-  const { data, isLoading, isError, error, refetch } = useQuery<VenuesResponse>({
+  const { data, isLoading, isError, error, refetch, isFetching } = useQuery<VenuesResponse>({
     queryKey: ["admin", "venues", selectedStatus, searchQuery],
     queryFn: async () => {
       const params = new URLSearchParams();
       if (selectedStatus !== "ALL") params.set("status", selectedStatus);
       if (searchQuery.trim()) params.set("search", searchQuery.trim());
-      const res = await apiClient.get<VenuesResponse>(`/api/admin/venues?${params.toString()}`);
+      const res = await apiClient.get<VenuesResponse>(`/admin/venues?${params.toString()}`);
       return res.data;
     },
   });
@@ -63,7 +67,7 @@ export default function AdminVenuesPage() {
   // Mutation pour changer le statut (Validation / Suspension)
   const updateStatusMutation = useMutation({
     mutationFn: async ({ venueId, status }: { venueId: string; status: VenueStatus }) => {
-      const res = await apiClient.patch(`/api/admin/venues/${venueId}`, { status });
+      const res = await apiClient.patch(`/admin/venues/${venueId}`, { status });
       return res.data;
     },
     onSuccess: (_, variables) => {
@@ -83,7 +87,7 @@ export default function AdminVenuesPage() {
   // Mutation pour modifier le taux de commission
   const updateCommissionMutation = useMutation({
     mutationFn: async ({ venueId, rate }: { venueId: string; rate: number }) => {
-      const res = await apiClient.patch(`/api/admin/venues/${venueId}`, {
+      const res = await apiClient.patch(`/admin/venues/${venueId}`, {
         commissionRate: rate,
       });
       return res.data;
@@ -109,33 +113,14 @@ export default function AdminVenuesPage() {
   const getStatusBadge = (status: VenueStatus) => {
     switch (status) {
       case "PUBLISHED":
-        return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
-            <CheckCircle2 className="w-3 h-3" />
-            Publié
-          </span>
-        );
+        return <Badge variant="success" icon={CheckCircle2}>Publié</Badge>;
       case "PENDING_VALIDATION":
-        return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
-            <AlertTriangle className="w-3 h-3" />
-            En attente
-          </span>
-        );
+        return <Badge variant="warning" icon={AlertTriangle}>En attente</Badge>;
       case "SUSPENDED":
-        return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-red-50 text-red-700 border border-red-200">
-            <XCircle className="w-3 h-3" />
-            Suspendu
-          </span>
-        );
+        return <Badge variant="danger" icon={XCircle}>Suspendu</Badge>;
       case "DRAFT":
       default:
-        return (
-          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-neutral-100 text-neutral-600 border border-neutral-200">
-            Brouillon
-          </span>
-        );
+        return <Badge variant="neutral">Brouillon</Badge>;
     }
   };
 
@@ -199,24 +184,18 @@ export default function AdminVenuesPage() {
 
       {/* Gestion d'erreur */}
       {isError && (
-        <div className="p-4 rounded-xl border border-red-200 bg-red-50 text-red-800 flex items-start gap-3">
-          <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-          <div className="flex-1">
-            <h4 className="text-sm font-semibold text-red-900">
-              Erreur lors du chargement des salons
-            </h4>
-            <p className="text-xs text-red-700 mt-1">
-              {error instanceof Error ? error.message : "Erreur de connexion serveur."}
-            </p>
-            <button
-              onClick={() => refetch()}
-              className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded bg-red-600 text-white text-xs font-medium hover:bg-red-700 transition-colors"
-            >
-              <RefreshCw className="w-3 h-3" />
-              Réessayer
-            </button>
-          </div>
-        </div>
+        <Alert
+          variant="error"
+          title="Erreur lors du chargement des salons"
+          description={
+            error instanceof Error ? error.message : "Erreur de connexion serveur."
+          }
+          action={{
+            label: "Réessayer",
+            onClick: () => refetch(),
+            isLoading: isFetching,
+          }}
+        />
       )}
 
       {/* Table des Établissements */}
@@ -238,19 +217,23 @@ export default function AdminVenuesPage() {
               {isLoading ? (
                 Array.from({ length: 4 }).map((_, i) => (
                   <tr key={i} className="animate-pulse">
-                    <td className="px-6 py-4"><div className="h-4 w-36 bg-neutral-200 rounded" /></td>
-                    <td className="px-6 py-4"><div className="h-4 w-28 bg-neutral-200 rounded" /></td>
-                    <td className="px-6 py-4"><div className="h-4 w-32 bg-neutral-200 rounded" /></td>
-                    <td className="px-6 py-4"><div className="h-5 w-20 bg-neutral-200 rounded-full" /></td>
-                    <td className="px-6 py-4"><div className="h-4 w-12 bg-neutral-200 rounded" /></td>
-                    <td className="px-6 py-4"><div className="h-4 w-20 bg-neutral-200 rounded" /></td>
-                    <td className="px-6 py-4 text-right"><div className="h-7 w-20 bg-neutral-200 rounded ml-auto" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-36" height="h-4" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-28" height="h-4" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-32" height="h-4" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-20" height="h-5" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-12" height="h-4" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-20" height="h-4" /></td>
+                    <td className="px-6 py-4 text-right"><InlineSkeleton width="w-20" height="h-7" /></td>
                   </tr>
                 ))
               ) : venues.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-sm text-neutral-500">
-                    Aucun établissement ne correspond aux filtres appliqués.
+                  <td colSpan={7} className="p-8 text-center">
+                    <EmptyState
+                      icon={Store}
+                      title="Aucun établissement trouvé"
+                      description="Aucun établissement ne correspond aux filtres ou à la recherche appliquée."
+                    />
                   </td>
                 </tr>
               ) : (

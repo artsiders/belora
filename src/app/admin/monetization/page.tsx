@@ -14,6 +14,10 @@ import {
   Sliders,
   ShieldAlert,
 } from "lucide-react";
+import { Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { InlineSkeleton } from "@/components/ui/inline-skeleton";
+import { EmptyState } from "@/components/ui/empty-state";
 
 interface MonetizationSettingsResponse {
   settings: {
@@ -35,10 +39,10 @@ export default function AdminMonetizationPage() {
   const [defaultRatePercent, setDefaultRatePercent] = useState<number>(1.8);
   const [maintenanceMode, setMaintenanceMode] = useState<boolean>(false);
 
-  const { data, isLoading, isError, error, refetch } = useQuery<MonetizationSettingsResponse>({
+  const { data, isLoading, isError, error, refetch, isFetching } = useQuery<MonetizationSettingsResponse>({
     queryKey: ["admin", "monetization"],
     queryFn: async () => {
-      const res = await apiClient.get<MonetizationSettingsResponse>("/api/admin/monetization");
+      const res = await apiClient.get<MonetizationSettingsResponse>("/admin/monetization");
       return res.data;
     },
   });
@@ -54,7 +58,7 @@ export default function AdminMonetizationPage() {
 
   const updateMutation = useMutation({
     mutationFn: async (payload: { defaultCommissionRate: number; maintenanceMode: boolean }) => {
-      const res = await apiClient.patch("/api/admin/monetization", payload);
+      const res = await apiClient.patch("/admin/monetization", payload);
       return res.data;
     },
     onSuccess: () => {
@@ -105,24 +109,18 @@ export default function AdminMonetizationPage() {
 
       {/* Erreur */}
       {isError && (
-        <div className="p-4 rounded-xl border border-red-200 bg-red-50 text-red-800 flex items-start gap-3">
-          <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-          <div className="flex-1">
-            <h4 className="text-sm font-semibold text-red-900">
-              Erreur lors du chargement des paramètres
-            </h4>
-            <p className="text-xs text-red-700 mt-1">
-              {error instanceof Error ? error.message : "Erreur de connexion serveur."}
-            </p>
-            <button
-              onClick={() => refetch()}
-              className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded bg-red-600 text-white text-xs font-medium hover:bg-red-700 transition-colors"
-            >
-              <RefreshCw className="w-3 h-3" />
-              Réessayer
-            </button>
-          </div>
-        </div>
+        <Alert
+          variant="error"
+          title="Erreur lors du chargement des paramètres"
+          description={
+            error instanceof Error ? error.message : "Erreur de connexion serveur."
+          }
+          action={{
+            label: "Réessayer",
+            onClick: () => refetch(),
+            isLoading: isFetching,
+          }}
+        />
       )}
 
       {/* Section Paramétrage Global */}
@@ -138,10 +136,9 @@ export default function AdminMonetizationPage() {
               <span>Paramètres Globaux de la Marketplace</span>
             </div>
             {settings?.maintenanceMode && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
-                <ShieldAlert className="w-3 h-3" />
+              <Badge variant="warning" icon={ShieldAlert}>
                 Mode maintenance activé
-              </span>
+              </Badge>
             )}
           </div>
 
