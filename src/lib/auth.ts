@@ -1,11 +1,11 @@
 import NextAuth from "next-auth";
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { authConfig } from "@/auth.config";
+import { createBeloraAuthAdapter } from "@/lib/auth-adapter";
 
 const credentialsSchema = z.object({
   email: z.string().email("Adresse e-mail invalide"),
@@ -14,7 +14,7 @@ const credentialsSchema = z.object({
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
-  adapter: PrismaAdapter(db),
+  adapter: createBeloraAuthAdapter(db),
   providers: [
     ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
       ? [
@@ -123,4 +123,65 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    ...authConfig.callbacks,
+    async jwt({ token, user, trigger, session }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
+        token.phone = user.phone;
+        token.venueId = user.venueId;
+        token.venueSlug = user.venueSlug;
+        token.staffId = user.staffId;
+      }
+
+      // Synchronisation approfondie pour OAuth (ex: Google) ou si les métadonnées Pro ne sont pas chargées
+      if (token.id && (!token.role || !token.firstName || (!token.venueId && !token.staffId))) {
+        try {
+          const dbUser = await db.user.findUnique({
+            where: { id: token.id as string },
+            select: {
+              role: true,
+              firstName: true,
+              lastName: true,
+              phone: true,
+              ownedVenues: {
+                select: { id: true, slug: true },
+                take: 1,
+              },
+              staffProfiles: {
+                select: { id: true, venueId: true },
+                take: 1,
+              },
+            },
+          });
+
+          if (dbUser) {
+            token.role = dbUser.role;
+            if (!token.firstName) token.firstName = dbUser.firstName;
+            if (!token.lastName) token.lastName = dbUser.lastName;
+            if (!token.phone) token.phone = dbUser.phone;
+
+            if (dbUser.ownedVenues.length > 0) {
+              token.venueId = dbUser.ownedVenues[0].id;
+              token.venueSlug = dbUser.ownedVenues[0].slug;
+            } else if (dbUser.staffProfiles.length > 0) {
+              token.venueId = dbUser.staffProfiles[0].venueId;
+              token.staffId = dbUser.staffProfiles[0].id;
+            }
+          }
+        } catch {
+          // Tolérance aux pannes réseau ou indisponibilité temporaire
+        }
+      }
+
+      if (trigger === "update" && session?.user) {
+        token = { ...token, ...session.user };
+      }
+
+      return token;
+    },
+  },
 });
