@@ -49,7 +49,7 @@ export async function getPendingAppointments(
   pendingAppointments: ProAppointment[];
   allTodayAppointments: ProAppointment[];
 }> {
-  const targetDate = dateStr || new Date().toISOString().split("T")[0];
+  const targetDate = dateStr || formatUtcToLocalParts(new Date()).date;
   const rangeStart = createUtcDateFromLocal(targetDate, 0);
   const rangeEnd = createUtcDateFromLocal(targetDate, 23 * 60 + 59);
 
@@ -262,7 +262,7 @@ export async function createSaleTicketTransaction(
  * Récupère le résumé journalier des encaissements et l'état de clôture Z.
  */
 export async function getDailySummary(venueId: string, dateStr?: string) {
-  const targetDate = dateStr || new Date().toISOString().split("T")[0];
+  const targetDate = dateStr || formatUtcToLocalParts(new Date()).date;
   const rangeStart = createUtcDateFromLocal(targetDate, 0);
   const rangeEnd = createUtcDateFromLocal(targetDate, 23 * 60 + 59);
 
@@ -354,7 +354,7 @@ export async function performDailyClosing(
   input: DailyClosingInput & { venueId: string }
 ) {
   const { venueId, cashCounted, startingFloat = 150 } = input;
-  const targetDateStr = input.date || new Date().toISOString().split("T")[0];
+  const targetDateStr = input.date || formatUtcToLocalParts(new Date()).date;
 
   const rangeStart = createUtcDateFromLocal(targetDateStr, 0);
   const rangeEnd = createUtcDateFromLocal(targetDateStr, 23 * 60 + 59);

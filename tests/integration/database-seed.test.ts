@@ -1,17 +1,9 @@
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
-import { PrismaClient, Role, VenueStatus, BookingStatus } from "@prisma/client";
+import { describe, it, expect } from "vitest";
+import { Role, VenueStatus, BookingStatus } from "@prisma/client";
+import { db as prisma } from "@/lib/db";
 import bcrypt from "bcryptjs";
 
 describe("Database & Prisma Seed Integration Tests", () => {
-  let prisma: PrismaClient;
-
-  beforeAll(() => {
-    prisma = new PrismaClient();
-  });
-
-  afterAll(async () => {
-    await prisma.$disconnect();
-  });
 
   it("has the 3 core accounts with correct roles and valid bcrypt password hashes", async () => {
     const admin = await prisma.user.findUnique({

@@ -1,16 +1,12 @@
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
-import { PrismaClient, Role } from "@prisma/client";
+import { describe, it, expect, afterAll } from "vitest";
+import { Role } from "@prisma/client";
+import { db as prisma } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { authConfig } from "../../src/auth.config";
 import { POST as registerPost } from "../../src/app/api/auth/register/route";
 import { POST as registerProPost } from "../../src/app/api/auth/register-pro/route";
 
 describe("Sprint 1 - Authentification NextAuth v5 & Sécurité RBAC", () => {
-  let prisma: PrismaClient;
-
-  beforeAll(() => {
-    prisma = new PrismaClient();
-  });
 
   afterAll(async () => {
     // Nettoyage des comptes de test créés pendant les tests
@@ -37,7 +33,6 @@ describe("Sprint 1 - Authentification NextAuth v5 & Sécurité RBAC", () => {
         },
       },
     });
-    await prisma.$disconnect();
   });
 
   describe("API POST /api/auth/register (Client)", () => {

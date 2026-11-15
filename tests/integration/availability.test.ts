@@ -1,18 +1,15 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
-import { PrismaClient } from "@prisma/client";
+import { db as prisma } from "@/lib/db";
 import { AvailabilityService } from "../../src/modules/availability/availability.service";
 import { LockService } from "../../src/modules/availability/lock.service";
 
 describe("Sprint 3 - Moteur de Disponibilités & Verrouillage Anti-Collision", () => {
-  let prisma: PrismaClient;
   let venueId: string;
   let serviceCoupeId: string;
   let staffHeleneId: string;
   let staffClementId: string;
 
   beforeAll(async () => {
-    prisma = new PrismaClient();
-
     const venue = await prisma.venue.findUnique({
       where: { slug: "atelier-botanique-paris" },
       include: {
@@ -41,7 +38,6 @@ describe("Sprint 3 - Moteur de Disponibilités & Verrouillage Anti-Collision", (
     await prisma.holdingLock.deleteMany({
       where: { lockKey: { contains: venueId } },
     });
-    await prisma.$disconnect();
   });
 
   describe("Calcul des Créneaux Disponibles (AvailabilityService)", () => {

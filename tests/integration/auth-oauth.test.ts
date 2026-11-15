@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
-import { PrismaClient, Role } from "@prisma/client";
+import { Role } from "@prisma/client";
+import { db as prisma } from "@/lib/db";
 import type { AdapterAccount, AdapterUser } from "next-auth/adapters";
 import { createBeloraAuthAdapter } from "../../src/lib/auth-adapter";
 
@@ -10,7 +11,6 @@ interface BeloraTestUser extends AdapterUser {
 }
 
 describe("Sprint 1 & Auth - Intégration OAuth & Adaptateur Belora", () => {
-  let prisma: PrismaClient;
   let adapter: ReturnType<typeof createBeloraAuthAdapter>;
 
   const testEmail1 = "oauth.google.test1@belora.com";
@@ -18,7 +18,6 @@ describe("Sprint 1 & Auth - Intégration OAuth & Adaptateur Belora", () => {
   const testEmailSingleName = "oauth.google.singlename@belora.com";
 
   beforeAll(() => {
-    prisma = new PrismaClient();
     adapter = createBeloraAuthAdapter(prisma);
   });
 
@@ -37,7 +36,6 @@ describe("Sprint 1 & Auth - Intégration OAuth & Adaptateur Belora", () => {
         },
       },
     });
-    await prisma.$disconnect();
   });
 
   describe("createBeloraAuthAdapter - Gestion transparente de Google OAuth", () => {
