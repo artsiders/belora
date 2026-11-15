@@ -55,9 +55,6 @@ export default function AuthLayout({
 
         {/* Pied de page visuel : Manifeste & Réassurance */}
         <div className="relative z-10 max-w-md space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-900/80 backdrop-blur-xs border border-white/15 text-sm uppercase tracking-wider text-primary-200 font-semibold">
-            <span>Maison d’artisans du soin</span>
-          </div>
 
           <h2 className="font-display text-3xl xl:text-4xl leading-[1.15] text-white text-balance font-normal">
             L’exigence du geste, la beauté du moment suspendu.
@@ -70,11 +67,11 @@ export default function AuthLayout({
 
           <div className="pt-4 border-t border-white/15 flex items-center justify-between text-sm text-neutral-300">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-primary-300" />
+              <ShieldCheck className="w-5 h-5 text-white" />
               <span>Artisans audités</span>
             </div>
             <div className="flex items-center gap-1.5 font-medium num text-neutral-100">
-              <Star className="w-4 h-4 fill-primary-400 text-primary-400" />
+              <Star className="w-4 h-4 text-white" />
               <span>4,9 / 5 certifié</span>
             </div>
           </div>

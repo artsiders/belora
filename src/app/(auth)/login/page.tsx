@@ -144,9 +144,6 @@ function LoginForm() {
 
       {/* 2. Titre et sous-titre éditorial */}
       <div className="mb-8">
-        <span className="text-sm font-semibold uppercase tracking-wider text-primary-700 block mb-1">
-          {userType === "client" ? "Réservation de soins" : "Gestion d’atelier"}
-        </span>
         <h1 className="font-display text-3xl sm:text-4xl text-neutral-950 tracking-tight font-normal">
           {userType === "client" ? "Bienvenue à nouveau" : "Espace Artisan & Salon"}
         </h1>
@@ -324,9 +321,6 @@ function LoginForm() {
             <div className="flex items-center justify-between">
               <span className="text-xs uppercase font-bold tracking-wider text-neutral-500">
                 Comptes de test & démo
-              </span>
-              <span className="text-xs font-mono text-neutral-600 font-semibold bg-neutral-200/60 px-1.5 py-0.5 rounded">
-                Mot de passe : @Motdepass1
               </span>
             </div>
             <div className="flex flex-wrap gap-1.5 pt-1">
