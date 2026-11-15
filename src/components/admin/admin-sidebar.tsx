@@ -5,10 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
+  CalendarCheck,
+  Users,
   Store,
-  PlusCircle,
+  Wallet,
   MessageSquare,
   Coins,
+  Settings,
+  PlusCircle,
   ShieldCheck,
   ArrowLeft,
 } from "lucide-react";
@@ -21,14 +25,24 @@ const NAV_ITEMS = [
     icon: LayoutDashboard,
   },
   {
+    label: "Réservations",
+    href: "/admin/bookings",
+    icon: CalendarCheck,
+  },
+  {
+    label: "Utilisateurs",
+    href: "/admin/users",
+    icon: Users,
+  },
+  {
     label: "Établissements",
     href: "/admin/venues",
     icon: Store,
   },
   {
-    label: "Création assistée",
-    href: "/admin/venues/create-assisted",
-    icon: PlusCircle,
+    label: "Finances & Payouts",
+    href: "/admin/finance",
+    icon: Wallet,
   },
   {
     label: "Modération avis",
@@ -39,6 +53,16 @@ const NAV_ITEMS = [
     label: "Monétisation",
     href: "/admin/monetization",
     icon: Coins,
+  },
+  {
+    label: "Paramètres & Santé",
+    href: "/admin/settings",
+    icon: Settings,
+  },
+  {
+    label: "Création assistée",
+    href: "/admin/venues/create-assisted",
+    icon: PlusCircle,
   },
 ];
 

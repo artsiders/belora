@@ -7,6 +7,9 @@ import {
   UpdateVenueStatusInput,
   CreateAssistedVenueInput,
   UpdateMonetizationInput,
+  UpdateUserInput,
+  UpdateBookingStatusInput,
+  UpdatePlatformSettingsInput,
 } from "@/lib/validations/admin.schema";
 
 export interface AdminUser {
@@ -601,3 +604,631 @@ export async function deleteAdminReview(reviewId: string) {
   await db.review.delete({ where: { id: reviewId } });
   return { success: true, id: reviewId };
 }
+
+// =============================================================================
+// GESTION COMPLÈTE DES UTILISATEURS (CLIENTS, PROS, ADMINS)
+// =============================================================================
+
+export interface AdminUserListItem {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string | null;
+  role: Role;
+  emailVerified: string | null;
+  createdAt: string;
+  ownedVenuesCount: number;
+  bookingsCount: number;
+  totalSpentEuros: number;
+}
+
+export async function getAdminUsers(params?: {
+  role?: Role;
+  search?: string;
+}): Promise<AdminUserListItem[]> {
+  const users = await db.user.findMany({
+    where: {
+      ...(params?.role ? { role: params.role } : {}),
+      ...(params?.search
+        ? {
+            OR: [
+              { email: { contains: params.search, mode: "insensitive" } },
+              { firstName: { contains: params.search, mode: "insensitive" } },
+              { lastName: { contains: params.search, mode: "insensitive" } },
+              { phone: { contains: params.search, mode: "insensitive" } },
+            ],
+          }
+        : {}),
+    },
+    include: {
+      ownedVenues: {
+        select: { id: true, name: true },
+      },
+      crmProfiles: {
+        include: {
+          bookings: {
+            select: { totalPriceCents: true, status: true },
+          },
+        },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return users.map((u) => {
+    // Calcul des réservations et dépenses totales via CRM profiles ou email
+    let totalBookings = 0;
+    let totalSpentCents = 0;
+
+    for (const crm of u.crmProfiles) {
+      totalBookings += crm.bookings.length;
+      for (const b of crm.bookings) {
+        if (
+          b.status === BookingStatus.CONFIRMED ||
+          b.status === BookingStatus.COMPLETED
+        ) {
+          totalSpentCents += b.totalPriceCents;
+        }
+      }
+    }
+
+    return {
+      id: u.id,
+      email: u.email,
+      firstName: u.firstName,
+      lastName: u.lastName,
+      phone: u.phone,
+      role: u.role,
+      emailVerified: u.emailVerified ? u.emailVerified.toISOString() : null,
+      createdAt: u.createdAt.toISOString(),
+      ownedVenuesCount: u.ownedVenues.length,
+      bookingsCount: totalBookings,
+      totalSpentEuros: totalSpentCents / 100,
+    };
+  });
+}
+
+export async function getAdminUserById(userId: string) {
+  const user = await db.user.findUnique({
+    where: { id: userId },
+    include: {
+      ownedVenues: {
+        select: { id: true, name: true, slug: true, status: true, city: true },
+      },
+      crmProfiles: {
+        include: {
+          venue: { select: { id: true, name: true } },
+          bookings: {
+            take: 10,
+            orderBy: { createdAt: "desc" },
+            include: {
+              venue: { select: { name: true } },
+            },
+          },
+        },
+      },
+      reviews: {
+        take: 10,
+        orderBy: { createdAt: "desc" },
+        include: {
+          venue: { select: { name: true } },
+        },
+      },
+    },
+  });
+
+  if (!user) throw new Error("Utilisateur introuvable.");
+
+  return {
+    id: user.id,
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    phone: user.phone,
+    role: user.role,
+    emailVerified: user.emailVerified ? user.emailVerified.toISOString() : null,
+    createdAt: user.createdAt.toISOString(),
+    updatedAt: user.updatedAt.toISOString(),
+    ownedVenues: user.ownedVenues,
+    crmProfiles: user.crmProfiles.map((c) => ({
+      venueName: c.venue.name,
+      totalVisits: c.totalVisits,
+      totalSpentEuros: c.totalSpentCents / 100,
+      bookings: c.bookings.map((b) => ({
+        id: b.id,
+        reference: b.reference,
+        status: b.status,
+        totalPriceEuros: b.totalPriceCents / 100,
+        createdAt: b.createdAt.toISOString(),
+      })),
+    })),
+    reviews: user.reviews.map((r) => ({
+      id: r.id,
+      venueName: r.venue.name,
+      rating: r.rating,
+      comment: r.comment,
+      createdAt: r.createdAt.toISOString(),
+    })),
+  };
+}
+
+export async function updateAdminUser(
+  userId: string,
+  input: UpdateUserInput
+) {
+  const user = await db.user.findUnique({ where: { id: userId } });
+  if (!user) throw new Error("Utilisateur introuvable.");
+
+  const updated = await db.user.update({
+    where: { id: userId },
+    data: {
+      ...(input.role ? { role: input.role } : {}),
+      ...(input.firstName ? { firstName: input.firstName.trim() } : {}),
+      ...(input.lastName ? { lastName: input.lastName.trim() } : {}),
+      ...(input.phone !== undefined ? { phone: input.phone?.trim() || null } : {}),
+      ...(input.emailVerified !== undefined
+        ? { emailVerified: input.emailVerified ? new Date() : null }
+        : {}),
+    },
+  });
+
+  return {
+    id: updated.id,
+    email: updated.email,
+    firstName: updated.firstName,
+    lastName: updated.lastName,
+    role: updated.role,
+    phone: updated.phone,
+    emailVerified: updated.emailVerified ? updated.emailVerified.toISOString() : null,
+  };
+}
+
+export async function deleteAdminUser(userId: string, currentAdminId: string) {
+  if (userId === currentAdminId) {
+    throw new Error("Impossible de supprimer votre propre compte administrateur.");
+  }
+
+  const user = await db.user.findUnique({
+    where: { id: userId },
+    include: { ownedVenues: true },
+  });
+
+  if (!user) throw new Error("Utilisateur introuvable.");
+
+  if (user.ownedVenues.length > 0) {
+    throw new Error(
+      "Impossible de supprimer un compte propriétaire d'établissements actifs. Veuillez transférer ou supprimer les salons d'abord."
+    );
+  }
+
+  await db.user.delete({ where: { id: userId } });
+  return { success: true, id: userId };
+}
+
+// =============================================================================
+// GESTION COMPLÈTE DES RÉSERVATIONS PLATEFORME
+// =============================================================================
+
+export interface AdminBookingListItem {
+  id: string;
+  reference: string;
+  venueId: string;
+  venueName: string;
+  venueSlug: string;
+  clientName: string;
+  clientPhone: string;
+  clientEmail: string | null;
+  status: BookingStatus;
+  totalPriceEuros: number;
+  depositEuros: number;
+  remainingEuros: number;
+  paymentStatus: string;
+  commissionRate: number;
+  commissionEuros: number;
+  stripePaymentIntentId: string | null;
+  servicesSummary: string;
+  scheduledAt: string | null;
+  cancellationReason: string | null;
+  createdAt: string;
+}
+
+export async function getAdminBookings(params?: {
+  status?: BookingStatus;
+  venueId?: string;
+  search?: string;
+}): Promise<AdminBookingListItem[]> {
+  const bookings = await db.booking.findMany({
+    where: {
+      ...(params?.status ? { status: params.status } : {}),
+      ...(params?.venueId ? { venueId: params.venueId } : {}),
+      ...(params?.search
+        ? {
+            OR: [
+              { reference: { contains: params.search, mode: "insensitive" } },
+              { clientName: { contains: params.search, mode: "insensitive" } },
+              { clientEmail: { contains: params.search, mode: "insensitive" } },
+              { clientPhone: { contains: params.search, mode: "insensitive" } },
+              { venue: { name: { contains: params.search, mode: "insensitive" } } },
+            ],
+          }
+        : {}),
+    },
+    include: {
+      venue: {
+        select: { id: true, name: true, slug: true, commissionRate: true },
+      },
+      items: {
+        include: {
+          service: { select: { name: true } },
+          staff: { select: { name: true } },
+        },
+        orderBy: { startTime: "asc" },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return bookings.map((b) => {
+    const rate = b.venue.commissionRate ?? 0.018;
+    const commissionEuros = Math.round(b.totalPriceCents * rate) / 100;
+    const servicesSummary = b.items.map((i) => i.service.name).join(", ") || "Prestation standard";
+    const scheduledAt = b.items[0]?.startTime ? b.items[0].startTime.toISOString() : null;
+
+    return {
+      id: b.id,
+      reference: b.reference,
+      venueId: b.venue.id,
+      venueName: b.venue.name,
+      venueSlug: b.venue.slug,
+      clientName: b.clientName,
+      clientPhone: b.clientPhone,
+      clientEmail: b.clientEmail,
+      status: b.status,
+      totalPriceEuros: b.totalPriceCents / 100,
+      depositEuros: b.depositCents / 100,
+      remainingEuros: b.remainingCents / 100,
+      paymentStatus: b.paymentStatus,
+      commissionRate: rate,
+      commissionEuros,
+      stripePaymentIntentId: b.stripePaymentIntentId,
+      servicesSummary,
+      scheduledAt,
+      cancellationReason: b.cancellationReason,
+      createdAt: b.createdAt.toISOString(),
+    };
+  });
+}
+
+export async function getAdminBookingById(bookingId: string) {
+  const booking = await db.booking.findUnique({
+    where: { id: bookingId },
+    include: {
+      venue: {
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          phone: true,
+          email: true,
+          address: true,
+          city: true,
+          postalCode: true,
+          commissionRate: true,
+          stripeAccountId: true,
+          stripeChargesEnabled: true,
+        },
+      },
+      items: {
+        include: {
+          service: { select: { id: true, name: true, durationMinutes: true, priceCents: true } },
+          staff: { select: { id: true, name: true, role: true } },
+          resource: { select: { id: true, name: true } },
+        },
+        orderBy: { startTime: "asc" },
+      },
+      customer: {
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          phone: true,
+          email: true,
+          totalVisits: true,
+        },
+      },
+      review: true,
+      saleTickets: true,
+    },
+  });
+
+  if (!booking) throw new Error("Réservation introuvable.");
+
+  const rate = booking.venue.commissionRate ?? 0.018;
+
+  return {
+    id: booking.id,
+    reference: booking.reference,
+    status: booking.status,
+    totalPriceEuros: booking.totalPriceCents / 100,
+    depositEuros: booking.depositCents / 100,
+    remainingEuros: booking.remainingCents / 100,
+    commissionRate: rate,
+    commissionEuros: Math.round(booking.totalPriceCents * rate) / 100,
+    paymentStatus: booking.paymentStatus,
+    stripePaymentIntentId: booking.stripePaymentIntentId,
+    clientName: booking.clientName,
+    clientPhone: booking.clientPhone,
+    clientEmail: booking.clientEmail,
+    notes: booking.notes,
+    cancellationReason: booking.cancellationReason,
+    cancelledAt: booking.cancelledAt ? booking.cancelledAt.toISOString() : null,
+    createdAt: booking.createdAt.toISOString(),
+    updatedAt: booking.updatedAt.toISOString(),
+    venue: booking.venue,
+    customer: booking.customer,
+    review: booking.review,
+    saleTickets: booking.saleTickets,
+    items: booking.items.map((i) => ({
+      id: i.id,
+      serviceName: i.service.name,
+      durationMinutes: i.service.durationMinutes,
+      priceEuros: i.priceCents / 100,
+      staffName: i.staff.name,
+      staffRole: i.staff.role,
+      resourceName: i.resource?.name || null,
+      startTime: i.startTime.toISOString(),
+      endTime: i.endTime.toISOString(),
+    })),
+  };
+}
+
+export async function updateAdminBookingStatus(
+  bookingId: string,
+  input: UpdateBookingStatusInput
+) {
+  const booking = await db.booking.findUnique({ where: { id: bookingId } });
+  if (!booking) throw new Error("Réservation introuvable.");
+
+  const isCancelling = input.status === BookingStatus.CANCELLED;
+
+  const updated = await db.booking.update({
+    where: { id: bookingId },
+    data: {
+      status: input.status,
+      cancellationReason: isCancelling
+        ? input.cancellationReason || "Annulé par l'administrateur Belora"
+        : null,
+      cancelledAt: isCancelling ? new Date() : null,
+    },
+  });
+
+  return {
+    id: updated.id,
+    reference: updated.reference,
+    status: updated.status,
+    cancellationReason: updated.cancellationReason,
+    cancelledAt: updated.cancelledAt ? updated.cancelledAt.toISOString() : null,
+  };
+}
+
+// =============================================================================
+// FINANCES, COMMISSIONS & STRIPE CONNECT
+// =============================================================================
+
+export interface AdminFinancialReport {
+  kpis: {
+    gmvTotalEuros: number;
+    commissionsCollectedEuros: number;
+    depositsEscrowEuros: number;
+    inStoreRemainingEuros: number;
+    stripeConnectedVenuesCount: number;
+    stripePendingVenuesCount: number;
+  };
+  venuesFinances: {
+    venueId: string;
+    venueName: string;
+    city: string;
+    commissionRate: number;
+    gmvEuros: number;
+    commissionsEuros: number;
+    depositsEuros: number;
+    stripeAccountId: string | null;
+    stripeChargesEnabled: boolean;
+  }[];
+  recentTransactions: {
+    id: string;
+    reference: string;
+    venueName: string;
+    clientName: string;
+    amountEuros: number;
+    depositEuros: number;
+    commissionEuros: number;
+    status: string;
+    stripePaymentIntentId: string | null;
+    createdAt: string;
+  }[];
+}
+
+export async function getAdminFinancialReport(): Promise<AdminFinancialReport> {
+  const [venues, bookings] = await Promise.all([
+    db.venue.findMany({
+      select: {
+        id: true,
+        name: true,
+        city: true,
+        commissionRate: true,
+        stripeAccountId: true,
+        stripeChargesEnabled: true,
+      },
+      orderBy: { name: "asc" },
+    }),
+    db.booking.findMany({
+      include: {
+        venue: {
+          select: { name: true, commissionRate: true },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    }),
+  ]);
+
+  let gmvTotalCents = 0;
+  let commissionsCollectedCents = 0;
+  let depositsEscrowCents = 0;
+  let inStoreRemainingCents = 0;
+
+  // Breakdown per venue
+  const venueFinanceMap = new Map<
+    string,
+    { gmvCents: number; commissionsCents: number; depositsCents: number }
+  >();
+
+  for (const v of venues) {
+    venueFinanceMap.set(v.id, { gmvCents: 0, commissionsCents: 0, depositsCents: 0 });
+  }
+
+  for (const b of bookings) {
+    const isSuccess =
+      b.status === BookingStatus.CONFIRMED ||
+      b.status === BookingStatus.COMPLETED;
+
+    if (isSuccess) {
+      gmvTotalCents += b.totalPriceCents;
+      depositsEscrowCents += b.depositCents;
+      inStoreRemainingCents += b.remainingCents;
+
+      const rate = b.venue.commissionRate ?? 0.018;
+      const commissionCents = Math.round(b.totalPriceCents * rate);
+      commissionsCollectedCents += commissionCents;
+
+      const cur = venueFinanceMap.get(b.venueId);
+      if (cur) {
+        cur.gmvCents += b.totalPriceCents;
+        cur.commissionsCents += commissionCents;
+        cur.depositsCents += b.depositCents;
+      }
+    }
+  }
+
+  let stripeConnectedCount = 0;
+  let stripePendingCount = 0;
+
+  const venuesFinances = venues.map((v) => {
+    if (v.stripeChargesEnabled) {
+      stripeConnectedCount++;
+    } else {
+      stripePendingCount++;
+    }
+
+    const cur = venueFinanceMap.get(v.id) || {
+      gmvCents: 0,
+      commissionsCents: 0,
+      depositsCents: 0,
+    };
+
+    return {
+      venueId: v.id,
+      venueName: v.name,
+      city: v.city,
+      commissionRate: v.commissionRate ?? 0.018,
+      gmvEuros: cur.gmvCents / 100,
+      commissionsEuros: cur.commissionsCents / 100,
+      depositsEuros: cur.depositsCents / 100,
+      stripeAccountId: v.stripeAccountId,
+      stripeChargesEnabled: v.stripeChargesEnabled,
+    };
+  });
+
+  const recentTransactions = bookings.slice(0, 15).map((b) => {
+    const rate = b.venue.commissionRate ?? 0.018;
+    return {
+      id: b.id,
+      reference: b.reference,
+      venueName: b.venue.name,
+      clientName: b.clientName,
+      amountEuros: b.totalPriceCents / 100,
+      depositEuros: b.depositCents / 100,
+      commissionEuros: Math.round(b.totalPriceCents * rate) / 100,
+      status: b.status.toLowerCase(),
+      stripePaymentIntentId: b.stripePaymentIntentId,
+      createdAt: b.createdAt.toISOString(),
+    };
+  });
+
+  return {
+    kpis: {
+      gmvTotalEuros: gmvTotalCents / 100,
+      commissionsCollectedEuros: commissionsCollectedCents / 100,
+      depositsEscrowEuros: depositsEscrowCents / 100,
+      inStoreRemainingEuros: inStoreRemainingCents / 100,
+      stripeConnectedVenuesCount: stripeConnectedCount,
+      stripePendingVenuesCount: stripePendingCount,
+    },
+    venuesFinances,
+    recentTransactions,
+  };
+}
+
+// =============================================================================
+// PARAMÈTRES PLATEFORME & SANTÉ SYSTÈME (DIAGNOSTICS)
+// =============================================================================
+
+export interface AdminSystemHealth {
+  databaseStatus: "healthy" | "degraded" | "down";
+  latencyMs: number;
+  tablesCount: {
+    users: number;
+    venues: number;
+    bookings: number;
+    reviews: number;
+  };
+  serverUptimeSeconds: number;
+  nodeVersion: string;
+  environment: string;
+}
+
+export async function getAdminSystemHealth(): Promise<AdminSystemHealth> {
+  const start = Date.now();
+  let dbStatus: "healthy" | "degraded" | "down" = "healthy";
+
+  let usersCount = 0;
+  let venuesCount = 0;
+  let bookingsCount = 0;
+  let reviewsCount = 0;
+
+  try {
+    const [u, v, b, r] = await Promise.all([
+      db.user.count(),
+      db.venue.count(),
+      db.booking.count(),
+      db.review.count(),
+    ]);
+    usersCount = u;
+    venuesCount = v;
+    bookingsCount = b;
+    reviewsCount = r;
+  } catch {
+    dbStatus = "down";
+  }
+
+  const latencyMs = Date.now() - start;
+  if (dbStatus === "healthy" && latencyMs > 500) {
+    dbStatus = "degraded";
+  }
+
+  return {
+    databaseStatus: dbStatus,
+    latencyMs,
+    tablesCount: {
+      users: usersCount,
+      venues: venuesCount,
+      bookings: bookingsCount,
+      reviews: reviewsCount,
+    },
+    serverUptimeSeconds: Math.floor(process.uptime()),
+    nodeVersion: process.version,
+    environment: process.env.NODE_ENV || "development",
+  };
+}
+

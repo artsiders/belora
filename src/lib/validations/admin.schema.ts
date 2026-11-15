@@ -43,3 +43,41 @@ export const updateMonetizationSchema = z.object({
 });
 
 export type UpdateMonetizationInput = z.infer<typeof updateMonetizationSchema>;
+
+export const roleEnum = z.enum(["CUSTOMER", "PRO", "ADMIN"]);
+
+export const updateUserSchema = z.object({
+  role: roleEnum.optional(),
+  firstName: z.string().min(2, "Le prénom doit comporter au moins 2 caractères").optional(),
+  lastName: z.string().min(2, "Le nom doit comporter au moins 2 caractères").optional(),
+  phone: z.string().optional().nullable(),
+  emailVerified: z.boolean().optional(),
+});
+
+export type UpdateUserInput = z.infer<typeof updateUserSchema>;
+
+export const bookingStatusEnum = z.enum([
+  "PENDING_PAYMENT",
+  "CONFIRMED",
+  "COMPLETED",
+  "CANCELLED",
+  "NO_SHOW",
+]);
+
+export const updateBookingStatusSchema = z.object({
+  status: bookingStatusEnum,
+  cancellationReason: z.string().optional().nullable(),
+});
+
+export type UpdateBookingStatusInput = z.infer<typeof updateBookingStatusSchema>;
+
+export const updatePlatformSettingsSchema = z.object({
+  defaultCommissionRate: z
+    .number()
+    .min(0, "Le taux minimal est 0%")
+    .max(0.5, "Le taux maximal est 50%")
+    .optional(),
+  maintenanceMode: z.boolean().optional(),
+});
+
+export type UpdatePlatformSettingsInput = z.infer<typeof updatePlatformSettingsSchema>;
