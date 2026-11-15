@@ -584,7 +584,7 @@ export async function getTeamSettings(
       id: s.id,
       name: s.name,
       role: s.role,
-      avatar: s.avatarUrl || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      avatar: s.avatarUrl || "/images/artisans/avatar-default.webp",
       email: s.user?.email || "collaborateur@atelierbotanique.fr",
       phone: s.user?.phone || "06 00 00 00 00",
       color: s.color,

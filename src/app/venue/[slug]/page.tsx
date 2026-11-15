@@ -182,7 +182,7 @@ async function VenueContent({ params }: VenuePageProps) {
 
   return (
     <>
-      {/* 1. Fil d'Ariane épuré */}
+      {/* 1. Fil d'Ariane */}
       <div className="border-b border-primary-200/80 bg-primary-600 py-3 text-sm text-white/80">
         <div className="container-belora flex items-center gap-2">
           <Link href="/" className="hover:text-white transition-colors">

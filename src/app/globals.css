@@ -255,19 +255,19 @@
 
   /* ----- Boutons ----- */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 min-h-10.5 px-5 border border-transparent rounded-lg text-sm font-semibold uppercase whitespace-nowrap cursor-pointer select-none shadow-2xs transition-all duration-150 ease-belora active:translate-y-px active:shadow-none disabled:opacity-45 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none aria-[disabled=true]:opacity-45 aria-[disabled=true]:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 min-h-10.5 px-5 border border-transparent rounded-md text-sm font-semibold uppercase whitespace-nowrap cursor-pointer select-none shadow-2xs transition-all duration-150 ease-belora active:translate-y-px active:shadow-none disabled:opacity-45 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none aria-[disabled=true]:opacity-45 aria-[disabled=true]:cursor-not-allowed;
   }
 
   .btn-primary {
-    @apply bg-primary-600 border-primary-600 text-white hover:not-disabled:bg-primary-700 hover:not-disabled:border-primary-700 hover:not-disabled:text-white hover:not-disabled:shadow-md hover:not-disabled:shadow-primary-600/25 hover:not-disabled:-translate-y-px;
+    @apply bg-primary-600 text-white hover:not-disabled:bg-primary-700 hover:not-disabled:border-primary-700 hover:not-disabled:text-white hover:not-disabled:shadow-md hover:not-disabled:shadow-primary-600/25 hover:not-disabled:-translate-y-px;
   }
 
   .btn-secondary {
-    @apply bg-neutral-100 border-primary-300 text-neutral-950 hover:not-disabled:bg-neutral-200 hover:not-disabled:border-primary-400 hover:not-disabled:text-neutral-950 hover:not-disabled:-translate-y-px;
+    @apply bg-neutral-100 text-neutral-950 hover:not-disabled:bg-neutral-200 hover:not-disabled:border-primary-400 hover:not-disabled:text-neutral-950 hover:not-disabled:-translate-y-px;
   }
 
   .btn-dark {
-    @apply bg-neutral-950 border-primary-950 text-white hover:not-disabled:bg-neutral-800 hover:not-disabled:border-primary-800 hover:not-disabled:text-white hover:not-disabled:-translate-y-px;
+    @apply bg-neutral-950 text-white hover:not-disabled:bg-neutral-800 hover:not-disabled:border-primary-800 hover:not-disabled:text-white hover:not-disabled:-translate-y-px;
   }
 
   .btn-ink {
@@ -315,13 +315,13 @@
   }
 
   .btn-xs {
-    @apply min-h-7.5 px-3 text-sm;
+    @apply min-h-7.5 px-3 text-sm rounded-sm;
   }
   .btn-sm {
-    @apply min-h-9 px-4 text-sm;
+    @apply min-h-9 px-4 text-sm rounded-md;
   }
   .btn-lg {
-    @apply min-h-12 px-6.5 text-sm;
+    @apply min-h-12 px-6.5 text-sm rounded-lg;
   }
   .btn-block {
     @apply w-full;

@@ -560,7 +560,7 @@ export function AccountClient() {
           ONGLET 1 : RENDEZ-VOUS À VENIR
           ======================================================================= */}
       {activeTab === "upcoming" && (
-        <div className="space-y-4 max-w-4xl">
+        <div className="space-y-4 container mx-auto">
           {isLoadingBookings ? (
             <div className="space-y-3">
               {[1, 2].map((i) => (
@@ -701,7 +701,7 @@ export function AccountClient() {
           ONGLET 2 : HISTORIQUE & AVIS CERTIFIÉS
           ======================================================================= */}
       {activeTab === "past" && (
-        <div className="space-y-4 max-w-4xl">
+        <div className="space-y-4 container mx-auto">
           {isLoadingBookings ? (
             <div className="space-y-3">
               {[1, 2].map((i) => (
@@ -845,7 +845,7 @@ export function AccountClient() {
           ONGLET 3 : MAISONS RECOMMANDÉES & FAVORIS
           ======================================================================= */}
       {activeTab === "favorites" && (
-        <div className="space-y-4 max-w-4xl">
+        <div className="space-y-4 container mx-auto">
           <div className="p-4 rounded-xl bg-primary-50/50 border border-primary-100 text-xs sm:text-sm text-primary-900 flex items-center justify-between">
             <span>
               Maisons d&apos;artisanat d&apos;art sélectionnées pour l&apos;excellence de leurs rituels et leur charte d&apos;accueil Belora.
@@ -926,7 +926,7 @@ export function AccountClient() {
           ONGLET 4 : INFORMATIONS PERSONNELLES & SÉCURITÉ
           ======================================================================= */}
       {activeTab === "profile" && (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-4xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 container mx-auto">
           {/* Formulaire Coordonnées Personnelles */}
           <div className="lg:col-span-2 p-6 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs space-y-6">
             <div>

@@ -258,5 +258,33 @@ describe("Sprint 1 — Authentification NextAuth v5 & Sécurité RBAC", () => {
         expect(result).toBe(true);
       }
     });
+
+    it("redirects logged-in users away from /login, /register, and /forgot-password", async () => {
+      if (!authorized) throw new Error("authorized callback not found");
+
+      // Client connecté tentant d'accéder à /login
+      const clientRes = await (authorized as any)({
+        auth: { user: { role: "CUSTOMER" } },
+        request: { nextUrl: new URL("http://localhost:3000/login") },
+      });
+      expect(clientRes).toBeInstanceOf(Response);
+      expect(clientRes.headers.get("Location")).toBe("http://localhost:3000/account");
+
+      // Pro connecté tentant d'accéder à /login
+      const proRes = await (authorized as any)({
+        auth: { user: { role: "PRO" } },
+        request: { nextUrl: new URL("http://localhost:3000/login") },
+      });
+      expect(proRes).toBeInstanceOf(Response);
+      expect(proRes.headers.get("Location")).toBe("http://localhost:3000/pro/agenda");
+
+      // Admin connecté tentant d'accéder à /register
+      const adminRes = await (authorized as any)({
+        auth: { user: { role: "ADMIN" } },
+        request: { nextUrl: new URL("http://localhost:3000/register") },
+      });
+      expect(adminRes).toBeInstanceOf(Response);
+      expect(adminRes.headers.get("Location")).toBe("http://localhost:3000/admin/dashboard");
+    });
   });
 });

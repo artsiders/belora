@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { signIn, getSession } from "next-auth/react";
+import { signIn, getSession, useSession } from "next-auth/react";
 import { Eye, EyeOff, Mail, ArrowRight, AlertCircle, CheckCircle2 } from "lucide-react";
 
 function LoginForm() {
@@ -11,6 +11,21 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
   const errorParam = searchParams.get("error");
+  const { data: session, status } = useSession();
+
+  // Redirection immédiate si déjà authentifié
+  useEffect(() => {
+    if (status === "authenticated" && session?.user) {
+      const role = session.user.role;
+      if (role === "ADMIN") {
+        router.replace("/admin/dashboard");
+      } else if (role === "PRO") {
+        router.replace("/pro/agenda");
+      } else {
+        router.replace("/account");
+      }
+    }
+  }, [status, session, router]);
 
   const getInitialErrorMessage = () => {
     if (!errorParam) return null;

@@ -17,6 +17,7 @@ import {
   AlertCircle,
   Loader2,
   RotateCcw,
+  Gift,
 } from "lucide-react";
 
 interface BookClientProps {
@@ -27,7 +28,20 @@ interface BookClientProps {
 function generateUpcomingDays() {
   const days: { label: string; dateLabel: string; dayCode: string }[] = [];
   const dayNames = ["Dim.", "Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam."];
-  const monthNames = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
+  const monthNames = [
+    "janv.",
+    "févr.",
+    "mars",
+    "avr.",
+    "mai",
+    "juin",
+    "juil.",
+    "août",
+    "sept.",
+    "oct.",
+    "nov.",
+    "déc.",
+  ];
 
   const now = new Date();
   for (let i = 1; i <= 10; i++) {
@@ -47,6 +61,7 @@ function generateUpcomingDays() {
 export function BookClient({ venue }: BookClientProps) {
   const searchParams = useSearchParams();
   const initialServiceId = searchParams.get("service");
+  const isGift = searchParams.get("gift") === "true";
 
   const upcomingDays = useMemo(() => generateUpcomingDays(), []);
 
@@ -66,14 +81,18 @@ export function BookClient({ venue }: BookClientProps) {
   const [selectedArtisan, setSelectedArtisan] = useState<string>("any");
 
   // 3. Date et créneau sélectionnés
-  const [selectedDayCode, setSelectedDayCode] = useState<string>(upcomingDays[0]?.dayCode || "");
+  const [selectedDayCode, setSelectedDayCode] = useState<string>(
+    upcomingDays[0]?.dayCode || "",
+  );
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>("");
 
-  // 4. Coordonnées client
+  // 4. Coordonnées client & personnalisation du cadeau
   const [customerName, setCustomerName] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [customerNotes, setCustomerNotes] = useState("");
+  const [recipientName, setRecipientName] = useState("");
+  const [giftMessage, setGiftMessage] = useState("");
 
   // États de soumission et confirmation
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -112,7 +131,9 @@ export function BookClient({ venue }: BookClientProps) {
         params.staffId = selectedArtisan;
       }
       const res = await apiClient.get<{
-        slots: Array<string | { time: string; startTime?: string; endTime?: string }>;
+        slots: Array<
+          string | { time: string; startTime?: string; endTime?: string }
+        >;
         date: string;
       }>("/availability", {
         params,
@@ -142,26 +163,32 @@ export function BookClient({ venue }: BookClientProps) {
   }, [selectedDayCode, selectedArtisan]);
 
   // Calculs financiers
-  const totalDuration = selectedServices.reduce((acc, s) => acc + s.durationMinutes, 0);
+  const totalDuration = selectedServices.reduce(
+    (acc, s) => acc + s.durationMinutes,
+    0,
+  );
   const totalPrice = selectedServices.reduce((acc, s) => acc + s.priceEuros, 0);
 
   const toggleService = (service: Service) => {
     const exists = selectedServices.some((s) => s.id === service.id);
     if (exists) {
       if (selectedServices.length > 1) {
-        setSelectedServices(selectedServices.filter((s) => s.id !== service.id));
+        setSelectedServices(
+          selectedServices.filter((s) => s.id !== service.id),
+        );
       }
     } else {
       setSelectedServices([...selectedServices, service]);
     }
   };
 
-  const selectedDayInfo = upcomingDays.find((d) => d.dayCode === selectedDayCode) || upcomingDays[0];
+  const selectedDayInfo =
+    upcomingDays.find((d) => d.dayCode === selectedDayCode) || upcomingDays[0];
 
   // Soumission finale de la réservation vers /api/bookings
   const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedTimeSlot) {
+    if (!selectedTimeSlot && !isGift) {
       setSubmitError("Veuillez sélectionner un horaire de rendez-vous.");
       setStep(3);
       return;
@@ -172,19 +199,38 @@ export function BookClient({ venue }: BookClientProps) {
 
     try {
       // Construction du timestamp ISO UTC complet
-      const [hours, minutes] = selectedTimeSlot.split(":").map(Number);
-      const bookingDate = new Date(`${selectedDayCode}T00:00:00Z`);
+      const effectiveSlot = selectedTimeSlot || "10:00";
+      const [hours, minutes] = effectiveSlot.split(":").map(Number);
+      const bookingDate = new Date(
+        `${selectedDayCode || upcomingDays[0]?.dayCode}T00:00:00Z`,
+      );
       bookingDate.setUTCHours(hours, minutes, 0, 0);
+
+      const computedNotes = [
+        isGift ? "[FORMULE BON CADEAU BELORA]" : null,
+        isGift && recipientName.trim()
+          ? `Bénéficiaire : ${recipientName.trim()}`
+          : null,
+        isGift && giftMessage.trim()
+          ? `Message : "${giftMessage.trim()}"`
+          : null,
+        customerNotes.trim() || null,
+      ]
+        .filter(Boolean)
+        .join("\n");
 
       const payload = {
         venueId: venue.id,
         serviceIds: selectedServices.map((s) => s.id),
         staffId: selectedArtisan !== "any" ? selectedArtisan : null,
         startTime: bookingDate.toISOString(),
-        clientName: customerName.trim(),
+        clientName:
+          isGift && recipientName.trim()
+            ? `${customerName.trim()} (pour ${recipientName.trim()})`
+            : customerName.trim(),
         clientEmail: customerEmail.trim() || undefined,
         clientPhone: customerPhone.trim(),
-        notes: customerNotes.trim() || undefined,
+        notes: computedNotes || undefined,
       };
 
       const res = await apiClient.post<{
@@ -224,28 +270,54 @@ export function BookClient({ venue }: BookClientProps) {
         </div>
 
         <span className="text-sm uppercase font-bold text-primary-700 tracking-wider block mb-2">
-          Réservation Confirmée
+          {isGift ? "Bon Cadeau Édité avec Succès" : "Réservation Confirmée"}
         </span>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-neutral-950 mb-3">
-          Votre moment est sanctuarisé
+          {isGift
+            ? "Votre cadeau est prêt à être transmis"
+            : "Votre moment est sanctuarisé"}
         </h1>
 
         <div className="inline-block px-3 py-1.5 rounded-lg bg-neutral-100 border border-neutral-200 text-sm font-bold text-neutral-900 mb-6 num">
-          Référence : {confirmedBooking.reference}
+          {isGift
+            ? `Code Bon Cadeau : ${confirmedBooking.reference}`
+            : `Référence : ${confirmedBooking.reference}`}
         </div>
 
         <p className="text-sm sm:text-base text-neutral-600 mb-8 leading-relaxed max-w-md mx-auto">
-          Un e-mail de confirmation vous a été envoyé. {venue.name} vous attend le{" "}
-          <strong className="text-neutral-950">{selectedDayInfo?.dateLabel}</strong> à{" "}
-          <strong className="text-neutral-950">{selectedTimeSlot}</strong>.
+          {isGift ? (
+            <>
+              Votre bon cadeau pour{" "}
+              <strong className="text-neutral-950">
+                {recipientName || "votre bénéficiaire"}
+              </strong>{" "}
+              a été généré et envoyé à{" "}
+              <strong className="text-neutral-950">
+                {customerEmail || "votre adresse e-mail"}
+              </strong>
+              . Il est valable 12 mois dans l’établissement {venue.name}.
+            </>
+          ) : (
+            <>
+              Un e-mail de confirmation vous a été envoyé. {venue.name} vous
+              attend le{" "}
+              <strong className="text-neutral-950">
+                {selectedDayInfo?.dateLabel}
+              </strong>{" "}
+              à <strong className="text-neutral-950">{selectedTimeSlot}</strong>
+              .
+            </>
+          )}
         </p>
 
         {/* Récapitulatif du rendez-vous */}
         <div className="p-6 rounded-2xl bg-white border border-neutral-200/90 text-left mb-8 space-y-4 shadow-2xs">
           <div className="border-b border-neutral-200/80 pb-3">
             <h3 className="text-lg font-bold text-neutral-950">{venue.name}</h3>
-            <p className="text-sm text-neutral-500">{venue.address}, {venue.city}</p>
+            <p className="text-sm text-neutral-500">
+              {venue.address}, {venue.city}
+            </p>
             {confirmedBooking.staffName && (
               <p className="text-sm text-primary-700 font-semibold mt-1">
                 Artisan : {confirmedBooking.staffName}
@@ -254,10 +326,17 @@ export function BookClient({ venue }: BookClientProps) {
           </div>
 
           <div className="space-y-2 text-sm">
-            <div className="text-neutral-500 font-medium">Prestations réservées :</div>
+            <div className="text-neutral-500 font-medium">
+              Prestations réservées :
+            </div>
             {selectedServices.map((s) => (
-              <div key={s.id} className="flex justify-between font-medium text-neutral-900">
-                <span>{s.name} ({s.durationMinutes} min)</span>
+              <div
+                key={s.id}
+                className="flex justify-between font-medium text-neutral-900"
+              >
+                <span>
+                  {s.name} ({s.durationMinutes} min)
+                </span>
                 <span className="num font-bold">{s.priceEuros} €</span>
               </div>
             ))}
@@ -296,35 +375,64 @@ export function BookClient({ venue }: BookClientProps) {
   }
 
   return (
-    <div className="container-belora py-10">
+    <div className="pb-10">
       {/* En-tête du tunnel */}
-      <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-neutral-200/80">
-        <div>
-          <Link
-            href={`/venue/${venue.slug}`}
-            className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-neutral-900 transition-colors mb-1"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Retour à la maison {venue.name}</span>
-          </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold text-neutral-950">
-            Réservation chez {venue.name}
-          </h1>
-        </div>
+      <div className="flex items-center justify-between gap-4 mb-8 py-6 border-b border-neutral-200/80 bg-primary-500">
+        <div className="container mx-auto">
+          <div>
+            {/* 1. Fil d'Ariane */}
+            <div className="flex items-center gap-2 mb-4 text-neutral-200">
+              <Link href="/" className="hover:text-white transition-colors">
+                Accueil
+              </Link>
+              <span>/</span>
+              <Link
+                href={`/search`}
+                className="hover:text-white transition-colors"
+              >
+                Search
+              </Link>
+              <span>/</span>
+              <span className="text-white font-medium truncate">{venue.name}</span>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <h1 className="text-2xl sm:text-3xl font-bold text-white">
+                {isGift
+                  ? `Offrir un bon cadeau chez ${venue.name}`
+                  : `Réservation chez ${venue.name}`}
+              </h1>
+              {isGift && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-100 text-secondary-800 text-xs font-bold uppercase tracking-wider">
+                  <Gift className="w-3.5 h-3.5 text-secondary-700" />
+                  <span>Formule Cadeau</span>
+                </span>
+              )}
+            </div>
+            {isGift && (
+              <p className="text-sm text-white mt-1 max-w-2xl leading-relaxed">
+                Offrez ce soin sous forme de bon cadeau d’exception valable 12
+                mois. Le destinataire recevra son bon et conviendra de sa date
+                de rendez-vous en toute sérénité.
+              </p>
+            )}
+          </div>
 
-        {/* Indicateur d'étape */}
-        <div className="text-sm text-neutral-500 hidden sm:block num">
-          Étape <strong className="text-neutral-900">{step}</strong> sur 4
+          {/* Indicateur d'étape */}
+          <div className="text-sm text-white hidden sm:block num">
+            Étape <strong className="text-white">{step}</strong> sur 4
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start container mx-auto">
         {/* Colonne Gauche : Formulaire par étapes */}
         <div className="lg:col-span-8 space-y-6">
           {/* Étape 1 : Choix des prestations */}
           <div
             className={`p-6 rounded-2xl bg-white border transition-all ${
-              step === 1 ? "border-primary-600 shadow-sm" : "border-neutral-200/90"
+              step === 1
+                ? "border-primary-600 shadow-sm"
+                : "border-neutral-200/90"
             }`}
           >
             <div className="flex items-center justify-between mb-4">
@@ -350,7 +458,9 @@ export function BookClient({ venue }: BookClientProps) {
             {step === 1 ? (
               <div className="space-y-3">
                 {venue.services.map((service) => {
-                  const isChecked = selectedServices.some((s) => s.id === service.id);
+                  const isChecked = selectedServices.some(
+                    (s) => s.id === service.id,
+                  );
                   return (
                     <div
                       key={service.id}
@@ -404,8 +514,12 @@ export function BookClient({ venue }: BookClientProps) {
               <div className="text-sm text-neutral-700 space-y-1">
                 {selectedServices.map((s) => (
                   <div key={s.id} className="flex justify-between">
-                    <span>{s.name} ({s.durationMinutes} min)</span>
-                    <span className="font-bold text-neutral-900 num">{s.priceEuros} €</span>
+                    <span>
+                      {s.name} ({s.durationMinutes} min)
+                    </span>
+                    <span className="font-bold text-neutral-900 num">
+                      {s.priceEuros} €
+                    </span>
                   </div>
                 ))}
               </div>
@@ -415,7 +529,9 @@ export function BookClient({ venue }: BookClientProps) {
           {/* Étape 2 : Choix du praticien */}
           <div
             className={`p-6 rounded-2xl bg-white border transition-all ${
-              step === 2 ? "border-primary-600 shadow-sm" : "border-neutral-200/90"
+              step === 2
+                ? "border-primary-600 shadow-sm"
+                : "border-neutral-200/90"
             }`}
           >
             <div className="flex items-center justify-between mb-4">
@@ -521,7 +637,9 @@ export function BookClient({ venue }: BookClientProps) {
           {/* Étape 3 : Date & Créneau horaire dynamiques */}
           <div
             className={`p-6 rounded-2xl bg-white border transition-all ${
-              step === 3 ? "border-primary-600 shadow-sm" : "border-neutral-200/90"
+              step === 3
+                ? "border-primary-600 shadow-sm"
+                : "border-neutral-200/90"
             }`}
           >
             <div className="flex items-center justify-between mb-4">
@@ -570,7 +688,8 @@ export function BookClient({ venue }: BookClientProps) {
                           {d.label}
                         </span>
                         <span className="text-sm font-semibold block mt-0.5">
-                          {d.dateLabel.split(" ")[1]} {d.dateLabel.split(" ")[2]}
+                          {d.dateLabel.split(" ")[1]}{" "}
+                          {d.dateLabel.split(" ")[2]}
                         </span>
                       </button>
                     ))}
@@ -605,7 +724,8 @@ export function BookClient({ venue }: BookClientProps) {
                     </div>
                   ) : availableSlots.length === 0 ? (
                     <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200 text-center text-sm text-neutral-600">
-                      Aucun créneau libre à cette date. Veuillez choisir un autre jour.
+                      Aucun créneau libre à cette date. Veuillez choisir un
+                      autre jour.
                     </div>
                   ) : (
                     <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -654,7 +774,9 @@ export function BookClient({ venue }: BookClientProps) {
           {/* Étape 4 : Coordonnées & Validation */}
           <div
             className={`p-6 rounded-2xl bg-white border transition-all ${
-              step === 4 ? "border-primary-600 shadow-sm" : "border-neutral-200/90"
+              step === 4
+                ? "border-primary-600 shadow-sm"
+                : "border-neutral-200/90"
             }`}
           >
             <div className="flex items-center gap-2.5 mb-4">
@@ -662,7 +784,9 @@ export function BookClient({ venue }: BookClientProps) {
                 4
               </span>
               <h2 className="text-lg sm:text-xl font-bold text-neutral-950">
-                Vos coordonnées
+                {isGift
+                  ? "Coordonnées & Bénéficiaire du bon"
+                  : "Vos coordonnées"}
               </h2>
             </div>
 
@@ -675,9 +799,45 @@ export function BookClient({ venue }: BookClientProps) {
                   </div>
                 )}
 
+                {isGift && (
+                  <div className="p-4 rounded-xl bg-secondary-50 border border-secondary-200/80 space-y-4">
+                    <div className="flex items-center gap-2 text-secondary-900 font-bold text-sm">
+                      <Gift className="w-4 h-4 text-secondary-600" />
+                      <span>Informations sur le bon cadeau</span>
+                    </div>
+                    <div>
+                      <label className="text-sm font-semibold text-neutral-900 mb-1 block">
+                        Nom et prénom du bénéficiaire *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={recipientName}
+                        onChange={(e) => setRecipientName(e.target.value)}
+                        placeholder="Ex : Claire Dupont"
+                        className="input"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-semibold text-neutral-900 mb-1 block">
+                        Message personnalisé pour le bon (optionnel)
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={giftMessage}
+                        onChange={(e) => setGiftMessage(e.target.value)}
+                        placeholder="Joyeux anniversaire ! Profite bien de ce moment de détente..."
+                        className="input"
+                      />
+                    </div>
+                  </div>
+                )}
+
                 <div>
                   <label className="text-sm font-semibold text-neutral-900 mb-1 block">
-                    Nom et prénom complet *
+                    {isGift
+                      ? "Votre nom et prénom (acheteur) *"
+                      : "Nom et prénom complet *"}
                   </label>
                   <input
                     type="text"
@@ -733,7 +893,9 @@ export function BookClient({ venue }: BookClientProps) {
                 <div className="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200/80 text-sm text-neutral-600 flex items-start gap-2.5">
                   <ShieldCheck className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
                   <p className="leading-snug">
-                    Règlement sur place auprès de l’artisan. Annulation sans frais possible jusqu’à 24h avant le rendez-vous.
+                    {isGift
+                      ? "Le bon cadeau est valable 1 an dans l'établissement sélectionné. Le bénéficiaire pourra choisir sa date et son heure."
+                      : "Règlement sur place auprès de l’artisan. Annulation sans frais possible jusqu’à 24h avant le rendez-vous."}
                   </p>
                 </div>
 
@@ -745,11 +907,19 @@ export function BookClient({ venue }: BookClientProps) {
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Confirmation en cours...</span>
+                      <span>
+                        {isGift
+                          ? "Édition du bon en cours..."
+                          : "Confirmation en cours..."}
+                      </span>
                     </>
                   ) : (
                     <>
-                      <span>Confirmer mon rendez-vous ({totalPrice} €)</span>
+                      <span>
+                        {isGift
+                          ? `Confirmer et éditer le bon cadeau (${totalPrice} €)`
+                          : `Confirmer mon rendez-vous (${totalPrice} €)`}
+                      </span>
                       <Check className="w-4 h-4" />
                     </>
                   )}
@@ -766,8 +936,12 @@ export function BookClient({ venue }: BookClientProps) {
               <span className="text-xs uppercase font-bold tracking-wider text-primary-600 block mb-1">
                 Récapitulatif de réservation
               </span>
-              <h3 className="text-xl font-bold text-neutral-950">{venue.name}</h3>
-              <p className="text-sm text-neutral-500">{venue.address}, {venue.city}</p>
+              <h3 className="text-xl font-bold text-neutral-950">
+                {venue.name}
+              </h3>
+              <p className="text-sm text-neutral-500">
+                {venue.address}, {venue.city}
+              </p>
             </div>
 
             <div className="pt-4 border-t border-neutral-200/80 space-y-3">
@@ -789,12 +963,15 @@ export function BookClient({ venue }: BookClientProps) {
             <div className="pt-4 border-t border-neutral-200/80 space-y-2 text-sm text-neutral-600">
               <div className="flex items-center justify-between">
                 <span>Durée estimée</span>
-                <span className="font-semibold text-neutral-900 num">{totalDuration} min</span>
+                <span className="font-semibold text-neutral-900 num">
+                  {totalDuration} min
+                </span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Date & heure</span>
                 <span className="font-semibold text-neutral-900">
-                  {selectedDayInfo?.dateLabel} · {selectedTimeSlot || "À sélectionner"}
+                  {selectedDayInfo?.dateLabel} ·{" "}
+                  {selectedTimeSlot || "À sélectionner"}
                 </span>
               </div>
               <div className="flex items-center justify-between">

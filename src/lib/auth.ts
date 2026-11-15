@@ -3,9 +3,18 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
+import net from "node:net";
 import { db } from "@/lib/db";
 import { authConfig } from "@/auth.config";
 import { createBeloraAuthAdapter } from "@/lib/auth-adapter";
+
+// Désactivation de l'Happy Eyeballs IPv6 pour garantir la fiabilité des connexions OIDC Node.js
+if (typeof net !== "undefined" && typeof (net as any).setDefaultAutoSelectFamily === "function") {
+  (net as any).setDefaultAutoSelectFamily(false);
+}
+
+const googleClientId = process.env.AUTH_GOOGLE_ID || process.env.GOOGLE_CLIENT_ID;
+const googleClientSecret = process.env.AUTH_GOOGLE_SECRET || process.env.GOOGLE_CLIENT_SECRET;
 
 const credentialsSchema = z.object({
   email: z.string().email("Adresse e-mail invalide"),
@@ -16,11 +25,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   adapter: createBeloraAuthAdapter(db),
   providers: [
-    ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+    ...(googleClientId && googleClientSecret
       ? [
           Google({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            clientId: googleClientId,
+            clientSecret: googleClientSecret,
             allowDangerousEmailAccountLinking: true,
           }),
         ]

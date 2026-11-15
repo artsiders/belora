@@ -29,20 +29,20 @@ export default function AuthLayout({
 
         {/* En-tête : Logo Belora & Retour accueil */}
         <div className="relative z-10 flex items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center gap-2 group"
-            aria-label="Belora - Retour à l'accueil"
-          >
-            <Image
-              src="/images/logos/belora.svg"
-              alt="Belora"
-              width={182}
-              height={80}
-              priority
-              className="object-contain h-7 w-auto invert brightness-200"
-            />
-          </Link>
+        <Link
+          href="/"
+          className="flex items-center gap-2 group"
+          aria-label="Belora - Retour à l'accueil"
+        >
+          <Image
+            src="/images/logos/belora.svg"
+            alt="Belora"
+            width={182}
+            height={80}
+            priority
+            className="object-contain h-7 w-auto brightness-0 invert"
+          />
+        </Link>
 
           <Link
             href="/"

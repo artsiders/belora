@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--no-network-family-autoselection' next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_OPTIONS='--no-network-family-autoselection' next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "NODE_OPTIONS='--no-network-family-autoselection' vitest run"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

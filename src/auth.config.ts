@@ -1,6 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
 
 export const authConfig: NextAuthConfig = {
+  secret: process.env.AUTH_SECRET,
   pages: {
     signIn: "/login",
     newUser: "/register",
@@ -14,14 +15,31 @@ export const authConfig: NextAuthConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const pathname = nextUrl.pathname;
+      const role = auth?.user?.role;
 
-      // Routes protégées Client : /account/*
+      // 1. Redirection automatique des utilisateurs déjà connectés accédant aux pages d'authentification
+      const isAuthRoute =
+        pathname === "/login" ||
+        pathname === "/register" ||
+        pathname === "/forgot-password";
+
+      if (isLoggedIn && isAuthRoute) {
+        let destination = "/account";
+        if (role === "ADMIN") {
+          destination = "/admin/dashboard";
+        } else if (role === "PRO") {
+          destination = "/pro/agenda";
+        }
+        return Response.redirect(new URL(destination, nextUrl));
+      }
+
+      // 2. Routes protégées Client : /account/*
       const isAccountRoute = pathname.startsWith("/account");
       if (isAccountRoute) {
         return isLoggedIn;
       }
 
-      // Routes protégées Pro : /pro/* sauf la landing page /pro et inscription /pro/join
+      // 3. Routes protégées Pro : /pro/* sauf la landing page /pro et inscription /pro/join
       const isProDashboard =
         pathname.startsWith("/pro") &&
         pathname !== "/pro" &&
@@ -29,15 +47,14 @@ export const authConfig: NextAuthConfig = {
 
       if (isProDashboard) {
         if (!isLoggedIn) return false;
-        const role = auth?.user?.role;
         return role === "PRO" || role === "ADMIN";
       }
 
-      // Routes protégées Super-Admin : /admin/*
+      // 4. Routes protégées Super-Admin : /admin/*
       const isAdminRoute = pathname.startsWith("/admin");
       if (isAdminRoute) {
         if (!isLoggedIn) return false;
-        return auth?.user?.role === "ADMIN";
+        return role === "ADMIN";
       }
 
       return true;

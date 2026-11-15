@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Star, MapPin, Heart, Calendar, Gift, ChevronRight } from "lucide-react";
 import { Venue } from "@/lib/data/venues";
+import { Tooltip } from "@/components/ui/tooltip";
 
 interface SearchVenueCardProps {
   venue: Venue;
@@ -73,16 +74,18 @@ export function SearchVenueCard({
           )}
         </div>
 
-        {/* Lien sous la photo style Planity */}
+        {/* Lien sous la photo vers la fiche détaillée du salon */}
         <div className="w-full mt-2.5 text-center sm:text-left">
-          <Link
-            href={`/venue/${venue.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="text-sm font-semibold text-neutral-900 underline underline-offset-4 hover:text-primary-600 transition-colors inline-flex items-center gap-1"
-          >
-            <span>Plus d&apos;informations</span>
-            <ChevronRight className="w-3 h-3 text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all" />
-          </Link>
+          <Tooltip content="Consulter la présentation du lieu, les prestations et les avis détaillés" position="right">
+            <Link
+              href={`/venue/${venue.slug}`}
+              onClick={(e) => e.stopPropagation()}
+              className="text-sm font-semibold text-neutral-800 underline underline-offset-4 hover:text-primary-600 transition-colors inline-flex items-center gap-1 cursor-pointer"
+            >
+              <span>Fiche du salon</span>
+              <ChevronRight className="w-3 h-3 text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all" />
+            </Link>
+          </Tooltip>
         </div>
       </div>
 
@@ -177,40 +180,56 @@ export function SearchVenueCard({
                 )}
               </div>
             ) : (
-              /* Bloc Prochaine disponibilité */
-              <div className="p-2.5 rounded-xl bg-neutral-50 border border-neutral-200/80 flex items-center gap-2.5">
-                <Calendar className="w-4 h-4 text-neutral-500 shrink-0" />
-                <div className="text-sm leading-tight">
-                  <span className="text-neutral-500 font-semibold uppercase tracking-wider block text-sm">
-                    Prochaine disponibilité
-                  </span>
-                  <span className="font-semibold text-primary-700 text-sm">
-                    {venue.nextAvailability || "Demain à 10h00"}
-                  </span>
-                </div>
-              </div>
+              /* Bloc Prochaine disponibilité interactif */
+              <Tooltip
+                content={`Réserver directement le premier créneau disponible (${venue.nextAvailability || "Demain à 10h00"})`}
+                className="w-full"
+              >
+                <Link
+                  href={`/book/${venue.slug}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-full p-2.5 rounded-xl bg-neutral-50 hover:bg-neutral-100/90 border border-neutral-200/80 flex items-center justify-between gap-2.5 transition-colors cursor-pointer group/slot"
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <Calendar className="w-4 h-4 text-neutral-500 shrink-0" />
+                    <div className="text-left text-sm leading-tight">
+                      <span className="text-neutral-500 font-semibold uppercase tracking-wider block text-xs">
+                        Prochaine disponibilité
+                      </span>
+                      <span className="font-semibold text-primary-700 text-sm group-hover/slot:underline">
+                        {venue.nextAvailability || "Demain à 10h00"}
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-neutral-400 group-hover/slot:translate-x-0.5 group-hover/slot:text-primary-600 transition-all shrink-0" />
+                </Link>
+              </Tooltip>
             )}
           </div>
         </div>
 
-        {/* Boutons d'action en bas à droite */}
-        <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-end gap-2">
-          <Link
-            href={`/book/${venue.slug}?gift=true`}
-            onClick={(e) => e.stopPropagation()}
-            className="btn btn-outline text-sm px-3 py-1.5 rounded-xl flex items-center gap-1.5 font-semibold text-neutral-700 hover:text-neutral-950"
-          >
-            <Gift className="w-3.5 h-3.5 text-neutral-500" />
-            <span>Offrir</span>
-          </Link>
+        {/* Boutons d'action en bas à droite avec Tooltips explicatifs */}
+        <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-end gap-2.5">
+          <Tooltip content="Offrir ce soin sous forme de bon cadeau valable 1 an (le destinataire choisira sa date)">
+            <Link
+              href={`/book/${venue.slug}?gift=true`}
+              onClick={(e) => e.stopPropagation()}
+              className="btn btn-outline text-sm px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 font-semibold text-neutral-800 hover:text-neutral-950 hover:border-neutral-400 cursor-pointer"
+            >
+              <Gift className="w-4 h-4 text-secondary-600 shrink-0" />
+              <span>Offrir un soin</span>
+            </Link>
+          </Tooltip>
 
-          <Link
-            href={`/book/${venue.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="btn btn-dark text-sm px-4 py-1.5 rounded-xl font-semibold shadow-2xs"
-          >
-            Prendre RDV
-          </Link>
+          <Tooltip content="Choisir une prestation et réserver votre créneau directement en ligne">
+            <Link
+              href={`/book/${venue.slug}`}
+              onClick={(e) => e.stopPropagation()}
+              className="btn btn-dark text-sm px-4.5 py-1.5 rounded-xl font-semibold shadow-2xs cursor-pointer"
+            >
+              Prendre RDV
+            </Link>
+          </Tooltip>
         </div>
       </div>
     </article>
