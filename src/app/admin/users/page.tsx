@@ -155,7 +155,7 @@ export default function AdminUsersPage() {
   };
 
   return (
-    <div className="space-y-8 max-w-7xl">
+    <div className="space-y-8 container mx-auto">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">

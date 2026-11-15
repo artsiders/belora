@@ -139,7 +139,7 @@ export function AgendaToolbar({
 
         {/* Granularité des créneaux (15 min / 20 min / 30 min) */}
         <div className="hidden md:flex items-center gap-1.5 text-sm text-neutral-600">
-          <span className="text-neutral-500">Pas :</span>
+          <span className="text-neutral-500 whitespace-nowrap">Pas :</span>
           <select
             value={intervalMinutes}
             onChange={(e) => onIntervalChange(Number(e.target.value))}
