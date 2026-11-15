@@ -210,7 +210,7 @@ export default function NotificationsSettingsPage() {
                   <span className="font-semibold text-neutral-700 block">
                     Variables dynamiques disponibles :
                   </span>
-                  <div className="flex flex-wrap gap-1.5 font-mono text-[11px]">
+                  <div className="flex flex-wrap gap-1.5 font-mono text-sm">
                     <span className="px-1.5 py-0.5 bg-neutral-100 rounded text-neutral-800">
                       {"{client_name}"}
                     </span>
@@ -244,7 +244,7 @@ export default function NotificationsSettingsPage() {
                   <div className="p-3.5 rounded-xl bg-white shadow-2xs border border-neutral-200 text-sm text-neutral-800 leading-relaxed font-sans">
                     {previewSms}
                   </div>
-                  <div className="text-right text-[11px] text-neutral-400 mt-1.5 font-medium">
+                  <div className="text-right text-sm text-neutral-400 mt-1.5 font-medium">
                     Expéditeur : Belora &bull; Aujourd&apos;hui à 10:42
                   </div>
                 </div>

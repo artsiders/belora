@@ -187,7 +187,7 @@ export function CheckoutSidebar({
                   </div>
 
                   {apt.depositPaid > 0 && (
-                    <div className="flex items-center gap-1 text-[11px] text-primary-800 font-semibold pt-0.5">
+                    <div className="flex items-center gap-1 text-sm text-primary-800 font-semibold pt-0.5">
                       <ShieldCheck className="w-3 h-3" />
                       <span>Acompte Stripe {apt.depositPaid} € perçu</span>
                     </div>

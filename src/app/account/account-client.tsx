@@ -893,7 +893,7 @@ export function AccountClient() {
                       {venue.tags.map((t) => (
                         <span
                           key={t}
-                          className="text-[11px] px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700"
+                          className="text-sm px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700"
                         >
                           {t}
                         </span>
