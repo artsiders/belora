@@ -68,7 +68,7 @@ export default function AdminDashboardPage() {
       {/* Entête */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-serif font-bold text-neutral-900 tracking-tight">
+          <h2 className="text-2xl font-bold text-neutral-900 tracking-tight">
             Vue d&apos;ensemble de la Marketplace
           </h2>
           <p className="text-sm text-neutral-500 mt-1">
@@ -130,7 +130,7 @@ export default function AdminDashboardPage() {
             {isLoading ? (
               <span className="block h-8 w-32 rounded bg-neutral-200 animate-pulse my-1" />
             ) : (
-              <div className="text-2xl font-bold font-serif text-neutral-900">
+              <div className="text-2xl font-bold text-neutral-900">
                 {formatEuro(kpis?.gmvEuros || 0)}
               </div>
             )}
@@ -154,7 +154,7 @@ export default function AdminDashboardPage() {
             {isLoading ? (
               <span className="block h-8 w-28 rounded bg-neutral-200 animate-pulse my-1" />
             ) : (
-              <div className="text-2xl font-bold font-serif text-amber-700">
+              <div className="text-2xl font-bold text-amber-700">
                 {formatEuro(kpis?.commissionsEuros || 0)}
               </div>
             )}
@@ -178,7 +178,7 @@ export default function AdminDashboardPage() {
             {isLoading ? (
               <span className="block h-8 w-20 rounded bg-neutral-200 animate-pulse my-1" />
             ) : (
-              <div className="text-2xl font-bold font-serif text-neutral-900">
+              <div className="text-2xl font-bold text-neutral-900">
                 {kpis?.totalBookings || 0}
               </div>
             )}
@@ -202,7 +202,7 @@ export default function AdminDashboardPage() {
             {isLoading ? (
               <span className="block h-8 w-20 rounded bg-neutral-200 animate-pulse my-1" />
             ) : (
-              <div className="text-2xl font-bold font-serif text-neutral-900">
+              <div className="text-2xl font-bold text-neutral-900">
                 {kpis?.activeVenuesCount || 0}
               </div>
             )}

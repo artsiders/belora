@@ -69,7 +69,7 @@ export default function AdminReviewsPage() {
       {/* En-tête */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-serif font-bold text-neutral-900 tracking-tight">
+          <h2 className="text-2xl font-bold text-neutral-900 tracking-tight">
             Modération des Avis Clients
           </h2>
           <p className="text-sm text-neutral-500 mt-1">

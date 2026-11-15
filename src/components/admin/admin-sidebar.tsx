@@ -45,12 +45,12 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-neutral-900 text-neutral-100 flex flex-col shrink-0 min-h-screen border-r border-neutral-800">
+    <aside className="w-64 bg-secondary-900 text-neutral-100 flex flex-col shrink-0 min-h-screen border-r border-neutral-800">
       {/* Brand Header */}
       <div className="p-6 border-b border-neutral-800 flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <span className="font-serif text-xl tracking-wider text-white font-medium">
+            <span className="text-xl tracking-wider text-white font-medium">
               BELORA
             </span>
             <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold px-2 py-0.5 rounded bg-neutral-800 border border-amber-500/30">
@@ -61,7 +61,6 @@ export function AdminSidebar() {
             Supervision Plateforme
           </p>
         </div>
-        <ShieldCheck className="w-5 h-5 text-amber-400 shrink-0" />
       </div>
 
       {/* Navigation Links */}
@@ -78,7 +77,7 @@ export function AdminSidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 isActive
-                  ? "bg-neutral-800 text-white border-l-2 border-amber-400 font-semibold"
+                  ? "bg-amber-300/10 text-white font-semibold"
                   : "text-neutral-300 hover:bg-neutral-800/60 hover:text-white"
               }`}
             >

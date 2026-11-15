@@ -126,7 +126,7 @@ export default function CreateAssistedVenuePage() {
           <ArrowLeft className="w-3.5 h-3.5" />
           Retour à la liste des établissements
         </Link>
-        <h2 className="text-2xl font-serif font-bold text-neutral-900 tracking-tight">
+        <h2 className="text-2xl font-bold text-neutral-900 tracking-tight">
           Création Assistée d&apos;Établissement
         </h2>
         <p className="text-sm text-neutral-500 mt-1">

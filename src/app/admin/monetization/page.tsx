@@ -87,7 +87,7 @@ export default function AdminMonetizationPage() {
       {/* En-tête */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-serif font-bold text-neutral-900 tracking-tight">
+          <h2 className="text-2xl font-bold text-neutral-900 tracking-tight">
             Monétisation &amp; Commissions Plateforme
           </h2>
           <p className="text-sm text-neutral-500 mt-1">
@@ -220,7 +220,7 @@ export default function AdminMonetizationPage() {
               {isLoading ? (
                 <span className="block h-9 w-36 rounded bg-neutral-200 animate-pulse my-2" />
               ) : (
-                <div className="text-3xl font-serif font-bold text-amber-700 mt-1">
+                <div className="text-3xl font-bold text-amber-700 mt-1">
                   {formatEuro(settings?.totalCommissionsCollectedEuros || 0)}
                 </div>
               )}
