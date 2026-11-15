@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   CalendarDays,
   CreditCard,
@@ -14,15 +16,35 @@ import {
   ChevronDown,
   Clock,
   Check,
+  Building2,
+  HelpCircle,
+  LogOut,
+  Shield,
+  User,
 } from "lucide-react";
 import { MOCK_ESTABLISHMENT } from "@/lib/data/pro-mock-data";
 
 export function DashboardHeader() {
   const pathname = usePathname();
+  const { data: session } = useSession();
   const [currentTime, setCurrentTime] = useState("");
   const [salonSwitcherOpen, setSalonSwitcherOpen] = useState(false);
   const [unreadNotifications, setUnreadNotifications] = useState(3);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  const userName = session?.user?.name || "Hélène de Valois";
+  const userEmail = session?.user?.email || "helene@atelierbotanique.fr";
+  const userRoleLabel =
+    session?.user?.role === "ADMIN" ? "Super-Admin" : "Gérante & Coloriste";
+  const initials =
+    userName
+      .split(" ")
+      .map((n) => n[0])
+      .filter(Boolean)
+      .join("")
+      .slice(0, 2)
+      .toUpperCase() || "HV";
 
   useEffect(() => {
     const updateTime = () => {
@@ -173,6 +195,8 @@ export function DashboardHeader() {
               type="button"
               onClick={() => {
                 setShowNotifications(!showNotifications);
+                setUserMenuOpen(false);
+                setSalonSwitcherOpen(false);
                 setUnreadNotifications(0);
               }}
               aria-label="Centre de notifications"
@@ -250,9 +274,181 @@ export function DashboardHeader() {
             <ExternalLink className="w-3.5 h-3.5" />
           </Link>
 
-          {/* Avatar Pro */}
-          <div className="w-9 h-9 rounded-full bg-primary-100 text-primary-900 font-bold text-xs flex items-center justify-center shrink-0 border border-primary-200/60 shadow-2xs">
-            HV
+          {/* Avatar & Menu Profil Pro */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => {
+                setUserMenuOpen(!userMenuOpen);
+                setShowNotifications(false);
+                setSalonSwitcherOpen(false);
+              }}
+              aria-expanded={userMenuOpen}
+              aria-haspopup="menu"
+              aria-label="Menu du profil pro"
+              className="flex items-center gap-1.5 p-1 rounded-xl hover:bg-neutral-100 transition-colors cursor-pointer group"
+            >
+              <div className="w-9 h-9 rounded-full bg-primary-100 text-primary-900 font-bold text-xs flex items-center justify-center shrink-0 border border-primary-200/60 shadow-2xs group-hover:border-primary-400 transition-colors">
+                {initials}
+              </div>
+              <ChevronDown
+                className={`w-3.5 h-3.5 text-neutral-400 transition-transform duration-200 hidden sm:block ${
+                  userMenuOpen ? "rotate-180 text-primary-600" : ""
+                }`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {userMenuOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setUserMenuOpen(false)}
+                  />
+                  <motion.div
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 mt-2 w-72 sm:w-80 rounded-2xl border border-neutral-200/90 bg-white p-2 shadow-xl z-50 text-sm overflow-hidden"
+                  >
+                    {/* Header Identité Utilisateur */}
+                    <div className="p-3 bg-neutral-50/80 rounded-xl border border-neutral-200/60 mb-2">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary-100 text-primary-900 font-bold text-sm flex items-center justify-center shrink-0 border border-primary-200/70 shadow-2xs">
+                          {initials}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-neutral-950 text-sm truncate">
+                              {userName}
+                            </span>
+                          </div>
+                          <p className="text-xs text-neutral-500 truncate mt-0.5">
+                            {userEmail}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mt-2.5 pt-2 border-t border-neutral-200/60 flex items-center justify-between text-xs">
+                        <span className="text-neutral-500 truncate">
+                          {MOCK_ESTABLISHMENT.name}
+                        </span>
+                        <span className="font-semibold text-primary-700 bg-primary-50 px-2 py-0.5 rounded-md border border-primary-200/50 shrink-0">
+                          {userRoleLabel}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Liens Opérationnels & Paramètres */}
+                    <div className="space-y-0.5 py-1">
+                      <Link
+                        href="/pro/settings/team"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors font-medium"
+                      >
+                        <User className="w-4 h-4 text-neutral-500 shrink-0" />
+                        <div className="truncate">
+                          <div>Mon profil & équipe</div>
+                          <span className="text-xs text-neutral-400 font-normal block">
+                            Plannings, absences et rôles
+                          </span>
+                        </div>
+                      </Link>
+
+                      <Link
+                        href="/pro/settings/establishment"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors font-medium"
+                      >
+                        <Building2 className="w-4 h-4 text-neutral-500 shrink-0" />
+                        <div className="truncate">
+                          <div>Paramètres de l&apos;atelier</div>
+                          <span className="text-xs text-neutral-400 font-normal block">
+                            Horaires, coordonnées & acomptes
+                          </span>
+                        </div>
+                      </Link>
+
+                      <Link
+                        href="/pro/settings/services"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors font-medium"
+                      >
+                        <CalendarDays className="w-4 h-4 text-neutral-500 shrink-0" />
+                        <div className="truncate">
+                          <div>Catalogue des prestations</div>
+                          <span className="text-xs text-neutral-400 font-normal block">
+                            Tarifs, durées & temps de pose
+                          </span>
+                        </div>
+                      </Link>
+
+                      <Link
+                        href={`/venue/${MOCK_ESTABLISHMENT.slug}`}
+                        target="_blank"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="flex items-center justify-between px-3 py-2 rounded-lg text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors font-medium"
+                      >
+                        <div className="flex items-center gap-3 truncate">
+                          <ExternalLink className="w-4 h-4 text-neutral-500 shrink-0" />
+                          <div className="truncate">
+                            <div>Voir ma vitrine publique</div>
+                            <span className="text-xs text-neutral-400 font-normal block">
+                              Page de réservation en ligne
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
+
+                      <Link
+                        href="/help"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors font-medium"
+                      >
+                        <HelpCircle className="w-4 h-4 text-neutral-500 shrink-0" />
+                        <div className="truncate">
+                          <div>Assistance & support Belora</div>
+                          <span className="text-xs text-neutral-400 font-normal block">
+                            Guides pro et contact équipe
+                          </span>
+                        </div>
+                      </Link>
+
+                      {session?.user?.role === "ADMIN" && (
+                        <Link
+                          href="/admin/dashboard"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 rounded-lg text-amber-900 bg-amber-50/60 hover:bg-amber-100/60 transition-colors font-semibold border border-amber-200/50"
+                        >
+                          <Shield className="w-4 h-4 text-amber-700 shrink-0" />
+                          <div className="truncate">
+                            <div>Console Super-Admin</div>
+                            <span className="text-xs text-amber-700/80 font-normal block">
+                              Administration globale de la plateforme
+                            </span>
+                          </div>
+                        </Link>
+                      )}
+                    </div>
+
+                    {/* Déconnexion */}
+                    <div className="pt-1.5 mt-1 border-t border-neutral-100">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setUserMenuOpen(false);
+                          signOut({ callbackUrl: "/login" });
+                        }}
+                        className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-rose-600 hover:bg-rose-50/70 transition-colors cursor-pointer text-left font-semibold text-sm"
+                      >
+                        <LogOut className="w-4 h-4 text-rose-500 shrink-0" />
+                        <span>Se déconnecter</span>
+                      </button>
+                    </div>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>

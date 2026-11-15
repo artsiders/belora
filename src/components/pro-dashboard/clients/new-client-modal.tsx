@@ -1,13 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { User, Phone, Mail, Tag } from "lucide-react";
 import { Modal } from "@/components/pro-dashboard/ui/modal";
+import { Badge } from "@/components/ui/badge";
 import {
   FormInput,
   FormTextarea,
   FormCheckbox,
 } from "@/components/pro-dashboard/ui/form-controls";
 import { ProClient } from "@/lib/data/pro-mock-data";
+
+const QUICK_PREFERENCES = [
+  "Boisson : Thé vert",
+  "Boisson : Café court",
+  "Sensibilité cuir chevelu",
+  "Préfère le silence",
+  "Toujours ponctuel(le)",
+];
 
 interface NewClientModalProps {
   isOpen: boolean;
@@ -123,6 +134,55 @@ export function NewClientModal({
       }
     >
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Live Client Preview Card */}
+        <AnimatePresence>
+          {(firstName.trim() || lastName.trim()) && (
+            <motion.div
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.15 }}
+              className="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200/90 flex items-center justify-between gap-3"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-10 h-10 rounded-full bg-primary-100 text-primary-900 font-bold text-sm flex items-center justify-center shrink-0 border border-primary-200/70">
+                  {firstName.trim() ? firstName.trim()[0].toUpperCase() : ""}
+                  {lastName.trim() ? lastName.trim()[0].toUpperCase() : ""}
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-neutral-950 text-sm truncate">
+                      {firstName || "Prénom"} {lastName || "Nom"}
+                    </span>
+                    {isVip && (
+                      <Badge variant="gold" size="sm">
+                        VIP
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-3 text-xs text-neutral-500 mt-0.5 truncate">
+                    {phone && (
+                      <span className="inline-flex items-center gap-1">
+                        <Phone className="w-3 h-3 text-neutral-400" />
+                        {phone}
+                      </span>
+                    )}
+                    {email && (
+                      <span className="inline-flex items-center gap-1 truncate">
+                        <Mail className="w-3 h-3 text-neutral-400" />
+                        {email}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <span className="text-xs font-semibold text-neutral-400 shrink-0 uppercase tracking-wider">
+                Aperçu
+              </span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <FormInput
             label="Prénom"
@@ -164,12 +224,29 @@ export function NewClientModal({
           onChange={(e) => setIsVip(e.target.checked)}
         />
 
-        <FormTextarea
-          label="Notes d'accueil & préférences"
-          placeholder="Boisson préférée, sensibilité au chaud, habitudes particulières..."
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-        />
+        <div className="space-y-1.5">
+          <FormTextarea
+            label="Notes d'accueil & préférences"
+            placeholder="Boisson préférée, sensibilité au chaud, habitudes particulières..."
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          />
+          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+            <span className="text-xs text-neutral-400 font-medium">Suggestions rapides :</span>
+            {QUICK_PREFERENCES.map((pref) => (
+              <button
+                key={pref}
+                type="button"
+                onClick={() => {
+                  setNotes((prev) => (prev ? `${prev}, ${pref}` : pref));
+                }}
+                className="px-2 py-0.5 rounded-md border border-neutral-200 bg-white hover:bg-neutral-50 text-neutral-600 text-xs transition-colors cursor-pointer"
+              >
+                + {pref}
+              </button>
+            ))}
+          </div>
+        </div>
       </form>
     </Modal>
   );

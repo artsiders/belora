@@ -91,11 +91,17 @@ export function CheckoutSidebar({
             <div className="space-y-2.5">
               <FormSelect
                 label=""
+                placeholder="Rechercher un client (nom, tél)..."
+                searchable
                 value={selectedClientId}
                 onChange={(e) => onSelectClient(e.target.value)}
                 options={clients.map((c) => ({
                   value: c.id,
-                  label: `${c.firstName} ${c.lastName}${c.isVip ? " (VIP)" : ""}`,
+                  label: `${c.firstName} ${c.lastName}`,
+                  sublabel: c.phone,
+                  avatarInitials: `${c.firstName.charAt(0)}${c.lastName.charAt(0)}`,
+                  badge: c.isVip ? "VIP" : undefined,
+                  badgeVariant: "gold",
                 }))}
               />
 

@@ -8,9 +8,17 @@ import {
   Phone,
   Mail,
   ShieldCheck,
+  UserPlus,
+  CalendarCheck,
+  User,
+  Scissors,
+  CheckCircle2,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Modal } from "@/components/pro-dashboard/ui/modal";
-import { FormInput, FormSelect } from "@/components/pro-dashboard/ui/form-controls";
+import { FormInput } from "@/components/pro-dashboard/ui/form-controls";
+import { Select, SelectOption } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 import {
   ProAppointment,
   ProStaffMember,
@@ -18,6 +26,8 @@ import {
   ProService,
   ProClient,
 } from "@/lib/data/pro-mock-data";
+
+import { toast } from "sonner";
 
 interface AppointmentModalProps {
   isOpen: boolean;
@@ -52,6 +62,13 @@ export function AppointmentModal({
   onStatusChange,
   onNavigateToCheckout,
 }: AppointmentModalProps) {
+  // Liste locale des clients pour création instantanée
+  const [localClients, setLocalClients] = useState<ProClient[]>(clientsList);
+  const [isQuickAddClientOpen, setIsQuickAddClientOpen] = useState(false);
+  const [quickClientFirstName, setQuickClientFirstName] = useState("");
+  const [quickClientLastName, setQuickClientLastName] = useState("");
+  const [quickClientPhone, setQuickClientPhone] = useState("");
+
   // État formulaire nouveau RDV
   const [selectedClientId, setSelectedClientId] = useState(clientsList[0]?.id || "");
   const [selectedServiceId, setSelectedServiceId] = useState(servicesList[0]?.id || "");
@@ -61,48 +78,90 @@ export function AppointmentModal({
   const [customNotes, setCustomNotes] = useState("");
 
   React.useEffect(() => {
+    setLocalClients(clientsList);
+  }, [clientsList]);
+
+  React.useEffect(() => {
     if (isOpen) {
-      if (clientsList[0]?.id && !selectedClientId) setSelectedClientId(clientsList[0].id);
+      if (localClients[0]?.id && !selectedClientId) setSelectedClientId(localClients[0].id);
       if (servicesList[0]?.id && !selectedServiceId) setSelectedServiceId(servicesList[0].id);
       if (defaultStaffId) setSelectedStaffId(defaultStaffId);
       else if (staffList[0]?.id && !selectedStaffId) setSelectedStaffId(staffList[0].id);
       if (defaultResourceId) setSelectedResourceId(defaultResourceId);
       else if (resourceList[0]?.id && !selectedResourceId) setSelectedResourceId(resourceList[0].id);
       if (defaultTime) setStartTime(defaultTime);
+      setIsQuickAddClientOpen(false);
     }
-  }, [isOpen, clientsList, servicesList, staffList, resourceList, defaultStaffId, defaultResourceId, defaultTime, selectedClientId, selectedServiceId, selectedStaffId, selectedResourceId]);
+  }, [isOpen, localClients, servicesList, staffList, resourceList, defaultStaffId, defaultResourceId, defaultTime, selectedClientId, selectedServiceId, selectedStaffId, selectedResourceId]);
+
+  const activeService = servicesList.find((s) => s.id === selectedServiceId);
+  const activeClient = localClients.find((c) => c.id === selectedClientId);
+  const activeStaff = staffList.find((st) => st.id === selectedStaffId);
+  const activeResource = resourceList.find((r) => r.id === selectedResourceId);
+
+  // Calcul dynamique de l'heure de fin
+  let calculatedEndTime = "--:--";
+  if (startTime && activeService) {
+    const [h, m] = startTime.split(":").map(Number);
+    const endMinutes = h * 60 + m + activeService.durationMinutes;
+    const endH = String(Math.floor(endMinutes / 60)).padStart(2, "0");
+    const endM = String(endMinutes % 60).padStart(2, "0");
+    calculatedEndTime = `${endH}:${endM}`;
+  }
+
+  const handleStartQuickClient = (query: string) => {
+    const parts = query.trim().split(" ");
+    setQuickClientFirstName(parts[0] || "");
+    setQuickClientLastName(parts.slice(1).join(" ") || "");
+    setQuickClientPhone("");
+    setIsQuickAddClientOpen(true);
+  };
+
+  const handleConfirmQuickClient = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!quickClientFirstName.trim() || !quickClientPhone.trim()) {
+      toast.error("Veuillez renseigner au moins le prénom et le téléphone.");
+      return;
+    }
+
+    const newClient: ProClient = {
+      id: `client-quick-${Date.now()}`,
+      firstName: quickClientFirstName.trim(),
+      lastName: quickClientLastName.trim() || "Client",
+      phone: quickClientPhone.trim(),
+      email: `${quickClientFirstName.toLowerCase().replace(/[^a-z0-9]/g, "")}@belora.temp`,
+      isVip: false,
+      totalVisits: 1,
+      totalSpent: 0,
+      lastVisit: new Date().toISOString().slice(0, 10),
+      createdAt: new Date().toISOString().slice(0, 10),
+    };
+
+    setLocalClients((prev) => [newClient, ...prev]);
+    setSelectedClientId(newClient.id);
+    setIsQuickAddClientOpen(false);
+    toast.success(`Client ${newClient.firstName} ${newClient.lastName} créé et sélectionné !`);
+  };
 
   const handleCreateSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const service = servicesList.find((s) => s.id === selectedServiceId);
-    const client = clientsList.find((c) => c.id === selectedClientId);
-    const staff = staffList.find((st) => st.id === selectedStaffId);
-    const resource = resourceList.find((r) => r.id === selectedResourceId);
-
-    if (!service || !client || !staff) return;
-
-    // Calcul de l'heure de fin
-    const [h, m] = startTime.split(":").map(Number);
-    const endMinutes = h * 60 + m + service.durationMinutes;
-    const endH = String(Math.floor(endMinutes / 60)).padStart(2, "0");
-    const endM = String(endMinutes % 60).padStart(2, "0");
-    const endTime = `${endH}:${endM}`;
+    if (!activeService || !activeClient || !activeStaff) return;
 
     onSaveNewAppointment({
-      clientId: client.id,
-      clientName: `${client.firstName} ${client.lastName}`,
-      clientPhone: client.phone,
-      clientEmail: client.email,
-      serviceId: service.id,
-      serviceName: service.name,
-      staffId: staff.id,
-      staffName: staff.name,
-      resourceId: resource?.id,
-      resourceName: resource?.name,
+      clientId: activeClient.id,
+      clientName: `${activeClient.firstName} ${activeClient.lastName}`,
+      clientPhone: activeClient.phone,
+      clientEmail: activeClient.email,
+      serviceId: activeService.id,
+      serviceName: activeService.name,
+      staffId: activeStaff.id,
+      staffName: activeStaff.name,
+      resourceId: activeResource?.id,
+      resourceName: activeResource?.name,
       startTime,
-      endTime,
-      price: service.priceEuros,
-      depositPaid: service.depositRequired ? service.depositAmountEuros : 0,
+      endTime: calculatedEndTime,
+      price: activeService.priceEuros,
+      depositPaid: activeService.depositRequired ? activeService.depositAmountEuros : 0,
       status: "confirmed",
       notes: customNotes,
     });
@@ -321,53 +380,168 @@ export function AppointmentModal({
       }
     >
       <form onSubmit={handleCreateSubmit} className="space-y-4">
-        {/* Choix du client */}
-        <FormSelect
+        {/* Création Express de client en ligne */}
+        <AnimatePresence>
+          {isQuickAddClientOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="p-4 bg-primary-50/60 border border-primary-200/80 rounded-2xl space-y-3 overflow-hidden shadow-2xs"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-primary-950 font-bold text-xs uppercase tracking-wider">
+                  <UserPlus className="w-4 h-4 text-primary-600" />
+                  <span>Nouveau Client Express</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsQuickAddClientOpen(false)}
+                  className="text-xs text-neutral-500 hover:text-neutral-800"
+                >
+                  Fermer
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <div>
+                  <label className="block text-xs font-semibold text-neutral-700 mb-1">
+                    Prénom *
+                  </label>
+                  <input
+                    type="text"
+                    value={quickClientFirstName}
+                    onChange={(e) => setQuickClientFirstName(e.target.value)}
+                    placeholder="Ex : Camille"
+                    className="w-full h-9 px-3 bg-white border border-neutral-200 rounded-xl text-xs text-neutral-900 focus:outline-hidden focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-neutral-700 mb-1">
+                    Nom
+                  </label>
+                  <input
+                    type="text"
+                    value={quickClientLastName}
+                    onChange={(e) => setQuickClientLastName(e.target.value)}
+                    placeholder="Ex : Dupont"
+                    className="w-full h-9 px-3 bg-white border border-neutral-200 rounded-xl text-xs text-neutral-900 focus:outline-hidden focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-neutral-700 mb-1">
+                    Téléphone *
+                  </label>
+                  <input
+                    type="tel"
+                    value={quickClientPhone}
+                    onChange={(e) => setQuickClientPhone(e.target.value)}
+                    placeholder="06 12 34 56 78"
+                    className="w-full h-9 px-3 bg-white border border-neutral-200 rounded-xl text-xs text-neutral-900 focus:outline-hidden focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={() => setIsQuickAddClientOpen(false)}
+                  className="px-3 py-1.5 text-xs font-semibold text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
+                >
+                  Annuler
+                </button>
+                <button
+                  type="button"
+                  onClick={handleConfirmQuickClient}
+                  className="px-3.5 py-1.5 text-xs font-semibold bg-neutral-900 text-white hover:bg-neutral-800 rounded-lg transition-colors shadow-2xs"
+                >
+                  Créer et Sélectionner
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Choix du client avec recherche et création rapide */}
+        <Select
           label="Client"
-          value={selectedClientId}
-          onChange={(e) => setSelectedClientId(e.target.value)}
-          options={clientsList.map((c) => ({
-            value: c.id,
-            label: `${c.firstName} ${c.lastName} (${c.phone})`,
-          }))}
           required
+          searchable
+          searchPlaceholder="Rechercher par prénom, nom ou 06..."
+          creatable
+          createPrompt="Créer le client express"
+          onCreateNew={handleStartQuickClient}
+          value={selectedClientId}
+          onChange={(val) => setSelectedClientId(val)}
+          options={localClients.map((c) => ({
+            value: c.id,
+            label: `${c.firstName} ${c.lastName}`.trim(),
+            sublabel: c.phone,
+            badge: c.isVip ? "VIP" : undefined,
+            badgeVariant: "gold",
+            avatarInitials: `${c.firstName[0] || ""}${c.lastName[0] || ""}`.toUpperCase(),
+          }))}
         />
 
-        {/* Choix de la prestation */}
-        <FormSelect
+        {/* Choix de la prestation avec badges de prix et durée */}
+        <Select
           label="Prestation"
+          required
+          searchable
+          searchPlaceholder="Rechercher une prestation (coupe, soin, balayage...)"
           value={selectedServiceId}
-          onChange={(e) => setSelectedServiceId(e.target.value)}
+          onChange={(val) => setSelectedServiceId(val)}
           options={servicesList.map((s) => ({
             value: s.id,
-            label: `${s.name} - ${s.durationMinutes} min (${s.priceEuros} €)`,
+            label: s.name,
+            sublabel: `${s.durationMinutes} min${
+              s.breakDurationMinutes ? ` • Pause pose : ${s.breakDurationMinutes} min` : ""
+            }`,
+            badge: `${s.priceEuros} €`,
+            badgeVariant: "info",
           }))}
-          required
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Choix du collaborateur */}
-          <FormSelect
+          <Select
             label="Collaborateur"
+            required
+            searchable
+            searchPlaceholder="Rechercher un membre de l'équipe..."
             value={selectedStaffId}
-            onChange={(e) => setSelectedStaffId(e.target.value)}
+            onChange={(val) => setSelectedStaffId(val)}
             options={staffList.map((st) => ({
               value: st.id,
               label: st.name,
+              sublabel: st.role,
+              avatarInitials: st.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")
+                .slice(0, 2)
+                .toUpperCase(),
+              badge: st.role,
             }))}
-            required
           />
 
-          {/* Choix de la cabine */}
-          <FormSelect
+          {/* Choix de la cabine / ressource */}
+          <Select
             label="Cabine / Ressource"
             value={selectedResourceId}
-            onChange={(e) => setSelectedResourceId(e.target.value)}
+            onChange={(val) => setSelectedResourceId(val)}
             options={[
-              { value: "", label: "Sans cabine assignée" },
+              {
+                value: "",
+                label: "Sans cabine assignée",
+                sublabel: "Attribution automatique selon disponibilité",
+              },
               ...resourceList.map((r) => ({
                 value: r.id,
                 label: r.name,
+                sublabel: r.type,
               })),
             ]}
           />
@@ -383,12 +557,12 @@ export function AppointmentModal({
             required
           />
 
-          {/* Note sur acompte */}
-          <div className="flex flex-col justify-end pb-1 text-sm text-neutral-500">
+          {/* Note sur l'encaissement */}
+          <div className="flex flex-col justify-end pb-1 text-xs text-neutral-500">
             <span className="font-semibold text-neutral-800">
-              Réservation en salon
+              Règlement en salon
             </span>
-            <span>Règlement intégral sur place lors de l&apos;encaissement</span>
+            <span>Paiement intégral lors de l&apos;encaissement en caisse POS</span>
           </div>
         </div>
 
@@ -400,6 +574,45 @@ export function AppointmentModal({
           value={customNotes}
           onChange={(e) => setCustomNotes(e.target.value)}
         />
+
+        {/* Synthèse en temps réel du rendez-vous */}
+        {activeService && activeClient && activeStaff && (
+          <motion.div
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="p-3.5 bg-neutral-50 rounded-2xl border border-neutral-200/80 space-y-2 text-xs shadow-2xs"
+          >
+            <div className="flex items-center justify-between text-neutral-500 font-medium">
+              <span className="flex items-center gap-1.5 text-neutral-900 font-semibold">
+                <Clock className="w-3.5 h-3.5 text-primary-600" />
+                <span>
+                  {startTime} → {calculatedEndTime} ({activeService.durationMinutes} min)
+                </span>
+              </span>
+              <span className="font-bold text-neutral-950 text-sm">
+                {activeService.priceEuros.toFixed(2)} € TTC
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between text-neutral-600 pt-1.5 border-t border-neutral-200/60">
+              <div className="flex items-center gap-2 truncate">
+                <span className="text-neutral-500">Avec</span>
+                <strong className="text-neutral-900 font-semibold truncate">
+                  {activeStaff.name}
+                </strong>
+                {activeResource && (
+                  <>
+                    <span className="text-neutral-300">•</span>
+                    <span className="text-neutral-600 truncate">{activeResource.name}</span>
+                  </>
+                )}
+              </div>
+              <Badge variant="success" size="sm">
+                En salon
+              </Badge>
+            </div>
+          </motion.div>
+        )}
       </form>
     </Modal>
   );

@@ -14,8 +14,28 @@ import {
 } from "lucide-react";
 import { Drawer } from "@/components/pro-dashboard/ui/drawer";
 import { Badge } from "@/components/pro-dashboard/ui/badge";
-import { FormInput, FormTextarea } from "@/components/pro-dashboard/ui/form-controls";
+import { FormInput, FormTextarea, FormSelect } from "@/components/pro-dashboard/ui/form-controls";
 import { ProClient, ProAppointment } from "@/lib/data/pro-mock-data";
+
+const HAIR_TYPE_PRESETS = [
+  "Cheveux lisses, texture fine",
+  "Cheveux lisses, texture normale",
+  "Cheveux ondulés, texture moyenne",
+  "Cheveux bouclés, texture épaisse",
+  "Cheveux frisés / afros",
+  "Cheveux colorés / balayage",
+  "Cheveux décolorés / sensibilisés",
+  "Cuir chevelu gras, pointes sèches",
+];
+
+const SENSITIVITIES_PRESETS = [
+  "Aucune sensibilité particulière",
+  "Cuir chevelu réactif / sensible",
+  "Allergie oxydant fort / décoloration",
+  "Allergie résorcine / PPD / ammoniaque",
+  "Psoriasis / Eczéma cuir chevelu",
+  "Grossesse / Allaitement",
+];
 
 interface ClientDrawerProps {
   isOpen: boolean;
@@ -62,6 +82,23 @@ function ClientDrawerInner({
     setHairType(client.techSheet?.hairType || "Cheveux ondulés, texture fine");
     setSensitivities(client.techSheet?.sensitivities || "Sensibilité cuir chevelu");
   }, [client]);
+
+  const hairOptions = React.useMemo(() => {
+    const list = [...HAIR_TYPE_PRESETS];
+    if (hairType && !list.includes(hairType)) {
+      list.unshift(hairType);
+    }
+    return list.map((h) => ({ value: h, label: h }));
+  }, [hairType]);
+
+  const sensitivityOptions = React.useMemo(() => {
+    const list = [...SENSITIVITIES_PRESETS];
+    if (sensitivities && !list.includes(sensitivities)) {
+      list.unshift(sensitivities);
+    }
+    return list.map((s) => ({ value: s, label: s }));
+  }, [sensitivities]);
+
   const [isAddingFormula, setIsAddingFormula] = useState(false);
   const [newFormulaService, setNewFormulaService] = useState("");
   const [newFormulaText, setNewFormulaText] = useState("");
@@ -268,15 +305,27 @@ function ClientDrawerInner({
               Diagnostic morphologique & capillaire
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <FormInput
+              <FormSelect
                 label="Nature & texture du cheveu"
+                searchable
+                creatable
+                createPrompt="Définir"
+                placeholder="Sélectionner ou saisir une texture..."
                 value={hairType}
                 onChange={(e) => setHairType(e.target.value)}
+                onCreateNew={(custom) => setHairType(custom)}
+                options={hairOptions}
               />
-              <FormInput
+              <FormSelect
                 label="Sensibilités & contre-indications"
+                searchable
+                creatable
+                createPrompt="Définir"
+                placeholder="Sélectionner ou saisir une sensibilité..."
                 value={sensitivities}
                 onChange={(e) => setSensitivities(e.target.value)}
+                onCreateNew={(custom) => setSensitivities(custom)}
+                options={sensitivityOptions}
               />
             </div>
           </div>

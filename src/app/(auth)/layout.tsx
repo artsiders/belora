@@ -54,7 +54,7 @@ export default function AuthLayout({
         </div>
 
         {/* Pied de page visuel : Manifeste & Réassurance */}
-        <div className="relative z-10 max-w-md space-y-6">
+        <div className="relative z-10 space-y-6">
 
           <h2 className="font-display text-3xl xl:text-4xl leading-[1.15] text-white text-balance font-normal">
             L’exigence du geste, la beauté du moment suspendu.

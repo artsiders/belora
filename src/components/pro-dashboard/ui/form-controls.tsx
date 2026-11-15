@@ -54,61 +54,98 @@ export const FormInput = React.forwardRef<HTMLInputElement, InputProps>(
 );
 FormInput.displayName = "FormInput";
 
+import { Select as CustomSelect, SelectOption as CustomSelectOption } from "@/components/ui/select";
+
 export interface SelectOption {
   value: string;
   label: string;
+  sublabel?: string;
+  badge?: string;
+  badgeVariant?: "default" | "neutral" | "success" | "warning" | "danger" | "info" | "gold";
+  avatarInitials?: string;
   disabled?: boolean;
+  group?: string;
 }
 
-export interface SelectProps
-  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps {
+  id?: string;
+  name?: string;
   label?: string;
   error?: string;
   helper?: string;
   options: SelectOption[];
+  value?: string | number | readonly string[];
+  onChange?: (e: any) => void;
+  required?: boolean;
+  disabled?: boolean;
+  placeholder?: string;
+  searchable?: boolean;
+  clearable?: boolean;
+  creatable?: boolean;
+  createPrompt?: string;
+  onCreateNew?: (query: string) => void;
+  className?: string;
+  size?: "sm" | "md";
+  variant?: "default" | "ghost";
 }
 
-export const FormSelect = React.forwardRef<HTMLSelectElement, SelectProps>(
-  ({ label, error, helper, options, className = "", id, ...props }, ref) => {
-    const generatedId = React.useId();
-    const selectId = id || generatedId;
+export const FormSelect = React.forwardRef<HTMLDivElement, SelectProps>(
+  (
+    {
+      label,
+      error,
+      helper,
+      options,
+      value,
+      onChange,
+      required,
+      disabled,
+      placeholder,
+      searchable,
+      clearable,
+      creatable,
+      createPrompt,
+      onCreateNew,
+      size,
+      variant,
+      className = "",
+      id,
+    },
+    ref
+  ) => {
+    const valString = value !== undefined && value !== null ? String(value) : "";
+
+    const handleChange = (selectedVal: string) => {
+      if (onChange) {
+        // Simule un événement synthétique pour compatibilité totale avec les formulaires existants
+        onChange({
+          target: { value: selectedVal },
+          currentTarget: { value: selectedVal },
+        });
+      }
+    };
 
     return (
-      <div className="space-y-1.5 w-full">
-        {label && (
-          <label
-            htmlFor={selectId}
-            className="block text-sm font-semibold text-neutral-800 uppercase tracking-wider"
-          >
-            {label}
-            {props.required && <span className="text-rose-600 ml-1">*</span>}
-          </label>
-        )}
-        <div className="relative">
-          <select
-            ref={ref}
-            id={selectId}
-            className={`w-full h-11 ps-3.5 pe-9 bg-white border rounded-lg text-neutral-900 text-sm transition-colors duration-150 focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 disabled:opacity-50 disabled:bg-neutral-50 cursor-pointer appearance-none ${
-              error
-                ? "border-rose-400 focus:border-rose-600"
-                : "border-neutral-300 hover:border-neutral-400"
-            } ${className}`}
-            {...props}
-          >
-            {options.map((opt) => (
-              <option key={opt.value} value={opt.value} disabled={opt.disabled}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-          <div className="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none text-neutral-400">
-            <ChevronDown className="w-4 h-4" />
-          </div>
-        </div>
-        {error && <p className="text-sm text-rose-600">{error}</p>}
-        {helper && !error && (
-          <p className="text-sm text-neutral-500">{helper}</p>
-        )}
+      <div ref={ref} className={className}>
+        <CustomSelect
+          id={id}
+          label={label}
+          required={required}
+          error={error}
+          helper={helper}
+          disabled={disabled}
+          placeholder={placeholder}
+          searchable={searchable}
+          clearable={clearable}
+          creatable={creatable}
+          createPrompt={createPrompt}
+          onCreateNew={onCreateNew}
+          size={size}
+          variant={variant}
+          value={valString}
+          onChange={handleChange}
+          options={options as CustomSelectOption[]}
+        />
       </div>
     );
   }

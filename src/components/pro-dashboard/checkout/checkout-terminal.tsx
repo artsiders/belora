@@ -619,19 +619,21 @@ export function CheckoutTerminal({
 
                 <div className="flex items-center justify-between pt-1 text-sm">
                   {/* Attribution praticien pour commission/traçabilité */}
-                  <select
-                    value={item.staffId}
-                    onChange={(e) =>
-                      handleUpdateStaff(item.id, e.target.value)
-                    }
-                    className="select h-7 py-0 px-2 text-sm font-medium text-neutral-800"
-                  >
-                    {staffList.map((st) => (
-                      <option key={st.id} value={st.id}>
-                        {st.name}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="w-48">
+                    <FormSelect
+                      size="sm"
+                      value={item.staffId}
+                      onChange={(e) =>
+                        handleUpdateStaff(item.id, e.target.value)
+                      }
+                      options={staffList.map((st) => ({
+                        value: st.id,
+                        label: st.name,
+                        sublabel: st.role,
+                        avatarInitials: st.name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase(),
+                      }))}
+                    />
+                  </div>
 
                   {/* Contrôles Quantité */}
                   <div className="flex items-center gap-1.5">

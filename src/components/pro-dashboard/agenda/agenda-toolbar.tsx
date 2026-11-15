@@ -8,6 +8,7 @@ import {
   Plus,
   SlidersHorizontal,
 } from "lucide-react";
+import { Select } from "@/components/ui/select";
 
 interface AgendaToolbarProps {
   currentDate: Date;
@@ -137,19 +138,22 @@ export function AgendaToolbar({
           </button>
         </div>
 
-        {/* Granularité des créneaux (15 min / 20 min / 30 min) */}
-        <div className="hidden md:flex items-center gap-1.5 text-sm text-neutral-600">
-          <span className="text-neutral-500 whitespace-nowrap">Pas :</span>
-          <select
-            value={intervalMinutes}
-            onChange={(e) => onIntervalChange(Number(e.target.value))}
-            className="select h-8 px-2 py-0 text-sm font-semibold text-neutral-800"
-          >
-            <option value={10}>10 min</option>
-            <option value={15}>15 min</option>
-            <option value={20}>20 min</option>
-            <option value={30}>30 min</option>
-          </select>
+        {/* Granularité des créneaux (10 min / 15 min / 20 min / 30 min) */}
+        <div className="hidden md:flex items-center gap-2 text-xs text-neutral-600">
+          <span className="text-neutral-500 whitespace-nowrap font-medium">Pas :</span>
+          <div className="w-28">
+            <Select
+              size="sm"
+              value={String(intervalMinutes)}
+              onChange={(val) => onIntervalChange(Number(val))}
+              options={[
+                { value: "10", label: "10 min" },
+                { value: "15", label: "15 min" },
+                { value: "20", label: "20 min" },
+                { value: "30", label: "30 min" },
+              ]}
+            />
+          </div>
         </div>
 
         {/* Bouton Création d'un RDV */}

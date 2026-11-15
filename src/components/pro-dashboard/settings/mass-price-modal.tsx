@@ -66,11 +66,25 @@ export function MassPriceModal({
         {/* Catégories ciblées */}
         <FormSelect
           label="Catégories de prestations à modifier"
+          searchable
           value={selectedCatId}
           onChange={(e) => setSelectedCatId(e.target.value)}
           options={[
-            { value: "all", label: "Toutes les catégories du salon" },
-            ...categories.map((c) => ({ value: c.id, label: c.name })),
+            {
+              value: "all",
+              label: "Toutes les catégories du salon",
+              badge: `${services.length} prestations`,
+              badgeVariant: "neutral",
+            },
+            ...categories.map((c) => {
+              const count = services.filter((s) => s.categoryId === c.id).length;
+              return {
+                value: c.id,
+                label: c.name,
+                badge: `${count} prestation${count > 1 ? "s" : ""}`,
+                badgeVariant: "neutral" as const,
+              };
+            }),
           ]}
         />
 

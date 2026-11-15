@@ -8,6 +8,7 @@ import {
   Layers,
   ChevronDown,
 } from "lucide-react";
+import { Select } from "@/components/ui/select";
 import {
   ProStaffMember,
   ProResource,
@@ -210,22 +211,22 @@ export function AgendaGrid({
           </div>
         ) : (
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-neutral-500">
-              Planning hebdomadaire de :
+            <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+              Planning de :
             </span>
-            <div className="relative inline-flex items-center">
-              <select
+            <div className="w-56">
+              <Select
+                size="sm"
                 value={selectedWeekStaffId}
-                onChange={(e) => setSelectedWeekStaffId(e.target.value)}
-                className="select h-8 ps-3 pe-8 text-sm font-bold text-neutral-900 appearance-none shadow-2xs"
-              >
-                {staffList.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.name} ({s.role})
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute end-2.5 pointer-events-none" />
+                onChange={(val) => setSelectedWeekStaffId(val)}
+                options={staffList.map((s) => ({
+                  value: s.id,
+                  label: s.name,
+                  sublabel: s.role,
+                  avatarInitials: s.name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase(),
+                  badge: s.role,
+                }))}
+              />
             </div>
           </div>
         )}

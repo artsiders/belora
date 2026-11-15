@@ -112,6 +112,8 @@ function ServiceEditInnerForm({
         />
         <FormSelect
           label="Catégorie"
+          searchable
+          placeholder="Sélectionner une catégorie..."
           value={categoryId}
           onChange={(e) => setCategoryId(e.target.value)}
           options={categories.map((c) => ({
@@ -123,7 +125,7 @@ function ServiceEditInnerForm({
       </div>
 
       {/* Durée, Temps de pose, Prix */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 gap-3">
         <FormInput
           type="number"
           label="Durée totale (min)"
@@ -204,15 +206,16 @@ function ServiceEditInnerForm({
       {/* Ressource / Cabine requise */}
       <FormSelect
         label="Cabine ou matériel requis (optionnel)"
+        placeholder="Aucun équipement dédié requis"
+        searchable
+        clearable
         value={requiredResourceId}
         onChange={(e) => setRequiredResourceId(e.target.value)}
-        options={[
-          { value: "", label: "Aucun équipement dédié requis" },
-          ...resourceList.map((r) => ({
-            value: r.id,
-            label: r.name,
-          })),
-        ]}
+        options={resourceList.map((r) => ({
+          value: r.id,
+          label: r.name,
+          sublabel: r.type ? `Type : ${r.type}` : undefined,
+        }))}
       />
 
       {/* Description de la prestation */}

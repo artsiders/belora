@@ -19,6 +19,7 @@ import { Venue, CITY_COORDINATES } from "@/lib/data/venues";
 import { SearchVenueCard } from "@/components/search/search-venue-card";
 import { SearchMap } from "@/components/search/search-map";
 import { apiClient } from "@/lib/api-client";
+import { Select } from "@/components/ui/select";
 
 const CATEGORY_OPTIONS = [
   { slug: "all", label: "Toutes prestations" },
@@ -219,23 +220,23 @@ export function SearchClient() {
             className="flex flex-col md:flex-row items-stretch md:items-center gap-2 rounded-2xl"
           >
             {/* Prestation / Catégorie */}
-            <div className="flex-1 flex items-center gap-2 px-4 py-4 h-16 bg-white rounded-xl border border-neutral-200/70">
-              <Search className="w-4 h-4 text-primary-600 shrink-0" />
+            <div className="flex-1 flex items-center gap-2 px-4 py-2 min-h-16 bg-white rounded-xl border border-neutral-200/70">
+              <Search className="w-4 h-4 text-primary-600 shrink-0 self-center" />
               <div className="flex-1 min-w-0">
-                <span className="text-sm uppercase font-bold text-neutral-400 block tracking-wider leading-none">
+                <span className="text-xs uppercase font-bold text-neutral-400 block tracking-wider leading-none mb-0.5">
                   Prestation
                 </span>
-                <select
+                <Select
+                  variant="ghost"
                   value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full bg-transparent text-sm sm:text-base font-semibold text-neutral-900 focus:outline-hidden cursor-pointer"
-                >
-                  {CATEGORY_OPTIONS.map((opt) => (
-                    <option key={opt.slug} value={opt.slug}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(val) => setSelectedCategory(val)}
+                  options={CATEGORY_OPTIONS.map((opt) => ({
+                    value: opt.slug,
+                    label: opt.label,
+                  }))}
+                  searchable
+                  searchPlaceholder="Filtrer une prestation..."
+                />
               </div>
             </div>
 
