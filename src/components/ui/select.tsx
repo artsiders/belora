@@ -1,6 +1,14 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useId, useMemo } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useId,
+  useMemo,
+  useCallback,
+} from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronDown,
@@ -8,9 +16,9 @@ import {
   Search,
   X,
   Plus,
-  LucideIcon,
+  type LucideIcon,
 } from "lucide-react";
-import { Badge, BadgeVariant } from "@/components/ui/badge";
+import { Badge, type BadgeVariant } from "@/components/ui/badge";
 
 export interface SelectOption<T = string> {
   value: T;
@@ -76,19 +84,32 @@ export function Select<T = string>({
   const selectId = id || generatedId;
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [highlightedIndex, setHighlightedIndex] = useState<number>(0);
+  const [menuCoords, setMenuCoords] = useState<{
+    top: number;
+    left: number;
+    width: number;
+  }>({ top: 0, left: 0, width: 0 });
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
-  // Selected Option finding
+  // Sécurité SSR (Next.js App Router) avant d'utiliser document.body
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Option actuellement sélectionnée
   const selectedOption = useMemo(() => {
     return options.find((opt) => opt.value === value);
   }, [options, value]);
 
-  // Filtered options based on search query
+  // Filtrage selon la recherche
   const filteredOptions = useMemo(() => {
     if (!searchQuery.trim()) return options;
     const query = searchQuery.toLowerCase().trim();
@@ -97,60 +118,98 @@ export function Select<T = string>({
       const matchSub = opt.sublabel?.toLowerCase().includes(query);
       const matchBadge = opt.badge?.toLowerCase().includes(query);
       const matchDesc = opt.description?.toLowerCase().includes(query);
-      return matchLabel || matchSub || matchBadge || matchDesc;
+      return Boolean(matchLabel || matchSub || matchBadge || matchDesc);
     });
   }, [options, searchQuery]);
 
-  // Grouped options if groups exist
+  // Regroupement des options si `group` est défini
   const groupedOptions = useMemo(() => {
-    const hasGroups = filteredOptions.some((opt) => opt.group);
+    const hasGroups = filteredOptions.some((opt) => Boolean(opt.group));
     if (!hasGroups) return null;
 
     const groups: Record<string, SelectOption<T>[]> = {};
     for (const opt of filteredOptions) {
       const groupName = opt.group || "Autres";
-      if (!groups[groupName]) groups[groupName] = [];
+      if (!groups[groupName]) {
+        groups[groupName] = [];
+      }
       groups[groupName].push(opt);
     }
     return groups;
   }, [filteredOptions]);
 
-  // Handle open state & focus search input
+  // Calcul de la position fixe du menu par rapport au déclencheur
+  const updatePosition = useCallback(() => {
+    if (!triggerRef.current) return;
+    const rect = triggerRef.current.getBoundingClientRect();
+    const offset = variant === "ghost" ? 8 : 6;
+    setMenuCoords({
+      top: rect.bottom + offset,
+      left: rect.left,
+      width: Math.max(rect.width, 220),
+    });
+  }, [variant]);
+
+  // Gestion ouverture / fermeture, focus et repositionnement
   useEffect(() => {
     if (isOpen) {
+      updatePosition();
       setHighlightedIndex(0);
       if (searchable) {
-        setTimeout(() => {
+        requestAnimationFrame(() => {
           searchInputRef.current?.focus();
-        }, 50);
+        });
       }
+      window.addEventListener("scroll", updatePosition, true);
+      window.addEventListener("resize", updatePosition);
     } else {
       setSearchQuery("");
     }
-  }, [isOpen, searchable]);
 
-  // Click outside listener
+    return () => {
+      window.removeEventListener("scroll", updatePosition, true);
+      window.removeEventListener("resize", updatePosition);
+    };
+  }, [isOpen, searchable, updatePosition]);
+
+  // Fermeture au clic extérieur (trigger + portal)
   useEffect(() => {
     function handleClickOutside(event: MouseEvent | TouchEvent) {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
+      const target = event.target as Node | null;
+      if (!target) return;
+
+      const clickedInsideContainer = containerRef.current?.contains(target);
+      const clickedInsideMenu = menuRef.current?.contains(target);
+
+      if (!clickedInsideContainer && !clickedInsideMenu) {
         setIsOpen(false);
       }
     }
+
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("touchstart", handleClickOutside);
     }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("touchstart", handleClickOutside);
     };
   }, [isOpen]);
 
-  // Keyboard navigation
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleSelect = (option: SelectOption<T>) => {
+    if (option.disabled) return;
+    onChange(option.value);
+    setIsOpen(false);
+  };
+
+  const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    onChange("" as unknown as T);
+  };
+
+  // Navigation clavier (compatible div trigger et input search)
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
     if (disabled) return;
 
     if (!isOpen) {
@@ -164,28 +223,35 @@ export function Select<T = string>({
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setHighlightedIndex((prev) =>
-          prev < filteredOptions.length - 1 ? prev + 1 : 0
-        );
+        if (filteredOptions.length > 0) {
+          setHighlightedIndex((prev) =>
+            prev < filteredOptions.length - 1 ? prev + 1 : 0
+          );
+        }
         break;
       case "ArrowUp":
         e.preventDefault();
-        setHighlightedIndex((prev) =>
-          prev > 0 ? prev - 1 : filteredOptions.length - 1
-        );
+        if (filteredOptions.length > 0) {
+          setHighlightedIndex((prev) =>
+            prev > 0 ? prev - 1 : filteredOptions.length - 1
+          );
+        }
         break;
-      case "Enter":
+      case "Enter": {
         e.preventDefault();
-        if (filteredOptions[highlightedIndex]) {
-          handleSelect(filteredOptions[highlightedIndex]);
+        const highlightedOption = filteredOptions[highlightedIndex];
+        if (highlightedOption) {
+          handleSelect(highlightedOption);
         } else if (creatable && searchQuery.trim() && onCreateNew) {
           onCreateNew(searchQuery.trim());
           setIsOpen(false);
         }
         break;
+      }
       case "Escape":
         e.preventDefault();
         setIsOpen(false);
+        triggerRef.current?.focus();
         break;
       case "Tab":
         setIsOpen(false);
@@ -193,26 +259,15 @@ export function Select<T = string>({
     }
   };
 
-  const handleSelect = (option: SelectOption<T>) => {
-    if (option.disabled) return;
-    onChange(option.value);
-    setIsOpen(false);
-  };
-
-  const handleClear = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onChange("" as unknown as T);
-  };
-
   const heightClass = size === "sm" ? "h-9 text-xs" : "h-11 text-sm";
 
   return (
-    <div ref={containerRef} className={`space-y-1.5 w-full relative ${className}`}>
+    <div ref={containerRef} className={`w-full ${className}`}>
       {/* Label */}
       {label && (
         <label
           htmlFor={selectId}
-          className="block text-xs font-semibold text-neutral-800 uppercase tracking-wider"
+          className="block text-xs font-semibold text-neutral-800 uppercase tracking-wider mb-1.5"
         >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
@@ -221,6 +276,7 @@ export function Select<T = string>({
 
       {/* Trigger Button */}
       <div
+        ref={triggerRef}
         id={selectId}
         role="combobox"
         aria-expanded={isOpen}
@@ -240,7 +296,7 @@ export function Select<T = string>({
               }`
         } ${disabled ? "opacity-50 cursor-not-allowed bg-neutral-50" : ""}`}
       >
-        {/* Left Side: Selected Value or Placeholder */}
+        {/* Valeur sélectionnée ou Placeholder */}
         <div className="flex items-center gap-2.5 min-w-0 flex-1 truncate">
           {selectedOption ? (
             renderValue ? (
@@ -279,7 +335,7 @@ export function Select<T = string>({
           )}
         </div>
 
-        {/* Right Side: Clear icon & Chevron */}
+        {/* Bouton Clear & Chevron */}
         <div className="flex items-center gap-1.5 shrink-0 text-neutral-400">
           {clearable && selectedOption && !disabled && (
             <button
@@ -299,221 +355,241 @@ export function Select<T = string>({
         </div>
       </div>
 
-      {/* Helper & Error Texts */}
+      {/* Textes d'erreur ou d'aide */}
       {error ? (
-        <p className="text-xs text-red-600 font-medium">{error}</p>
+        <p className="mt-1.5 text-xs text-red-600 font-medium">{error}</p>
       ) : helper ? (
-        <p className="text-xs text-neutral-500">{helper}</p>
+        <p className="mt-1.5 text-xs text-neutral-500">{helper}</p>
       ) : null}
 
-      {/* Dropdown Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-            className={`absolute z-50 left-0 right-0 ${
-              variant === "ghost" ? "top-full mt-2" : "top-full mt-1.5"
-            } min-w-[220px] bg-white border border-neutral-200/90 rounded-2xl shadow-xl overflow-hidden backdrop-blur-md`}
-          >
-            {/* Live Search Input */}
-            {searchable && (
-              <div className="p-2 border-b border-neutral-100 bg-neutral-50/50">
-                <div className="relative">
-                  <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input
-                    ref={searchInputRef}
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={searchPlaceholder}
-                    className="w-full pl-9 pr-8 py-2 bg-white border border-neutral-200 rounded-xl text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-hidden focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
-                  />
-                  {searchQuery && (
-                    <button
-                      type="button"
-                      onClick={() => setSearchQuery("")}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 text-neutral-400 hover:text-neutral-600"
-                    >
-                      <X className="w-3 h-3" />
-                    </button>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Options List */}
-            <ul
-              ref={listRef}
-              role="listbox"
-              tabIndex={-1}
-              className="max-h-60 overflow-y-auto p-1.5 space-y-1 text-xs"
-            >
-              {filteredOptions.length === 0 ? (
-                <div className="py-6 px-4 text-center">
-                  <p className="text-neutral-500 font-medium">
-                    Aucun résultat trouvé pour &laquo;&nbsp;{searchQuery}&nbsp;&raquo;
-                  </p>
-                  {creatable && searchQuery.trim() && onCreateNew && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        onCreateNew(searchQuery.trim());
-                        setIsOpen(false);
-                      }}
-                      className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary-50 text-primary-700 hover:bg-primary-100 font-semibold text-xs transition-colors"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                      <span>
-                        {createPrompt} &laquo;&nbsp;{searchQuery.trim()}&nbsp;&raquo;
-                      </span>
-                    </button>
-                  )}
-                </div>
-              ) : groupedOptions ? (
-                Object.entries(groupedOptions).map(([groupTitle, groupOpts]) => (
-                  <div key={groupTitle} className="space-y-1">
-                    <div className="px-3 py-1.5 text-xs font-semibold text-neutral-400 uppercase tracking-wider">
-                      {groupTitle}
+      {/* Menu déroulant rendu dans un Portal */}
+      {isMounted &&
+        createPortal(
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                ref={menuRef}
+                initial={{ opacity: 0, y: -4, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -4, scale: 0.98 }}
+                transition={{ duration: 0.14, ease: "easeOut" }}
+                style={{
+                  position: "fixed",
+                  top: menuCoords.top,
+                  left: menuCoords.left,
+                  width: menuCoords.width,
+                  transformOrigin: "top center",
+                }}
+                className="z-[9999] bg-white border border-neutral-200/90 rounded-2xl shadow-xl overflow-hidden backdrop-blur-md"
+              >
+                {/* Champ de recherche */}
+                {searchable && (
+                  <div className="p-2 border-b border-neutral-100 bg-neutral-50/50">
+                    <div className="relative">
+                      <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                      <input
+                        ref={searchInputRef}
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        placeholder={searchPlaceholder}
+                        className="w-full pl-9 pr-8 py-2 bg-white border border-neutral-200 rounded-xl text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-hidden focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
+                      />
+                      {searchQuery && (
+                        <button
+                          type="button"
+                          onClick={() => setSearchQuery("")}
+                          className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 text-neutral-400 hover:text-neutral-600"
+                        >
+                          <X className="w-3 h-3" />
+                        </button>
+                      )}
                     </div>
-                    {groupOpts.map((opt) => {
+                  </div>
+                )}
+
+                {/* Liste des options */}
+                <ul
+                  ref={listRef}
+                  role="listbox"
+                  tabIndex={-1}
+                  className="max-h-60 overflow-y-auto p-1.5 space-y-1 text-xs"
+                >
+                  {filteredOptions.length === 0 ? (
+                    <div className="py-6 px-4 text-center">
+                      <p className="text-neutral-500 font-medium">
+                        Aucun résultat trouvé pour &laquo;&nbsp;{searchQuery}&nbsp;&raquo;
+                      </p>
+                      {creatable && searchQuery.trim() && onCreateNew && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            onCreateNew(searchQuery.trim());
+                            setIsOpen(false);
+                          }}
+                          className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary-50 text-primary-700 hover:bg-primary-100 font-semibold text-xs transition-colors"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                          <span>
+                            {createPrompt} &laquo;&nbsp;{searchQuery.trim()}&nbsp;&raquo;
+                          </span>
+                        </button>
+                      )}
+                    </div>
+                  ) : groupedOptions ? (
+                    Object.entries(groupedOptions).map(([groupTitle, groupOpts]) => (
+                      <div key={groupTitle} className="space-y-1">
+                        <div className="px-3 py-1.5 text-xs font-semibold text-neutral-400 uppercase tracking-wider">
+                          {groupTitle}
+                        </div>
+                        {groupOpts.map((opt) => {
+                          const isSelected = opt.value === value;
+                          return (
+                            <li
+                              key={String(opt.value)}
+                              role="option"
+                              aria-selected={isSelected}
+                              onClick={() => handleSelect(opt)}
+                              className={`flex items-center justify-between gap-3 px-3 py-2 rounded-xl cursor-pointer transition-colors ${
+                                isSelected
+                                  ? "bg-primary-50 text-primary-900 font-semibold"
+                                  : "text-neutral-700 hover:bg-neutral-100"
+                              } ${opt.disabled ? "opacity-40 cursor-not-allowed" : ""}`}
+                            >
+                              <div className="flex items-center gap-2.5 truncate flex-1">
+                                {opt.avatarInitials && (
+                                  <span className="w-6 h-6 rounded-full bg-neutral-200 text-neutral-700 font-bold text-xs flex items-center justify-center shrink-0">
+                                    {opt.avatarInitials}
+                                  </span>
+                                )}
+                                {opt.icon && (
+                                  <opt.icon className="w-4 h-4 text-neutral-400 shrink-0" />
+                                )}
+                                <div className="truncate">
+                                  <div className="truncate">{opt.label}</div>
+                                  {opt.sublabel && (
+                                    <div className="text-xs text-neutral-500 font-normal truncate">
+                                      {opt.sublabel}
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+
+                              <div className="flex items-center gap-2 shrink-0">
+                                {opt.badge && (
+                                  <Badge
+                                    variant={opt.badgeVariant || "neutral"}
+                                    size="sm"
+                                  >
+                                    {opt.badge}
+                                  </Badge>
+                                )}
+                                {isSelected && (
+                                  <Check className="w-4 h-4 text-primary-600 stroke-[2.5]" />
+                                )}
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </div>
+                    ))
+                  ) : (
+                    filteredOptions.map((opt, idx) => {
                       const isSelected = opt.value === value;
+                      const isHighlighted = idx === highlightedIndex;
+
                       return (
                         <li
                           key={String(opt.value)}
                           role="option"
                           aria-selected={isSelected}
+                          onMouseEnter={() => setHighlightedIndex(idx)}
                           onClick={() => handleSelect(opt)}
                           className={`flex items-center justify-between gap-3 px-3 py-2 rounded-xl cursor-pointer transition-colors ${
                             isSelected
                               ? "bg-primary-50 text-primary-900 font-semibold"
+                              : isHighlighted
+                              ? "bg-neutral-100 text-neutral-900"
                               : "text-neutral-700 hover:bg-neutral-100"
                           } ${opt.disabled ? "opacity-40 cursor-not-allowed" : ""}`}
                         >
-                          <div className="flex items-center gap-2.5 truncate flex-1">
-                            {opt.avatarInitials && (
-                              <span className="w-6 h-6 rounded-full bg-neutral-200 text-neutral-700 font-bold text-xs flex items-center justify-center shrink-0">
-                                {opt.avatarInitials}
-                              </span>
-                            )}
-                            {opt.icon && (
-                              <opt.icon className="w-4 h-4 text-neutral-400 shrink-0" />
-                            )}
-                            <div className="truncate">
-                              <div className="truncate">{opt.label}</div>
-                              {opt.sublabel && (
-                                <div className="text-xs text-neutral-500 font-normal truncate">
-                                  {opt.sublabel}
+                          {renderOption ? (
+                            renderOption(opt, isSelected)
+                          ) : (
+                            <>
+                              <div className="flex items-center gap-2.5 truncate flex-1">
+                                {opt.avatarInitials && (
+                                  <span className="w-6 h-6 rounded-full bg-neutral-200 text-neutral-700 font-bold text-xs flex items-center justify-center shrink-0">
+                                    {opt.avatarInitials}
+                                  </span>
+                                )}
+                                {opt.icon && (
+                                  <opt.icon className="w-4 h-4 text-neutral-400 shrink-0" />
+                                )}
+                                <div className="truncate">
+                                  <div className="truncate font-medium">
+                                    {opt.label}
+                                  </div>
+                                  {opt.sublabel && (
+                                    <div className="text-xs text-neutral-500 font-normal truncate">
+                                      {opt.sublabel}
+                                    </div>
+                                  )}
                                 </div>
-                              )}
-                            </div>
-                          </div>
+                              </div>
 
-                          <div className="flex items-center gap-2 shrink-0">
-                            {opt.badge && (
-                              <Badge
-                                variant={opt.badgeVariant || "neutral"}
-                                size="sm"
-                              >
-                                {opt.badge}
-                              </Badge>
-                            )}
-                            {isSelected && (
-                              <Check className="w-4 h-4 text-primary-600 stroke-[2.5]" />
-                            )}
-                          </div>
+                              <div className="flex items-center gap-2 shrink-0">
+                                {opt.badge && (
+                                  <Badge
+                                    variant={opt.badgeVariant || "neutral"}
+                                    size="sm"
+                                  >
+                                    {opt.badge}
+                                  </Badge>
+                                )}
+                                {isSelected && (
+                                  <Check className="w-4 h-4 text-primary-600 stroke-[2.5]" />
+                                )}
+                              </div>
+                            </>
+                          )}
                         </li>
                       );
-                    })}
-                  </div>
-                ))
-              ) : (
-                filteredOptions.map((opt) => {
-                  const isSelected = opt.value === value;
+                    })
+                  )}
 
-                  return (
-                    <li
-                      key={String(opt.value)}
-                      role="option"
-                      aria-selected={isSelected}
-                      onClick={() => handleSelect(opt)}
-                      className={`flex items-center justify-between gap-3 px-3 py-2 rounded-xl cursor-pointer transition-colors ${
-                        isSelected
-                          ? "bg-primary-50 text-primary-900 font-semibold"
-                          : "text-neutral-700 hover:bg-neutral-100"
-                      } ${opt.disabled ? "opacity-40 cursor-not-allowed" : ""}`}
-                    >
-                      {renderOption ? (
-                        renderOption(opt, isSelected)
-                      ) : (
-                        <>
-                          <div className="flex items-center gap-2.5 truncate flex-1">
-                            {opt.avatarInitials && (
-                              <span className="w-6 h-6 rounded-full bg-neutral-200 text-neutral-700 font-bold text-xs flex items-center justify-center shrink-0">
-                                {opt.avatarInitials}
-                              </span>
-                            )}
-                            {opt.icon && (
-                              <opt.icon className="w-4 h-4 text-neutral-400 shrink-0" />
-                            )}
-                            <div className="truncate">
-                              <div className="truncate font-medium">{opt.label}</div>
-                              {opt.sublabel && (
-                                <div className="text-xs text-neutral-500 font-normal truncate">
-                                  {opt.sublabel}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="flex items-center gap-2 shrink-0">
-                            {opt.badge && (
-                              <Badge
-                                variant={opt.badgeVariant || "neutral"}
-                                size="sm"
-                              >
-                                {opt.badge}
-                              </Badge>
-                            )}
-                            {isSelected && (
-                              <Check className="w-4 h-4 text-primary-600 stroke-[2.5]" />
-                            )}
-                          </div>
-                        </>
-                      )}
-                    </li>
-                  );
-                })
-              )}
-              {creatable &&
-                searchQuery.trim() &&
-                onCreateNew &&
-                filteredOptions.length > 0 &&
-                !options.some(
-                  (o) => o.label.toLowerCase() === searchQuery.trim().toLowerCase()
-                ) && (
-                  <li className="pt-1 mt-1 border-t border-neutral-100 list-none">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        onCreateNew(searchQuery.trim());
-                        setIsOpen(false);
-                      }}
-                      className="w-full flex items-center gap-2 px-3 py-2 rounded-xl bg-primary-50 text-primary-700 hover:bg-primary-100 font-semibold text-xs transition-colors cursor-pointer"
-                    >
-                      <Plus className="w-3.5 h-3.5 shrink-0" />
-                      <span className="truncate">
-                        {createPrompt} &laquo;&nbsp;{searchQuery.trim()}&nbsp;&raquo;
-                      </span>
-                    </button>
-                  </li>
-                )}
-            </ul>
-          </motion.div>
+                  {/* Option de création rapide */}
+                  {creatable &&
+                    searchQuery.trim() &&
+                    onCreateNew &&
+                    filteredOptions.length > 0 &&
+                    !options.some(
+                      (o) =>
+                        o.label.toLowerCase() === searchQuery.trim().toLowerCase()
+                    ) && (
+                      <li className="pt-1 mt-1 border-t border-neutral-100 list-none">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            onCreateNew(searchQuery.trim());
+                            setIsOpen(false);
+                          }}
+                          className="w-full flex items-center gap-2 px-3 py-2 rounded-xl bg-primary-50 text-primary-700 hover:bg-primary-100 font-semibold text-xs transition-colors cursor-pointer"
+                        >
+                          <Plus className="w-3.5 h-3.5 shrink-0" />
+                          <span className="truncate">
+                            {createPrompt} &laquo;&nbsp;{searchQuery.trim()}&nbsp;&raquo;
+                          </span>
+                        </button>
+                      </li>
+                    )}
+                </ul>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </div>
   );
 }
