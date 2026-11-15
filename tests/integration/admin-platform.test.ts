@@ -12,7 +12,7 @@ import {
 import { GET as getReviewsRoute } from "@/app/api/admin/reviews/route";
 import { DELETE as deleteReviewRoute } from "@/app/api/admin/reviews/[id]/route";
 
-describe("Sprint 12 — Panneau Super-Admin Belora Plateforme (/admin)", () => {
+describe("Sprint 12 - Panneau Super-Admin Belora Plateforme (/admin)", () => {
   const adminEmail = "admin@yopmail.com";
   const clientEmail = "client@yopmail.com";
 

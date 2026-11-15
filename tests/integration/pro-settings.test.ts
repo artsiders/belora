@@ -30,7 +30,7 @@ import {
   PATCH as updateNotificationsRoute,
 } from "@/app/api/pro/settings/notifications/route";
 
-describe("Sprint 10 — Espace Pro : Catalogue Prestations & Paramètres Salon", () => {
+describe("Sprint 10 - Espace Pro : Catalogue Prestations & Paramètres Salon", () => {
   let venueId: string;
   let testCategoryId: string;
   let createdServiceId: string;

@@ -6,7 +6,7 @@ import { GET as getDailySummaryRoute } from "@/app/api/pro/checkout/daily-summar
 import { POST as dailyClosingRoute } from "@/app/api/pro/checkout/daily-closing/route";
 import { BookingStatus, PaymentStatus } from "@prisma/client";
 
-describe("Sprint 8 — Espace Pro : Caisse Enregistreuse POS & Clôture Fiscale Z", () => {
+describe("Sprint 8 - Espace Pro : Caisse Enregistreuse POS & Clôture Fiscale Z", () => {
   let venueId: string;
   let testBookingId: string;
   let testCustomerId: string;

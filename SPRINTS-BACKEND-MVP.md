@@ -1,4 +1,4 @@
-# Belora — Feuille de Route d'Ingénierie Backend MVP
+# Belora - Feuille de Route d'Ingénierie Backend MVP
 ## Découpage Opérationnel en Sprints Exhaustifs
 
 > **Document de Référence Technique pour le Développement Backend.**  
@@ -9,24 +9,24 @@
 
 ## Sommaire des Sprints
 
-- [Sprint 0 — Base de Données, Modèle Prisma & Données de Démonstration](#sprint-0--base-de-données-modèle-prisma--données-de-démonstration)
-- [Sprint 1 — Authentification NextAuth v5, Sessions & Sécurité RBAC](#sprint-1--authentification-nextauth-v5-sessions--sécurité-rbac)
-- [Sprint 2 — Infrastructure Réseau Client (Axios + React Query) & DTOs Zod](#sprint-2--infrastructure-réseau-client-axios--react-query--dtos-zod)
-- [Sprint 3 — Moteur de Disponibilités & Verrouillage Anti-Collision](#sprint-3--moteur-de-disponibilités--verrouillage-anti-collision)
-- [Sprint 4 — API Publique Marketplace & Données Salons](#sprint-4--api-publique-marketplace--données-salons)
-- [Sprint 5 — Tunnel de Réservation & Flux Financier Stripe Connect](#sprint-5--tunnel-de-réservation--flux-financier-stripe-connect)
-- [Sprint 6 — Notifications E-mails (Resend) & SMS (Brevo)](#sprint-6--notifications-e-mails-resend--sms-brevo)
-- [Sprint 7 — Espace Pro : Agenda Dynamique & Pointage Présences](#sprint-7--espace-pro--agenda-dynamique--pointage-présences)
-- [Sprint 8 — Espace Pro : Caisse Enregistreuse POS & Clôture Fiscale Z](#sprint-8--espace-pro--caisse-enregistreuse-pos--clôture-fiscale-z)
-- [Sprint 9 — Espace Pro : Fichier Clients CRM & Fiches Techniques](#sprint-9--espace-pro--fichier-clients-crm--fiches-techniques)
-- [Sprint 10 — Espace Pro : Catalogue Prestations & Paramètres Salon](#sprint-10--espace-pro--catalogue-prestations--paramètres-salon)
-- [Sprint 11 — Compte Client, Annulations & Avis Vérifiés](#sprint-11--compte-client-annulations--avis-vérifiés)
-- [Sprint 12 — Panneau Super-Admin Belora Plateforme (/admin)](#sprint-12--panneau-super-admin-belora-plateforme-admin)
-- [Sprint 13 — Déploiement VPS Hostinger, Docker & Sécurisation Finale](#sprint-13--déploiement-vps-hostinger-docker--sécurisation-finale)
+- [Sprint 0 - Base de Données, Modèle Prisma & Données de Démonstration](#sprint-0--base-de-données-modèle-prisma--données-de-démonstration)
+- [Sprint 1 - Authentification NextAuth v5, Sessions & Sécurité RBAC](#sprint-1--authentification-nextauth-v5-sessions--sécurité-rbac)
+- [Sprint 2 - Infrastructure Réseau Client (Axios + React Query) & DTOs Zod](#sprint-2--infrastructure-réseau-client-axios--react-query--dtos-zod)
+- [Sprint 3 - Moteur de Disponibilités & Verrouillage Anti-Collision](#sprint-3--moteur-de-disponibilités--verrouillage-anti-collision)
+- [Sprint 4 - API Publique Marketplace & Données Salons](#sprint-4--api-publique-marketplace--données-salons)
+- [Sprint 5 - Tunnel de Réservation & Flux Financier Stripe Connect](#sprint-5--tunnel-de-réservation--flux-financier-stripe-connect)
+- [Sprint 6 - Notifications E-mails (Resend) & SMS (Brevo)](#sprint-6--notifications-e-mails-resend--sms-brevo)
+- [Sprint 7 - Espace Pro : Agenda Dynamique & Pointage Présences](#sprint-7--espace-pro--agenda-dynamique--pointage-présences)
+- [Sprint 8 - Espace Pro : Caisse Enregistreuse POS & Clôture Fiscale Z](#sprint-8--espace-pro--caisse-enregistreuse-pos--clôture-fiscale-z)
+- [Sprint 9 - Espace Pro : Fichier Clients CRM & Fiches Techniques](#sprint-9--espace-pro--fichier-clients-crm--fiches-techniques)
+- [Sprint 10 - Espace Pro : Catalogue Prestations & Paramètres Salon](#sprint-10--espace-pro--catalogue-prestations--paramètres-salon)
+- [Sprint 11 - Compte Client, Annulations & Avis Vérifiés](#sprint-11--compte-client-annulations--avis-vérifiés)
+- [Sprint 12 - Panneau Super-Admin Belora Plateforme (/admin)](#sprint-12--panneau-super-admin-belora-plateforme-admin)
+- [Sprint 13 - Déploiement VPS Hostinger, Docker & Sécurisation Finale](#sprint-13--déploiement-vps-hostinger-docker--sécurisation-finale)
 
 ---
 
-## Sprint 0 — Base de Données, Modèle Prisma & Données de Démonstration
+## Sprint 0 - Base de Données, Modèle Prisma & Données de Démonstration
 
 ### Objectif
 Mettre en place l'infrastructure de persistance PostgreSQL locale, initialiser l'ORM Prisma, définir l'intégralité du modèle relationnel et injecter des données réalistes de démonstration.
@@ -70,7 +70,7 @@ Mettre en place l'infrastructure de persistance PostgreSQL locale, initialiser l
 
 ---
 
-## Sprint 1 — Authentification NextAuth v5, Sessions & Sécurité RBAC
+## Sprint 1 - Authentification NextAuth v5, Sessions & Sécurité RBAC
 
 ### Objectif
 Sécuriser l'application avec un système d'authentification robuste NextAuth v5 (Auth.js) supportant la connexion par mot de passe et Google OAuth, avec enrichissement de session et contrôle d'accès par rôles (RBAC).
@@ -100,7 +100,7 @@ Sécuriser l'application avec un système d'authentification robuste NextAuth v5
 
 ---
 
-## Sprint 2 — Infrastructure Réseau Client (Axios + React Query) & DTOs Zod
+## Sprint 2 - Infrastructure Réseau Client (Axios + React Query) & DTOs Zod
 
 ### Objectif
 Mettre en place la couche réseau standardisée obligatoire (Directive `.agents/AGENTS.md` Règle 17 : pas de Server Actions, API Routes Next.js, Axios et React Query).
@@ -125,7 +125,7 @@ Mettre en place la couche réseau standardisée obligatoire (Directive `.agents/
 
 ---
 
-## Sprint 3 — Moteur de Disponibilités & Verrouillage Anti-Collision
+## Sprint 3 - Moteur de Disponibilités & Verrouillage Anti-Collision
 
 ### Objectif
 Développer le cœur algorithmique de Belora : le moteur de calcul des créneaux libres en temps réel, garantissant zéro double réservation et gérant le multi-prestations, les temps de pose et les fuseaux horaires.
@@ -158,7 +158,7 @@ Développer le cœur algorithmique de Belora : le moteur de calcul des créneaux
 
 ---
 
-## Sprint 4 — API Publique Marketplace & Données Salons
+## Sprint 4 - API Publique Marketplace & Données Salons
 
 ### Objectif
 Créer les routes API publiques pour alimenter l'accueil, la recherche avec carte interactive et la fiche salon, puis brancher les pages existantes avec React Query.
@@ -181,7 +181,7 @@ Créer les routes API publiques pour alimenter l'accueil, la recherche avec cart
 
 ---
 
-## Sprint 5 — Tunnel de Réservation & Flux Financier Stripe Connect
+## Sprint 5 - Tunnel de Réservation & Flux Financier Stripe Connect
 
 ### Objectif
 Connecter le tunnel de réservation mobile-first en 4 étapes à la création réelle de réservations en base et au paiement sécurisé par Stripe Connect (acompte ou montant total avec déduction de la commission Belora).
@@ -211,7 +211,7 @@ Connecter le tunnel de réservation mobile-first en 4 étapes à la création r�
 
 ---
 
-## Sprint 6 — Notifications E-mails (Resend) & SMS (Brevo)
+## Sprint 6 - Notifications E-mails (Resend) & SMS (Brevo)
 
 ### Objectif
 Implémenter la chaîne de notification transactionnelle automatique pour sécuriser la présence des clients et éliminer les no-shows.
@@ -233,7 +233,7 @@ Implémenter la chaîne de notification transactionnelle automatique pour sécur
 
 ---
 
-## Sprint 7 — Espace Pro : Agenda Dynamique & Pointage Présences
+## Sprint 7 - Espace Pro : Agenda Dynamique & Pointage Présences
 
 ### Objectif
 Remplacer les états locaux de l'Agenda Pro par des requêtes React Query synchronisées avec la base de données, permettant la gestion en direct des rendez-vous et des présences.
@@ -254,7 +254,7 @@ Remplacer les états locaux de l'Agenda Pro par des requêtes React Query synchr
 
 ---
 
-## Sprint 8 — Espace Pro : Caisse Enregistreuse POS & Clôture Fiscale Z
+## Sprint 8 - Espace Pro : Caisse Enregistreuse POS & Clôture Fiscale Z
 
 ### Objectif
 Connecter le terminal de caisse POS à la base de données pour gérer l'encaissement des clients, la déduction automatique des acomptes Stripe et la clôture journalière Z certifiée.
@@ -278,7 +278,7 @@ Connecter le terminal de caisse POS à la base de données pour gérer l'encaiss
 
 ---
 
-## Sprint 9 — Espace Pro : Fichier Clients CRM & Fiches Techniques
+## Sprint 9 - Espace Pro : Fichier Clients CRM & Fiches Techniques
 
 ### Objectif
 Connecter l'annuaire CRM de l'atelier à la base de données, avec segmentation intelligente et sauvegarde des fiches techniques confidentielles.
@@ -298,7 +298,7 @@ Connecter l'annuaire CRM de l'atelier à la base de données, avec segmentation 
 
 ---
 
-## Sprint 10 — Espace Pro : Catalogue Prestations & Paramètres Salon
+## Sprint 10 - Espace Pro : Catalogue Prestations & Paramètres Salon
 
 ### Objectif
 Permettre au professionnel de piloter l'ensemble de son offre commerciale et de ses paramètres opérationnels depuis son backoffice.
@@ -318,7 +318,7 @@ Permettre au professionnel de piloter l'ensemble de son offre commerciale et de 
 
 ---
 
-## Sprint 11 — Compte Client, Annulations & Avis Vérifiés
+## Sprint 11 - Compte Client, Annulations & Avis Vérifiés
 
 ### Objectif
 Offrir au client final un espace personnel autonome pour consulter ses réservations, modifier/annuler selon la politique du salon et déposer un avis certifié.
@@ -337,7 +337,7 @@ Offrir au client final un espace personnel autonome pour consulter ses réservat
 
 ---
 
-## Sprint 12 — Panneau Super-Admin Belora Plateforme (/admin)
+## Sprint 12 - Panneau Super-Admin Belora Plateforme (/admin)
 
 ### Objectif
 Construire l'interface d'administration centrale réservée à l'équipe Belora pour piloter la marketplace, valider les salons, modérer le contenu et suivre la rentabilité de la plateforme.
@@ -361,7 +361,7 @@ Construire l'interface d'administration centrale réservée à l'équipe Belora 
 
 ---
 
-## Sprint 13 — Déploiement VPS Hostinger, Docker & Sécurisation Finale
+## Sprint 13 - Déploiement VPS Hostinger, Docker & Sécurisation Finale
 
 ### Objectif
 Packager l'application Next.js en conteneur Docker optimisé, configurer l'environnement de production sur le VPS Hostinger et déployer la solution avec certificats SSL et sauvegardes automatiques.

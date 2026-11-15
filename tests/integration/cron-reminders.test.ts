@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { POST as cronRemindersRoute } from "@/app/api/cron/reminders/route";
 import { BookingStatus, PaymentStatus } from "@prisma/client";
 
-describe("Sprint 6 — Tâche Automatisée de Rappels (Worker Cron)", () => {
+describe("Sprint 6 - Tâche Automatisée de Rappels (Worker Cron)", () => {
   let testBookingId: string;
 
   beforeAll(async () => {

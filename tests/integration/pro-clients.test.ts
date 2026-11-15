@@ -9,7 +9,7 @@ import {
   PATCH as updateClientRoute,
 } from "@/app/api/pro/clients/[id]/route";
 
-describe("Sprint 9 — Espace Pro : Fichier Clients CRM & Fiches Techniques", () => {
+describe("Sprint 9 - Espace Pro : Fichier Clients CRM & Fiches Techniques", () => {
   let venueId: string;
   let createdClientId: string;
 

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { apiClient } from "../../src/lib/api-client";
 
-describe("Sprint 2 — Client Axios apiClient", () => {
+describe("Sprint 2 - Client Axios apiClient", () => {
   it("is configured with baseURL /api and json headers", () => {
     expect(apiClient.defaults.baseURL).toBe("/api");
     expect(apiClient.defaults.headers["Content-Type"]).toBe("application/json");

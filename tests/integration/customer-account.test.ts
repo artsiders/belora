@@ -9,7 +9,7 @@ import {
   PATCH as updateProfileRoute,
 } from "@/app/api/account/profile/route";
 
-describe("Sprint 11 — Compte Client, Annulations & Avis Vérifiés", () => {
+describe("Sprint 11 - Compte Client, Annulations & Avis Vérifiés", () => {
   let venueId: string;
   let serviceId: string;
   let staffId: string;

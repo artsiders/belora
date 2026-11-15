@@ -8,7 +8,7 @@ import {
   createUtcDateFromLocal,
 } from "../../src/modules/availability/time-utils";
 
-describe("Sprint 3 — Utilitaires Temporels & Calculs Créneaux (time-utils)", () => {
+describe("Sprint 3 - Utilitaires Temporels & Calculs Créneaux (time-utils)", () => {
   it("converts time string to minutes and back without loss", () => {
     expect(timeStringToMinutes("00:00")).toBe(0);
     expect(timeStringToMinutes("09:30")).toBe(570);

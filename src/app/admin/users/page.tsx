@@ -380,7 +380,7 @@ export default function AdminUsersPage() {
                             {user.ownedVenuesCount} salon{user.ownedVenuesCount > 1 ? "s" : ""}
                           </span>
                         ) : (
-                          <span className="text-neutral-400">—</span>
+                          <span className="text-neutral-400">-</span>
                         )}
                       </td>
 

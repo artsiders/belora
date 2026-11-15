@@ -4,7 +4,7 @@ import { createServiceSchema } from "../../src/lib/validations/service.schema";
 import { clientCrmSchema } from "../../src/lib/validations/client.schema";
 import { updateVenueProfileSchema, openingHourDaySchema } from "../../src/lib/validations/venue.schema";
 
-describe("Sprint 2 — Schémas de Validation Zod Partagés", () => {
+describe("Sprint 2 - Schémas de Validation Zod Partagés", () => {
   describe("Booking Validation (createBookingSchema)", () => {
     it("validates a compliant booking payload with ISO 8601 UTC date", () => {
       const validPayload = {

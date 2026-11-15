@@ -133,7 +133,7 @@ export function NewEstablishmentModal({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <FormInput
             label="Nom de l'établissement"
-            placeholder="Ex : L'Atelier Botanique — Bordeaux"
+            placeholder="Ex : L'Atelier Botanique - Bordeaux"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required

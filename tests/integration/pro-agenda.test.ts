@@ -16,7 +16,7 @@ import {
   DELETE as deleteAppointmentRoute,
 } from "@/app/api/pro/appointments/[id]/route";
 
-describe("Sprint 7 — Espace Pro : Agenda Dynamique & Pointage Présences", () => {
+describe("Sprint 7 - Espace Pro : Agenda Dynamique & Pointage Présences", () => {
   let venueId: string;
   let staffHeleneId: string;
   let staffClementId: string;

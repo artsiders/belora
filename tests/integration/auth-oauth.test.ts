@@ -9,7 +9,7 @@ interface BeloraTestUser extends AdapterUser {
   role?: Role;
 }
 
-describe("Sprint 1 & Auth — Intégration OAuth & Adaptateur Belora", () => {
+describe("Sprint 1 & Auth - Intégration OAuth & Adaptateur Belora", () => {
   let prisma: PrismaClient;
   let adapter: ReturnType<typeof createBeloraAuthAdapter>;
 
@@ -40,7 +40,7 @@ describe("Sprint 1 & Auth — Intégration OAuth & Adaptateur Belora", () => {
     await prisma.$disconnect();
   });
 
-  describe("createBeloraAuthAdapter — Gestion transparente de Google OAuth", () => {
+  describe("createBeloraAuthAdapter - Gestion transparente de Google OAuth", () => {
     it("creates a user from NextAuth OAuth payload and splits name into firstName and lastName", async () => {
       const payload: AdapterUser = {
         id: "",

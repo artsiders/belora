@@ -247,8 +247,8 @@ export default function AdminSettingsPage() {
               </span>
               <span className="text-xs text-neutral-500">
                 {maintenanceMode
-                  ? "Actif — Les clients ne peuvent pas réserver."
-                  : "Désactivé — La plateforme est accessible normalement."}
+                  ? "Actif - Les clients ne peuvent pas réserver."
+                  : "Désactivé - La plateforme est accessible normalement."}
               </span>
             </div>
 

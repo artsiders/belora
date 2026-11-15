@@ -12,7 +12,7 @@
    1. TOKENS CSS
    -------------------------------------------------------------------------- */
 :root {
-  /* Primaire — Figue */
+  /* Primaire - Figue */
   --primary-50:  #faf3f5;
   --primary-100: #f4e4e9;
   --primary-200: #e8c9d3;
@@ -25,7 +25,7 @@
   --primary-900: #3f1b2d;
   --primary-950: #26101b;
 
-  /* Secondaire — Monochrome Moderne (Blanc, Gris franc, Noir profond) */
+  /* Secondaire - Monochrome Moderne (Blanc, Gris franc, Noir profond) */
   --secondary-50:  #fafafa;
   --secondary-100: #f4f4f5;
   --secondary-200: #e4e4e7;

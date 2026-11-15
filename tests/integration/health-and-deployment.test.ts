@@ -3,7 +3,7 @@ import { GET as healthRoute } from "@/app/api/health/route";
 import fs from "fs";
 import path from "path";
 
-describe("Sprint 13 — Déploiement VPS Hostinger, Docker & Sécurisation Finale", () => {
+describe("Sprint 13 - Déploiement VPS Hostinger, Docker & Sécurisation Finale", () => {
   // ===========================================================================
   // 1. HEALTHCHECK ENDPOINT
   // ===========================================================================

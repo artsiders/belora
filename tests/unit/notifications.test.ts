@@ -8,7 +8,7 @@ import {
 } from "@/emails/templates";
 import { normalizePhoneNumber, sendBookingReminderSms } from "@/lib/sms";
 
-describe("Sprint 6 — Templates E-mails & Notifications SMS", () => {
+describe("Sprint 6 - Templates E-mails & Notifications SMS", () => {
   const sampleData = {
     reference: "#BEL-12345",
     venueName: "L’Atelier Botanique",

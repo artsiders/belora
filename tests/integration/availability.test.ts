@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { AvailabilityService } from "../../src/modules/availability/availability.service";
 import { LockService } from "../../src/modules/availability/lock.service";
 
-describe("Sprint 3 — Moteur de Disponibilités & Verrouillage Anti-Collision", () => {
+describe("Sprint 3 - Moteur de Disponibilités & Verrouillage Anti-Collision", () => {
   let prisma: PrismaClient;
   let venueId: string;
   let serviceCoupeId: string;

@@ -5,7 +5,7 @@ import { GET as getBookingRoute } from "@/app/api/bookings/[id]/route";
 import { POST as stripeWebhookRoute } from "@/app/api/webhooks/stripe/route";
 import { BookingStatus, PaymentStatus } from "@prisma/client";
 
-describe("Sprint 5 — Tunnel de Réservation & Flux Financier Stripe Connect", () => {
+describe("Sprint 5 - Tunnel de Réservation & Flux Financier Stripe Connect", () => {
   const cleanupTestData = async () => {
     await db.bookingItem.deleteMany({
       where: { booking: { clientEmail: "eleonore@test-belora.fr" } },

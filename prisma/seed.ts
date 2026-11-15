@@ -910,11 +910,11 @@ async function main() {
     });
   }
 
-  // 17. Deuxième Établissement Pro : L'Atelier Botanique — Saint-Germain (Paris 6e)
+  // 17. Deuxième Établissement Pro : L'Atelier Botanique - Saint-Germain (Paris 6e)
   const venue2 = await prisma.venue.create({
     data: {
       slug: "atelier-botanique-saint-germain",
-      name: "L’Atelier Botanique — Saint-Germain",
+      name: "L’Atelier Botanique - Saint-Germain",
       tagline: "Rive Gauche • Soins Holistiques & Coupe Sur-Mesure",
       description:
         "Deuxième adresse parisienne de la Maison, au cœur de Saint-Germain-des-Prés. Un écrin confidentiel dédié à la beauté naturelle du cheveu et aux soins du cuir chevelu.",
@@ -1033,7 +1033,7 @@ async function main() {
     },
   });
 
-  console.log("🏛️ Created 2nd establishment (L'Atelier Botanique — Saint-Germain) for multi-site Pro.");
+  console.log("🏛️ Created 2nd establishment (L'Atelier Botanique - Saint-Germain) for multi-site Pro.");
   console.log("⭐ Created verified reviews with owner replies.");
   console.log("✅ Belora seed completed successfully!");
 }

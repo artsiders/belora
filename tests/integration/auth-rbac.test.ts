@@ -5,7 +5,7 @@ import { authConfig } from "../../src/auth.config";
 import { POST as registerPost } from "../../src/app/api/auth/register/route";
 import { POST as registerProPost } from "../../src/app/api/auth/register-pro/route";
 
-describe("Sprint 1 — Authentification NextAuth v5 & Sécurité RBAC", () => {
+describe("Sprint 1 - Authentification NextAuth v5 & Sécurité RBAC", () => {
   let prisma: PrismaClient;
 
   beforeAll(() => {
