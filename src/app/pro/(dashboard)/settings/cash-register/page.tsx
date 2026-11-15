@@ -82,7 +82,7 @@ export default function CashRegisterSettingsPage() {
   const hasError = isError || Boolean(error);
 
   return (
-    <div className="p-4 sm:p-8 space-y-6 max-w-4xl">
+    <div className="p-4 sm:p-8 container mx-auto">
       {/* Titre */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-neutral-200">
         <div>

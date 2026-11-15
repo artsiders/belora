@@ -83,7 +83,7 @@ export default function AdminMonetizationPage() {
     }).format(amount);
 
   return (
-    <div className="space-y-8 max-w-7xl">
+    <div className="space-y-8 container mx-auto">
       {/* En-tête */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>

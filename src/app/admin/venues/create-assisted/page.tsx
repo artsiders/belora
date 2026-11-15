@@ -116,16 +116,9 @@ export default function CreateAssistedVenuePage() {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl">
+    <div className="space-y-6 container mx-auto">
       {/* Retour et En-tête */}
       <div>
-        <Link
-          href="/admin/venues"
-          className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-900 transition-colors mb-3"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          Retour à la liste des établissements
-        </Link>
         <h2 className="text-2xl font-bold text-neutral-900 tracking-tight">
           Création Assistée d&apos;Établissement
         </h2>
