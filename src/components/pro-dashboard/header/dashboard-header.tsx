@@ -21,17 +21,28 @@ import {
   LogOut,
   Shield,
   User,
+  Plus,
+  MapPin,
 } from "lucide-react";
-import { MOCK_ESTABLISHMENT } from "@/lib/data/pro-mock-data";
+import { useEstablishment } from "@/contexts/pro-establishment-context";
+import { NewEstablishmentModal } from "@/components/pro-dashboard/establishment/new-establishment-modal";
 
 export function DashboardHeader() {
   const pathname = usePathname();
   const { data: session } = useSession();
+  const {
+    establishments,
+    currentEstablishment,
+    switchEstablishment,
+    isLoadingEstablishments,
+  } = useEstablishment();
+
   const [currentTime, setCurrentTime] = useState("");
   const [salonSwitcherOpen, setSalonSwitcherOpen] = useState(false);
   const [unreadNotifications, setUnreadNotifications] = useState(3);
   const [showNotifications, setShowNotifications] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [isNewEstablishmentModalOpen, setIsNewEstablishmentModalOpen] = useState(false);
 
   const userName = session?.user?.name || "Hélène de Valois";
   const userEmail = session?.user?.email || "helene@atelierbotanique.fr";
@@ -110,7 +121,7 @@ export function DashboardHeader() {
 
           <div className="h-5 w-px bg-neutral-200 hidden sm:block" />
 
-          {/* Switcher d'Établissement (Style Planity "Chez Colette") */}
+          {/* Switcher d'Établissement Dynamique */}
           <div className="relative">
             <button
               type="button"
@@ -118,9 +129,15 @@ export function DashboardHeader() {
               className="flex items-center gap-2 text-sm sm:text-base font-semibold text-neutral-900 hover:text-primary-700 transition-colors px-2 py-1.5 rounded-lg hover:bg-neutral-100 cursor-pointer"
             >
               <span className="truncate max-w-[130px] sm:max-w-[200px]">
-                {MOCK_ESTABLISHMENT.name}
+                {isLoadingEstablishments
+                  ? "Chargement..."
+                  : currentEstablishment?.name || "Mon établissement"}
               </span>
-              <ChevronDown className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
+              <ChevronDown
+                className={`w-3.5 h-3.5 text-neutral-400 shrink-0 transition-transform ${
+                  salonSwitcherOpen ? "rotate-180 text-primary-600" : ""
+                }`}
+              />
             </button>
 
             {salonSwitcherOpen && (
@@ -129,28 +146,66 @@ export function DashboardHeader() {
                   className="fixed inset-0 z-40"
                   onClick={() => setSalonSwitcherOpen(false)}
                 />
-                <div className="absolute left-0 mt-1 w-64 rounded-xl border border-neutral-200 bg-white p-2 shadow-lg z-50 text-sm">
-                  <div className="px-3 py-2 text-neutral-400 font-medium border-b border-neutral-100 uppercase tracking-wider">
-                    Établissement actif
+                <div className="absolute left-0 mt-1 w-72 rounded-xl border border-neutral-200 bg-white p-2 shadow-xl z-50 text-sm">
+                  <div className="px-3 py-2 text-neutral-400 font-semibold border-b border-neutral-100 uppercase tracking-wider text-xs">
+                    Mes Établissements ({establishments.length})
                   </div>
-                  <div className="p-2 flex items-center justify-between rounded-lg bg-primary-50/60 text-neutral-900 font-semibold my-1">
-                    <div>
-                      <p>{MOCK_ESTABLISHMENT.name}</p>
-                      <span className="text-neutral-500 font-normal">
-                        {MOCK_ESTABLISHMENT.city}
-                      </span>
-                    </div>
-                    <Check className="w-4 h-4 text-primary-700" />
+
+                  <div className="py-1 max-h-60 overflow-y-auto divide-y divide-neutral-100">
+                    {establishments.map((est) => {
+                      const isActive = est.id === currentEstablishment?.id;
+                      return (
+                        <button
+                          key={est.id}
+                          type="button"
+                          onClick={() => {
+                            switchEstablishment(est.id);
+                            setSalonSwitcherOpen(false);
+                          }}
+                          className={`w-full text-left p-2.5 flex items-center justify-between rounded-lg transition-colors cursor-pointer my-0.5 ${
+                            isActive
+                              ? "bg-primary-50 text-primary-900 font-semibold"
+                              : "hover:bg-neutral-50 text-neutral-800"
+                          }`}
+                        >
+                          <div className="min-w-0 pr-2">
+                            <p className="truncate text-sm font-semibold">{est.name}</p>
+                            <div className="flex items-center gap-1.5 text-xs text-neutral-500 font-normal mt-0.5">
+                              <MapPin className="w-3 h-3 text-neutral-400 shrink-0" />
+                              <span className="truncate">{est.city || est.address}</span>
+                            </div>
+                          </div>
+                          {isActive && (
+                            <Check className="w-4 h-4 text-primary-700 shrink-0" />
+                          )}
+                        </button>
+                      );
+                    })}
                   </div>
-                  <div className="pt-2 border-t border-neutral-100">
-                    <Link
-                      href={`/venue/${MOCK_ESTABLISHMENT.slug}`}
-                      target="_blank"
-                      className="flex items-center justify-between px-3 py-2 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 rounded-lg transition-colors"
+
+                  <div className="pt-2 border-t border-neutral-100 space-y-1">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSalonSwitcherOpen(false);
+                        setIsNewEstablishmentModalOpen(true);
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-primary-700 hover:bg-primary-50/70 rounded-lg transition-colors text-xs font-semibold cursor-pointer"
                     >
-                      <span>Voir la page publique</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </Link>
+                      <Plus className="w-4 h-4" />
+                      <span>Ajouter un établissement</span>
+                    </button>
+
+                    {currentEstablishment?.slug && (
+                      <Link
+                        href={`/venue/${currentEstablishment.slug}`}
+                        target="_blank"
+                        className="flex items-center justify-between px-3 py-2 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 rounded-lg transition-colors text-xs"
+                      >
+                        <span>Voir la page publique</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </Link>
+                    )}
                   </div>
                 </div>
               </>
@@ -264,15 +319,17 @@ export function DashboardHeader() {
           </div>
 
           {/* Lien externe vers la fiche vitrine */}
-          <Link
-            href={`/venue/${MOCK_ESTABLISHMENT.slug}`}
-            target="_blank"
-            title="Consulter ma fiche en ligne sur Belora"
-            className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-neutral-200 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50 text-sm font-semibold transition-colors"
-          >
-            <span>Fiche publique</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </Link>
+          {currentEstablishment?.slug && (
+            <Link
+              href={`/venue/${currentEstablishment.slug}`}
+              target="_blank"
+              title="Consulter ma fiche en ligne sur Belora"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-neutral-200 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50 text-sm font-semibold transition-colors"
+            >
+              <span>Fiche publique</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </Link>
+          )}
 
           {/* Avatar & Menu Profil Pro */}
           <div className="relative">
@@ -331,7 +388,7 @@ export function DashboardHeader() {
                       </div>
                       <div className="mt-2.5 pt-2 border-t border-neutral-200/60 flex items-center justify-between text-xs">
                         <span className="text-neutral-500 truncate">
-                          {MOCK_ESTABLISHMENT.name}
+                          {currentEstablishment?.name || "Atelier Belora"}
                         </span>
                         <span className="font-semibold text-primary-700 bg-primary-50 px-2 py-0.5 rounded-md border border-primary-200/50 shrink-0">
                           {userRoleLabel}
@@ -383,22 +440,24 @@ export function DashboardHeader() {
                         </div>
                       </Link>
 
-                      <Link
-                        href={`/venue/${MOCK_ESTABLISHMENT.slug}`}
-                        target="_blank"
-                        onClick={() => setUserMenuOpen(false)}
-                        className="flex items-center justify-between px-3 py-2 rounded-lg text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors font-medium"
-                      >
-                        <div className="flex items-center gap-3 truncate">
-                          <ExternalLink className="w-4 h-4 text-neutral-500 shrink-0" />
-                          <div className="truncate">
-                            <div>Voir ma vitrine publique</div>
-                            <span className="text-xs text-neutral-400 font-normal block">
-                              Page de réservation en ligne
-                            </span>
+                      {currentEstablishment?.slug && (
+                        <Link
+                          href={`/venue/${currentEstablishment.slug}`}
+                          target="_blank"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center justify-between px-3 py-2 rounded-lg text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors font-medium"
+                        >
+                          <div className="flex items-center gap-3 truncate">
+                            <ExternalLink className="w-4 h-4 text-neutral-500 shrink-0" />
+                            <div className="truncate">
+                              <div>Voir ma vitrine publique</div>
+                              <span className="text-xs text-neutral-400 font-normal block">
+                                Page de réservation en ligne
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      </Link>
+                        </Link>
+                      )}
 
                       <Link
                         href="/help"
@@ -452,6 +511,11 @@ export function DashboardHeader() {
           </div>
         </div>
       </div>
+
+      <NewEstablishmentModal
+        isOpen={isNewEstablishmentModalOpen}
+        onClose={() => setIsNewEstablishmentModalOpen(false)}
+      />
     </header>
   );
 }

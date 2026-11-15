@@ -82,10 +82,10 @@ export default function ServicesSettingsPage() {
     staleTime: 60_000,
   });
 
-  const categories = data?.categories || [];
-  const services = data?.services || [];
-  const staffList = staffData?.staff || [];
-  const resourceList = resourcesData?.resources || [];
+  const categories = Array.isArray(data?.categories) ? data.categories : [];
+  const services = Array.isArray(data?.services) ? data.services : [];
+  const staffList = Array.isArray(staffData?.staff) ? staffData.staff : [];
+  const resourceList = Array.isArray(resourcesData?.resources) ? resourcesData.resources : [];
 
   // Mutations
   const createServiceMutation = useMutation({

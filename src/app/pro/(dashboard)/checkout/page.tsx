@@ -32,8 +32,8 @@ function CheckoutContent() {
   } = useQuery<ProService[]>({
     queryKey: ["pro", "services"],
     queryFn: async () => {
-      const res = await apiClient.get<{ services: ProService[] }>("/pro/services");
-      return res.data.services;
+      const res = await apiClient.get<{ services?: ProService[] }>("/pro/services");
+      return Array.isArray(res.data?.services) ? res.data.services : [];
     },
     staleTime: 300_000,
   });
@@ -47,8 +47,8 @@ function CheckoutContent() {
   } = useQuery<ProStaffMember[]>({
     queryKey: ["pro", "staff"],
     queryFn: async () => {
-      const res = await apiClient.get<{ staff: ProStaffMember[] }>("/pro/staff");
-      return res.data.staff;
+      const res = await apiClient.get<{ staff?: ProStaffMember[] }>("/pro/staff");
+      return Array.isArray(res.data?.staff) ? res.data.staff : [];
     },
     staleTime: 60_000,
   });
@@ -61,8 +61,8 @@ function CheckoutContent() {
   } = useQuery<ProClient[]>({
     queryKey: ["pro", "clients"],
     queryFn: async () => {
-      const res = await apiClient.get<{ clients: ProClient[] }>("/pro/clients");
-      return res.data.clients;
+      const res = await apiClient.get<{ clients?: ProClient[] }>("/pro/clients");
+      return Array.isArray(res.data?.clients) ? res.data.clients : [];
     },
     staleTime: 60_000,
   });

@@ -910,6 +910,130 @@ async function main() {
     });
   }
 
+  // 17. Deuxième Établissement Pro : L'Atelier Botanique — Saint-Germain (Paris 6e)
+  const venue2 = await prisma.venue.create({
+    data: {
+      slug: "atelier-botanique-saint-germain",
+      name: "L’Atelier Botanique — Saint-Germain",
+      tagline: "Rive Gauche • Soins Holistiques & Coupe Sur-Mesure",
+      description:
+        "Deuxième adresse parisienne de la Maison, au cœur de Saint-Germain-des-Prés. Un écrin confidentiel dédié à la beauté naturelle du cheveu et aux soins du cuir chevelu.",
+      address: "42 Rue du Cherche-Midi",
+      city: "Paris",
+      postalCode: "75006",
+      countryCode: "FR",
+      latitude: 48.8488,
+      longitude: 2.3245,
+      phone: "01 45 44 28 90",
+      email: "saintgermain@atelierbotanique.fr",
+      currency: "EUR",
+      timezone: "Europe/Paris",
+      status: VenueStatus.PUBLISHED,
+      commissionRate: 0.018,
+      ownerId: proUser.id,
+      siret: "849 201 942 00035",
+      vatNumber: "FR 82 849201942",
+      cancellationDelayHours: 24,
+      depositPercentage: 30,
+      cashSettings: {
+        acceptCard: true,
+        acceptCash: true,
+        acceptCheck: false,
+        ticketFooter: "L'Atelier Botanique Saint-Germain vous remercie de votre visite !",
+      },
+      notificationSettings: {
+        emailConfirmEnabled: true,
+        sms24hEnabled: true,
+        sms2hEnabled: false,
+        smsTemplate:
+          "Bonjour {client_name}, votre rendez-vous chez {venue_name} est confirmé le {date} à {time}.",
+      },
+    },
+  });
+
+  // Horaires venue2
+  for (const item of openingHoursData) {
+    await prisma.venueOpeningHour.create({
+      data: {
+        venueId: venue2.id,
+        ...item,
+      },
+    });
+  }
+
+  // Collaboratrice venue2
+  const claraUser = await prisma.user.create({
+    data: {
+      email: "clara.vasseur@yopmail.com",
+      passwordHash: commonPasswordHash,
+      firstName: "Clara",
+      lastName: "Vasseur",
+      phone: "06 44 33 22 11",
+      role: Role.PRO,
+      emailVerified: new Date(),
+    },
+  });
+
+  const staffClara = await prisma.staffMember.create({
+    data: {
+      venueId: venue2.id,
+      userId: claraUser.id,
+      name: "Clara Vasseur",
+      role: "Responsable Salon & Coloriste Experte",
+      color: "#82385a",
+      avatarUrl: "/images/artisans/artisan-1.jpg",
+      isActive: true,
+    },
+  });
+
+  for (let day = 2; day <= 6; day++) {
+    await prisma.staffSchedule.create({
+      data: {
+        staffId: staffClara.id,
+        dayOfWeek: day,
+        plannedStart: "09:30",
+        plannedEnd: "19:30",
+        isActive: true,
+      },
+    });
+  }
+
+  // Ressource venue2
+  await prisma.resource.create({
+    data: {
+      venueId: venue2.id,
+      name: "Fauteuil Saint-Germain 1",
+      type: "chair",
+      color: "#82385a",
+      isActive: true,
+    },
+  });
+
+  // Catégorie & Service venue2
+  const catSG = await prisma.serviceCategory.create({
+    data: {
+      venueId: venue2.id,
+      name: "Soins Signatures Saint-Germain",
+      order: 1,
+    },
+  });
+
+  await prisma.service.create({
+    data: {
+      venueId: venue2.id,
+      categoryId: catSG.id,
+      name: "Rituel Botanique Complet & Brushing Rive Gauche",
+      description: "Diagnostic capillaire sur-mesure, bain d'huiles tièdes et coiffage d'exception.",
+      durationMinutes: 60,
+      priceCents: 8500,
+      depositRequired: true,
+      depositCents: 2500,
+      order: 1,
+      isActive: true,
+    },
+  });
+
+  console.log("🏛️ Created 2nd establishment (L'Atelier Botanique — Saint-Germain) for multi-site Pro.");
   console.log("⭐ Created verified reviews with owner replies.");
   console.log("✅ Belora seed completed successfully!");
 }

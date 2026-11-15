@@ -54,55 +54,59 @@ function AgendaContent() {
 
   // 1. Requête Collaborateurs du salon
   const {
-    data: staffList = [],
+    data: rawStaff,
     isLoading: isStaffLoading,
     isError: isStaffError,
     refetch: refetchStaff,
   } = useQuery<ProStaffMember[]>({
     queryKey: ["pro", "staff"],
     queryFn: async () => {
-      const res = await apiClient.get<{ staff: ProStaffMember[] }>("/pro/staff");
-      return res.data.staff;
+      const res = await apiClient.get<{ staff?: ProStaffMember[] }>("/pro/staff");
+      return Array.isArray(res.data?.staff) ? res.data.staff : [];
     },
     staleTime: 60_000,
   });
+  const staffList = Array.isArray(rawStaff) ? rawStaff : [];
 
   // 2. Requête Ressources (Fauteuils / Cabines)
   const {
-    data: resourceList = [],
+    data: rawResources,
     isLoading: isResourcesLoading,
   } = useQuery<ProResource[]>({
     queryKey: ["pro", "resources"],
     queryFn: async () => {
-      const res = await apiClient.get<{ resources: ProResource[] }>("/pro/resources");
-      return res.data.resources;
+      const res = await apiClient.get<{ resources?: ProResource[] }>("/pro/resources");
+      return Array.isArray(res.data?.resources) ? res.data.resources : [];
     },
     staleTime: 300_000,
   });
+  const resourceList = Array.isArray(rawResources) ? rawResources : [];
 
   // 3. Requête Prestations & Tarifs
-  const { data: servicesList = [] } = useQuery<ProService[]>({
+  const { data: rawServices } = useQuery<ProService[]>({
     queryKey: ["pro", "services"],
     queryFn: async () => {
-      const res = await apiClient.get<{ services: ProService[] }>("/pro/services");
-      return res.data.services;
+      const res = await apiClient.get<{ services?: ProService[] }>("/pro/services");
+      return Array.isArray(res.data?.services) ? res.data.services : [];
     },
     staleTime: 300_000,
   });
+  const servicesList = Array.isArray(rawServices) ? rawServices : [];
 
   // 4. Requête Clients CRM
-  const { data: clientsList = [] } = useQuery<ProClient[]>({
+  const { data: rawClients } = useQuery<ProClient[]>({
     queryKey: ["pro", "clients"],
     queryFn: async () => {
-      const res = await apiClient.get<{ clients: ProClient[] }>("/pro/clients");
-      return res.data.clients;
+      const res = await apiClient.get<{ clients?: ProClient[] }>("/pro/clients");
+      return Array.isArray(res.data?.clients) ? res.data.clients : [];
     },
     staleTime: 60_000,
   });
+  const clientsList = Array.isArray(rawClients) ? rawClients : [];
 
   // 5. Requête Rendez-vous de la période sélectionnée
   const {
-    data: appointments = [],
+    data: rawAppointments,
     isLoading: isAppointmentsLoading,
     isFetching: isAppointmentsFetching,
     isError: isAppointmentsError,
@@ -110,14 +114,15 @@ function AgendaContent() {
   } = useQuery<ProAppointment[]>({
     queryKey: ["pro", "appointments", startDate, endDate],
     queryFn: async () => {
-      const res = await apiClient.get<{ appointments: ProAppointment[] }>(
+      const res = await apiClient.get<{ appointments?: ProAppointment[] }>(
         `/pro/appointments?startDate=${startDate}&endDate=${endDate}`
       );
-      return res.data.appointments;
+      return Array.isArray(res.data?.appointments) ? res.data.appointments : [];
     },
     placeholderData: keepPreviousData,
     staleTime: 30_000,
   });
+  const appointments = Array.isArray(rawAppointments) ? rawAppointments : [];
 
   // Filtres actifs de sélection
   const [selectedStaffIds, setSelectedStaffIds] = useState<string[]>([]);
@@ -323,10 +328,6 @@ function AgendaContent() {
     clockInMutation.mutate(staffId);
   };
 
-  // Filtrage des listes selon les checkboxes
-  const visibleStaff = staffList.filter((s) => selectedStaffIds.includes(s.id));
-  const visibleResources = resourceList.filter((r) => selectedResourceIds.includes(r.id));
-
   // Gestion d'erreur globale avec interface dédiée et bouton Réessayer
   if (isAppointmentsError || isStaffError) {
     return (
@@ -347,7 +348,7 @@ function AgendaContent() {
             refetchAppointments();
             refetchStaff();
           }}
-          className="btn btn-primary btn-sm flex items-center gap-2"
+          className="btn btn-primary btn-sm flex items-center gap-2 cursor-pointer"
         >
           <RefreshCw className="w-4 h-4" />
           <span>Réessayer</span>
@@ -355,6 +356,10 @@ function AgendaContent() {
       </div>
     );
   }
+
+  // Filtrage des listes selon les checkboxes
+  const visibleStaff = staffList.filter((s) => selectedStaffIds.includes(s.id));
+  const visibleResources = resourceList.filter((r) => selectedResourceIds.includes(r.id));
 
   return (
     <div className="flex-1 flex flex-col h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] overflow-hidden relative">

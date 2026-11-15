@@ -80,13 +80,13 @@ function ClientsContent() {
   const { data: appointments = [] } = useQuery<ProAppointment[]>({
     queryKey: ["pro", "appointments"],
     queryFn: async () => {
-      const res = await apiClient.get<{ appointments: ProAppointment[] }>("/pro/appointments");
-      return res.data.appointments;
+      const res = await apiClient.get<{ appointments?: ProAppointment[] }>("/pro/appointments");
+      return Array.isArray(res.data?.appointments) ? res.data.appointments : [];
     },
     staleTime: 60_000,
   });
 
-  const clients = clientsResponse?.clients || [];
+  const clients = Array.isArray(clientsResponse?.clients) ? clientsResponse.clients : [];
 
   // Mutation création fiche client
   const createClientMutation = useMutation({

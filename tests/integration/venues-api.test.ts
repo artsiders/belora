@@ -47,7 +47,7 @@ describe("Sprint 4 - Marketplace Venues & Categories API Integration Tests", () 
 
     const data = await res.json();
     expect(data.venues.length).toBeGreaterThan(0);
-    expect(data.venues[0].slug).toBe("atelier-botanique-paris");
+    expect(data.venues.some((v: any) => v.slug === "atelier-botanique-paris")).toBe(true);
   });
 
   it("GET /api/venues/[slug] returns full details for an existing venue", async () => {

@@ -30,15 +30,19 @@ export async function getProVenueContext(
     session = null;
   }
 
-  // 1. Session NextAuth valide
-  if (session?.user?.venueId) {
-    return { venueId: session.user.venueId, userId: session.user.id };
-  }
-
-  // 2. Paramètre venueId ou en-tête x-venue-id (dev, tests automatisés ou administrateur)
+  // 1. Paramètre explicite (query param, en-tête x-venue-id ou cookie belora_active_venue_id)
   const url = request ? new URL(request.url) : null;
+  const cookieHeader = request?.headers.get("cookie") || "";
+  const cookieVenueId = cookieHeader
+    .split(";")
+    .map((c) => c.trim())
+    .find((c) => c.startsWith("belora_active_venue_id="))
+    ?.split("=")[1];
+
   const paramVenueId =
-    url?.searchParams.get("venueId") || request?.headers.get("x-venue-id");
+    url?.searchParams.get("venueId") ||
+    request?.headers.get("x-venue-id") ||
+    cookieVenueId;
 
   if (paramVenueId) {
     const venue = await db.venue.findUnique({
@@ -48,6 +52,11 @@ export async function getProVenueContext(
     if (venue) {
       return { venueId: venue.id, userId: session?.user?.id };
     }
+  }
+
+  // 2. Session NextAuth valide
+  if (session?.user?.venueId) {
+    return { venueId: session.user.venueId, userId: session.user.id };
   }
 
   // 3. Fallback dev / test (premier salon seed : L'Atelier Botanique)
