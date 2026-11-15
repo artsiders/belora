@@ -605,6 +605,25 @@ export async function deleteAdminReview(reviewId: string) {
   return { success: true, id: reviewId };
 }
 
+export async function updateAdminReview(
+  reviewId: string,
+  data: { isVerified?: boolean; reply?: string | null }
+) {
+  const review = await db.review.findUnique({ where: { id: reviewId } });
+  if (!review) throw new Error("Avis introuvable.");
+
+  const updated = await db.review.update({
+    where: { id: reviewId },
+    data: {
+      ...(data.isVerified !== undefined ? { isVerified: data.isVerified } : {}),
+      ...(data.reply !== undefined
+        ? { reply: data.reply, replyAt: data.reply ? new Date() : null }
+        : {}),
+    },
+  });
+  return { success: true, review: updated };
+}
+
 // =============================================================================
 // GESTION COMPLÈTE DES UTILISATEURS (CLIENTS, PROS, ADMINS)
 // =============================================================================

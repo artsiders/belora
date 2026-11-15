@@ -14,9 +14,10 @@ export default async function AdminLayout({
 }) {
   const session = await auth();
   const userEmail = session?.user?.email || "admin@belora.com";
+  const userName = session?.user?.name || "Administrateur Belora";
 
   return (
-    <AdminLayoutShell userEmail={userEmail}>
+    <AdminLayoutShell userEmail={userEmail} userName={userName}>
       {children}
     </AdminLayoutShell>
   );
