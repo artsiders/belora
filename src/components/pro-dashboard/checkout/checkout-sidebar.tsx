@@ -6,7 +6,6 @@ import {
   Calendar,
   Lock,
   Clock,
-  Sparkle,
   ShieldCheck,
   Check,
   UserCheck,
@@ -16,6 +15,7 @@ import { FormSelect } from "@/components/pro-dashboard/ui/form-controls";
 import { Badge } from "@/components/pro-dashboard/ui/badge";
 
 interface CheckoutSidebarProps {
+  className?: string;
   clients: ProClient[];
   selectedClientId: string;
   onSelectClient: (clientId: string) => void;
@@ -30,6 +30,7 @@ interface CheckoutSidebarProps {
 }
 
 export function CheckoutSidebar({
+  className = "",
   clients,
   selectedClientId,
   onSelectClient,
@@ -45,18 +46,18 @@ export function CheckoutSidebar({
   const activeClient = clients.find((c) => c.id === selectedClientId);
 
   return (
-    <aside className="w-64 sm:w-72 bg-white border-e border-neutral-200/90 flex flex-col shrink-0 overflow-y-auto custom-scrollbar select-none">
+    <aside className={`bg-white border-e border-neutral-200/90 flex flex-col shrink-0 h-full select-none ${className || "w-72 lg:w-80"}`}>
       {/* En-tête de la sidebar */}
-      <div className="p-4 border-b border-neutral-200/80 space-y-1">
+      <div className="p-4 border-b border-neutral-200/80 space-y-1 shrink-0">
         <h2 className="text-sm font-bold text-neutral-950 uppercase tracking-wider">
           Caisse & POS &bull; Terminal
         </h2>
-        <p className="text-sm text-neutral-500">
+        <p className="text-xs text-neutral-500">
           Attribution client & flux d&apos;encaissement
         </p>
       </div>
 
-      <div className="p-4 space-y-5 flex-1">
+      <div className="p-4 flex-1 min-h-0 flex flex-col gap-4 overflow-hidden">
         {/* Section 1 : Client au comptoir */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
@@ -145,8 +146,8 @@ export function CheckoutSidebar({
         </div>
 
         {/* Section 2 : Rendez-vous du jour à encaisser */}
-        <div className="space-y-2.5 pt-2 border-t border-neutral-200/80">
-          <div className="flex items-center justify-between">
+        <div className="flex-1 min-h-0 flex flex-col pt-3 border-t border-neutral-200/80">
+          <div className="flex items-center justify-between shrink-0">
             <span className="text-xs font-bold text-neutral-500 uppercase tracking-wider flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5 text-primary-700" />
               <span>Rendez-vous du jour</span>
@@ -156,57 +157,63 @@ export function CheckoutSidebar({
             </span>
           </div>
 
-          <p className="text-xs text-neutral-500">
+          <p className="text-xs text-neutral-500 shrink-0 mt-1 mb-2.5">
             Cliquez sur un RDV pour pré-remplir le panier en 1 clic.
           </p>
 
-          <div className="space-y-2 max-h-56 overflow-y-auto custom-scrollbar pr-1">
-            {appointments.map((apt) => {
-              const isSelected = activeAppointmentId === apt.id;
+          <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-2">
+            {appointments.length === 0 ? (
+              <div className="py-8 text-center text-xs text-neutral-400">
+                Aucun rendez-vous à encaisser aujourd&apos;hui.
+              </div>
+            ) : (
+              appointments.map((apt) => {
+                const isSelected = activeAppointmentId === apt.id;
 
-              return (
-                <button
-                  key={apt.id}
-                  type="button"
-                  onClick={() => onSelectAppointment(apt)}
-                  className={`w-full text-left p-2.5 rounded-lg border transition-all cursor-pointer space-y-1 ${
-                    isSelected
-                      ? "bg-primary-50 border-primary-600 ring-1 ring-primary-600 shadow-2xs"
-                      : "bg-white border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50"
-                  }`}
-                >
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-neutral-900 truncate">
-                      {apt.clientName}
-                    </span>
-                    <span className="font-bold tabular-nums text-neutral-950">
-                      {apt.price} €
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between text-xs text-neutral-500">
-                    <span className="truncate">{apt.serviceName}</span>
-                    <span className="tabular-nums flex items-center gap-1 shrink-0 text-neutral-600">
-                      <Clock className="w-3 h-3 text-neutral-400" />
-                      <span>{apt.startTime}</span>
-                    </span>
-                  </div>
-
-                  {apt.depositPaid > 0 && (
-                    <div className="flex items-center gap-1 text-sm text-primary-800 font-semibold pt-0.5">
-                      <ShieldCheck className="w-3 h-3" />
-                      <span>Acompte Stripe {apt.depositPaid} € perçu</span>
+                return (
+                  <button
+                    key={apt.id}
+                    type="button"
+                    onClick={() => onSelectAppointment(apt)}
+                    className={`w-full text-left p-2.5 rounded-lg border transition-all cursor-pointer space-y-1 ${
+                      isSelected
+                        ? "bg-primary-50 border-primary-600 ring-1 ring-primary-600 shadow-2xs"
+                        : "bg-white border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-semibold text-neutral-900 truncate">
+                        {apt.clientName}
+                      </span>
+                      <span className="font-bold tabular-nums text-neutral-950">
+                        {apt.price} €
+                      </span>
                     </div>
-                  )}
-                </button>
-              );
-            })}
+
+                    <div className="flex items-center justify-between text-xs text-neutral-500">
+                      <span className="truncate">{apt.serviceName}</span>
+                      <span className="tabular-nums flex items-center gap-1 shrink-0 text-neutral-600">
+                        <Clock className="w-3 h-3 text-neutral-400" />
+                        <span>{apt.startTime}</span>
+                      </span>
+                    </div>
+
+                    {apt.depositPaid > 0 && (
+                      <div className="flex items-center gap-1 text-xs text-primary-800 font-semibold pt-0.5">
+                        <ShieldCheck className="w-3.5 h-3.5" />
+                        <span>Acompte Stripe {apt.depositPaid} € perçu</span>
+                      </div>
+                    )}
+                  </button>
+                );
+              })
+            )}
           </div>
         </div>
       </div>
 
       {/* Section 3 : Synthèse d'activité & Clôture Z en bas */}
-      <div className="p-4 mt-auto border-t border-neutral-200/80 bg-neutral-50/60 space-y-3">
+      <div className="p-4 shrink-0 border-t border-neutral-200/80 bg-neutral-50/60 space-y-3">
         <div className="space-y-1">
           <div className="flex items-center justify-between text-xs font-bold text-neutral-700 uppercase tracking-wider">
             <span>Activité du jour</span>

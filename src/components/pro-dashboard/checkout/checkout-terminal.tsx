@@ -111,6 +111,7 @@ export function CheckoutTerminal({
   const [selectedAppointmentId, setSelectedAppointmentId] = useState<
     string | null
   >(initialAppointmentId || null);
+  const [mobileTab, setMobileTab] = useState<"client" | "catalog" | "ticket">("catalog");
 
   const handleSelectAppointment = (apt: ProAppointment) => {
     setSelectedAppointmentId(apt.id);
@@ -128,6 +129,7 @@ export function CheckoutTerminal({
         staffId: apt.staffId,
       },
     ]);
+    setMobileTab("ticket");
   };
 
   // Panier
@@ -435,9 +437,52 @@ export function CheckoutTerminal({
   // TERMINAL POS ACTIF (SIDEBAR 280PX + CATALOGUE + TICKET)
   // --------------------------------------------------------------------------
   return (
-    <div className="flex-1 flex h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] overflow-hidden">
+    <div className="flex-1 flex flex-col lg:flex-row h-full overflow-hidden min-h-0">
+      {/* Sélecteur de vue mobile & tablette (< lg) */}
+      <div className="lg:hidden flex items-center justify-between border-b border-neutral-200 bg-white p-2 shrink-0 gap-1.5 z-10">
+        <button
+          type="button"
+          onClick={() => setMobileTab("client")}
+          className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+            mobileTab === "client"
+              ? "bg-primary-900 text-white"
+              : "text-neutral-600 hover:bg-neutral-100"
+          }`}
+        >
+          <User className="w-3.5 h-3.5" />
+          <span>Client & RDV ({appointments.length})</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setMobileTab("catalog")}
+          className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+            mobileTab === "catalog"
+              ? "bg-primary-900 text-white"
+              : "text-neutral-600 hover:bg-neutral-100"
+          }`}
+        >
+          <ShoppingBag className="w-3.5 h-3.5" />
+          <span>Catalogue</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setMobileTab("ticket")}
+          className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+            mobileTab === "ticket"
+              ? "bg-primary-900 text-white"
+              : "text-neutral-600 hover:bg-neutral-100"
+          }`}
+        >
+          <Receipt className="w-3.5 h-3.5" />
+          <span>Ticket ({cart.length})</span>
+        </button>
+      </div>
+
       {/* Sidebar Caisse & POS (Attribution Client, RDV du jour, Clôture Z) */}
       <CheckoutSidebar
+        className={`${mobileTab === "client" ? "flex w-full" : "hidden"} lg:flex lg:w-72 xl:w-80`}
         clients={clients}
         selectedClientId={selectedClientId}
         onSelectClient={(id) => {
@@ -455,9 +500,9 @@ export function CheckoutTerminal({
       />
 
       {/* Zone Centrale & Droite : Catalogue + Ticket POS */}
-      <div className="flex-1 flex flex-col lg:flex-row gap-4 p-4 sm:p-6 overflow-hidden bg-neutral-50/40">
+      <div className={`flex-1 ${mobileTab === "client" ? "hidden lg:flex" : "flex"} flex-col lg:flex-row gap-4 p-3 sm:p-4 lg:p-6 overflow-hidden bg-neutral-50/40 min-h-0`}>
         {/* Colonne Centre : Catalogue de Vente (Prestations vs Produits) */}
-        <div className="flex-1 flex flex-col p-4 sm:p-5 rounded-xl bg-white border border-neutral-200/90 shadow-2xs overflow-hidden">
+        <div className={`flex-1 flex flex-col p-4 sm:p-5 rounded-xl bg-white border border-neutral-200/90 shadow-2xs overflow-hidden min-h-0 ${mobileTab === "ticket" ? "hidden lg:flex" : "flex"}`}>
           {/* Navigation Catalogue */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pb-3 border-b border-neutral-200">
             <div className="inline-flex p-1 rounded-lg bg-neutral-100 text-sm font-semibold">
@@ -573,7 +618,7 @@ export function CheckoutTerminal({
         {/* =====================================================================
             COLONNE DROITE : TICKET DE CAISSE EN COURS & RÈGLEMENT (POS)
             ===================================================================== */}
-        <div className="w-full lg:w-96 flex flex-col p-4 sm:p-5 rounded-xl bg-white border border-neutral-200/90 shadow-2xs overflow-hidden shrink-0">
+        <div className={`w-full lg:w-80 xl:w-96 flex flex-col p-4 sm:p-5 rounded-xl bg-white border border-neutral-200/90 shadow-2xs overflow-hidden shrink-0 min-h-0 ${mobileTab === "catalog" ? "hidden lg:flex" : "flex"}`}>
         {/* Header Ticket */}
         <div className="flex items-center justify-between pb-3 border-b border-neutral-200">
           <div className="flex items-center gap-2">
@@ -855,6 +900,20 @@ export function CheckoutTerminal({
         </div>
       </div>
     </div>
-    </div>
-  );
+
+    {/* Barre d'action rapide mobile vers le panier */}
+    {cart.length > 0 && mobileTab === "catalog" && (
+      <div className="lg:hidden p-3 bg-white border-t border-neutral-200 shrink-0">
+        <button
+          type="button"
+          onClick={() => setMobileTab("ticket")}
+          className="btn btn-primary btn-sm w-full flex items-center justify-between"
+        >
+          <span>Voir le ticket ({cart.length} article{cart.length > 1 ? "s" : ""})</span>
+          <span className="font-bold tabular-nums">{totalDue.toFixed(2)} € &rarr;</span>
+        </button>
+      </div>
+    )}
+  </div>
+);
 }
