@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { BookingStatus, PaymentStatus, Role } from "@prisma/client";
 import { refundPaymentIntent } from "@/lib/stripe";
+import { isTestIdentityFallbackAllowed } from "@/lib/test-identity";
 import { sendBookingCancellationEmail } from "@/lib/email";
 import {
   CreateReviewInput,
@@ -55,8 +56,10 @@ export async function getAccountUserContext(
     }
   }
 
-  // Fallback pour requêtes API avec userId ou email explicite (tests d'intégration)
-  const { searchParams } = new URL(request.url);
+  // Fallback réservé aux tests d'intégration (Vitest) : jamais en dev ni en production
+  const searchParams = isTestIdentityFallbackAllowed()
+    ? new URL(request.url).searchParams
+    : new URLSearchParams();
   const paramUserId = searchParams.get("userId");
   const paramEmail = searchParams.get("email");
 
