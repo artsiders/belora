@@ -10,6 +10,7 @@ import {
   CreditCard,
   MessageSquare,
   HelpCircle,
+  BadgeEuro,
 } from "lucide-react";
 
 export function SettingsSidebar() {
@@ -20,6 +21,7 @@ export function SettingsSidebar() {
   const isTeamActive = pathname === "/pro/settings/team";
   const isCashActive = pathname === "/pro/settings/cash-register";
   const isNotificationsActive = pathname === "/pro/settings/notifications";
+  const isSubscriptionActive = pathname === "/pro/settings/subscription";
 
   return (
     <aside className="w-64 sm:w-72 bg-white border-e border-neutral-200/90 flex flex-col shrink-0 overflow-y-auto custom-scrollbar select-none">
@@ -91,6 +93,18 @@ export function SettingsSidebar() {
         >
           <MessageSquare className="w-4 h-4 shrink-0" />
           <span>SMS & E-mails</span>
+        </Link>
+
+        <Link
+          href="/pro/settings/subscription"
+          className={`flex items-center gap-2.5 p-2.5 rounded-lg transition-all duration-150 ${
+            isSubscriptionActive
+              ? "bg-primary-600 text-white shadow-2xs font-bold"
+              : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
+          }`}
+        >
+          <BadgeEuro className="w-4 h-4 shrink-0" />
+          <span>Abonnement</span>
         </Link>
       </nav>
 

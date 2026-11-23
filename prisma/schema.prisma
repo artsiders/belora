@@ -40,6 +40,35 @@ enum PaymentStatus {
   FAILED
 }
 
+enum BookingChannel {
+  MARKETPLACE // Réservation trouvée via la recherche / les pages Belora
+  DIRECT_LINK // Lien direct du salon (site, réseaux sociaux, QR code)
+  IN_SALON    // Rendez-vous saisi par le salon dans son agenda
+}
+
+enum CommissionMode {
+  DISABLED              // Aucune commission
+  NEW_CLIENTS_ONLY      // Uniquement les nouveaux clients apportés par la marketplace
+  ALL_MARKETPLACE       // Toutes les réservations issues de la marketplace
+}
+
+enum CommissionBase {
+  ONLINE_PAYMENT // Calculée sur le montant payé en ligne (acompte)
+  BOOKING_TOTAL  // Calculée sur le prix total de la réservation
+}
+
+enum BillingInterval {
+  MONTHLY
+  ANNUAL
+}
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELED
+}
+
 enum PaymentMethod {
   CARD_ONLINE
   CARD_TERMINAL
@@ -142,7 +171,8 @@ model Venue {
   status               VenueStatus @default(PUBLISHED)
   stripeAccountId      String?
   stripeChargesEnabled Boolean     @default(false)
-  commissionRate       Float       @default(0.018) // 1.8% Belora platform commission
+  commissionRate       Float?      // Taux négocié (null = taux du forfait ou taux plateforme)
+  commissionRateUntil  DateTime?   // Fin du taux négocié (null = sans limite)
   ownerId              String
   siret                String?
   vatNumber            String?
@@ -164,6 +194,7 @@ model Venue {
   saleTickets       SaleTicket[]
   dailyClosings     DailyClosing[]
   reviews           Review[]
+  subscription      VenueSubscription?
 
   @@map("venues")
 }
@@ -351,6 +382,12 @@ model Booking {
   remainingCents        Int           @default(0)
   paymentStatus         PaymentStatus @default(PENDING)
   stripePaymentIntentId String?
+  channel               BookingChannel @default(MARKETPLACE)
+  isNewClient           Boolean       @default(false)
+  commissionRate        Float         @default(0)
+  commissionCents       Int           @default(0) // Commission Belora totale due
+  commissionCollectedCents Int        @default(0) // Part prélevée automatiquement au paiement en ligne
+  paymentFeeCents       Int           @default(0) // Frais de paiement plateforme
   notes                 String?       @db.Text
   cancellationReason    String?
   cancelledAt           DateTime?
@@ -478,10 +515,77 @@ model Review {
 // -----------------------------------------------------------------------------
 
 model PlatformSetting {
-  id                    String   @id @default(cuid())
-  defaultCommissionRate Float    @default(0.018) // 1.8%
-  maintenanceMode       Boolean  @default(false)
-  updatedAt             DateTime @updatedAt
+  id                    String         @id @default(cuid())
+  defaultCommissionRate Float          @default(0.018) // Taux plateforme par défaut
+  commissionMode        CommissionMode @default(NEW_CLIENTS_ONLY)
+  commissionBase        CommissionBase @default(BOOKING_TOTAL)
+  commissionMinCents    Int            @default(0)   // Commission minimale par réservation commissionnée
+  commissionMaxCents    Int?                         // Plafond par réservation (null = sans plafond)
+  paymentFeePercent     Float          @default(0)   // Frais de paiement plateforme (ex : 0.015)
+  paymentFeeFixedCents  Int            @default(0)   // Part fixe des frais de paiement
+  defaultTrialDays      Int            @default(14)
+  defaultPlanId         String?                      // Forfait attribué si aucun n'est choisi
+  salesContactEmail     String?                      // Contact commercial (forfaits sur devis)
+  maintenanceMode       Boolean        @default(false)
+  updatedAt             DateTime       @updatedAt
 
   @@map("platform_settings")
+}
+
+// -----------------------------------------------------------------------------
+// FORFAITS & ABONNEMENTS PROFESSIONNELS
+// -----------------------------------------------------------------------------
+
+model SubscriptionPlan {
+  id                     String   @id @default(cuid())
+  slug                   String   @unique
+  name                   String
+  description            String?
+  monthlyPriceCents      Int      // Prix HT mensuel, sans engagement
+  annualPriceCents       Int      // Prix HT mensuel équivalent, engagement annuel
+  currency               String   @default("EUR")
+  trialDays              Int?     // null = durée d'essai plateforme
+  maxStaff               Int?     // null = illimité
+  maxResources           Int?     // null = illimité
+  maxVenues              Int?     // null = illimité
+  commissionRate         Float?   // null = taux plateforme
+  includesSmsReminders   Boolean  @default(true)
+  includesAnalytics      Boolean  @default(false)
+  includesPriorityListing Boolean @default(false)
+  features               String[] // Arguments affichés sur la page tarifs
+  isHighlighted          Boolean  @default(false)
+  highlightLabel         String?
+  isContactSales         Boolean  @default(false) // Forfait sur devis : pas d'inscription directe
+  isPublic               Boolean  @default(true)  // Affiché sur la page tarifs
+  isActive               Boolean  @default(true)  // Souscriptible
+  order                  Int      @default(0)
+  stripeProductId        String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  subscriptions VenueSubscription[]
+
+  @@map("subscription_plans")
+}
+
+model VenueSubscription {
+  id                   String             @id @default(cuid())
+  venueId              String             @unique
+  planId               String
+  status               SubscriptionStatus @default(TRIALING)
+  interval             BillingInterval    @default(MONTHLY)
+  trialEndsAt          DateTime?
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean            @default(false)
+  isComplimentary      Boolean            @default(false) // Offert par l'équipe Belora (pas de facturation)
+  stripeCustomerId     String?
+  stripeSubscriptionId String?            @unique
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  venue Venue            @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  plan  SubscriptionPlan @relation(fields: [planId], references: [id], onDelete: Restrict)
+
+  @@index([status])
+  @@map("venue_subscriptions")
 }

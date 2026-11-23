@@ -62,6 +62,8 @@ export function BookClient({ venue }: BookClientProps) {
   const searchParams = useSearchParams();
   const initialServiceId = searchParams.get("service");
   const isGift = searchParams.get("gift") === "true";
+  // Lien direct partagé par le salon : réservation sans commission d'acquisition
+  const bookingSource = searchParams.get("source") === "direct" ? "direct" : "marketplace";
 
   const upcomingDays = useMemo(() => generateUpcomingDays(), []);
 
@@ -231,6 +233,7 @@ export function BookClient({ venue }: BookClientProps) {
         clientEmail: customerEmail.trim() || undefined,
         clientPhone: customerPhone.trim(),
         notes: computedNotes || undefined,
+        source: bookingSource,
       };
 
       const res = await apiClient.post<{

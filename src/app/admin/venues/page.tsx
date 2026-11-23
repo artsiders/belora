@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiClient } from "@/lib/api-client";
+import { apiClient, type ApiErrorResponse } from "@/lib/api-client";
 import { toast } from "sonner";
 import {
   Store,
@@ -10,11 +10,9 @@ import {
   CheckCircle2,
   XCircle,
   AlertTriangle,
-  RefreshCw,
   ExternalLink,
   Percent,
   PlusCircle,
-  X,
 } from "lucide-react";
 import Link from "next/link";
 import { VenueStatus } from "@prisma/client";
@@ -22,6 +20,13 @@ import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { InlineSkeleton } from "@/components/ui/inline-skeleton";
 import { EmptyState } from "@/components/ui/empty-state";
+import { VenueCommissionModal } from "@/components/admin/billing/venue-commission-modal";
+import {
+  VenueSubscriptionModal,
+  type AdminVenueSubscription,
+} from "@/components/admin/billing/venue-subscription-modal";
+import { SUBSCRIPTION_STATE_LABELS, formatRate } from "@/modules/billing/format";
+import type { EffectiveSubscriptionStateValue } from "@/modules/billing/types";
 
 interface AdminVenueItem {
   id: string;
@@ -32,7 +37,9 @@ interface AdminVenueItem {
   postalCode: string;
   phone: string | null;
   status: VenueStatus;
-  commissionRate: number;
+  commissionRate: number | null;
+  commissionRateUntil: string | null;
+  subscription: (AdminVenueSubscription & { planName: string; state: EffectiveSubscriptionStateValue }) | null;
   ownerName: string;
   ownerEmail: string;
   bookingsCount: number;
@@ -49,7 +56,7 @@ export default function AdminVenuesPage() {
   const [selectedStatus, setSelectedStatus] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState("");
   const [editingVenue, setEditingVenue] = useState<AdminVenueItem | null>(null);
-  const [newRatePercent, setNewRatePercent] = useState<number>(1.8);
+  const [subscriptionVenue, setSubscriptionVenue] = useState<AdminVenueItem | null>(null);
 
   const { data, isLoading, isError, error, refetch, isFetching } = useQuery<VenuesResponse>({
     queryKey: ["admin", "venues", selectedStatus, searchQuery],
@@ -79,28 +86,7 @@ export default function AdminVenuesPage() {
         toast.success("Établissement suspendu de la marketplace");
       }
     },
-    onError: (err: any) => {
-      toast.error(err?.response?.data?.error || "Erreur lors de la mise à jour");
-    },
-  });
-
-  // Mutation pour modifier le taux de commission
-  const updateCommissionMutation = useMutation({
-    mutationFn: async ({ venueId, rate }: { venueId: string; rate: number }) => {
-      const res = await apiClient.patch(`/admin/venues/${venueId}`, {
-        commissionRate: rate,
-      });
-      return res.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["admin", "venues"] });
-      queryClient.invalidateQueries({ queryKey: ["admin", "monetization"] });
-      toast.success("Taux de commission mis à jour");
-      setEditingVenue(null);
-    },
-    onError: (err: any) => {
-      toast.error(err?.response?.data?.error || "Erreur lors de la mise à jour du taux");
-    },
+    onError: (err: ApiErrorResponse) => toast.error(err.error),
   });
 
   const formatEuro = (amount: number) =>
@@ -208,6 +194,7 @@ export default function AdminVenuesPage() {
                 <th className="px-6 py-3.5">Localisation</th>
                 <th className="px-6 py-3.5">Responsable</th>
                 <th className="px-6 py-3.5">Statut</th>
+                <th className="px-6 py-3.5">Forfait</th>
                 <th className="px-6 py-3.5">Commission</th>
                 <th className="px-6 py-3.5">Revenus Plateforme</th>
                 <th className="px-6 py-3.5 text-right">Actions</th>
@@ -221,6 +208,7 @@ export default function AdminVenuesPage() {
                     <td className="px-6 py-4"><InlineSkeleton width="w-28" height="h-4" /></td>
                     <td className="px-6 py-4"><InlineSkeleton width="w-32" height="h-4" /></td>
                     <td className="px-6 py-4"><InlineSkeleton width="w-20" height="h-5" /></td>
+                    <td className="px-6 py-4"><InlineSkeleton width="w-24" height="h-4" /></td>
                     <td className="px-6 py-4"><InlineSkeleton width="w-12" height="h-4" /></td>
                     <td className="px-6 py-4"><InlineSkeleton width="w-20" height="h-4" /></td>
                     <td className="px-6 py-4 text-right"><InlineSkeleton width="w-20" height="h-7" /></td>
@@ -228,7 +216,7 @@ export default function AdminVenuesPage() {
                 ))
               ) : venues.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="p-8 text-center">
+                  <td colSpan={8} className="p-8 text-center">
                     <EmptyState
                       icon={Store}
                       title="Aucun établissement trouvé"
@@ -256,14 +244,31 @@ export default function AdminVenuesPage() {
                     </td>
                     <td className="px-6 py-4">
                       <button
-                        onClick={() => {
-                          setEditingVenue(venue);
-                          setNewRatePercent((venue.commissionRate ?? 0.018) * 100);
-                        }}
-                        className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-neutral-700 bg-neutral-100 hover:bg-neutral-200 px-2 py-0.5 rounded transition-colors"
-                        title="Modifier la commission"
+                        type="button"
+                        onClick={() => setSubscriptionVenue(venue)}
+                        className="text-left text-sm hover:text-primary-700 transition-colors"
+                        title="Gérer l'abonnement"
                       >
-                        {((venue.commissionRate ?? 0.018) * 100).toFixed(1)} %
+                        <span className="block font-medium text-neutral-800">
+                          {venue.subscription?.planName ?? "Attribuer un forfait"}
+                        </span>
+                        <span className="block text-neutral-500">
+                          {venue.subscription
+                            ? venue.subscription.isComplimentary
+                              ? "Offert"
+                              : SUBSCRIPTION_STATE_LABELS[venue.subscription.state]
+                            : SUBSCRIPTION_STATE_LABELS.none}
+                        </span>
+                      </button>
+                    </td>
+                    <td className="px-6 py-4">
+                      <button
+                        type="button"
+                        onClick={() => setEditingVenue(venue)}
+                        className="inline-flex items-center gap-1 text-sm font-semibold text-neutral-700 hover:text-primary-700 transition-colors"
+                        title="Définir un taux négocié"
+                      >
+                        {venue.commissionRate === null ? "Standard" : formatRate(venue.commissionRate)}
                         <Percent className="w-3 h-3 text-neutral-400" />
                       </button>
                     </td>
@@ -320,7 +325,7 @@ export default function AdminVenuesPage() {
                           </button>
                         )}
                         <Link
-                          href={`/salons/${venue.slug}`}
+                          href={`/venue/${venue.slug}`}
                           target="_blank"
                           className="p-1 text-neutral-400 hover:text-neutral-700 transition-colors"
                           title="Voir la fiche publique"
@@ -337,66 +342,11 @@ export default function AdminVenuesPage() {
         </div>
       </div>
 
-      {/* Modale d'ajustement du taux de commission */}
       {editingVenue && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-900/40 p-4">
-          <div className="bg-white rounded-xl max-w-sm w-full p-6 shadow-xl border border-neutral-200 space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-base font-semibold text-neutral-900">
-                Ajuster la Commission
-              </h3>
-              <button
-                onClick={() => setEditingVenue(null)}
-                className="text-neutral-400 hover:text-neutral-600 p-1"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-            <p className="text-xs text-neutral-500">
-              Modifiez le taux de commission Belora appliqué aux réservations de{" "}
-              <strong className="text-neutral-800">{editingVenue.name}</strong>.
-            </p>
-            <div>
-              <label className="block text-xs font-medium text-neutral-700 mb-1">
-                Taux de commission (%)
-              </label>
-              <div className="relative">
-                <input
-                  type="number"
-                  step="0.1"
-                  min="0"
-                  max="50"
-                  value={newRatePercent}
-                  onChange={(e) => setNewRatePercent(parseFloat(e.target.value) || 0)}
-                  className="w-full px-3 py-2 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-900"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 text-sm font-medium">
-                  %
-                </span>
-              </div>
-            </div>
-            <div className="flex items-center justify-end gap-2 pt-2">
-              <button
-                onClick={() => setEditingVenue(null)}
-                className="px-3 py-1.5 text-xs font-medium text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
-              >
-                Annuler
-              </button>
-              <button
-                onClick={() =>
-                  updateCommissionMutation.mutate({
-                    venueId: editingVenue.id,
-                    rate: newRatePercent / 100,
-                  })
-                }
-                disabled={updateCommissionMutation.isPending}
-                className="px-4 py-1.5 text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-800 rounded-lg transition-colors"
-              >
-                {updateCommissionMutation.isPending ? "Enregistrement..." : "Enregistrer"}
-              </button>
-            </div>
-          </div>
-        </div>
+        <VenueCommissionModal venue={editingVenue} onClose={() => setEditingVenue(null)} />
+      )}
+      {subscriptionVenue && (
+        <VenueSubscriptionModal venue={subscriptionVenue} onClose={() => setSubscriptionVenue(null)} />
       )}
     </div>
   );

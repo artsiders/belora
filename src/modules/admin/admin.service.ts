@@ -3,10 +3,13 @@ import { auth } from "@/lib/auth";
 import { Role, VenueStatus, BookingStatus } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
+import { isTestIdentityFallbackAllowed } from "@/lib/test-identity";
+import { resolveSignupPlan } from "@/modules/billing/plan.service";
+import { startTrial } from "@/modules/billing/subscription.service";
+import { resolveSubscriptionState } from "@/modules/billing/subscription-state";
 import {
   UpdateVenueStatusInput,
   CreateAssistedVenueInput,
-  UpdateMonetizationInput,
   UpdateUserInput,
   UpdateBookingStatusInput,
   UpdatePlatformSettingsInput,
@@ -60,19 +63,14 @@ export async function getAdminContext(
     }
   }
 
-  // Fallback pour tests d'intégration ou scripts d'administration
-  const { searchParams } = new URL(request.url);
-  const paramAdminEmail = searchParams.get("adminEmail");
-  const headerAdminKey = request.headers.get("x-admin-key");
+  // Fallback réservé aux tests d'intégration (Vitest) : jamais en dev ni en production
+  const paramAdminEmail = isTestIdentityFallbackAllowed()
+    ? new URL(request.url).searchParams.get("adminEmail")
+    : null;
 
-  if (paramAdminEmail || headerAdminKey) {
-    const user = await db.user.findFirst({
-      where: {
-        OR: [
-          ...(paramAdminEmail ? [{ email: paramAdminEmail }] : []),
-          ...(headerAdminKey ? [{ email: "admin@yopmail.com" }, { email: "admin@belora.com" }] : []),
-        ],
-      },
+  if (paramAdminEmail) {
+    const user = await db.user.findUnique({
+      where: { email: paramAdminEmail },
     });
 
     if (user) {
@@ -141,10 +139,8 @@ export async function getPlatformDashboardMetrics(): Promise<PlatformDashboardMe
       select: {
         totalPriceCents: true,
         depositCents: true,
+        commissionCents: true,
         status: true,
-        venue: {
-          select: { commissionRate: true },
-        },
       },
     }),
     db.venue.findMany({
@@ -158,7 +154,7 @@ export async function getPlatformDashboardMetrics(): Promise<PlatformDashboardMe
       orderBy: { createdAt: "desc" },
       include: {
         venue: {
-          select: { name: true, commissionRate: true },
+          select: { name: true },
         },
       },
     }),
@@ -175,8 +171,7 @@ export async function getPlatformDashboardMetrics(): Promise<PlatformDashboardMe
       b.status === BookingStatus.COMPLETED
     ) {
       totalGmvCents += b.totalPriceCents;
-      const rate = b.venue.commissionRate ?? 0.018;
-      totalCommissionsCents += Math.round(b.totalPriceCents * rate);
+      totalCommissionsCents += b.commissionCents;
     }
     if (b.status === BookingStatus.CONFIRMED) confirmedCount++;
     if (b.status === BookingStatus.COMPLETED) completedCount++;
@@ -195,7 +190,7 @@ export async function getPlatformDashboardMetrics(): Promise<PlatformDashboardMe
     venueName: b.venue.name,
     totalPriceEuros: b.totalPriceCents / 100,
     depositEuros: b.depositCents / 100,
-    commissionEuros: Math.round(b.totalPriceCents * (b.venue.commissionRate ?? 0.018)) / 100,
+    commissionEuros: b.commissionCents / 100,
     status: b.status.toLowerCase(),
     createdAt: b.createdAt.toISOString(),
   }));
@@ -230,11 +225,23 @@ export interface AdminVenueListItem {
   postalCode: string;
   phone: string | null;
   status: VenueStatus;
-  commissionRate: number;
+  /** Taux négocié pour ce salon (null = taux du forfait ou de la plateforme). */
+  commissionRate: number | null;
+  commissionRateUntil: string | null;
   ownerName: string;
   ownerEmail: string;
   bookingsCount: number;
   totalRevenueEuros: number;
+  commissionsEuros: number;
+  subscription: {
+    planId: string;
+    planName: string;
+    status: string;
+    state: string;
+    interval: string;
+    trialEndsAt: string | null;
+    isComplimentary: boolean;
+  } | null;
   createdAt: string;
 }
 
@@ -261,20 +268,23 @@ export async function getAdminVenues(filter?: {
         select: { firstName: true, lastName: true, email: true },
       },
       bookings: {
-        select: { totalPriceCents: true, status: true },
+        select: { totalPriceCents: true, commissionCents: true, status: true },
       },
+      subscription: { include: { plan: { select: { id: true, name: true } } } },
     },
     orderBy: { createdAt: "desc" },
   });
 
   return venues.map((v) => {
     let totalRevenueCents = 0;
+    let commissionsCents = 0;
     for (const b of v.bookings) {
       if (
         b.status === BookingStatus.CONFIRMED ||
         b.status === BookingStatus.COMPLETED
       ) {
         totalRevenueCents += b.totalPriceCents;
+        commissionsCents += b.commissionCents;
       }
     }
 
@@ -288,10 +298,23 @@ export async function getAdminVenues(filter?: {
       phone: v.phone,
       status: v.status,
       commissionRate: v.commissionRate,
+      commissionRateUntil: v.commissionRateUntil?.toISOString() ?? null,
       ownerName: `${v.owner.firstName} ${v.owner.lastName}`.trim(),
       ownerEmail: v.owner.email,
       bookingsCount: v.bookings.length,
       totalRevenueEuros: totalRevenueCents / 100,
+      commissionsEuros: commissionsCents / 100,
+      subscription: v.subscription
+        ? {
+            planId: v.subscription.plan.id,
+            planName: v.subscription.plan.name,
+            status: v.subscription.status,
+            state: resolveSubscriptionState(v.subscription),
+            interval: v.subscription.interval,
+            trialEndsAt: v.subscription.trialEndsAt?.toISOString() ?? null,
+            isComplimentary: v.subscription.isComplimentary,
+          }
+        : null,
       createdAt: v.createdAt.toISOString(),
     };
   });
@@ -310,6 +333,9 @@ export async function updateAdminVenue(
       ...(input.status ? { status: input.status } : {}),
       ...(input.commissionRate !== undefined
         ? { commissionRate: input.commissionRate }
+        : {}),
+      ...(input.commissionRateUntil !== undefined
+        ? { commissionRateUntil: input.commissionRateUntil ? new Date(input.commissionRateUntil) : null }
         : {}),
     },
   });
@@ -356,6 +382,8 @@ export async function createAssistedVenue(
     baseSlug = `${baseSlug}-${Math.floor(1000 + Math.random() * 9000)}`;
   }
 
+  const signupPlan = await resolveSignupPlan();
+
   const result = await db.$transaction(async (tx) => {
     // 1. Recherche ou création du compte utilisateur PRO
     let proUser = await tx.user.findUnique({
@@ -394,7 +422,7 @@ export async function createAssistedVenue(
         phone: input.proPhone.trim(),
         email: normalizedEmail,
         status: VenueStatus.PENDING_VALIDATION,
-        commissionRate: input.commissionRate ?? 0.018,
+        commissionRate: input.commissionRate ?? null,
         latitude: 48.8566,
         longitude: 2.3522,
         ownerId: proUser.id,
@@ -424,7 +452,12 @@ export async function createAssistedVenue(
       });
     }
 
-    // 4. Génération du jeton d'invitation
+    // 4. Essai gratuit sur le forfait par défaut
+    if (signupPlan) {
+      await startTrial(tx, { venueId: venue.id, plan: signupPlan, interval: "MONTHLY" });
+    }
+
+    // 5. Génération du jeton d'invitation
     const token = crypto.randomBytes(32).toString("hex");
     const expires = new Date(Date.now() + 7 * 24 * 3600 * 1000); // 7 jours
 
@@ -460,96 +493,7 @@ export async function createAssistedVenue(
 // MONÉTISATION & COMMISSIONS
 // =============================================================================
 
-export interface MonetizationSettingsResult {
-  defaultCommissionRate: number;
-  maintenanceMode: boolean;
-  totalCommissionsCollectedEuros: number;
-  venuesSummary: {
-    venueId: string;
-    venueName: string;
-    commissionRate: number;
-    gmvEuros: number;
-    commissionCollectedEuros: number;
-  }[];
-}
-
-export async function getMonetizationSettings(): Promise<MonetizationSettingsResult> {
-  let setting = await db.platformSetting.findFirst();
-
-  if (!setting) {
-    setting = await db.platformSetting.create({
-      data: {
-        defaultCommissionRate: 0.018,
-        maintenanceMode: false,
-      },
-    });
-  }
-
-  const venues = await db.venue.findMany({
-    include: {
-      bookings: {
-        where: {
-          status: { in: [BookingStatus.CONFIRMED, BookingStatus.COMPLETED] },
-        },
-        select: { totalPriceCents: true },
-      },
-    },
-    orderBy: { name: "asc" },
-  });
-
-  let totalCollectedCents = 0;
-  const venuesSummary = venues.map((v) => {
-    let venueGmvCents = 0;
-    for (const b of v.bookings) {
-      venueGmvCents += b.totalPriceCents;
-    }
-    const rate = v.commissionRate ?? setting.defaultCommissionRate;
-    const collectedCents = Math.round(venueGmvCents * rate);
-    totalCollectedCents += collectedCents;
-
-    return {
-      venueId: v.id,
-      venueName: v.name,
-      commissionRate: rate,
-      gmvEuros: venueGmvCents / 100,
-      commissionCollectedEuros: collectedCents / 100,
-    };
-  });
-
-  return {
-    defaultCommissionRate: setting.defaultCommissionRate,
-    maintenanceMode: setting.maintenanceMode,
-    totalCommissionsCollectedEuros: totalCollectedCents / 100,
-    venuesSummary,
-  };
-}
-
-export async function updateMonetizationSettings(
-  input: UpdateMonetizationInput
-) {
-  let setting = await db.platformSetting.findFirst();
-
-  if (!setting) {
-    setting = await db.platformSetting.create({
-      data: {
-        defaultCommissionRate: input.defaultCommissionRate,
-        maintenanceMode: input.maintenanceMode ?? false,
-      },
-    });
-  } else {
-    setting = await db.platformSetting.update({
-      where: { id: setting.id },
-      data: {
-        defaultCommissionRate: input.defaultCommissionRate,
-        ...(input.maintenanceMode !== undefined
-          ? { maintenanceMode: input.maintenanceMode }
-          : {}),
-      },
-    });
-  }
-
-  return setting;
-}
+// Les paramètres de monétisation sont gérés par le module billing (modules/billing).
 
 // =============================================================================
 // MODÉRATION DES AVIS
@@ -889,8 +833,8 @@ export async function getAdminBookings(params?: {
   });
 
   return bookings.map((b) => {
-    const rate = b.venue.commissionRate ?? 0.018;
-    const commissionEuros = Math.round(b.totalPriceCents * rate) / 100;
+    const rate = b.commissionRate;
+    const commissionEuros = b.commissionCents / 100;
     const servicesSummary = b.items.map((i) => i.service.name).join(", ") || "Prestation standard";
     const scheduledAt = b.items[0]?.startTime ? b.items[0].startTime.toISOString() : null;
 
@@ -963,7 +907,7 @@ export async function getAdminBookingById(bookingId: string) {
 
   if (!booking) throw new Error("Réservation introuvable.");
 
-  const rate = booking.venue.commissionRate ?? 0.018;
+  const rate = booking.commissionRate;
 
   return {
     id: booking.id,
@@ -973,7 +917,7 @@ export async function getAdminBookingById(bookingId: string) {
     depositEuros: booking.depositCents / 100,
     remainingEuros: booking.remainingCents / 100,
     commissionRate: rate,
-    commissionEuros: Math.round(booking.totalPriceCents * rate) / 100,
+    commissionEuros: booking.commissionCents / 100,
     paymentStatus: booking.paymentStatus,
     stripePaymentIntentId: booking.stripePaymentIntentId,
     clientName: booking.clientName,
@@ -1117,8 +1061,7 @@ export async function getAdminFinancialReport(): Promise<AdminFinancialReport> {
       depositsEscrowCents += b.depositCents;
       inStoreRemainingCents += b.remainingCents;
 
-      const rate = b.venue.commissionRate ?? 0.018;
-      const commissionCents = Math.round(b.totalPriceCents * rate);
+      const commissionCents = b.commissionCents;
       commissionsCollectedCents += commissionCents;
 
       const cur = venueFinanceMap.get(b.venueId);
@@ -1160,7 +1103,6 @@ export async function getAdminFinancialReport(): Promise<AdminFinancialReport> {
   });
 
   const recentTransactions = bookings.slice(0, 15).map((b) => {
-    const rate = b.venue.commissionRate ?? 0.018;
     return {
       id: b.id,
       reference: b.reference,
@@ -1168,7 +1110,7 @@ export async function getAdminFinancialReport(): Promise<AdminFinancialReport> {
       clientName: b.clientName,
       amountEuros: b.totalPriceCents / 100,
       depositEuros: b.depositCents / 100,
-      commissionEuros: Math.round(b.totalPriceCents * rate) / 100,
+      commissionEuros: b.commissionCents / 100,
       status: b.status.toLowerCase(),
       stripePaymentIntentId: b.stripePaymentIntentId,
       createdAt: b.createdAt.toISOString(),

@@ -3,6 +3,9 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { VenueStatus } from "@prisma/client";
 import { z } from "zod";
+import { isTestIdentityFallbackAllowed } from "@/lib/test-identity";
+import { resolveSignupPlan } from "@/modules/billing/plan.service";
+import { PlanLimitError, assertWithinPlanLimit, startTrial } from "@/modules/billing/subscription.service";
 
 const createVenueSchema = z.object({
   name: z.string().min(2, "Le nom de l'établissement doit contenir au moins 2 caractères"),
@@ -46,7 +49,7 @@ export async function GET() {
     }
 
     // 3. Fallback dev / tests : renvoyer tous les établissements de la base
-    if (venues.length === 0 && process.env.NODE_ENV !== "production") {
+    if (venues.length === 0 && isTestIdentityFallbackAllowed()) {
       venues = await db.venue.findMany({
         orderBy: { createdAt: "asc" },
       });
@@ -87,7 +90,7 @@ export async function POST(request: Request) {
     }
 
     const userId = session?.user?.id;
-    if (!userId && process.env.NODE_ENV === "production") {
+    if (!userId && !isTestIdentityFallbackAllowed()) {
       return NextResponse.json(
         { error: "Non autorisé. Veuillez vous connecter." },
         { status: 401 }
@@ -109,6 +112,16 @@ export async function POST(request: Request) {
         { error: "Impossible de déterminer le propriétaire de l'établissement." },
         { status: 400 }
       );
+    }
+
+    // Limite d'établissements du forfait (vérifiée sur un salon existant du propriétaire)
+    const referenceVenue = await db.venue.findFirst({
+      where: { ownerId },
+      orderBy: { createdAt: "asc" },
+      include: { subscription: { include: { plan: true } } },
+    });
+    if (referenceVenue) {
+      await assertWithinPlanLimit(referenceVenue.id, "venues");
     }
 
     const body = await request.json();
@@ -166,9 +179,18 @@ export async function POST(request: Request) {
           latitude: 48.8566,
           longitude: 2.3522,
           status: VenueStatus.PUBLISHED,
-          commissionRate: 0.018,
         },
       });
+
+      // Chaque établissement a son propre abonnement, sur le forfait du salon existant
+      const plan = referenceVenue?.subscription?.plan ?? (await resolveSignupPlan());
+      if (plan) {
+        await startTrial(tx, {
+          venueId: venue.id,
+          plan,
+          interval: referenceVenue?.subscription?.interval ?? "MONTHLY",
+        });
+      }
 
       // Horaires d'ouverture standards
       const defaultHours = [
@@ -204,6 +226,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ venue: newVenue }, { status: 201 });
   } catch (err: unknown) {
+    if (err instanceof PlanLimitError) {
+      return NextResponse.json({ error: err.message }, { status: err.status });
+    }
     const message = err instanceof Error ? err.message : "Erreur lors de la création de l'établissement.";
     return NextResponse.json({ error: message }, { status: 500 });
   }

@@ -1,58 +1,31 @@
 import { NextResponse } from "next/server";
-import {
-  getAdminContext,
-  getMonetizationSettings,
-  updateMonetizationSettings,
-} from "@/modules/admin/admin.service";
-import { updateMonetizationSchema } from "@/lib/validations/admin.schema";
+import { getAdminContext } from "@/modules/admin/admin.service";
+import { getMonetizationOverview } from "@/modules/billing/admin-billing.service";
+import { updatePlatformSettings } from "@/modules/billing/platform-settings.service";
+import { platformBillingSettingsSchema } from "@/lib/validations/billing.schema";
+import { errorResponse, jsonError, parseBody } from "@/lib/api-route";
 
 export async function GET(request: Request) {
   try {
-    const adminContext = await getAdminContext(request);
-    if ("error" in adminContext) {
-      return NextResponse.json(
-        { error: adminContext.error },
-        { status: adminContext.status }
-      );
-    }
-
-    const settings = await getMonetizationSettings();
-    return NextResponse.json({ settings });
-  } catch (err: unknown) {
-    const message =
-      err instanceof Error
-        ? err.message
-        : "Erreur lors de la récupération des paramètres de monétisation.";
-    return NextResponse.json({ error: message }, { status: 500 });
+    const admin = await getAdminContext(request);
+    if ("error" in admin) return jsonError(admin.error, admin.status);
+    return NextResponse.json(await getMonetizationOverview());
+  } catch (err) {
+    return errorResponse(err, "Impossible de charger les paramètres de monétisation.", 500);
   }
 }
 
 export async function PATCH(request: Request) {
   try {
-    const adminContext = await getAdminContext(request);
-    if ("error" in adminContext) {
-      return NextResponse.json(
-        { error: adminContext.error },
-        { status: adminContext.status }
-      );
-    }
+    const admin = await getAdminContext(request);
+    if ("error" in admin) return jsonError(admin.error, admin.status);
 
-    const body = await request.json();
-    const parsed = updateMonetizationSchema.safeParse(body);
-    if (!parsed.success) {
-      return NextResponse.json(
-        { error: parsed.error.issues[0]?.message || "Données invalides." },
-        { status: 400 }
-      );
-    }
+    const parsed = await parseBody(request, platformBillingSettingsSchema);
+    if ("response" in parsed) return parsed.response;
 
-    const updated = await updateMonetizationSettings(parsed.data);
-    return NextResponse.json({ settings: updated });
-  } catch (err: unknown) {
-    const message =
-      err instanceof Error
-        ? err.message
-        : "Erreur lors de la mise à jour des paramètres de monétisation.";
-    return NextResponse.json({ error: message }, { status: 400 });
+    await updatePlatformSettings(parsed.data);
+    return NextResponse.json(await getMonetizationOverview());
+  } catch (err) {
+    return errorResponse(err, "Impossible d'enregistrer les paramètres de monétisation.");
   }
 }

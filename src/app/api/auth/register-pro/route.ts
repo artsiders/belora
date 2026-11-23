@@ -3,6 +3,8 @@ import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { Role, VenueStatus } from "@prisma/client";
 import { db } from "@/lib/db";
+import { resolveSignupPlan } from "@/modules/billing/plan.service";
+import { startTrial } from "@/modules/billing/subscription.service";
 
 const registerProSchema = z.object({
   email: z.string().email("Veuillez saisir une adresse e-mail professionnelle valide"),
@@ -19,6 +21,8 @@ const registerProSchema = z.object({
   venueCity: z.string().min(2, "La ville est requise"),
   venuePostalCode: z.string().min(4, "Le code postal est requis"),
   tagline: z.string().optional(),
+  planSlug: z.string().max(40).optional(),
+  billingInterval: z.enum(["MONTHLY", "ANNUAL"]).optional(),
 });
 
 function generateSlug(name: string): string {
@@ -52,7 +56,12 @@ export async function POST(req: Request) {
       venueCity,
       venuePostalCode,
       tagline,
+      planSlug,
+      billingInterval,
     } = result.data;
+
+    // Forfait choisi sur la page tarifs (ou forfait par défaut défini par l'équipe Belora)
+    const plan = await resolveSignupPlan(planSlug);
 
     const normalizedEmail = email.toLowerCase().trim();
 
@@ -110,7 +119,6 @@ export async function POST(req: Request) {
           currency: "EUR",
           timezone: "Europe/Paris",
           status: VenueStatus.PUBLISHED,
-          commissionRate: 0.018,
           ownerId: user.id,
         },
       });
@@ -160,6 +168,11 @@ export async function POST(req: Request) {
             isActive: true,
           },
         });
+      }
+
+      // Essai gratuit sur le forfait choisi
+      if (plan) {
+        await startTrial(tx, { venueId: venue.id, plan, interval: billingInterval ?? "MONTHLY" });
       }
 
       return { user, venue, staff };

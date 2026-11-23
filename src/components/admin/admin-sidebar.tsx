@@ -12,6 +12,7 @@ import {
   Wallet,
   MessageSquare,
   Coins,
+  Layers,
   Settings,
   PlusCircle,
   ShieldCheck,
@@ -52,12 +53,17 @@ const NAV_ITEMS = [
     icon: MessageSquare,
   },
   {
+    label: "Forfaits",
+    href: "/admin/plans",
+    icon: Layers,
+  },
+  {
     label: "Monétisation",
     href: "/admin/monetization",
     icon: Coins,
   },
   {
-    label: "Paramètres & Santé",
+    label: "Santé système",
     href: "/admin/settings",
     icon: Settings,
   },

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { PlanLimitError, assertWithinPlanLimit } from "@/modules/billing/subscription.service";
 import { getProVenueContext } from "@/modules/pro/pro-agenda.service";
 import {
   getTeamSettings,
@@ -46,12 +47,17 @@ export async function POST(request: Request) {
       );
     }
 
+    await assertWithinPlanLimit(venueContext.venueId, "staff");
+
     const staffMember = await createStaffMember(
       venueContext.venueId,
       parsed.data
     );
     return NextResponse.json({ staffMember }, { status: 201 });
   } catch (err: unknown) {
+    if (err instanceof PlanLimitError) {
+      return NextResponse.json({ error: err.message }, { status: err.status });
+    }
     const message =
       err instanceof Error
         ? err.message

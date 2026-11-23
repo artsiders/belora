@@ -43,7 +43,8 @@ describe("Database & Prisma Seed Integration Tests", () => {
     expect(venue?.postalCode).toBe("75003");
     expect(venue?.latitude).toBeCloseTo(48.8566, 2);
     expect(venue?.longitude).toBeCloseTo(2.3622, 2);
-    expect(venue?.commissionRate).toBe(0.018);
+    // Pas de taux négocié : le taux du forfait ou de la plateforme s'applique
+    expect(venue?.commissionRate).toBeNull();
     expect(venue?.owner.email).toBe("pro@yopmail.com");
     expect(venue?.email).toBe("contact.atelierbotanique@yopmail.com");
 

@@ -73,7 +73,7 @@ describe("Sprint 12 - Panneau Super-Admin Belora Plateforme (/admin)", () => {
         where: { id: atelier.id },
         data: {
           status: VenueStatus.PUBLISHED,
-          commissionRate: 0.018,
+          commissionRate: null,
         },
       });
     }
@@ -255,18 +255,17 @@ describe("Sprint 12 - Panneau Super-Admin Belora Plateforme (/admin)", () => {
     expect(getRes.status).toBe(200);
     const getBody = await getRes.json();
     expect(getBody.settings.defaultCommissionRate).toBeDefined();
-    expect(getBody.settings.venuesSummary).toBeInstanceOf(Array);
+    expect(getBody.settings.commissionMode).toBeDefined();
+    expect(getBody.venues).toBeInstanceOf(Array);
+    expect(getBody.totals.commissionsDueEuros).toBeTypeOf("number");
 
-    // PATCH
+    // PATCH (paramètres complets, comme le formulaire d'administration)
     const patchReq = new Request(
       `http://localhost:3000/api/admin/monetization?adminEmail=${adminEmail}`,
       {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          defaultCommissionRate: 0.022,
-          maintenanceMode: false,
-        }),
+        body: JSON.stringify({ ...getBody.settings, defaultCommissionRate: 0.022, maintenanceMode: false }),
       }
     );
     const patchRes = await updateMonetizationRoute(patchReq);

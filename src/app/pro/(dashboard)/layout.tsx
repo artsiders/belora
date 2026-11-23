@@ -1,6 +1,7 @@
 import React from "react";
 import { DashboardHeader } from "@/components/pro-dashboard/header/dashboard-header";
 import { EstablishmentProvider } from "@/contexts/pro-establishment-context";
+import { SubscriptionBanner } from "@/components/pro-dashboard/subscription/subscription-banner";
 
 export const metadata = {
   title: "Belora Pro - Espace de Gestion",
@@ -17,6 +18,7 @@ export default function ProDashboardLayout({
       <div className="min-h-screen flex flex-col bg-neutral-100/60 text-neutral-900 antialiased">
         {/* Header Permanent Pro */}
         <DashboardHeader />
+        <SubscriptionBanner />
 
         {/* Main Content Area */}
         <main className="flex-1 flex flex-col overflow-x-hidden">

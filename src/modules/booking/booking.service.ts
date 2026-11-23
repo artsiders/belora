@@ -1,6 +1,9 @@
 import { db } from "@/lib/db";
-import { BookingStatus, PaymentStatus } from "@prisma/client";
-import { calculateVat, calculatePlatformCommission, calculateDeposit } from "@/lib/utils/money";
+import { BookingChannel, BookingStatus, PaymentStatus } from "@prisma/client";
+import { calculateDeposit } from "@/lib/utils/money";
+import { computeCommission, resolveCommissionRate } from "@/modules/billing/commission";
+import { getPlatformSettings, toCommissionPolicy } from "@/modules/billing/platform-settings.service";
+import { hasActiveAccess, resolveSubscriptionState } from "@/modules/billing/subscription-state";
 import { createBookingPaymentIntent } from "@/lib/stripe";
 import { LockService } from "@/modules/availability/lock.service";
 
@@ -16,10 +19,13 @@ export interface CreateBookingInput {
   };
   notes?: string;
   userId?: string | null;
+  /** Origine de la réservation : détermine l'application de la commission. */
+  channel?: BookingChannel;
 }
 
 export async function createBookingTransaction(input: CreateBookingInput) {
   const { venueId, serviceIds, staffId, notes, userId, customer: customerInput } = input;
+  const channel = input.channel ?? BookingChannel.MARKETPLACE;
 
   if (!serviceIds || serviceIds.length === 0) {
     throw new Error("Veuillez sélectionner au moins une prestation.");
@@ -36,11 +42,24 @@ export async function createBookingTransaction(input: CreateBookingInput) {
     include: {
       staff: { where: { isActive: true } },
       openingHours: true,
+      subscription: { include: { plan: true } },
     },
   });
 
   if (!venue) {
     throw new Error("Établissement introuvable.");
+  }
+
+  const platformSetting = await getPlatformSettings();
+
+  // Réservations en ligne : plateforme ouverte et abonnement du salon actif
+  if (channel !== BookingChannel.IN_SALON) {
+    if (platformSetting.maintenanceMode) {
+      throw new Error("La réservation en ligne est momentanément indisponible. Veuillez réessayer un peu plus tard.");
+    }
+    if (venue.subscription && !hasActiveAccess(resolveSubscriptionState(venue.subscription))) {
+      throw new Error("Cet établissement ne prend pas de réservation en ligne pour le moment. Contactez-le directement.");
+    }
   }
 
   // 2. Récupération et vérification des prestations
@@ -70,7 +89,13 @@ export async function createBookingTransaction(input: CreateBookingInput) {
   }
 
   const remainingCents = Math.max(0, subtotalCents - depositCents);
-  const commissionCents = calculatePlatformCommission(subtotalCents, venue.commissionRate);
+  const commissionPolicy = toCommissionPolicy(platformSetting);
+  const commissionRate = resolveCommissionRate({
+    venueRate: venue.commissionRate,
+    venueRateUntil: venue.commissionRateUntil,
+    planRate: venue.subscription?.plan.commissionRate ?? null,
+    platformRate: platformSetting.defaultCommissionRate,
+  });
 
   // 4. Exécution atomique sous transaction Prisma
   return await db.$transaction(async (tx) => {
@@ -144,6 +169,16 @@ export async function createBookingTransaction(input: CreateBookingInput) {
     const firstName = nameParts[0] || "";
     const lastName = nameParts.slice(1).join(" ") || "";
 
+    // Un client déjà présent dans le fichier du salon est un habitué : pas de commission « nouveau client »
+    const isNewClient = !customer;
+    const commission = computeCommission(commissionPolicy, {
+      channel,
+      isNewClient,
+      totalCents: subtotalCents,
+      onlineCents: depositCents,
+      rate: commissionRate,
+    });
+
     if (!customer) {
       customer = await tx.customerCRM.create({
         data: {
@@ -205,6 +240,12 @@ export async function createBookingTransaction(input: CreateBookingInput) {
         depositCents,
         remainingCents,
         paymentStatus: initialPaymentStatus,
+        channel,
+        isNewClient,
+        commissionRate: commission.rate,
+        commissionCents: commission.commissionCents,
+        commissionCollectedCents: commission.collectedCents,
+        paymentFeeCents: commission.paymentFeeCents,
         notes: notes || null,
         items: {
           create: itemsData,
@@ -250,7 +291,7 @@ export async function createBookingTransaction(input: CreateBookingInput) {
         amountCents: depositCents,
         currency: venue.currency,
         destinationAccountId: venue.stripeAccountId,
-        applicationFeeAmountCents: commissionCents,
+        applicationFeeAmountCents: commission.collectedCents + commission.paymentFeeCents,
         bookingId: booking.id,
         venueId: venue.id,
         customerEmail: normalizedEmail,

@@ -3,6 +3,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient, Role, VenueStatus, BookingStatus, PaymentStatus, PaymentMethod } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
+import { bootstrapBilling } from "../src/modules/billing/bootstrap";
 
 const connectionString = process.env.DIRECT_URL || process.env.DATABASE_URL;
 const pool = new Pool({ connectionString });
@@ -106,7 +107,7 @@ async function main() {
       currency: "EUR",
       timezone: "Europe/Paris",
       status: VenueStatus.PUBLISHED,
-      commissionRate: 0.018,
+      commissionRate: null,
       ownerId: proUser.id,
       siret: "849 201 942 00019",
       vatNumber: "FR 82 849201942",
@@ -935,7 +936,7 @@ async function main() {
       currency: "EUR",
       timezone: "Europe/Paris",
       status: VenueStatus.PUBLISHED,
-      commissionRate: 0.018,
+      commissionRate: null,
       ownerId: proUser.id,
       siret: "849 201 942 00035",
       vatNumber: "FR 82 849201942",
@@ -1041,6 +1042,10 @@ async function main() {
 
   console.log("🏛️ Created 2nd establishment (L'Atelier Botanique - Saint-Germain) for multi-site Pro.");
   console.log("⭐ Created verified reviews with owner replies.");
+  // Forfaits, forfait par défaut et abonnements des établissements de démonstration
+  const billing = await bootstrapBilling(prisma);
+  console.log("Facturation initialisée :", billing);
+
   console.log("✅ Belora seed completed successfully!");
 }
 

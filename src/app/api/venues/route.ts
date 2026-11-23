@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { activeSubscriptionWhere } from "@/modules/billing/subscription-state";
 import { db } from "@/lib/db";
 import { VenueStatus } from "@prisma/client";
 
@@ -25,7 +26,11 @@ export async function GET(request: Request) {
     const limit = Math.min(50, Math.max(1, parseInt(searchParams.get("limit") || "20", 10)));
     const skip = (page - 1) * limit;
 
-    const conditions: any[] = [{ status: VenueStatus.PUBLISHED }];
+    const conditions: any[] = [
+      { status: VenueStatus.PUBLISHED },
+      // Seuls les salons dont l'abonnement est actif apparaissent (sans abonnement : données antérieures)
+      { OR: [{ subscription: { is: null } }, activeSubscriptionWhere()] },
+    ];
 
     // 1. Filtre Géographique (Ville, Adresse, Code Postal)
     if (location && location.trim() !== "") {

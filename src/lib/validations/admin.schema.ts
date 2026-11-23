@@ -13,7 +13,9 @@ export const updateVenueStatusSchema = z.object({
     .number()
     .min(0, "Le taux de commission ne peut pas être négatif")
     .max(0.5, "Le taux de commission maximal est de 50%")
+    .nullable()
     .optional(),
+  commissionRateUntil: z.string().datetime().nullable().optional(),
 });
 
 export type UpdateVenueStatusInput = z.infer<typeof updateVenueStatusSchema>;
@@ -29,20 +31,10 @@ export const createAssistedVenueSchema = z.object({
   postalCode: z.string().min(4, "Le code postal est requis"),
   tagline: z.string().optional(),
   description: z.string().optional(),
-  commissionRate: z.number().min(0).max(0.5).default(0.018),
+  commissionRate: z.number().min(0).max(0.5).nullable().optional(),
 });
 
 export type CreateAssistedVenueInput = z.infer<typeof createAssistedVenueSchema>;
-
-export const updateMonetizationSchema = z.object({
-  defaultCommissionRate: z
-    .number()
-    .min(0, "Le taux minimal est 0%")
-    .max(0.5, "Le taux maximal est 50%"),
-  maintenanceMode: z.boolean().optional(),
-});
-
-export type UpdateMonetizationInput = z.infer<typeof updateMonetizationSchema>;
 
 export const roleEnum = z.enum(["CUSTOMER", "PRO", "ADMIN"]);
 

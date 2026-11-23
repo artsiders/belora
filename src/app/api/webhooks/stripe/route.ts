@@ -4,6 +4,8 @@ import { db } from "@/lib/db";
 import { BookingStatus, PaymentStatus } from "@prisma/client";
 import { sendBookingConfirmationEmail, sendProNewBookingNotificationEmail } from "@/lib/email";
 import type Stripe from "stripe";
+import { isTestIdentityFallbackAllowed } from "@/lib/test-identity";
+import { markSubscriptionPastDue, syncStripeSubscription } from "@/modules/billing/subscription.service";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
@@ -21,8 +23,11 @@ export async function POST(request: Request) {
         console.error("Stripe webhook signature verification failed:", err?.message);
         return NextResponse.json({ error: "Signature de webhook invalide." }, { status: 400 });
       }
+    } else if (!isTestIdentityFallbackAllowed()) {
+      // Sans signature vérifiable, aucun événement n'est accepté (sinon falsifiable)
+      return NextResponse.json({ error: "Signature de webhook manquante." }, { status: 400 });
     } else {
-      // Mode simulation / fallback développement
+      // Tests automatisés uniquement
       try {
         event = JSON.parse(rawBody) as Stripe.Event;
       } catch {
@@ -79,6 +84,30 @@ export async function POST(request: Request) {
           });
           console.warn(`Paiement échoué pour la réservation ${bookingId}`);
         }
+        break;
+      }
+
+      case "checkout.session.completed": {
+        const session = event.data.object as Stripe.Checkout.Session;
+        if (session.mode === "subscription" && typeof session.subscription === "string") {
+          const subscription = await stripe.subscriptions.retrieve(session.subscription);
+          await syncStripeSubscription(subscription);
+        }
+        break;
+      }
+
+      case "customer.subscription.created":
+      case "customer.subscription.updated":
+      case "customer.subscription.deleted": {
+        await syncStripeSubscription(event.data.object as Stripe.Subscription);
+        break;
+      }
+
+      case "invoice.payment_failed": {
+        const invoice = event.data.object as Stripe.Invoice & { subscription?: string | { id: string } | null };
+        const subscriptionId =
+          typeof invoice.subscription === "string" ? invoice.subscription : invoice.subscription?.id;
+        if (subscriptionId) await markSubscriptionPastDue(subscriptionId);
         break;
       }
 

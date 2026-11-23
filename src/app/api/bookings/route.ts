@@ -30,6 +30,7 @@ export async function POST(request: Request) {
       clientEmail,
       clientPhone,
       notes,
+      source,
     } = parseResult.data;
 
     const email = clientEmail && clientEmail.trim() !== "" ? clientEmail : `${clientPhone.replace(/\D/g, "")}@belora-client.fr`;
@@ -46,6 +47,7 @@ export async function POST(request: Request) {
       },
       notes,
       userId: session?.user?.id || null,
+      channel: source === "direct" ? "DIRECT_LINK" : "MARKETPLACE",
     });
 
     return NextResponse.json(result, { status: 201 });

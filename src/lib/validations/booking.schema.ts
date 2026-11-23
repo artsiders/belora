@@ -24,6 +24,8 @@ export const createBookingSchema = z.object({
     .optional()
     .or(z.literal("")),
   notes: z.string().max(500, "Les notes ne peuvent pas dépasser 500 caractères").optional(),
+  // Origine publique : "direct" = lien partagé par le salon (aucune commission d'acquisition)
+  source: z.enum(["marketplace", "direct"]).optional(),
 });
 
 export type CreateBookingInput = z.infer<typeof createBookingSchema>;

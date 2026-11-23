@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { isTestIdentityFallbackAllowed } from "@/lib/test-identity";
 import { BookingStatus, PaymentStatus } from "@prisma/client";
 import {
   timeStringToMinutes,
@@ -44,13 +45,43 @@ export async function getProVenueContext(
     request?.headers.get("x-venue-id") ||
     cookieVenueId;
 
+  const testMode = isTestIdentityFallbackAllowed();
+  const sessionUserId = session?.user?.id;
+
+  // Hors tests, une session est obligatoire
+  if (!sessionUserId && !testMode) {
+    return { error: "Non autorisé. Accès réservé aux professionnels connectés.", status: 401 };
+  }
+
   if (paramVenueId) {
     const venue = await db.venue.findUnique({
       where: { id: paramVenueId },
-      select: { id: true },
+      select: {
+        id: true,
+        ownerId: true,
+        staff: sessionUserId ? { where: { userId: sessionUserId }, select: { id: true } } : false,
+      },
     });
     if (venue) {
-      return { venueId: venue.id, userId: session?.user?.id };
+      // Le salon demandé doit appartenir à l'utilisateur (propriétaire, membre de l'équipe ou admin)
+      let allowed = testMode && !sessionUserId;
+      if (sessionUserId) {
+        if (venue.ownerId === sessionUserId || (venue.staff && venue.staff.length > 0)) {
+          allowed = true;
+        } else {
+          const user = await db.user.findUnique({
+            where: { id: sessionUserId },
+            select: { role: true },
+          });
+          allowed = user?.role === "ADMIN";
+        }
+      }
+      if (allowed) {
+        return { venueId: venue.id, userId: sessionUserId };
+      }
+      if (sessionUserId) {
+        return { error: "Accès refusé à cet établissement.", status: 403 };
+      }
     }
   }
 
@@ -59,8 +90,8 @@ export async function getProVenueContext(
     return { venueId: session.user.venueId, userId: session.user.id };
   }
 
-  // 3. Fallback dev / test (premier salon seed : L'Atelier Botanique)
-  if (process.env.NODE_ENV !== "production") {
+  // 3. Fallback tests uniquement (premier salon seed : L'Atelier Botanique)
+  if (testMode) {
     const fallbackVenue = await db.venue.findFirst({
       select: { id: true },
       orderBy: { createdAt: "asc" },
@@ -310,6 +341,7 @@ export async function createManualProAppointment(
     data: {
       reference,
       venueId,
+      channel: "IN_SALON",
       customerId: customer.id,
       clientName: input.clientName,
       clientPhone: input.clientPhone,

@@ -15,11 +15,15 @@ import {
   AlertCircle,
   CheckCircle2,
 } from "lucide-react";
+import { SelectedPlanNotice } from "@/components/billing/selected-plan-notice";
 
 function RegisterFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialRole = searchParams.get("role") === "pro" ? "pro" : "client";
+  // Forfait choisi sur la page tarifs /pro
+  const planSlug = searchParams.get("plan");
+  const billingInterval = searchParams.get("interval") === "ANNUAL" ? "ANNUAL" : "MONTHLY";
   const errorParam = searchParams.get("error");
   const { data: session, status } = useSession();
 
@@ -105,6 +109,8 @@ function RegisterFormContent() {
               venueAddress: formData.address || `${formData.city}`,
               venueCity: formData.city,
               venuePostalCode: formData.postalCode || "75000",
+              planSlug: planSlug || undefined,
+              billingInterval,
             }
           : {
               email: formData.email,
@@ -330,6 +336,7 @@ function RegisterFormContent() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            {role === "pro" && <SelectedPlanNotice planSlug={planSlug} interval={billingInterval} />}
             {role === "pro" && (
               <>
                 <div>

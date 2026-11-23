@@ -5,6 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { MainNav } from "@/components/layout/main-nav";
 import { Footer } from "@/components/layout/footer";
+import { ProPricingSection } from "@/components/pro/landing/pro-pricing-section";
+import { usePublicPricing } from "@/components/billing/billing-queries";
+import { commissionHeadline } from "@/modules/billing/format";
+import { InlineSkeleton } from "@/components/ui/inline-skeleton";
 import {
   ArrowRight,
   CalendarDays,
@@ -21,7 +25,13 @@ import {
 } from "lucide-react";
 
 export default function ProPage() {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("annual");
+  const { data: pricing, isLoading: isPricingLoading, isError, refetch: refetchPricing } = usePublicPricing();
+  const hasPricingError = isError || Boolean((pricing as { error?: string } | undefined)?.error);
+  const commission = pricing?.commission;
+  const commissionShort = commission
+    ? commissionHeadline(commission)
+    : "Commission uniquement sur les nouveaux clients apportés par Belora";
+  const trialDays = commission?.defaultTrialDays ?? null;
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [selectedArtisanTab, setSelectedArtisanTab] = useState<"all" | "helene" | "marc" | "nour">("all");
 
@@ -31,107 +41,58 @@ export default function ProPage() {
       number: "01",
       title: "Agenda pro ultra-réactif",
       description:
-        "Vue jour et semaine fluide par collaborateur. Glisser-déposer sans latence, pauses automatiques et gestion précise des temps de pose de coloration.",
+        "Vue jour et semaine par collaborateur et par cabine, création d'un rendez-vous en un clic, temps de pose et horaires de chaque collaborateur pris en compte.",
     },
     {
       icon: ShieldCheck,
       number: "02",
       title: "Zéro rendez-vous non honoré",
       description:
-        "Rappels automatisés par e-mail et SMS personnalisés. Sécurisation de chaque créneau par empreinte bancaire ou acompte Stripe Connect.",
+        "Rappels automatiques par e-mail et SMS avant chaque rendez-vous. Acompte en ligne configurable prestation par prestation.",
     },
     {
       icon: Store,
       number: "03",
       title: "Clientèle valorisant le geste",
       description:
-        "Votre établissement est exposé à des clients en quête d'artisanat d'exception, prêts à honorer le juste prix du savoir-faire sans marchandage.",
+        "Votre établissement apparaît dans la recherche Belora, avec vos prestations, vos tarifs, votre équipe et les avis vérifiés de vos clients.",
     },
     {
       icon: Wallet,
       number: "04",
-      title: "Paiements directs sans intermédiaire",
-      description:
-        "Chaque recette est versée directement sur votre compte bancaire professionnel. 0% de commission prélevée sur vos clients habituels.",
+      title: "Une commission juste",
+      description: `Les acomptes en ligne sont versés sur votre compte professionnel. ${commissionShort}.`,
     },
   ];
 
   const COMPARISONS = [
     {
       topic: "Commission sur vos clients réguliers",
-      traditional: "10% à 25% prélevés sur chaque réservation",
-      belora: "0% de commission à vie sur tous vos habitués",
+      traditional: "Une commission prélevée sur chaque réservation en ligne",
+      belora:
+        commission?.mode === "ALL_MARKETPLACE"
+          ? "Aucune commission sur les réservations faites via votre propre lien"
+          : "Aucune commission sur les clients déjà présents dans votre fichier",
     },
     {
       topic: "Sécurisation contre le no-show",
       traditional: "Options rigides ou perte totale en cas de rendez-vous manqué",
-      belora: "Acomptes bancaires et empreinte configurables par prestation",
+      belora: "Acompte en ligne et délai d'annulation configurables",
     },
     {
       topic: "Valorisation de votre image",
-      traditional: "Mélangé à des chaînes discounts et bourses aux rabais",
-      belora: "Curation exclusive d'ateliers d'exception et artisans audités",
+      traditional: "Mélangé à des chaînes et à des offres de remise permanentes",
+      belora: "Une vitrine dédiée aux salons indépendants, avec avis vérifiés après rendez-vous",
     },
     {
       topic: "Ergonomie & Rapidité quotidienne",
       traditional: "Interfaces lourdes, chargements lents et surcharges de clics",
-      belora: "Design épuré réactif conçu pour iPad, Mac et smartphone",
+      belora: "Une interface sobre, utilisable sur ordinateur, tablette et smartphone",
     },
     {
       topic: "Accompagnement & Support technique",
       traditional: "Serveur vocal impersonnel ou ticket sans suivi",
-      belora: "Conseiller dédié basé en France, joignable 6j/7 directement",
-    },
-  ];
-
-  const PRICING_PLANS = [
-    {
-      name: "Atelier Solo",
-      monthlyPrice: 39,
-      annualPrice: 31,
-      description: "Pour les artisans indépendants, barbiers et praticiens en studio privé.",
-      features: [
-        "1 agenda praticien illimité",
-        "Réservation en ligne 24h/24",
-        "Rappels e-mails et SMS illimités",
-        "Profil audité sur la marketplace Belora",
-        "Paiements Stripe Connect sécurisés",
-        "Export comptable des recettes",
-      ],
-      highlighted: false,
-      cta: "Commencer l’essai Solo",
-    },
-    {
-      name: "Maison & Équipe",
-      monthlyPrice: 69,
-      annualPrice: 55,
-      description: "Pour les salons de coiffure, instituts et spas avec plusieurs collaborateurs.",
-      features: [
-        "Jusqu'à 6 praticiens en simultané",
-        "Gestion des plannings et congés",
-        "Réservation avec choix du praticien",
-        "Statistiques de chiffre d'affaires et fidélité",
-        "Shooting photo annuel de l'atelier offert",
-        "Assistance prioritaire 6j/7",
-      ],
-      highlighted: true,
-      cta: "Commencer l’essai Équipe",
-    },
-    {
-      name: "Grand Sanctuaire",
-      monthlyPrice: 119,
-      annualPrice: 95,
-      description: "Pour les établissements multi-espaces, académies et spas d'hôtels d'exception.",
-      features: [
-        "Membres d'équipe illimités",
-        "Multi-cabines et gestion des ressources",
-        "Gestionnaire de compte dédié 6j/7",
-        "Mise en avant prioritaire sur la marketplace",
-        "Intégration caisse certifiée NF525",
-        "Formation personnalisée de l'équipe",
-      ],
-      highlighted: false,
-      cta: "Contacter un conseiller",
+      belora: "Une équipe Belora joignable directement par e-mail",
     },
   ];
 
@@ -139,17 +100,22 @@ export default function ProPage() {
     {
       question: "Puis-je importer mes clients et l'historique depuis mon ancien logiciel ?",
       answer:
-        "Absolument. Notre équipe technique s'occupe de migrer gratuitement l'ensemble de votre fichier clients, vos prestations et vos plannings en moins de 24h, sans la moindre interruption pour votre salon.",
+        "Vous pouvez saisir vos prestations, votre équipe et vos clients dès l'inscription. Pour un fichier important, contactez notre équipe : elle vous accompagne dans la reprise de vos données.",
     },
     {
       question: "Prenez-vous une commission sur les réservations de mes clients habituels ?",
-      answer:
-        "Non, jamais. Vous ne payez que votre forfait mensuel fixe. Vous conservez 100% de vos encaissements sur l'ensemble de votre clientèle existante.",
+      answer: commission
+        ? commission.mode === "DISABLED"
+          ? "Non. Belora ne prélève aucune commission sur vos rendez-vous : seul votre forfait est facturé."
+          : commission.mode === "NEW_CLIENTS_ONLY"
+            ? "Non. Un client déjà présent dans votre fichier n'est jamais commissionné, et les rendez-vous pris via votre propre lien de réservation ou saisis dans votre agenda non plus. La commission ne concerne que la première réservation d'un nouveau client qui vous a trouvé sur Belora."
+            : "Les rendez-vous pris via votre propre lien de réservation ou saisis dans votre agenda ne sont jamais commissionnés. La commission ne concerne que les réservations faites depuis la recherche Belora."
+        : "Le détail des conditions de commission figure dans la section tarifs ci-dessus.",
     },
     {
       question: "Comment fonctionnent la sécurisation et les acomptes en ligne ?",
       answer:
-        "Vous choisissez librement pour chaque prestation si vous souhaitez demander une simple empreinte bancaire ou un acompte (par exemple 30% ou 50%). Les fonds sont versés immédiatement sur votre compte bancaire via Stripe Connect.",
+        "Vous choisissez pour chaque prestation si un acompte est demandé et son montant, ainsi que le délai d'annulation gratuite. L'acompte est déduit automatiquement lors de l'encaissement en caisse.",
     },
     {
       question: "Quel matériel informatique est nécessaire dans mon atelier ?",
@@ -157,9 +123,10 @@ export default function ProPage() {
         "Aucun boîtier dédié n'est requis. Belora Pro fonctionne avec une fluidité instantanée sur iPad, Mac, PC, tablette Android et smartphone directement depuis votre navigateur web habituel.",
     },
     {
-      question: "L'essai de 14 jours nécessite-t-il une carte bancaire ?",
-      answer:
-        "Non. Vous créez votre espace en 2 minutes sans carte bancaire. Vous testez l'agenda librement et ne souscrivez que si vous êtes conquis par la simplicité de l'outil.",
+      question: "L'essai gratuit nécessite-t-il une carte bancaire ?",
+      answer: `Non. Vous créez votre espace sans carte bancaire${
+        trialDays ? ` et profitez de ${trialDays} jours d'essai` : ""
+      }. Avant la fin de l'essai, choisissez votre forfait dans Admin › Abonnement pour continuer à recevoir des réservations en ligne.`,
     },
   ];
 
@@ -207,25 +174,25 @@ export default function ProPage() {
               </h1>
 
               <p className="text-base sm:text-lg text-neutral-200/95 leading-relaxed font-normal max-w-2xl text-pretty">
-                Libérez-vous de la gestion administrative. Belora Pro réunit un agenda d’une fluidité absolue, la sécurisation des créneaux par acompte et la mise en avant de votre atelier auprès d’une clientèle sélective.
+                Libérez-vous de la gestion administrative. Belora Pro réunit l’agenda de votre équipe, la caisse, le fichier clients et la réservation en ligne, avec acompte et rappels automatiques.
               </p>
             </div>
 
             {/* Boutons d'action modernes */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
-                href="/pro/agenda"
+                href="/register?role=pro"
                 className="btn btn-primary btn-lg inline-flex items-center gap-2 shadow-sm"
               >
-                <span>Ouvrir l’Espace Pro (Dashboard)</span>
+                <span>Créer mon espace pro</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
               <Link
-                href="/pro/join"
+                href="#pricing"
                 className="btn btn-outline btn-lg text-white border-white/25 hover:bg-white/10 hover:text-white transition-colors"
               >
-                <span>Demander une démo privée</span>
+                <span>Voir les tarifs</span>
               </Link>
             </div>
 
@@ -236,8 +203,18 @@ export default function ProPage() {
                   <ShieldCheck className="w-4.5 h-4.5" />
                 </div>
                 <div>
-                  <strong className="block text-white font-semibold">0% de commission</strong>
-                  <span className="text-neutral-400 text-sm">Sur tous vos clients réguliers</span>
+                  <strong className="block text-white font-semibold">
+                    {commission?.mode === "DISABLED" ? "Aucune commission" : "0 % sur vos habitués"}
+                  </strong>
+                  <span className="text-neutral-400 text-sm">
+                    {isPricingLoading ? (
+                      <InlineSkeleton width="w-40" height="h-4" />
+                    ) : commission?.mode === "ALL_MARKETPLACE" ? (
+                      "Via votre propre lien de réservation"
+                    ) : (
+                      "Commission sur les seuls nouveaux clients"
+                    )}
+                  </span>
                 </div>
               </div>
 
@@ -247,7 +224,7 @@ export default function ProPage() {
                 </div>
                 <div>
                   <strong className="block text-white font-semibold">Acomptes sécurisés</strong>
-                  <span className="text-neutral-400 text-sm">Zéro no-show garanti via Stripe</span>
+                  <span className="text-neutral-400 text-sm">Acompte en ligne et rappels automatiques</span>
                 </div>
               </div>
 
@@ -546,7 +523,7 @@ export default function ProPage() {
                       </p>
                       <div className="flex items-center gap-1.5 text-sm text-primary-700 font-medium pt-1">
                         <CheckCircle2 className="w-3.5 h-3.5" />
-                        <span>Acompte Stripe versé &bull; 140 €</span>
+                        <span>Acompte en ligne versé &bull; 140 €</span>
                       </div>
                     </div>
 
@@ -680,13 +657,10 @@ export default function ProPage() {
                   </span>
                 </h2>
                 <p className="mt-1 text-sm sm:text-base text-neutral-600 font-normal">
-                  Fini les commissions masquées et les annuaires discounts. Belora restaure la dignité du geste artisanal.
+                  Un abonnement clair pour le logiciel, une commission seulement quand Belora vous apporte un nouveau client.
                 </p>
               </div>
 
-              <span className="px-3 py-1.5 rounded-full bg-white border border-neutral-200 text-neutral-800 text-sm font-semibold num shadow-2xs shrink-0 self-start sm:self-auto">
-                0% commission habitués
-              </span>
             </div>
 
             {/* Tableau comparatif moderne et aéré */}
@@ -703,7 +677,7 @@ export default function ProPage() {
                         Logiciels & Annuaires Traditionnels
                       </h3>
                       <p className="text-sm text-neutral-500">
-                        Modèle basé sur la captation de commission
+                        Commission prélevée sur chaque réservation
                       </p>
                     </div>
                   </div>
@@ -736,7 +710,7 @@ export default function ProPage() {
                         Le Standard Belora Pro
                       </h3>
                       <p className="text-sm text-primary-700 font-medium">
-                        Forfait fixe, liberté totale et respect du savoir-faire
+                        Abonnement clair, commission limitée aux nouveaux clients
                       </p>
                     </div>
                   </div>
@@ -765,126 +739,12 @@ export default function ProPage() {
         {/* =========================================================================
             5. TARIFS TRANSPARENTS SANS ENGAGEMENT
             ========================================================================= */}
-        <section
-          id="pricing"
-          className="py-12 sm:py-16 lg:py-20 bg-white border-b border-primary-200/80"
-          aria-labelledby="pricing-heading"
-        >
-          <div className="container-belora">
-            {/* En-tête standardisé */}
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10 pb-4 border-b border-neutral-200/80">
-              <div>
-                <span className="eyebrow text-neutral-500 font-semibold block mb-1">
-                  Tarification &bull; Sans Engagement
-                </span>
-                <h2
-                  id="pricing-heading"
-                  className="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-950"
-                >
-                  Des forfaits clairs et fixes,{" "}
-                  <span className="text-primary-600 font-bold">
-                    sans commission masquée.
-                  </span>
-                </h2>
-                <p className="mt-1 text-sm sm:text-base text-neutral-600 font-normal">
-                  14 jours d’essai offert sans carte bancaire. Modifiez ou résiliez à tout moment en un clic.
-                </p>
-              </div>
-
-              {/* Sélecteur de cycle de facturation */}
-              <div className="inline-flex items-center p-1 rounded-xl bg-neutral-100 border border-neutral-200/80 shrink-0 self-start sm:self-auto">
-                <button
-                  type="button"
-                  onClick={() => setBillingCycle("monthly")}
-                  className={`px-4 py-2 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer ${
-                    billingCycle === "monthly"
-                      ? "bg-white text-neutral-950 shadow-2xs"
-                      : "text-neutral-600 hover:text-neutral-900"
-                  }`}
-                >
-                  Mensuel
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setBillingCycle("annual")}
-                  className={`px-4 py-2 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
-                    billingCycle === "annual"
-                      ? "bg-white text-neutral-950 shadow-2xs"
-                      : "text-neutral-600 hover:text-neutral-900"
-                  }`}
-                >
-                  <span>Annuel</span>
-                  <span className="text-sm text-primary-700 font-bold uppercase bg-primary-50 px-2 py-0.5 rounded-md">
-                    -20%
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            {/* Cartes de prix harmonisées */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-              {PRICING_PLANS.map((plan) => {
-                const price =
-                  billingCycle === "annual" ? plan.annualPrice : plan.monthlyPrice;
-
-                return (
-                  <div
-                    key={plan.name}
-                    className={`p-7 sm:p-8 rounded-xl flex flex-col justify-between border transition-all duration-300 ${
-                      plan.highlighted
-                        ? "bg-white border-primary-600 ring-2 ring-primary-600/20 shadow-lg relative"
-                        : "bg-white border-neutral-200/90 shadow-2xs hover:shadow-md hover:border-neutral-300"
-                    }`}
-                  >
-                    <div>
-                      {plan.highlighted && (
-                        <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-sm font-bold uppercase tracking-wider inline-block mb-3">
-                          Formule Signature
-                        </span>
-                      )}
-
-                      <h3 className="text-xl sm:text-2xl font-bold text-neutral-950 mb-1">
-                        {plan.name}
-                      </h3>
-                      <p className="text-sm text-neutral-600 mb-6 font-normal min-h-10 leading-snug">
-                        {plan.description}
-                      </p>
-
-                      <div className="flex items-baseline gap-1 mb-6 pb-6 border-b border-neutral-100">
-                        <span className="text-4xl font-bold text-neutral-950 num">
-                          {price} €
-                        </span>
-                        <span className="text-sm sm:text-base text-neutral-500 font-normal">
-                          /mois {billingCycle === "annual" ? "(facturé à l'année)" : ""}
-                        </span>
-                      </div>
-
-                      <ul className="space-y-3.5 text-sm text-neutral-700 mb-8">
-                        {plan.features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-2.5">
-                            <Check className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <Link
-                      href="/pro/join"
-                      className={`w-full btn btn-lg flex items-center justify-center transition-all ${
-                        plan.highlighted
-                          ? "btn-primary shadow-sm"
-                          : "btn-outline text-neutral-900"
-                      }`}
-                    >
-                      {plan.cta}
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        <ProPricingSection
+          pricing={pricing}
+          isLoading={isPricingLoading}
+          hasError={hasPricingError}
+          onRetry={() => refetchPricing()}
+        />
 
         {/* =========================================================================
             6. FAQ ARTISANS & GÉRANTS
@@ -983,12 +843,13 @@ export default function ProPage() {
               >
                 Vous dirigez un salon ou un institut ?{" "}
                 <span className="block text-primary-300 font-normal">
-                  Rejoignez l’élite des maisons Belora Pro.
+                  Rejoignez les salons Belora Pro.
                 </span>
               </h2>
 
               <p className="text-sm sm:text-base text-neutral-200/90 leading-relaxed font-normal mb-6">
-                Activez votre espace en 2 minutes. Bénéficiez d’un accompagnement personnalisé, d’une migration gratuite de vos données et d’un essai de 14 jours sans engagement.
+                Créez votre espace en quelques minutes
+                {trialDays ? ` et profitez de ${trialDays} jours d'essai sans carte bancaire` : ""}. Sans engagement en formule mensuelle.
               </p>
 
               {/* 3 piliers d'engagement en ligne aérée */}
@@ -1001,7 +862,7 @@ export default function ProPage() {
                     Réservations 24h/24
                   </h3>
                   <p className="text-sm text-neutral-300/80 leading-relaxed">
-                    Synchronisation directe sans commissions sur vos habitués.
+                    Vos clients réservent en ligne, même en dehors des horaires d’ouverture.
                   </p>
                 </div>
 
@@ -1010,10 +871,10 @@ export default function ProPage() {
                     <ShieldCheck className="w-4 h-4 stroke-[1.5]" />
                   </div>
                   <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5">
-                    Visibilité sélective
+                    Visibilité locale
                   </h3>
                   <p className="text-sm text-neutral-300/80 leading-relaxed">
-                    Attirez une clientèle respectueuse du savoir-faire.
+                    Soyez trouvé par de nouveaux clients près de chez vous.
                   </p>
                 </div>
 
@@ -1022,10 +883,10 @@ export default function ProPage() {
                     <Lock className="w-4 h-4 stroke-[1.5]" />
                   </div>
                   <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5">
-                    Zéro no-show
+                    Moins de rendez-vous manqués
                   </h3>
                   <p className="text-sm text-neutral-300/80 leading-relaxed">
-                    Acomptes bancaires sécurisés et rappels automatiques.
+                    Acompte en ligne et rappels automatiques.
                   </p>
                 </div>
               </div>
@@ -1033,10 +894,10 @@ export default function ProPage() {
               {/* Boutons d'action finaux */}
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 <Link
-                  href="/pro/join"
+                  href="/register?role=pro"
                   className="btn btn-primary btn-lg inline-flex items-center justify-center gap-2 shadow-lg"
                 >
-                  <span>Rejoindre Belora Pro</span>
+                  <span>Créer mon espace pro</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
