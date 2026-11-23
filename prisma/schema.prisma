@@ -57,6 +57,17 @@ enum CommissionBase {
   BOOKING_TOTAL  // Calculée sur le prix total de la réservation
 }
 
+enum OnlinePaymentMode {
+  NONE    // Aucun paiement en ligne : tout est réglé en salon
+  DEPOSIT // Acompte en ligne, solde en salon
+  FULL    // Totalité réglée en ligne
+}
+
+enum DepositScope {
+  FLAGGED_SERVICES // Seulement les prestations qui exigent un acompte
+  ALL_SERVICES     // Toutes les prestations
+}
+
 enum BillingInterval {
   MONTHLY
   ANNUAL
@@ -176,8 +187,17 @@ model Venue {
   ownerId              String
   siret                String?
   vatNumber            String?
+  website              String?
   cancellationDelayHours Int       @default(24)
   depositPercentage    Int         @default(30)
+  onlinePaymentMode    OnlinePaymentMode @default(DEPOSIT)
+  depositScope         DepositScope @default(FLAGGED_SERVICES)
+  onlineBookingEnabled Boolean     @default(true)
+  minBookingNoticeMinutes Int      @default(60)  // Délai minimum avant un rendez-vous réservé en ligne
+  maxBookingAdvanceDays Int        @default(90)  // Horizon de réservation en ligne
+  slotStepMinutes      Int         @default(15)  // Pas des créneaux proposés
+  bufferMinutes        Int         @default(0)   // Battement après chaque rendez-vous
+  allowStaffChoice     Boolean     @default(true) // Le client peut choisir son artisan
   cashSettings         Json?
   notificationSettings Json?
   createdAt            DateTime    @default(now())
@@ -185,6 +205,7 @@ model Venue {
 
   owner             User               @relation("VenueOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   openingHours      VenueOpeningHour[]
+  closures          VenueClosure[]
   staff             StaffMember[]
   resources         Resource[]
   serviceCategories ServiceCategory[]
@@ -206,11 +227,28 @@ model VenueOpeningHour {
   openTime  String  // "09:00"
   closeTime String  // "19:00"
   isOpen    Boolean @default(true)
+  breakStart String? // Fermeture en milieu de journée (ex : "12:30")
+  breakEnd   String?
 
   venue Venue @relation(fields: [venueId], references: [id], onDelete: Cascade)
 
   @@unique([venueId, dayOfWeek])
   @@map("venue_opening_hours")
+}
+
+/// Fermeture exceptionnelle (congés, jours fériés, travaux) : aucune réservation en ligne.
+model VenueClosure {
+  id        String   @id @default(cuid())
+  venueId   String
+  startDate DateTime @db.Date
+  endDate   DateTime @db.Date
+  label     String?
+  createdAt DateTime @default(now())
+
+  venue Venue @relation(fields: [venueId], references: [id], onDelete: Cascade)
+
+  @@index([venueId, startDate, endDate])
+  @@map("venue_closures")
 }
 
 // -----------------------------------------------------------------------------

@@ -49,6 +49,12 @@ export interface Venue {
   coordinates?: { lat: number; lng: number };
   slots?: { morning: string[]; afternoon: string[] };
   nextAvailability?: string;
+  /** Règles de réservation en ligne fixées par le salon (absentes pour les salons de démonstration). */
+  bookingRules?: {
+    allowStaffChoice: boolean;
+    maxAdvanceDays: number;
+    onlinePaymentMode: "NONE" | "DEPOSIT" | "FULL";
+  };
 }
 
 export const CITY_COORDINATES: Record<string, { lat: number; lng: number; zoom: number }> = {

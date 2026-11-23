@@ -346,7 +346,7 @@ describe("Sprint 10 - Espace Pro : Catalogue Prestations & Paramètres Salon", (
           name: "L’Atelier Botanique Paris Marais",
           category: "Artisan Coiffeur Haute Coiffure",
           description: "Maison d'artisan rénovée au cœur du Marais.",
-          siret: "849 201 942 00027",
+          siret: "849 201 942 00026",
           vatNumber: "FR 82 849201942",
           phone: "01 42 68 90 12",
           email: "contact.atelierbotanique@yopmail.com",
@@ -355,9 +355,17 @@ describe("Sprint 10 - Espace Pro : Catalogue Prestations & Paramètres Salon", (
           city: "Paris",
           cancellationDelayHours: 48,
           depositPercentage: 35,
+          onlinePaymentMode: "DEPOSIT",
+          depositScope: "FLAGGED_SERVICES",
+          onlineBookingEnabled: true,
+          minBookingNoticeMinutes: 60,
+          maxBookingAdvanceDays: 90,
+          slotStepMinutes: 15,
+          bufferMinutes: 0,
+          allowStaffChoice: true,
           openingHours: [
             { dayOfWeek: 1, openTime: "09:00", closeTime: "19:00", isOpen: false }, // Lundi
-            { dayOfWeek: 2, openTime: "10:00", closeTime: "20:00", isOpen: true },  // Mardi
+            { dayOfWeek: 2, openTime: "10:00", closeTime: "20:00", isOpen: true, breakStart: "13:00", breakEnd: "14:00" },  // Mardi
             { dayOfWeek: 3, openTime: "09:30", closeTime: "19:30", isOpen: true },  // Mercredi
             { dayOfWeek: 4, openTime: "09:30", closeTime: "20:30", isOpen: true },  // Jeudi
             { dayOfWeek: 5, openTime: "09:30", closeTime: "20:30", isOpen: true },  // Vendredi
@@ -374,6 +382,8 @@ describe("Sprint 10 - Espace Pro : Catalogue Prestations & Paramètres Salon", (
     expect(data.establishment.name).toBe("L’Atelier Botanique Paris Marais");
     expect(data.establishment.cancellationDelayHours).toBe(48);
     expect(data.establishment.depositPercentage).toBe(35);
+    const tuesday = data.establishment.openingHours.find((d: { dayIndex: number }) => d.dayIndex === 2);
+    expect(tuesday.breakStart).toBe("13:00");
 
     // Rétablir les paramètres originaux pour l'isolation des tests
     await db.venue.update({
@@ -387,7 +397,7 @@ describe("Sprint 10 - Espace Pro : Catalogue Prestations & Paramètres Salon", (
     });
     await db.venueOpeningHour.updateMany({
       where: { venueId, dayOfWeek: 2 },
-      data: { openTime: "09:30", closeTime: "19:30", isOpen: true },
+      data: { openTime: "09:30", closeTime: "19:30", isOpen: true, breakStart: null, breakEnd: null },
     });
   });
 

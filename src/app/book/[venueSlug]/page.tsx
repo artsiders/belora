@@ -4,6 +4,7 @@ import { MainNav } from "@/components/layout/main-nav";
 import { Footer } from "@/components/layout/footer";
 import { getVenueBySlug, VENUES, Venue } from "@/lib/data/venues";
 import { BookClient } from "./book-client";
+import { formatOpeningHours } from "@/lib/utils/opening-hours";
 import { db } from "@/lib/db";
 import { VenueStatus } from "@prisma/client";
 
@@ -104,8 +105,13 @@ async function BookContent({ params }: BookPageProps) {
         features: ["Produits Bio", "Artisan Certifié", "Réservation Immédiate"],
         openingHours: dbVenue.openingHours.map((oh) => ({
           day: days[oh.dayOfWeek] || "",
-          hours: oh.isOpen ? `${oh.openTime} - ${oh.closeTime}` : "Fermé",
+          hours: formatOpeningHours(oh),
         })),
+        bookingRules: {
+          allowStaffChoice: dbVenue.allowStaffChoice,
+          maxAdvanceDays: dbVenue.maxBookingAdvanceDays,
+          onlinePaymentMode: dbVenue.onlinePaymentMode,
+        },
         team: dbVenue.staff.map((s) => ({
           id: s.id,
           name: s.name,

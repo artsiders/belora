@@ -396,10 +396,19 @@ export interface FormattedOpeningHour {
   isOpen: boolean;
   openTime: string;
   closeTime: string;
+  breakStart: string | null;
+  breakEnd: string | null;
+}
+
+export interface FormattedClosure {
+  startDate: string; // "YYYY-MM-DD"
+  endDate: string;
+  label: string | null;
 }
 
 export interface FormattedEstablishment {
   id: string;
+  slug: string;
   name: string;
   category: string;
   description: string;
@@ -407,22 +416,35 @@ export interface FormattedEstablishment {
   vatNumber: string;
   phone: string;
   email: string;
+  website: string;
   address: string;
   postalCode: string;
   city: string;
   cancellationDelayHours: number;
   depositPercentage: number;
+  onlinePaymentMode: "NONE" | "DEPOSIT" | "FULL";
+  depositScope: "FLAGGED_SERVICES" | "ALL_SERVICES";
+  onlineBookingEnabled: boolean;
+  minBookingNoticeMinutes: number;
+  maxBookingAdvanceDays: number;
+  slotStepMinutes: number;
+  bufferMinutes: number;
+  allowStaffChoice: boolean;
   openingHours: FormattedOpeningHour[];
+  closures: FormattedClosure[];
 }
 
-export async function getEstablishmentSettings(
-  venueId: string
-): Promise<FormattedEstablishment> {
+const toDateString = (d: Date) => d.toISOString().slice(0, 10);
+
+export async function getEstablishmentSettings(venueId: string): Promise<FormattedEstablishment> {
   const venue = await db.venue.findUnique({
     where: { id: venueId },
     include: {
-      openingHours: {
-        orderBy: { dayOfWeek: "asc" },
+      openingHours: { orderBy: { dayOfWeek: "asc" } },
+      // Les fermetures passées n'ont plus d'effet : seules celles en cours ou à venir sont gérées
+      closures: {
+        where: { endDate: { gte: new Date(new Date().toISOString().slice(0, 10)) } },
+        orderBy: { startDate: "asc" },
       },
     },
   });
@@ -431,41 +453,52 @@ export async function getEstablishmentSettings(
     throw new Error("Établissement introuvable.");
   }
 
-  // Mapper les 7 jours de la semaine (0 = Dimanche, 1 = Lundi, ..., 6 = Samedi)
-  const existingHoursMap = new Map(
-    venue.openingHours.map((oh) => [oh.dayOfWeek, oh])
-  );
-
-  const openingHours: FormattedOpeningHour[] = [];
-  // Standard French calendar starts on Monday (1) to Sunday (0)
+  const existingHoursMap = new Map(venue.openingHours.map((oh) => [oh.dayOfWeek, oh]));
+  // Semaine française : du lundi (1) au dimanche (0)
   const orderedIndices = [1, 2, 3, 4, 5, 6, 0];
-
-  for (const dayIndex of orderedIndices) {
+  const openingHours: FormattedOpeningHour[] = orderedIndices.map((dayIndex) => {
     const existing = existingHoursMap.get(dayIndex);
-    openingHours.push({
+    return {
       day: DAY_NAMES[dayIndex],
       dayIndex,
       isOpen: existing?.isOpen ?? (dayIndex >= 2 && dayIndex <= 6),
       openTime: existing?.openTime || "09:30",
       closeTime: existing?.closeTime || "19:30",
-    });
-  }
+      breakStart: existing?.breakStart ?? null,
+      breakEnd: existing?.breakEnd ?? null,
+    };
+  });
 
   return {
     id: venue.id,
+    slug: venue.slug,
     name: venue.name,
-    category: venue.tagline || "Maison d'Artisan Coiffeur",
+    category: venue.tagline || "",
     description: venue.description || "",
     siret: venue.siret || "",
     vatNumber: venue.vatNumber || "",
     phone: venue.phone || "",
     email: venue.email || "",
+    website: venue.website || "",
     address: venue.address,
     postalCode: venue.postalCode,
     city: venue.city,
-    cancellationDelayHours: venue.cancellationDelayHours ?? 24,
-    depositPercentage: venue.depositPercentage ?? 30,
+    cancellationDelayHours: venue.cancellationDelayHours,
+    depositPercentage: venue.depositPercentage,
+    onlinePaymentMode: venue.onlinePaymentMode,
+    depositScope: venue.depositScope,
+    onlineBookingEnabled: venue.onlineBookingEnabled,
+    minBookingNoticeMinutes: venue.minBookingNoticeMinutes,
+    maxBookingAdvanceDays: venue.maxBookingAdvanceDays,
+    slotStepMinutes: venue.slotStepMinutes,
+    bufferMinutes: venue.bufferMinutes,
+    allowStaffChoice: venue.allowStaffChoice,
     openingHours,
+    closures: venue.closures.map((c) => ({
+      startDate: toDateString(c.startDate),
+      endDate: toDateString(c.endDate),
+      label: c.label,
+    })),
   };
 }
 
@@ -483,39 +516,54 @@ export async function updateEstablishmentSettings(
         name: input.name.trim(),
         tagline: input.category?.trim() || null,
         description: input.description?.trim() || null,
-        siret: input.siret.trim(),
-        vatNumber: input.vatNumber.trim(),
+        siret: input.siret.replace(/\D/g, ""),
+        vatNumber: input.vatNumber.replace(/\s/g, "").toUpperCase() || null,
         phone: input.phone.trim(),
-        email: input.email.trim(),
+        email: input.email.trim().toLowerCase(),
+        website: input.website?.trim() || null,
         address: input.address.trim(),
         postalCode: input.postalCode.trim(),
         city: input.city.trim(),
         cancellationDelayHours: input.cancellationDelayHours,
         depositPercentage: input.depositPercentage,
+        onlinePaymentMode: input.onlinePaymentMode,
+        depositScope: input.depositScope,
+        onlineBookingEnabled: input.onlineBookingEnabled,
+        minBookingNoticeMinutes: input.minBookingNoticeMinutes,
+        maxBookingAdvanceDays: input.maxBookingAdvanceDays,
+        slotStepMinutes: input.slotStepMinutes,
+        bufferMinutes: input.bufferMinutes,
+        allowStaffChoice: input.allowStaffChoice,
       },
     });
 
-    if (input.openingHours && input.openingHours.length > 0) {
-      for (const oh of input.openingHours) {
-        await tx.venueOpeningHour.upsert({
-          where: {
-            venueId_dayOfWeek: {
-              venueId,
-              dayOfWeek: oh.dayOfWeek,
-            },
-          },
-          create: {
+    for (const oh of input.openingHours ?? []) {
+      const hours = {
+        isOpen: oh.isOpen,
+        openTime: oh.openTime,
+        closeTime: oh.closeTime,
+        breakStart: oh.isOpen ? oh.breakStart ?? null : null,
+        breakEnd: oh.isOpen ? oh.breakEnd ?? null : null,
+      };
+      await tx.venueOpeningHour.upsert({
+        where: { venueId_dayOfWeek: { venueId, dayOfWeek: oh.dayOfWeek } },
+        create: { venueId, dayOfWeek: oh.dayOfWeek, ...hours },
+        update: hours,
+      });
+    }
+
+    // Les fermetures à venir sont remplacées par la liste envoyée ; l'historique passé est conservé
+    if (input.closures) {
+      const today = new Date(new Date().toISOString().slice(0, 10));
+      await tx.venueClosure.deleteMany({ where: { venueId, endDate: { gte: today } } });
+      if (input.closures.length > 0) {
+        await tx.venueClosure.createMany({
+          data: input.closures.map((c) => ({
             venueId,
-            dayOfWeek: oh.dayOfWeek,
-            isOpen: oh.isOpen,
-            openTime: oh.openTime,
-            closeTime: oh.closeTime,
-          },
-          update: {
-            isOpen: oh.isOpen,
-            openTime: oh.openTime,
-            closeTime: oh.closeTime,
-          },
+            startDate: new Date(`${c.startDate}T00:00:00.000Z`),
+            endDate: new Date(`${c.endDate}T00:00:00.000Z`),
+            label: c.label?.trim() || null,
+          })),
         });
       }
     }

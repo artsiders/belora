@@ -25,7 +25,7 @@ interface BookClientProps {
 }
 
 // Générateur de dates dynamiques pour les 10 prochains jours
-function generateUpcomingDays() {
+function generateUpcomingDays(maxAdvanceDays = 10) {
   const days: { label: string; dateLabel: string; dayCode: string }[] = [];
   const dayNames = ["Dim.", "Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam."];
   const monthNames = [
@@ -44,7 +44,9 @@ function generateUpcomingDays() {
   ];
 
   const now = new Date();
-  for (let i = 1; i <= 10; i++) {
+  // Jours proposés : au plus 14, et jamais au-delà de l'horizon de réservation du salon
+  const count = Math.max(1, Math.min(14, maxAdvanceDays));
+  for (let i = 1; i <= count; i++) {
     const d = new Date(now.getTime() + i * 24 * 60 * 60 * 1000);
     const dayCode = d.toISOString().split("T")[0];
     const isTomorrow = i === 1;
@@ -65,7 +67,11 @@ export function BookClient({ venue }: BookClientProps) {
   // Lien direct partagé par le salon : réservation sans commission d'acquisition
   const bookingSource = searchParams.get("source") === "direct" ? "direct" : "marketplace";
 
-  const upcomingDays = useMemo(() => generateUpcomingDays(), []);
+  const allowStaffChoice = venue.bookingRules?.allowStaffChoice ?? true;
+  const upcomingDays = useMemo(
+    () => generateUpcomingDays(venue.bookingRules?.maxAdvanceDays ?? 10),
+    [venue.bookingRules?.maxAdvanceDays]
+  );
 
   // 1. Sélection des prestations
   const [selectedServices, setSelectedServices] = useState<Service[]>(() => {
@@ -150,10 +156,11 @@ export function BookClient({ venue }: BookClientProps) {
   const availableSlots = useMemo(() => {
     return rawSlots.map((slot, index) => {
       if (typeof slot === "string") {
-        return { time: slot, key: `${slot}-${index}` };
+        return { time: slot, startTime: undefined as string | undefined, key: `${slot}-${index}` };
       }
       return {
         time: slot.time,
+        startTime: slot.startTime as string | undefined,
         key: slot.startTime || `${slot.time}-${index}`,
       };
     });
@@ -200,13 +207,14 @@ export function BookClient({ venue }: BookClientProps) {
     setSubmitError(null);
 
     try {
-      // Construction du timestamp ISO UTC complet
+      // Heure exacte du créneau calculée par le moteur (dans le fuseau du salon)
       const effectiveSlot = selectedTimeSlot || "10:00";
+      const slotStart = availableSlots.find((s) => s.time === effectiveSlot)?.startTime;
       const [hours, minutes] = effectiveSlot.split(":").map(Number);
-      const bookingDate = new Date(
-        `${selectedDayCode || upcomingDays[0]?.dayCode}T00:00:00Z`,
-      );
-      bookingDate.setUTCHours(hours, minutes, 0, 0);
+      const bookingDate = slotStart
+        ? new Date(slotStart)
+        : new Date(`${selectedDayCode || upcomingDays[0]?.dayCode}T00:00:00Z`);
+      if (!slotStart) bookingDate.setUTCHours(hours, minutes, 0, 0);
 
       const computedNotes = [
         isGift ? "[FORMULE BON CADEAU BELORA]" : null,
@@ -504,11 +512,11 @@ export function BookClient({ venue }: BookClientProps) {
                 <div className="pt-4 flex justify-end">
                   <button
                     type="button"
-                    onClick={() => setStep(2)}
+                    onClick={() => setStep(allowStaffChoice ? 2 : 3)}
                     disabled={selectedServices.length === 0}
                     className="btn btn-primary inline-flex items-center gap-1.5 cursor-pointer"
                   >
-                    <span>Continuer vers le praticien</span>
+                    <span>{allowStaffChoice ? "Continuer vers le praticien" : "Choisir la date et l'heure"}</span>
                     <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -529,8 +537,9 @@ export function BookClient({ venue }: BookClientProps) {
             )}
           </div>
 
-          {/* Étape 2 : Choix du praticien */}
+          {/* Étape 2 : Choix du praticien (masquée si le salon attribue lui-même l'artisan) */}
           <div
+            hidden={!allowStaffChoice}
             className={`p-6 rounded-2xl bg-white border transition-all ${
               step === 2
                 ? "border-primary-600 shadow-sm"

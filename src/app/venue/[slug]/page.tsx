@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { db } from "@/lib/db";
 import { getVenueBySlug, VENUES } from "@/lib/data/venues";
 import { formatCentsToEuros } from "@/lib/utils/money";
+import { formatOpeningHours } from "@/lib/utils/opening-hours";
 import {
   Star,
   MapPin,
@@ -122,7 +123,7 @@ async function VenueContent({ params }: VenuePageProps) {
   const openingHours = dbVenue
     ? dbVenue.openingHours.map((h) => ({
         day: DAY_NAMES[h.dayOfWeek],
-        hours: h.isOpen ? `${h.openTime} - ${h.closeTime}` : "Fermé",
+        hours: formatOpeningHours(h),
       }))
     : mockVenue!.openingHours;
 

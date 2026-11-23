@@ -3,6 +3,15 @@ import { db as prisma } from "@/lib/db";
 import { AvailabilityService } from "../../src/modules/availability/availability.service";
 import { LockService } from "../../src/modules/availability/lock.service";
 
+/** Prochain jour de la semaine donné (au moins 7 jours plus tard, hors délai minimum de réservation). */
+function nextWeekday(day: number): string {
+  const d = new Date();
+  d.setUTCDate(d.getUTCDate() + 7 + ((day - d.getUTCDay() + 7) % 7));
+  return d.toISOString().slice(0, 10);
+}
+const NEXT_MONDAY = nextWeekday(1);
+const NEXT_TUESDAY = nextWeekday(2);
+
 describe("Sprint 3 - Moteur de Disponibilités & Verrouillage Anti-Collision", () => {
   let venueId: string;
   let serviceCoupeId: string;
@@ -45,7 +54,7 @@ describe("Sprint 3 - Moteur de Disponibilités & Verrouillage Anti-Collision", (
       const result = await AvailabilityService.getAvailableSlots({
         venueId,
         serviceIds: [serviceCoupeId],
-        date: "2026-11-16", // Lundi (Fermé dans les horaires)
+        date: NEXT_MONDAY, // Lundi (Fermé dans les horaires)
       });
 
       expect(result.isOpen).toBe(false);
@@ -56,7 +65,7 @@ describe("Sprint 3 - Moteur de Disponibilités & Verrouillage Anti-Collision", (
       const result = await AvailabilityService.getAvailableSlots({
         venueId,
         serviceIds: [serviceCoupeId],
-        date: "2026-11-17", // Mardi (Ouvert 09:30 à 19:30)
+        date: NEXT_TUESDAY, // Mardi (Ouvert 09:30 à 19:30)
       });
 
       expect(result.isOpen).toBe(true);
@@ -76,7 +85,7 @@ describe("Sprint 3 - Moteur de Disponibilités & Verrouillage Anti-Collision", (
       const resultHelene = await AvailabilityService.getAvailableSlots({
         venueId,
         serviceIds: [serviceCoupeId],
-        date: "2026-11-17",
+        date: NEXT_TUESDAY,
         staffId: staffHeleneId,
       });
 
@@ -91,7 +100,7 @@ describe("Sprint 3 - Moteur de Disponibilités & Verrouillage Anti-Collision", (
       const result = await AvailabilityService.getAvailableSlots({
         venueId,
         serviceIds: [serviceCoupeId],
-        date: "2026-11-17",
+        date: NEXT_TUESDAY,
         staffId: staffHeleneId,
       });
 

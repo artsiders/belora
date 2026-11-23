@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 import { BookingChannel, BookingStatus, PaymentStatus } from "@prisma/client";
-import { calculateDeposit } from "@/lib/utils/money";
+import { bookingWindowError, computeOnlinePaymentCents, findClosure } from "@/modules/booking/booking-policy";
 import { computeCommission, resolveCommissionRate } from "@/modules/billing/commission";
 import { getPlatformSettings, toCommissionPolicy } from "@/modules/billing/platform-settings.service";
 import { hasActiveAccess, resolveSubscriptionState } from "@/modules/billing/subscription-state";
@@ -42,6 +42,7 @@ export async function createBookingTransaction(input: CreateBookingInput) {
     include: {
       staff: { where: { isActive: true } },
       openingHours: true,
+      closures: { where: { endDate: { gte: new Date(startDate.toISOString().slice(0, 10)) } } },
       subscription: { include: { plan: true } },
     },
   });
@@ -59,6 +60,24 @@ export async function createBookingTransaction(input: CreateBookingInput) {
     }
     if (venue.subscription && !hasActiveAccess(resolveSubscriptionState(venue.subscription))) {
       throw new Error("Cet établissement ne prend pas de réservation en ligne pour le moment. Contactez-le directement.");
+    }
+    if (!venue.onlineBookingEnabled) {
+      throw new Error("Cet établissement ne prend pas de réservation en ligne pour le moment. Contactez-le directement.");
+    }
+    const windowError = bookingWindowError(startDate, {
+      minNoticeMinutes: venue.minBookingNoticeMinutes,
+      maxAdvanceDays: venue.maxBookingAdvanceDays,
+    });
+    if (windowError) throw new Error(windowError);
+    // Date locale du salon (le fuseau peut décaler le jour par rapport à l'UTC)
+    const localDate = new Intl.DateTimeFormat("en-CA", { timeZone: venue.timezone || "Europe/Paris" }).format(startDate);
+    const closure = findClosure(localDate, venue.closures);
+    if (closure) {
+      throw new Error(
+        closure.label
+          ? `L'établissement est fermé à cette date (${closure.label}).`
+          : "L'établissement est exceptionnellement fermé à cette date."
+      );
     }
   }
 
@@ -80,13 +99,16 @@ export async function createBookingTransaction(input: CreateBookingInput) {
   const endDate = new Date(startDate.getTime() + totalDurationMinutes * 60 * 1000);
   const subtotalCents = services.reduce((acc, s) => acc + s.priceCents, 0);
 
-  // Acompte exigé : somme des acomptes individuels ou 30% si une prestation l'exige
-  const requiresAnyDeposit = services.some((s) => s.depositRequired || s.depositCents > 0);
-  let depositCents = 0;
-  if (requiresAnyDeposit) {
-    const sumCustomDeposits = services.reduce((acc, s) => acc + s.depositCents, 0);
-    depositCents = sumCustomDeposits > 0 ? sumCustomDeposits : calculateDeposit(subtotalCents, 30);
-  }
+  // Montant réglé en ligne selon la politique du salon (aucun, acompte ou totalité).
+  // Un rendez-vous saisi en salon n'est jamais soumis à paiement en ligne.
+  const depositCents =
+    channel === BookingChannel.IN_SALON
+      ? 0
+      : computeOnlinePaymentCents(services, {
+          mode: venue.onlinePaymentMode,
+          scope: venue.depositScope,
+          depositPercentage: venue.depositPercentage,
+        });
 
   const remainingCents = Math.max(0, subtotalCents - depositCents);
   const commissionPolicy = toCommissionPolicy(platformSetting);
@@ -100,7 +122,9 @@ export async function createBookingTransaction(input: CreateBookingInput) {
   // 4. Exécution atomique sous transaction Prisma
   return await db.$transaction(async (tx) => {
     // 4.1 Résolution du collaborateur (artisan)
-    let resolvedStaffId = staffId && staffId !== "any" ? staffId : null;
+    // Choix de l'artisan désactivé par le salon : attribution automatique pour les réservations en ligne
+    const staffChoiceAllowed = venue.allowStaffChoice || channel === BookingChannel.IN_SALON;
+    let resolvedStaffId = staffChoiceAllowed && staffId && staffId !== "any" ? staffId : null;
 
     if (resolvedStaffId) {
       const staffMember = venue.staff.find((s) => s.id === resolvedStaffId);

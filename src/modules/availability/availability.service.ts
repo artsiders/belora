@@ -1,3 +1,4 @@
+import { bookingWindowError, computeOnlinePaymentCents, findClosure } from "@/modules/booking/booking-policy";
 import { db } from "@/lib/db";
 import {
   getDayOfWeekFromDateString,
@@ -54,10 +55,29 @@ export class AvailabilityService {
     // 1. Récupération de l'établissement
     const venue = await db.venue.findUnique({
       where: { id: venueId },
-      select: { id: true, timezone: true, status: true },
+      select: {
+        id: true,
+        timezone: true,
+        status: true,
+        onlineBookingEnabled: true,
+        minBookingNoticeMinutes: true,
+        maxBookingAdvanceDays: true,
+        slotStepMinutes: true,
+        bufferMinutes: true,
+        onlinePaymentMode: true,
+        depositScope: true,
+        depositPercentage: true,
+        closures: { where: { endDate: { gte: new Date(`${date}T00:00:00.000Z`) } } },
+      },
     });
 
-    if (!venue || venue.status !== "PUBLISHED") {
+    // Fermé : salon non publié, réservation en ligne désactivée ou fermeture exceptionnelle
+    if (
+      !venue ||
+      venue.status !== "PUBLISHED" ||
+      !venue.onlineBookingEnabled ||
+      findClosure(date, venue.closures)
+    ) {
       return {
         venueId,
         date,
@@ -96,6 +116,10 @@ export class AvailabilityService {
 
     const venueOpenMinutes = timeStringToMinutes(openingHour.openTime);
     const venueCloseMinutes = timeStringToMinutes(openingHour.closeTime);
+    const hasVenueBreak = Boolean(openingHour.breakStart && openingHour.breakEnd);
+    const venueBreakStart = hasVenueBreak ? timeStringToMinutes(openingHour.breakStart!) : -1;
+    const venueBreakEnd = hasVenueBreak ? timeStringToMinutes(openingHour.breakEnd!) : -1;
+    const now = new Date();
 
     // 3. Récupération et calcul des prestations sélectionnées
     const services = await db.service.findMany({
@@ -111,6 +135,7 @@ export class AvailabilityService {
         processingTimeMinutes: true,
         priceCents: true,
         depositCents: true,
+        depositRequired: true,
       },
     });
 
@@ -132,7 +157,11 @@ export class AvailabilityService {
       0
     );
     const totalPriceCents = services.reduce((acc, s) => acc + s.priceCents, 0);
-    const totalDepositCents = services.reduce((acc, s) => acc + s.depositCents, 0);
+    const totalDepositCents = computeOnlinePaymentCents(services, {
+      mode: venue.onlinePaymentMode,
+      scope: venue.depositScope,
+      depositPercentage: venue.depositPercentage,
+    });
 
     // Temps de pose total (pendant lequel le collaborateur est libéré)
     const totalProcessingMinutes = services.reduce(
@@ -202,7 +231,8 @@ export class AvailabilityService {
     // Map : heure locale "HH:mm" -> liste des collaborateurs disponibles
     const slotsMap = new Map<string, AvailableStaffSummary[]>();
 
-    const stepMinutes = 15;
+    const stepMinutes = venue.slotStepMinutes || 15;
+    const bufferMs = venue.bufferMinutes * 60_000;
     const latestStartMinutes = venueCloseMinutes - totalDurationMinutes;
 
     for (const staff of eligibleStaff) {
@@ -241,6 +271,11 @@ export class AvailabilityService {
       ) {
         const endMin = startMin + totalDurationMinutes;
 
+        // Fermeture du salon en milieu de journée
+        if (hasVenueBreak && minutesRangesOverlap(startMin, endMin, venueBreakStart, venueBreakEnd)) {
+          continue;
+        }
+
         // Collision avec pause déjeuner (le praticien ne peut pas travailler pendant sa pause)
         if (hasBreak && minutesRangesOverlap(startMin, endMin, breakStart, breakEnd)) {
           // Exception intelligente : si la prestation a un temps de pose couvrant la pause
@@ -252,10 +287,24 @@ export class AvailabilityService {
         const slotStartUtc = createUtcDateFromLocal(date, startMin, timezone);
         const slotEndUtc = createUtcDateFromLocal(date, endMin, timezone);
 
+        // Délai minimum et horizon de réservation en ligne
+        if (
+          bookingWindowError(
+            slotStartUtc,
+            { minNoticeMinutes: venue.minBookingNoticeMinutes, maxAdvanceDays: venue.maxBookingAdvanceDays },
+            now
+          )
+        ) {
+          continue;
+        }
+
         // Vérification de collision avec les réservations existantes
         let isBooked = false;
         for (const booking of staffBookings) {
-          if (dateRangesOverlap(slotStartUtc, slotEndUtc, booking.startTime, booking.endTime)) {
+          // Le battement s'ajoute après chaque rendez-vous existant et après le nouveau
+          const bookingEnd = new Date(booking.endTime.getTime() + bufferMs);
+          const slotEndWithBuffer = new Date(slotEndUtc.getTime() + bufferMs);
+          if (dateRangesOverlap(slotStartUtc, slotEndWithBuffer, booking.startTime, bookingEnd)) {
             isBooked = true;
             break;
           }
