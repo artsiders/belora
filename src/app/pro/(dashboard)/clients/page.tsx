@@ -294,7 +294,7 @@ function ClientsContent() {
   }
 
   return (
-    <div className="flex-1 flex h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] overflow-hidden relative">
+    <div className="flex-1 flex min-h-0 overflow-hidden relative">
       {/* Sidebar Dédiée Fichier Clients */}
       <ClientsSidebar
         clients={clients}

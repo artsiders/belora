@@ -206,7 +206,7 @@ function CheckoutContent() {
   }
 
   return (
-    <div className="flex-1 flex h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] overflow-hidden">
+    <div className="flex-1 flex min-h-0 overflow-hidden">
       {/* Terminal de Vente & Caisse POS avec Sidebar unifiée */}
       <CheckoutTerminal
         services={services}

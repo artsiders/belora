@@ -15,13 +15,14 @@ export default function ProDashboardLayout({
 }) {
   return (
     <EstablishmentProvider>
-      <div className="min-h-screen flex flex-col bg-neutral-100/60 text-neutral-900 antialiased">
+      <div className="h-dvh flex flex-col overflow-hidden bg-neutral-100/60 text-neutral-900 antialiased">
         {/* Header Permanent Pro */}
         <DashboardHeader />
         <SubscriptionBanner />
 
         {/* Main Content Area */}
-        <main className="flex-1 flex flex-col overflow-x-hidden">
+        {/* Hauteur restante sous l'en-tête : chaque page gère son propre défilement */}
+        <main className="flex-1 min-h-0 flex flex-col overflow-x-hidden overflow-y-auto">
           {children}
         </main>
       </div>

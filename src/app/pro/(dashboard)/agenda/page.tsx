@@ -362,7 +362,7 @@ function AgendaContent() {
   const visibleResources = resourceList.filter((r) => selectedResourceIds.includes(r.id));
 
   return (
-    <div className="flex-1 flex flex-col h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] overflow-hidden relative">
+    <div className="flex-1 flex flex-col min-h-0 overflow-hidden relative">
       {/* Barre d'outils secondaire de l'Agenda */}
       <AgendaToolbar
         currentDate={currentDate}

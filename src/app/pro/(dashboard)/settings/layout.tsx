@@ -7,7 +7,7 @@ export default function SettingsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex-1 flex h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] overflow-hidden">
+    <div className="flex-1 flex min-h-0 overflow-hidden">
       {/* Sidebar Paramètres */}
       <SettingsSidebar />
 
