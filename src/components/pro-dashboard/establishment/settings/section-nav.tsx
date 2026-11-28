@@ -33,7 +33,7 @@ export function SectionNav({ sections }: { sections: SectionLink[] }) {
           key={s.id}
           href={`#${s.id}`}
           onClick={() => setActive(s.id)}
-          className={`block px-3 py-2 rounded-lg border-s-2 transition-colors ${
+          className={`block px-3 py-2 border-s-2 transition-colors ${
             active === s.id
               ? "border-primary-600 bg-primary-50 text-primary-800 font-semibold"
               : "border-transparent text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100"
